@@ -13,10 +13,10 @@ namespace woodBox {
 					uint8_t green;
 					uint8_t blue;
 				};
-				virtual ~IDisplay() = 0;
+				virtual ~IRGBLed() = 0;
                 virtual void clear() = 0;
                 virtual void update() = 0;
-				virtual const Color &getColor() = 0;
+				virtual const Color &getColor() const = 0;
 				virtual void setColor(const Color &) = 0;
 		};
 	}
