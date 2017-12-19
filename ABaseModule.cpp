@@ -15,9 +15,7 @@ namespace woodBox {
 			APoweredModule(power),
 			ASensorModule(sensor),
 			AStorageModule(storage)
-        {
-			onStart();
-		}
+        {}
 
         ABaseModule::ABaseModule(ABaseModule &other):
             ADisplayModule(other),
@@ -43,11 +41,21 @@ namespace woodBox {
         ABaseModule::~ABaseModule() {}
 
         void ABaseModule::run() {
+			setup();
+			loop();
         }
 
         void ABaseModule::stop() {
             onStop();
         }
+
+		void ABaseModule::setup() {
+			onStart();
+		}
+
+		void ABaseModule::loop() {
+		
+		}
     }
 }
 

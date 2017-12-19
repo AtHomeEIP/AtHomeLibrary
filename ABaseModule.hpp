@@ -27,6 +27,8 @@ namespace woodBox {
 				ABaseModule(display::IDisplay * = nullptr, communication::ICommunicator * = nullptr,
 					power::IPower * = nullptr, sensor::ISensor * = nullptr, storage::IStorage * = nullptr);
                 ABaseModule(ABaseModule &);
+			/* Callbacks */
+			protected:
                 virtual void onReset() = 0;
                 virtual void onStart() = 0;
                 virtual void onStop() = 0;
@@ -38,6 +40,10 @@ namespace woodBox {
                 virtual void onRestoreFromStorage() = 0;
 				virtual void onSampleSensor() = 0;
 				virtual void onUpdateDisplay() = 0;
+			/* Default execution methods */
+			protected:
+				virtual void setup();
+				virtual void loop();
 			private:
 				static ABaseModule *_instance;
         };
