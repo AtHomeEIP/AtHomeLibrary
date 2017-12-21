@@ -55,23 +55,16 @@ struct s_wifi_client {
 	ipv6_address	ipv6;
 };
 
-typedef s_wifi_client			wifi_client;
+typedef s_wifi_client			WiFi_client;
 
 struct s_wifi_access_point {
-	wifi_ssid		ssid;
-	wifi_password	password;
-	wifi_channel	channel;
-};
-
-typedef s_wifi_access_point		wifi_ap;
-
-struct s_wifi_configuration {
-	wifi_ap				ap;
+	wifi_ssid			ssid;
+	wifi_password		password;
+	wifi_channel		channel;
 	wifi_norm			norm;
 	wifi_frequency_band	band;
-	wifi_channel		channel;
 };
 
-typedef s_wifi_configuration	wifi_configuration;
+typedef s_wifi_access_point		WiFi_ap;
 
 #endif /* WIFI_TYPES_HPP */
