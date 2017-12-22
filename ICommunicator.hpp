@@ -8,8 +8,8 @@ namespace woodBox {
         class ICommunicator {
             public:
                 virtual ~ICommunicator() = 0;
-                virtual uint8_t &read(uint32_t) = 0; // Read n bytes
-                virtual void write(const uint8_t &, uint32_t) = 0; // Write n bytes
+				virtual uint8_t *read(size_t) = 0;
+				virtual void write(const uint8_t &, size_t) = 0;
         };
     }
 }
