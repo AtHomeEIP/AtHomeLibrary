@@ -24,7 +24,7 @@ namespace woodBox {
 					return dynamic_cast<T*>(_instance);
 				}
             protected:
-				ABaseModule(display::IDisplay * = nullptr, communication::ICommunicator * = nullptr,
+				ABaseModule(display::IDisplay * = nullptr, Stream * = nullptr,
 					power::IPower * = nullptr, sensor::ISensor * = nullptr, storage::IStorage * = nullptr);
                 ABaseModule(ABaseModule &);
 			/* Callbacks */

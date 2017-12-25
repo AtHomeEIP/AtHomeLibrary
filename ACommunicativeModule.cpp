@@ -2,37 +2,37 @@
 
 namespace woodBox {
     namespace module {
-        ACommunicativeModule::ACommunicativeModule(communication::ICommunicator *communicator):
-            _communicator(communicator)
+        ACommunicativeModule::ACommunicativeModule(Stream *stream):
+            _stream(stream)
         {}
 
         ACommunicativeModule::ACommunicativeModule(ACommunicativeModule &other):
-            _communicator(other._communicator)
+            _stream(other._stream)
         {
-            other._communicator = nullptr;
+            other._stream = nullptr;
         }
 
         ACommunicativeModule &ACommunicativeModule::operator=(ACommunicativeModule &other) {
-			if (_communicator != nullptr)
-				delete _communicator;
-            _communicator = other._communicator;
-            other._communicator = nullptr;
+			if (_stream != nullptr)
+				delete _stream;
+            _stream = other._stream;
+            other._stream = nullptr;
             return *this;
         }
 
         ACommunicativeModule::~ACommunicativeModule() {
-			if (_communicator != nullptr)
-				delete _communicator;
+			if (_stream != nullptr)
+				delete _stream;
         }
 
-        const communication::ICommunicator *ACommunicativeModule::getCommunicator() {
-            return _communicator;
+        const Stream *ACommunicativeModule::getCommunicator() {
+            return _stream;
         }
 
-        void ACommunicativeModule::setCommunicator(communication::ICommunicator *communicator) {
-			if (_communicator != nullptr)
-				delete _communicator;
-            _communicator = communicator;
+        void ACommunicativeModule::setCommunicator(Stream *stream) {
+			if (_stream != nullptr)
+				delete _stream;
+            _stream = stream;
         }
     }
 }

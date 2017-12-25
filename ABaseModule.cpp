@@ -6,7 +6,7 @@ namespace woodBox {
 
         ABaseModule::ABaseModule(
 			display::IDisplay *display,
-			communication::ICommunicator *communicator,
+			Stream *communicator,
 			power::IPower *power,
 			sensor::ISensor *sensor,
 			storage::IStorage *storage):
