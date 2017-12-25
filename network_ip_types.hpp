@@ -16,8 +16,8 @@ struct s_host {
 		ipv6_address	ipv6;
 		ipv4_address	ipv4;
 	};
-	port				port;
-}
+	port				hport;
+};
 
 typedef s_host					tcp_host;
 typedef s_host					udp_host;

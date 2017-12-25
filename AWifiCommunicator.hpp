@@ -8,17 +8,17 @@
 # endif /* ARDUINO */
 
 # include <Stream.h>
-# include "ICommunicator.hpp"
+//# include "ICommunicator.hpp"
 # include "wifi_types.hpp"
 
 namespace woodBox {
 	namespace communication {
 		class AWiFiCommunicator : public Stream {
 			public:
-				AWiFiCommunicator(const WiFi_ap * = nullptr, const WiFi_client * = nullptr, const wifi_mode = STATION);
+				AWiFiCommunicator(const WiFi_ap * = nullptr, const WiFi_client * = nullptr, const wifi_mode = STATION, Stream * = nullptr);
 				AWiFiCommunicator(const AWiFiCommunicator &) = delete;
 				AWiFiCommunicator &operator=(const AWiFiCommunicator &) = delete;
-				virtual ~AWiFiCommunicator();
+				virtual ~AWiFiCommunicator() = 0;
 				virtual int available() = 0;
 				virtual int read() = 0;
 				virtual int peek() = 0;
@@ -30,25 +30,26 @@ namespace woodBox {
 				virtual void disconnect() = 0;
 				virtual void connectToHost(const tcp_host * = nullptr) = 0;
 				virtual void disconnectFromHost() = 0;
+				virtual bool isConnected() = 0;
 
-				virtual const WiFi_ap &getAccessPoint();
-				virtual const WiFi_client &getConnectionAddresses();
-				virtual const tcp_host &getHost();
-				virtual wifi_mode getWiFiMode();
-				virtual const WiFi_client[] &getConnectedClients();
+				virtual const WiFi_ap &getAccessPoint() const;
+				virtual const WiFi_client &getConnectionAddresses() const;
+				//virtual const tcp_host &getHost() const;
+				virtual wifi_mode getWiFiMode() const;
+				//virtual const WiFi_client[] &getConnectedClients() const;
 				
 				virtual void setAccessPoint(const WiFi_ap &);
 				virtual void setConnectionAddresses(const WiFi_client &);
-				virtual void setHost(const tcp_host &);
+				//virtual void setHost(const tcp_host &);
 				virtual void setWiFiMode(wifi_mode);
 				virtual void setStreamToChipset(Stream *);
 			protected:
-				WiFi_ap		_ap;
-				WiFi_client	_me;
 				wifi_mode	_mode;
 				Stream		*_stream;
-				tcp_host	_host;
-				WiFi_client	*_clients;
+				WiFi_ap		_ap;
+				WiFi_client	_me;
+				//tcp_host	_host;
+				//WiFi_client	*_clients;
 		};
 	}
 }
