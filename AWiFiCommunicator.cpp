@@ -3,7 +3,7 @@
 
 namespace woodBox {
 	namespace communication {
-		AWiFiCommunicator::AWiFiCommunicator(const WiFi_ap *ap, const WiFi_client *client, const wifi_mode mode, Stream *stream):
+		AWiFiCommunicator::AWiFiCommunicator(const WiFi_ap *ap, const WiFi_client *client, const wifi_mode mode, ICommunicator *stream):
 			/* _ap({
 				"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
 				"\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
@@ -55,7 +55,7 @@ namespace woodBox {
 			_mode = mode;
 		}
 
-		void AWiFiCommunicator::setStreamToChipset(Stream *stream) {
+		void AWiFiCommunicator::setICommunicatorToChipset(ICommunicator *stream) {
 			_stream = stream;
 		}
 	}

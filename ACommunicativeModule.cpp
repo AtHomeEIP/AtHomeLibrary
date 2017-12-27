@@ -2,7 +2,7 @@
 
 namespace woodBox {
     namespace module {
-        ACommunicativeModule::ACommunicativeModule(Stream *stream):
+        ACommunicativeModule::ACommunicativeModule(communication::ICommunicator *stream):
             _stream(stream)
         {}
 
@@ -25,11 +25,11 @@ namespace woodBox {
 				delete _stream;
         }
 
-        const Stream *ACommunicativeModule::getCommunicator() {
+        const communication::ICommunicator *ACommunicativeModule::getCommunicator() {
             return _stream;
         }
 
-        void ACommunicativeModule::setCommunicator(Stream *stream) {
+        void ACommunicativeModule::setCommunicator(communication::ICommunicator *stream) {
 			if (_stream != nullptr)
 				delete _stream;
             _stream = stream;

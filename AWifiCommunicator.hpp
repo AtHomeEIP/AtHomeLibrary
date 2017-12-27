@@ -7,15 +7,15 @@
 
 # endif /* ARDUINO */
 
-# include <Stream.h>
-//# include "ICommunicator.hpp"
+//# include <Stream.h>
+# include "ICommunicator.hpp"
 # include "wifi_types.hpp"
 
 namespace woodBox {
 	namespace communication {
-		class AWiFiCommunicator : public Stream {
+		class AWiFiCommunicator : public ICommunicator {
 			public:
-				AWiFiCommunicator(const WiFi_ap * = nullptr, const WiFi_client * = nullptr, const wifi_mode = STATION, Stream * = nullptr);
+				AWiFiCommunicator(const WiFi_ap * = nullptr, const WiFi_client * = nullptr, const wifi_mode = STATION, ICommunicator * = nullptr);
 				AWiFiCommunicator(const AWiFiCommunicator &) = delete;
 				AWiFiCommunicator &operator=(const AWiFiCommunicator &) = delete;
 				virtual ~AWiFiCommunicator() = 0;
@@ -42,10 +42,10 @@ namespace woodBox {
 				virtual void setConnectionAddresses(const WiFi_client &);
 				//virtual void setHost(const tcp_host &);
 				virtual void setWiFiMode(wifi_mode);
-				virtual void setStreamToChipset(Stream *);
+				virtual void setICommunicatorToChipset(ICommunicator *);
 			protected:
 				wifi_mode	_mode;
-				Stream		*_stream;
+				ICommunicator		*_stream;
 				WiFi_ap		_ap;
 				WiFi_client	_me;
 				//tcp_host	_host;

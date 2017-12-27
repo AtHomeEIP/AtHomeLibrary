@@ -1,24 +1,24 @@
 #ifndef ACOMMUNICATIVEMODULE_HPP
 # define ACOMMUNICATIVEMODULE_HPP
 
-# include <Stream.h>
+//# include <Stream.h>
 # include "IModule.hpp"
-//# include "ICommunicator.hpp"
+# include "ICommunicator.hpp"
 
 namespace woodBox {
     namespace module {
         class ACommunicativeModule : public IModule {
             public:
-                ACommunicativeModule(Stream *);
+                ACommunicativeModule(communication::ICommunicator *);
                 ACommunicativeModule(ACommunicativeModule &);
                 virtual ACommunicativeModule &operator=(ACommunicativeModule &);
                 virtual ~ACommunicativeModule();
                 virtual void run() = 0;
                 virtual void stop() = 0;
-                virtual const Stream *getCommunicator();
-                virtual void setCommunicator(Stream *);
+                virtual const communication::ICommunicator *getCommunicator();
+                virtual void setCommunicator(communication::ICommunicator *);
             protected:
-                Stream    *_stream;
+                communication::ICommunicator    *_stream;
         };
     }
 }
