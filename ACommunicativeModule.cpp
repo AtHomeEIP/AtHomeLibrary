@@ -4,7 +4,9 @@ namespace woodBox {
     namespace module {
         ACommunicativeModule::ACommunicativeModule(communication::ICommunicator *stream):
             _stream(stream)
-        {}
+        {
+			stream->open();
+		}
 
         ACommunicativeModule::ACommunicativeModule(ACommunicativeModule &other):
             _stream(other._stream)
