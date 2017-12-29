@@ -17,9 +17,6 @@ namespace woodBox {
 				virtual const power::IPower *getPowerSource();
 				virtual void setPowerSource(power::IPower *);
 			protected:
-				virtual void onBackupOnStorage() = 0;
-                virtual void onRestoreFromStorage() = 0;
-			protected:
 				power::IPower *_power;
 		};
 	}

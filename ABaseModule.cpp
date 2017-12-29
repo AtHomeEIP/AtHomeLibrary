@@ -1,5 +1,13 @@
 #include "ABaseModule.hpp"
 
+#ifndef ARDUINO
+inline void delay(uint32_t ms) {
+    for (uint32_t i = 0; i < ms; i++) {
+        for (uint32_t j = 0; j < 33; j++);
+    }
+}
+#endif /* ARDUINO */
+
 namespace woodBox {
     namespace module {
 		ABaseModule *ABaseModule::_instance = nullptr;
@@ -46,15 +54,33 @@ namespace woodBox {
         }
 
         void ABaseModule::stop() {
+            onBackupOnStorage();
             onStop();
         }
 
 		void ABaseModule::setup() {
+		    onRestoreFromStorage();
 			onStart();
 		}
 
 		void ABaseModule::loop() {
+		    while (1) {
+		        onSampleSensor();
+		        onUpdateDisplay();
+		        onCommunicate();
+		        onPause();
+		        sleep();
+		        onResume();
+		    }
+		}
+
+		void ABaseModule::sleep() {
+		    delay(1000);
+		    wakeUp();
+		}
 		
+		void ABaseModule::wakeUp() {
+		    onResume();
 		}
     }
 }

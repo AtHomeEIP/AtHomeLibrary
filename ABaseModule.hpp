@@ -1,6 +1,14 @@
 #ifndef ABASEMODULE_HPP
 # define ABASEMODULE_HPP
 
+# include <stdint.h>
+
+# ifdef ARDUINO
+#  include <Arduino.h>
+# else
+inline void delay(uint32_t);
+# endif /* ARDUINO */
+
 # include "ADisplayModule.hpp"
 # include "ACommunicativeModule.hpp"
 # include "APoweredModule.hpp"
@@ -34,14 +42,15 @@ namespace woodBox {
                 virtual void onStop() = 0;
                 virtual void onPause() = 0;
                 virtual void onResume() = 0;
-				virtual void onSleep() = 0;
-                virtual void onWakeUp() = 0;
                 virtual void onBackupOnStorage() = 0;
                 virtual void onRestoreFromStorage() = 0;
 				virtual void onSampleSensor() = 0;
 				virtual void onUpdateDisplay() = 0;
+				virtual void onCommunicate() = 0;
 			/* Default execution methods */
 			protected:
+				virtual void sleep();
+				virtual void wakeUp();
 				virtual void setup();
 				virtual void loop();
 			private:
