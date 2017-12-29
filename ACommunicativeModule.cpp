@@ -16,7 +16,7 @@ namespace woodBox {
 
         ACommunicativeModule &ACommunicativeModule::operator=(ACommunicativeModule &other) {
 			if (_stream != nullptr)
-				delete _stream;
+				_stream->close();
             _stream = other._stream;
             other._stream = nullptr;
             return *this;
@@ -24,7 +24,7 @@ namespace woodBox {
 
         ACommunicativeModule::~ACommunicativeModule() {
 			if (_stream != nullptr)
-				delete _stream;
+				_stream->close();
         }
 
         const communication::ICommunicator *ACommunicativeModule::getCommunicator() {
@@ -33,7 +33,7 @@ namespace woodBox {
 
         void ACommunicativeModule::setCommunicator(communication::ICommunicator *stream) {
 			if (_stream != nullptr)
-				delete _stream;
+				_stream->close();
             _stream = stream;
         }
     }
