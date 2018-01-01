@@ -25,6 +25,8 @@ namespace woodBox {
 			(client != nullptr) ? memcpy(&_me, client, sizeof(WiFi_client)) : memset(&_me, 0, sizeof(WiFi_client));
 		}
 
+		//AWiFiCommunicator::~AWiFiCommunicator() {}
+
 		const WiFi_ap &AWiFiCommunicator::getAccessPoint() const {
 			return _ap;
 		}

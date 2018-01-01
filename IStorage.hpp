@@ -7,7 +7,7 @@ namespace woodBox {
 	namespace storage {
 		class IStorage {
 			public:
-				virtual ~IStorage() = 0;
+				//virtual ~IStorage() = 0;
 				virtual void open() = 0;
 				virtual void close() = 0;
 				virtual uint8_t& read(uint32_t);

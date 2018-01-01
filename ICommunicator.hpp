@@ -9,7 +9,7 @@ namespace woodBox {
     namespace communication {
         class ICommunicator : public Stream {
             public:
-                virtual ~ICommunicator() = 0;
+                //virtual ~ICommunicator() = 0;
 				virtual void open() = 0;
 				virtual void close() = 0;
         };

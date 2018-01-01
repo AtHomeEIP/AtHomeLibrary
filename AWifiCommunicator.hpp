@@ -18,7 +18,6 @@ namespace woodBox {
 				AWiFiCommunicator(const WiFi_ap * = nullptr, const WiFi_client * = nullptr, const wifi_mode = STATION, ICommunicator * = nullptr);
 				AWiFiCommunicator(const AWiFiCommunicator &) = delete;
 				AWiFiCommunicator &operator=(const AWiFiCommunicator &) = delete;
-				virtual ~AWiFiCommunicator() = 0;
 				virtual int available() = 0;
 				virtual int read() = 0;
 				virtual int peek() = 0;
