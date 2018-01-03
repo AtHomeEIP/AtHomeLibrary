@@ -14,12 +14,12 @@ namespace woodBox {
 
         ABaseModule::ABaseModule(
 			display::IDisplay *display,
-			communication::ICommunicator *communicator,
+			communication::ICommunicator **communicators,
 			power::IPower *power,
 			sensor::ISensor *sensor,
 			storage::IStorage *storage):
             ADisplayModule(display),
-            ACommunicativeModule(communicator),
+            ACommunicativeModule(communicators),
 			APoweredModule(power),
 			ASensorModule(sensor),
 			AStorageModule(storage)
@@ -33,18 +33,18 @@ namespace woodBox {
 			AStorageModule(other)
         {}
 
-        /* ABaseModule &ABaseModule::operator=(ABaseModule &other) {
-            DisplayModule::operator=(other);
+        ABaseModule &ABaseModule::operator=(ABaseModule &other) {
+            /* DisplayModule::operator=(other);
             CommunicativeModule::operator=(other);
 			PoweredModule::operator=(other);
 			SensorModule::operator=(other);
-			StorageModule::operator=(other);
+			StorageModule::operator=(other); */
 			if (_instance != nullptr && _instance != this) {
 				delete _instance;
 				_instance = this;
 			}
             return *this;
-        } */
+        }
 
         ABaseModule::~ABaseModule() {}
 

@@ -2,39 +2,52 @@
 
 namespace woodBox {
     namespace module {
-        ACommunicativeModule::ACommunicativeModule(communication::ICommunicator *stream):
-            _stream(stream)
+        ACommunicativeModule::ACommunicativeModule(communication::ICommunicator **streams):
+            _streams(streams)
         {
-			stream->open();
+            if (_streams != nullptr) {
+                for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
+                    stream->open();
+                }
+            }
 		}
 
         ACommunicativeModule::ACommunicativeModule(ACommunicativeModule &other):
-            _stream(other._stream)
+            _streams(other._streams)
         {
-            other._stream = nullptr;
+            other._streams = nullptr;
         }
 
         ACommunicativeModule &ACommunicativeModule::operator=(ACommunicativeModule &other) {
-			if (_stream != nullptr)
-				_stream->close();
-            _stream = other._stream;
-            other._stream = nullptr;
+			if (_streams != nullptr) {
+			    for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
+			        stream->close();
+			    }
+			}
+            _streams = other._streams;
+            other._streams = nullptr;
             return *this;
         }
 
         ACommunicativeModule::~ACommunicativeModule() {
-			if (_stream != nullptr)
-				_stream->close();
+			if (_streams != nullptr) {
+			    for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
+			        stream->close();
+			    }
+			}
         }
 
-        const communication::ICommunicator *ACommunicativeModule::getCommunicator() {
-            return _stream;
-        }
+        /* const communication::ICommunicator **ACommunicativeModule::getCommunicators() {
+            return _streams;
+        } */
 
-        void ACommunicativeModule::setCommunicator(communication::ICommunicator *stream) {
-			if (_stream != nullptr)
-				_stream->close();
-            _stream = stream;
+        void ACommunicativeModule::setCommunicators(communication::ICommunicator **streams) {
+            if (_streams != nullptr) {
+                for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
+                    stream->close();
+                }
+            }
+            _streams = streams;
         }
     }
 }

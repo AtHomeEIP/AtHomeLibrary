@@ -19,7 +19,7 @@ namespace woodBox {
     namespace module {
         class ABaseModule : public ADisplayModule, public ACommunicativeModule, public APoweredModule, public ASensorModule, public AStorageModule {
             public:
-                virtual ABaseModule &operator=(ABaseModule &) = delete;
+                virtual ABaseModule &operator=(ABaseModule &);
                 virtual ~ABaseModule();
                 virtual void run();
                 virtual void stop();
@@ -32,7 +32,7 @@ namespace woodBox {
 					return dynamic_cast<T*>(_instance);
 				}
             protected:
-				ABaseModule(display::IDisplay * = nullptr, communication::ICommunicator * = nullptr,
+				ABaseModule(display::IDisplay * = nullptr, communication::ICommunicator ** = nullptr,
 					power::IPower * = nullptr, sensor::ISensor * = nullptr, storage::IStorage * = nullptr);
                 ABaseModule(ABaseModule &);
 			/* Callbacks */
