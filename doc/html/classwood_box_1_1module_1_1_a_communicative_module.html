@@ -81,14 +81,15 @@ Inheritance diagram for woodBox::module::ACommunicativeModule:</div>
   <map id="woodBox::module::ACommunicativeModule_map" name="woodBox::module::ACommunicativeModule_map">
 <area href="classwood_box_1_1module_1_1_i_module.html" alt="woodBox::module::IModule" shape="rect" coords="0,0,251,24"/>
 <area href="classwood_box_1_1module_1_1_a_base_module.html" alt="woodBox::module::ABaseModule" shape="rect" coords="0,112,251,136"/>
+<area href="classwood_box_1_1module_1_1_a_wood_box_module.html" alt="woodBox::module::AWoodBoxModule" shape="rect" coords="0,168,251,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afa4213c8224e42a60ac8412799064d50"><td class="memItemLeft" align="right" valign="top"><a id="afa4213c8224e42a60ac8412799064d50"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ACommunicativeModule</b> (<a class="el" href="classwood_box_1_1communication_1_1_i_communicator.html">communication::ICommunicator</a> *)</td></tr>
-<tr class="separator:afa4213c8224e42a60ac8412799064d50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a070c3d909948d9701f7f4fcede2b0c52"><td class="memItemLeft" align="right" valign="top"><a id="a070c3d909948d9701f7f4fcede2b0c52"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ACommunicativeModule</b> (<a class="el" href="classwood_box_1_1communication_1_1_i_communicator.html">communication::ICommunicator</a> **)</td></tr>
+<tr class="separator:a070c3d909948d9701f7f4fcede2b0c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7d03d4e9ea7322b966af682f6106fd6"><td class="memItemLeft" align="right" valign="top"><a id="af7d03d4e9ea7322b966af682f6106fd6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ACommunicativeModule</b> (<a class="el" href="classwood_box_1_1module_1_1_a_communicative_module.html">ACommunicativeModule</a> &amp;)</td></tr>
 <tr class="separator:af7d03d4e9ea7322b966af682f6106fd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -101,18 +102,15 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()=0<
 <tr class="memitem:aaedcc9c9798b58a7aed8cf615404ef31"><td class="memItemLeft" align="right" valign="top"><a id="aaedcc9c9798b58a7aed8cf615404ef31"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()=0</td></tr>
 <tr class="separator:aaedcc9c9798b58a7aed8cf615404ef31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a30f015913ded87819d9e39266ad4f8ee"><td class="memItemLeft" align="right" valign="top"><a id="a30f015913ded87819d9e39266ad4f8ee"></a>
-virtual const <a class="el" href="classwood_box_1_1communication_1_1_i_communicator.html">communication::ICommunicator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getCommunicator</b> ()</td></tr>
-<tr class="separator:a30f015913ded87819d9e39266ad4f8ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af882e77775d892452247f0e6e7a008b7"><td class="memItemLeft" align="right" valign="top"><a id="af882e77775d892452247f0e6e7a008b7"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setCommunicator</b> (<a class="el" href="classwood_box_1_1communication_1_1_i_communicator.html">communication::ICommunicator</a> *)</td></tr>
-<tr class="separator:af882e77775d892452247f0e6e7a008b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78a8ab8058a256c2dbccf2762dde10f7"><td class="memItemLeft" align="right" valign="top"><a id="a78a8ab8058a256c2dbccf2762dde10f7"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setCommunicators</b> (<a class="el" href="classwood_box_1_1communication_1_1_i_communicator.html">communication::ICommunicator</a> **)</td></tr>
+<tr class="separator:a78a8ab8058a256c2dbccf2762dde10f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a2eb402d7af8591b0935e79c63be06bf8"><td class="memItemLeft" align="right" valign="top"><a id="a2eb402d7af8591b0935e79c63be06bf8"></a>
-<a class="el" href="classwood_box_1_1communication_1_1_i_communicator.html">communication::ICommunicator</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_stream</b></td></tr>
-<tr class="separator:a2eb402d7af8591b0935e79c63be06bf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bd6e2a941c299e7040a14bb291b6361"><td class="memItemLeft" align="right" valign="top"><a id="a4bd6e2a941c299e7040a14bb291b6361"></a>
+<a class="el" href="classwood_box_1_1communication_1_1_i_communicator.html">communication::ICommunicator</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td></tr>
+<tr class="separator:a4bd6e2a941c299e7040a14bb291b6361"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_a_communicative_module_8hpp_source.html">ACommunicativeModule.hpp</a></li>
