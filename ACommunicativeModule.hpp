@@ -55,6 +55,13 @@
  *   - Method name -> defined by constructor? Setter? Builder class?
  *   - Parameters -> defined by dictionary? Attributes in a class?
  *   - Body -> Blob
+ *
+ * Proposition:
+ * - ICommunicators classes are discovered through dynamic_cast, eg.: A SetWiFi command is received,
+ *   the corresponding receiver method iterate through all ICommunicators and if some are AWiFiCommunicator,
+ *   they update the settings. But this exclude having several communicators of same type connected to several different pairs
+ * - Event receivers are specialized classes implementing an interface, and are associated in a map to the corresponding event
+ * - SendingCommand objects are a helper class used to send a command. Predefined command could have specialized classes implementing their action
  * */
 
 namespace woodBox {
