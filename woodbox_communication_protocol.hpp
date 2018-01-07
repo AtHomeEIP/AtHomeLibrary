@@ -4,8 +4,8 @@ namespace woodBox {
             const char *end_of_line = "\r\n";
             const char *part_separator = "================================================================================";
             const char spacer = '\t';
-            const char end_of_command = '\X03'; // It's the end of text character, ie Ctrl^D
-            const char end_of_communication = '\X04'; // It's the end of transmission character, ie Ctrl^C
+            const char end_of_command = '\x03'; // It's the end of text character, ie Ctrl^D
+            const char end_of_communication = '\x04'; // It's the end of transmission character, ie Ctrl^C
 
             const char *enumerate = "Enumerate";
             const char *uploadData = "UploadData";
