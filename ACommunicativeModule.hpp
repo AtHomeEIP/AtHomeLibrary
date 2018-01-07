@@ -15,7 +15,7 @@ namespace woodBox {
                 virtual ~ACommunicativeModule();
                 virtual void run() = 0;
                 virtual void stop() = 0;
-                //virtual const communication::ICommunicator **getCommunicators();
+                virtual communication::ICommunicator **getCommunicators();
                 virtual void setCommunicators(communication::ICommunicator **);
             protected:
                 communication::ICommunicator    **_streams;

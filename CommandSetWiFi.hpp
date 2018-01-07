@@ -3,13 +3,14 @@
 
 # include "ICommunicatorEventReceiver.hpp"
 # include "wifi_types.hpp"
+# include "AWiFiCommunicator.hpp"
 
 namespace woodBox {
     namespace communication {
         namespace commands {
             class CommandSetWiFi : public ICommunicatorCommandReceiver {
             public:
-                CommandSetWiFi();
+                CommandSetWiFi(AWiFiCommunicator &);
                 CommandSetWiFi(const CommandSetWiFi &) = delete;
                 CommandSetWiFi &operator=(const CommandSetWiFi &) = delete;
                 ~CommandSetWiFi();
@@ -17,8 +18,9 @@ namespace woodBox {
                 virtual void execute();
                 virtual void reply(ICommunicator &);
             private:
-                bool    _ok;
-                WiFi_ap _ap;
+                bool                            _ok;
+                AWiFiCommunicator               &_com;
+                WiFi_ap                         _ap;
             };
 
             const char *ssid_key = "ssid";

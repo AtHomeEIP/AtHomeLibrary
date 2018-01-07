@@ -37,9 +37,9 @@ namespace woodBox {
             }
         }
 
-        /* const communication::ICommunicator **ACommunicativeModule::getCommunicators() {
+        communication::ICommunicator **ACommunicativeModule::getCommunicators() {
             return _streams;
-        } */
+        }
 
         void ACommunicativeModule::setCommunicators(communication::ICommunicator **streams) {
             if (_streams != nullptr) {

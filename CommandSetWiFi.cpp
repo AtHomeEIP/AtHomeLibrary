@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include "CommandSetWiFi.hpp"
 #include "woodbox_communication_protocol.hpp"
+#include "AWiFiCommunicator.hpp"
 
 /*
  * Example of setWiFiJson:
@@ -20,7 +21,11 @@
 namespace woodBox {
     namespace communication {
         namespace commands {
-            CommandSetWiFi::CommandSetWiFi():_ok(false) { memset(&_ap, 0, sizeof(WiFi_ap)); }
+            CommandSetWiFi::CommandSetWiFi(AWiFiCommunicator &com):
+                    _ok(false),
+                    _com(com) {
+                memset(&_ap, 0, sizeof(WiFi_ap));
+            }
 
             CommandSetWiFi::~CommandSetWiFi() {}
 
@@ -45,7 +50,7 @@ namespace woodBox {
             }
 
             void CommandSetWiFi::execute() {
-                // Need to be friend with AWoodBoxModule
+                _com.setAccessPoint(_ap);
             }
 
             void CommandSetWiFi::reply(ICommunicator &communicator) {

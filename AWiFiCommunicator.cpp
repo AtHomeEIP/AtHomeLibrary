@@ -40,21 +40,24 @@ namespace woodBox {
         }
 
         void AWiFiCommunicator::setAccessPoint(const WiFi_ap &ap) {
-            disconnectFromHost();
+            //disconnectFromHost();
             disconnect();
             memcpy(&_ap, &ap, sizeof(WiFi_ap));
+            connect();
+            //connectToHost();
         }
 
         void AWiFiCommunicator::setConnectionAddresses(const WiFi_client &client) {
             disconnectFromHost();
-            disconnect();
             memcpy(&_me, &client, sizeof(WiFi_client));
+            connectToHost();
         }
 
         void AWiFiCommunicator::setWiFiMode(wifi_mode mode) {
-            disconnectFromHost();
+            //disconnectFromHost();
             disconnect();
             _mode = mode;
+            connect();
         }
 
         void AWiFiCommunicator::setICommunicatorToChipset(ICommunicator *streams) {
