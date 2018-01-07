@@ -25,7 +25,7 @@ namespace woodBox {
     namespace communication {
         namespace commands {
             namespace {
-#ifndef AVR
+#ifndef __AVR__
                 const char ssid_key[] = "ssid";
                 const char password_key[] = "password";
                 const char ip_key[] = "ip";
