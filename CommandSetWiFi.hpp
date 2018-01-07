@@ -19,7 +19,7 @@ namespace woodBox {
                 virtual void reply(ICommunicator &);
             private:
                 bool                            _ok;
-                wifi::AWiFiCommunicator               &_com;
+                wifi::AWiFiCommunicator         &_com;
                 WiFi_ap                         _ap;
                 tcp_host                        _host;
             };
