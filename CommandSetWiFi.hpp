@@ -21,10 +21,8 @@ namespace woodBox {
                 bool                            _ok;
                 AWiFiCommunicator               &_com;
                 WiFi_ap                         _ap;
+                tcp_host                        _host;
             };
-
-            const char *ssid_key = "ssid";
-            const char *password_key = "password";
         }
     }
 }
