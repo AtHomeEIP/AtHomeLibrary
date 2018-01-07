@@ -39,7 +39,7 @@ namespace woodBox {
 #endif
             }
 
-            CommandSetWiFi::CommandSetWiFi(AWiFiCommunicator &com):
+            CommandSetWiFi::CommandSetWiFi(wifi::AWiFiCommunicator &com):
                     _ok(false),
                     _com(com) {
                 memset(&_ap, 0, sizeof(WiFi_ap));

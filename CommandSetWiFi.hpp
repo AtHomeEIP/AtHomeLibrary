@@ -10,7 +10,7 @@ namespace woodBox {
         namespace commands {
             class CommandSetWiFi : public ICommunicatorCommandReceiver {
             public:
-                CommandSetWiFi(AWiFiCommunicator &);
+                CommandSetWiFi(wifi::AWiFiCommunicator &);
                 CommandSetWiFi(const CommandSetWiFi &) = delete;
                 CommandSetWiFi &operator=(const CommandSetWiFi &) = delete;
                 ~CommandSetWiFi();
@@ -19,7 +19,7 @@ namespace woodBox {
                 virtual void reply(ICommunicator &);
             private:
                 bool                            _ok;
-                AWiFiCommunicator               &_com;
+                wifi::AWiFiCommunicator               &_com;
                 WiFi_ap                         _ap;
                 tcp_host                        _host;
             };
