@@ -1,7 +1,7 @@
 #ifndef CHAINABLELED_HPP
 # define CHAINABLELED_HPP
 
-# ifdef ARDUINO
+# ifdef GROVE_RGB_CHAINABLE_LED_ENABLED
 
 #  include <ChainableLED.h>
 #  include "IRGBLed.hpp"
@@ -33,6 +33,6 @@ namespace woodBox {
 	}
 }
 
-# endif /* ARDUINO */
+# endif /* GROVE_RGB_CHAINABLE_LED_ENABLED */
 
 #endif /* CHAINABLELED_HPP */

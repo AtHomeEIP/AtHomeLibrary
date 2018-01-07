@@ -1,4 +1,4 @@
-#ifdef ARDUINO
+#ifdef GROVE_RGB_CHAINABLE_LED_ENABLED
 
 # include "GroveChainableLED.hpp"
 
@@ -66,4 +66,4 @@ namespace woodBox {
 	}
 }
 
-#endif /* ARDUINO */
+#endif /* GROVE_RGB_CHAINABLE_LED_ENABLED */
