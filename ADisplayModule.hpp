@@ -16,8 +16,8 @@ namespace woodBox {
                 virtual void stop() = 0;
                 virtual const display::IDisplay *getDisplay();
                 virtual void setDisplay(display::IDisplay *);
-			protected:
-				virtual void onUpdateDisplay() = 0;
+            protected:
+                virtual void onUpdateDisplay() = 0;
             protected:
                 display::IDisplay   *_display;
         };

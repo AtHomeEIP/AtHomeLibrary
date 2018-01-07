@@ -13,16 +13,16 @@ namespace woodBox {
         }
 
         ADisplayModule &ADisplayModule::operator=(ADisplayModule &other) {
-			if (_display != nullptr)
-				delete _display;
+            if (_display != nullptr)
+                delete _display;
             _display = other._display;
             other._display = nullptr;
             return *this;
         }
 
         ADisplayModule::~ADisplayModule() {
-			if (_display != nullptr)
-				delete _display;
+            if (_display != nullptr)
+                delete _display;
         }
 
         const display::IDisplay *ADisplayModule::getDisplay() {
@@ -30,8 +30,8 @@ namespace woodBox {
         }
 
         void ADisplayModule::setDisplay(display::IDisplay *display) {
-			if (_display != nullptr)
-				delete _display;
+            if (_display != nullptr)
+                delete _display;
             _display = display;
         }
     }

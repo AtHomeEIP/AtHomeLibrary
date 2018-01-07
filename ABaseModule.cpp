@@ -10,47 +10,46 @@ inline void delay(uint32_t ms) {
 
 namespace woodBox {
     namespace module {
-		ABaseModule *ABaseModule::_instance = nullptr;
+        ABaseModule *ABaseModule::_instance = nullptr;
 
         ABaseModule::ABaseModule(
-			display::IDisplay *display,
-			communication::ICommunicator **communicators,
-			power::IPower *power,
-			sensor::ISensor *sensor,
-			storage::IStorage *storage):
-            ADisplayModule(display),
-            ACommunicativeModule(communicators),
-			APoweredModule(power),
-			ASensorModule(sensor),
-			AStorageModule(storage)
-        {}
+                                 display::IDisplay *display,
+                                 communication::ICommunicator **communicators,
+                                 power::IPower *power,
+                                 sensor::ISensor *sensor,
+                                 storage::IStorage *storage
+                                ):
+                                 ADisplayModule(display),
+                                 ACommunicativeModule(communicators),
+                                 APoweredModule(power),
+                                 ASensorModule(sensor),
+                                 AStorageModule(storage) {}
 
         ABaseModule::ABaseModule(ABaseModule &other):
-            ADisplayModule(other),
-            ACommunicativeModule(other),
-			APoweredModule(other),
-			ASensorModule(other),
-			AStorageModule(other)
-        {}
+                                                    ADisplayModule(other),
+                                                    ACommunicativeModule(other),
+                                                    APoweredModule(other),
+                                                    ASensorModule(other),
+                                                    AStorageModule(other) {}
 
         ABaseModule &ABaseModule::operator=(ABaseModule &other) {
             /* DisplayModule::operator=(other);
             CommunicativeModule::operator=(other);
-			PoweredModule::operator=(other);
-			SensorModule::operator=(other);
-			StorageModule::operator=(other); */
-			if (_instance != nullptr && _instance != this) {
-				delete _instance;
-				_instance = this;
-			}
+            PoweredModule::operator=(other);
+            SensorModule::operator=(other);
+            StorageModule::operator=(other); */
+            if (_instance != nullptr && _instance != this) {
+                delete _instance;
+                _instance = this;
+            }
             return *this;
         }
 
         ABaseModule::~ABaseModule() {}
 
         void ABaseModule::run() {
-			setup();
-			loop();
+            setup();
+            loop();
         }
 
         void ABaseModule::stop() {
@@ -58,30 +57,30 @@ namespace woodBox {
             onStop();
         }
 
-		void ABaseModule::setup() {
-		    onRestoreFromStorage();
-			onStart();
-		}
+        void ABaseModule::setup() {
+            onRestoreFromStorage();
+            onStart();
+        }
 
-		void ABaseModule::loop() {
-		    while (1) {
-		        onSampleSensor();
-		        onUpdateDisplay();
-		        onCommunicate();
-		        onPause();
-		        sleep();
-		        onResume();
-		    }
-		}
+        void ABaseModule::loop() {
+            while (1) {
+                onSampleSensor();
+                onUpdateDisplay();
+                onCommunicate();
+                onPause();
+                sleep();
+                onResume();
+            }
+        }
 
-		void ABaseModule::sleep() {
-		    delay(1000);
-		    wakeUp();
-		}
-		
-		void ABaseModule::wakeUp() {
-		    onResume();
-		}
+        void ABaseModule::sleep() {
+            delay(1000);
+            wakeUp();
+        }
+
+        void ABaseModule::wakeUp() {
+            onResume();
+        }
     }
 }
 

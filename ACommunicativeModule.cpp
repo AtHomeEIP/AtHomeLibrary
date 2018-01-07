@@ -10,7 +10,7 @@ namespace woodBox {
                     stream->open();
                 }
             }
-		}
+        }
 
         ACommunicativeModule::ACommunicativeModule(ACommunicativeModule &other):
             _streams(other._streams)
@@ -19,22 +19,22 @@ namespace woodBox {
         }
 
         ACommunicativeModule &ACommunicativeModule::operator=(ACommunicativeModule &other) {
-			if (_streams != nullptr) {
-			    for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
-			        stream->close();
-			    }
-			}
+            if (_streams != nullptr) {
+                for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
+                    stream->close();
+                }
+            }
             _streams = other._streams;
             other._streams = nullptr;
             return *this;
         }
 
         ACommunicativeModule::~ACommunicativeModule() {
-			if (_streams != nullptr) {
-			    for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
-			        stream->close();
-			    }
-			}
+            if (_streams != nullptr) {
+                for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
+                    stream->close();
+                }
+            }
         }
 
         /* const communication::ICommunicator **ACommunicativeModule::getCommunicators() {
