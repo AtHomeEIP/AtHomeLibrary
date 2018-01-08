@@ -6,7 +6,6 @@
 #  include <Arduino.h>
 
 # endif /* ARDUINO */
-
 //# include <Stream.h>
 # include "ICommunicator.hpp"
 # include "wifi_types.hpp"
