@@ -21,10 +21,10 @@ namespace woodBox {
                     RADIOACTIVITY // Geiger counter
                 };
 
-                typename char       moduleVendor[33];
-                typename char       moduleSerial[33];
-                typename uint16_t   measure;
-                typename uint32_t   timestamp;
+                typedef char       moduleVendor[33];
+                typedef char       moduleSerial[33];
+                typedef uint16_t   measure;
+                typedef uint32_t   timestamp;
 
                 AWoodBoxModule(const AWoodBoxModule &) = delete;
                 AWoodBoxModule &operator=(const AWoodBoxModule &) = delete;

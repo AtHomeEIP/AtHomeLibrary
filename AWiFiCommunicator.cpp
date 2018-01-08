@@ -24,6 +24,7 @@ namespace woodBox {
             {
                 (ap != nullptr) ? memcpy(&_ap, ap, sizeof(WiFi_ap)) : memset(&_ap, 0, sizeof(WiFi_ap));
                 (client != nullptr) ? memcpy(&_me, client, sizeof(WiFi_client)) : memset(&_me, 0, sizeof(WiFi_client));
+                memset(&_host, 0, sizeof(tcp_host));
             }
 
             //AWiFiCommunicator::~AWiFiCommunicator() {}
@@ -34,6 +35,10 @@ namespace woodBox {
 
             const WiFi_client &AWiFiCommunicator::getConnectionAddresses() const {
                 return _me;
+            }
+
+            const tcp_host &AWiFiCommunicator::getHost() const {
+                return _host;
             }
 
             wifi_mode AWiFiCommunicator::getWiFiMode() const {
@@ -52,6 +57,10 @@ namespace woodBox {
                 disconnectFromHost();
                 memcpy(&_me, &client, sizeof(WiFi_client));
                 connectToHost();
+            }
+
+            void AWiFiCommunicator::setHost(const tcp_host &host) {
+                memcpy(&_host, &host, sizeof(tcp_host));
             }
 
             void AWiFiCommunicator::setWiFiMode(wifi_mode mode) {

@@ -13,26 +13,26 @@ enum e_wifi_frequency_band {
 };
 
 enum e_wifi_norm {
-    A,
-    AC,
-    AD,
-    AH,
-    AX,
-    B,
-    C,
-    D,
-    E,
-    F,
-    G,
-    H,
-    I,
-    IR,
-    J,
-    N,
-    R,
-    S,
-    U,
-    V
+    WIFI_A,
+    WIFI_AC,
+    WIFI_AD,
+    WIFI_AH,
+    WIFI_AX,
+    WIFI_B,
+    WIFI_C,
+    WIFI_D,
+    WIFI_E,
+    WIFI_F,
+    WIFI_G,
+    WIFI_H,
+    WIFI_I,
+    WIFI_IR,
+    WIFI_J,
+    WIFI_N,
+    WIFI_R,
+    WIFI_S,
+    WIFI_U,
+    WIFI_V
 };
 
 enum e_wifi_mode {

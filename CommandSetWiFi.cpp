@@ -80,7 +80,8 @@ namespace woodBox {
 
             void CommandSetWiFi::execute() {
                 _com.setAccessPoint(_ap);
-                _com.connectToHost(&_host);
+                _com.setHost(_host);
+                _com.connectToHost();
             }
 
             void CommandSetWiFi::reply(ICommunicator &communicator) {
