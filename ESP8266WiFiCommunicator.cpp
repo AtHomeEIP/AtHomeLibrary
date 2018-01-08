@@ -66,7 +66,33 @@ namespace woodBox {
 #endif
             }
 
-            ESP8266WiFiCommunicator::ESP8266WiFiCommunicator() {}
+            ESP8266WiFiCommunicator::ESP8266WiFiCommunicator():AWiFiCommunicator() {}
+
+            //ESP8266WiFiCommunicator::~ESP8266WiFiCommunicator() {}
+
+            int ESP8266WiFiCommunicator::available() { return 0; }
+
+            int ESP8266WiFiCommunicator::read() { return 0; }
+
+            int ESP8266WiFiCommunicator::peek() { return 0; }
+
+            size_t ESP8266WiFiCommunicator::write(uint8_t octet) { return 0; }
+
+            void ESP8266WiFiCommunicator::flush() {}
+
+            void ESP8266WiFiCommunicator::open() {}
+
+            void ESP8266WiFiCommunicator::close() {}
+
+            void ESP8266WiFiCommunicator::connect() {}
+
+            void ESP8266WiFiCommunicator::disconnect() {}
+
+            void ESP8266WiFiCommunicator::connectToHost() {}
+
+            void ESP8266WiFiCommunicator::disconnectFromHost() {}
+
+            bool ESP8266WiFiCommunicator::isConnected() { return false; }
         }
     }
 }

@@ -1,4 +1,6 @@
+#ifndef __msp430
 #include <ArduinoJson.h>
+#endif
 #include <string.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -53,6 +55,7 @@ namespace woodBox {
                 size_t len = 0;
                 if ((len = communicator.readBytesUntil(end_of_command, buffer, 130))) {
                     buffer[len] = '\0';
+#ifndef __msp430
                     StaticJsonBuffer<100> json;
                     JsonObject &root = json.parseObject(buffer);
                     const char *ssid = root.get<const char*>(ssid_key);
@@ -75,6 +78,7 @@ namespace woodBox {
                         }
                         _ok = true;
                     }
+#endif
                 }
             }
 

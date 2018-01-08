@@ -23,9 +23,12 @@ namespace woodBox {
 				    virtual int read() = 0;
 				    virtual int peek() = 0;
 				    virtual size_t write(uint8_t) = 0;
+				    virtual void flush() = 0;
 				    /* Methods from ICommunicator:
 				    virtual uint8_t &read(uint32_t) = 0; // Read n bytes
 				    virtual void write(const uint8_t &, uint32_t) = 0; // Write n bytes */
+				    virtual void open() = 0;
+				    virtual void close() = 0;
 				    virtual void connect() = 0;
 				    virtual void disconnect() = 0;
 				    virtual void connectToHost() = 0;
