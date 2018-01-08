@@ -1,0 +1,53 @@
+# This file is a template, and might need editing before it works on your project.
+# use the official gcc image, based on debian
+# can use verions as well, like gcc:5.2
+# see https://hub.docker.com/_/gcc/
+image: debian
+
+build:
+  stage: build
+  # instead of calling g++ directly you can also use some build toolkit like make
+  # install the necessary build tools when needed
+  before_script:
+    - apt update && apt -y install build-essential git xvfb wget xz-utils libxext6 libxtst6 libxrender1 libgtk2.0.0 default-jre libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr make
+    - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
+    - sleep 3
+    - export DISPLAY=:1.0
+    - wget http://downloads.arduino.cc/arduino-1.8.5-linux64.tar.xz
+    - tar xf arduino-1.8.5-linux64.tar.xz
+    - mv arduino-1.8.5 /usr/local/share/arduino
+    - ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
+    - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
+    - git clone https://github.com/pjpmarques/ChainableLED.git
+    - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
+    - git clone https://github.com/bblanchon/ArduinoJson.
+    - git clone https://github.com/mmurdoch/arduinounit.git
+    - ln -s $PWD/Grove_Digital_Light_Sensor /usr/local/share/arduino/libraries/Grove_Digital_Light_Sensor
+    - ln -s $PWD/ChainableLED /usr/local/share/arduino/libraries/ChainableLED
+    - ln -s $PWD/Grove_Air_quality_Sensor /usr/local/share/arduino/libraries/Grove_Air_quality_Sensor
+    - ln -s $PWD/ArduinoJson /usr/local/share/arduino/libraries/ArduinoJson
+    - ln -s $PWD/arduinounit /usr/local/share/arduino/libraries/ArduinoUnit
+    - ln -s $PWD /usr/local/share/arduino/libraries/woodBox
+    - arduino --install-library "Adafruit NeoPixel"
+    - git clone https://github.com/buserror/simavr.git
+    - cd ./simavr ; make && make install ; cd -
+    - mkdir -p $PWD/test/output/uno
+    - mkdir -p $PWD/test/output/leonardo
+    # - apt update && apt -y install make autoconf 
+  script:
+    - arduino --verify --board arduino:avr:uno $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/uno/
+    - arduino --verify --board arduino:avr:leonardo $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/leonardo/
+  artifacts:
+    paths:
+      - "$PWD/test/output/uno/*.hex"
+      - "$PWD/test/output/leonardo/*.hex"
+  # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
+  # cache:
+  #   paths:
+  #     - "*.o"
+
+# run tests using the binary built before
+# test:
+#   stage: test
+#   script:
+#     - ./runmytests.sh
