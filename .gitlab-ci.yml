@@ -20,7 +20,7 @@ build:
     - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
     - git clone https://github.com/pjpmarques/ChainableLED.git
     - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
-    - git clone https://github.com/bblanchon/ArduinoJson.
+    - git clone https://github.com/bblanchon/ArduinoJson.git
     - git clone https://github.com/mmurdoch/arduinounit.git
     - ln -s $PWD/Grove_Digital_Light_Sensor /usr/local/share/arduino/libraries/Grove_Digital_Light_Sensor
     - ln -s $PWD/ChainableLED /usr/local/share/arduino/libraries/ChainableLED
