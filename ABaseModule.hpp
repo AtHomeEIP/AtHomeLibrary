@@ -29,7 +29,9 @@ namespace woodBox {
                         _instance = new T();
                         return _instance;
                     }
-                    return dynamic_cast<T*>(_instance);
+                    return _instance;
+                    // Dynamic cast doesn't works on embedded target. Not troublesome here, but will be later in code
+                    //return dynamic_cast<T*>(_instance);
                 }
             protected:
                 ABaseModule(display::IDisplay * = nullptr, communication::ICommunicator ** = nullptr,
