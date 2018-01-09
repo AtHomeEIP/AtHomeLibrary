@@ -28,10 +28,10 @@ namespace woodBox {
 				    virtual void write(const uint8_t &, uint32_t) = 0; // Write n bytes */
 				    virtual void open() = 0;
 				    virtual void close() = 0;
-				    virtual void connect() = 0;
-				    virtual void disconnect() = 0;
-				    virtual void connectToHost() = 0;
-				    virtual void disconnectFromHost() = 0;
+				    virtual int connect() = 0;
+				    virtual int disconnect() = 0;
+				    virtual int connectToHost() = 0;
+				    virtual int disconnectFromHost() = 0;
 				    virtual bool isConnected() = 0;
 
 				    virtual const WiFi_ap &getAccessPoint() const;
