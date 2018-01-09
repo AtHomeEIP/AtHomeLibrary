@@ -47,7 +47,7 @@ namespace woodBox {
 				    virtual void setICommunicatorToChipset(ICommunicator *);
 			    protected:
 				    wifi_mode	        _mode;
-				    ICommunicator		*_streams;
+				    ICommunicator		*_stream;
 				    WiFi_ap		        _ap;
 				    WiFi_client	        _me;
 				    tcp_host	        _host;

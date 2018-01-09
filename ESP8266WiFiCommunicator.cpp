@@ -66,33 +66,101 @@ namespace woodBox {
 #endif
             }
 
-            ESP8266WiFiCommunicator::ESP8266WiFiCommunicator():AWiFiCommunicator() {}
+            ESP8266WiFiCommunicator::ESP8266WiFiCommunicator():
+                AWiFiCommunicator(),
+                _connected(false),
+                _connected_to_host(false),
+                _receiving_data(false),
+                _receiving_len(0) {
+            }
 
             //ESP8266WiFiCommunicator::~ESP8266WiFiCommunicator() {}
 
-            int ESP8266WiFiCommunicator::available() { return 0; }
+            int ESP8266WiFiCommunicator::available() {
+                return _input_buffer.available();
+            }
 
-            int ESP8266WiFiCommunicator::read() { return 0; }
+            int ESP8266WiFiCommunicator::read() {
+                return _input_buffer.read();
+            }
 
-            int ESP8266WiFiCommunicator::peek() { return 0; }
+            int ESP8266WiFiCommunicator::peek() {
+                return _input_buffer.peek();
+            }
 
-            size_t ESP8266WiFiCommunicator::write(uint8_t octet) { return 0; }
+            size_t ESP8266WiFiCommunicator::write(uint8_t byte) {
+                if (!_connected_to_host) {
+                    return 0;
+                }
+                _output_buffer.write(byte);
+                if (_output_buffer.available() == ESP8266_BUFFER_SIZE) {
+                    _flush_output();
+                }
+                return 1;
+            }
 
-            void ESP8266WiFiCommunicator::flush() {}
+            void ESP8266WiFiCommunicator::flush() {
+                _flush_input();
+                _flush_output();
+            }
 
-            void ESP8266WiFiCommunicator::open() {}
+            void ESP8266WiFiCommunicator::open() {
+                _switch_on_esp();
+            }
 
-            void ESP8266WiFiCommunicator::close() {}
+            void ESP8266WiFiCommunicator::close() {
+                if (_connected) {
+                    disconnect();
+                }
+                _switch_off_esp();
+            }
 
-            void ESP8266WiFiCommunicator::connect() {}
+            void ESP8266WiFiCommunicator::connect() {
+                // TODO: To implement
+            }
 
-            void ESP8266WiFiCommunicator::disconnect() {}
+            void ESP8266WiFiCommunicator::disconnect() {
+                if (_connected_to_host) {
+                    disconnectFromHost();
+                }
+                // TODO: To complete
+            }
 
-            void ESP8266WiFiCommunicator::connectToHost() {}
+            void ESP8266WiFiCommunicator::connectToHost() {
+                // TODO: To implement
+            }
 
-            void ESP8266WiFiCommunicator::disconnectFromHost() {}
+            void ESP8266WiFiCommunicator::disconnectFromHost() {
+                // TODO: To implement
+            }
 
-            bool ESP8266WiFiCommunicator::isConnected() { return false; }
+            bool ESP8266WiFiCommunicator::isConnected() {
+                return _connected_to_host;
+            }
+
+            void ESP8266WiFiCommunicator::_interpret() {
+                // TODO: To implement
+            }
+
+            void ESP8266WiFiCommunicator::_read() {
+                // TODO: To implement
+            }
+
+            void ESP8266WiFiCommunicator::_flush_input() {
+                // TODO: To implement
+            }
+
+            void ESP8266WiFiCommunicator::_flush_output() {
+                // TODO: To implement
+            }
+
+            void ESP8266WiFiCommunicator::_switch_on_esp() {
+                // TODO: To implement
+            }
+
+            void ESP8266WiFiCommunicator::_switch_off_esp() {
+                // TODO: To implement
+            }
         }
     }
 }

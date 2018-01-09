@@ -1,7 +1,17 @@
 #ifndef ESP8266WIFICOMMUNICATOR_HPP
 # define ESP8266WIFICOMMUNICATOR_HPP
 
+# include <stdint.h>
 # include "AWiFiCommunicator.hpp"
+# include "Buffer.hpp"
+
+# ifndef ESP8266_BUFFER_SIZE
+#  define ESP8266_BUFFER_SIZE 64
+# endif
+
+# ifndef ESP8266_COMMAND_BUFFER_SIZE
+#  define ESP8266_COMMAND_BUFFER_SIZE 4
+# endif
 
 namespace woodBox {
     namespace communication {
@@ -26,7 +36,20 @@ namespace woodBox {
             /* private:
                 virtual ~ESP8266WiFiCommunicator(); */
             private:
-                bool _connected;
+                void _interpret();
+                void _read();
+                void _flush_input();
+                void _flush_output();
+                void _switch_on_esp();
+                void _switch_off_esp();
+            private:
+                bool                                                        _connected;
+                bool                                                        _connected_to_host;
+                bool                                                        _receiving_data;
+                size_t                                                      _receiving_len;
+                utility::Buffer<int, ESP8266_BUFFER_SIZE>                   _input_buffer;
+                utility::Buffer<int, ESP8266_BUFFER_SIZE>                   _output_buffer;
+                utility::Buffer<const char *, ESP8266_COMMAND_BUFFER_SIZE>  _command_buffer;
             };
         }
     }
