@@ -31,7 +31,7 @@ build:
     - ln -s $PWD/Grove_Air_quality_Sensor /usr/local/share/arduino/libraries/Grove_Air_quality_Sensor
     - ln -s $PWD/ArduinoJson /usr/local/share/arduino/libraries/ArduinoJson
     - ln -s $PWD/arduinounit /usr/local/share/arduino/libraries/ArduinoUnit
-    # - ln -s $PWD /usr/local/share/arduino/libraries/woodBox
+    - ln -s $PWD /usr/local/share/arduino/libraries/woodBox
     # - ln -s $PWD/Grove_Digital_Light_Sensor /usr/local/share/energia/libraries/Grove_Digital_Light_Sensor
     # - ln -s $PWD/ChainableLED /usr/local/share/arduino/energia/ChainableLED
     # - ln -s $PWD/Grove_Air_quality_Sensor /usr/local/share/energia/libraries/Grove_Air_quality_Sensor
