@@ -16,7 +16,11 @@ build:
     - wget http://downloads.arduino.cc/arduino-1.8.5-linux64.tar.xz
     - tar xf arduino-1.8.5-linux64.tar.xz
     - mv arduino-1.8.5 /usr/local/share/arduino
-    - ln -s /usr/local/share/arduino/arduino /usr/local/bin/arduino
+    - ln -s /usr/local/share/arduino/arduino /usr/local/bin/
+    # - wget http://energia.nu/downloads/downloadv4.php?file=energia-1.6.10E18-linux64.tar.xz
+    # - tar xf energia-1.6.10E18-linux64.tar.xz
+    # - mv energia-1.6.10E18 /usr/local/share/energia
+    - ln -s /usr/local/share/energia/energia /usr/local/bin/
     - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
     - git clone https://github.com/pjpmarques/ChainableLED.git
     - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
@@ -27,20 +31,45 @@ build:
     - ln -s $PWD/Grove_Air_quality_Sensor /usr/local/share/arduino/libraries/Grove_Air_quality_Sensor
     - ln -s $PWD/ArduinoJson /usr/local/share/arduino/libraries/ArduinoJson
     - ln -s $PWD/arduinounit /usr/local/share/arduino/libraries/ArduinoUnit
-    - ln -s $PWD /usr/local/share/arduino/libraries/woodBox
+    # - ln -s $PWD /usr/local/share/arduino/libraries/woodBox
+    # - ln -s $PWD/Grove_Digital_Light_Sensor /usr/local/share/energia/libraries/Grove_Digital_Light_Sensor
+    # - ln -s $PWD/ChainableLED /usr/local/share/arduino/energia/ChainableLED
+    # - ln -s $PWD/Grove_Air_quality_Sensor /usr/local/share/energia/libraries/Grove_Air_quality_Sensor
+    # - ln -s $PWD/ArduinoJson /usr/local/share/arduino/energia/ArduinoJson
+    # - ln -s $PWD/arduinounit /usr/local/share/arduino/energia/ArduinoUnit
+    # - ln -s $PWD /usr/local/share/energia/libraries/woodBox
     - arduino --install-library "Adafruit NeoPixel"
+    - arduino --install-boards arduino:sam
+    - arduino --install-boards arduino:samd
+    - arduino --install-boards chipKIT:pic32
+    # - energia --install-boards energia:msp430
+    # - energia --install-boards energia:msp432
+    # - energia --install-library "Adafruit NeoPixel"
+    # - cp $PWD/test/platforms/msp432/platform.txt ~/.energia15/packages/hardware/msp432/3.8.0/platform.txt
     - git clone https://github.com/buserror/simavr.git
     - cd ./simavr ; make && make install ; cd -
-    - mkdir -p $PWD/test/output/uno
-    - mkdir -p $PWD/test/output/leonardo
+    - mkdir -p $PWD/test/output/avr/uno # test the most classical arduino
+    - mkdir -p $PWD/test/output/avr/leonardo # test avr based arduino with native usb port
+    - mkdir -p $PWD/test/output/arm/zero # test official arm cortex m0+ board
+    - mkdir -p $PWD/test/output/arm/due # test official arm cortex m3 board
+    - mkdir -p $PWD/test/output/pic32/fubarino_mini # test pic32mx250 based board
+    # - mkdir -p $PWD/test/output/msp430/launchpad_fr2433 # test msp430fr2433 board
+    # - mkdir -p $PWD/test/output/msp432/launchpad # test msp432 board, it's an arm cortex m4f
     # - apt update && apt -y install make autoconf 
   script:
-    - arduino --verify --board arduino:avr:uno $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/uno/
-    - arduino --verify --board arduino:avr:leonardo $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/leonardo/
+    - arduino --verify --board arduino:avr:uno $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/
+    - arduino --verify --board arduino:avr:leonardo $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/
+    - arduino --verify --board chipKIT:pic32:fubarino_mini $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/pic32/fubarino_mini/
+    # - energia --verify --board energia:msp432:MSP-EXP432P401R /c/Users/toshiba/Documents/Arduino/libraries/woodBox/test/1/main/main.ino
   artifacts:
     paths:
-      - "$PWD/test/output/uno/*.hex"
-      - "$PWD/test/output/leonardo/*.hex"
+      - "$PWD/test/output/avr/uno/*.hex"
+      - "$PWD/test/output/avr/leonardo/*.hex"
+      - "$PWD/test/output/arm/zero/*.hex"
+      - "$PWD/test/output/arm/due/*.hex"
+      - "$PWD/test/output/pic32/fubarino_mini/*.hex"
   # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
   # cache:
   #   paths:
