@@ -20,7 +20,7 @@ build:
     # - wget http://energia.nu/downloads/downloadv4.php?file=energia-1.6.10E18-linux64.tar.xz
     # - tar xf energia-1.6.10E18-linux64.tar.xz
     # - mv energia-1.6.10E18 /usr/local/share/energia
-    - ln -s /usr/local/share/energia/energia /usr/local/bin/
+    # - ln -s /usr/local/share/energia/energia /usr/local/bin/
     - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
     - git clone https://github.com/pjpmarques/ChainableLED.git
     - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
