@@ -41,7 +41,7 @@ build:
     - arduino --install-library "Adafruit NeoPixel"
     - arduino --install-boards arduino:sam
     - arduino --install-boards arduino:samd
-    - arduino --install-boards chipKIT:pic32
+    # - arduino --install-boards chipKIT:pic32
     # - energia --install-boards energia:msp430
     # - energia --install-boards energia:msp432
     # - energia --install-library "Adafruit NeoPixel"
@@ -52,7 +52,7 @@ build:
     - mkdir -p $PWD/test/output/avr/leonardo # test avr based arduino with native usb port
     - mkdir -p $PWD/test/output/arm/zero # test official arm cortex m0+ board
     - mkdir -p $PWD/test/output/arm/due # test official arm cortex m3 board
-    - mkdir -p $PWD/test/output/pic32/fubarino_mini # test pic32mx250 based board
+    # - mkdir -p $PWD/test/output/pic32/fubarino_mini # test pic32mx250 based board
     # - mkdir -p $PWD/test/output/msp430/launchpad_fr2433 # test msp430fr2433 board
     # - mkdir -p $PWD/test/output/msp432/launchpad # test msp432 board, it's an arm cortex m4f
     # - apt update && apt -y install make autoconf 
@@ -61,7 +61,7 @@ build:
     - arduino --verify --board arduino:avr:leonardo $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/
     - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/
     - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/
-    - arduino --verify --board chipKIT:pic32:fubarino_mini $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/pic32/fubarino_mini/
+    # - arduino --verify --board chipKIT:pic32:fubarino_mini $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/pic32/fubarino_mini/
     # - energia --verify --board energia:msp432:MSP-EXP432P401R /c/Users/toshiba/Documents/Arduino/libraries/woodBox/test/1/main/main.ino
   artifacts:
     paths:
