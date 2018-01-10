@@ -4,7 +4,7 @@
 namespace woodBox {
     namespace communication {
         namespace wifi {
-            AWiFiCommunicator::AWiFiCommunicator(const WiFi_ap *ap, const WiFi_client *client, const wifi_mode mode, ICommunicator *stream):
+            AWiFiCommunicator::AWiFiCommunicator(const WiFi_ap *ap, const WiFi_client *client, const wifi_mode mode, Stream *stream):
                     /* _ap({
                     "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
                     "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
@@ -49,14 +49,15 @@ namespace woodBox {
                 //disconnectFromHost();
                 disconnect();
                 memcpy(&_ap, &ap, sizeof(WiFi_ap));
-                connect();
+                // Should not connect automatically, yes?
+                //connect();
                 //connectToHost();
             }
 
             void AWiFiCommunicator::setConnectionAddresses(const WiFi_client &client) {
                 disconnectFromHost();
                 memcpy(&_me, &client, sizeof(WiFi_client));
-                connectToHost();
+                //connectToHost();
             }
 
             void AWiFiCommunicator::setHost(const tcp_host &host) {
@@ -67,10 +68,10 @@ namespace woodBox {
                 //disconnectFromHost();
                 disconnect();
                 _mode = mode;
-                connect();
+                //connect();
             }
 
-            void AWiFiCommunicator::setICommunicatorToChipset(ICommunicator *stream) {
+            void AWiFiCommunicator::setStreamToChipset(Stream *stream) {
                 _stream = stream;
             }
         }

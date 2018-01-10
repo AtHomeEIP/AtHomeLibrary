@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <string.h>
+#include <stdio.h>
 #include "ESP8266WiFiCommunicator.hpp"
 
 namespace woodBox {
@@ -180,11 +181,13 @@ namespace woodBox {
             void ESP8266WiFiCommunicator::_switch_on_esp() {
                 // TODO: To implement
                 digitalWrite(_enable_pin, LOW);
+                _enabled = true;
             }
 
             void ESP8266WiFiCommunicator::_switch_off_esp() {
                 // TODO: To implement
                 digitalWrite(_enable_pin, HIGH);
+                _enabled = false;
             }
 
             int ESP8266WiFiCommunicator::_command_check() {
@@ -194,11 +197,17 @@ namespace woodBox {
                 if (!_enabled) {
                     return -2;
                 }
+                return 0;
             }
 
             int ESP8266WiFiCommunicator::_esp_answer_check() {
                 while (!_stream->available()) {
                     delay(10);
+                }
+                int tmp = 0;
+                while ((tmp = _stream->peek()) == '\r' || tmp == '\n' || tmp == -1) {
+                    _stream->read();
+                    delay(1);
                 }
                 String result = _stream->readStringUntil(at_nl);
                 result.replace("\r", "");
@@ -242,27 +251,49 @@ namespace woodBox {
                 if (check) {
                     return check;
                 }
-                else if (_set_esp_ap_mode()) {
+                else if (_set_esp_station_mode()) {
                     return -3;
                 }
                 _stream->print(at_cwjap);
                 _stream->print(F("=\""));
-                _stream->print(reinterpret_cast<const char *>(_ap.ssid));
+                _stream->print(_ap.ssid);
                 _stream->print(F("\",\""));
-                _stream->print(reinterpret_cast<const char *>(_ap.password));
+                _stream->print(_ap.password);
                 _stream->print(F("\""));
                 _stream->print(at_eol);
                 return _esp_answer_check();
             }
 
             int ESP8266WiFiCommunicator::_create_ap() {
-                // Todo: Need to implement
-                return -1;
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
+                else if (_set_esp_ap_mode()) {
+                    return -3;
+                }
+                char channel[3];
+                snprintf(channel, 2, "%hhu", _ap.channel);
+                _stream->print(at_cwsap);
+                _stream->print(F("=\""));
+                _stream->print(_ap.ssid);
+                _stream->print(F("\",\""));
+                _stream->print(_ap.password);
+                _stream->print(F("\","));
+                _stream->print(channel);
+                _stream->print(F(",3"));
+                _stream->print(at_eol);
+                return _esp_answer_check();
             }
 
             int ESP8266WiFiCommunicator::_reset_esp() {
-                // Todo: Need to implement
-                return -1;
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
+                _stream->print(at_rst);
+                _stream->print(at_eol);
+                return _esp_answer_check();
             }
         }
     }

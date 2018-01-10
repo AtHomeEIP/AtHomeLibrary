@@ -1,12 +1,8 @@
 #ifndef AWIFICOMMUNICATOR_HPP
 # define AWIFICOMMUNICATOR_HPP
 
-# ifdef ARDUINO
-
-#  include <Arduino.h>
-
-# endif /* ARDUINO */
-//# include <Stream.h>
+# include <Arduino.h>
+# include <Stream.h>
 # include "ICommunicator.hpp"
 # include "wifi_types.hpp"
 
@@ -15,7 +11,7 @@ namespace woodBox {
 	    namespace wifi {
 		    class AWiFiCommunicator : public ICommunicator {
 			    public:
-				    AWiFiCommunicator(const WiFi_ap * = nullptr, const WiFi_client * = nullptr, const wifi_mode = STATION, ICommunicator * = nullptr);
+				    AWiFiCommunicator(const WiFi_ap * = nullptr, const WiFi_client * = nullptr, const wifi_mode = STATION, Stream * = nullptr);
 				    AWiFiCommunicator(const AWiFiCommunicator &) = delete;
 				    AWiFiCommunicator &operator=(const AWiFiCommunicator &) = delete;
 				    virtual int available() = 0;
@@ -44,10 +40,10 @@ namespace woodBox {
 				    virtual void setConnectionAddresses(const WiFi_client &);
 				    virtual void setHost(const tcp_host &);
 				    virtual void setWiFiMode(wifi_mode);
-				    virtual void setICommunicatorToChipset(ICommunicator *);
+				    virtual void setStreamToChipset(Stream *);
 			    protected:
 				    wifi_mode	        _mode;
-				    ICommunicator		*_stream;
+				    Stream		        *_stream;
 				    WiFi_ap		        _ap;
 				    WiFi_client	        _me;
 				    tcp_host	        _host;

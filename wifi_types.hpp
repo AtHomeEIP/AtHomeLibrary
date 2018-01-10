@@ -3,7 +3,7 @@
 
 # include "network_ip_types.hpp"
 
-typedef int8_t                  ascii_char;
+typedef char                    ascii_char;
 
 /* Common types between all architectures */
 

@@ -16,5 +16,6 @@
 # include "LithiumBattery.hpp"
 # include "MQ2.hpp"
 # include "NeoPixel.hpp"
+# include "wifi_types.hpp"
 
 #endif /* WOODBOX_H */
