@@ -38,6 +38,7 @@ namespace woodBox {
                 const char at_ciupdate[] =  "CIUPDATE";
                 const char at_ipd[] =       "+IPD";
                 const char at_ok[] =        "OK";
+                const char at_error[] =     "ERROR";
 #else
 # include <avr/pgmspace.h>
                 const PROGMEM char at_eol[] =       "\r\n";
@@ -69,6 +70,7 @@ namespace woodBox {
                 const PROGMEM char at_ciupdate[] =  "CIUPDATE";
                 const PROGMEM char at_ipd[] =       "+IPD";
                 const PROGMEM char at_ok[] =        "OK";
+                const PROGMEM char at_error[] =     "ERROR";
 #endif
             }
 
@@ -204,14 +206,30 @@ namespace woodBox {
                 while (!_stream->available()) {
                     delay(10);
                 }
-                int tmp = 0;
+                while (_stream->available()) {
+                    String str = _stream->readStringUntil(at_nl);
+                    //Serial.println("Debug");
+                    //Serial.println(str);
+                    str.replace('\r', '\0');
+                    if (!strcmp(str.c_str(), at_ok)) {
+                        return 0;
+                    }
+                    if (!strcmp(str.c_str(), at_error)) {
+                        return -1;
+                    }
+                    delay(1);
+                }
+                return -2;
+                /*int tmp = 0;
                 while ((tmp = _stream->peek()) == '\r' || tmp == '\n' || tmp == -1) {
                     _stream->read();
                     delay(1);
                 }
-                String result = _stream->readStringUntil(at_nl);
-                result.replace("\r", "");
-                return (!strcmp(result.c_str(), at_ok)) ? 0 : -3;
+                String result = _stream->readStringUntil(at_ok);
+                Serial.print(result);
+                _stream->flush();
+                return 0;*/
+                //return (!strcmp(result.c_str(), at_ok)) ? 0 : -3;
             }
 
             int ESP8266WiFiCommunicator::_test_esp() {
@@ -229,6 +247,8 @@ namespace woodBox {
                 if (check) {
                     return check;
                 }
+                _stream->print(at_at);
+                _stream->print(F("+"));
                 _stream->print(at_cwmode);
                 _stream->print(F("=1"));
                 _stream->print(at_eol);
@@ -240,6 +260,8 @@ namespace woodBox {
                 if (check) {
                     return check;
                 }
+                _stream->print(at_at);
+                _stream->print(F("+"));
                 _stream->print(at_cwmode);
                 _stream->print(F("=2"));
                 _stream->print(at_eol);
@@ -254,6 +276,8 @@ namespace woodBox {
                 else if (_set_esp_station_mode()) {
                     return -3;
                 }
+                _stream->print(at_at);
+                _stream->print(F("+"));
                 _stream->print(at_cwjap);
                 _stream->print(F("=\""));
                 _stream->print(_ap.ssid);
@@ -274,6 +298,8 @@ namespace woodBox {
                 }
                 char channel[3];
                 snprintf(channel, 2, "%hhu", _ap.channel);
+                _stream->print(at_at);
+                _stream->print(F("+"));
                 _stream->print(at_cwsap);
                 _stream->print(F("=\""));
                 _stream->print(_ap.ssid);
@@ -291,6 +317,8 @@ namespace woodBox {
                 if (check) {
                     return check;
                 }
+                _stream->print(at_at);
+                _stream->print(F("+"));
                 _stream->print(at_rst);
                 _stream->print(at_eol);
                 return _esp_answer_check();
