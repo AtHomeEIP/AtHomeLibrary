@@ -19,7 +19,7 @@ class MyModule : public woodBox::module::AWoodBoxModule {
 };
 
 woodBox::module::ABaseModule* me = MyModule::getInstance<MyModule>();
-woodBox::communication::wifi::ESP8266WiFiCommunicator wifi_com(2);
+woodBox::communication::wifi::ESP8266WiFiCommunicator wifi_com(2, 3);
 woodBox::communication::commands::CommandSetWiFi *setWiFi = new woodBox::communication::commands::CommandSetWiFi(wifi_com);
 
 void setup() {
