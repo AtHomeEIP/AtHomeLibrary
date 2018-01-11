@@ -9,6 +9,7 @@ namespace woodBox {
             namespace {
                 const char at_nl =          '\n';
 #ifndef __AVR__
+# define STRCMP strcmp
                 const char at_eol[] =       "\r\n";
                 const char at_at[] =        "AT";
                 const char at_rst[] =       "RST";
@@ -39,8 +40,11 @@ namespace woodBox {
                 const char at_ipd[] =       "+IPD";
                 const char at_ok[] =        "OK";
                 const char at_error[] =     "ERROR";
+                const char at_ready[] =     "ready";
+                const char at_listen[] =    ">";
 #else
 # include <avr/pgmspace.h>
+# define STRCMP strcmp_P
                 const PROGMEM char at_eol[] =       "\r\n";
                 const PROGMEM char at_at[] =        "AT";
                 const PROGMEM char at_rst[] =       "RST";
@@ -71,12 +75,15 @@ namespace woodBox {
                 const PROGMEM char at_ipd[] =       "+IPD";
                 const PROGMEM char at_ok[] =        "OK";
                 const PROGMEM char at_error[] =     "ERROR";
+                const PROGMEM char at_ready[] =     "ready";
+                const PROGMEM char at_listen[] =    ">";
 #endif
             }
 
-            ESP8266WiFiCommunicator::ESP8266WiFiCommunicator(int enable_pin):
+            ESP8266WiFiCommunicator::ESP8266WiFiCommunicator(int enable_pin, int reset_pin):
                 AWiFiCommunicator(),
                 _enable_pin(enable_pin),
+                _reset_pin(reset_pin),
                 _enabled(false),
                 _connected(false),
                 _connected_to_host(false),
@@ -144,7 +151,16 @@ namespace woodBox {
 
             int ESP8266WiFiCommunicator::connectToHost() {
                 // TODO: To implement
-                return -1;
+                if (_connect_to_tcp_socket()) {
+                    return -1;
+                }
+                if (_enable_transparent_mode()) {
+                    return -2;
+                }
+                if (_go_to_send_mode()) {
+                    return -3;
+                }
+                return 0;
             }
 
             int ESP8266WiFiCommunicator::disconnectFromHost() {
@@ -182,8 +198,11 @@ namespace woodBox {
 
             void ESP8266WiFiCommunicator::_switch_on_esp() {
                 // TODO: To implement
+                if (_stream == nullptr) {
+                    return;
+                }
                 digitalWrite(_enable_pin, LOW);
-                _enabled = true;
+                _wait_for_esp_ready();
             }
 
             void ESP8266WiFiCommunicator::_switch_off_esp() {
@@ -211,10 +230,10 @@ namespace woodBox {
                     //Serial.println("Debug");
                     //Serial.println(str);
                     str.replace('\r', '\0');
-                    if (!strcmp(str.c_str(), at_ok)) {
+                    if (!STRCMP(str.c_str(), at_ok)) {
                         return 0;
                     }
-                    if (!strcmp(str.c_str(), at_error)) {
+                    if (!STRCMP(str.c_str(), at_error)) {
                         return -1;
                     }
                     delay(1);
@@ -229,7 +248,7 @@ namespace woodBox {
                 Serial.print(result);
                 _stream->flush();
                 return 0;*/
-                //return (!strcmp(result.c_str(), at_ok)) ? 0 : -3;
+                //return (!STRCMP(result.c_str(), at_ok)) ? 0 : -3;
             }
 
             int ESP8266WiFiCommunicator::_test_esp() {
@@ -317,11 +336,100 @@ namespace woodBox {
                 if (check) {
                     return check;
                 }
-                _stream->print(at_at);
+                digitalWrite(_reset_pin, HIGH);
+                delay(1);
+                digitalWrite(_reset_pin, LOW);
+                _stream->flush();
+                /*_stream->print(at_at);
                 _stream->print(F("+"));
                 _stream->print(at_rst);
                 _stream->print(at_eol);
+                if (_esp_answer_check()) {
+                    return -3;
+                }*/
+                _enabled = false;
+                _connected = false;
+                _connected_to_host = false;
+                _receiving_data = false;
+                return _wait_for_esp_ready();
+            }
+
+            int ESP8266WiFiCommunicator::_wait_for_esp_ready() {
+                if (_stream == nullptr) {
+                    return -1;
+                }
+                while (1) {
+                    String line = _stream->readStringUntil(at_nl);
+                    line.replace('\r', '\0');
+                    if (!STRCMP(line.c_str(), at_ready)) {
+                        _enabled = true;
+                        return 0;
+                    }
+                }
+            }
+
+            int ESP8266WiFiCommunicator::_connect_to_tcp_socket() {
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
+                if (!_host.hport) {
+                    return -3;
+                }
+                char strIp[16];
+                sprintf(strIp, "%hhu.%hhu.%hhu.%hhu", _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
+                _stream->print(at_at);
+                _stream->print(F("+"));
+                _stream->print(at_cipstart);
+                _stream->print(F("=\"TCP\",\""));
+                _stream->print(strIp);
+                _stream->print(F("\","));
+                _stream->print(_host.hport);
+                _stream->print(at_eol);
+                if (_esp_answer_check()) {
+                    return -4;
+                }
+                _connected_to_host = true;
+                return 0;
+            }
+
+            int ESP8266WiFiCommunicator::_enable_transparent_mode() {
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
+                if (!_connected_to_host) {
+                    return -3;
+                }
+                _stream->print(at_at);
+                _stream->print(F("+"));
+                _stream->print(at_cipmode);
+                _stream->print(F("=1"));
+                _stream->print(at_eol);
                 return _esp_answer_check();
+            }
+
+            int ESP8266WiFiCommunicator::_go_to_send_mode() {
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
+                if (!_connected_to_host) {
+                    return -3;
+                }
+                _stream->print(at_at);
+                _stream->print(F("+"));
+                _stream->print(at_cipsend);
+                _stream->print(at_eol);
+                while (1) {
+                    String line = _stream->readStringUntil(at_nl);
+                    line.replace('\r', '\n');
+                    if (!STRCMP(line.c_str(), at_listen)) {
+                        return 0;
+                    }
+                    delay(1);
+                }
+                return 0;
             }
         }
     }

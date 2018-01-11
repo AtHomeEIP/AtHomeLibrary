@@ -63,10 +63,10 @@ build:
     # - mkdir -p $PWD/test/output/msp432/launchpad # test msp432 board, it's an arm cortex m4f
     # - apt update && apt -y install make autoconf 
   script:
-    - arduino --verify --board arduino:avr:uno $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/
-    - arduino --verify --board arduino:avr:leonardo $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/
-    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/
-    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/
+    - arduino --verify --board arduino:avr:uno $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/
+    - arduino --verify --board arduino:avr:leonardo $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/
     # - arduino --verify --board chipKIT:pic32:fubarino_mini $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/pic32/fubarino_mini/
     # - energia --verify --board energia:msp432:MSP-EXP432P401R /c/Users/toshiba/Documents/Arduino/libraries/woodBox/test/1/main/main.ino
   artifacts:

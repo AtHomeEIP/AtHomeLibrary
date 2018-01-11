@@ -18,7 +18,7 @@ namespace woodBox {
         namespace wifi {
             class ESP8266WiFiCommunicator : public AWiFiCommunicator {
             public:
-                ESP8266WiFiCommunicator(int);
+                ESP8266WiFiCommunicator(int, int);
                 ESP8266WiFiCommunicator(const ESP8266WiFiCommunicator &) = delete;
                 ESP8266WiFiCommunicator &operator=(const ESP8266WiFiCommunicator &) = delete;
                 virtual int available();
@@ -51,8 +51,13 @@ namespace woodBox {
                 int _connect_ap();
                 int _create_ap();
                 int _reset_esp();
+                int _wait_for_esp_ready();
+                int _connect_to_tcp_socket();
+                int _enable_transparent_mode();
+                int _go_to_send_mode();
             private:
                 int                                                                                 _enable_pin;
+                int                                                                                 _reset_pin;
                 bool                                                                                _enabled;
                 bool                                                                                _connected;
                 bool                                                                                _connected_to_host;
