@@ -26,7 +26,7 @@ void setup() {
   // put your setup code here, to run once:
     Serial.begin(115200);
     wifi_com.setStreamToChipset(&Serial);
-    wifi_com.setWiFiMode(wifi_mode::STATION);
+    wifi_com.setWiFiMode(wifi_mode::ACCESS_POINT);
     WiFi_ap ap;
     strcpy(ap.ssid, "ESP01Test");
     strcpy(ap.password, "HelloWorld");

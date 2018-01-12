@@ -8,6 +8,7 @@ namespace woodBox {
         namespace commands {
             class ICommunicatorCommandReceiver {
             public:
+                //virtual ~ICommunicatorCommandReceiver() = 0;
                 // Parse command input -> parameters + body
                 virtual void parse(ICommunicator &) = 0;
                 // Execute code related to this command

@@ -108,14 +108,19 @@ namespace woodBox {
             }
 
             size_t ESP8266WiFiCommunicator::write(uint8_t byte) {
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
                 if (!_connected_to_host) {
-                    return 0;
+                    return -3;
                 }
                 _output_buffer.write(byte);
                 if (_output_buffer.available() == ESP8266_BUFFER_SIZE) {
+                    _write();
                     _flush_output();
                 }
-                return 1;
+                return 0;
             }
 
             void ESP8266WiFiCommunicator::flush() {
@@ -132,6 +137,7 @@ namespace woodBox {
                     disconnect();
                 }
                 _switch_off_esp();
+                flush();
             }
 
             int ESP8266WiFiCommunicator::connect() {
@@ -165,7 +171,17 @@ namespace woodBox {
 
             int ESP8266WiFiCommunicator::disconnectFromHost() {
                 // TODO: To implement
-                return -1;
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
+                if (!_connected_to_host) {
+                    return -3;
+                }
+                delay(50);
+                _stream->print(F("+++"));
+                delay(50);
+                return 0;
             }
 
             bool ESP8266WiFiCommunicator::isConnected() {
@@ -184,6 +200,16 @@ namespace woodBox {
 
             void ESP8266WiFiCommunicator::_read() {
                 // TODO: To implement
+            }
+
+            void ESP8266WiFiCommunicator::_write() {
+                if (_command_check() || !_connected_to_host) {
+                    return;
+                }
+                while (_output_buffer.available()) {
+                    _stream->write(_output_buffer.read());
+                }
+                delay(25);
             }
 
             void ESP8266WiFiCommunicator::_flush_input() {
@@ -340,6 +366,7 @@ namespace woodBox {
                 delay(1);
                 digitalWrite(_reset_pin, LOW);
                 _stream->flush();
+                flush();
                 /*_stream->print(at_at);
                 _stream->print(F("+"));
                 _stream->print(at_rst);

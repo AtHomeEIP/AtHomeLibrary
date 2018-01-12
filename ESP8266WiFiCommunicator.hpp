@@ -38,6 +38,7 @@ namespace woodBox {
             private:
                 void _interpret();
                 void _read();
+                void _write();
                 void _flush_input();
                 void _flush_output();
                 void _switch_on_esp();

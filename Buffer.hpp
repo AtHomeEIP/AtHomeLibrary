@@ -3,9 +3,7 @@
 
 # include <stdint.h>
 # include <string.h>
-# ifdef ARDUINO
-#  include <Arduino.h>
-# endif /* ARDUINO */
+# include <Stream.h>
 
 namespace woodBox {
     namespace utility {
@@ -83,10 +81,8 @@ namespace woodBox {
             T        _buffer[size];
         };
 
-# ifdef ARDUINO
         template <size_t size>
-        class StreamBuffer : public Stream, public Buffer<int, size> {};
-# endif /* ARDUINO */
+        class StreamBuffer : virtual public Stream, virtual public Buffer<int, size> {};
     }
 }
 

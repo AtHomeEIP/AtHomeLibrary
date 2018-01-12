@@ -27,8 +27,6 @@ namespace woodBox {
                 memset(&_host, 0, sizeof(tcp_host));
             }
 
-            //AWiFiCommunicator::~AWiFiCommunicator() {}
-
             const WiFi_ap &AWiFiCommunicator::getAccessPoint() const {
                 return _ap;
             }

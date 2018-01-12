@@ -1,18 +1,20 @@
+#include <Arduino.h>
+
 namespace woodBox {
     namespace communication {
         namespace commands {
-            const char *end_of_line = "\r\n";
-            const char *part_separator = "================================================================================";
-            const char spacer = '\t';
-            const char end_of_command = '\x03'; // It's the end of text character, ie Ctrl^D
-            const char end_of_communication = '\x04'; // It's the end of transmission character, ie Ctrl^C
+#define end_of_line F("\r\n")
+#define part_separator F("================================================================================")
+#define spacer '\t'
+#define end_of_command '\x03' // It's the end of text character, ie Ctrl^D
+#define end_of_communication = '\x04' // It's the end of transmission character, ie Ctrl^C
 
-            const char *enumerate = "Enumerate";
-            const char *uploadData = "UploadData";
-            const char *syncTime = "SyncTime";
-            const char *setWiFi = "SetWiFi";
-            const char *setEndPoint = "SetEndPoint";
-            const char *setProfile = "SetProfile";
+#define enumerate F("Enumerate")
+#define uploadData F("UploadData")
+#define syncTime F("SyncTime")
+#define setWiFi F("SetWiFi")
+#define setEndPoint F("SetEndPoint")
+#define setProfile F("SetProfile")
 
 /*
  * Thinking communication wisely

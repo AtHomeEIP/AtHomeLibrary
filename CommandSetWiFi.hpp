@@ -21,7 +21,7 @@ namespace woodBox {
                 bool                            _ok;
                 wifi::AWiFiCommunicator         &_com;
                 WiFi_ap                         _ap;
-                tcp_host                        _host;
+                //tcp_host                        _host;
             };
         }
     }
