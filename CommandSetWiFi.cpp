@@ -12,10 +12,7 @@
  * Example of setWiFiJson:
  * {
  * 'ssid': 'ElominpBox',
- * 'password': 'blabla2A',
- * 'channel': 10,
- * 'ip': '192.168.0.1',
- * 'port': 65535
+ * 'password': 'blabla2A'
  * }
  *
  * Note: esp8266 supports only 2.4ghz band, so this parameter is useless (as for now), and the norm is WiFi n.
@@ -30,14 +27,10 @@ namespace woodBox {
 #ifndef __AVR__
                 const char ssid_key[] = "ssid";
                 const char password_key[] = "password";
-                //const char ip_key[] = "ip";
-                //const char port_key[] = "port";
 #else
 #include <avr/pgmspace.h>
                 const PROGMEM char ssid_key[] = "ssid";
                 const PROGMEM char password_key[] = "password";
-                //const PROGMEM char ip_key[] = "ip";
-                //const PROGMEM char port_key[] = "port";
 #endif
             }
 
@@ -45,41 +38,27 @@ namespace woodBox {
                     _ok(false),
                     _com(com) {
                 memset(&_ap, 0, sizeof(WiFi_ap));
-                //memset(&_host, 0, sizeof(tcp_host));
             }
 
             CommandSetWiFi::~CommandSetWiFi() {}
 
-            void CommandSetWiFi::parse(ICommunicator &communicator) {
+            void CommandSetWiFi::parse(Stream &communicator) {
                 char buffer[101];
                 size_t len = 0;
                 _ok = false;
                 if ((len = communicator.readBytesUntil(end_of_command, buffer, 100))) {
                     buffer[len] = '\0';
-#ifndef __msp430
                     StaticJsonBuffer<100> json;
                     JsonObject &root = json.parseObject(buffer);
                     const char *ssid = root.get<const char*>(ssid_key);
                     const char *password = root.get<const char *>(password_key);
                     if (ssid != nullptr && password != nullptr) {
-                        // C casting is ugly, but it's a hack to allow some C standard libs having different definitions of char to compile
                         strncpy(_ap.ssid, ssid, 32);
                         strncpy(_ap.password, password, 32);
                         _ap.ssid[32] = '\0';
                         _ap.password[32] = '\0';
-                        /*const char *ip = root.get<const char *>(ip_key);
-                        port p = root.get<port>(port_key);
-                        if (ip != nullptr) {
-                            sscanf(ip, "%hhu.%hhu.%hhu.%hhu",
-                                   &(_host.ipv4[0]),
-                                   &(_host.ipv4[1]),
-                                   &(_host.ipv4[2]),
-                                   &(_host.ipv4[3]));
-                            _host.hport = p;
-                        }*/
                         _ok = true;
                     }
-#endif
                 }
             }
 
@@ -87,11 +66,9 @@ namespace woodBox {
                 if (_ok) {
                     _com.setAccessPoint(_ap);
                 }
-                //_com.setHost(_host);
-                //_com.connectToHost();
             }
 
-            void CommandSetWiFi::reply(ICommunicator &communicator) {
+            void CommandSetWiFi::reply(Stream &communicator) {
                 // Nothing to reply?
             }
         }

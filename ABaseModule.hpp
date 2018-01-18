@@ -1,14 +1,11 @@
 #ifndef ABASEMODULE_HPP
 # define ABASEMODULE_HPP
 
+# define _TASK_INLINE // Macro used by TaskScheduler library
+
 # include <stdint.h>
-
-# ifdef ARDUINO
-#  include <Arduino.h>
-# else
-inline void delay(uint32_t);
-# endif /* ARDUINO */
-
+# include <Arduino.h>
+# include <TaskScheduler.h>
 # include "ADisplayModule.hpp"
 # include "ACommunicativeModule.hpp"
 # include "APoweredModule.hpp"
@@ -23,6 +20,8 @@ namespace woodBox {
                 virtual ~ABaseModule();
                 virtual void run();
                 virtual void stop();
+                void setScheduler(Scheduler &);
+                Scheduler *getScheduler();
                 template <typename T>
                 static ABaseModule *getInstance() {
                     if (_instance == nullptr) {
@@ -51,12 +50,20 @@ namespace woodBox {
                 virtual void onCommunicate() = 0;
                 /* Default execution methods */
             protected:
-                virtual void sleep();
-                virtual void wakeUp();
+                //virtual void sleep();
+                //virtual void wakeUp();
                 virtual void setup();
                 virtual void loop();
             private:
-                static ABaseModule *_instance;
+                static void _onSampleSensor() { _instance->onSampleSensor(); }
+                static void _onUpdateDisplay() { _instance->onUpdateDisplay(); }
+                static void _onCommunicate() { _instance->onCommunicate(); }
+            private:
+                Scheduler           *_scheduler;
+                Task                _sensorTask;
+                Task                _displayTask;
+                Task                _communicationTask;
+                static ABaseModule  *_instance;
         };
     }
 }

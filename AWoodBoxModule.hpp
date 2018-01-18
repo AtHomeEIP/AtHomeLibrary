@@ -31,14 +31,19 @@ namespace woodBox {
                 virtual ~AWoodBoxModule();
             protected:
                 AWoodBoxModule();
+            protected:
+                virtual void onBackupOnStorage();
+                virtual void onRestoreFromStorage();
+                virtual void onCommunicate();
             private:
-                static moduleType   _type;
-                static moduleVendor _vendor;
-                static moduleSerial _serial;
+                moduleType          _type;
+                moduleVendor        _vendor;
+                moduleSerial        _serial;
                 size_t              _nbMeasures;
                 measure             *_measures;
                 timestamp           *_timestamps;
                 size_t              _measureId;
+                long                _comDuration;
         };
     }
 }

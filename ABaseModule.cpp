@@ -23,14 +23,26 @@ namespace woodBox {
                                  ACommunicativeModule(communicators),
                                  APoweredModule(power),
                                  ASensorModule(sensor),
-                                 AStorageModule(storage) {}
+                                 AStorageModule(storage),
+                                 _scheduler(nullptr) {
+            _sensorTask.setInterval(TASK_SECOND);
+            _sensorTask.setIterations(TASK_FOREVER);
+            _sensorTask.setCallback(&ABaseModule::_onSampleSensor);
+            _displayTask.setInterval(TASK_SECOND);
+            _displayTask.setIterations(TASK_FOREVER);
+            _displayTask.setCallback(&ABaseModule::_onUpdateDisplay);
+            _communicationTask.setInterval(TASK_MINUTE);
+            _communicationTask.setIterations(TASK_FOREVER);
+            _communicationTask.setCallback(&ABaseModule::_onCommunicate);
+        }
 
         ABaseModule::ABaseModule(ABaseModule &other):
                                                     ADisplayModule(other),
                                                     ACommunicativeModule(other),
                                                     APoweredModule(other),
                                                     ASensorModule(other),
-                                                    AStorageModule(other) {}
+                                                    AStorageModule(other),
+                                                    _scheduler(other._scheduler) {}
 
         ABaseModule &ABaseModule::operator=(ABaseModule &other) {
             /* DisplayModule::operator=(other);
@@ -47,9 +59,25 @@ namespace woodBox {
 
         ABaseModule::~ABaseModule() {}
 
+        void ABaseModule::setScheduler(Scheduler &scheduler) {
+            if (_scheduler != nullptr) {
+                _scheduler->deleteTask(_sensorTask);
+                _scheduler->deleteTask(_displayTask);
+                _scheduler->deleteTask(_communicationTask);
+            }
+            _scheduler = &scheduler;
+            _scheduler->addTask(_sensorTask);
+            _scheduler->addTask(_displayTask);
+            _scheduler->addTask(_communicationTask);
+        }
+
+        Scheduler *ABaseModule::getScheduler() {
+            return _scheduler;
+        }
+
         void ABaseModule::run() {
             setup();
-            loop();
+            //loop();
         }
 
         void ABaseModule::stop() {
@@ -60,27 +88,30 @@ namespace woodBox {
         void ABaseModule::setup() {
             onRestoreFromStorage();
             onStart();
+
+
         }
 
         void ABaseModule::loop() {
             while (1) {
-                onSampleSensor();
+                /* onSampleSensor();
                 onUpdateDisplay();
                 onCommunicate();
                 onPause();
                 sleep();
-                onResume();
+                onResume(); */
+                _scheduler->execute();
             }
         }
 
-        void ABaseModule::sleep() {
+        /* void ABaseModule::sleep() {
             delay(1000);
             wakeUp();
         }
 
         void ABaseModule::wakeUp() {
             onResume();
-        }
+        } */
     }
 }
 

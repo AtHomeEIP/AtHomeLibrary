@@ -1,7 +1,7 @@
 #ifndef ICOMMUNICATOR_EVENT_RECEIVER_HPP
 # define ICOMMUNICATOR_EVENT_RECEIVER_HPP
 
-# include "ICommunicator.hpp"
+# include <Stream.h>
 
 namespace woodBox {
     namespace communication {
@@ -10,11 +10,11 @@ namespace woodBox {
             public:
                 //virtual ~ICommunicatorCommandReceiver() = 0;
                 // Parse command input -> parameters + body
-                virtual void parse(ICommunicator &) = 0;
+                virtual void parse(Stream &) = 0;
                 // Execute code related to this command
                 virtual void execute() = 0;
                 // Write a reply, if needed
-                virtual void reply(ICommunicator &) = 0;
+                virtual void reply(Stream &) = 0;
             };
         }
     }

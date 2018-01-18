@@ -30,7 +30,7 @@ namespace woodBox {
 
             CommandSetEndPoint::~CommandSetEndPoint() {}
 
-            void CommandSetEndPoint::parse(ICommunicator &communicator) {
+            void CommandSetEndPoint::parse(Stream &communicator) {
                 char buffer[42];
                 size_t len = 0;
                 if ((len = communicator.readBytesUntil(end_of_command, buffer, 42))) {
@@ -61,7 +61,7 @@ namespace woodBox {
                 }
             }
 
-            void CommandSetEndPoint::reply(ICommunicator &communicator) {
+            void CommandSetEndPoint::reply(Stream &communicator) {
                 // Nothing to reply?
             }
         }

@@ -14,9 +14,9 @@ namespace woodBox {
                 CommandSetEndPoint(const CommandSetEndPoint &) = delete;
                 CommandSetEndPoint &operator=(const CommandSetEndPoint &) = delete;
                 ~CommandSetEndPoint();
-                virtual void parse(ICommunicator &);
+                virtual void parse(Stream &);
                 virtual void execute();
-                virtual void reply(ICommunicator &);
+                virtual void reply(Stream &);
             private:
                 bool                            _ok;
                 wifi::AWiFiCommunicator         &_com;
