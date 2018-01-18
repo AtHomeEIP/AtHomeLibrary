@@ -29,6 +29,7 @@ build:
     - git clone https://github.com/adafruit/Adafruit_Sensor.git
     - git clone https://github.com/rweather/arduinolibs.git
     - git clone https://github.com/adafruit/Adafruit_TSL2561.git
+    - git clone -b testing https://github.com/arkhipenko/TaskScheduler.git
     - ln -s $PWD/Grove_Digital_Light_Sensor /usr/local/share/arduino/libraries/Grove_Digital_Light_Sensor
     - ln -s $PWD/ChainableLED /usr/local/share/arduino/libraries/ChainableLED
     - ln -s $PWD/Grove_Air_quality_Sensor /usr/local/share/arduino/libraries/Grove_Air_quality_Sensor
@@ -37,6 +38,7 @@ build:
     - ln -s $PWD/Adafruit_Sensor /usr/local/share/arduino/libraries/Adafruit_Sensor
     - ln -s $PWD/arduinolibs/libraries/Crypto /usr/local/share/arduino/libraries/Crypto
     - ln -s $PWD/Adafruit_TSL2561 /usr/local/share/arduino/libraries/Adafruit_TSL2561
+    - ln -s $PWD/TaskScheduler /usr/local/share/arduino/libraries/TaskScheduler
     - ln -s $PWD /usr/local/share/arduino/libraries/woodBox
     # - ln -s $PWD/Grove_Digital_Light_Sensor /usr/local/share/energia/libraries/Grove_Digital_Light_Sensor
     # - ln -s $PWD/ChainableLED /usr/local/share/arduino/energia/ChainableLED
