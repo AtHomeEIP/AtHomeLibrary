@@ -1,7 +1,7 @@
 #include <string.h>
 #include <woodBox.h>
 
-class MyModule : public woodBox::module::AWoodBoxModule {
+class MyModule : public woodBox::module::AWoodBoxModule<uint16_t, 15> {
   public:
     MyModule():AWoodBoxModule() {}
     virtual ~MyModule() {}
@@ -23,7 +23,7 @@ void StackPaint(void) __attribute__((naked)) __attribute__((section(".init1")));
 
 void StackPaint(void) {
   uint8_t *p = &_end;
-  while (p <= &_stack) {
+  while (p <= &__stack) {
     *p = 0x2a;
     p++;
   }
