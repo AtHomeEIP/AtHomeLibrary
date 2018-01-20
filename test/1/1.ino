@@ -6,21 +6,40 @@ class MyModule : public woodBox::module::AWoodBoxModule {
     MyModule():AWoodBoxModule() {}
     virtual ~MyModule() {}
   protected:
-                virtual void onReset() {}
-                virtual void onStart() {}
-                virtual void onStop() {}
-                virtual void onPause() {}
-                virtual void onResume() {}
-                virtual void onBackupOnStorage() {}
-                virtual void onRestoreFromStorage() {}
                 virtual void onSampleSensor() {}
                 virtual void onUpdateDisplay() {}
-                virtual void onCommunicate() {}
 };
 
 woodBox::module::ABaseModule* me = MyModule::getInstance<MyModule>();
 woodBox::communication::wifi::ESP8266WiFiCommunicator wifi_com(2, 3);
 woodBox::communication::commands::CommandSetWiFi *setWiFi = new woodBox::communication::commands::CommandSetWiFi(wifi_com);
+
+/* AVRGCC Stack monitoring */
+// From: http://www.avrfreaks.net/forum/soft-c-avrgcc-monitoring-stack-usage?name=PNphpBB2&file=viewtopic&t=52249
+extern uint8_t _end;
+extern uint8_t __stack;
+
+void StackPaint(void) __attribute__((naked)) __attribute__((section(".init1")));
+
+void StackPaint(void) {
+  uint8_t *p = &_end;
+  while (p <= &_stack) {
+    *p = 0x2a;
+    p++;
+  }
+}
+
+size_t StackCount() {
+  const uint8_t *p = &_end;
+  size_t c = 0;
+
+  while (*p == 0x2a && p <= &__stack) {
+    p++;
+    c++;
+  }
+
+  return c;
+}
 
 void setup() {
   // put your setup code here, to run once:
@@ -34,14 +53,13 @@ void setup() {
     ap.channel = 5;
     ap.band = wifi_frequency_band::TWO_POINT_FOUR_GHZ;
     wifi_com.setAccessPoint(ap);
-    delay(5000);
-    Serial.println(F("Ready? Emulate esp!"));
-    delay(1000);
-    wifi_com.open();
-    wifi_com.connect();
+    Serial.println(StackCount(), DEC);
+    //wifi_com.open();
+    //wifi_com.connect();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-    delay(1000);
+  exit(0);
+    //delay(1000);
 }

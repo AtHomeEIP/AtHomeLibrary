@@ -20,7 +20,7 @@ namespace woodBox {
 #ifdef ARDUINO
             _last_sample = analogRead(_analog_pin);
 #else
-            compile_error
+#error not_implement_yet
 #endif /* ARDUINO */
             return reinterpret_cast<uint8_t *>(&_last_sample);
         }

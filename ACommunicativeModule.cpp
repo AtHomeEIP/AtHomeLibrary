@@ -2,15 +2,9 @@
 
 namespace woodBox {
     namespace module {
-        ACommunicativeModule::ACommunicativeModule(communication::ICommunicator **streams):
+        ACommunicativeModule::ACommunicativeModule(Stream **streams):
             _streams(streams)
-        {
-            if (_streams != nullptr) {
-                for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
-                    stream->open();
-                }
-            }
-        }
+        {}
 
         ACommunicativeModule::ACommunicativeModule(ACommunicativeModule &other):
             _streams(other._streams)
@@ -19,34 +13,18 @@ namespace woodBox {
         }
 
         ACommunicativeModule &ACommunicativeModule::operator=(ACommunicativeModule &other) {
-            if (_streams != nullptr) {
-                for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
-                    stream->close();
-                }
-            }
             _streams = other._streams;
             other._streams = nullptr;
             return *this;
         }
 
-        ACommunicativeModule::~ACommunicativeModule() {
-            if (_streams != nullptr) {
-                for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
-                    stream->close();
-                }
-            }
-        }
+        ACommunicativeModule::~ACommunicativeModule() {}
 
-        communication::ICommunicator **ACommunicativeModule::getCommunicators() {
+        Stream **ACommunicativeModule::getStreams() {
             return _streams;
         }
 
-        void ACommunicativeModule::setCommunicators(communication::ICommunicator **streams) {
-            if (_streams != nullptr) {
-                for (communication::ICommunicator *stream = _streams[0]; stream != nullptr; stream++) {
-                    stream->close();
-                }
-            }
+        void ACommunicativeModule::setStreams(Stream **streams) {
             _streams = streams;
         }
     }

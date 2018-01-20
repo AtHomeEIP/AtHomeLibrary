@@ -1,20 +1,12 @@
 #include "ABaseModule.hpp"
 
-#ifndef ARDUINO
-inline void delay(uint32_t ms) {
-    for (uint32_t i = 0; i < ms; i++) {
-        for (uint32_t j = 0; j < 33; j++);
-    }
-}
-#endif /* ARDUINO */
-
 namespace woodBox {
     namespace module {
         ABaseModule *ABaseModule::_instance = nullptr;
 
         ABaseModule::ABaseModule(
                                  display::IDisplay *display,
-                                 communication::ICommunicator **communicators,
+                                 Stream **communicators,
                                  power::IPower *power,
                                  sensor::ISensor *sensor,
                                  storage::IStorage *storage
@@ -24,14 +16,17 @@ namespace woodBox {
                                  APoweredModule(power),
                                  ASensorModule(sensor),
                                  AStorageModule(storage),
-                                 _scheduler(nullptr) {
-            _sensorTask.setInterval(TASK_SECOND);
+                                 _scheduler(nullptr),
+                                 _sensorInterval(TASK_SECOND),
+                                 _displayInterval(TASK_SECOND),
+                                 _communicationInterval(TASK_MILLISECOND) {
+            _sensorTask.setInterval(_sensorInterval);
             _sensorTask.setIterations(TASK_FOREVER);
             _sensorTask.setCallback(&ABaseModule::_onSampleSensor);
-            _displayTask.setInterval(TASK_SECOND);
+            _displayTask.setInterval(_displayInterval);
             _displayTask.setIterations(TASK_FOREVER);
             _displayTask.setCallback(&ABaseModule::_onUpdateDisplay);
-            _communicationTask.setInterval(TASK_MINUTE);
+            _communicationTask.setInterval(_communicationInterval);
             _communicationTask.setIterations(TASK_FOREVER);
             _communicationTask.setCallback(&ABaseModule::_onCommunicate);
         }
@@ -42,18 +37,13 @@ namespace woodBox {
                                                     APoweredModule(other),
                                                     ASensorModule(other),
                                                     AStorageModule(other),
-                                                    _scheduler(other._scheduler) {}
+                                                    _scheduler(other._scheduler),
+                                                    _sensorInterval(other._sensorInterval),
+                                                    _displayInterval(other._displayInterval),
+                                                    _communicationInterval(other._communicationInterval) {
+        }
 
         ABaseModule &ABaseModule::operator=(ABaseModule &other) {
-            /* DisplayModule::operator=(other);
-            CommunicativeModule::operator=(other);
-            PoweredModule::operator=(other);
-            SensorModule::operator=(other);
-            StorageModule::operator=(other); */
-            if (_instance != nullptr && _instance != this) {
-                delete _instance;
-                _instance = this;
-            }
             return *this;
         }
 
@@ -77,7 +67,7 @@ namespace woodBox {
 
         void ABaseModule::run() {
             setup();
-            //loop();
+            loop();
         }
 
         void ABaseModule::stop() {
@@ -88,30 +78,59 @@ namespace woodBox {
         void ABaseModule::setup() {
             onRestoreFromStorage();
             onStart();
-
-
+            _sensorTask.enableIfNot();
+            _displayTask.enableIfNot();
+            _communicationTask.enableIfNot();
         }
 
         void ABaseModule::loop() {
-            while (1) {
-                /* onSampleSensor();
-                onUpdateDisplay();
-                onCommunicate();
-                onPause();
-                sleep();
-                onResume(); */
-                _scheduler->execute();
+            _scheduler->execute();
+        }
+
+        void ABaseModule::setSensorExecutionInterval(unsigned long ms) {
+            if (ms && ms != _sensorInterval) {
+                _sensorInterval = ms;
+                _sensorTask.setInterval(_sensorInterval * TASK_MILLISECOND);
             }
         }
 
-        /* void ABaseModule::sleep() {
-            delay(1000);
-            wakeUp();
+        void ABaseModule::setDisplayExecutionInterval(unsigned long ms) {
+            if (ms && ms != _displayInterval) {
+                _displayInterval = ms;
+                _displayTask.setInterval(_displayInterval * TASK_MILLISECOND);
+            }
         }
 
-        void ABaseModule::wakeUp() {
-            onResume();
-        } */
+        void ABaseModule::setCommunicationExecutionInterval(unsigned long ms) {
+            if (ms && ms != _communicationInterval) {
+                _communicationInterval = ms;
+                _communicationTask.setInterval(_communicationInterval * TASK_MILLISECOND);
+            }
+        }
+
+        unsigned long ABaseModule::getSensorExecutionInterval() const {
+            return _sensorInterval;
+        }
+
+        unsigned long ABaseModule::getDisplayExecutionInterval() const {
+            return _displayInterval;
+        }
+
+        unsigned long ABaseModule::getCommunicationExecutionInterval() const {
+            return _communicationInterval;
+        }
+
+        void ABaseModule::setSensorExecutionCallback(customCallback f) {
+            _sensorTask.setCallback((f == nullptr) ? &ABaseModule::_onSampleSensor : f);
+        }
+
+        void ABaseModule::setDisplayExecutionCallback(customCallback f) {
+            _displayTask.setCallback((f == nullptr) ? &ABaseModule::_onUpdateDisplay : f);
+        }
+
+        void ABaseModule::setCommunicationExecutionCallback(customCallback f) {
+            _communicationTask.setCallback((f == nullptr) ? &ABaseModule::_onCommunicate : f);
+        }
     }
 }
 
