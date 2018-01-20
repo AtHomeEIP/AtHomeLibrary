@@ -14,6 +14,8 @@ woodBox::module::ABaseModule* me = MyModule::getInstance<MyModule>();
 woodBox::communication::wifi::ESP8266WiFiCommunicator wifi_com(2, 3);
 woodBox::communication::commands::CommandSetWiFi *setWiFi = new woodBox::communication::commands::CommandSetWiFi(wifi_com);
 
+#ifdef __AVR__
+
 /* AVRGCC Stack monitoring */
 // From: http://www.avrfreaks.net/forum/soft-c-avrgcc-monitoring-stack-usage?name=PNphpBB2&file=viewtopic&t=52249
 extern uint8_t _end;
@@ -41,6 +43,8 @@ size_t StackCount() {
   return c;
 }
 
+#endif
+
 void setup() {
   // put your setup code here, to run once:
     Serial.begin(115200);
@@ -53,7 +57,9 @@ void setup() {
     ap.channel = 5;
     ap.band = wifi_frequency_band::TWO_POINT_FOUR_GHZ;
     wifi_com.setAccessPoint(ap);
+#ifdef __AVR__
     Serial.println(StackCount(), DEC);
+#endif
     //wifi_com.open();
     //wifi_com.connect();
 }
