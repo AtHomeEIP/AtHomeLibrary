@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 308.880309
+%%BoundingBox: 0 0 500 291.970803
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,7 +19,7 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 1.618750 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 1.712500 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
@@ -176,7 +176,7 @@ boxfont setfont
 (woodBox::module::ACommunicativeModule) cw
 (woodBox::module::IModule) cw
 (woodBox::module::ABaseModule) cw
-(woodBox::module::AWoodBoxModule) cw
+(woodBox::module::AWoodBoxModule< T, n >) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -191,7 +191,7 @@ boundx scalefactor div boundy scalefactor div scale
  (woodBox::module::ACommunicativeModule) 0.000000 2.000000 box
  (woodBox::module::IModule) 0.000000 3.000000 box
  (woodBox::module::ABaseModule) 0.000000 1.000000 box
- (woodBox::module::AWoodBoxModule) 0.000000 0.000000 box
+ (woodBox::module::AWoodBoxModule< T, n >) 0.000000 0.000000 box
 
 % ----- relations -----
 

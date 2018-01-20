@@ -9,6 +9,6 @@ var searchData=
   ['apoweredmodule',['APoweredModule',['../classwood_box_1_1module_1_1_a_powered_module.html',1,'woodBox::module']]],
   ['asensormodule',['ASensorModule',['../classwood_box_1_1module_1_1_a_sensor_module.html',1,'woodBox::module']]],
   ['astoragemodule',['AStorageModule',['../classwood_box_1_1module_1_1_a_storage_module.html',1,'woodBox::module']]],
-  ['awificommunicator',['AWiFiCommunicator',['../classwood_box_1_1communication_1_1_a_wi_fi_communicator.html',1,'woodBox::communication']]],
+  ['awificommunicator',['AWiFiCommunicator',['../classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html',1,'woodBox::communication::wifi']]],
   ['awoodboxmodule',['AWoodBoxModule',['../classwood_box_1_1module_1_1_a_wood_box_module.html',1,'woodBox::module']]]
 ];

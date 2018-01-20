@@ -3,7 +3,7 @@
 Inheritance diagram for wood\+Box\+:\+:module\+:\+:A\+Base\+Module\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.729730cm]{classwood_box_1_1module_1_1_a_base_module}
+\includegraphics[height=1.635036cm]{classwood_box_1_1module_1_1_a_base_module}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -17,6 +17,12 @@ virtual void {\bfseries run} ()
 \item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_ab11ff2fcd98e85183dfbd450e74258fe}\label{classwood_box_1_1module_1_1_a_base_module_ab11ff2fcd98e85183dfbd450e74258fe}} 
 virtual void {\bfseries stop} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a94f45796ed7680f7106bceb63d6ac5b9}\label{classwood_box_1_1module_1_1_a_base_module_a94f45796ed7680f7106bceb63d6ac5b9}} 
+void {\bfseries set\+Scheduler} (Scheduler \&)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a33b55cc0db87727adb0d087b2362b938}\label{classwood_box_1_1module_1_1_a_base_module_a33b55cc0db87727adb0d087b2362b938}} 
+Scheduler $\ast$ {\bfseries get\+Scheduler} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -24,11 +30,17 @@ virtual void {\bfseries stop} ()
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a08ba1924981ed852924f7047f915986b}\label{classwood_box_1_1module_1_1_a_base_module_a08ba1924981ed852924f7047f915986b}} 
 {\footnotesize template$<$typename T $>$ }\\static \mbox{\hyperlink{classwood_box_1_1module_1_1_a_base_module}{A\+Base\+Module}} $\ast$ {\bfseries get\+Instance} ()
 \end{DoxyCompactItemize}
+\subsection*{Protected Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_ad5baa2bb35cc60ff4ed473724ec43b4e}\label{classwood_box_1_1module_1_1_a_base_module_ad5baa2bb35cc60ff4ed473724ec43b4e}} 
+typedef void($\ast$ {\bfseries custom\+Callback}) ()
+\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_acb9dfc130e01d73b4887dd6d58a1bd08}\label{classwood_box_1_1module_1_1_a_base_module_acb9dfc130e01d73b4887dd6d58a1bd08}} 
-{\bfseries A\+Base\+Module} (\mbox{\hyperlink{classwood_box_1_1display_1_1_i_display}{display\+::\+I\+Display}} $\ast$=nullptr, \mbox{\hyperlink{classwood_box_1_1communication_1_1_i_communicator}{communication\+::\+I\+Communicator}} $\ast$$\ast$=nullptr, \mbox{\hyperlink{classwood_box_1_1power_1_1_i_power}{power\+::\+I\+Power}} $\ast$=nullptr, \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor}{sensor\+::\+I\+Sensor}} $\ast$=nullptr, \mbox{\hyperlink{classwood_box_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} $\ast$=nullptr)
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a40edd799ba7342abfaf5cb06e60a4b04}\label{classwood_box_1_1module_1_1_a_base_module_a40edd799ba7342abfaf5cb06e60a4b04}} 
+{\bfseries A\+Base\+Module} (\mbox{\hyperlink{classwood_box_1_1display_1_1_i_display}{display\+::\+I\+Display}} $\ast$=nullptr, Stream $\ast$$\ast$=nullptr, \mbox{\hyperlink{classwood_box_1_1power_1_1_i_power}{power\+::\+I\+Power}} $\ast$=nullptr, \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor}{sensor\+::\+I\+Sensor}} $\ast$=nullptr, \mbox{\hyperlink{classwood_box_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} $\ast$=nullptr)
 \item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_aed2f16158b239a6ad450f3a522809644}\label{classwood_box_1_1module_1_1_a_base_module_aed2f16158b239a6ad450f3a522809644}} 
 {\bfseries A\+Base\+Module} (\mbox{\hyperlink{classwood_box_1_1module_1_1_a_base_module}{A\+Base\+Module}} \&)
@@ -63,17 +75,44 @@ virtual void {\bfseries on\+Update\+Display} ()=0
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a8ea3cf7772b85e3102a4e81ada7cf830}\label{classwood_box_1_1module_1_1_a_base_module_a8ea3cf7772b85e3102a4e81ada7cf830}} 
 virtual void {\bfseries on\+Communicate} ()=0
 \item 
-\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a1af76b5b3b49af1f2feb1624ac64d535}\label{classwood_box_1_1module_1_1_a_base_module_a1af76b5b3b49af1f2feb1624ac64d535}} 
-virtual void {\bfseries sleep} ()
-\item 
-\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a39051c62edae6df5b6c6a167e0408d50}\label{classwood_box_1_1module_1_1_a_base_module_a39051c62edae6df5b6c6a167e0408d50}} 
-virtual void {\bfseries wake\+Up} ()
-\item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_aa6bec11f1eca540ea055d14f6207bc7a}\label{classwood_box_1_1module_1_1_a_base_module_aa6bec11f1eca540ea055d14f6207bc7a}} 
 virtual void {\bfseries setup} ()
 \item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_ad834c5039de920a07bc946775bbd0d28}\label{classwood_box_1_1module_1_1_a_base_module_ad834c5039de920a07bc946775bbd0d28}} 
 virtual void {\bfseries loop} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a9e1f4c54fea4de74047f0ccbec8146d3}\label{classwood_box_1_1module_1_1_a_base_module_a9e1f4c54fea4de74047f0ccbec8146d3}} 
+void {\bfseries set\+Sensor\+Execution\+Interval} (unsigned long)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a5fcbdc7d6ad261bb22609d88d08c7839}\label{classwood_box_1_1module_1_1_a_base_module_a5fcbdc7d6ad261bb22609d88d08c7839}} 
+void {\bfseries set\+Display\+Execution\+Interval} (unsigned long)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_af0bfceb9e88a4118329152c7bc601d49}\label{classwood_box_1_1module_1_1_a_base_module_af0bfceb9e88a4118329152c7bc601d49}} 
+void {\bfseries set\+Communication\+Execution\+Interval} (unsigned long)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a341f663577af71d9784059f706ef1f8d}\label{classwood_box_1_1module_1_1_a_base_module_a341f663577af71d9784059f706ef1f8d}} 
+unsigned long {\bfseries get\+Sensor\+Execution\+Interval} () const
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_aff98f693e843a2664d0f139e8ba07ab8}\label{classwood_box_1_1module_1_1_a_base_module_aff98f693e843a2664d0f139e8ba07ab8}} 
+unsigned long {\bfseries get\+Display\+Execution\+Interval} () const
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_ae805d297359db5dd403bbff30530c144}\label{classwood_box_1_1module_1_1_a_base_module_ae805d297359db5dd403bbff30530c144}} 
+unsigned long {\bfseries get\+Communication\+Execution\+Interval} () const
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a38d0056f4d237f76c61f3cdc13205cef}\label{classwood_box_1_1module_1_1_a_base_module_a38d0056f4d237f76c61f3cdc13205cef}} 
+void {\bfseries set\+Sensor\+Execution\+Callback} (custom\+Callback)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a7e31faec1a3d5445df33bbebd12ec7df}\label{classwood_box_1_1module_1_1_a_base_module_a7e31faec1a3d5445df33bbebd12ec7df}} 
+void {\bfseries set\+Display\+Execution\+Callback} (custom\+Callback)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a0ef5dc2067bd946d1ae2a879d7813b8e}\label{classwood_box_1_1module_1_1_a_base_module_a0ef5dc2067bd946d1ae2a879d7813b8e}} 
+void {\bfseries set\+Communication\+Execution\+Callback} (custom\+Callback)
+\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a5ff68d9c953ca40e3928fa9fc75fed61}\label{classwood_box_1_1module_1_1_a_base_module_a5ff68d9c953ca40e3928fa9fc75fed61}} 
+static \mbox{\hyperlink{classwood_box_1_1module_1_1_a_base_module}{A\+Base\+Module}} $\ast$ {\bfseries get\+A\+Base\+Module\+Instance} ()
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
