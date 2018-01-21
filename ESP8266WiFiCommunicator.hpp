@@ -26,8 +26,8 @@ namespace woodBox {
                 virtual int peek();
                 virtual size_t write(uint8_t);
                 virtual void flush();
-                virtual void open();
-                virtual void close();
+                void open();
+                void close();
                 virtual int connect();
                 virtual int disconnect();
                 virtual int connectToHost();
@@ -66,7 +66,6 @@ namespace woodBox {
                 size_t                                                                              _receiving_len;
                 utility::Buffer<int, ESP8266_BUFFER_SIZE>                                           _input_buffer;
                 utility::Buffer<int, ESP8266_BUFFER_SIZE>                                           _output_buffer;
-                utility::Buffer<int (ESP8266WiFiCommunicator::*)(), ESP8266_COMMAND_BUFFER_SIZE>    _command_buffer;
             };
         }
     }

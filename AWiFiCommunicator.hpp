@@ -3,13 +3,12 @@
 
 # include <Arduino.h>
 # include <Stream.h>
-# include "ICommunicator.hpp"
 # include "wifi_types.hpp"
 
 namespace woodBox {
 	namespace communication {
 	    namespace wifi {
-		    class AWiFiCommunicator : public ICommunicator {
+		    class AWiFiCommunicator : public Stream {
 			    public:
 				    AWiFiCommunicator(const WiFi_ap * = nullptr, const WiFi_client * = nullptr, const wifi_mode = STATION, Stream * = nullptr);
 				    AWiFiCommunicator(const AWiFiCommunicator &) = delete;
@@ -21,26 +20,26 @@ namespace woodBox {
 				    virtual void flush() = 0;
 				    /* Methods from ICommunicator:
 				    virtual uint8_t &read(uint32_t) = 0; // Read n bytes
-				    virtual void write(const uint8_t &, uint32_t) = 0; // Write n bytes */
+				    virtual void write(const uint8_t &, uint32_t) = 0; // Write n bytes
 				    virtual void open() = 0;
-				    virtual void close() = 0;
+				    virtual void close() = 0; */
 				    virtual int connect() = 0;
 				    virtual int disconnect() = 0;
 				    virtual int connectToHost() = 0;
 				    virtual int disconnectFromHost() = 0;
 				    virtual bool isConnected() = 0;
 
-				    virtual const WiFi_ap &getAccessPoint() const;
-				    virtual const WiFi_client &getConnectionAddresses() const;
-				    virtual const tcp_host &getHost() const;
-				    virtual wifi_mode getWiFiMode() const;
+				    const WiFi_ap &getAccessPoint() const;
+				    const WiFi_client &getConnectionAddresses() const;
+				    const tcp_host &getHost() const;
+				    wifi_mode getWiFiMode() const;
 				    //virtual const WiFi_client[] &getConnectedClients() const;
 				
-				    virtual void setAccessPoint(const WiFi_ap &);
-				    virtual void setConnectionAddresses(const WiFi_client &);
-				    virtual void setHost(const tcp_host &);
-				    virtual void setWiFiMode(wifi_mode);
-				    virtual void setStreamToChipset(Stream *);
+				    void setAccessPoint(const WiFi_ap &);
+				    void setConnectionAddresses(const WiFi_client &);
+				    void setHost(const tcp_host &);
+				    void setWiFiMode(wifi_mode);
+				    void setStreamToChipset(Stream *);
 			    protected:
 				    wifi_mode	        _mode;
 				    Stream		        *_stream;

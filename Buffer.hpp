@@ -80,9 +80,6 @@ namespace woodBox {
             size_t   _write_idx;
             T        _buffer[size];
         };
-
-        template <size_t size>
-        class StreamBuffer : virtual public Stream, virtual public Buffer<int, size> {};
     }
 }
 

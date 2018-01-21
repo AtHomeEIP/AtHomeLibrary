@@ -10,73 +10,79 @@ namespace woodBox {
                 const char at_nl =          '\n';
 #ifndef __AVR__
 # define STRCMP strcmp
-                const char at_eol[] =       "\r\n";
-                const char at_at[] =        "AT";
-                const char at_rst[] =       "RST";
-                const char at_gmr[] =       "GMR";
-                const char at_gslp[] =      "GLSP";
-                const char at_ate[] =       "ATE";
-                const char at_cwmode[] =    "CWMODE";
-                const char at_cwjap[] =     "CWJAP";
-                const char at_cwlap[] =     "CWLAP";
-                const char at_cwqap[] =     "CWQAP";
-                const char at_cwsap[] =     "CWSAP";
-                const char at_cwlif[] =     "CWLIF";
-                const char at_cwdhcp[] =    "CWDHCP";
-                const char at_cipstamac[] = "CIPSTAMAC";
-                const char at_cipapmac[] =  "CIPAPMAC";
-                const char at_cipsta[] =    "CIPSTA";
-                const char at_ciap[] =      "CIPAP";
-                const char at_cipstatus[] = "CIPSTATUS";
-                const char at_cipstart[] =  "CIPSTART";
-                const char at_cipsend[] =   "CIPSEND";
-                const char at_cipclose[] =  "CIPCLOSE";
-                const char at_cifsr[] =     "CIFSR";
-                const char at_cipmux[] =    "CIPMUX";
-                const char at_cipserver[] = "CIPSERVER";
-                const char at_cipmode[] =   "CIPMODE";
-                const char at_cipsto[] =    "CIPSTO";
-                const char at_ciupdate[] =  "CIUPDATE";
-                const char at_ipd[] =       "+IPD";
-                const char at_ok[] =        "OK";
-                const char at_error[] =     "ERROR";
-                const char at_ready[] =     "ready";
-                const char at_listen[] =    ">";
+# define SNPRINTF snprintf
+                const char at_eol[] =           "\r\n";
+                const char at_at[] =            "AT";
+                const char at_rst[] =           "RST";
+                const char at_gmr[] =           "GMR";
+                const char at_gslp[] =          "GLSP";
+                const char at_ate[] =           "ATE";
+                const char at_cwmode[] =        "CWMODE";
+                const char at_cwjap[] =         "CWJAP";
+                const char at_cwlap[] =         "CWLAP";
+                const char at_cwqap[] =         "CWQAP";
+                const char at_cwsap[] =         "CWSAP";
+                const char at_cwlif[] =         "CWLIF";
+                const char at_cwdhcp[] =        "CWDHCP";
+                const char at_cipstamac[] =     "CIPSTAMAC";
+                const char at_cipapmac[] =      "CIPAPMAC";
+                const char at_cipsta[] =        "CIPSTA";
+                const char at_ciap[] =          "CIPAP";
+                const char at_cipstatus[] =     "CIPSTATUS";
+                const char at_cipstart[] =      "CIPSTART";
+                const char at_cipsend[] =       "CIPSEND";
+                const char at_cipclose[] =      "CIPCLOSE";
+                const char at_cifsr[] =         "CIFSR";
+                const char at_cipmux[] =        "CIPMUX";
+                const char at_cipserver[] =     "CIPSERVER";
+                const char at_cipmode[] =       "CIPMODE";
+                const char at_cipsto[] =        "CIPSTO";
+                const char at_ciupdate[] =      "CIUPDATE";
+                const char at_ipd[] =           "+IPD";
+                const char at_ok[] =            "OK";
+                const char at_error[] =         "ERROR";
+                const char at_ready[] =         "ready";
+                const char at_listen[] =        ">";
+                const char ip_format[] =        "%hhu.%hhu.%hhu.%hhu";
+                const char channel_format[] =   "%hhu";
 #else
 # include <avr/pgmspace.h>
 # define STRCMP strcmp_P
-                const PROGMEM char at_eol[] =       "\r\n";
-                const PROGMEM char at_at[] =        "AT";
-                const PROGMEM char at_rst[] =       "RST";
-                const PROGMEM char at_gmr[] =       "GMR";
-                const PROGMEM char at_gslp[] =      "GLSP";
-                const PROGMEM char at_ate[] =       "ATE";
-                const PROGMEM char at_cwmode[] =    "CWMODE";
-                const PROGMEM char at_cwjap[] =     "CWJAP";
-                const PROGMEM char at_cwlap[] =     "CWLAP";
-                const PROGMEM char at_cwqap[] =     "CWQAP";
-                const PROGMEM char at_cwsap[] =     "CWSAP";
-                const PROGMEM char at_cwlif[] =     "CWLIF";
-                const PROGMEM char at_cwdhcp[] =    "CWDHCP";
-                const PROGMEM char at_cipstamac[] = "CIPSTAMAC";
-                const PROGMEM char at_cipapmac[] =  "CIPAPMAC";
-                const PROGMEM char at_cipsta[] =    "CIPSTA";
-                const PROGMEM char at_ciap[] =      "CIPAP";
-                const PROGMEM char at_cipstatus[] = "CIPSTATUS";
-                const PROGMEM char at_cipstart[] =  "CIPSTART";
-                const PROGMEM char at_cipsend[] =   "CIPSEND";
-                const PROGMEM char at_cipclose[] =  "CIPCLOSE";
-                const PROGMEM char at_cifsr[] =     "CIFSR";
-                const PROGMEM char at_cipmux[] =    "CIPMUX";
-                const PROGMEM char at_cipserver[] = "CIPSERVER";
-                const PROGMEM char at_cipmode[] =   "CIPMODE";
-                const PROGMEM char at_cipsto[] =    "CIPSTO";
-                const PROGMEM char at_ciupdate[] =  "CIUPDATE";
-                const PROGMEM char at_ipd[] =       "+IPD";
-                const PROGMEM char at_ok[] =        "OK";
-                const PROGMEM char at_error[] =     "ERROR";
-                const PROGMEM char at_ready[] =     "ready";
-                const PROGMEM char at_listen[] =    ">";
+# define SNPRINTF snprintf_P
+                const PROGMEM char at_eol[] =           "\r\n";
+                const PROGMEM char at_at[] =            "AT";
+                const PROGMEM char at_rst[] =           "RST";
+                const PROGMEM char at_gmr[] =           "GMR";
+                const PROGMEM char at_gslp[] =          "GLSP";
+                const PROGMEM char at_ate[] =           "ATE";
+                const PROGMEM char at_cwmode[] =        "CWMODE";
+                const PROGMEM char at_cwjap[] =         "CWJAP";
+                const PROGMEM char at_cwlap[] =         "CWLAP";
+                const PROGMEM char at_cwqap[] =         "CWQAP";
+                const PROGMEM char at_cwsap[] =         "CWSAP";
+                const PROGMEM char at_cwlif[] =         "CWLIF";
+                const PROGMEM char at_cwdhcp[] =        "CWDHCP";
+                const PROGMEM char at_cipstamac[] =     "CIPSTAMAC";
+                const PROGMEM char at_cipapmac[] =      "CIPAPMAC";
+                const PROGMEM char at_cipsta[] =        "CIPSTA";
+                const PROGMEM char at_ciap[] =          "CIPAP";
+                const PROGMEM char at_cipstatus[] =     "CIPSTATUS";
+                const PROGMEM char at_cipstart[] =      "CIPSTART";
+                const PROGMEM char at_cipsend[] =       "CIPSEND";
+                const PROGMEM char at_cipclose[] =      "CIPCLOSE";
+                const PROGMEM char at_cifsr[] =         "CIFSR";
+                const PROGMEM char at_cipmux[] =        "CIPMUX";
+                const PROGMEM char at_cipserver[] =     "CIPSERVER";
+                const PROGMEM char at_cipmode[] =       "CIPMODE";
+                const PROGMEM char at_cipsto[] =        "CIPSTO";
+                const PROGMEM char at_ciupdate[] =      "CIUPDATE";
+                const PROGMEM char at_ipd[] =           "+IPD";
+                const PROGMEM char at_ok[] =            "OK";
+                const PROGMEM char at_error[] =         "ERROR";
+                const PROGMEM char at_ready[] =         "ready";
+                const PROGMEM char at_listen[] =        ">";
+                const PROGMEM char ip_format[] =        "%hhu.%hhu.%hhu.%hhu";
+                const PROGMEM char channel_format[] =   "%hhu";
 #endif
             }
 
@@ -253,8 +259,6 @@ namespace woodBox {
                 }
                 while (_stream->available()) {
                     String str = _stream->readStringUntil(at_nl);
-                    //Serial.println("Debug");
-                    //Serial.println(str);
                     str.replace('\r', '\0');
                     if (!STRCMP(str.c_str(), at_ok)) {
                         return 0;
@@ -265,16 +269,6 @@ namespace woodBox {
                     delay(1);
                 }
                 return -2;
-                /*int tmp = 0;
-                while ((tmp = _stream->peek()) == '\r' || tmp == '\n' || tmp == -1) {
-                    _stream->read();
-                    delay(1);
-                }
-                String result = _stream->readStringUntil(at_ok);
-                Serial.print(result);
-                _stream->flush();
-                return 0;*/
-                //return (!STRCMP(result.c_str(), at_ok)) ? 0 : -3;
             }
 
             int ESP8266WiFiCommunicator::_test_esp() {
@@ -342,7 +336,7 @@ namespace woodBox {
                     return -3;
                 }
                 char channel[3];
-                snprintf(channel, 2, "%hhu", _ap.channel);
+                SNPRINTF(channel, 2, channel_format, _ap.channel);
                 _stream->print(at_at);
                 _stream->print(F("+"));
                 _stream->print(at_cwsap);
@@ -404,7 +398,7 @@ namespace woodBox {
                     return -3;
                 }
                 char strIp[16];
-                sprintf(strIp, "%hhu.%hhu.%hhu.%hhu", _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
+                SNPRINTF(strIp, 15, ip_format, _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
                 _stream->print(at_at);
                 _stream->print(F("+"));
                 _stream->print(at_cipstart);
