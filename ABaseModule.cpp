@@ -11,11 +11,11 @@ namespace woodBox {
                                  sensor::ISensor *sensor,
                                  storage::IStorage *storage
                                 ):
-                                 ADisplayModule(display),
-                                 ACommunicativeModule(communicators),
-                                 APoweredModule(power),
-                                 ASensorModule(sensor),
-                                 AStorageModule(storage),
+                                 _display(display),
+                                 _streams(communicators),
+                                 _power(power),
+                                 _sensor(sensor),
+                                 _storage(storage),
                                  _scheduler(nullptr),
                                  _sensorInterval(TASK_SECOND),
                                  _displayInterval(TASK_SECOND),
@@ -31,21 +31,14 @@ namespace woodBox {
             _communicationTask.setCallback(&ABaseModule::_onCommunicate);
         }
 
-        ABaseModule::ABaseModule(ABaseModule &other):
-                                                    ADisplayModule(other),
-                                                    ACommunicativeModule(other),
-                                                    APoweredModule(other),
-                                                    ASensorModule(other),
-                                                    AStorageModule(other),
-                                                    _scheduler(other._scheduler),
-                                                    _sensorInterval(other._sensorInterval),
-                                                    _displayInterval(other._displayInterval),
-                                                    _communicationInterval(other._communicationInterval) {
+        /* ABaseModule::ABaseModule(ABaseModule &other) {
+            (void*)other;
         }
 
         ABaseModule &ABaseModule::operator=(ABaseModule &other) {
+            (void*)other;
             return *this;
-        }
+        } */
 
         ABaseModule::~ABaseModule() {}
 
@@ -130,6 +123,46 @@ namespace woodBox {
 
         void ABaseModule::setCommunicationExecutionCallback(customCallback f) {
             _communicationTask.setCallback((f == nullptr) ? &ABaseModule::_onCommunicate : f);
+        }
+
+        Stream **ABaseModule::getStreams() {
+            return _streams;
+        }
+
+        void ABaseModule::setStreams(Stream **streams) {
+            _streams = streams;
+        }
+
+        display::IDisplay *ABaseModule::getDisplay() {
+            return _display;
+        }
+
+        void ABaseModule::setDisplay(display::IDisplay *display) {
+            _display = display;
+        }
+
+        const power::IPower *ABaseModule::getPowerSource() const {
+            return _power;
+        }
+
+        void ABaseModule::setPowerSource(power::IPower *power) {
+            _power = power;
+        }
+
+        const sensor::ISensor *ABaseModule::getSensor() const {
+            return _sensor;
+        }
+
+        void ABaseModule::setSensor(sensor::ISensor *sensor) {
+            _sensor = sensor;
+        }
+
+        const storage::IStorage *ABaseModule::getStorage() const {
+            return _storage;
+        }
+
+        void ABaseModule::setStorage(storage::IStorage *storage) {
+            _storage = storage;
         }
     }
 }

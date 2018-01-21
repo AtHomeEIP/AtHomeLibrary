@@ -6,20 +6,19 @@
 # include <stdint.h>
 # include <Arduino.h>
 # include <TaskScheduler.h>
-# include "ADisplayModule.hpp"
-# include "ACommunicativeModule.hpp"
-# include "APoweredModule.hpp"
-# include "ASensorModule.hpp"
-# include "AStorageModule.hpp"
+# include "IDisplay.hpp"
+# include "IPower.hpp"
+# include "ISensor.hpp"
+# include "IStorage.hpp"
 
 namespace woodBox {
     namespace module {
-        class ABaseModule : public ADisplayModule, public ACommunicativeModule, public APoweredModule, public ASensorModule, public AStorageModule {
+        class ABaseModule {
             public:
-                virtual ABaseModule &operator=(ABaseModule &); // Singleton class
-                virtual ~ABaseModule();
-                virtual void run();
-                virtual void stop();
+                ABaseModule &operator=(ABaseModule &) = delete; // Singleton class
+                ~ABaseModule();
+                void run();
+                void stop();
                 void setScheduler(Scheduler &);
                 Scheduler *getScheduler();
                 template <typename T>
@@ -35,8 +34,18 @@ namespace woodBox {
             protected:
                 ABaseModule(display::IDisplay * = nullptr, Stream ** = nullptr,
                             power::IPower * = nullptr, sensor::ISensor * = nullptr, storage::IStorage * = nullptr);
-                ABaseModule(ABaseModule &); // Singleton class
+                ABaseModule(ABaseModule &) = delete; // Singleton class
                 static ABaseModule *getABaseModuleInstance() { return _instance; }
+                Stream **getStreams();
+                void setStreams(Stream **);
+                display::IDisplay *getDisplay();
+                void setDisplay(display::IDisplay *);
+                const power::IPower *getPowerSource() const;
+                void setPowerSource(power::IPower *);
+                const sensor::ISensor *getSensor() const;
+                void setSensor(sensor::ISensor *);
+                const storage::IStorage *getStorage() const;
+                void setStorage(storage::IStorage *);
                 /* Callbacks */
             protected:
                 virtual void onReset() = 0;
@@ -54,8 +63,8 @@ namespace woodBox {
                 typedef void (*customCallback)();
                 //virtual void sleep();
                 //virtual void wakeUp();
-                virtual void setup();
-                virtual void loop();
+                void setup();
+                void loop();
                 void setSensorExecutionInterval(unsigned long);
                 void setDisplayExecutionInterval(unsigned long);
                 void setCommunicationExecutionInterval(unsigned long);
@@ -69,6 +78,12 @@ namespace woodBox {
                 static void _onSampleSensor() { _instance->onSampleSensor(); }
                 static void _onUpdateDisplay() { _instance->onUpdateDisplay(); }
                 static void _onCommunicate() { _instance->onCommunicate(); }
+            protected:
+                display::IDisplay   *_display;
+                Stream              **_streams;
+                power::IPower       *_power;
+                sensor::ISensor     *_sensor;
+                storage::IStorage   *_storage;
             private:
                 Scheduler           *_scheduler;
                 unsigned long       _sensorInterval;
