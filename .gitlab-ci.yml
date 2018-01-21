@@ -9,7 +9,7 @@ build:
   # instead of calling g++ directly you can also use some build toolkit like make
   # install the necessary build tools when needed
   before_script:
-    - apt update && apt -y install build-essential git xvfb wget xz-utils libxext6 libxtst6 libxrender1 libgtk2.0.0 default-jre libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr make
+    - apt update && apt -y install build-essential git xvfb wget xz-utils libxext6 libxtst6 libxrender1 libgtk2.0.0 default-jre
     - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
     - sleep 3
     - export DISPLAY=:1.0
@@ -54,8 +54,6 @@ build:
     # - energia --install-boards energia:msp432
     # - energia --install-library "Adafruit NeoPixel"
     # - cp $PWD/test/platforms/msp432/platform.txt ~/.energia15/packages/hardware/msp432/3.8.0/platform.txt
-    - git clone https://github.com/buserror/simavr.git
-    - cd ./simavr ; make && make install ; cd -
     - mkdir -p $PWD/test/output/avr/uno # test the most classical arduino
     - mkdir -p $PWD/test/output/avr/leonardo # test avr based arduino with native usb port
     - mkdir -p $PWD/test/output/arm/zero # test official arm cortex m0+ board
