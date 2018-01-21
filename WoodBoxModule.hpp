@@ -1,5 +1,5 @@
-#ifndef AWOODBOXMODULE_HPP
-# define AWOODBOXMODULE_HPP
+#ifndef WOODBOXMODULE_HPP
+# define WOODBOXMODULE_HPP
 
 # include <stdint.h>
 # include "ABaseModule.hpp"
@@ -8,7 +8,7 @@
 namespace woodBox {
     namespace module {
         template <typename T, size_t n>
-        class AWoodBoxModule : public ABaseModule {
+        class WoodBoxModule : public ABaseModule {
             public:
                 enum moduleType {
                     UNKNOWN,
@@ -33,16 +33,16 @@ namespace woodBox {
                 typedef unsigned long   timestamp;
 #endif
 
-                AWoodBoxModule(const AWoodBoxModule &) = delete;
-                AWoodBoxModule &operator=(const AWoodBoxModule &) = delete;
-                ~AWoodBoxModule() {}
+                WoodBoxModule(const WoodBoxModule &) = delete;
+                WoodBoxModule &operator=(const WoodBoxModule &) = delete;
+                ~WoodBoxModule() {}
 
             public:
                 typedef void (*customCallback)();
 
-                static AWoodBoxModule *getInstance() {
+                static WoodBoxModule *getInstance() {
                     if (_instance == nullptr) {
-                        _instance = new AWoodBoxModule<T, n>();
+                        _instance = new WoodBoxModule<T, n>();
                         return _instance;
                     }
                     return _instance;
@@ -107,15 +107,15 @@ namespace woodBox {
                 }
 
                 void setSensorExecutionCallback(customCallback f) {
-                    _sensorTask.setCallback((f == nullptr) ? &AWoodBoxModule::_onSampleSensor : f);
+                    _sensorTask.setCallback((f == nullptr) ? &WoodBoxModule::_onSampleSensor : f);
                 }
 
                 void setDisplayExecutionCallback(customCallback f) {
-                    _displayTask.setCallback((f == nullptr) ? &AWoodBoxModule::_onUpdateDisplay : f);
+                    _displayTask.setCallback((f == nullptr) ? &WoodBoxModule::_onUpdateDisplay : f);
                 }
 
                 void setCommunicationExecutionCallback(customCallback f) {
-                    _communicationTask.setCallback((f == nullptr) ? &AWoodBoxModule::_onCommunicate : f);
+                    _communicationTask.setCallback((f == nullptr) ? &WoodBoxModule::_onCommunicate : f);
                 }
 
                 moduleType          getType() const { return _type; }
@@ -174,7 +174,7 @@ namespace woodBox {
                 }
 
             protected:
-                AWoodBoxModule():
+                WoodBoxModule():
                     ABaseModule(),
                     _scheduler(nullptr),
                     _sensorInterval(TASK_SECOND),
@@ -186,10 +186,10 @@ namespace woodBox {
                     memset(_serial, 0, sizeof(moduleSerial));
                     memset(_measures, 0, sizeof(T) * n);
                     memset(_timestamps, 0, sizeof(T) * n);
-                    _uploadDataTask.set(TASK_SECOND * 30, TASK_FOREVER, &AWoodBoxModule::_uploadData);
-                    _sensorTask.set(_sensorInterval, TASK_FOREVER, &AWoodBoxModule::_onSampleSensor);
-                    _displayTask.set(_displayInterval, TASK_FOREVER, &AWoodBoxModule::_onUpdateDisplay);
-                    _communicationTask.set(_communicationInterval, TASK_FOREVER, &AWoodBoxModule::_onCommunicate);
+                    _uploadDataTask.set(TASK_SECOND * 30, TASK_FOREVER, &WoodBoxModule::_uploadData);
+                    _sensorTask.set(_sensorInterval, TASK_FOREVER, &WoodBoxModule::_onSampleSensor);
+                    _displayTask.set(_displayInterval, TASK_FOREVER, &WoodBoxModule::_onUpdateDisplay);
+                    _communicationTask.set(_communicationInterval, TASK_FOREVER, &WoodBoxModule::_onCommunicate);
                     setup();
                 }
                 void        uploadData() {}
@@ -230,11 +230,11 @@ namespace woodBox {
                 Task                        _sensorTask;
                 Task                        _displayTask;
                 Task                        _communicationTask;
-                static AWoodBoxModule<T, n> *_instance;
+                static WoodBoxModule<T, n> *_instance;
         };
 
         template <typename T, size_t n>
-        AWoodBoxModule<T, n> *AWoodBoxModule<T, n>::_instance = nullptr;
+        WoodBoxModule<T, n> *WoodBoxModule<T, n>::_instance = nullptr;
     }
 }
-#endif /* AWOODBOXMODULE_HPP */
+#endif /* WOODBOXMODULE_HPP */

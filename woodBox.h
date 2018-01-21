@@ -1,7 +1,7 @@
 #ifndef WOODBOX_H
 # define WOODBOX_H
 
-# include "AWoodBoxModule.hpp"
+# include "WoodBoxModule.hpp"
 # include "Capacitor.hpp"
 # include "CommandEnumerate.hpp"
 # include "CommandProfile.hpp"
