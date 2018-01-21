@@ -35,47 +35,172 @@ namespace woodBox {
 
                 AWoodBoxModule(const AWoodBoxModule &) = delete;
                 AWoodBoxModule &operator=(const AWoodBoxModule &) = delete;
-                virtual ~AWoodBoxModule() {}
+                ~AWoodBoxModule() {}
+
+            public:
+                typedef void (*customCallback)();
+
+                static AWoodBoxModule *getInstance() {
+                    if (_instance == nullptr) {
+                        _instance = new AWoodBoxModule<T, n>();
+                        return _instance;
+                    }
+                    return _instance;
+                }
+
+                void setScheduler(Scheduler &scheduler) {
+                    if (_scheduler != nullptr) {
+                        _scheduler->deleteTask(_sensorTask);
+                        _scheduler->deleteTask(_displayTask);
+                        _scheduler->deleteTask(_communicationTask);
+                    }
+                    _scheduler = &scheduler;
+                    _scheduler->addTask(_sensorTask);
+                    _scheduler->addTask(_displayTask);
+                    _scheduler->addTask(_communicationTask);
+                }
+
+                Scheduler *getScheduler() {
+                    return _scheduler;
+                }
+
+                void run() {
+                    _scheduler->execute();
+                }
+
+                void stop() {
+                    onBackupOnStorage();
+                    onStop();
+                }
+
+                void setSensorExecutionInterval(unsigned long ms) {
+                    if (ms && ms != _sensorInterval) {
+                        _sensorInterval = ms;
+                        _sensorTask.setInterval(_sensorInterval * TASK_MILLISECOND);
+                    }
+                }
+
+                void setDisplayExecutionInterval(unsigned long ms) {
+                    if (ms && ms != _displayInterval) {
+                        _displayInterval = ms;
+                        _displayTask.setInterval(_displayInterval * TASK_MILLISECOND);
+                    }
+                }
+
+                void setCommunicationExecutionInterval(unsigned long ms) {
+                    if (ms && ms != _communicationInterval) {
+                        _communicationInterval = ms;
+                        _communicationTask.setInterval(_communicationInterval * TASK_MILLISECOND);
+                    }
+                }
+
+                unsigned long getSensorExecutionInterval() const {
+                    return _sensorInterval;
+                }
+
+                unsigned long getDisplayExecutionInterval() const {
+                    return _displayInterval;
+                }
+
+                unsigned long getCommunicationExecutionInterval() const {
+                    return _communicationInterval;
+                }
+
+                void setSensorExecutionCallback(customCallback f) {
+                    _sensorTask.setCallback((f == nullptr) ? &AWoodBoxModule::_onSampleSensor : f);
+                }
+
+                void setDisplayExecutionCallback(customCallback f) {
+                    _displayTask.setCallback((f == nullptr) ? &AWoodBoxModule::_onUpdateDisplay : f);
+                }
+
+                void setCommunicationExecutionCallback(customCallback f) {
+                    _communicationTask.setCallback((f == nullptr) ? &AWoodBoxModule::_onCommunicate : f);
+                }
+
+                moduleType          getType() const { return _type; }
+
+                const moduleVendor* getVendor() const { return &_vendor; }
+
+                const moduleSerial* getSerial() const { return &_serial; }
+
+                void                setType(moduleType type) {
+                    if (type != moduleType::UNKNOWN) {
+                        _type = type;
+                    }
+                }
+
+                void                setVendor(moduleVendor vendor) {
+                    if (vendor != nullptr) {
+                        _vendor = vendor;
+                    }
+                }
+
+                void                setSerial(moduleSerial serial) {
+                    if (serial != nullptr) {
+                        _serial = serial;
+                    }
+                }
+
+            private:
+                static void _onSampleSensor() {
+                    if (_instance != nullptr) {
+                        _instance->onSampleSensor();
+                    }
+                }
+                static void _onUpdateDisplay() {
+                    if (_instance != nullptr) {
+                        _instance->onUpdateDisplay();
+                    }
+                }
+                static void _onCommunicate() {
+                    if (_instance != nullptr) {
+                        _instance->onCommunicate();
+                    }
+                }
+                static void _uploadData() {
+                    if (_instance != nullptr) {
+                        _instance->uploadData();
+                    }
+                }
+
+                void setup() {
+                    onRestoreFromStorage();
+                    onStart();
+                    _sensorTask.enableIfNot();
+                    _displayTask.enableIfNot();
+                    _communicationTask.enableIfNot();
+                    _uploadDataTask.enableIfNot();
+                }
 
             protected:
                 AWoodBoxModule():
                     ABaseModule(),
+                    _scheduler(nullptr),
+                    _sensorInterval(TASK_SECOND),
+                    _displayInterval(TASK_SECOND),
+                    _communicationInterval(TASK_MILLISECOND),
                     _type(UNKNOWN),
                     _nbMeasures(0) {
                     memset(_vendor, 0, sizeof(moduleVendor));
                     memset(_serial, 0, sizeof(moduleSerial));
                     memset(_measures, 0, sizeof(T) * n);
                     memset(_timestamps, 0, sizeof(T) * n);
-                    _uploadDataTask.set(TASK_SECOND * 30, TASK_FOREVER, AWoodBoxModule::_uploadData);
-
+                    _uploadDataTask.set(TASK_SECOND * 30, TASK_FOREVER, &AWoodBoxModule::_uploadData);
+                    _sensorTask.set(_sensorInterval, TASK_FOREVER, &AWoodBoxModule::_onSampleSensor);
+                    _displayTask.set(_displayInterval, TASK_FOREVER, &AWoodBoxModule::_onUpdateDisplay);
+                    _communicationTask.set(_communicationInterval, TASK_FOREVER, &AWoodBoxModule::_onCommunicate);
+                    setup();
                 }
-                moduleType          getType() const { return _type; }
-                const moduleVendor* getVendor() const { return &_vendor; }
-                const moduleSerial* getSerial() const { return &_serial; }
-                void                setType(moduleType type) {
-                    if (type != moduleType::UNKNOWN) {
-                        _type = type;
-                    }
-                }
-                void                setVendor(moduleVendor vendor) {
-                    if (vendor != nullptr) {
-                        _vendor = vendor;
-                    }
-                }
-                void                setSerial(moduleSerial serial) {
-                    if (serial != nullptr) {
-                        _serial = serial;
-                    }
-                }
-                virtual void        uploadData() {}
-                virtual void        onReset() {}
-                virtual void        onStart() {}
-                virtual void        onStop() {}
-                virtual void        onPause() {}
-                virtual void        onResume() {}
-                virtual void        onBackupOnStorage() {}
-                virtual void        onRestoreFromStorage() {}
-                virtual void        onSampleSensor() {
+                void        uploadData() {}
+                void        onReset() {}
+                void        onStart() {}
+                void        onStop() {}
+                void        onPause() {}
+                void        onResume() {}
+                void        onBackupOnStorage() {}
+                void        onRestoreFromStorage() {}
+                void        onSampleSensor() {
                     if (_sensor != nullptr && _nbMeasures < n) {
                         uint8_t* rawData = _sensor->getSample();
                         if (rawData != nullptr) {
@@ -88,24 +213,28 @@ namespace woodBox {
                         onUpdateDisplay();
                     }
                 }
-                virtual void        onUpdateDisplay() = 0;
-                virtual void        onCommunicate() {}
+                void        onUpdateDisplay() {}
+                void        onCommunicate() {}
             private:
-                static void         _uploadData() {
-                    AWoodBoxModule* instance = (AWoodBoxModule*)ABaseModule::getABaseModuleInstance();
-                    if (instance != nullptr) {
-                        instance->uploadData();
-                    }
-                }
-            private:
-                moduleType          _type;
-                size_t              _nbMeasures;
-                moduleVendor        _vendor;
-                moduleSerial        _serial;
-                T                   _measures[n];
-                timestamp           _timestamps[n];
-                Task                _uploadDataTask;
+                Scheduler                   *_scheduler;
+                unsigned long               _sensorInterval;
+                unsigned long               _displayInterval;
+                unsigned long               _communicationInterval;
+                moduleType                  _type;
+                size_t                      _nbMeasures;
+                moduleVendor                _vendor;
+                moduleSerial                _serial;
+                T                           _measures[n];
+                timestamp                   _timestamps[n];
+                Task                        _uploadDataTask;
+                Task                        _sensorTask;
+                Task                        _displayTask;
+                Task                        _communicationTask;
+                static AWoodBoxModule<T, n> *_instance;
         };
+
+        template <typename T, size_t n>
+        AWoodBoxModule<T, n> *AWoodBoxModule<T, n>::_instance = nullptr;
     }
 }
 #endif /* AWOODBOXMODULE_HPP */
