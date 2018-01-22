@@ -8,10 +8,10 @@ namespace woodBox {
         class IStorage {
             public:
                 //virtual ~IStorage() = 0;
-                virtual void open() = 0;
-                virtual void close() = 0;
-                virtual uint8_t& read(uint32_t);
-                virtual void write(const uint8_t &, uint32_t);
+                // Copy n bytes (3rd parameter) in dest (2nd parameter) from offset x (1st parameter)
+                virtual void read(size_t, void *, size_t) = 0;
+                // Write n bytes (3rd parameter) in offset x (1st parameter) from src (2nd parameter)
+                virtual void write(size_t, const void *, size_t) = 0;
         };
     }
 }

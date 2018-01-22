@@ -1,20 +1,39 @@
+#ifndef WOODBOX_COMMUNICATION_PROTOCOL_HPP
+# define WOODBOX_COMMUNICATION_PROTOCOL_HPP
+
 #include <Arduino.h>
 
 namespace woodBox {
     namespace communication {
         namespace commands {
-#define end_of_line F("\r\n")
-#define part_separator F("================================================================================")
-#define spacer '\t'
-#define end_of_command '\x03' // It's the end of text character, ie Ctrl^D
-#define end_of_communication = '\x04' // It's the end of transmission character, ie Ctrl^C
+            extern const char spacer;
+            extern const char end_of_command;
+            extern const char end_of_communication;
+# ifndef __AVR__
+#  define STRCMP strcmp
+#  define SNPRINTF snprintf
+            extern const char end_of_line[];
+            extern const char part_separator[];
 
-#define enumerate F("Enumerate")
-#define uploadData F("UploadData")
-#define syncTime F("SyncTime")
-#define setWiFi F("SetWiFi")
-#define setEndPoint F("SetEndPoint")
-#define setProfile F("SetProfile")
+            extern const char enumerate[];
+            extern const char uploadData[];
+            extern const char syncTime[];
+            extern const char setWiFi[];
+            extern const char setEndPoint[];
+            extern const char setProfile[];
+# else
+# define STRCMP strcmp_P
+# define SNPRINTF snprintf_P
+            extern const PROGMEM char end_of_line[];
+            extern const PROGMEM char part_separator[];
+
+            extern const PROGMEM char enumerate[];
+            extern const PROGMEM char uploadData[];
+            extern const PROGMEM char syncTime[];
+            extern const PROGMEM char setWiFi[];
+            extern const PROGMEM char setEndPoint[];
+            extern const PROGMEM char setProfile[];
+# endif
 
 /*
  * Thinking communication wisely
@@ -64,3 +83,5 @@ namespace woodBox {
         }
     }
 }
+
+#endif /* WOODBOX_COMMUNICATION_PROTOCOL */

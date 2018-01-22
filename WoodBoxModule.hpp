@@ -5,6 +5,7 @@
 # include "ARGBLed.hpp"
 # include "ABaseModule.hpp"
 # include "AWiFiCommunicator.hpp"
+# include "woodbox_communication_protocol.hpp"
 
 namespace woodBox {
     namespace module {
@@ -24,13 +25,8 @@ namespace woodBox {
                     RADIOACTIVITY // Geiger counter
                 };
 
-#ifdef __AVR__
-                typedef PROGMEM char            moduleVendor[33];
-                typedef PROGMEM char            moduleSerial[33];
-#else
                 typedef char            moduleVendor[33];
                 typedef char            moduleSerial[33];
-#endif
                 typedef unsigned long   timestamp;
 
                 WoodBoxModule(const WoodBoxModule &) = delete;
@@ -39,6 +35,7 @@ namespace woodBox {
 
             public:
                 typedef void (*customCallback)();
+                typedef void (*WoodBoxCommandPlugin)(const String &, Stream *);
 
                 static WoodBoxModule *getInstance() {
                     if (_instance == nullptr) {
@@ -118,11 +115,15 @@ namespace woodBox {
                     _communicationTask.setCallback((f == nullptr) ? &WoodBoxModule::_onCommunicate : f);
                 }
 
+                void setCommandPlugin(WoodBoxCommandPlugin plugin) {
+                    _communicationPlugin = plugin;
+                }
+
                 moduleType          getType() const { return _type; }
 
-                const moduleVendor* getVendor() const { return &_vendor; }
+                const moduleVendor &getVendor() const { return _vendor; }
 
-                const moduleSerial* getSerial() const { return &_serial; }
+                const moduleSerial &getSerial() const { return _serial; }
 
                 void                setType(moduleType type) {
                     if (type != moduleType::UNKNOWN) {
@@ -130,15 +131,15 @@ namespace woodBox {
                     }
                 }
 
-                void                setVendor(moduleVendor vendor) {
+                void                setVendor(const moduleVendor &vendor) {
                     if (vendor != nullptr) {
-                        _vendor = vendor;
+                        memcpy(_vendor, &vendor, sizeof(moduleVendor));
                     }
                 }
 
-                void                setSerial(moduleSerial serial) {
+                void                setSerial(const moduleSerial &serial) {
                     if (serial != nullptr) {
-                        _serial = serial;
+                        memcpy(_serial, &serial, sizeof(moduleSerial));
                     }
                 }
 
@@ -174,6 +175,7 @@ namespace woodBox {
                 }
 
             protected:
+
                 WoodBoxModule():
                     ABaseModule(),
                     _scheduler(nullptr),
@@ -181,7 +183,8 @@ namespace woodBox {
                     //_displayInterval(TASK_SECOND),
                     _communicationInterval(TASK_MILLISECOND),
                     _type(UNKNOWN),
-                    _nbMeasures(0) {
+                    _nbMeasures(0),
+                    _communicationPlugin(nullptr) {
                     memset(_vendor, 0, sizeof(moduleVendor));
                     memset(_serial, 0, sizeof(moduleSerial));
                     memset(_measures, 0, sizeof(T) * n);
@@ -192,14 +195,28 @@ namespace woodBox {
                     _communicationTask.set(_communicationInterval, TASK_FOREVER, &WoodBoxModule::_onCommunicate);
                     setup();
                 }
-                void        uploadData() {}
+                void        uploadData() {
+                    //Todo: Need to implement it
+                }
                 void        onReset() {}
                 void        onStart() {}
                 void        onStop() {}
                 void        onPause() {}
                 void        onResume() {}
-                void        onBackupOnStorage() {}
-                void        onRestoreFromStorage() {}
+                void        onBackupOnStorage() {
+                    if (_storage != nullptr) {
+                        _storage->write(0, reinterpret_cast<const void *>(_vendor), sizeof(moduleVendor));
+                        _storage->write(sizeof(moduleVendor), reinterpret_cast<const void *>(_serial), sizeof(moduleSerial));
+                        _storage->write(sizeof(moduleVendor) + sizeof(moduleSerial), reinterpret_cast<const void *>(&_type), sizeof(moduleType));
+                    }
+                }
+                void        onRestoreFromStorage() {
+                    if (_storage != nullptr) {
+                        _storage->read(0, reinterpret_cast<void *>(_vendor), sizeof(moduleVendor));
+                        _storage->read(sizeof(moduleVendor), reinterpret_cast<void *>(_serial), sizeof(moduleSerial));
+                        _storage->read(sizeof(moduleVendor) + sizeof(moduleSerial), reinterpret_cast<void *>(&_type), sizeof(moduleType));
+                    }
+                }
                 void        onSampleSensor() {
                     if (_sensor != nullptr && _nbMeasures < n) {
                         uint8_t* rawData = _sensor->getSample();
@@ -228,7 +245,32 @@ namespace woodBox {
                     display->setColor(color);
                     display->update();
                 }
-                void        onCommunicate() {}
+                void        onCommunicate() {
+                    if (_streams == nullptr) {
+                        return;
+                    }
+                    for (Stream *stream = *_streams; stream != nullptr; stream++) {
+                        if (stream->available()) {
+                            String commandName = stream->readStringUntil('\n');
+                            commandName.replace('\r', '\0');
+                            if (STRCMP(commandName.c_str(), communication::commands::setProfile)) {
+                                // TODO: need to implement set profile command -> set conf of module itself (vendor, serial, ...etc)
+                                stream->println(F("Not implemented yet"));
+                            }
+                            else if (STRCMP(commandName.c_str(), communication::commands::enumerate)) {
+                                // TODO: need to implement enumerate command
+                                stream->println(F("Not implemented yet"));
+                            }
+                            else if (STRCMP(commandName.c_str(), communication::commands::syncTime)) {
+                                // TODO: need to implement syncTime command
+                                stream->println(F("Not implemented yet"));
+                            }
+                            else if (_communicationPlugin != nullptr) {
+                                _communicationPlugin(commandName, stream);
+                            }
+                        }
+                    }
+                }
             private:
                 Scheduler                   *_scheduler;
                 unsigned long               _sensorInterval;
@@ -236,6 +278,7 @@ namespace woodBox {
                 unsigned long               _communicationInterval;
                 moduleType                  _type;
                 size_t                      _nbMeasures;
+                WoodBoxCommandPlugin        _communicationPlugin;
                 moduleVendor                _vendor;
                 moduleSerial                _serial;
                 T                           _measures[n];
