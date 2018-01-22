@@ -4,30 +4,30 @@
 # ifdef GROVE_RGB_CHAINABLE_LED_ENABLED
 
 #  include <ChainableLED.h>
-#  include "IRGBLed.hpp"
+#  include "ARGBLed.hpp"
 
 namespace woodBox {
     namespace display {
-        class GroveChainableLED : public IRGBLed {
+        class GroveChainableLED : public ARGBLed {
             public:
                 struct Pins {
                     uint8_t clock;
                     uint8_t data;
                 };
                 GroveChainableLED(const Pins * = nullptr);
-                GroveChainableLED(const IRGBLed::Color &, const Pins * = nullptr);
-                GroveChainableLED(const IRGBLed &, const Pins * = nullptr);
-                GroveChainableLED &operator=(const IRGBLed &);
-                GroveChainableLED &operator=(const IRGBLed::Color &);
+                GroveChainableLED(const ARGBLed::Color &, const Pins * = nullptr);
+                GroveChainableLED(const ARGBLed &, const Pins * = nullptr);
+                GroveChainableLED &operator=(const ARGBLed &);
+                GroveChainableLED &operator=(const ARGBLed::Color &);
                 virtual ~GroveChainableLED();
                 virtual void clear();
                 virtual void update();
-                virtual const IRGBLed::Color &getColor() const;
-                virtual void setColor(const IRGBLed::Color &);
+                /* virtual const ARGBLed::Color &getColor() const;
+                virtual void setColor(const ARGBLed::Color &); */
             private:
                 void setup(const Pins *);
             protected:
-                IRGBLed::Color _color;
+                //ARGBLed::Color _color;
                 ChainableLED *_led;
         };
     }

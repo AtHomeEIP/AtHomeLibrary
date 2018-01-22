@@ -2,6 +2,7 @@
 # define WOODBOXMODULE_HPP
 
 # include <stdint.h>
+# include "ARGBLed.hpp"
 # include "ABaseModule.hpp"
 # include "AWiFiCommunicator.hpp"
 
@@ -26,12 +27,11 @@ namespace woodBox {
 #ifdef __AVR__
                 typedef PROGMEM char            moduleVendor[33];
                 typedef PROGMEM char            moduleSerial[33];
-                typedef PROGMEM unsigned long   timestamp;
 #else
                 typedef char            moduleVendor[33];
                 typedef char            moduleSerial[33];
-                typedef unsigned long   timestamp;
 #endif
+                typedef unsigned long   timestamp;
 
                 WoodBoxModule(const WoodBoxModule &) = delete;
                 WoodBoxModule &operator=(const WoodBoxModule &) = delete;
@@ -51,12 +51,12 @@ namespace woodBox {
                 void setScheduler(Scheduler &scheduler) {
                     if (_scheduler != nullptr) {
                         _scheduler->deleteTask(_sensorTask);
-                        _scheduler->deleteTask(_displayTask);
+                        //_scheduler->deleteTask(_displayTask);
                         _scheduler->deleteTask(_communicationTask);
                     }
                     _scheduler = &scheduler;
                     _scheduler->addTask(_sensorTask);
-                    _scheduler->addTask(_displayTask);
+                    //_scheduler->addTask(_displayTask);
                     _scheduler->addTask(_communicationTask);
                 }
 
@@ -80,12 +80,12 @@ namespace woodBox {
                     }
                 }
 
-                void setDisplayExecutionInterval(unsigned long ms) {
+                /* void setDisplayExecutionInterval(unsigned long ms) {
                     if (ms && ms != _displayInterval) {
                         _displayInterval = ms;
                         _displayTask.setInterval(_displayInterval * TASK_MILLISECOND);
                     }
-                }
+                } */
 
                 void setCommunicationExecutionInterval(unsigned long ms) {
                     if (ms && ms != _communicationInterval) {
@@ -98,9 +98,9 @@ namespace woodBox {
                     return _sensorInterval;
                 }
 
-                unsigned long getDisplayExecutionInterval() const {
+                /* unsigned long getDisplayExecutionInterval() const {
                     return _displayInterval;
-                }
+                } */
 
                 unsigned long getCommunicationExecutionInterval() const {
                     return _communicationInterval;
@@ -110,9 +110,9 @@ namespace woodBox {
                     _sensorTask.setCallback((f == nullptr) ? &WoodBoxModule::_onSampleSensor : f);
                 }
 
-                void setDisplayExecutionCallback(customCallback f) {
+                /* void setDisplayExecutionCallback(customCallback f) {
                     _displayTask.setCallback((f == nullptr) ? &WoodBoxModule::_onUpdateDisplay : f);
-                }
+                } */
 
                 void setCommunicationExecutionCallback(customCallback f) {
                     _communicationTask.setCallback((f == nullptr) ? &WoodBoxModule::_onCommunicate : f);
@@ -148,11 +148,11 @@ namespace woodBox {
                         _instance->onSampleSensor();
                     }
                 }
-                static void _onUpdateDisplay() {
+                /* static void _onUpdateDisplay() {
                     if (_instance != nullptr) {
                         _instance->onUpdateDisplay();
                     }
-                }
+                } */
                 static void _onCommunicate() {
                     if (_instance != nullptr) {
                         _instance->onCommunicate();
@@ -168,7 +168,7 @@ namespace woodBox {
                     onRestoreFromStorage();
                     onStart();
                     _sensorTask.enableIfNot();
-                    _displayTask.enableIfNot();
+                    //_displayTask.enableIfNot();
                     _communicationTask.enableIfNot();
                     _uploadDataTask.enableIfNot();
                 }
@@ -178,7 +178,7 @@ namespace woodBox {
                     ABaseModule(),
                     _scheduler(nullptr),
                     _sensorInterval(TASK_SECOND),
-                    _displayInterval(TASK_SECOND),
+                    //_displayInterval(TASK_SECOND),
                     _communicationInterval(TASK_MILLISECOND),
                     _type(UNKNOWN),
                     _nbMeasures(0) {
@@ -188,7 +188,7 @@ namespace woodBox {
                     memset(_timestamps, 0, sizeof(T) * n);
                     _uploadDataTask.set(TASK_SECOND * 30, TASK_FOREVER, &WoodBoxModule::_uploadData);
                     _sensorTask.set(_sensorInterval, TASK_FOREVER, &WoodBoxModule::_onSampleSensor);
-                    _displayTask.set(_displayInterval, TASK_FOREVER, &WoodBoxModule::_onUpdateDisplay);
+                    //_displayTask.set(_displayInterval, TASK_FOREVER, &WoodBoxModule::_onUpdateDisplay);
                     _communicationTask.set(_communicationInterval, TASK_FOREVER, &WoodBoxModule::_onCommunicate);
                     setup();
                 }
@@ -213,12 +213,26 @@ namespace woodBox {
                         onUpdateDisplay();
                     }
                 }
-                void        onUpdateDisplay() {}
+                void        onUpdateDisplay() {
+                    if (_display == nullptr || _sensor == nullptr) {
+                        return;
+                    }
+                    display::ARGBLed *display = (display::ARGBLed *)_display;
+                    display::ARGBLed::Color color;
+                    if (_sensor->getEstimate() >= sensor::ISensor::ISensorScale::FIVE) {
+                        color = {0, 5, 0};
+                    }
+                    else {
+                        color = {255, 0, 0};
+                    }
+                    display->setColor(color);
+                    display->update();
+                }
                 void        onCommunicate() {}
             private:
                 Scheduler                   *_scheduler;
                 unsigned long               _sensorInterval;
-                unsigned long               _displayInterval;
+                //unsigned long               _displayInterval;
                 unsigned long               _communicationInterval;
                 moduleType                  _type;
                 size_t                      _nbMeasures;
@@ -228,7 +242,7 @@ namespace woodBox {
                 timestamp                   _timestamps[n];
                 Task                        _uploadDataTask;
                 Task                        _sensorTask;
-                Task                        _displayTask;
+                //Task                        _displayTask;
                 Task                        _communicationTask;
                 static WoodBoxModule<T, n> *_instance;
         };

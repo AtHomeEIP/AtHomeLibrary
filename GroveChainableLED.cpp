@@ -5,33 +5,30 @@
 namespace woodBox {
 	namespace display {
 		GroveChainableLED::GroveChainableLED(const Pins *pins):
-			_color({0, 0, 0}),
 			_led(nullptr)
 		{
 			setup(pins);
 		}
 
-		GroveChainableLED::GroveChainableLED(const IRGBLed::Color &color, const Pins *pins):
-			_color(color),
+		GroveChainableLED::GroveChainableLED(const ARGBLed::Color &color, const Pins *pins):
 			_led(nullptr)
 		{
 			setup(pins);
 		}
 
-		GroveChainableLED::GroveChainableLED(const IRGBLed &other, const Pins *pins):
-			_color(other.getColor()),
+		GroveChainableLED::GroveChainableLED(const ARGBLed &other, const Pins *pins):
 			_led(nullptr)
 		{
 			setup(pins);
 		}
 
-		GroveChainableLED &GroveChainableLED::operator=(const IRGBLed::Color &color) {
-			_color = color;
+		GroveChainableLED &GroveChainableLED::operator=(const ARGBLed::Color &color) {
+			setColor(color);
 			return *this;
 		}
 
-		GroveChainableLED &GroveChainableLED::operator=(const IRGBLed &other) {
-			_color = other.getColor();
+		GroveChainableLED &GroveChainableLED::operator=(const ARGBLed &other) {
+			setColor(other.getColor());
 			return *this;
 		}
 
@@ -41,20 +38,22 @@ namespace woodBox {
 		}
 
 		void GroveChainableLED::clear() {
-			_color = {0, 0, 0};
+			ARGBLed::Color black = {0, 0, 0};
+			setColor(black);
 		}
 
 		void GroveChainableLED::update() {
-			_led->setColorRGB(0, _color.red, _color.green, _color.blue);
+		    const ARGBLed::Color &color = getColor();
+			_led->setColorRGB(0, color.red, color.green, color.blue);
 		}
 
-		const IRGBLed::Color &GroveChainableLED::getColor() const {
+		/* const ARGBLed::Color &GroveChainableLED::getColor() const {
 			return _color;
 		}
 
-		void GroveChainableLED::setColor(const IRGBLed::Color &color) {
+		void GroveChainableLED::setColor(const ARGBLed::Color &color) {
 			_color = color;
-		}
+		} */
 
 		void GroveChainableLED::setup(const Pins *pins) {
 			if (_led != nullptr)
