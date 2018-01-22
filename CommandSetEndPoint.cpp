@@ -23,7 +23,6 @@ namespace woodBox {
             }
 
             CommandSetEndPoint::CommandSetEndPoint(wifi::AWiFiCommunicator &com):
-                    _ok(false),
                     _com(com) {
                 memset(&_host, 0, sizeof(tcp_host));
             }
@@ -48,21 +47,10 @@ namespace woodBox {
                                &(_host.ipv4[3]));
                         _host.hport = p;
                     }
-                    _ok = true;
-#endif
-                }
-                _ok = false;
-            }
-
-            void CommandSetEndPoint::execute() {
-                if (_ok) {
                     _com.setHost(_host);
                     _com.connectToHost();
+#endif
                 }
-            }
-
-            void CommandSetEndPoint::reply(Stream &communicator) {
-                // Nothing to reply?
             }
         }
     }

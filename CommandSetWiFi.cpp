@@ -35,7 +35,6 @@ namespace woodBox {
             }
 
             CommandSetWiFi::CommandSetWiFi(wifi::AWiFiCommunicator &com):
-                    _ok(false),
                     _com(com) {
                 memset(&_ap, 0, sizeof(WiFi_ap));
             }
@@ -45,7 +44,6 @@ namespace woodBox {
             void CommandSetWiFi::parse(Stream &communicator) {
                 char buffer[101];
                 size_t len = 0;
-                _ok = false;
                 if ((len = communicator.readBytesUntil(end_of_command, buffer, 100))) {
                     buffer[len] = '\0';
                     StaticJsonBuffer<100> json;
@@ -57,19 +55,9 @@ namespace woodBox {
                         strncpy(_ap.password, password, 32);
                         _ap.ssid[32] = '\0';
                         _ap.password[32] = '\0';
-                        _ok = true;
+                        _com.setAccessPoint(_ap);
                     }
                 }
-            }
-
-            void CommandSetWiFi::execute() {
-                if (_ok) {
-                    _com.setAccessPoint(_ap);
-                }
-            }
-
-            void CommandSetWiFi::reply(Stream &communicator) {
-                // Nothing to reply?
             }
         }
     }
