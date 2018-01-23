@@ -43,7 +43,6 @@ namespace woodBox {
                 const char at_error[] =         "ERROR";
                 const char at_ready[] =         "ready";
                 const char at_listen[] =        ">";
-                const char ip_format[] =        "%hhu.%hhu.%hhu.%hhu";
                 const char channel_format[] =   "%hhu";
 #else
 # include <avr/pgmspace.h>
@@ -81,7 +80,6 @@ namespace woodBox {
                 const PROGMEM char at_error[] =         "ERROR";
                 const PROGMEM char at_ready[] =         "ready";
                 const PROGMEM char at_listen[] =        ">";
-                const PROGMEM char ip_format[] =        "%hhu.%hhu.%hhu.%hhu";
                 const PROGMEM char channel_format[] =   "%hhu";
 #endif
             }
@@ -398,7 +396,7 @@ namespace woodBox {
                     return -3;
                 }
                 char strIp[16];
-                SNPRINTF(strIp, 15, ip_format, _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
+                SNPRINTF(strIp, 15, ip::ip_format, _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
                 _stream->print(at_at);
                 _stream->print(F("+"));
                 _stream->print(at_cipstart);

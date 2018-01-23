@@ -3,15 +3,13 @@
 
 # include "WoodBoxWiFiModule.hpp"
 # include "WoodBoxModule.hpp"
-# include "Capacitor.hpp"
-# include "CommandSetEndPoint.hpp"
-# include "CommandSetWiFi.hpp"
-# include "EInk.hpp"
-# include "ESP8266WiFiCommunicator.hpp"
-# include "GroveChainableLED.hpp"
-# include "LithiumBattery.hpp"
-# include "MQ2.hpp"
-# include "NeoPixel.hpp"
+# include "network_ip_types.hpp"
 # include "wifi_types.hpp"
+# include "GroveChainableLED.hpp"
+# include "ESP8266WiFiCommunicator.hpp"
+
+using woodBox::module::WoodBoxModule;
+using woodBox::module::WoodBoxWiFiModule;
+using woodBox::communication::wifi::ESP8266WiFiCommunicator;
 
 #endif /* WOODBOX_H */

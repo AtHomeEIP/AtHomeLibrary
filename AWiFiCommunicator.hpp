@@ -31,13 +31,13 @@ namespace woodBox {
 
 				    const WiFi_ap &getAccessPoint() const;
 				    const WiFi_client &getConnectionAddresses() const;
-				    const tcp_host &getHost() const;
+				    const ip::tcp_host &getHost() const;
 				    wifi_mode getWiFiMode() const;
 				    //virtual const WiFi_client[] &getConnectedClients() const;
 				
 				    void setAccessPoint(const WiFi_ap &);
 				    void setConnectionAddresses(const WiFi_client &);
-				    void setHost(const tcp_host &);
+				    void setHost(const ip::tcp_host &);
 				    void setWiFiMode(wifi_mode);
 				    void setStreamToChipset(Stream *);
 			    protected:
@@ -45,7 +45,7 @@ namespace woodBox {
 				    Stream		        *_stream;
 				    WiFi_ap		        _ap;
 				    WiFi_client	        _me;
-				    tcp_host	        _host;
+				    ip::tcp_host	    _host;
 				    //WiFi_client	    *_clients;
 		    };
 	    }

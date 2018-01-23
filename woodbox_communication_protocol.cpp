@@ -16,6 +16,13 @@ namespace woodBox {
             const char setWiFi[] = "SetWiFi";
             const char setEndPoint[] = "SetEndPoint";
             const char setProfile[] = "SetProfile";
+
+            const char ssid_key[] = "ssid";
+            const char password_key[] = "password";
+            const char ip_key[] = "ip";
+            const char port_key[] = "port";
+
+
 #else
 # include <avr/pgmspace.h>
             const PROGMEM char end_of_line[] = "\r\n";
@@ -27,6 +34,13 @@ namespace woodBox {
             const PROGMEM char setWiFi[] = "SetWiFi";
             const PROGMEM char setEndPoint[] = "SetEndPoint";
             const PROGMEM char setProfile[] = "SetProfile";
+
+            const PROGMEM char ssid_key[] = "ssid";
+            const PROGMEM char password_key[] = "password";
+            const PROGMEM char ip_key[] = "ip";
+            const PROGMEM char port_key[] = "port";
+
+
 #endif
         }
     }

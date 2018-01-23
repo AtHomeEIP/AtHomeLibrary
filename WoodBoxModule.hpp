@@ -275,15 +275,15 @@ namespace woodBox {
                         if (stream->available()) {
                             String commandName = stream->readStringUntil('\n');
                             commandName.replace('\r', '\0');
-                            if (STRCMP(commandName.c_str(), communication::commands::setProfile)) {
+                            if (!STRCMP(commandName.c_str(), communication::commands::setProfile)) {
                                 // TODO: need to implement set profile command -> set conf of module itself (vendor, serial, ...etc)
                                 stream->println(F("Not implemented yet"));
                             }
-                            else if (STRCMP(commandName.c_str(), communication::commands::enumerate)) {
+                            else if (!STRCMP(commandName.c_str(), communication::commands::enumerate)) {
                                 // TODO: need to implement enumerate command
                                 stream->println(F("Not implemented yet"));
                             }
-                            else if (STRCMP(commandName.c_str(), communication::commands::syncTime)) {
+                            else if (!STRCMP(commandName.c_str(), communication::commands::syncTime)) {
                                 // TODO: need to implement syncTime command
                                 stream->println(F("Not implemented yet"));
                             }
