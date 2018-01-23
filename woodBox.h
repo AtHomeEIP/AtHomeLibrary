@@ -1,7 +1,7 @@
 #ifndef WOODBOX_H
 # define WOODBOX_H
 
-# include "ESP8266WoodBoxModule.hpp"
+# include "WoodBoxWiFiModule.hpp"
 # include "WoodBoxModule.hpp"
 # include "Capacitor.hpp"
 # include "CommandSetEndPoint.hpp"
