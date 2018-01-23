@@ -11,9 +11,8 @@ int freeRam () {
 
 #endif
 
-woodBox::module::WoodBoxModule<uint16_t, 15> *me = woodBox::module::WoodBoxModule<uint16_t, 15>::getInstance();
-woodBox::communication::wifi::ESP8266WiFiCommunicator wifi_com(2, 3);
-woodBox::communication::commands::CommandSetWiFi set_wifi(wifi_com);
+WoodBoxWiFiModule<uint16_t, 15> *me = WoodBoxModule<uint16_t, 15>::getInstance<WoodBoxWiFiModule<uint16_t, 15> >();
+ESP8266WiFiCommunicator wifi_com(2, 3);
 
 const PROGMEM char ssid[] = "ESP01Test";
 const PROGMEM char password[] = "HelloWorld";
@@ -25,13 +24,13 @@ void setup() {
     Serial.println(F("Setup..."));
     Serial.flush();
     wifi_com.setStreamToChipset(&Serial);
-    wifi_com.setWiFiMode(wifi_mode::ACCESS_POINT);
-    WiFi_ap ap;
+    wifi_com.setWiFiMode(woodBox::communication::wifi::wifi_mode::ACCESS_POINT);
+    woodBox::communication::wifi::WiFi_ap ap;
     strcpy_P(ap.ssid, ssid);
     strcpy_P(ap.password, password);
-    ap.norm = wifi_norm::WIFI_N;
+    ap.norm = woodBox::communication::wifi::wifi_norm::WIFI_N;
     ap.channel = 5;
-    ap.band = wifi_frequency_band::TWO_POINT_FOUR_GHZ;
+    ap.band = woodBox::communication::wifi::wifi_frequency_band::TWO_POINT_FOUR_GHZ;
 #ifdef __AVR__
     Serial.println(freeRam());
     Serial.flush();
