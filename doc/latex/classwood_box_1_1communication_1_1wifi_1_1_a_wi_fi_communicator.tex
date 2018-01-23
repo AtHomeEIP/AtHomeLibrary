@@ -3,14 +3,14 @@
 Inheritance diagram for wood\+Box\+:\+:communication\+:\+:wifi\+:\+:A\+Wi\+Fi\+Communicator\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=4.000000cm]{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}
+\includegraphics[height=3.000000cm]{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a9d1dc13ca9243170b04211bef2b86ed2}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a9d1dc13ca9243170b04211bef2b86ed2}} 
-{\bfseries A\+Wi\+Fi\+Communicator} (const \mbox{\hyperlink{structs__wifi__access__point}{Wi\+Fi\+\_\+ap}} $\ast$=nullptr, const \mbox{\hyperlink{structs__wifi__client}{Wi\+Fi\+\_\+client}} $\ast$=nullptr, const wifi\+\_\+mode=S\+T\+A\+T\+I\+ON, Stream $\ast$=nullptr)
+{\bfseries A\+Wi\+Fi\+Communicator} (const \mbox{\hyperlink{structwood_box_1_1communication_1_1wifi_1_1s__wifi__access__point}{Wi\+Fi\+\_\+ap}} $\ast$=nullptr, const \mbox{\hyperlink{structwood_box_1_1communication_1_1wifi_1_1s__wifi__client}{Wi\+Fi\+\_\+client}} $\ast$=nullptr, const wifi\+\_\+mode=S\+T\+A\+T\+I\+ON, Stream $\ast$=nullptr)
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_aef6faae3bf738776f0fb437a45c27883}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_aef6faae3bf738776f0fb437a45c27883}} 
 {\bfseries A\+Wi\+Fi\+Communicator} (const \mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{A\+Wi\+Fi\+Communicator}} \&)=delete
@@ -33,12 +33,6 @@ virtual size\+\_\+t {\bfseries write} (uint8\+\_\+t)=0
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a1c74b8bc27a89604b4b7daa94c0168a6}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a1c74b8bc27a89604b4b7daa94c0168a6}} 
 virtual void {\bfseries flush} ()=0
 \item 
-\mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_ad421ea4ec4a5147a1f32b8726e870472}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_ad421ea4ec4a5147a1f32b8726e870472}} 
-virtual void {\bfseries open} ()=0
-\item 
-\mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a8db4e9ad841d9274c398ed16cd020de4}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a8db4e9ad841d9274c398ed16cd020de4}} 
-virtual void {\bfseries close} ()=0
-\item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a7c4763c1594a4b934e5a39e90b271799}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a7c4763c1594a4b934e5a39e90b271799}} 
 virtual int {\bfseries connect} ()=0
 \item 
@@ -55,31 +49,31 @@ virtual int {\bfseries disconnect\+From\+Host} ()=0
 virtual bool {\bfseries is\+Connected} ()=0
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_abda6749593511b1acc44a999734b9bd6}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_abda6749593511b1acc44a999734b9bd6}} 
-virtual const \mbox{\hyperlink{structs__wifi__access__point}{Wi\+Fi\+\_\+ap}} \& {\bfseries get\+Access\+Point} () const
+const \mbox{\hyperlink{structwood_box_1_1communication_1_1wifi_1_1s__wifi__access__point}{Wi\+Fi\+\_\+ap}} \& {\bfseries get\+Access\+Point} () const
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a9b0669461151786a0c70fbb1c1a07bc7}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a9b0669461151786a0c70fbb1c1a07bc7}} 
-virtual const \mbox{\hyperlink{structs__wifi__client}{Wi\+Fi\+\_\+client}} \& {\bfseries get\+Connection\+Addresses} () const
+const \mbox{\hyperlink{structwood_box_1_1communication_1_1wifi_1_1s__wifi__client}{Wi\+Fi\+\_\+client}} \& {\bfseries get\+Connection\+Addresses} () const
 \item 
-\mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_ad990cbef2501766527a4be9aa129a3ba}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_ad990cbef2501766527a4be9aa129a3ba}} 
-virtual const \mbox{\hyperlink{structs__host}{tcp\+\_\+host}} \& {\bfseries get\+Host} () const
+\mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a6bd3193f145df44c577da0f0e7a8686a}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a6bd3193f145df44c577da0f0e7a8686a}} 
+const \mbox{\hyperlink{structwood_box_1_1communication_1_1ip_1_1s__host}{ip\+::tcp\+\_\+host}} \& {\bfseries get\+Host} () const
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_aa5b3e64e11585cb4ac16e7bd39fe565b}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_aa5b3e64e11585cb4ac16e7bd39fe565b}} 
-virtual wifi\+\_\+mode {\bfseries get\+Wi\+Fi\+Mode} () const
+wifi\+\_\+mode {\bfseries get\+Wi\+Fi\+Mode} () const
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a6987322a622fab72d4a01de99da19491}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a6987322a622fab72d4a01de99da19491}} 
-virtual void {\bfseries set\+Access\+Point} (const \mbox{\hyperlink{structs__wifi__access__point}{Wi\+Fi\+\_\+ap}} \&)
+void {\bfseries set\+Access\+Point} (const \mbox{\hyperlink{structwood_box_1_1communication_1_1wifi_1_1s__wifi__access__point}{Wi\+Fi\+\_\+ap}} \&)
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_ae0e96daf4cbeef3e646cc5af87eaa82d}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_ae0e96daf4cbeef3e646cc5af87eaa82d}} 
-virtual void {\bfseries set\+Connection\+Addresses} (const \mbox{\hyperlink{structs__wifi__client}{Wi\+Fi\+\_\+client}} \&)
+void {\bfseries set\+Connection\+Addresses} (const \mbox{\hyperlink{structwood_box_1_1communication_1_1wifi_1_1s__wifi__client}{Wi\+Fi\+\_\+client}} \&)
 \item 
-\mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a3309e5f8c638dca695f211c73c40637b}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a3309e5f8c638dca695f211c73c40637b}} 
-virtual void {\bfseries set\+Host} (const \mbox{\hyperlink{structs__host}{tcp\+\_\+host}} \&)
+\mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a1bbe3367296c647d6846b3c7d0313261}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a1bbe3367296c647d6846b3c7d0313261}} 
+void {\bfseries set\+Host} (const \mbox{\hyperlink{structwood_box_1_1communication_1_1ip_1_1s__host}{ip\+::tcp\+\_\+host}} \&)
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a813fcffda64d86abfe0316a873f23f54}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a813fcffda64d86abfe0316a873f23f54}} 
-virtual void {\bfseries set\+Wi\+Fi\+Mode} (wifi\+\_\+mode)
+void {\bfseries set\+Wi\+Fi\+Mode} (wifi\+\_\+mode)
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a526d2c9ece9000889fd40d9ab98acbdf}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a526d2c9ece9000889fd40d9ab98acbdf}} 
-virtual void {\bfseries set\+Stream\+To\+Chipset} (Stream $\ast$)
+void {\bfseries set\+Stream\+To\+Chipset} (Stream $\ast$)
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -91,13 +85,13 @@ wifi\+\_\+mode {\bfseries \+\_\+mode}
 Stream $\ast$ {\bfseries \+\_\+stream}
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a9d2cdaede0b5e5040867c3d428dd98f0}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a9d2cdaede0b5e5040867c3d428dd98f0}} 
-\mbox{\hyperlink{structs__wifi__access__point}{Wi\+Fi\+\_\+ap}} {\bfseries \+\_\+ap}
+\mbox{\hyperlink{structwood_box_1_1communication_1_1wifi_1_1s__wifi__access__point}{Wi\+Fi\+\_\+ap}} {\bfseries \+\_\+ap}
 \item 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_afde4ef66d5296fbeeff2e1b333105bec}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_afde4ef66d5296fbeeff2e1b333105bec}} 
-\mbox{\hyperlink{structs__wifi__client}{Wi\+Fi\+\_\+client}} {\bfseries \+\_\+me}
+\mbox{\hyperlink{structwood_box_1_1communication_1_1wifi_1_1s__wifi__client}{Wi\+Fi\+\_\+client}} {\bfseries \+\_\+me}
 \item 
-\mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a1faaa218eefb367d3d24b6ae83bfe09b}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a1faaa218eefb367d3d24b6ae83bfe09b}} 
-\mbox{\hyperlink{structs__host}{tcp\+\_\+host}} {\bfseries \+\_\+host}
+\mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_ace744bc5d2c8f66dcd735029b129dea6}\label{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_ace744bc5d2c8f66dcd735029b129dea6}} 
+\mbox{\hyperlink{structwood_box_1_1communication_1_1ip_1_1s__host}{ip\+::tcp\+\_\+host}} {\bfseries \+\_\+host}
 \end{DoxyCompactItemize}
 
 

@@ -66,6 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classwood_box_1_1sensor_1_1_i_sensor-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -82,17 +83,34 @@ Inheritance diagram for woodBox::sensor::ISensor:</div>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:aa377bda61ed0d4a1d7e1a7bffe459452"><td class="memItemLeft" align="right" valign="top"><a id="aa377bda61ed0d4a1d7e1a7bffe459452"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ISensorScale</b> { <br />
+&#160;&#160;<b>ZERO</b>, 
+<b>ONE</b>, 
+<b>TWO</b>, 
+<b>THREE</b>, 
+<br />
+&#160;&#160;<b>FOUR</b>, 
+<b>FIVE</b>, 
+<b>SIX</b>, 
+<b>SEVEN</b>, 
+<br />
+&#160;&#160;<b>EIGHT</b>, 
+<b>NINE</b>, 
+<b>TEN</b>
+<br />
+ }</td></tr>
+<tr class="separator:aa377bda61ed0d4a1d7e1a7bffe459452"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac772909aea9d8556cdda19841d3bbc40"><td class="memItemLeft" align="right" valign="top"><a id="ac772909aea9d8556cdda19841d3bbc40"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> ()=0</td></tr>
-<tr class="separator:ac772909aea9d8556cdda19841d3bbc40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a801f29792a0cd49bef0c54b346c570ad"><td class="memItemLeft" align="right" valign="top"><a id="a801f29792a0cd49bef0c54b346c570ad"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()=0</td></tr>
-<tr class="separator:a801f29792a0cd49bef0c54b346c570ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9de8041b991b76cc2f6fcc3b6a1bf363"><td class="memItemLeft" align="right" valign="top"><a id="a9de8041b991b76cc2f6fcc3b6a1bf363"></a>
 virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>getSample</b> ()=0</td></tr>
 <tr class="separator:a9de8041b991b76cc2f6fcc3b6a1bf363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb01c2473efc4a823bf5dada0048d2bc"><td class="memItemLeft" align="right" valign="top"><a id="afb01c2473efc4a823bf5dada0048d2bc"></a>
+virtual ISensorScale&#160;</td><td class="memItemRight" valign="bottom"><b>getEstimate</b> ()=0</td></tr>
+<tr class="separator:afb01c2473efc4a823bf5dada0048d2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="_i_sensor_8hpp_source.html">ISensor.hpp</a></li>
