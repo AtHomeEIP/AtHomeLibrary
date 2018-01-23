@@ -35,7 +35,8 @@ namespace woodBox {
 
             public:
                 typedef void (*customCallback)();
-                typedef void (*WoodBoxCommandPlugin)(const String &, Stream *);
+                typedef void (*WoodBoxCommandPlugin)(const String &, Stream &);
+                typedef void (*WoodBoxStoragePlugin)(size_t, storage::IStorage &);
 
                 template <typename U = WoodBoxModule>
                 static U *getInstance() {
@@ -121,6 +122,14 @@ namespace woodBox {
                     _communicationPlugin = plugin;
                 }
 
+                void setOnBackupPlugin(WoodBoxStoragePlugin plugin) {
+                    _onBackupPlugin = plugin;
+                }
+
+                void setOnRestorePlugin(WoodBoxStoragePlugin plugin) {
+                    _onRestorePlugin = plugin;
+                }
+
                 moduleType          getType() const { return _type; }
 
                 const moduleVendor &getVendor() const { return _vendor; }
@@ -189,7 +198,9 @@ namespace woodBox {
                     _communicationInterval(TASK_MILLISECOND),
                     _type(UNKNOWN),
                     _nbMeasures(0),
-                    _communicationPlugin(nullptr) {
+                    _communicationPlugin(nullptr),
+                    _onBackupPlugin(nullptr),
+                    _onRestorePlugin(nullptr) {
                     memset(_vendor, 0, sizeof(moduleVendor));
                     memset(_serial, 0, sizeof(moduleSerial));
                     memset(_measures, 0, sizeof(T) * n);
@@ -213,6 +224,9 @@ namespace woodBox {
                         _storage->write(0, reinterpret_cast<const void *>(_vendor), sizeof(moduleVendor));
                         _storage->write(sizeof(moduleVendor), reinterpret_cast<const void *>(_serial), sizeof(moduleSerial));
                         _storage->write(sizeof(moduleVendor) + sizeof(moduleSerial), reinterpret_cast<const void *>(&_type), sizeof(moduleType));
+                        if (_onBackupPlugin != nullptr) {
+                            _onBackupPlugin(sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType), *_storage);
+                        }
                     }
                 }
                 void        onRestoreFromStorage() {
@@ -220,6 +234,9 @@ namespace woodBox {
                         _storage->read(0, reinterpret_cast<void *>(_vendor), sizeof(moduleVendor));
                         _storage->read(sizeof(moduleVendor), reinterpret_cast<void *>(_serial), sizeof(moduleSerial));
                         _storage->read(sizeof(moduleVendor) + sizeof(moduleSerial), reinterpret_cast<void *>(&_type), sizeof(moduleType));
+                        if (_onRestorePlugin != nullptr) {
+                            _onRestorePlugin(sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType), *_storage);
+                        }
                     }
                 }
                 void        onSampleSensor() {
@@ -271,7 +288,7 @@ namespace woodBox {
                                 stream->println(F("Not implemented yet"));
                             }
                             else if (_communicationPlugin != nullptr) {
-                                _communicationPlugin(commandName, stream);
+                                _communicationPlugin(commandName, *stream);
                             }
                         }
                     }
@@ -284,6 +301,8 @@ namespace woodBox {
                 moduleType                  _type;
                 size_t                      _nbMeasures;
                 WoodBoxCommandPlugin        _communicationPlugin;
+                WoodBoxStoragePlugin        _onBackupPlugin;
+                WoodBoxStoragePlugin        _onRestorePlugin;
                 moduleVendor                _vendor;
                 moduleSerial                _serial;
                 T                           _measures[n];
