@@ -37,12 +37,14 @@ namespace woodBox {
                 typedef void (*customCallback)();
                 typedef void (*WoodBoxCommandPlugin)(const String &, Stream *);
 
-                static WoodBoxModule *getInstance() {
+                template <typename U = WoodBoxModule>
+                static U *getInstance() {
                     if (_instance == nullptr) {
-                        _instance = new WoodBoxModule<T, n>();
-                        return _instance;
+                        U *ptr = new U();
+                        _instance = reinterpret_cast<void *>(ptr);
+                        return ptr;
                     }
-                    return _instance;
+                    return reinterpret_cast<U *>(_instance);
                 }
 
                 void setScheduler(Scheduler &scheduler) {
@@ -145,8 +147,9 @@ namespace woodBox {
 
             private:
                 static void _onSampleSensor() {
-                    if (_instance != nullptr) {
-                        _instance->onSampleSensor();
+                    WoodBoxModule<T, n> *instance = getInstance();
+                    if (instance != nullptr) {
+                        instance->onSampleSensor();
                     }
                 }
                 /* static void _onUpdateDisplay() {
@@ -155,13 +158,15 @@ namespace woodBox {
                     }
                 } */
                 static void _onCommunicate() {
-                    if (_instance != nullptr) {
-                        _instance->onCommunicate();
+                    WoodBoxModule<T, n> *instance = getInstance();
+                    if (instance != nullptr) {
+                        instance->onCommunicate();
                     }
                 }
                 static void _uploadData() {
-                    if (_instance != nullptr) {
-                        _instance->uploadData();
+                    WoodBoxModule<T, n> *instance = getInstance();
+                    if (instance != nullptr) {
+                        instance->uploadData();
                     }
                 }
 
@@ -287,11 +292,11 @@ namespace woodBox {
                 Task                        _sensorTask;
                 //Task                        _displayTask;
                 Task                        _communicationTask;
-                static WoodBoxModule<T, n> *_instance;
+                static void                 *_instance;
         };
 
         template <typename T, size_t n>
-        WoodBoxModule<T, n> *WoodBoxModule<T, n>::_instance = nullptr;
+        void *WoodBoxModule<T, n>::_instance = nullptr;
     }
 }
 #endif /* WOODBOXMODULE_HPP */
