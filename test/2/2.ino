@@ -24,7 +24,9 @@ void setup() {
   module->setStreams(streams);
   module->setSensor(&sensor);
   module->setSensorExecutionInterval(1000);
-  module->setCommunicationExecutionInterval(1);
+  module->setCommunicationExecutionInterval(10);
+  module->setUploadDataExecutionInterval(1000);
+  module->setup();
 #ifdef __AVR__
   module->setStorage(&storage);
   Serial.println(freeRam());
