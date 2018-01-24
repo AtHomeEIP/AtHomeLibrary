@@ -198,6 +198,7 @@ namespace woodBox {
                     _communicationInterval(TASK_MILLISECOND),
                     _type(UNKNOWN),
                     _nbMeasures(0),
+                    _refTimestamp(0),
                     _communicationPlugin(nullptr),
                     _onBackupPlugin(nullptr),
                     _onRestorePlugin(nullptr) {
@@ -211,14 +212,65 @@ namespace woodBox {
                     _communicationTask.set(_communicationInterval, TASK_FOREVER, &WoodBoxModule::_onCommunicate);
                     setup();
                 }
-                void        uploadData() {
-                    //Todo: Need to implement it
+
+                template <typename U>
+                void        broadcast(const U &data) {
+                    if (_streams == nullptr) {
+                        return;
+                    }
+                    for (Stream *stream = *_streams; stream != nullptr; stream++) {
+                        stream->print(data);
+                    }
                 }
-                void        onReset() {}
-                void        onStart() {}
-                void        onStop() {}
-                void        onPause() {}
-                void        onResume() {}
+
+                template <typename U>
+                void        broadcastln(const U &data) {
+                    broadcast(data);
+                    broadcast(communication::commands::end_of_line);
+                }
+
+                void        uploadData() {
+                    // Forward version of uploadData
+                    // Todo: implement a more resource efficient and generic version
+                    broadcastln(communication::commands::uploadData);
+                    broadcastln(communication::commands::part_separator);
+                    broadcast(F("{\"Serial\":\""));
+                    broadcast(_serial);
+                    broadcast(F("\",\"Data\":["));
+                    for (size_t i = 0; i < n; i++) {
+                        broadcast(F("{\"Measure\":\""));
+                        broadcast(_measures[i]);
+                        broadcast(F("\",\"Timestamp\":\""));
+                        broadcast(_timestamps[i]);
+                        broadcast(F("\"}"));
+                        if (i < (n - 1)) {
+                            broadcast(F(","));
+                        }
+                    }
+                    broadcastln(F("]}"));
+                    broadcast(communication::commands::end_of_command);
+                }
+
+                void        onReset() {
+                    // Todo: need to implement
+                }
+
+                void        onStart() {
+                    // Todo: need to implement
+                }
+
+                void        onStop() {
+                    // Todo: need to implement
+                }
+
+                void        onPause() {
+                    // Todo: need to implement
+                }
+
+                void        onResume() {
+                    // Todo: need to implement
+                }
+
                 void        onBackupOnStorage() {
                     if (_storage != nullptr) {
                         _storage->write(0, reinterpret_cast<const void *>(_vendor), sizeof(moduleVendor));
@@ -229,6 +281,7 @@ namespace woodBox {
                         }
                     }
                 }
+
                 void        onRestoreFromStorage() {
                     if (_storage != nullptr) {
                         _storage->read(0, reinterpret_cast<void *>(_vendor), sizeof(moduleVendor));
@@ -239,6 +292,7 @@ namespace woodBox {
                         }
                     }
                 }
+
                 void        onSampleSensor() {
                     if (_sensor != nullptr && _nbMeasures < n) {
                         uint8_t* rawData = _sensor->getSample();
@@ -248,10 +302,12 @@ namespace woodBox {
                         else {
                             memset(&(_measures[_nbMeasures]), 0, sizeof(T));
                         }
+                        _timestamps[_nbMeasures] = _refTimestamp + millis();
                         _nbMeasures++;
                         onUpdateDisplay();
                     }
                 }
+
                 void        onUpdateDisplay() {
                     if (_display == nullptr || _sensor == nullptr) {
                         return;
@@ -267,6 +323,7 @@ namespace woodBox {
                     display->setColor(color);
                     display->update();
                 }
+
                 void        onCommunicate() {
                     if (_streams == nullptr) {
                         return;
@@ -300,6 +357,7 @@ namespace woodBox {
                 unsigned long               _communicationInterval;
                 moduleType                  _type;
                 size_t                      _nbMeasures;
+                timestamp                   _refTimestamp;
                 WoodBoxCommandPlugin        _communicationPlugin;
                 WoodBoxStoragePlugin        _onBackupPlugin;
                 WoodBoxStoragePlugin        _onRestorePlugin;

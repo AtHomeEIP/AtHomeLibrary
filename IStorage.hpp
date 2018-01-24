@@ -1,7 +1,7 @@
 #ifndef ISTORAGE_HPP
 # define ISTORAGE_HPP
 
-# include <stdint.h>
+# include <stddef.h>
 
 namespace woodBox {
     namespace storage {

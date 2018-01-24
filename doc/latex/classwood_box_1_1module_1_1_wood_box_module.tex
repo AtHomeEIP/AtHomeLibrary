@@ -1,0 +1,165 @@
+\hypertarget{classwood_box_1_1module_1_1_wood_box_module}{}\section{wood\+Box\+:\+:module\+:\+:Wood\+Box\+Module$<$ T, n $>$ Class Template Reference}
+\label{classwood_box_1_1module_1_1_wood_box_module}\index{wood\+Box\+::module\+::\+Wood\+Box\+Module$<$ T, n $>$@{wood\+Box\+::module\+::\+Wood\+Box\+Module$<$ T, n $>$}}
+Inheritance diagram for wood\+Box\+:\+:module\+:\+:Wood\+Box\+Module$<$ T, n $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classwood_box_1_1module_1_1_wood_box_module}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_af74476c8a785de7fe587c4fb68435673}\label{classwood_box_1_1module_1_1_wood_box_module_af74476c8a785de7fe587c4fb68435673}} 
+enum {\bfseries module\+Type} \{ \newline
+{\bfseries U\+N\+K\+N\+O\+WN}, 
+{\bfseries A\+I\+R\+\_\+\+Q\+U\+A\+L\+I\+TY}, 
+{\bfseries T\+E\+M\+P\+E\+R\+A\+T\+U\+RE}, 
+{\bfseries H\+U\+M\+I\+D\+I\+TY}, 
+\newline
+{\bfseries L\+U\+M\+I\+N\+O\+S\+I\+TY}, 
+{\bfseries N\+O\+I\+SE}, 
+{\bfseries C\+A\+R\+B\+ON}, 
+{\bfseries C\+A\+R\+B\+O\+N\+\_\+\+M\+O\+N\+O\+X\+Y\+DE}, 
+\newline
+{\bfseries E\+L\+E\+C\+T\+R\+O\+M\+A\+G\+N\+E\+T\+IC}, 
+{\bfseries R\+A\+D\+I\+O\+A\+C\+T\+I\+V\+I\+TY}
+ \}
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_adf5d59bae2980ff138284d0fa885df19}\label{classwood_box_1_1module_1_1_wood_box_module_adf5d59bae2980ff138284d0fa885df19}} 
+typedef char {\bfseries module\+Vendor}\mbox{[}33\mbox{]}
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a3a6503bbd5147a06ba50081f97177b46}\label{classwood_box_1_1module_1_1_wood_box_module_a3a6503bbd5147a06ba50081f97177b46}} 
+typedef char {\bfseries module\+Serial}\mbox{[}33\mbox{]}
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab03bf835ec02656605c3c0df0188dc28}\label{classwood_box_1_1module_1_1_wood_box_module_ab03bf835ec02656605c3c0df0188dc28}} 
+typedef unsigned long {\bfseries timestamp}
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}\label{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}} 
+typedef void($\ast$ {\bfseries custom\+Callback}) ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab0e08bb82f5585fd357ce1881855d0e2}\label{classwood_box_1_1module_1_1_wood_box_module_ab0e08bb82f5585fd357ce1881855d0e2}} 
+typedef void($\ast$ {\bfseries Wood\+Box\+Command\+Plugin}) (const String \&, Stream \&)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}\label{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}} 
+typedef void($\ast$ {\bfseries Wood\+Box\+Storage\+Plugin}) (size\+\_\+t, \mbox{\hyperlink{classwood_box_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} \&)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ade3d82ff1e508da2ad37185c208f9333}\label{classwood_box_1_1module_1_1_wood_box_module_ade3d82ff1e508da2ad37185c208f9333}} 
+{\bfseries Wood\+Box\+Module} (const \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{Wood\+Box\+Module}} \&)=delete
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_acdae18f8e9e685cdbce5a4fc99956ab3}\label{classwood_box_1_1module_1_1_wood_box_module_acdae18f8e9e685cdbce5a4fc99956ab3}} 
+\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{Wood\+Box\+Module}} \& {\bfseries operator=} (const \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{Wood\+Box\+Module}} \&)=delete
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a71289d760332ef4945ceb4b95f2e616e}\label{classwood_box_1_1module_1_1_wood_box_module_a71289d760332ef4945ceb4b95f2e616e}} 
+void {\bfseries set\+Scheduler} (Scheduler \&scheduler)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a08e0f7b37441c9fa9ba51ab1da21e1c0}\label{classwood_box_1_1module_1_1_wood_box_module_a08e0f7b37441c9fa9ba51ab1da21e1c0}} 
+Scheduler $\ast$ {\bfseries get\+Scheduler} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ac65e58ab2338b1e3f57e4ce5d9e70c6c}\label{classwood_box_1_1module_1_1_wood_box_module_ac65e58ab2338b1e3f57e4ce5d9e70c6c}} 
+void {\bfseries run} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_abbc32e89fe1ace40f447539237c0b713}\label{classwood_box_1_1module_1_1_wood_box_module_abbc32e89fe1ace40f447539237c0b713}} 
+void {\bfseries stop} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_aa5e44c8631ee30e85c16ffc0454c8210}\label{classwood_box_1_1module_1_1_wood_box_module_aa5e44c8631ee30e85c16ffc0454c8210}} 
+void {\bfseries set\+Sensor\+Execution\+Interval} (unsigned long ms)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a0242f49765460d7c1e0528260ba1c26e}\label{classwood_box_1_1module_1_1_wood_box_module_a0242f49765460d7c1e0528260ba1c26e}} 
+void {\bfseries set\+Communication\+Execution\+Interval} (unsigned long ms)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a4d5b8fd2ec5aeacb5704435bb6d961e7}\label{classwood_box_1_1module_1_1_wood_box_module_a4d5b8fd2ec5aeacb5704435bb6d961e7}} 
+unsigned long {\bfseries get\+Sensor\+Execution\+Interval} () const
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ad4a7b447a617d9c6908ef624cfd2cab4}\label{classwood_box_1_1module_1_1_wood_box_module_ad4a7b447a617d9c6908ef624cfd2cab4}} 
+unsigned long {\bfseries get\+Communication\+Execution\+Interval} () const
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a5841176b2161324d7e72045e69454c62}\label{classwood_box_1_1module_1_1_wood_box_module_a5841176b2161324d7e72045e69454c62}} 
+void {\bfseries set\+Sensor\+Execution\+Callback} (custom\+Callback f)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_adbdb8028cfb897d3323876be6d117db7}\label{classwood_box_1_1module_1_1_wood_box_module_adbdb8028cfb897d3323876be6d117db7}} 
+void {\bfseries set\+Communication\+Execution\+Callback} (custom\+Callback f)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ad40df0835ac2ffcec83cfb96d12f9079}\label{classwood_box_1_1module_1_1_wood_box_module_ad40df0835ac2ffcec83cfb96d12f9079}} 
+void {\bfseries set\+Command\+Plugin} (Wood\+Box\+Command\+Plugin plugin)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a94cfcf71ecd1d715d14752001fbc7b6a}\label{classwood_box_1_1module_1_1_wood_box_module_a94cfcf71ecd1d715d14752001fbc7b6a}} 
+void {\bfseries set\+On\+Backup\+Plugin} (Wood\+Box\+Storage\+Plugin plugin)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a85d4efff4708d41e3097479ab364faac}\label{classwood_box_1_1module_1_1_wood_box_module_a85d4efff4708d41e3097479ab364faac}} 
+void {\bfseries set\+On\+Restore\+Plugin} (Wood\+Box\+Storage\+Plugin plugin)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab2507312ea013ea5c95b8e1731ddc81d}\label{classwood_box_1_1module_1_1_wood_box_module_ab2507312ea013ea5c95b8e1731ddc81d}} 
+module\+Type {\bfseries get\+Type} () const
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a2d3f18ce3df3d5fe3b6230fce2199958}\label{classwood_box_1_1module_1_1_wood_box_module_a2d3f18ce3df3d5fe3b6230fce2199958}} 
+const module\+Vendor \& {\bfseries get\+Vendor} () const
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_aa8fc11fbebc7904f144bc40b7654a215}\label{classwood_box_1_1module_1_1_wood_box_module_aa8fc11fbebc7904f144bc40b7654a215}} 
+const module\+Serial \& {\bfseries get\+Serial} () const
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a807efbd90ccdd796bfc62c15bfbc81ab}\label{classwood_box_1_1module_1_1_wood_box_module_a807efbd90ccdd796bfc62c15bfbc81ab}} 
+void {\bfseries set\+Type} (module\+Type type)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_af19696ed5702e009a584065892ed1501}\label{classwood_box_1_1module_1_1_wood_box_module_af19696ed5702e009a584065892ed1501}} 
+void {\bfseries set\+Vendor} (const module\+Vendor \&vendor)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_affcbb54be4585637a88aade3e29b8a93}\label{classwood_box_1_1module_1_1_wood_box_module_affcbb54be4585637a88aade3e29b8a93}} 
+void {\bfseries set\+Serial} (const module\+Serial \&serial)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a3f13bd3a6318ddf2a7db84f86b198a49}\label{classwood_box_1_1module_1_1_wood_box_module_a3f13bd3a6318ddf2a7db84f86b198a49}} 
+{\footnotesize template$<$typename U  = Wood\+Box\+Module$>$ }\\static U $\ast$ {\bfseries get\+Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ac481cbb3ee83f192218a5943c59d74fe}\label{classwood_box_1_1module_1_1_wood_box_module_ac481cbb3ee83f192218a5943c59d74fe}} 
+{\footnotesize template$<$typename U $>$ }\\void {\bfseries broadcast} (const U \&data)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a5329c737b0a102851782b5d2a6019bc8}\label{classwood_box_1_1module_1_1_wood_box_module_a5329c737b0a102851782b5d2a6019bc8}} 
+{\footnotesize template$<$typename U $>$ }\\void {\bfseries broadcastln} (const U \&data)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a4fa136e3e3f29c71d12a8163b4c5a765}\label{classwood_box_1_1module_1_1_wood_box_module_a4fa136e3e3f29c71d12a8163b4c5a765}} 
+void {\bfseries upload\+Data} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a5e6a48a192f53fa5d739ec40153e3af4}\label{classwood_box_1_1module_1_1_wood_box_module_a5e6a48a192f53fa5d739ec40153e3af4}} 
+void {\bfseries on\+Reset} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a96620d9bbbb5ad60347aac340dee6892}\label{classwood_box_1_1module_1_1_wood_box_module_a96620d9bbbb5ad60347aac340dee6892}} 
+void {\bfseries on\+Start} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a5897df7845ffc3b9d0ec8394e10a2ff2}\label{classwood_box_1_1module_1_1_wood_box_module_a5897df7845ffc3b9d0ec8394e10a2ff2}} 
+void {\bfseries on\+Stop} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a55bfd3c23c7be2b757db22b3db7d1bc5}\label{classwood_box_1_1module_1_1_wood_box_module_a55bfd3c23c7be2b757db22b3db7d1bc5}} 
+void {\bfseries on\+Pause} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ac6c8420f517a8ce3acf98ceda5827bac}\label{classwood_box_1_1module_1_1_wood_box_module_ac6c8420f517a8ce3acf98ceda5827bac}} 
+void {\bfseries on\+Resume} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a28c9b89bc3429d6e78fa38698c78d553}\label{classwood_box_1_1module_1_1_wood_box_module_a28c9b89bc3429d6e78fa38698c78d553}} 
+void {\bfseries on\+Backup\+On\+Storage} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a89395caa73cadc63c576931b45400c2d}\label{classwood_box_1_1module_1_1_wood_box_module_a89395caa73cadc63c576931b45400c2d}} 
+void {\bfseries on\+Restore\+From\+Storage} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a227e8b23e8435f622f4d59eb6847e98b}\label{classwood_box_1_1module_1_1_wood_box_module_a227e8b23e8435f622f4d59eb6847e98b}} 
+void {\bfseries on\+Sample\+Sensor} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a1461bd1a53529065541c87fc03a28f57}\label{classwood_box_1_1module_1_1_wood_box_module_a1461bd1a53529065541c87fc03a28f57}} 
+void {\bfseries on\+Update\+Display} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_acacb4ac748c70bd1f172d9a87e07dfbf}\label{classwood_box_1_1module_1_1_wood_box_module_acacb4ac748c70bd1f172d9a87e07dfbf}} 
+void {\bfseries on\+Communicate} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Wood\+Box\+Module.\+hpp\end{DoxyCompactItemize}
