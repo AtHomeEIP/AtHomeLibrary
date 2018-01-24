@@ -48,24 +48,44 @@ namespace woodBox {
                     return reinterpret_cast<U *>(_instance);
                 }
 
-                void setScheduler(Scheduler &scheduler) {
+                /*void setScheduler(Scheduler &scheduler) {
                     if (_scheduler != nullptr) {
-                        _scheduler->deleteTask(_sensorTask);
-                        //_scheduler->deleteTask(_displayTask);
-                        _scheduler->deleteTask(_communicationTask);
+                        _scheduler.deleteTask(_sensorTask);
+                        //_scheduler.deleteTask(_displayTask);
+                        _scheduler.deleteTask(_communicationTask);
+                        _scheduler.deleteTask(_uploadDataTask);
                     }
                     _scheduler = &scheduler;
-                    _scheduler->addTask(_sensorTask);
-                    //_scheduler->addTask(_displayTask);
-                    _scheduler->addTask(_communicationTask);
-                }
+                    _scheduler.addTask(_sensorTask);
+                    //_scheduler.addTask(_displayTask);
+                    _scheduler.addTask(_communicationTask);
+                    _scheduler.addTask(_uploadDataTask);
+                    _sensorTask.enableIfNot();
+                    _communicationTask.enableIfNot();
+                    _uploadDataTask.enableIfNot();
+                }*/
 
-                Scheduler *getScheduler() {
+                Scheduler &getScheduler() {
                     return _scheduler;
                 }
 
+                void setup() {
+                    onRestoreFromStorage();
+                    onStart();
+                    _sensorTask.set(_sensorInterval, TASK_FOREVER, &WoodBoxModule::_onSampleSensor);
+                    //_displayTask.set(_displayInterval, TASK_FOREVER, &WoodBoxModule::_onUpdateDisplay);
+                    _communicationTask.set(_communicationInterval, TASK_FOREVER, &WoodBoxModule::_onCommunicate);
+                    _uploadDataTask.set(_uploadDataInterval, TASK_FOREVER, &WoodBoxModule::_uploadData);
+                    _scheduler.addTask(_sensorTask);
+                    _scheduler.addTask(_communicationTask);
+                    _scheduler.addTask(_uploadDataTask);
+                    _sensorTask.enableIfNot();
+                    _communicationTask.enableIfNot();
+                    _uploadDataTask.enableIfNot();
+                }
+
                 void run() {
-                    _scheduler->execute();
+                    _scheduler.execute();
                 }
 
                 void stop() {
@@ -94,6 +114,13 @@ namespace woodBox {
                     }
                 }
 
+                void setUploadDataExecutionInterval(unsigned long ms) {
+                    if (ms && ms != _uploadDataInterval) {
+                        _uploadDataInterval = ms;
+                        _uploadDataTask.setInterval(_uploadDataInterval * TASK_MILLISECOND);
+                    }
+                }
+
                 unsigned long getSensorExecutionInterval() const {
                     return _sensorInterval;
                 }
@@ -106,6 +133,10 @@ namespace woodBox {
                     return _communicationInterval;
                 }
 
+                unsigned long getUploadDataExecutionInterval() const {
+                    return _uploadDataInterval;
+                }
+
                 void setSensorExecutionCallback(customCallback f) {
                     _sensorTask.setCallback((f == nullptr) ? &WoodBoxModule::_onSampleSensor : f);
                 }
@@ -116,6 +147,10 @@ namespace woodBox {
 
                 void setCommunicationExecutionCallback(customCallback f) {
                     _communicationTask.setCallback((f == nullptr) ? &WoodBoxModule::_onCommunicate : f);
+                }
+
+                void setUploadDataExecutionCallback(customCallback f) {
+                    _uploadDataTask.setCallback((f == nullptr) ? &WoodBoxModule::_uploadData() : f);
                 }
 
                 void setCommandPlugin(WoodBoxCommandPlugin plugin) {
@@ -156,7 +191,7 @@ namespace woodBox {
 
             private:
                 static void _onSampleSensor() {
-                    WoodBoxModule<T, n> *instance = getInstance();
+                    WoodBoxModule *instance = getInstance();
                     if (instance != nullptr) {
                         instance->onSampleSensor();
                     }
@@ -167,35 +202,26 @@ namespace woodBox {
                     }
                 } */
                 static void _onCommunicate() {
-                    WoodBoxModule<T, n> *instance = getInstance();
+                    WoodBoxModule *instance = getInstance();
                     if (instance != nullptr) {
                         instance->onCommunicate();
                     }
                 }
                 static void _uploadData() {
-                    WoodBoxModule<T, n> *instance = getInstance();
+                    WoodBoxModule *instance = getInstance();
                     if (instance != nullptr) {
                         instance->uploadData();
                     }
-                }
-
-                void setup() {
-                    onRestoreFromStorage();
-                    onStart();
-                    _sensorTask.enableIfNot();
-                    //_displayTask.enableIfNot();
-                    _communicationTask.enableIfNot();
-                    _uploadDataTask.enableIfNot();
                 }
 
             protected:
 
                 WoodBoxModule():
                     ABaseModule(),
-                    _scheduler(nullptr),
                     _sensorInterval(TASK_SECOND),
                     //_displayInterval(TASK_SECOND),
-                    _communicationInterval(TASK_MILLISECOND),
+                    _communicationInterval(TASK_MILLISECOND * 10),
+                    _uploadDataInterval(TASK_SECOND * 15),
                     _type(UNKNOWN),
                     _nbMeasures(0),
                     _refTimestamp(0),
@@ -206,11 +232,6 @@ namespace woodBox {
                     memset(_serial, 0, sizeof(moduleSerial));
                     memset(_measures, 0, sizeof(T) * n);
                     memset(_timestamps, 0, sizeof(T) * n);
-                    _uploadDataTask.set(TASK_SECOND * 30, TASK_FOREVER, &WoodBoxModule::_uploadData);
-                    _sensorTask.set(_sensorInterval, TASK_FOREVER, &WoodBoxModule::_onSampleSensor);
-                    //_displayTask.set(_displayInterval, TASK_FOREVER, &WoodBoxModule::_onUpdateDisplay);
-                    _communicationTask.set(_communicationInterval, TASK_FOREVER, &WoodBoxModule::_onCommunicate);
-                    setup();
                 }
 
                 template <typename U>
@@ -218,8 +239,8 @@ namespace woodBox {
                     if (_streams == nullptr) {
                         return;
                     }
-                    for (Stream *stream = *_streams; stream != nullptr; stream++) {
-                        stream->print(data);
+                    for (size_t i = 0; _streams[i] != nullptr; i++) {
+                        _streams[i]->print(data);
                     }
                 }
 
@@ -229,6 +250,7 @@ namespace woodBox {
                     broadcast(communication::commands::end_of_line);
                 }
 
+            public:
                 void        uploadData() {
                     // Forward version of uploadData
                     // Todo: implement a more resource efficient and generic version
@@ -237,7 +259,7 @@ namespace woodBox {
                     broadcast(F("{\"Serial\":\""));
                     broadcast(_serial);
                     broadcast(F("\",\"Data\":["));
-                    for (size_t i = 0; i < n; i++) {
+                    for (size_t i = 0; i <= _nbMeasures; i++) {
                         broadcast(F("{\"Measure\":\""));
                         broadcast(_measures[i]);
                         broadcast(F("\",\"Timestamp\":\""));
@@ -249,7 +271,9 @@ namespace woodBox {
                     }
                     broadcastln(F("]}"));
                     broadcast(communication::commands::end_of_command);
+                    _nbMeasures = 0;
                 }
+            protected:
 
                 void        onReset() {
                     // Todo: need to implement
@@ -328,39 +352,49 @@ namespace woodBox {
                     if (_streams == nullptr) {
                         return;
                     }
-                    for (Stream *stream = *_streams; stream != nullptr; stream++) {
-                        if (stream->available()) {
-                            String commandName = stream->readStringUntil('\n');
+                    for (size_t i = 0; _streams[i] != nullptr; i++) {
+                        if (_streams[i]->available()) {
+                            String commandName = _streams[i]->readStringUntil('\n');
                             commandName.replace('\r', '\0');
                             if (!STRCMP(commandName.c_str(), communication::commands::setProfile)) {
                                 // TODO: need to implement set profile command -> set conf of module itself (vendor, serial, ...etc)
-                                stream->println(F("Not implemented yet"));
+                                _streams[i]->println(F("Not implemented yet"));
                             }
                             else if (!STRCMP(commandName.c_str(), communication::commands::enumerate)) {
                                 // TODO: need to implement enumerate command
-                                stream->println(F("Not implemented yet"));
+                                _streams[i]->println(F("Not implemented yet"));
                             }
                             else if (!STRCMP(commandName.c_str(), communication::commands::syncTime)) {
                                 // TODO: need to implement syncTime command
-                                stream->println(F("Not implemented yet"));
+                                _streams[i]->println(F("Not implemented yet"));
                             }
                             else if (_communicationPlugin != nullptr) {
-                                _communicationPlugin(commandName, *stream);
+                                _communicationPlugin(commandName, *_streams[i]);
                             }
                         }
                     }
                 }
+
+                void        flushStreams() {
+                    if (_streams == nullptr) {
+                        return;
+                    }
+                    for (size_t i = 0; _streams[i] != nullptr; i++) {
+                        _streams[i]->flush();
+                    }
+                }
             private:
-                Scheduler                   *_scheduler;
                 unsigned long               _sensorInterval;
                 //unsigned long               _displayInterval;
                 unsigned long               _communicationInterval;
+                unsigned long               _uploadDataInterval;
                 moduleType                  _type;
                 size_t                      _nbMeasures;
                 timestamp                   _refTimestamp;
                 WoodBoxCommandPlugin        _communicationPlugin;
                 WoodBoxStoragePlugin        _onBackupPlugin;
                 WoodBoxStoragePlugin        _onRestorePlugin;
+                Scheduler                   _scheduler;
                 moduleVendor                _vendor;
                 moduleSerial                _serial;
                 T                           _measures[n];
