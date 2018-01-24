@@ -72,6 +72,8 @@ $(function() {
 <div class="title">woodBox::display::IDisplay Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_i_display_8hpp_source.html">IDisplay.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for woodBox::display::IDisplay:</div>
 <div class="dyncontent">
@@ -84,13 +86,70 @@ Inheritance diagram for woodBox::display::IDisplay:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7030f0768c1ef15ce936a259406168dc"><td class="memItemLeft" align="right" valign="top"><a id="a7030f0768c1ef15ce936a259406168dc"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> ()=0</td></tr>
+<tr class="memitem:a7030f0768c1ef15ce936a259406168dc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1display_1_1_i_display.html#a7030f0768c1ef15ce936a259406168dc">clear</a> ()=0</td></tr>
 <tr class="separator:a7030f0768c1ef15ce936a259406168dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8c0811b8b807ce119a06c7806004de7"><td class="memItemLeft" align="right" valign="top"><a id="ad8c0811b8b807ce119a06c7806004de7"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()=0</td></tr>
+<tr class="memitem:ad8c0811b8b807ce119a06c7806004de7"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1display_1_1_i_display.html#ad8c0811b8b807ce119a06c7806004de7">update</a> ()=0</td></tr>
 <tr class="separator:ad8c0811b8b807ce119a06c7806004de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Interface used to control any kind of display. As the content displayed can change from on display to another (text, color, pixels, ...etc), it has a very few common methods. Unfortunately, embedded platforms tends to not have RTTI support (no dynamic_cast or typeof), so user will have to manage the use of derived interfaces / classes by himself </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7030f0768c1ef15ce936a259406168dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7030f0768c1ef15ce936a259406168dc">&#9670;&nbsp;</a></span>clear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void woodBox::display::IDisplay::clear </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Remove display content </p>
+
+<p>Implemented in <a class="el" href="classwood_box_1_1display_1_1_a_r_g_b_led.html#a01eeaee1bbb439e81f5f9bc536c04df7">woodBox::display::ARGBLed</a>.</p>
+
+</div>
+</div>
+<a id="ad8c0811b8b807ce119a06c7806004de7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8c0811b8b807ce119a06c7806004de7">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void woodBox::display::IDisplay::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Update display content </p>
+
+<p>Implemented in <a class="el" href="classwood_box_1_1display_1_1_a_r_g_b_led.html#ab71f321d91e931f95b96d1f492a9454d">woodBox::display::ARGBLed</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="_i_display_8hpp_source.html">IDisplay.hpp</a></li>
 </ul>

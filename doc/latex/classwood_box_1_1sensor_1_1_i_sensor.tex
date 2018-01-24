@@ -1,5 +1,9 @@
 \hypertarget{classwood_box_1_1sensor_1_1_i_sensor}{}\section{wood\+Box\+:\+:sensor\+:\+:I\+Sensor Class Reference}
 \label{classwood_box_1_1sensor_1_1_i_sensor}\index{wood\+Box\+::sensor\+::\+I\+Sensor@{wood\+Box\+::sensor\+::\+I\+Sensor}}
+
+
+{\ttfamily \#include $<$I\+Sensor.\+hpp$>$}
+
 Inheritance diagram for wood\+Box\+:\+:sensor\+:\+:I\+Sensor\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,8 +13,7 @@ Inheritance diagram for wood\+Box\+:\+:sensor\+:\+:I\+Sensor\+:\begin{figure}[H]
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classwood_box_1_1sensor_1_1_i_sensor_aa377bda61ed0d4a1d7e1a7bffe459452}\label{classwood_box_1_1sensor_1_1_i_sensor_aa377bda61ed0d4a1d7e1a7bffe459452}} 
-enum {\bfseries I\+Sensor\+Scale} \{ \newline
+enum \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor_aa377bda61ed0d4a1d7e1a7bffe459452}{I\+Sensor\+Scale}} \{ \newline
 {\bfseries Z\+E\+RO}, 
 {\bfseries O\+NE}, 
 {\bfseries T\+WO}, 
@@ -29,12 +32,45 @@ enum {\bfseries I\+Sensor\+Scale} \{ \newline
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classwood_box_1_1sensor_1_1_i_sensor_a9de8041b991b76cc2f6fcc3b6a1bf363}\label{classwood_box_1_1sensor_1_1_i_sensor_a9de8041b991b76cc2f6fcc3b6a1bf363}} 
-virtual uint8\+\_\+t $\ast$ {\bfseries get\+Sample} ()=0
+virtual uint8\+\_\+t $\ast$ \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor_a9de8041b991b76cc2f6fcc3b6a1bf363}{get\+Sample}} ()=0
 \item 
-\mbox{\Hypertarget{classwood_box_1_1sensor_1_1_i_sensor_afb01c2473efc4a823bf5dada0048d2bc}\label{classwood_box_1_1sensor_1_1_i_sensor_afb01c2473efc4a823bf5dada0048d2bc}} 
-virtual I\+Sensor\+Scale {\bfseries get\+Estimate} ()=0
+virtual \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor_aa377bda61ed0d4a1d7e1a7bffe459452}{I\+Sensor\+Scale}} \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor_afb01c2473efc4a823bf5dada0048d2bc}{get\+Estimate}} ()=0
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface used to grab data from a sensor in a Module class. Configuration and treatment of sensor raw data is to be handled by derived classes, as this interfaces is intended to be able to just being able to grab raw sensors data, and an interpretation of them without any knowledge of the sensor. 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classwood_box_1_1sensor_1_1_i_sensor_aa377bda61ed0d4a1d7e1a7bffe459452}\label{classwood_box_1_1sensor_1_1_i_sensor_aa377bda61ed0d4a1d7e1a7bffe459452}} 
+\index{wood\+Box\+::sensor\+::\+I\+Sensor@{wood\+Box\+::sensor\+::\+I\+Sensor}!I\+Sensor\+Scale@{I\+Sensor\+Scale}}
+\index{I\+Sensor\+Scale@{I\+Sensor\+Scale}!wood\+Box\+::sensor\+::\+I\+Sensor@{wood\+Box\+::sensor\+::\+I\+Sensor}}
+\subsubsection{\texorpdfstring{I\+Sensor\+Scale}{ISensorScale}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor_aa377bda61ed0d4a1d7e1a7bffe459452}{wood\+Box\+::sensor\+::\+I\+Sensor\+::\+I\+Sensor\+Scale}}}
+
+Enumeration used to represent the estimation of safety of a sensor value on a scale from 1 to 10. Value 0 means invalid 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classwood_box_1_1sensor_1_1_i_sensor_afb01c2473efc4a823bf5dada0048d2bc}\label{classwood_box_1_1sensor_1_1_i_sensor_afb01c2473efc4a823bf5dada0048d2bc}} 
+\index{wood\+Box\+::sensor\+::\+I\+Sensor@{wood\+Box\+::sensor\+::\+I\+Sensor}!get\+Estimate@{get\+Estimate}}
+\index{get\+Estimate@{get\+Estimate}!wood\+Box\+::sensor\+::\+I\+Sensor@{wood\+Box\+::sensor\+::\+I\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Estimate()}{getEstimate()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor_aa377bda61ed0d4a1d7e1a7bffe459452}{I\+Sensor\+Scale}} wood\+Box\+::sensor\+::\+I\+Sensor\+::get\+Estimate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the estimation of safety from the current sensor value 
+
+Implemented in \mbox{\hyperlink{classwood_box_1_1sensor_1_1_analog_sensor_a74ddcfe84f3f5b9d7010442f365c4eee}{wood\+Box\+::sensor\+::\+Analog\+Sensor}}.
+
+\mbox{\Hypertarget{classwood_box_1_1sensor_1_1_i_sensor_a9de8041b991b76cc2f6fcc3b6a1bf363}\label{classwood_box_1_1sensor_1_1_i_sensor_a9de8041b991b76cc2f6fcc3b6a1bf363}} 
+\index{wood\+Box\+::sensor\+::\+I\+Sensor@{wood\+Box\+::sensor\+::\+I\+Sensor}!get\+Sample@{get\+Sample}}
+\index{get\+Sample@{get\+Sample}!wood\+Box\+::sensor\+::\+I\+Sensor@{wood\+Box\+::sensor\+::\+I\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
+{\footnotesize\ttfamily virtual uint8\+\_\+t$\ast$ wood\+Box\+::sensor\+::\+I\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns a pointer on sensor sample raw memory, as an array of bytes 
+
+Implemented in \mbox{\hyperlink{classwood_box_1_1sensor_1_1_analog_sensor_ae78c25d8c01ba9acd03f90f278966189}{wood\+Box\+::sensor\+::\+Analog\+Sensor}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

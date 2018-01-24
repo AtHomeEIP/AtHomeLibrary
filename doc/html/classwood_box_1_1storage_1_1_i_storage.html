@@ -72,16 +72,105 @@ $(function() {
 <div class="title">woodBox::storage::IStorage Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_i_storage_8hpp_source.html">IStorage.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a01bab924be0844e3866b27279caa506d"><td class="memItemLeft" align="right" valign="top"><a id="a01bab924be0844e3866b27279caa506d"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> (size_t, void *, size_t)=0</td></tr>
+<tr class="memitem:a01bab924be0844e3866b27279caa506d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1storage_1_1_i_storage.html#a01bab924be0844e3866b27279caa506d">read</a> (size_t, void *, size_t)=0</td></tr>
 <tr class="separator:a01bab924be0844e3866b27279caa506d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5eb82c922e8a3147ddab510706be8e24"><td class="memItemLeft" align="right" valign="top"><a id="a5eb82c922e8a3147ddab510706be8e24"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (size_t, const void *, size_t)=0</td></tr>
+<tr class="memitem:a5eb82c922e8a3147ddab510706be8e24"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1storage_1_1_i_storage.html#a5eb82c922e8a3147ddab510706be8e24">write</a> (size_t, const void *, size_t)=0</td></tr>
 <tr class="separator:a5eb82c922e8a3147ddab510706be8e24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Interface used to be able to store and read raw data from any source, by transferring memory buffers </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a01bab924be0844e3866b27279caa506d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01bab924be0844e3866b27279caa506d">&#9670;&nbsp;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void woodBox::storage::IStorage::read </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Copy n bytes (3rd parameter) in dest (2nd parameter) from offset x (1st parameter) </p>
+
+</div>
+</div>
+<a id="a5eb82c922e8a3147ddab510706be8e24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eb82c922e8a3147ddab510706be8e24">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void woodBox::storage::IStorage::write </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname">&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Write n bytes (3rd parameter) in offset x (1st parameter) from src (2nd parameter) </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="_i_storage_8hpp_source.html">IStorage.hpp</a></li>
 </ul>

@@ -73,6 +73,8 @@ $(function() {
 <div class="title">woodBox::sensor::ISensor Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_i_sensor_8hpp_source.html">ISensor.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for woodBox::sensor::ISensor:</div>
 <div class="dyncontent">
@@ -85,7 +87,7 @@ Inheritance diagram for woodBox::sensor::ISensor:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:aa377bda61ed0d4a1d7e1a7bffe459452"><td class="memItemLeft" align="right" valign="top"><a id="aa377bda61ed0d4a1d7e1a7bffe459452"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ISensorScale</b> { <br />
+<tr class="memitem:aa377bda61ed0d4a1d7e1a7bffe459452"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#aa377bda61ed0d4a1d7e1a7bffe459452">ISensorScale</a> { <br />
 &#160;&#160;<b>ZERO</b>, 
 <b>ONE</b>, 
 <b>TWO</b>, 
@@ -105,13 +107,86 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9de8041b991b76cc2f6fcc3b6a1bf363"><td class="memItemLeft" align="right" valign="top"><a id="a9de8041b991b76cc2f6fcc3b6a1bf363"></a>
-virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>getSample</b> ()=0</td></tr>
+<tr class="memitem:a9de8041b991b76cc2f6fcc3b6a1bf363"><td class="memItemLeft" align="right" valign="top">virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#a9de8041b991b76cc2f6fcc3b6a1bf363">getSample</a> ()=0</td></tr>
 <tr class="separator:a9de8041b991b76cc2f6fcc3b6a1bf363"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afb01c2473efc4a823bf5dada0048d2bc"><td class="memItemLeft" align="right" valign="top"><a id="afb01c2473efc4a823bf5dada0048d2bc"></a>
-virtual ISensorScale&#160;</td><td class="memItemRight" valign="bottom"><b>getEstimate</b> ()=0</td></tr>
+<tr class="memitem:afb01c2473efc4a823bf5dada0048d2bc"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#aa377bda61ed0d4a1d7e1a7bffe459452">ISensorScale</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#afb01c2473efc4a823bf5dada0048d2bc">getEstimate</a> ()=0</td></tr>
 <tr class="separator:afb01c2473efc4a823bf5dada0048d2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Interface used to grab data from a sensor in a Module class. Configuration and treatment of sensor raw data is to be handled by derived classes, as this interfaces is intended to be able to just being able to grab raw sensors data, and an interpretation of them without any knowledge of the sensor. </p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="aa377bda61ed0d4a1d7e1a7bffe459452"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa377bda61ed0d4a1d7e1a7bffe459452">&#9670;&nbsp;</a></span>ISensorScale</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#aa377bda61ed0d4a1d7e1a7bffe459452">woodBox::sensor::ISensor::ISensorScale</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Enumeration used to represent the estimation of safety of a sensor value on a scale from 1 to 10. Value 0 means invalid </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="afb01c2473efc4a823bf5dada0048d2bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb01c2473efc4a823bf5dada0048d2bc">&#9670;&nbsp;</a></span>getEstimate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#aa377bda61ed0d4a1d7e1a7bffe459452">ISensorScale</a> woodBox::sensor::ISensor::getEstimate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the estimation of safety from the current sensor value </p>
+
+<p>Implemented in <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a74ddcfe84f3f5b9d7010442f365c4eee">woodBox::sensor::AnalogSensor</a>.</p>
+
+</div>
+</div>
+<a id="a9de8041b991b76cc2f6fcc3b6a1bf363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9de8041b991b76cc2f6fcc3b6a1bf363">&#9670;&nbsp;</a></span>getSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint8_t* woodBox::sensor::ISensor::getSample </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns a pointer on sensor sample raw memory, as an array of bytes </p>
+
+<p>Implemented in <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#ae78c25d8c01ba9acd03f90f278966189">woodBox::sensor::AnalogSensor</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="_i_sensor_8hpp_source.html">ISensor.hpp</a></li>
 </ul>

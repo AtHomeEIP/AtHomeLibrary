@@ -9,9 +9,15 @@
 
 namespace woodBox {
     namespace module {
+        /**
+         * Template class implementing base WoodBox Modules, taking the type representing a reading from the intended sensor to use and the number of readings to save in a buffer.
+         */
         template <typename T, size_t n>
         class WoodBoxModule : public ABaseModule {
             public:
+                /**
+                 * Enumeration representing the type of a module
+                 */
                 enum moduleType {
                     UNKNOWN,
                     AIR_QUALITY, // Dust, smoke, ...etc
@@ -25,19 +31,53 @@ namespace woodBox {
                     RADIOACTIVITY // Geiger counter
                 };
 
+                /**
+                 * moduleVendor type represents a type holding the vendor name of a module ("WoodBox" when they are built by WoodBox team)
+                 */
                 typedef char            moduleVendor[33];
+                /**
+                 * moduleSerial type represents a unique value used to identify a module from other
+                 */
                 typedef char            moduleSerial[33];
+                /**
+                 * timestamp type is used to represent sensor readings date
+                 */
                 typedef unsigned long   timestamp;
 
+                /**
+                 * WoodBoxModule and derived classes are singletons, duplication is not allowed
+                 */
                 WoodBoxModule(const WoodBoxModule &) = delete;
+                /**
+                 * WoodBoxModule and derived classes are singletons, as only one instance can exist, copy is not possible
+                 */
                 WoodBoxModule &operator=(const WoodBoxModule &) = delete;
                 ~WoodBoxModule() {}
 
             public:
+                /**
+                 * customCallback type is used to pass a callback to call during various events.
+                 * Functions used as callback must have a compatible prototype to this: void name()
+                 */
                 typedef void (*customCallback)();
+                /**
+                 * WoodBoxCommandCommandPlugin callback is used to extend command interpreter and called when an unknown command is the received.
+                 * Functions used as callback receive a reference on a String holding the actual command name and a reference on the Stream from which it has been received.
+                 * These functions must have a prototype compatible to this one: void name(const String &, Stream &);
+                 */
                 typedef void (*WoodBoxCommandPlugin)(const String &, Stream &);
+                /**
+                 * WoodBoxStoragePlugin callback is used to save or restore additional data from actual storage.
+                 * Functions used as callback will receive the current offset usable after the module read or saved data in the storage, and a reference to this storage interface.
+                 * These functions must have a prototype compatible to this one: void name(size_t, woodBox::storage::IStorage &)
+                 */
                 typedef void (*WoodBoxStoragePlugin)(size_t, storage::IStorage &);
 
+                /**
+                 * Template function used to get the address of the current WoodBoxModule or derived class or instanciates it if there's still no instances existing.
+                 * The template parameter takes the class type (and of course it's own template parameters if it's a templated class).
+                 * If no template parameter is given, it will create by default a WoodBoxModule instance with an array of 15 variables of 2 bytes, typically used to store analog values from a sensor.
+                 */
                 template <typename U = WoodBoxModule>
                 static U *getInstance() {
                     if (_instance == nullptr) {

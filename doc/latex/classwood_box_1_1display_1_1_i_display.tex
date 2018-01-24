@@ -1,5 +1,9 @@
 \hypertarget{classwood_box_1_1display_1_1_i_display}{}\section{wood\+Box\+:\+:display\+:\+:I\+Display Class Reference}
 \label{classwood_box_1_1display_1_1_i_display}\index{wood\+Box\+::display\+::\+I\+Display@{wood\+Box\+::display\+::\+I\+Display}}
+
+
+{\ttfamily \#include $<$I\+Display.\+hpp$>$}
+
 Inheritance diagram for wood\+Box\+:\+:display\+:\+:I\+Display\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,12 +13,36 @@ Inheritance diagram for wood\+Box\+:\+:display\+:\+:I\+Display\+:\begin{figure}[
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classwood_box_1_1display_1_1_i_display_a7030f0768c1ef15ce936a259406168dc}\label{classwood_box_1_1display_1_1_i_display_a7030f0768c1ef15ce936a259406168dc}} 
-virtual void {\bfseries clear} ()=0
+virtual void \mbox{\hyperlink{classwood_box_1_1display_1_1_i_display_a7030f0768c1ef15ce936a259406168dc}{clear}} ()=0
 \item 
-\mbox{\Hypertarget{classwood_box_1_1display_1_1_i_display_ad8c0811b8b807ce119a06c7806004de7}\label{classwood_box_1_1display_1_1_i_display_ad8c0811b8b807ce119a06c7806004de7}} 
-virtual void {\bfseries update} ()=0
+virtual void \mbox{\hyperlink{classwood_box_1_1display_1_1_i_display_ad8c0811b8b807ce119a06c7806004de7}{update}} ()=0
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface used to control any kind of display. As the content displayed can change from on display to another (text, color, pixels, ...etc), it has a very few common methods. Unfortunately, embedded platforms tends to not have R\+T\+TI support (no dynamic\+\_\+cast or typeof), so user will have to manage the use of derived interfaces / classes by himself 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classwood_box_1_1display_1_1_i_display_a7030f0768c1ef15ce936a259406168dc}\label{classwood_box_1_1display_1_1_i_display_a7030f0768c1ef15ce936a259406168dc}} 
+\index{wood\+Box\+::display\+::\+I\+Display@{wood\+Box\+::display\+::\+I\+Display}!clear@{clear}}
+\index{clear@{clear}!wood\+Box\+::display\+::\+I\+Display@{wood\+Box\+::display\+::\+I\+Display}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily virtual void wood\+Box\+::display\+::\+I\+Display\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Remove display content 
+
+Implemented in \mbox{\hyperlink{classwood_box_1_1display_1_1_a_r_g_b_led_a01eeaee1bbb439e81f5f9bc536c04df7}{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led}}.
+
+\mbox{\Hypertarget{classwood_box_1_1display_1_1_i_display_ad8c0811b8b807ce119a06c7806004de7}\label{classwood_box_1_1display_1_1_i_display_ad8c0811b8b807ce119a06c7806004de7}} 
+\index{wood\+Box\+::display\+::\+I\+Display@{wood\+Box\+::display\+::\+I\+Display}!update@{update}}
+\index{update@{update}!wood\+Box\+::display\+::\+I\+Display@{wood\+Box\+::display\+::\+I\+Display}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual void wood\+Box\+::display\+::\+I\+Display\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Update display content 
+
+Implemented in \mbox{\hyperlink{classwood_box_1_1display_1_1_a_r_g_b_led_ab71f321d91e931f95b96d1f492a9454d}{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led}}.
+
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}

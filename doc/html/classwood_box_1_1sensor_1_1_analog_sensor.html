@@ -94,11 +94,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a66111957aca931c1b1ea219749b03b3c"><td class="memItemLeft" align="right" valign="top"><a id="a66111957aca931c1b1ea219749b03b3c"></a>
 <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html">AnalogSensor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html">AnalogSensor</a> &amp;)=delete</td></tr>
 <tr class="separator:a66111957aca931c1b1ea219749b03b3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae78c25d8c01ba9acd03f90f278966189"><td class="memItemLeft" align="right" valign="top"><a id="ae78c25d8c01ba9acd03f90f278966189"></a>
-virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><b>getSample</b> ()</td></tr>
+<tr class="memitem:ae78c25d8c01ba9acd03f90f278966189"><td class="memItemLeft" align="right" valign="top">virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#ae78c25d8c01ba9acd03f90f278966189">getSample</a> ()</td></tr>
 <tr class="separator:ae78c25d8c01ba9acd03f90f278966189"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74ddcfe84f3f5b9d7010442f365c4eee"><td class="memItemLeft" align="right" valign="top"><a id="a74ddcfe84f3f5b9d7010442f365c4eee"></a>
-virtual ISensorScale&#160;</td><td class="memItemRight" valign="bottom"><b>getEstimate</b> ()</td></tr>
+<tr class="memitem:a74ddcfe84f3f5b9d7010442f365c4eee"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#aa377bda61ed0d4a1d7e1a7bffe459452">ISensorScale</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a74ddcfe84f3f5b9d7010442f365c4eee">getEstimate</a> ()</td></tr>
 <tr class="separator:a74ddcfe84f3f5b9d7010442f365c4eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a7c67726db40be3edd48294910b117b"><td class="memItemLeft" align="right" valign="top"><a id="a5a7c67726db40be3edd48294910b117b"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>getAnaloguePin</b> ()</td></tr>
@@ -113,7 +111,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>_analog_pin</b></t
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pub_types_classwood_box_1_1sensor_1_1_i_sensor"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classwood_box_1_1sensor_1_1_i_sensor')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">woodBox::sensor::ISensor</a></td></tr>
-<tr class="memitem:aa377bda61ed0d4a1d7e1a7bffe459452 inherit pub_types_classwood_box_1_1sensor_1_1_i_sensor"><td class="memItemLeft" align="right" valign="top"><a id="aa377bda61ed0d4a1d7e1a7bffe459452"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ISensorScale</b> { <br />
+<tr class="memitem:aa377bda61ed0d4a1d7e1a7bffe459452 inherit pub_types_classwood_box_1_1sensor_1_1_i_sensor"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#aa377bda61ed0d4a1d7e1a7bffe459452">ISensorScale</a> { <br />
 &#160;&#160;<b>ZERO</b>, 
 <b>ONE</b>, 
 <b>TWO</b>, 
@@ -131,6 +129,63 @@ Additional Inherited Members</h2></td></tr>
  }</td></tr>
 <tr class="separator:aa377bda61ed0d4a1d7e1a7bffe459452 inherit pub_types_classwood_box_1_1sensor_1_1_i_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a74ddcfe84f3f5b9d7010442f365c4eee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74ddcfe84f3f5b9d7010442f365c4eee">&#9670;&nbsp;</a></span>getEstimate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#aa377bda61ed0d4a1d7e1a7bffe459452">ISensor::ISensorScale</a> woodBox::sensor::AnalogSensor::getEstimate </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the estimation of safety from the current sensor value </p>
+
+<p>Implements <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#afb01c2473efc4a823bf5dada0048d2bc">woodBox::sensor::ISensor</a>.</p>
+
+</div>
+</div>
+<a id="ae78c25d8c01ba9acd03f90f278966189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae78c25d8c01ba9acd03f90f278966189">&#9670;&nbsp;</a></span>getSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t * woodBox::sensor::AnalogSensor::getSample </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns a pointer on sensor sample raw memory, as an array of bytes </p>
+
+<p>Implements <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#a9de8041b991b76cc2f6fcc3b6a1bf363">woodBox::sensor::ISensor</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_analog_sensor_8hpp_source.html">AnalogSensor.hpp</a></li>
 <li>AnalogSensor.cpp</li>

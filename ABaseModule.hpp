@@ -13,11 +13,13 @@
 
 namespace woodBox {
     namespace module {
+        /**
+         * Abstract base class for all Module classes, mainly handling low level logic and accessers to Module components
+         */
         class ABaseModule {
             public:
                 ABaseModule &operator=(ABaseModule &) = delete; // Singleton class
                 ~ABaseModule();
-                virtual void run() = 0;
             protected:
                 ABaseModule(display::IDisplay * = nullptr, Stream ** = nullptr,
                             power::IPower * = nullptr, sensor::ISensor * = nullptr, storage::IStorage * = nullptr);

@@ -5,12 +5,19 @@
 
 namespace woodBox {
     namespace storage {
+        /**
+         * Interface used to be able to store and read raw data from any source, by transferring memory buffers
+         */
         class IStorage {
             public:
                 //virtual ~IStorage() = 0;
-                // Copy n bytes (3rd parameter) in dest (2nd parameter) from offset x (1st parameter)
+                /**
+                 * Copy n bytes (3rd parameter) in dest (2nd parameter) from offset x (1st parameter)
+                 */
                 virtual void read(size_t, void *, size_t) = 0;
-                // Write n bytes (3rd parameter) in offset x (1st parameter) from src (2nd parameter)
+                /**
+                 * Write n bytes (3rd parameter) in offset x (1st parameter) from src (2nd parameter)
+                 */
                 virtual void write(size_t, const void *, size_t) = 0;
         };
     }
