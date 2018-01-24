@@ -11,11 +11,9 @@ namespace woodBox {
 				AnalogSensor(uint8_t pin);
 				AnalogSensor(const AnalogSensor &) = delete;
 				AnalogSensor &operator=(const AnalogSensor &) = delete;
-				virtual ~AnalogSensor();
-				virtual void init();
-				virtual void stop();
+				~AnalogSensor();
 				virtual uint8_t *getSample();
-				uint8_t getAnaloguePin();
+                      virtual ISensorScale getEstimate();				uint8_t getAnaloguePin();
 			protected:
 				uint8_t		_analog_pin;
 			private:

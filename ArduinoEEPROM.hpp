@@ -7,7 +7,7 @@
 
 namespace woodBox {
     namespace storage {
-        class ArduinoEEPROM {
+        class ArduinoEEPROM : public IStorage {
         public:
             ArduinoEEPROM();
             ArduinoEEPROM(const ArduinoEEPROM &) = delete;
