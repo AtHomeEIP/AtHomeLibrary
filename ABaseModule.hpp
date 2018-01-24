@@ -22,6 +22,7 @@ namespace woodBox {
                 ABaseModule(display::IDisplay * = nullptr, Stream ** = nullptr,
                             power::IPower * = nullptr, sensor::ISensor * = nullptr, storage::IStorage * = nullptr);
                 ABaseModule(ABaseModule &) = delete; // Singleton class
+            public:
                 Stream **getStreams();
                 void setStreams(Stream **);
                 display::IDisplay *getDisplay();
