@@ -52,11 +52,11 @@ typedef void($\ast$ {\bfseries Wood\+Box\+Storage\+Plugin}) (size\+\_\+t, \mbox{
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_acdae18f8e9e685cdbce5a4fc99956ab3}\label{classwood_box_1_1module_1_1_wood_box_module_acdae18f8e9e685cdbce5a4fc99956ab3}} 
 \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{Wood\+Box\+Module}} \& {\bfseries operator=} (const \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{Wood\+Box\+Module}} \&)=delete
 \item 
-\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a71289d760332ef4945ceb4b95f2e616e}\label{classwood_box_1_1module_1_1_wood_box_module_a71289d760332ef4945ceb4b95f2e616e}} 
-void {\bfseries set\+Scheduler} (Scheduler \&scheduler)
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a24b14dd95e7b1c5a7ba31107cd0c524d}\label{classwood_box_1_1module_1_1_wood_box_module_a24b14dd95e7b1c5a7ba31107cd0c524d}} 
+Scheduler \& {\bfseries get\+Scheduler} ()
 \item 
-\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a08e0f7b37441c9fa9ba51ab1da21e1c0}\label{classwood_box_1_1module_1_1_wood_box_module_a08e0f7b37441c9fa9ba51ab1da21e1c0}} 
-Scheduler $\ast$ {\bfseries get\+Scheduler} ()
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a610b2339bd0ff26d2cde59d2006a4aed}\label{classwood_box_1_1module_1_1_wood_box_module_a610b2339bd0ff26d2cde59d2006a4aed}} 
+void {\bfseries setup} ()
 \item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ac65e58ab2338b1e3f57e4ce5d9e70c6c}\label{classwood_box_1_1module_1_1_wood_box_module_ac65e58ab2338b1e3f57e4ce5d9e70c6c}} 
 void {\bfseries run} ()
@@ -70,17 +70,26 @@ void {\bfseries set\+Sensor\+Execution\+Interval} (unsigned long ms)
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a0242f49765460d7c1e0528260ba1c26e}\label{classwood_box_1_1module_1_1_wood_box_module_a0242f49765460d7c1e0528260ba1c26e}} 
 void {\bfseries set\+Communication\+Execution\+Interval} (unsigned long ms)
 \item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ada9e2ee4b4da9396c504c0d0217d0c2f}\label{classwood_box_1_1module_1_1_wood_box_module_ada9e2ee4b4da9396c504c0d0217d0c2f}} 
+void {\bfseries set\+Upload\+Data\+Execution\+Interval} (unsigned long ms)
+\item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a4d5b8fd2ec5aeacb5704435bb6d961e7}\label{classwood_box_1_1module_1_1_wood_box_module_a4d5b8fd2ec5aeacb5704435bb6d961e7}} 
 unsigned long {\bfseries get\+Sensor\+Execution\+Interval} () const
 \item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ad4a7b447a617d9c6908ef624cfd2cab4}\label{classwood_box_1_1module_1_1_wood_box_module_ad4a7b447a617d9c6908ef624cfd2cab4}} 
 unsigned long {\bfseries get\+Communication\+Execution\+Interval} () const
 \item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a9582f3340d1aa35abfe278dec41f4313}\label{classwood_box_1_1module_1_1_wood_box_module_a9582f3340d1aa35abfe278dec41f4313}} 
+unsigned long {\bfseries get\+Upload\+Data\+Execution\+Interval} () const
+\item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a5841176b2161324d7e72045e69454c62}\label{classwood_box_1_1module_1_1_wood_box_module_a5841176b2161324d7e72045e69454c62}} 
 void {\bfseries set\+Sensor\+Execution\+Callback} (custom\+Callback f)
 \item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_adbdb8028cfb897d3323876be6d117db7}\label{classwood_box_1_1module_1_1_wood_box_module_adbdb8028cfb897d3323876be6d117db7}} 
 void {\bfseries set\+Communication\+Execution\+Callback} (custom\+Callback f)
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a4a428c0ed9491864d812df07467ab850}\label{classwood_box_1_1module_1_1_wood_box_module_a4a428c0ed9491864d812df07467ab850}} 
+void {\bfseries set\+Upload\+Data\+Execution\+Callback} (custom\+Callback f)
 \item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ad40df0835ac2ffcec83cfb96d12f9079}\label{classwood_box_1_1module_1_1_wood_box_module_ad40df0835ac2ffcec83cfb96d12f9079}} 
 void {\bfseries set\+Command\+Plugin} (Wood\+Box\+Command\+Plugin plugin)
@@ -156,6 +165,9 @@ void {\bfseries on\+Update\+Display} ()
 \item 
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_acacb4ac748c70bd1f172d9a87e07dfbf}\label{classwood_box_1_1module_1_1_wood_box_module_acacb4ac748c70bd1f172d9a87e07dfbf}} 
 void {\bfseries on\+Communicate} ()
+\item 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a240ad6ff3f905a531fcc62670a26a6fa}\label{classwood_box_1_1module_1_1_wood_box_module_a240ad6ff3f905a531fcc62670a26a6fa}} 
+void {\bfseries flush\+Streams} ()
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 

@@ -131,12 +131,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:acdae18f8e9e685cdbce5a4fc99956ab3"><td class="memItemLeft" align="right" valign="top"><a id="acdae18f8e9e685cdbce5a4fc99956ab3"></a>
 <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">WoodBoxModule</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">WoodBoxModule</a> &amp;)=delete</td></tr>
 <tr class="separator:acdae18f8e9e685cdbce5a4fc99956ab3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71289d760332ef4945ceb4b95f2e616e"><td class="memItemLeft" align="right" valign="top"><a id="a71289d760332ef4945ceb4b95f2e616e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setScheduler</b> (Scheduler &amp;scheduler)</td></tr>
-<tr class="separator:a71289d760332ef4945ceb4b95f2e616e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08e0f7b37441c9fa9ba51ab1da21e1c0"><td class="memItemLeft" align="right" valign="top"><a id="a08e0f7b37441c9fa9ba51ab1da21e1c0"></a>
-Scheduler *&#160;</td><td class="memItemRight" valign="bottom"><b>getScheduler</b> ()</td></tr>
-<tr class="separator:a08e0f7b37441c9fa9ba51ab1da21e1c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24b14dd95e7b1c5a7ba31107cd0c524d"><td class="memItemLeft" align="right" valign="top"><a id="a24b14dd95e7b1c5a7ba31107cd0c524d"></a>
+Scheduler &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getScheduler</b> ()</td></tr>
+<tr class="separator:a24b14dd95e7b1c5a7ba31107cd0c524d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a610b2339bd0ff26d2cde59d2006a4aed"><td class="memItemLeft" align="right" valign="top"><a id="a610b2339bd0ff26d2cde59d2006a4aed"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setup</b> ()</td></tr>
+<tr class="separator:a610b2339bd0ff26d2cde59d2006a4aed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac65e58ab2338b1e3f57e4ce5d9e70c6c"><td class="memItemLeft" align="right" valign="top"><a id="ac65e58ab2338b1e3f57e4ce5d9e70c6c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>run</b> ()</td></tr>
 <tr class="separator:ac65e58ab2338b1e3f57e4ce5d9e70c6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -149,18 +149,27 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setSensorExecutionInt
 <tr class="memitem:a0242f49765460d7c1e0528260ba1c26e"><td class="memItemLeft" align="right" valign="top"><a id="a0242f49765460d7c1e0528260ba1c26e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCommunicationExecutionInterval</b> (unsigned long ms)</td></tr>
 <tr class="separator:a0242f49765460d7c1e0528260ba1c26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada9e2ee4b4da9396c504c0d0217d0c2f"><td class="memItemLeft" align="right" valign="top"><a id="ada9e2ee4b4da9396c504c0d0217d0c2f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setUploadDataExecutionInterval</b> (unsigned long ms)</td></tr>
+<tr class="separator:ada9e2ee4b4da9396c504c0d0217d0c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d5b8fd2ec5aeacb5704435bb6d961e7"><td class="memItemLeft" align="right" valign="top"><a id="a4d5b8fd2ec5aeacb5704435bb6d961e7"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getSensorExecutionInterval</b> () const</td></tr>
 <tr class="separator:a4d5b8fd2ec5aeacb5704435bb6d961e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4a7b447a617d9c6908ef624cfd2cab4"><td class="memItemLeft" align="right" valign="top"><a id="ad4a7b447a617d9c6908ef624cfd2cab4"></a>
 unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getCommunicationExecutionInterval</b> () const</td></tr>
 <tr class="separator:ad4a7b447a617d9c6908ef624cfd2cab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9582f3340d1aa35abfe278dec41f4313"><td class="memItemLeft" align="right" valign="top"><a id="a9582f3340d1aa35abfe278dec41f4313"></a>
+unsigned long&#160;</td><td class="memItemRight" valign="bottom"><b>getUploadDataExecutionInterval</b> () const</td></tr>
+<tr class="separator:a9582f3340d1aa35abfe278dec41f4313"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5841176b2161324d7e72045e69454c62"><td class="memItemLeft" align="right" valign="top"><a id="a5841176b2161324d7e72045e69454c62"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setSensorExecutionCallback</b> (customCallback f)</td></tr>
 <tr class="separator:a5841176b2161324d7e72045e69454c62"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbdb8028cfb897d3323876be6d117db7"><td class="memItemLeft" align="right" valign="top"><a id="adbdb8028cfb897d3323876be6d117db7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCommunicationExecutionCallback</b> (customCallback f)</td></tr>
 <tr class="separator:adbdb8028cfb897d3323876be6d117db7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a428c0ed9491864d812df07467ab850"><td class="memItemLeft" align="right" valign="top"><a id="a4a428c0ed9491864d812df07467ab850"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setUploadDataExecutionCallback</b> (customCallback f)</td></tr>
+<tr class="separator:a4a428c0ed9491864d812df07467ab850"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad40df0835ac2ffcec83cfb96d12f9079"><td class="memItemLeft" align="right" valign="top"><a id="ad40df0835ac2ffcec83cfb96d12f9079"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCommandPlugin</b> (WoodBoxCommandPlugin plugin)</td></tr>
 <tr class="separator:ad40df0835ac2ffcec83cfb96d12f9079"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -192,6 +201,36 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setSerial</b> (const 
 <tr class="memitem:a61e8f78a69b3ea735e70a13f6de8d662 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a61e8f78a69b3ea735e70a13f6de8d662"></a>
 <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html">ABaseModule</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classwood_box_1_1module_1_1_a_base_module.html">ABaseModule</a> &amp;)=delete</td></tr>
 <tr class="separator:a61e8f78a69b3ea735e70a13f6de8d662 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada9df5e73cb0aee0bada1de17de19a9c inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="ada9df5e73cb0aee0bada1de17de19a9c"></a>
+Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>getStreams</b> ()</td></tr>
+<tr class="separator:ada9df5e73cb0aee0bada1de17de19a9c inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e3b73bd36f668f5d621dee3070c131a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a6e3b73bd36f668f5d621dee3070c131a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setStreams</b> (Stream **)</td></tr>
+<tr class="separator:a6e3b73bd36f668f5d621dee3070c131a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afecd89a2ed85517a6d72ad2f03ea87c3 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="afecd89a2ed85517a6d72ad2f03ea87c3"></a>
+<a class="el" href="classwood_box_1_1display_1_1_i_display.html">display::IDisplay</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getDisplay</b> ()</td></tr>
+<tr class="separator:afecd89a2ed85517a6d72ad2f03ea87c3 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e99b7d8d59953a8350e9859a475bc6a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a7e99b7d8d59953a8350e9859a475bc6a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setDisplay</b> (<a class="el" href="classwood_box_1_1display_1_1_i_display.html">display::IDisplay</a> *)</td></tr>
+<tr class="separator:a7e99b7d8d59953a8350e9859a475bc6a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a0c195b7c497201926f6d07b77f6489 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a6a0c195b7c497201926f6d07b77f6489"></a>
+const <a class="el" href="classwood_box_1_1power_1_1_i_power.html">power::IPower</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getPowerSource</b> () const</td></tr>
+<tr class="separator:a6a0c195b7c497201926f6d07b77f6489 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a117ce9fbbcef048ccde38f0b6a11aa91 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a117ce9fbbcef048ccde38f0b6a11aa91"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setPowerSource</b> (<a class="el" href="classwood_box_1_1power_1_1_i_power.html">power::IPower</a> *)</td></tr>
+<tr class="separator:a117ce9fbbcef048ccde38f0b6a11aa91 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73004296826a55c3d24c2212b7165569 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a73004296826a55c3d24c2212b7165569"></a>
+const <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getSensor</b> () const</td></tr>
+<tr class="separator:a73004296826a55c3d24c2212b7165569 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3fd88feae532ca88b14642f76ef8def inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="ac3fd88feae532ca88b14642f76ef8def"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setSensor</b> (<a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *)</td></tr>
+<tr class="separator:ac3fd88feae532ca88b14642f76ef8def inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaa761163e3e88fbeb26a1699eaccb78 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="afaa761163e3e88fbeb26a1699eaccb78"></a>
+const <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getStorage</b> () const</td></tr>
+<tr class="separator:afaa761163e3e88fbeb26a1699eaccb78 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9e009af37d04062c2da7d977baded80 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="af9e009af37d04062c2da7d977baded80"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setStorage</b> (<a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> *)</td></tr>
+<tr class="separator:af9e009af37d04062c2da7d977baded80 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -243,6 +282,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onUpdateDisplay</b> (
 <tr class="memitem:acacb4ac748c70bd1f172d9a87e07dfbf"><td class="memItemLeft" align="right" valign="top"><a id="acacb4ac748c70bd1f172d9a87e07dfbf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>onCommunicate</b> ()</td></tr>
 <tr class="separator:acacb4ac748c70bd1f172d9a87e07dfbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a240ad6ff3f905a531fcc62670a26a6fa"><td class="memItemLeft" align="right" valign="top"><a id="a240ad6ff3f905a531fcc62670a26a6fa"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>flushStreams</b> ()</td></tr>
+<tr class="separator:a240ad6ff3f905a531fcc62670a26a6fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classwood_box_1_1module_1_1_a_base_module"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classwood_box_1_1module_1_1_a_base_module')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html">woodBox::module::ABaseModule</a></td></tr>
 <tr class="memitem:a40edd799ba7342abfaf5cb06e60a4b04 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a40edd799ba7342abfaf5cb06e60a4b04"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ABaseModule</b> (<a class="el" href="classwood_box_1_1display_1_1_i_display.html">display::IDisplay</a> *=nullptr, Stream **=nullptr, <a class="el" href="classwood_box_1_1power_1_1_i_power.html">power::IPower</a> *=nullptr, <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *=nullptr, <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> *=nullptr)</td></tr>
@@ -250,36 +292,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>onCommunicate</b> ()<
 <tr class="memitem:a2ba8fdaace63960a0696b77bee60b64b inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a2ba8fdaace63960a0696b77bee60b64b"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ABaseModule</b> (<a class="el" href="classwood_box_1_1module_1_1_a_base_module.html">ABaseModule</a> &amp;)=delete</td></tr>
 <tr class="separator:a2ba8fdaace63960a0696b77bee60b64b inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada9df5e73cb0aee0bada1de17de19a9c inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="ada9df5e73cb0aee0bada1de17de19a9c"></a>
-Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>getStreams</b> ()</td></tr>
-<tr class="separator:ada9df5e73cb0aee0bada1de17de19a9c inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e3b73bd36f668f5d621dee3070c131a inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a6e3b73bd36f668f5d621dee3070c131a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStreams</b> (Stream **)</td></tr>
-<tr class="separator:a6e3b73bd36f668f5d621dee3070c131a inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afecd89a2ed85517a6d72ad2f03ea87c3 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="afecd89a2ed85517a6d72ad2f03ea87c3"></a>
-<a class="el" href="classwood_box_1_1display_1_1_i_display.html">display::IDisplay</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getDisplay</b> ()</td></tr>
-<tr class="separator:afecd89a2ed85517a6d72ad2f03ea87c3 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e99b7d8d59953a8350e9859a475bc6a inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a7e99b7d8d59953a8350e9859a475bc6a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDisplay</b> (<a class="el" href="classwood_box_1_1display_1_1_i_display.html">display::IDisplay</a> *)</td></tr>
-<tr class="separator:a7e99b7d8d59953a8350e9859a475bc6a inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a0c195b7c497201926f6d07b77f6489 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a6a0c195b7c497201926f6d07b77f6489"></a>
-const <a class="el" href="classwood_box_1_1power_1_1_i_power.html">power::IPower</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getPowerSource</b> () const</td></tr>
-<tr class="separator:a6a0c195b7c497201926f6d07b77f6489 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a117ce9fbbcef048ccde38f0b6a11aa91 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a117ce9fbbcef048ccde38f0b6a11aa91"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPowerSource</b> (<a class="el" href="classwood_box_1_1power_1_1_i_power.html">power::IPower</a> *)</td></tr>
-<tr class="separator:a117ce9fbbcef048ccde38f0b6a11aa91 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73004296826a55c3d24c2212b7165569 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a73004296826a55c3d24c2212b7165569"></a>
-const <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getSensor</b> () const</td></tr>
-<tr class="separator:a73004296826a55c3d24c2212b7165569 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3fd88feae532ca88b14642f76ef8def inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="ac3fd88feae532ca88b14642f76ef8def"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSensor</b> (<a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *)</td></tr>
-<tr class="separator:ac3fd88feae532ca88b14642f76ef8def inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afaa761163e3e88fbeb26a1699eaccb78 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="afaa761163e3e88fbeb26a1699eaccb78"></a>
-const <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getStorage</b> () const</td></tr>
-<tr class="separator:afaa761163e3e88fbeb26a1699eaccb78 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9e009af37d04062c2da7d977baded80 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="af9e009af37d04062c2da7d977baded80"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStorage</b> (<a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> *)</td></tr>
-<tr class="separator:af9e009af37d04062c2da7d977baded80 inherit pro_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>

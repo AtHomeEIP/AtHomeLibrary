@@ -250,7 +250,6 @@ namespace woodBox {
                     broadcast(communication::commands::end_of_line);
                 }
 
-            public:
                 void        uploadData() {
                     // Forward version of uploadData
                     // Todo: implement a more resource efficient and generic version
@@ -273,7 +272,6 @@ namespace woodBox {
                     broadcast(communication::commands::end_of_command);
                     _nbMeasures = 0;
                 }
-            protected:
 
                 void        onReset() {
                     // Todo: need to implement
