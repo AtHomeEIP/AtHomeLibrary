@@ -114,19 +114,19 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void woodBox::storage::ArduinoEEPROM::read </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>offset</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>dest</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -140,8 +140,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>See <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html#a01bab924be0844e3866b27279caa506d">woodBox::storage::IStorage::read</a> for method documentation. </p>
-
+<p>Copy n bytes (3rd parameter) in dest (2nd parameter) from offset x (1st parameter)</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_reading_something(IStorage &amp;storage) {</div><div class="line">  <span class="keywordtype">char</span> my_string[33];</div><div class="line">  <span class="keywordtype">int</span> my_number;</div><div class="line"></div><div class="line">  storage.read(0, my_string, <span class="keyword">sizeof</span>(my_string)); <span class="comment">// Reading a string (array of 33 char) at offset 0 of storage instance into my_string</span></div><div class="line">  storage.read(<span class="keyword">sizeof</span>(my_string), &amp;my_number, <span class="keyword">sizeof</span>(my_number)); <span class="comment">// Reading an integer at offset 33 (after content put into my_string) from storage instance into my_number</span></div><div class="line">}</div></div><!-- fragment --> 
 <p>Implements <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html#a01bab924be0844e3866b27279caa506d">woodBox::storage::IStorage</a>.</p>
 
 </div>
@@ -159,19 +160,19 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void woodBox::storage::ArduinoEEPROM::write </td>
           <td>(</td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>offset</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>src</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">size_t&#160;</td>
-          <td class="paramname"><em>len</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -185,9 +186,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>See <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html#a5eb82c922e8a3147ddab510706be8e24">woodBox::storage::IStorage::write</a> for method documentation.</p>
-<p>Content is written only if stored bytes in the EEPROM are different from the one passed as parameter through the memory pointer, to increase EEPROM lifespan. </p>
-
+<p>Write n bytes (3rd parameter) in offset x (1st parameter) from src (2nd parameter)</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_writing_something(IStorage &amp;storage) {</div><div class="line">  <span class="keywordtype">char</span> my_string[] = <span class="stringliteral">&quot;Hello, World!&quot;</span>;</div><div class="line">  <span class="keywordtype">int</span> my_number = 42;</div><div class="line"></div><div class="line">  storage.write(0, my_string, <span class="keyword">sizeof</span>(my_string)); <span class="comment">// Writing the string (array of 14 char) my_string at offset 0 of storage instance</span></div><div class="line">  storage.write(<span class="keyword">sizeof</span>(my_string), &amp;my_number, <span class="keyword">sizeof</span>(my_number)); <span class="comment">// Writing my_number at offset 14 (after my_string) of storage instance</span></div><div class="line">}</div></div><!-- fragment --> 
 <p>Implements <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html#a5eb82c922e8a3147ddab510706be8e24">woodBox::storage::IStorage</a>.</p>
 
 </div>

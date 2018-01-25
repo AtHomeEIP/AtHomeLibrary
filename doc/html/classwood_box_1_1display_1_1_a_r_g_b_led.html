@@ -73,6 +73,8 @@ $(function() {
 <div class="title">woodBox::display::ARGBLed Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_a_r_g_b_led_8hpp_source.html">ARGBLed.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for woodBox::display::ARGBLed:</div>
 <div class="dyncontent">
@@ -101,14 +103,15 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a01eeaee1bbb439e81f5f9bc536c04df7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab71f321d91e931f95b96d1f492a9454d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1display_1_1_a_r_g_b_led.html#ab71f321d91e931f95b96d1f492a9454d">update</a> ()=0</td></tr>
 <tr class="separator:ab71f321d91e931f95b96d1f492a9454d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0bd01eab303006612eb46058824b0c1"><td class="memItemLeft" align="right" valign="top"><a id="ae0bd01eab303006612eb46058824b0c1"></a>
-const <a class="el" href="structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getColor</b> () const</td></tr>
+<tr class="memitem:ae0bd01eab303006612eb46058824b0c1"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1display_1_1_a_r_g_b_led.html#ae0bd01eab303006612eb46058824b0c1">getColor</a> () const</td></tr>
 <tr class="separator:ae0bd01eab303006612eb46058824b0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac06b3ee90d2f49785173e9142df47bb7"><td class="memItemLeft" align="right" valign="top"><a id="ac06b3ee90d2f49785173e9142df47bb7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setColor</b> (const <a class="el" href="structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a> &amp;color)</td></tr>
+<tr class="memitem:ac06b3ee90d2f49785173e9142df47bb7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1display_1_1_a_r_g_b_led.html#ac06b3ee90d2f49785173e9142df47bb7">setColor</a> (const <a class="el" href="structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a> &amp;color)</td></tr>
 <tr class="separator:ac06b3ee90d2f49785173e9142df47bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Abstract class used to control RGB LEDs (Common cathode/anode, Grove Chainable LEDs, NeoPixels, ...etc)</p>
+<p>Example of use:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_changing_led_color(ARGBLed &amp;led) {</div><div class="line">  Color red = {255, 0, 0}; <span class="comment">// Create a Color structure with red fully on, green off and blue off</span></div><div class="line">  led.setColor(red); <span class="comment">// Set the new color by calling setColor method</span></div><div class="line">  led.update(); <span class="comment">// Display the new color on the LED</span></div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a01eeaee1bbb439e81f5f9bc536c04df7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a01eeaee1bbb439e81f5f9bc536c04df7">&#9670;&nbsp;</a></span>clear()</h2>
 
@@ -137,6 +140,62 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setColor</b> (const <
 
 <p>Implemented in <a class="el" href="classwood_box_1_1display_1_1_grove_chainable_l_e_d.html#a1c42c42ee9643aa914ab20a191e4adfd">woodBox::display::GroveChainableLED</a>.</p>
 
+</div>
+</div>
+<a id="ae0bd01eab303006612eb46058824b0c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0bd01eab303006612eb46058824b0c1">&#9670;&nbsp;</a></span>getColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a>&amp; woodBox::display::ARGBLed::getColor </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Return a reference on the <a class="el" href="structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a> structure representing the current color displayed (or next color, if LED color hasn't been updated since last change of color made by setColor)</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_printing_led_color(<span class="keyword">const</span> ARGBLed &amp;led) {</div><div class="line">  <span class="keyword">const</span> Color &amp;color = led.getColor();</div><div class="line"><span class="preprocessor">#ifdef ARDUINO</span></div><div class="line">  Serial.print(<span class="stringliteral">&quot;Red: &quot;</span>);</div><div class="line">  Serial.print(led.red);</div><div class="line">  Serial.print(<span class="stringliteral">&quot;, Green: &quot;</span>);</div><div class="line">  Serial.print(led.green);</div><div class="line">  Serial.print(<span class="stringliteral">&quot;, Blue: &quot;</span>);</div><div class="line">  Serial.println(led.blue);</div><div class="line"><span class="preprocessor">#else</span></div><div class="line">  printf(<span class="stringliteral">&quot;Red: %u, Green: %u, Blue: %u\n&quot;</span>, led.red, led.green, led.blue);</div><div class="line"><span class="preprocessor">#endif</span></div><div class="line"><span class="preprocessor">}</span></div></div><!-- fragment --> 
+</div>
+</div>
+<a id="ac06b3ee90d2f49785173e9142df47bb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac06b3ee90d2f49785173e9142df47bb7">&#9670;&nbsp;</a></span>setColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void woodBox::display::ARGBLed::setColor </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a> &amp;&#160;</td>
+          <td class="paramname"><em>color</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the new color to display on the LED.</p>
+<p>Note: You need to call the "update" method after this one, as it doesn't update automatically the new color on the LED.</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="keyword">const</span> Color red = {255, 0, 0};</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_changing_a_led_color_to_red(ARGBLed &amp;led) {</div><div class="line">  led.setColor(red); <span class="comment">// Set the new color in the LED object</span></div><div class="line">  led.update(); <span class="comment">// You need to call this method if you want the new color to be displayed on the LED</span></div><div class="line">}</div></div><!-- fragment --> 
 </div>
 </div>
 <a id="ab71f321d91e931f95b96d1f492a9454d"></a>

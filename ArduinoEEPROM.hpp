@@ -33,15 +33,7 @@ namespace woodBox {
             ArduinoEEPROM &operator=(const ArduinoEEPROM &) = delete;
             ~ArduinoEEPROM();
 
-            /**
-             * See woodBox::storage::IStorage::read for method documentation.
-             */
             void read(size_t, void *, size_t);
-            /**
-             * See woodBox::storage::IStorage::write for method documentation.
-             *
-             * Content is written only if stored bytes in the EEPROM are different from the one passed as parameter through the memory pointer, to increase EEPROM lifespan.
-             */
             void write(size_t, const void *, size_t);
         };
     }

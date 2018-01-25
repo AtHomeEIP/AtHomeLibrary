@@ -264,8 +264,9 @@ Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td
 class woodBox::module::WoodBoxWiFiModule&lt; T, n &gt;</h3>
 
 <p>Template class derived from <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a>, implementing WoodBox WiFi extension.</p>
-<p>The template parameters are the same than <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a> class, taking the type representing in memory a sample from the sensor and the number of samples to buffer. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p>The template parameters are the same than <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a> class, taking the type representing in memory a sample from the sensor and the number of samples to buffer.</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;woodBox.h&gt;</span></div><div class="line"></div><div class="line">WoodBoxWiFiModule&lt;uint16_t, 15&gt; *module = <a class="code" href="classwood_box_1_1module_1_1_wood_box_module.html#a3f13bd3a6318ddf2a7db84f86b198a49">WoodBoxModule&lt;uint16_t, 15&gt;::getInstance</a>&lt;WoodBoxWiFiModule&lt;uint16_t, 15&gt; &gt;();</div><div class="line">ESP8266WiFiCommunicator esp8266(2, 3); <span class="comment">// CH_ED (enable) pin of the ESP8266 is imagined to be connected to pin 2 of the host, and RST (reset) pin is imagined to be connected to pin 3 of the host</span></div><div class="line"></div><div class="line"><span class="keywordtype">void</span> <a class="code" href="classwood_box_1_1module_1_1_wood_box_module.html#a610b2339bd0ff26d2cde59d2006a4aed">setup</a>() {</div><div class="line">  Serial1.begin(115200);</div><div class="line">  esp8266.setStreamToChipset(&amp;Serial1); <span class="comment">// If you&#39;re using an Arduino UNO or any other board with only one or no UART, use the SoftwareSerial library to create a new Serial instance to pass to this function</span></div><div class="line">  module-&gt;setWiFiCommunicator(esp8266);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> loop() {</div><div class="line">  <span class="comment">// Put your code here</span></div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad1fa85749c0e194c9e589261dfb2433d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad1fa85749c0e194c9e589261dfb2433d">&#9670;&nbsp;</a></span>setWiFiCommunicator()</h2>
 
@@ -291,7 +292,8 @@ template&lt;typename T , size_t n&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set the WiFi object used for wireless communication by passing it as reference. </p>
+<p>Set the WiFi object used for wireless communication by passing it as reference.</p>
+<p>See class example for usage of this method. </p>
 
 </div>
 </div>

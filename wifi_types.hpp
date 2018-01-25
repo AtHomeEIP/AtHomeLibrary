@@ -55,8 +55,10 @@ namespace woodBox {
 
             struct s_wifi_client {
                 ip::mac_address     mac;
-                ip::ipv4_address    ipv4;
-                ip::ipv6_address    ipv6;
+                union {
+                    ip::ipv4_address    ipv4;
+                    ip::ipv6_address    ipv6;
+                };
             };
 
             typedef s_wifi_client           WiFi_client;

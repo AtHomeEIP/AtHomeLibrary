@@ -36,7 +36,32 @@ class wood\+Box\+::module\+::\+Wood\+Box\+Wi\+Fi\+Module$<$ T, n $>$}
 
 Template class derived from \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}, implementing Wood\+Box Wi\+Fi extension.
 
-The template parameters are the same than \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}} class, taking the type representing in memory a sample from the sensor and the number of samples to buffer. 
+The template parameters are the same than \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}} class, taking the type representing in memory a sample from the sensor and the number of samples to buffer.
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <woodBox.h>}
+
+WoodBoxWiFiModule<uint16\_t, 15> *module = 
+      \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a3f13bd3a6318ddf2a7db84f86b198a49}{WoodBoxModule<uint16\_t, 15>::getInstance}}<
+      WoodBoxWiFiModule<uint16\_t, 15> >();
+ESP8266WiFiCommunicator esp8266(2, 3); \textcolor{comment}{// CH\_ED (enable) pin of the ESP8266 is imagined to be connected to
+       pin 2 of the host, and RST (reset) pin is imagined to be connected to pin 3 of the host}
+
+\textcolor{keywordtype}{void} \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a610b2339bd0ff26d2cde59d2006a4aed}{setup}}() \{
+  Serial1.begin(115200);
+  esp8266.setStreamToChipset(&Serial1); \textcolor{comment}{// If you're using an Arduino UNO or any other board with only one
+       or no UART, use the SoftwareSerial library to create a new Serial instance to pass to this function}
+  module->setWiFiCommunicator(esp8266);
+\}
+
+\textcolor{keywordtype}{void} loop() \{
+  \textcolor{comment}{// Put your code here}
+\}
+\end{DoxyCode}
+ 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_wi_fi_module_ad1fa85749c0e194c9e589261dfb2433d}\label{classwood_box_1_1module_1_1_wood_box_wi_fi_module_ad1fa85749c0e194c9e589261dfb2433d}} 
@@ -46,7 +71,9 @@ The template parameters are the same than \mbox{\hyperlink{classwood_box_1_1modu
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
 void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_wi_fi_module}{wood\+Box\+::module\+::\+Wood\+Box\+Wi\+Fi\+Module}}$<$ T, n $>$\+::set\+Wi\+Fi\+Communicator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator}} \&}]{wifi }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Set the Wi\+Fi object used for wireless communication by passing it as reference. 
+Set the Wi\+Fi object used for wireless communication by passing it as reference.
+
+See class example for usage of this method. 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 

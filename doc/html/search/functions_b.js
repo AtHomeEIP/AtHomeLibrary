@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['queue',['Queue',['../classwood_box_1_1utility_1_1_queue.html#a34d7098f443aa9e8a2aebe47a50a9ae4',1,'woodBox::utility::Queue::Queue()'],['../classwood_box_1_1utility_1_1_queue.html#a3fd68bd9b7d12606445926b4e26e763c',1,'woodBox::utility::Queue::Queue(T &amp;data)'],['../classwood_box_1_1utility_1_1_queue.html#a811d00da7a7cefd7e3551a1381396a96',1,'woodBox::utility::Queue::Queue(const Queue &amp;)=delete']]]
+  ['update',['update',['../classwood_box_1_1display_1_1_a_r_g_b_led.html#ab71f321d91e931f95b96d1f492a9454d',1,'woodBox::display::ARGBLed::update()'],['../classwood_box_1_1display_1_1_grove_chainable_l_e_d.html#a650969665d0b5607465a63159c62e4ef',1,'woodBox::display::GroveChainableLED::update()'],['../classwood_box_1_1display_1_1_i_display.html#ad8c0811b8b807ce119a06c7806004de7',1,'woodBox::display::IDisplay::update()']]],
+  ['uploaddata',['uploadData',['../classwood_box_1_1module_1_1_wood_box_module.html#a4fa136e3e3f29c71d12a8163b4c5a765',1,'woodBox::module::WoodBoxModule']]]
 ];

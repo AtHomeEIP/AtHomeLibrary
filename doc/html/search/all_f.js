@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['woodboxmodule',['WoodBoxModule',['../classwood_box_1_1module_1_1_wood_box_module.html',1,'woodBox::module::WoodBoxModule&lt; T, n &gt;'],['../classwood_box_1_1module_1_1_wood_box_module.html#ade3d82ff1e508da2ad37185c208f9333',1,'woodBox::module::WoodBoxModule::WoodBoxModule()']]],
-  ['woodboxwifimodule',['WoodBoxWiFiModule',['../classwood_box_1_1module_1_1_wood_box_wi_fi_module.html',1,'woodBox::module']]],
-  ['write',['write',['../classwood_box_1_1storage_1_1_arduino_e_e_p_r_o_m.html#af78d2077806af7e1aac65d6890915d77',1,'woodBox::storage::ArduinoEEPROM::write()'],['../classwood_box_1_1storage_1_1_i_storage.html#a5eb82c922e8a3147ddab510706be8e24',1,'woodBox::storage::IStorage::write()']]]
+  ['update',['update',['../classwood_box_1_1display_1_1_a_r_g_b_led.html#ab71f321d91e931f95b96d1f492a9454d',1,'woodBox::display::ARGBLed::update()'],['../classwood_box_1_1display_1_1_grove_chainable_l_e_d.html#a650969665d0b5607465a63159c62e4ef',1,'woodBox::display::GroveChainableLED::update()'],['../classwood_box_1_1display_1_1_i_display.html#ad8c0811b8b807ce119a06c7806004de7',1,'woodBox::display::IDisplay::update()']]],
+  ['uploaddata',['uploadData',['../classwood_box_1_1module_1_1_wood_box_module.html#a4fa136e3e3f29c71d12a8163b4c5a765',1,'woodBox::module::WoodBoxModule']]]
 ];

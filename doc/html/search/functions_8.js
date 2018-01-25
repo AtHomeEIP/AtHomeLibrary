@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['update',['update',['../classwood_box_1_1display_1_1_a_r_g_b_led.html#ab71f321d91e931f95b96d1f492a9454d',1,'woodBox::display::ARGBLed::update()'],['../classwood_box_1_1display_1_1_grove_chainable_l_e_d.html#a650969665d0b5607465a63159c62e4ef',1,'woodBox::display::GroveChainableLED::update()'],['../classwood_box_1_1display_1_1_i_display.html#ad8c0811b8b807ce119a06c7806004de7',1,'woodBox::display::IDisplay::update()']]],
-  ['uploaddata',['uploadData',['../classwood_box_1_1module_1_1_wood_box_module.html#a4fa136e3e3f29c71d12a8163b4c5a765',1,'woodBox::module::WoodBoxModule']]]
+  ['peek',['peek',['../classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ae0a1f2f1906f76a12dd5f9b7c10b1282',1,'woodBox::communication::wifi::AWiFiCommunicator::peek()'],['../classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#accc6832fa7351cb977b9e3a805dc8107',1,'woodBox::communication::wifi::ESP8266WiFiCommunicator::peek()']]]
 ];

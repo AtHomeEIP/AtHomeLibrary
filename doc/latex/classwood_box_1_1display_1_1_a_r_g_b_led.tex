@@ -1,5 +1,9 @@
 \hypertarget{classwood_box_1_1display_1_1_a_r_g_b_led}{}\section{wood\+Box\+:\+:display\+:\+:A\+R\+G\+B\+Led Class Reference}
 \label{classwood_box_1_1display_1_1_a_r_g_b_led}\index{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led@{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led}}
+
+
+{\ttfamily \#include $<$A\+R\+G\+B\+Led.\+hpp$>$}
+
 Inheritance diagram for wood\+Box\+:\+:display\+:\+:A\+R\+G\+B\+Led\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -24,13 +28,26 @@ virtual void \mbox{\hyperlink{classwood_box_1_1display_1_1_a_r_g_b_led_a01eeaee1
 \item 
 virtual void \mbox{\hyperlink{classwood_box_1_1display_1_1_a_r_g_b_led_ab71f321d91e931f95b96d1f492a9454d}{update}} ()=0
 \item 
-\mbox{\Hypertarget{classwood_box_1_1display_1_1_a_r_g_b_led_ae0bd01eab303006612eb46058824b0c1}\label{classwood_box_1_1display_1_1_a_r_g_b_led_ae0bd01eab303006612eb46058824b0c1}} 
-const \mbox{\hyperlink{structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \& {\bfseries get\+Color} () const
+const \mbox{\hyperlink{structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \& \mbox{\hyperlink{classwood_box_1_1display_1_1_a_r_g_b_led_ae0bd01eab303006612eb46058824b0c1}{get\+Color}} () const
 \item 
-\mbox{\Hypertarget{classwood_box_1_1display_1_1_a_r_g_b_led_ac06b3ee90d2f49785173e9142df47bb7}\label{classwood_box_1_1display_1_1_a_r_g_b_led_ac06b3ee90d2f49785173e9142df47bb7}} 
-void {\bfseries set\+Color} (const \mbox{\hyperlink{structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \&color)
+void \mbox{\hyperlink{classwood_box_1_1display_1_1_a_r_g_b_led_ac06b3ee90d2f49785173e9142df47bb7}{set\+Color}} (const \mbox{\hyperlink{structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \&color)
 \end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+Abstract class used to control R\+GB L\+E\+Ds (Common cathode/anode, Grove Chainable L\+E\+Ds, Neo\+Pixels, ...etc)
+
+Example of use\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_changing\_led\_color(ARGBLed &led) \{
+  Color red = \{255, 0, 0\}; \textcolor{comment}{// Create a Color structure with red fully on, green off and blue off}
+  led.setColor(red); \textcolor{comment}{// Set the new color by calling setColor method}
+  led.update(); \textcolor{comment}{// Display the new color on the LED}
+\}
+\end{DoxyCode}
+ 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{classwood_box_1_1display_1_1_a_r_g_b_led_a01eeaee1bbb439e81f5f9bc536c04df7}\label{classwood_box_1_1display_1_1_a_r_g_b_led_a01eeaee1bbb439e81f5f9bc536c04df7}} 
@@ -47,7 +64,54 @@ Implements \mbox{\hyperlink{classwood_box_1_1display_1_1_i_display_a7030f0768c1e
 
 Implemented in \mbox{\hyperlink{classwood_box_1_1display_1_1_grove_chainable_l_e_d_a1c42c42ee9643aa914ab20a191e4adfd}{wood\+Box\+::display\+::\+Grove\+Chainable\+L\+ED}}.
 
-\mbox{\Hypertarget{classwood_box_1_1display_1_1_a_r_g_b_led_ab71f321d91e931f95b96d1f492a9454d}\label{classwood_box_1_1display_1_1_a_r_g_b_led_ab71f321d91e931f95b96d1f492a9454d}} 
+\mbox{\Hypertarget{classwood_box_1_1display_1_1_a_r_g_b_led_ae0bd01eab303006612eb46058824b0c1}\label{classwood_box_1_1display_1_1_a_r_g_b_led_ae0bd01eab303006612eb46058824b0c1}} 
+\index{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led@{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led}!get\+Color@{get\+Color}}
+\index{get\+Color@{get\+Color}!wood\+Box\+::display\+::\+A\+R\+G\+B\+Led@{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led}}
+\subsubsection{\texorpdfstring{get\+Color()}{getColor()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}}\& wood\+Box\+::display\+::\+A\+R\+G\+B\+Led\+::get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Return a reference on the \mbox{\hyperlink{structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} structure representing the current color displayed (or next color, if L\+ED color hasn\textquotesingle{}t been updated since last change of color made by set\+Color)
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_printing\_led\_color(\textcolor{keyword}{const} ARGBLed &led) \{
+  \textcolor{keyword}{const} Color &color = led.getColor();
+\textcolor{preprocessor}{#ifdef ARDUINO}
+  Serial.print(\textcolor{stringliteral}{"Red: "});
+  Serial.print(led.red);
+  Serial.print(\textcolor{stringliteral}{", Green: "});
+  Serial.print(led.green);
+  Serial.print(\textcolor{stringliteral}{", Blue: "});
+  Serial.println(led.blue);
+\textcolor{preprocessor}{#else}
+  printf(\textcolor{stringliteral}{"Red: %u, Green: %u, Blue: %u\(\backslash\)n"}, led.red, led.green, led.blue);
+\textcolor{preprocessor}{#endif}
+\textcolor{preprocessor}{\}}
+\end{DoxyCode}
+ \mbox{\Hypertarget{classwood_box_1_1display_1_1_a_r_g_b_led_ac06b3ee90d2f49785173e9142df47bb7}\label{classwood_box_1_1display_1_1_a_r_g_b_led_ac06b3ee90d2f49785173e9142df47bb7}} 
+\index{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led@{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led}!set\+Color@{set\+Color}}
+\index{set\+Color@{set\+Color}!wood\+Box\+::display\+::\+A\+R\+G\+B\+Led@{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led}}
+\subsubsection{\texorpdfstring{set\+Color()}{setColor()}}
+{\footnotesize\ttfamily void wood\+Box\+::display\+::\+A\+R\+G\+B\+Led\+::set\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structwood_box_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Set the new color to display on the L\+ED.
+
+Note\+: You need to call the \char`\"{}update\char`\"{} method after this one, as it doesn\textquotesingle{}t update automatically the new color on the L\+ED.
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{const} Color red = \{255, 0, 0\};
+
+\textcolor{keywordtype}{void} my\_function\_changing\_a\_led\_color\_to\_red(ARGBLed &led) \{
+  led.setColor(red); \textcolor{comment}{// Set the new color in the LED object}
+  led.update(); \textcolor{comment}{// You need to call this method if you want the new color to be displayed on the LED}
+\}
+\end{DoxyCode}
+ \mbox{\Hypertarget{classwood_box_1_1display_1_1_a_r_g_b_led_ab71f321d91e931f95b96d1f492a9454d}\label{classwood_box_1_1display_1_1_a_r_g_b_led_ab71f321d91e931f95b96d1f492a9454d}} 
 \index{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led@{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led}!update@{update}}
 \index{update@{update}!wood\+Box\+::display\+::\+A\+R\+G\+B\+Led@{wood\+Box\+::display\+::\+A\+R\+G\+B\+Led}}
 \subsubsection{\texorpdfstring{update()}{update()}}

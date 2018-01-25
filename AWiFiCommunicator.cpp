@@ -5,22 +5,8 @@ namespace woodBox {
     namespace communication {
         namespace wifi {
             AWiFiCommunicator::AWiFiCommunicator(const WiFi_ap *ap, const WiFi_client *client, const wifi_mode mode, Stream *stream):
-                    /* _ap({
-                    "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-                    "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0",
-                    0,
-                    N,
-                    TWO_POINT_FOUR_GHZ
-                }),
-                _me({
-                    {0,0,0,0,0,0},
-                    {0,0,0,0},
-                    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
-                }), */
                     _mode(mode),
                     _stream(stream)
-                //_host({{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}, 0}),
-                //_clients(nullptr)
             {
                 (ap != nullptr) ? memcpy(&_ap, ap, sizeof(WiFi_ap)) : memset(&_ap, 0, sizeof(WiFi_ap));
                 (client != nullptr) ? memcpy(&_me, client, sizeof(WiFi_client)) : memset(&_me, 0, sizeof(WiFi_client));

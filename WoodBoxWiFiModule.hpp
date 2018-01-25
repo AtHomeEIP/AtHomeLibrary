@@ -11,6 +11,25 @@ namespace woodBox {
          * Template class derived from woodBox::module::WoodBoxModule, implementing WoodBox WiFi extension.
          *
          * The template parameters are the same than woodBox::module::WoodBoxModule class, taking the type representing in memory a sample from the sensor and the number of samples to buffer.
+         *
+         * Example:
+         *
+         * \code{.cpp}
+         * #include <woodBox.h>
+         *
+         * WoodBoxWiFiModule<uint16_t, 15> *module = WoodBoxModule<uint16_t, 15>::getInstance<WoodBoxWiFiModule<uint16_t, 15> >();
+         * ESP8266WiFiCommunicator esp8266(2, 3); // CH_ED (enable) pin of the ESP8266 is imagined to be connected to pin 2 of the host, and RST (reset) pin is imagined to be connected to pin 3 of the host
+         *
+         * void setup() {
+         *   Serial1.begin(115200);
+         *   esp8266.setStreamToChipset(&Serial1); // If you're using an Arduino UNO or any other board with only one or no UART, use the SoftwareSerial library to create a new Serial instance to pass to this function
+         *   module->setWiFiCommunicator(esp8266);
+         * }
+         *
+         * void loop() {
+         *   // Put your code here
+         * }
+         * \endcode
          */
         template <typename T, size_t n>
         class WoodBoxWiFiModule : public WoodBoxModule<T, n> {
@@ -22,6 +41,8 @@ namespace woodBox {
 
             /**
              * Set the WiFi object used for wireless communication by passing it as reference.
+             *
+             * See class example for usage of this method.
              */
             void setWiFiCommunicator(communication::wifi::AWiFiCommunicator &wifi) {
                 if (_wifi != nullptr) {
