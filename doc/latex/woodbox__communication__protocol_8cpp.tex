@@ -1,0 +1,46 @@
+\hypertarget{woodbox__communication__protocol_8cpp}{}\section{woodbox\+\_\+communication\+\_\+protocol.\+cpp File Reference}
+\label{woodbox__communication__protocol_8cpp}\index{woodbox\+\_\+communication\+\_\+protocol.\+cpp@{woodbox\+\_\+communication\+\_\+protocol.\+cpp}}
+{\ttfamily \#include \char`\"{}woodbox\+\_\+communication\+\_\+protocol.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$avr/pgmspace.\+h$>$}\newline
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacewood_box}{wood\+Box}}
+\item 
+ \mbox{\hyperlink{namespacewood_box_1_1communication}{wood\+Box\+::communication}}
+\item 
+ \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands}{wood\+Box\+::communication\+::commands}}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_abc5d93b442c40ef05fa2b59ea9876f39}{wood\+Box\+::communication\+::commands\+::spacer}} = \textquotesingle{}\textbackslash{}t\textquotesingle{}
+\item 
+const char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_ac8f4a3315508756fb53544d3178d55c4}{wood\+Box\+::communication\+::commands\+::end\+\_\+of\+\_\+command}} = \textquotesingle{}\textbackslash{}x03\textquotesingle{}
+\item 
+const char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_ad36c9ec2903c21271782926bb54215ed}{wood\+Box\+::communication\+::commands\+::end\+\_\+of\+\_\+communication}} = \textquotesingle{}\textbackslash{}x04\textquotesingle{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_a1ab9d7397ae2201f38fa7b5d1c5c7cfd}{wood\+Box\+::communication\+::commands\+::end\+\_\+of\+\_\+line}} \mbox{[}$\,$\mbox{]} = \char`\"{}\textbackslash{}r\textbackslash{}n\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_a76851e1feab54d6c55c384d67bc4658d}{wood\+Box\+::communication\+::commands\+::part\+\_\+separator}} \mbox{[}$\,$\mbox{]} = \char`\"{}================================================================================\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_a0d21bd64e9d3ac5124e4839fd7ad1674}{wood\+Box\+::communication\+::commands\+::enumerate}} \mbox{[}$\,$\mbox{]} = \char`\"{}Enumerate\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_afe031bba1c80b536deb92aa3e53c9798}{wood\+Box\+::communication\+::commands\+::upload\+Data}} \mbox{[}$\,$\mbox{]} = \char`\"{}Upload\+Data\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_aaaf8dba01c188b30f1da691fd505aa7b}{wood\+Box\+::communication\+::commands\+::sync\+Time}} \mbox{[}$\,$\mbox{]} = \char`\"{}Sync\+Time\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_ab45ac37d499fb4c9a6381e77032a4d9e}{wood\+Box\+::communication\+::commands\+::set\+Wi\+Fi}} \mbox{[}$\,$\mbox{]} = \char`\"{}Set\+Wi\+Fi\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_a458319952946bba3318825dbfcc8d55f}{wood\+Box\+::communication\+::commands\+::set\+End\+Point}} \mbox{[}$\,$\mbox{]} = \char`\"{}Set\+End\+Point\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_a4d4ed99696ad571a3587986507c580b1}{wood\+Box\+::communication\+::commands\+::set\+Profile}} \mbox{[}$\,$\mbox{]} = \char`\"{}Set\+Profile\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_abca078c40f57a86aad8e4deefbada4f8}{wood\+Box\+::communication\+::commands\+::ssid\+\_\+key}} \mbox{[}$\,$\mbox{]} = \char`\"{}ssid\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_abc4cc92f05eab336200680b50b35630c}{wood\+Box\+::communication\+::commands\+::password\+\_\+key}} \mbox{[}$\,$\mbox{]} = \char`\"{}password\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_aae0ce9ea6660f4d4d6f24b69e27e62cd}{wood\+Box\+::communication\+::commands\+::ip\+\_\+key}} \mbox{[}$\,$\mbox{]} = \char`\"{}ip\char`\"{}
+\item 
+const P\+R\+O\+G\+M\+EM char \mbox{\hyperlink{namespacewood_box_1_1communication_1_1commands_af51ee90b8346b7778b6162cab4dad46d}{wood\+Box\+::communication\+::commands\+::port\+\_\+key}} \mbox{[}$\,$\mbox{]} = \char`\"{}port\char`\"{}
+\end{DoxyCompactItemize}

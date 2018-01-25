@@ -34,11 +34,14 @@ typedef char \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a3a650
 \item 
 typedef unsigned long \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab03bf835ec02656605c3c0df0188dc28}{timestamp}}
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}{custom\+Callback}}) ()
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}\label{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}} 
+typedef void($\ast$ {\bfseries custom\+Callback}) ()
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab0e08bb82f5585fd357ce1881855d0e2}{Wood\+Box\+Command\+Plugin}}) (const String \&, Stream \&)
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab0e08bb82f5585fd357ce1881855d0e2}\label{classwood_box_1_1module_1_1_wood_box_module_ab0e08bb82f5585fd357ce1881855d0e2}} 
+typedef void($\ast$ {\bfseries Wood\+Box\+Command\+Plugin}) (const String \&, Stream \&)
 \item 
-typedef void($\ast$ \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}{Wood\+Box\+Storage\+Plugin}}) (size\+\_\+t, \mbox{\hyperlink{classwood_box_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} \&)
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}\label{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}} 
+typedef void($\ast$ {\bfseries Wood\+Box\+Storage\+Plugin}) (size\+\_\+t, \mbox{\hyperlink{classwood_box_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} \&)
 \end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
@@ -67,17 +70,17 @@ unsigned long \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ad4a7
 \item 
 unsigned long \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a9582f3340d1aa35abfe278dec41f4313}{get\+Upload\+Data\+Execution\+Interval}} () const
 \item 
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab04481aafdcb9f3ff5ac9c9567f06006}{set\+Sensor\+Execution\+Callback}} (\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}{custom\+Callback}} f=nullptr)
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab04481aafdcb9f3ff5ac9c9567f06006}{set\+Sensor\+Execution\+Callback}} (custom\+Callback f=nullptr)
 \item 
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_af75fdaa122bfa637b3c0273a699adaef}{set\+Communication\+Execution\+Callback}} (\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}{custom\+Callback}} f=nullptr)
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_af75fdaa122bfa637b3c0273a699adaef}{set\+Communication\+Execution\+Callback}} (custom\+Callback f=nullptr)
 \item 
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a1912f897cb51233fdfeb061211dee3d2}{set\+Upload\+Data\+Execution\+Callback}} (\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}{custom\+Callback}} f=nullptr)
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a1912f897cb51233fdfeb061211dee3d2}{set\+Upload\+Data\+Execution\+Callback}} (custom\+Callback f=nullptr)
 \item 
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ad40df0835ac2ffcec83cfb96d12f9079}{set\+Command\+Plugin}} (\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab0e08bb82f5585fd357ce1881855d0e2}{Wood\+Box\+Command\+Plugin}} plugin)
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ad40df0835ac2ffcec83cfb96d12f9079}{set\+Command\+Plugin}} (Wood\+Box\+Command\+Plugin plugin)
 \item 
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a94cfcf71ecd1d715d14752001fbc7b6a}{set\+On\+Backup\+Plugin}} (\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}{Wood\+Box\+Storage\+Plugin}} plugin)
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a94cfcf71ecd1d715d14752001fbc7b6a}{set\+On\+Backup\+Plugin}} (Wood\+Box\+Storage\+Plugin plugin)
 \item 
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a85d4efff4708d41e3097479ab364faac}{set\+On\+Restore\+Plugin}} (\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}{Wood\+Box\+Storage\+Plugin}} plugin)
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a85d4efff4708d41e3097479ab364faac}{set\+On\+Restore\+Plugin}} (Wood\+Box\+Storage\+Plugin plugin)
 \item 
 \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_af74476c8a785de7fe587c4fb68435673}{module\+Type}} \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab2507312ea013ea5c95b8e1731ddc81d}{get\+Type}} () const
 \item 
@@ -127,49 +130,28 @@ class wood\+Box\+::module\+::\+Wood\+Box\+Module$<$ T, n $>$}
 Template class implementing base Wood\+Box Modules, taking the type representing a reading from the intended sensor to use and the number of readings to save in a buffer. 
 
 \subsection{Member Typedef Documentation}
-\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}\label{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}} 
-\index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!custom\+Callback@{custom\+Callback}}
-\index{custom\+Callback@{custom\+Callback}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
-\subsubsection{\texorpdfstring{custom\+Callback}{customCallback}}
-{\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::custom\+Callback) ()}
-
-custom\+Callback type is used to pass a callback to call during various events. Functions used as callback must have a compatible prototype to this\+: void name() \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a3a6503bbd5147a06ba50081f97177b46}\label{classwood_box_1_1module_1_1_wood_box_module_a3a6503bbd5147a06ba50081f97177b46}} 
+\mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a3a6503bbd5147a06ba50081f97177b46}\label{classwood_box_1_1module_1_1_wood_box_module_a3a6503bbd5147a06ba50081f97177b46}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!module\+Serial@{module\+Serial}}
 \index{module\+Serial@{module\+Serial}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{module\+Serial}{moduleSerial}}
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
 typedef char \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::module\+Serial\mbox{[}33\mbox{]}}
 
-module\+Serial type represents a unique value used to identify a module from other \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_adf5d59bae2980ff138284d0fa885df19}\label{classwood_box_1_1module_1_1_wood_box_module_adf5d59bae2980ff138284d0fa885df19}} 
+{\ttfamily module\+Serial} type represents a unique value used to identify a module from other \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_adf5d59bae2980ff138284d0fa885df19}\label{classwood_box_1_1module_1_1_wood_box_module_adf5d59bae2980ff138284d0fa885df19}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!module\+Vendor@{module\+Vendor}}
 \index{module\+Vendor@{module\+Vendor}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{module\+Vendor}{moduleVendor}}
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
 typedef char \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::module\+Vendor\mbox{[}33\mbox{]}}
 
-module\+Vendor type represents a type holding the vendor name of a module (\char`\"{}\+Wood\+Box\char`\"{} when they are built by Wood\+Box team) \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab03bf835ec02656605c3c0df0188dc28}\label{classwood_box_1_1module_1_1_wood_box_module_ab03bf835ec02656605c3c0df0188dc28}} 
+{\ttfamily module\+Vendor} type represents a type holding the vendor name of a module (\char`\"{}\+Wood\+Box\char`\"{} when they are built by Wood\+Box team) \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab03bf835ec02656605c3c0df0188dc28}\label{classwood_box_1_1module_1_1_wood_box_module_ab03bf835ec02656605c3c0df0188dc28}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!timestamp@{timestamp}}
 \index{timestamp@{timestamp}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{timestamp}{timestamp}}
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
 typedef unsigned long \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab03bf835ec02656605c3c0df0188dc28}{timestamp}}}
 
-timestamp type is used to represent sensor readings date \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab0e08bb82f5585fd357ce1881855d0e2}\label{classwood_box_1_1module_1_1_wood_box_module_ab0e08bb82f5585fd357ce1881855d0e2}} 
-\index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!Wood\+Box\+Command\+Plugin@{Wood\+Box\+Command\+Plugin}}
-\index{Wood\+Box\+Command\+Plugin@{Wood\+Box\+Command\+Plugin}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
-\subsubsection{\texorpdfstring{Wood\+Box\+Command\+Plugin}{WoodBoxCommandPlugin}}
-{\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::Wood\+Box\+Command\+Plugin) (const String \&, Stream \&)}
-
-Wood\+Box\+Command\+Command\+Plugin callback is used to extend command interpreter and called when an unknown command is the received. Functions used as callback receive a reference on a String holding the actual command name and a reference on the Stream from which it has been received. These functions must have a prototype compatible to this one\+: void name(const String \&, Stream \&); \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}\label{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}} 
-\index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!Wood\+Box\+Storage\+Plugin@{Wood\+Box\+Storage\+Plugin}}
-\index{Wood\+Box\+Storage\+Plugin@{Wood\+Box\+Storage\+Plugin}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
-\subsubsection{\texorpdfstring{Wood\+Box\+Storage\+Plugin}{WoodBoxStoragePlugin}}
-{\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
-typedef void($\ast$ \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::Wood\+Box\+Storage\+Plugin) (size\+\_\+t, \mbox{\hyperlink{classwood_box_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} \&)}
-
-Wood\+Box\+Storage\+Plugin callback is used to save or restore additional data from actual storage. Functions used as callback will receive the current offset usable after the module read or saved data in the storage, and a reference to this storage interface. These functions must have a prototype compatible to this one\+: void name(size\+\_\+t, wood\+Box\+::storage\+::\+I\+Storage \&) 
+{\ttfamily timestamp} type is used to represent sensor readings date 
 
 \subsection{Member Enumeration Documentation}
 \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_af74476c8a785de7fe587c4fb68435673}\label{classwood_box_1_1module_1_1_wood_box_module_af74476c8a785de7fe587c4fb68435673}} 
@@ -230,14 +212,22 @@ Get the interval between each time the module listens for received commands on i
 template$<$typename U  = Wood\+Box\+Module$>$ \\
 static U$\ast$ \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
-Template function used to get the address of the current \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{Wood\+Box\+Module}} or derived class or instanciates it if there\textquotesingle{}s still no instances existing. The template parameter takes the class type (and of course it\textquotesingle{}s own template parameters if it\textquotesingle{}s a templated class). If no template parameter is given, it will create by default a \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{Wood\+Box\+Module}} instance with an array of 15 variables of 2 bytes, typically used to store analog values from a sensor. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a24b14dd95e7b1c5a7ba31107cd0c524d}\label{classwood_box_1_1module_1_1_wood_box_module_a24b14dd95e7b1c5a7ba31107cd0c524d}} 
+Template function used to get the address of the current \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{Wood\+Box\+Module}} or derived class or instanciates it if there\textquotesingle{}s still no instances existing.
+
+The template parameter takes the class type (and of course it\textquotesingle{}s own template parameters if it\textquotesingle{}s a templated class).
+
+If no template parameter is given, it will create by default a \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{Wood\+Box\+Module}} instance. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a24b14dd95e7b1c5a7ba31107cd0c524d}\label{classwood_box_1_1module_1_1_wood_box_module_a24b14dd95e7b1c5a7ba31107cd0c524d}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!get\+Scheduler@{get\+Scheduler}}
 \index{get\+Scheduler@{get\+Scheduler}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{get\+Scheduler()}{getScheduler()}}
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
 Scheduler\& \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::get\+Scheduler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Get a reference on the scheduler instance used to manage tasks used by the module or for the user to add new custom tasks to execute. It\textquotesingle{}s based on the Task\+Scheduler library, see here for the documentation\+: \href{https://github.com/arkhipenko/TaskScheduler/wiki}{\tt https\+://github.\+com/arkhipenko/\+Task\+Scheduler/wiki} See there for the license of this library\+: \href{https://github.com/arkhipenko/TaskScheduler/blob/master/LICENSE.txt}{\tt https\+://github.\+com/arkhipenko/\+Task\+Scheduler/blob/master/\+L\+I\+C\+E\+N\+S\+E.\+txt} \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a4d5b8fd2ec5aeacb5704435bb6d961e7}\label{classwood_box_1_1module_1_1_wood_box_module_a4d5b8fd2ec5aeacb5704435bb6d961e7}} 
+Get a reference on the scheduler instance used to manage tasks used by the module or for the user to add new custom tasks to execute.
+
+It\textquotesingle{}s based on the Task\+Scheduler library, see here for the documentation\+: \href{https://github.com/arkhipenko/TaskScheduler/wiki}{\tt https\+://github.\+com/arkhipenko/\+Task\+Scheduler/wiki}
+
+\href{https://github.com/arkhipenko/TaskScheduler/blob/master/LICENSE.txt}{\tt See there for the license of this library\+: https\+://github.\+com/arkhipenko/\+Task\+Scheduler/blob/master/\+L\+I\+C\+E\+N\+S\+E.\+txt} \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a4d5b8fd2ec5aeacb5704435bb6d961e7}\label{classwood_box_1_1module_1_1_wood_box_module_a4d5b8fd2ec5aeacb5704435bb6d961e7}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!get\+Sensor\+Execution\+Interval@{get\+Sensor\+Execution\+Interval}}
 \index{get\+Sensor\+Execution\+Interval@{get\+Sensor\+Execution\+Interval}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{get\+Sensor\+Execution\+Interval()}{getSensorExecutionInterval()}}
@@ -321,21 +311,27 @@ Called (or trigger if called) when a module update its display. \mbox{\Hypertarg
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
 void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Main function used to execute the Module. It doesn\textquotesingle{}t use an infinite loop to allow user to execute code around each iterations of the module code, so it must be called in an infinite loop. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ad40df0835ac2ffcec83cfb96d12f9079}\label{classwood_box_1_1module_1_1_wood_box_module_ad40df0835ac2ffcec83cfb96d12f9079}} 
+Main function used to execute the Module.
+
+It doesn\textquotesingle{}t use an infinite loop to allow user to execute code around each iterations of the module code, so it must be called in an infinite loop. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ad40df0835ac2ffcec83cfb96d12f9079}\label{classwood_box_1_1module_1_1_wood_box_module_ad40df0835ac2ffcec83cfb96d12f9079}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!set\+Command\+Plugin@{set\+Command\+Plugin}}
 \index{set\+Command\+Plugin@{set\+Command\+Plugin}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{set\+Command\+Plugin()}{setCommandPlugin()}}
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+Command\+Plugin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab0e08bb82f5585fd357ce1881855d0e2}{Wood\+Box\+Command\+Plugin}}}]{plugin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+Command\+Plugin (\begin{DoxyParamCaption}\item[{Wood\+Box\+Command\+Plugin}]{plugin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Set a callback called after default command interpreter executed and wasn\textquotesingle{}t able to execute received input, passing the command string and a reference to the stream to the callback. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_af75fdaa122bfa637b3c0273a699adaef}\label{classwood_box_1_1module_1_1_wood_box_module_af75fdaa122bfa637b3c0273a699adaef}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!set\+Communication\+Execution\+Callback@{set\+Communication\+Execution\+Callback}}
 \index{set\+Communication\+Execution\+Callback@{set\+Communication\+Execution\+Callback}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{set\+Communication\+Execution\+Callback()}{setCommunicationExecutionCallback()}}
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+Communication\+Execution\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}{custom\+Callback}}}]{f = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+Communication\+Execution\+Callback (\begin{DoxyParamCaption}\item[{custom\+Callback}]{f = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Set the callback called when the module listens for received inputs. By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function. Calling this function passing no parameter or nullptr will restore the default callback of this class. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a0242f49765460d7c1e0528260ba1c26e}\label{classwood_box_1_1module_1_1_wood_box_module_a0242f49765460d7c1e0528260ba1c26e}} 
+Set the callback called when the module listens for received inputs.
+
+By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
+
+Calling this function passing no parameter or nullptr will restore the default callback of this class. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a0242f49765460d7c1e0528260ba1c26e}\label{classwood_box_1_1module_1_1_wood_box_module_a0242f49765460d7c1e0528260ba1c26e}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!set\+Communication\+Execution\+Interval@{set\+Communication\+Execution\+Interval}}
 \index{set\+Communication\+Execution\+Interval@{set\+Communication\+Execution\+Interval}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{set\+Communication\+Execution\+Interval()}{setCommunicationExecutionInterval()}}
@@ -347,23 +343,27 @@ Set the interval between each time the module listen for received commands on it
 \index{set\+On\+Backup\+Plugin@{set\+On\+Backup\+Plugin}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{set\+On\+Backup\+Plugin()}{setOnBackupPlugin()}}
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+On\+Backup\+Plugin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}{Wood\+Box\+Storage\+Plugin}}}]{plugin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+On\+Backup\+Plugin (\begin{DoxyParamCaption}\item[{Wood\+Box\+Storage\+Plugin}]{plugin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Set a callback called after module backup was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_a85d4efff4708d41e3097479ab364faac}\label{classwood_box_1_1module_1_1_wood_box_module_a85d4efff4708d41e3097479ab364faac}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!set\+On\+Restore\+Plugin@{set\+On\+Restore\+Plugin}}
 \index{set\+On\+Restore\+Plugin@{set\+On\+Restore\+Plugin}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{set\+On\+Restore\+Plugin()}{setOnRestorePlugin()}}
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+On\+Restore\+Plugin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ac7fea0a06e9fcab2ffb63500f6cd6565}{Wood\+Box\+Storage\+Plugin}}}]{plugin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+On\+Restore\+Plugin (\begin{DoxyParamCaption}\item[{Wood\+Box\+Storage\+Plugin}]{plugin }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 Set a callback called after module data loading was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ab04481aafdcb9f3ff5ac9c9567f06006}\label{classwood_box_1_1module_1_1_wood_box_module_ab04481aafdcb9f3ff5ac9c9567f06006}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!set\+Sensor\+Execution\+Callback@{set\+Sensor\+Execution\+Callback}}
 \index{set\+Sensor\+Execution\+Callback@{set\+Sensor\+Execution\+Callback}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{set\+Sensor\+Execution\+Callback()}{setSensorExecutionCallback()}}
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+Sensor\+Execution\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}{custom\+Callback}}}]{f = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+Sensor\+Execution\+Callback (\begin{DoxyParamCaption}\item[{custom\+Callback}]{f = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Set the callback called when the module sample a sensor. By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function. Calling this function passing no parameter or nullptr will restore the default callback of this class. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_aa5e44c8631ee30e85c16ffc0454c8210}\label{classwood_box_1_1module_1_1_wood_box_module_aa5e44c8631ee30e85c16ffc0454c8210}} 
+Set the callback called when the module sample a sensor.
+
+By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
+
+Calling this function passing no parameter or nullptr will restore the default callback of this class. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_aa5e44c8631ee30e85c16ffc0454c8210}\label{classwood_box_1_1module_1_1_wood_box_module_aa5e44c8631ee30e85c16ffc0454c8210}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!set\+Sensor\+Execution\+Interval@{set\+Sensor\+Execution\+Interval}}
 \index{set\+Sensor\+Execution\+Interval@{set\+Sensor\+Execution\+Interval}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{set\+Sensor\+Execution\+Interval()}{setSensorExecutionInterval()}}
@@ -396,9 +396,13 @@ Initialize (or reinitialize) Module \mbox{\Hypertarget{classwood_box_1_1module_1
 \index{set\+Upload\+Data\+Execution\+Callback@{set\+Upload\+Data\+Execution\+Callback}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{set\+Upload\+Data\+Execution\+Callback()}{setUploadDataExecutionCallback()}}
 {\footnotesize\ttfamily template$<$typename T , size\+\_\+t n$>$ \\
-void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+Upload\+Data\+Execution\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_ab6d400f05cc572fb9fd28dd0baf6d346}{custom\+Callback}}}]{f = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+void \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}}$<$ T, n $>$\+::set\+Upload\+Data\+Execution\+Callback (\begin{DoxyParamCaption}\item[{custom\+Callback}]{f = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
-Set the callback called when the module sends its stored sensor readings over its streams.. By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function. Calling this function passing no parameter or nullptr will restore the default callback of this class. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ada9e2ee4b4da9396c504c0d0217d0c2f}\label{classwood_box_1_1module_1_1_wood_box_module_ada9e2ee4b4da9396c504c0d0217d0c2f}} 
+Set the callback called when the module sends its stored sensor readings over its streams.
+
+By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
+
+Calling this function passing no parameter or nullptr will restore the default callback of this class. \mbox{\Hypertarget{classwood_box_1_1module_1_1_wood_box_module_ada9e2ee4b4da9396c504c0d0217d0c2f}\label{classwood_box_1_1module_1_1_wood_box_module_ada9e2ee4b4da9396c504c0d0217d0c2f}} 
 \index{wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}!set\+Upload\+Data\+Execution\+Interval@{set\+Upload\+Data\+Execution\+Interval}}
 \index{set\+Upload\+Data\+Execution\+Interval@{set\+Upload\+Data\+Execution\+Interval}!wood\+Box\+::module\+::\+Wood\+Box\+Module@{wood\+Box\+::module\+::\+Wood\+Box\+Module}}
 \subsubsection{\texorpdfstring{set\+Upload\+Data\+Execution\+Interval()}{setUploadDataExecutionInterval()}}

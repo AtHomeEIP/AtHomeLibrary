@@ -1,20 +1,6 @@
 var searchData=
 [
-  ['s_5fhost',['s_host',['../structwood_box_1_1communication_1_1ip_1_1s__host.html',1,'woodBox::communication::ip']]],
-  ['s_5fwifi_5faccess_5fpoint',['s_wifi_access_point',['../structwood_box_1_1communication_1_1wifi_1_1s__wifi__access__point.html',1,'woodBox::communication::wifi']]],
-  ['s_5fwifi_5fclient',['s_wifi_client',['../structwood_box_1_1communication_1_1wifi_1_1s__wifi__client.html',1,'woodBox::communication::wifi']]],
-  ['setcommandplugin',['setCommandPlugin',['../classwood_box_1_1module_1_1_wood_box_module.html#ad40df0835ac2ffcec83cfb96d12f9079',1,'woodBox::module::WoodBoxModule']]],
-  ['setcommunicationexecutioncallback',['setCommunicationExecutionCallback',['../classwood_box_1_1module_1_1_wood_box_module.html#af75fdaa122bfa637b3c0273a699adaef',1,'woodBox::module::WoodBoxModule']]],
-  ['setcommunicationexecutioninterval',['setCommunicationExecutionInterval',['../classwood_box_1_1module_1_1_wood_box_module.html#a0242f49765460d7c1e0528260ba1c26e',1,'woodBox::module::WoodBoxModule']]],
-  ['setonbackupplugin',['setOnBackupPlugin',['../classwood_box_1_1module_1_1_wood_box_module.html#a94cfcf71ecd1d715d14752001fbc7b6a',1,'woodBox::module::WoodBoxModule']]],
-  ['setonrestoreplugin',['setOnRestorePlugin',['../classwood_box_1_1module_1_1_wood_box_module.html#a85d4efff4708d41e3097479ab364faac',1,'woodBox::module::WoodBoxModule']]],
-  ['setsensorexecutioncallback',['setSensorExecutionCallback',['../classwood_box_1_1module_1_1_wood_box_module.html#ab04481aafdcb9f3ff5ac9c9567f06006',1,'woodBox::module::WoodBoxModule']]],
-  ['setsensorexecutioninterval',['setSensorExecutionInterval',['../classwood_box_1_1module_1_1_wood_box_module.html#aa5e44c8631ee30e85c16ffc0454c8210',1,'woodBox::module::WoodBoxModule']]],
-  ['setserial',['setSerial',['../classwood_box_1_1module_1_1_wood_box_module.html#affcbb54be4585637a88aade3e29b8a93',1,'woodBox::module::WoodBoxModule']]],
-  ['settype',['setType',['../classwood_box_1_1module_1_1_wood_box_module.html#a807efbd90ccdd796bfc62c15bfbc81ab',1,'woodBox::module::WoodBoxModule']]],
-  ['setup',['setup',['../classwood_box_1_1module_1_1_wood_box_module.html#a610b2339bd0ff26d2cde59d2006a4aed',1,'woodBox::module::WoodBoxModule']]],
-  ['setuploaddataexecutioncallback',['setUploadDataExecutionCallback',['../classwood_box_1_1module_1_1_wood_box_module.html#a1912f897cb51233fdfeb061211dee3d2',1,'woodBox::module::WoodBoxModule']]],
-  ['setuploaddataexecutioninterval',['setUploadDataExecutionInterval',['../classwood_box_1_1module_1_1_wood_box_module.html#ada9e2ee4b4da9396c504c0d0217d0c2f',1,'woodBox::module::WoodBoxModule']]],
-  ['setvendor',['setVendor',['../classwood_box_1_1module_1_1_wood_box_module.html#af19696ed5702e009a584065892ed1501',1,'woodBox::module::WoodBoxModule']]],
-  ['stop',['stop',['../classwood_box_1_1module_1_1_wood_box_module.html#abbc32e89fe1ace40f447539237c0b713',1,'woodBox::module::WoodBoxModule']]]
+  ['readme',['README',['../md__r_e_a_d_m_e.html',1,'']]],
+  ['read',['read',['../classwood_box_1_1storage_1_1_arduino_e_e_p_r_o_m.html#a1b9deb25ea803456b5450f4e3782fd20',1,'woodBox::storage::ArduinoEEPROM::read()'],['../classwood_box_1_1storage_1_1_i_storage.html#a01bab924be0844e3866b27279caa506d',1,'woodBox::storage::IStorage::read()']]],
+  ['run',['run',['../classwood_box_1_1module_1_1_wood_box_module.html#ac65e58ab2338b1e3f57e4ce5d9e70c6c',1,'woodBox::module::WoodBoxModule']]]
 ];

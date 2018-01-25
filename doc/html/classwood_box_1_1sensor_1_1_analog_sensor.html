@@ -73,6 +73,8 @@ $(function() {
 <div class="title">woodBox::sensor::AnalogSensor Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_analog_sensor_8hpp_source.html">AnalogSensor.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for woodBox::sensor::AnalogSensor:</div>
 <div class="dyncontent">
@@ -85,8 +87,7 @@ Inheritance diagram for woodBox::sensor::AnalogSensor:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a41d8ff91cf91d2bdbccffe8f1316421b"><td class="memItemLeft" align="right" valign="top"><a id="a41d8ff91cf91d2bdbccffe8f1316421b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AnalogSensor</b> (uint8_t pin)</td></tr>
+<tr class="memitem:a41d8ff91cf91d2bdbccffe8f1316421b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a41d8ff91cf91d2bdbccffe8f1316421b">AnalogSensor</a> (uint8_t pin)</td></tr>
 <tr class="separator:a41d8ff91cf91d2bdbccffe8f1316421b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8ee0238d3fab4515b5286e67f1f92083"><td class="memItemLeft" align="right" valign="top"><a id="a8ee0238d3fab4515b5286e67f1f92083"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>AnalogSensor</b> (const <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html">AnalogSensor</a> &amp;)=delete</td></tr>
@@ -98,8 +99,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae78c25d8c01ba9acd03f90f278966189"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a74ddcfe84f3f5b9d7010442f365c4eee"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#aa377bda61ed0d4a1d7e1a7bffe459452">ISensorScale</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a74ddcfe84f3f5b9d7010442f365c4eee">getEstimate</a> ()</td></tr>
 <tr class="separator:a74ddcfe84f3f5b9d7010442f365c4eee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a7c67726db40be3edd48294910b117b"><td class="memItemLeft" align="right" valign="top"><a id="a5a7c67726db40be3edd48294910b117b"></a>
-uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>getAnaloguePin</b> ()</td></tr>
+<tr class="memitem:a5a7c67726db40be3edd48294910b117b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a5a7c67726db40be3edd48294910b117b">getAnaloguePin</a> ()</td></tr>
 <tr class="separator:a5a7c67726db40be3edd48294910b117b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -129,7 +129,49 @@ Additional Inherited Members</h2></td></tr>
  }</td></tr>
 <tr class="separator:aa377bda61ed0d4a1d7e1a7bffe459452 inherit pub_types_classwood_box_1_1sensor_1_1_i_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Base class derived from <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">woodBox::sensor::ISensor</a> allowing to use an analog sensor.</p>
+<p>Warning: This class is only able to sample an analog sensor, not to interpret its value.</p>
+<p>Thus, <code>getEstimate</code> method will always return woodBox::sensor::ISensor::ISensorScale::ZERO if this method is not overriden by a specialized class. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a41d8ff91cf91d2bdbccffe8f1316421b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41d8ff91cf91d2bdbccffe8f1316421b">&#9670;&nbsp;</a></span>AnalogSensor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">woodBox::sensor::AnalogSensor::AnalogSensor </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Create an instance of <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html">AnalogSensor</a>, needing the analog pin used to sample the sensor. </p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5a7c67726db40be3edd48294910b117b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a7c67726db40be3edd48294910b117b">&#9670;&nbsp;</a></span>getAnaloguePin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t woodBox::sensor::AnalogSensor::getAnaloguePin </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Return the value of the pin used to sample the sensor. </p>
+
+</div>
+</div>
 <a id="a74ddcfe84f3f5b9d7010442f365c4eee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a74ddcfe84f3f5b9d7010442f365c4eee">&#9670;&nbsp;</a></span>getEstimate()</h2>
 
@@ -152,7 +194,7 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Returns the estimation of safety from the current sensor value </p>
+<p>Return woodBox::sensor::ISensor::ISensorScale::ZERO if object is an instance of <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html">AnalogSensor</a> class </p>
 
 <p>Implements <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#afb01c2473efc4a823bf5dada0048d2bc">woodBox::sensor::ISensor</a>.</p>
 
@@ -180,8 +222,9 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Returns a pointer on sensor sample raw memory, as an array of bytes </p>
-
+<p>Return a pointer on a <code>uint16_t</code> variable, so the memory area returned by the pointer is 2 bytes long or equivalent to an array of 2 <code>uint8_t</code>.</p>
+<p>Examples of use:</p>
+<div class="fragment"><div class="line"><a class="code" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a41d8ff91cf91d2bdbccffe8f1316421b">AnalogSensor</a> my_sensor(0); <span class="comment">// Or A0 for example if using Arduino</span></div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_func_reading_my_sensor() {</div><div class="line">  uint8_t *pointer = my_sensor.getSample();</div><div class="line">  <span class="keywordflow">if</span> (pointer == <span class="keyword">nullptr</span>) {</div><div class="line">    <span class="comment">// Invalid pointer -&gt; might be caused by a sample error from the sensor.</span></div><div class="line">    <span class="comment">// Can&#39;t happen with base AnalogSensor class but could happen from other woodBox::sensor::ISensor derived classes, so it&#39;s good practice to always check returned pointer.</span></div><div class="line">    <span class="keywordflow">return</span>;</div><div class="line">  }</div><div class="line">  <span class="comment">// Can access value from casting pointer to its original uint16_t type:</span></div><div class="line">  uint16_t *full_pointer = <span class="keyword">reinterpret_cast&lt;</span>uint16_t *<span class="keyword">&gt;</span>(pointer);</div><div class="line">  <span class="comment">// Or by casting it in C-style:</span></div><div class="line">  uint16_t *c_pointer = (uint16_t *)pointer;</div><div class="line">  <span class="comment">// Or by accessing it as an array of 2 bytes:</span></div><div class="line">  uint16_t value = ((pointer[0]) &lt;&lt; 8) | pointer[1];</div><div class="line"></div><div class="line">  printf(<span class="stringliteral">&quot;%hu\n&quot;</span>, *full_pointer); <span class="comment">// Or Serial.println(*full_pointer) for example on Arduino</span></div><div class="line">  printf(<span class="stringliteral">&quot;%hu\n&quot;</span>, *c_pointer); <span class="comment">// Or Serial.println(*c_pointer) for example on Arduino</span></div><div class="line">  printf(<span class="stringliteral">&quot;%hu\n&quot;</span>, value); <span class="comment">// Or Serial.println(value) for example on Arduino</span></div><div class="line">}</div></div><!-- fragment --> 
 <p>Implements <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#a9de8041b991b76cc2f6fcc3b6a1bf363">woodBox::sensor::ISensor</a>.</p>
 
 </div>

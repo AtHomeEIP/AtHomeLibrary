@@ -5,9 +5,12 @@ namespace woodBox {
     namespace display {
         /**
          * Interface used to control any kind of display.
+         *
          * As the content displayed can change from on display to another (text, color, pixels, ...etc),
+         *
          * it has a very few common methods.
-         * Unfortunately, embedded platforms tends to not have RTTI support (no dynamic_cast or typeof), so user will have to manage the use of derived interfaces / classes by himself
+         *
+         * Unfortunately, embedded platforms tends to not have runtime (no `dynamic_cast` or `typeof`), so user will have to manage the use of derived interfaces / classes by himself
          */
         class IDisplay {
             public:

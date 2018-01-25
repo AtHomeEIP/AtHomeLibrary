@@ -32,15 +32,15 @@ namespace woodBox {
                 };
 
                 /**
-                 * moduleVendor type represents a type holding the vendor name of a module ("WoodBox" when they are built by WoodBox team)
+                 * `moduleVendor` type represents a type holding the vendor name of a module ("WoodBox" when they are built by WoodBox team)
                  */
                 typedef char            moduleVendor[33];
                 /**
-                 * moduleSerial type represents a unique value used to identify a module from other
+                 * `moduleSerial` type represents a unique value used to identify a module from other
                  */
                 typedef char            moduleSerial[33];
                 /**
-                 * timestamp type is used to represent sensor readings date
+                 * `timestamp` type is used to represent sensor readings date
                  */
                 typedef unsigned long   timestamp;
 
@@ -57,26 +57,36 @@ namespace woodBox {
             public:
                 /**
                  * customCallback type is used to pass a callback to call during various events.
-                 * Functions used as callback must have a compatible prototype to this: void name()
+                 *
+                 * Functions used as callback must have a compatible prototype to this:
+                 * \fn void name()
                  */
                 typedef void (*customCallback)();
                 /**
                  * WoodBoxCommandCommandPlugin callback is used to extend command interpreter and called when an unknown command is the received.
+                 *
                  * Functions used as callback receive a reference on a String holding the actual command name and a reference on the Stream from which it has been received.
-                 * These functions must have a prototype compatible to this one: void name(const String &, Stream &);
+                 *
+                 * These functions must have a prototype compatible to this one:
+                 * \fn void name(const String &, Stream &)
                  */
                 typedef void (*WoodBoxCommandPlugin)(const String &, Stream &);
                 /**
                  * WoodBoxStoragePlugin callback is used to save or restore additional data from actual storage.
+                 *
                  * Functions used as callback will receive the current offset usable after the module read or saved data in the storage, and a reference to this storage interface.
-                 * These functions must have a prototype compatible to this one: void name(size_t, woodBox::storage::IStorage &)
+                 *
+                 * These functions must have a prototype compatible to this one:
+                 * \fn void name(size_t, woodBox::storage::IStorage &)
                  */
                 typedef void (*WoodBoxStoragePlugin)(size_t, storage::IStorage &);
 
                 /**
                  * Template function used to get the address of the current WoodBoxModule or derived class or instanciates it if there's still no instances existing.
+                 *
                  * The template parameter takes the class type (and of course it's own template parameters if it's a templated class).
-                 * If no template parameter is given, it will create by default a WoodBoxModule instance with an array of 15 variables of 2 bytes, typically used to store analog values from a sensor.
+                 *
+                 * If no template parameter is given, it will create by default a WoodBoxModule instance.
                  */
                 template <typename U = WoodBoxModule>
                 static U *getInstance() {
@@ -90,8 +100,10 @@ namespace woodBox {
 
                 /**
                  * Get a reference on the scheduler instance used to manage tasks used by the module or for the user to add new custom tasks to execute.
+                 *
                  * It's based on the TaskScheduler library, see here for the documentation: https://github.com/arkhipenko/TaskScheduler/wiki
-                 * See there for the license of this library: https://github.com/arkhipenko/TaskScheduler/blob/master/LICENSE.txt
+                 *
+                 * [See there for the license of this library: https://github.com/arkhipenko/TaskScheduler/blob/master/LICENSE.txt] (https://github.com/arkhipenko/TaskScheduler/blob/master/LICENSE.txt)
                  */
                 Scheduler &getScheduler() {
                     return _scheduler;
@@ -115,6 +127,7 @@ namespace woodBox {
 
                 /**
                  * Main function used to execute the Module.
+                 *
                  * It doesn't use an infinite loop to allow user to execute code around each iterations of the module code,
                  * so it must be called in an infinite loop.
                  */
@@ -183,7 +196,9 @@ namespace woodBox {
 
                 /**
                  * Set the callback called when the module sample a sensor.
+                 *
                  * By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
+                 *
                  * Calling this function passing no parameter or nullptr will restore the default callback of this class.
                  */
                 void setSensorExecutionCallback(customCallback f = nullptr) {
@@ -192,7 +207,9 @@ namespace woodBox {
 
                 /**
                  * Set the callback called when the module listens for received inputs.
+                 *
                  * By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
+                 *
                  * Calling this function passing no parameter or nullptr will restore the default callback of this class.
                  */
                 void setCommunicationExecutionCallback(customCallback f = nullptr) {
@@ -200,8 +217,10 @@ namespace woodBox {
                 }
 
                 /**
-                 * Set the callback called when the module sends its stored sensor readings over its streams..
+                 * Set the callback called when the module sends its stored sensor readings over its streams.
+                 *
                  * By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
+                 *
                  * Calling this function passing no parameter or nullptr will restore the default callback of this class.
                  */
                 void setUploadDataExecutionCallback(customCallback f = nullptr) {
@@ -293,7 +312,6 @@ namespace woodBox {
                 }
 
             protected:
-
                 WoodBoxModule():
                     ABaseModule(),
                     _sensorInterval(TASK_SECOND),

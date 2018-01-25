@@ -112,11 +112,14 @@ Public Types</h2></td></tr>
 <tr class="separator:a3a6503bbd5147a06ba50081f97177b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab03bf835ec02656605c3c0df0188dc28"><td class="memItemLeft" align="right" valign="top">typedef unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab03bf835ec02656605c3c0df0188dc28">timestamp</a></td></tr>
 <tr class="separator:ab03bf835ec02656605c3c0df0188dc28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6d400f05cc572fb9fd28dd0baf6d346"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab6d400f05cc572fb9fd28dd0baf6d346">customCallback</a>) ()</td></tr>
+<tr class="memitem:ab6d400f05cc572fb9fd28dd0baf6d346"><td class="memItemLeft" align="right" valign="top"><a id="ab6d400f05cc572fb9fd28dd0baf6d346"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>customCallback</b>) ()</td></tr>
 <tr class="separator:ab6d400f05cc572fb9fd28dd0baf6d346"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab0e08bb82f5585fd357ce1881855d0e2"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab0e08bb82f5585fd357ce1881855d0e2">WoodBoxCommandPlugin</a>) (const String &amp;, Stream &amp;)</td></tr>
+<tr class="memitem:ab0e08bb82f5585fd357ce1881855d0e2"><td class="memItemLeft" align="right" valign="top"><a id="ab0e08bb82f5585fd357ce1881855d0e2"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>WoodBoxCommandPlugin</b>) (const String &amp;, Stream &amp;)</td></tr>
 <tr class="separator:ab0e08bb82f5585fd357ce1881855d0e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7fea0a06e9fcab2ffb63500f6cd6565"><td class="memItemLeft" align="right" valign="top">typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ac7fea0a06e9fcab2ffb63500f6cd6565">WoodBoxStoragePlugin</a>) (size_t, <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> &amp;)</td></tr>
+<tr class="memitem:ac7fea0a06e9fcab2ffb63500f6cd6565"><td class="memItemLeft" align="right" valign="top"><a id="ac7fea0a06e9fcab2ffb63500f6cd6565"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>WoodBoxStoragePlugin</b>) (size_t, <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> &amp;)</td></tr>
 <tr class="separator:ac7fea0a06e9fcab2ffb63500f6cd6565"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -145,17 +148,17 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad4a7b447a617d9c6908ef624cfd2cab4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9582f3340d1aa35abfe278dec41f4313"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a9582f3340d1aa35abfe278dec41f4313">getUploadDataExecutionInterval</a> () const</td></tr>
 <tr class="separator:a9582f3340d1aa35abfe278dec41f4313"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab04481aafdcb9f3ff5ac9c9567f06006"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab04481aafdcb9f3ff5ac9c9567f06006">setSensorExecutionCallback</a> (<a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab6d400f05cc572fb9fd28dd0baf6d346">customCallback</a> f=nullptr)</td></tr>
+<tr class="memitem:ab04481aafdcb9f3ff5ac9c9567f06006"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab04481aafdcb9f3ff5ac9c9567f06006">setSensorExecutionCallback</a> (customCallback f=nullptr)</td></tr>
 <tr class="separator:ab04481aafdcb9f3ff5ac9c9567f06006"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af75fdaa122bfa637b3c0273a699adaef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#af75fdaa122bfa637b3c0273a699adaef">setCommunicationExecutionCallback</a> (<a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab6d400f05cc572fb9fd28dd0baf6d346">customCallback</a> f=nullptr)</td></tr>
+<tr class="memitem:af75fdaa122bfa637b3c0273a699adaef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#af75fdaa122bfa637b3c0273a699adaef">setCommunicationExecutionCallback</a> (customCallback f=nullptr)</td></tr>
 <tr class="separator:af75fdaa122bfa637b3c0273a699adaef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1912f897cb51233fdfeb061211dee3d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a1912f897cb51233fdfeb061211dee3d2">setUploadDataExecutionCallback</a> (<a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab6d400f05cc572fb9fd28dd0baf6d346">customCallback</a> f=nullptr)</td></tr>
+<tr class="memitem:a1912f897cb51233fdfeb061211dee3d2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a1912f897cb51233fdfeb061211dee3d2">setUploadDataExecutionCallback</a> (customCallback f=nullptr)</td></tr>
 <tr class="separator:a1912f897cb51233fdfeb061211dee3d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad40df0835ac2ffcec83cfb96d12f9079"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ad40df0835ac2ffcec83cfb96d12f9079">setCommandPlugin</a> (<a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab0e08bb82f5585fd357ce1881855d0e2">WoodBoxCommandPlugin</a> plugin)</td></tr>
+<tr class="memitem:ad40df0835ac2ffcec83cfb96d12f9079"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ad40df0835ac2ffcec83cfb96d12f9079">setCommandPlugin</a> (WoodBoxCommandPlugin plugin)</td></tr>
 <tr class="separator:ad40df0835ac2ffcec83cfb96d12f9079"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94cfcf71ecd1d715d14752001fbc7b6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a94cfcf71ecd1d715d14752001fbc7b6a">setOnBackupPlugin</a> (<a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ac7fea0a06e9fcab2ffb63500f6cd6565">WoodBoxStoragePlugin</a> plugin)</td></tr>
+<tr class="memitem:a94cfcf71ecd1d715d14752001fbc7b6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a94cfcf71ecd1d715d14752001fbc7b6a">setOnBackupPlugin</a> (WoodBoxStoragePlugin plugin)</td></tr>
 <tr class="separator:a94cfcf71ecd1d715d14752001fbc7b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85d4efff4708d41e3097479ab364faac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a85d4efff4708d41e3097479ab364faac">setOnRestorePlugin</a> (<a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ac7fea0a06e9fcab2ffb63500f6cd6565">WoodBoxStoragePlugin</a> plugin)</td></tr>
+<tr class="memitem:a85d4efff4708d41e3097479ab364faac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a85d4efff4708d41e3097479ab364faac">setOnRestorePlugin</a> (WoodBoxStoragePlugin plugin)</td></tr>
 <tr class="separator:a85d4efff4708d41e3097479ab364faac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab2507312ea013ea5c95b8e1731ddc81d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#af74476c8a785de7fe587c4fb68435673">moduleType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab2507312ea013ea5c95b8e1731ddc81d">getType</a> () const</td></tr>
 <tr class="separator:ab2507312ea013ea5c95b8e1731ddc81d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -173,35 +176,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a61e8f78a69b3ea735e70a13f6de8d662 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a61e8f78a69b3ea735e70a13f6de8d662"></a>
 <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html">ABaseModule</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classwood_box_1_1module_1_1_a_base_module.html">ABaseModule</a> &amp;)=delete</td></tr>
 <tr class="separator:a61e8f78a69b3ea735e70a13f6de8d662 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada9df5e73cb0aee0bada1de17de19a9c inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="ada9df5e73cb0aee0bada1de17de19a9c"></a>
-Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>getStreams</b> ()</td></tr>
+<tr class="memitem:ada9df5e73cb0aee0bada1de17de19a9c inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top">Stream **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#ada9df5e73cb0aee0bada1de17de19a9c">getStreams</a> ()</td></tr>
 <tr class="separator:ada9df5e73cb0aee0bada1de17de19a9c inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e3b73bd36f668f5d621dee3070c131a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a6e3b73bd36f668f5d621dee3070c131a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStreams</b> (Stream **)</td></tr>
+<tr class="memitem:a6e3b73bd36f668f5d621dee3070c131a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#a6e3b73bd36f668f5d621dee3070c131a">setStreams</a> (Stream **)</td></tr>
 <tr class="separator:a6e3b73bd36f668f5d621dee3070c131a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afecd89a2ed85517a6d72ad2f03ea87c3 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="afecd89a2ed85517a6d72ad2f03ea87c3"></a>
-<a class="el" href="classwood_box_1_1display_1_1_i_display.html">display::IDisplay</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getDisplay</b> ()</td></tr>
+<tr class="memitem:afecd89a2ed85517a6d72ad2f03ea87c3 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classwood_box_1_1display_1_1_i_display.html">display::IDisplay</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#afecd89a2ed85517a6d72ad2f03ea87c3">getDisplay</a> ()</td></tr>
 <tr class="separator:afecd89a2ed85517a6d72ad2f03ea87c3 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e99b7d8d59953a8350e9859a475bc6a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a7e99b7d8d59953a8350e9859a475bc6a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setDisplay</b> (<a class="el" href="classwood_box_1_1display_1_1_i_display.html">display::IDisplay</a> *)</td></tr>
+<tr class="memitem:a7e99b7d8d59953a8350e9859a475bc6a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#a7e99b7d8d59953a8350e9859a475bc6a">setDisplay</a> (<a class="el" href="classwood_box_1_1display_1_1_i_display.html">display::IDisplay</a> *)</td></tr>
 <tr class="separator:a7e99b7d8d59953a8350e9859a475bc6a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a0c195b7c497201926f6d07b77f6489 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a6a0c195b7c497201926f6d07b77f6489"></a>
-const <a class="el" href="classwood_box_1_1power_1_1_i_power.html">power::IPower</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getPowerSource</b> () const</td></tr>
-<tr class="separator:a6a0c195b7c497201926f6d07b77f6489 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a117ce9fbbcef048ccde38f0b6a11aa91 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a117ce9fbbcef048ccde38f0b6a11aa91"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPowerSource</b> (<a class="el" href="classwood_box_1_1power_1_1_i_power.html">power::IPower</a> *)</td></tr>
+<tr class="memitem:a1d67c7b9560b30774878e5b882c4bf0a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classwood_box_1_1power_1_1_i_power.html">power::IPower</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#a1d67c7b9560b30774878e5b882c4bf0a">getPowerSource</a> ()</td></tr>
+<tr class="separator:a1d67c7b9560b30774878e5b882c4bf0a inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a117ce9fbbcef048ccde38f0b6a11aa91 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#a117ce9fbbcef048ccde38f0b6a11aa91">setPowerSource</a> (<a class="el" href="classwood_box_1_1power_1_1_i_power.html">power::IPower</a> *)</td></tr>
 <tr class="separator:a117ce9fbbcef048ccde38f0b6a11aa91 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73004296826a55c3d24c2212b7165569 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="a73004296826a55c3d24c2212b7165569"></a>
-const <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getSensor</b> () const</td></tr>
-<tr class="separator:a73004296826a55c3d24c2212b7165569 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3fd88feae532ca88b14642f76ef8def inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="ac3fd88feae532ca88b14642f76ef8def"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setSensor</b> (<a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *)</td></tr>
+<tr class="memitem:acd7e95a20964a1f9ce2dbbbf629fe3dc inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#acd7e95a20964a1f9ce2dbbbf629fe3dc">getSensor</a> ()</td></tr>
+<tr class="separator:acd7e95a20964a1f9ce2dbbbf629fe3dc inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3fd88feae532ca88b14642f76ef8def inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#ac3fd88feae532ca88b14642f76ef8def">setSensor</a> (<a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *)</td></tr>
 <tr class="separator:ac3fd88feae532ca88b14642f76ef8def inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afaa761163e3e88fbeb26a1699eaccb78 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="afaa761163e3e88fbeb26a1699eaccb78"></a>
-const <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getStorage</b> () const</td></tr>
-<tr class="separator:afaa761163e3e88fbeb26a1699eaccb78 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9e009af37d04062c2da7d977baded80 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="af9e009af37d04062c2da7d977baded80"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStorage</b> (<a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> *)</td></tr>
+<tr class="memitem:ad55a3509dc2bcb2fc5c8abc4a4db1cf1 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#ad55a3509dc2bcb2fc5c8abc4a4db1cf1">getStorage</a> ()</td></tr>
+<tr class="separator:ad55a3509dc2bcb2fc5c8abc4a4db1cf1 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af9e009af37d04062c2da7d977baded80 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#af9e009af37d04062c2da7d977baded80">setStorage</a> (<a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> *)</td></tr>
 <tr class="separator:af9e009af37d04062c2da7d977baded80 inherit pub_methods_classwood_box_1_1module_1_1_a_base_module"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
@@ -265,23 +258,6 @@ class woodBox::module::WoodBoxModule&lt; T, n &gt;</h3>
 
 <p>Template class implementing base WoodBox Modules, taking the type representing a reading from the intended sensor to use and the number of readings to save in a buffer. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a id="ab6d400f05cc572fb9fd28dd0baf6d346"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6d400f05cc572fb9fd28dd0baf6d346">&#9670;&nbsp;</a></span>customCallback</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , size_t n&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a>&lt; T, n &gt;::customCallback) ()</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>customCallback type is used to pass a callback to call during various events. Functions used as callback must have a compatible prototype to this: void name() </p>
-
-</div>
-</div>
 <a id="a3a6503bbd5147a06ba50081f97177b46"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3a6503bbd5147a06ba50081f97177b46">&#9670;&nbsp;</a></span>moduleSerial</h2>
 
@@ -295,7 +271,7 @@ template&lt;typename T , size_t n&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>moduleSerial type represents a unique value used to identify a module from other </p>
+<p><code>moduleSerial</code> type represents a unique value used to identify a module from other </p>
 
 </div>
 </div>
@@ -312,7 +288,7 @@ template&lt;typename T , size_t n&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>moduleVendor type represents a type holding the vendor name of a module ("WoodBox" when they are built by WoodBox team) </p>
+<p><code>moduleVendor</code> type represents a type holding the vendor name of a module ("WoodBox" when they are built by WoodBox team) </p>
 
 </div>
 </div>
@@ -329,41 +305,7 @@ template&lt;typename T , size_t n&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>timestamp type is used to represent sensor readings date </p>
-
-</div>
-</div>
-<a id="ab0e08bb82f5585fd357ce1881855d0e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0e08bb82f5585fd357ce1881855d0e2">&#9670;&nbsp;</a></span>WoodBoxCommandPlugin</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , size_t n&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a>&lt; T, n &gt;::WoodBoxCommandPlugin) (const String &amp;, Stream &amp;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>WoodBoxCommandCommandPlugin callback is used to extend command interpreter and called when an unknown command is the received. Functions used as callback receive a reference on a String holding the actual command name and a reference on the Stream from which it has been received. These functions must have a prototype compatible to this one: void name(const String &amp;, Stream &amp;); </p>
-
-</div>
-</div>
-<a id="ac7fea0a06e9fcab2ffb63500f6cd6565"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7fea0a06e9fcab2ffb63500f6cd6565">&#9670;&nbsp;</a></span>WoodBoxStoragePlugin</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename T , size_t n&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef void(* <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a>&lt; T, n &gt;::WoodBoxStoragePlugin) (size_t, <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">storage::IStorage</a> &amp;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>WoodBoxStoragePlugin callback is used to save or restore additional data from actual storage. Functions used as callback will receive the current offset usable after the module read or saved data in the storage, and a reference to this storage interface. These functions must have a prototype compatible to this one: void name(size_t, woodBox::storage::IStorage &amp;) </p>
+<p><code>timestamp</code> type is used to represent sensor readings date </p>
 
 </div>
 </div>
@@ -560,7 +502,9 @@ template&lt;typename U  = WoodBoxModule&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Template function used to get the address of the current <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">WoodBoxModule</a> or derived class or instanciates it if there's still no instances existing. The template parameter takes the class type (and of course it's own template parameters if it's a templated class). If no template parameter is given, it will create by default a <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">WoodBoxModule</a> instance with an array of 15 variables of 2 bytes, typically used to store analog values from a sensor. </p>
+<p>Template function used to get the address of the current <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">WoodBoxModule</a> or derived class or instanciates it if there's still no instances existing.</p>
+<p>The template parameter takes the class type (and of course it's own template parameters if it's a templated class).</p>
+<p>If no template parameter is given, it will create by default a <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">WoodBoxModule</a> instance. </p>
 
 </div>
 </div>
@@ -588,7 +532,9 @@ template&lt;typename T , size_t n&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Get a reference on the scheduler instance used to manage tasks used by the module or for the user to add new custom tasks to execute. It's based on the TaskScheduler library, see here for the documentation: <a href="https://github.com/arkhipenko/TaskScheduler/wiki">https://github.com/arkhipenko/TaskScheduler/wiki</a> See there for the license of this library: <a href="https://github.com/arkhipenko/TaskScheduler/blob/master/LICENSE.txt">https://github.com/arkhipenko/TaskScheduler/blob/master/LICENSE.txt</a> </p>
+<p>Get a reference on the scheduler instance used to manage tasks used by the module or for the user to add new custom tasks to execute.</p>
+<p>It's based on the TaskScheduler library, see here for the documentation: <a href="https://github.com/arkhipenko/TaskScheduler/wiki">https://github.com/arkhipenko/TaskScheduler/wiki</a></p>
+<p><a href="https://github.com/arkhipenko/TaskScheduler/blob/master/LICENSE.txt">See there for the license of this library: https://github.com/arkhipenko/TaskScheduler/blob/master/LICENSE.txt</a> </p>
 
 </div>
 </div>
@@ -925,7 +871,8 @@ template&lt;typename T , size_t n&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Main function used to execute the Module. It doesn't use an infinite loop to allow user to execute code around each iterations of the module code, so it must be called in an infinite loop. </p>
+<p>Main function used to execute the Module.</p>
+<p>It doesn't use an infinite loop to allow user to execute code around each iterations of the module code, so it must be called in an infinite loop. </p>
 
 </div>
 </div>
@@ -943,7 +890,7 @@ template&lt;typename T , size_t n&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a>&lt; T, n &gt;::setCommandPlugin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab0e08bb82f5585fd357ce1881855d0e2">WoodBoxCommandPlugin</a>&#160;</td>
+          <td class="paramtype">WoodBoxCommandPlugin&#160;</td>
           <td class="paramname"><em>plugin</em></td><td>)</td>
           <td></td>
         </tr>
@@ -972,7 +919,7 @@ template&lt;typename T , size_t n&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a>&lt; T, n &gt;::setCommunicationExecutionCallback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab6d400f05cc572fb9fd28dd0baf6d346">customCallback</a>&#160;</td>
+          <td class="paramtype">customCallback&#160;</td>
           <td class="paramname"><em>f</em> = <code>nullptr</code></td><td>)</td>
           <td></td>
         </tr>
@@ -983,7 +930,9 @@ template&lt;typename T , size_t n&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set the callback called when the module listens for received inputs. By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function. Calling this function passing no parameter or nullptr will restore the default callback of this class. </p>
+<p>Set the callback called when the module listens for received inputs.</p>
+<p>By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.</p>
+<p>Calling this function passing no parameter or nullptr will restore the default callback of this class. </p>
 
 </div>
 </div>
@@ -1030,7 +979,7 @@ template&lt;typename T , size_t n&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a>&lt; T, n &gt;::setOnBackupPlugin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ac7fea0a06e9fcab2ffb63500f6cd6565">WoodBoxStoragePlugin</a>&#160;</td>
+          <td class="paramtype">WoodBoxStoragePlugin&#160;</td>
           <td class="paramname"><em>plugin</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1059,7 +1008,7 @@ template&lt;typename T , size_t n&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a>&lt; T, n &gt;::setOnRestorePlugin </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ac7fea0a06e9fcab2ffb63500f6cd6565">WoodBoxStoragePlugin</a>&#160;</td>
+          <td class="paramtype">WoodBoxStoragePlugin&#160;</td>
           <td class="paramname"><em>plugin</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1088,7 +1037,7 @@ template&lt;typename T , size_t n&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a>&lt; T, n &gt;::setSensorExecutionCallback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab6d400f05cc572fb9fd28dd0baf6d346">customCallback</a>&#160;</td>
+          <td class="paramtype">customCallback&#160;</td>
           <td class="paramname"><em>f</em> = <code>nullptr</code></td><td>)</td>
           <td></td>
         </tr>
@@ -1099,7 +1048,9 @@ template&lt;typename T , size_t n&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set the callback called when the module sample a sensor. By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function. Calling this function passing no parameter or nullptr will restore the default callback of this class. </p>
+<p>Set the callback called when the module sample a sensor.</p>
+<p>By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.</p>
+<p>Calling this function passing no parameter or nullptr will restore the default callback of this class. </p>
 
 </div>
 </div>
@@ -1232,7 +1183,7 @@ template&lt;typename T , size_t n&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a>&lt; T, n &gt;::setUploadDataExecutionCallback </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab6d400f05cc572fb9fd28dd0baf6d346">customCallback</a>&#160;</td>
+          <td class="paramtype">customCallback&#160;</td>
           <td class="paramname"><em>f</em> = <code>nullptr</code></td><td>)</td>
           <td></td>
         </tr>
@@ -1243,7 +1194,9 @@ template&lt;typename T , size_t n&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Set the callback called when the module sends its stored sensor readings over its streams.. By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function. Calling this function passing no parameter or nullptr will restore the default callback of this class. </p>
+<p>Set the callback called when the module sends its stored sensor readings over its streams.</p>
+<p>By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.</p>
+<p>Calling this function passing no parameter or nullptr will restore the default callback of this class. </p>
 
 </div>
 </div>

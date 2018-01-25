@@ -7,6 +7,7 @@ namespace woodBox {
     namespace sensor {
         /**
          * Interface used to grab data from a sensor in a Module class.
+         *
          * Configuration and treatment of sensor raw data is to be handled by derived classes,
          * as this interfaces is intended to be able to just being able to grab raw sensors data,
          * and an interpretation of them without any knowledge of the sensor.

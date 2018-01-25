@@ -7,6 +7,11 @@
 
 namespace woodBox {
     namespace module {
+        /**
+         * Template class derived from woodBox::module::WoodBoxModule, implementing WoodBox WiFi extension.
+         *
+         * The template parameters are the same than woodBox::module::WoodBoxModule class, taking the type representing in memory a sample from the sensor and the number of samples to buffer.
+         */
         template <typename T, size_t n>
         class WoodBoxWiFiModule : public WoodBoxModule<T, n> {
         friend class WoodBoxModule<T, n>;
@@ -15,6 +20,9 @@ namespace woodBox {
             WoodBoxWiFiModule &operator=(const WoodBoxWiFiModule &) = delete;
             ~WoodBoxWiFiModule() {}
 
+            /**
+             * Set the WiFi object used for wireless communication by passing it as reference.
+             */
             void setWiFiCommunicator(communication::wifi::AWiFiCommunicator &wifi) {
                 if (_wifi != nullptr) {
                     _wifi->disconnect();

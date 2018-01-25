@@ -63,6 +63,13 @@ $(function() {
 <div class="contents">
 &#160;
 
+<h3><a id="index_a"></a>- a -</h3><ul>
+<li>AnalogSensor()
+: <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a41d8ff91cf91d2bdbccffe8f1316421b">woodBox::sensor::AnalogSensor</a>
+</li>
+</ul>
+
+
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>broadcast()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ac481cbb3ee83f192218a5943c59d74fe">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
@@ -76,6 +83,7 @@ $(function() {
 <h3><a id="index_c"></a>- c -</h3><ul>
 <li>clear()
 : <a class="el" href="classwood_box_1_1display_1_1_a_r_g_b_led.html#a01eeaee1bbb439e81f5f9bc536c04df7">woodBox::display::ARGBLed</a>
+, <a class="el" href="classwood_box_1_1display_1_1_grove_chainable_l_e_d.html#a1c42c42ee9643aa914ab20a191e4adfd">woodBox::display::GroveChainableLED</a>
 , <a class="el" href="classwood_box_1_1display_1_1_i_display.html#a7030f0768c1ef15ce936a259406168dc">woodBox::display::IDisplay</a>
 </li>
 </ul>
@@ -89,8 +97,17 @@ $(function() {
 
 
 <h3><a id="index_g"></a>- g -</h3><ul>
+<li>getAnaloguePin()
+: <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a5a7c67726db40be3edd48294910b117b">woodBox::sensor::AnalogSensor</a>
+</li>
 <li>getCommunicationExecutionInterval()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ad4a7b447a617d9c6908ef624cfd2cab4">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
+</li>
+<li>getCurrent()
+: <a class="el" href="classwood_box_1_1power_1_1_i_power.html#a9b3e0363c22d3064bd7ccc8663f1a033">woodBox::power::IPower</a>
+</li>
+<li>getDisplay()
+: <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#afecd89a2ed85517a6d72ad2f03ea87c3">woodBox::module::ABaseModule</a>
 </li>
 <li>getEstimate()
 : <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a74ddcfe84f3f5b9d7010442f365c4eee">woodBox::sensor::AnalogSensor</a>
@@ -99,6 +116,9 @@ $(function() {
 <li>getInstance()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a3f13bd3a6318ddf2a7db84f86b198a49">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
 </li>
+<li>getPowerSource()
+: <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#a1d67c7b9560b30774878e5b882c4bf0a">woodBox::module::ABaseModule</a>
+</li>
 <li>getSample()
 : <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#ae78c25d8c01ba9acd03f90f278966189">woodBox::sensor::AnalogSensor</a>
 , <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html#a9de8041b991b76cc2f6fcc3b6a1bf363">woodBox::sensor::ISensor</a>
@@ -106,11 +126,20 @@ $(function() {
 <li>getScheduler()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a24b14dd95e7b1c5a7ba31107cd0c524d">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
 </li>
+<li>getSensor()
+: <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#acd7e95a20964a1f9ce2dbbbf629fe3dc">woodBox::module::ABaseModule</a>
+</li>
 <li>getSensorExecutionInterval()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a4d5b8fd2ec5aeacb5704435bb6d961e7">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
 </li>
 <li>getSerial()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#aa8fc11fbebc7904f144bc40b7654a215">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
+</li>
+<li>getStorage()
+: <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#ad55a3509dc2bcb2fc5c8abc4a4db1cf1">woodBox::module::ABaseModule</a>
+</li>
+<li>getStreams()
+: <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#ada9df5e73cb0aee0bada1de17de19a9c">woodBox::module::ABaseModule</a>
 </li>
 <li>getType()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab2507312ea013ea5c95b8e1731ddc81d">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
@@ -148,7 +177,8 @@ $(function() {
 
 <h3><a id="index_r"></a>- r -</h3><ul>
 <li>read()
-: <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html#a01bab924be0844e3866b27279caa506d">woodBox::storage::IStorage</a>
+: <a class="el" href="classwood_box_1_1storage_1_1_arduino_e_e_p_r_o_m.html#a1b9deb25ea803456b5450f4e3782fd20">woodBox::storage::ArduinoEEPROM</a>
+, <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html#a01bab924be0844e3866b27279caa506d">woodBox::storage::IStorage</a>
 </li>
 <li>run()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ac65e58ab2338b1e3f57e4ce5d9e70c6c">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
@@ -166,11 +196,20 @@ $(function() {
 <li>setCommunicationExecutionInterval()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a0242f49765460d7c1e0528260ba1c26e">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
 </li>
+<li>setDisplay()
+: <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#a7e99b7d8d59953a8350e9859a475bc6a">woodBox::module::ABaseModule</a>
+</li>
 <li>setOnBackupPlugin()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a94cfcf71ecd1d715d14752001fbc7b6a">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
 </li>
 <li>setOnRestorePlugin()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a85d4efff4708d41e3097479ab364faac">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
+</li>
+<li>setPowerSource()
+: <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#a117ce9fbbcef048ccde38f0b6a11aa91">woodBox::module::ABaseModule</a>
+</li>
+<li>setSensor()
+: <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#ac3fd88feae532ca88b14642f76ef8def">woodBox::module::ABaseModule</a>
 </li>
 <li>setSensorExecutionCallback()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ab04481aafdcb9f3ff5ac9c9567f06006">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
@@ -180,6 +219,12 @@ $(function() {
 </li>
 <li>setSerial()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#affcbb54be4585637a88aade3e29b8a93">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
+</li>
+<li>setStorage()
+: <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#af9e009af37d04062c2da7d977baded80">woodBox::module::ABaseModule</a>
+</li>
+<li>setStreams()
+: <a class="el" href="classwood_box_1_1module_1_1_a_base_module.html#a6e3b73bd36f668f5d621dee3070c131a">woodBox::module::ABaseModule</a>
 </li>
 <li>setType()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#a807efbd90ccdd796bfc62c15bfbc81ab">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
@@ -196,6 +241,9 @@ $(function() {
 <li>setVendor()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#af19696ed5702e009a584065892ed1501">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
 </li>
+<li>setWiFiCommunicator()
+: <a class="el" href="classwood_box_1_1module_1_1_wood_box_wi_fi_module.html#ad1fa85749c0e194c9e589261dfb2433d">woodBox::module::WoodBoxWiFiModule&lt; T, n &gt;</a>
+</li>
 <li>stop()
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#abbc32e89fe1ace40f447539237c0b713">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
 </li>
@@ -205,6 +253,7 @@ $(function() {
 <h3><a id="index_u"></a>- u -</h3><ul>
 <li>update()
 : <a class="el" href="classwood_box_1_1display_1_1_a_r_g_b_led.html#ab71f321d91e931f95b96d1f492a9454d">woodBox::display::ARGBLed</a>
+, <a class="el" href="classwood_box_1_1display_1_1_grove_chainable_l_e_d.html#a650969665d0b5607465a63159c62e4ef">woodBox::display::GroveChainableLED</a>
 , <a class="el" href="classwood_box_1_1display_1_1_i_display.html#ad8c0811b8b807ce119a06c7806004de7">woodBox::display::IDisplay</a>
 </li>
 <li>uploadData()
@@ -218,7 +267,8 @@ $(function() {
 : <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html#ade3d82ff1e508da2ad37185c208f9333">woodBox::module::WoodBoxModule&lt; T, n &gt;</a>
 </li>
 <li>write()
-: <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html#a5eb82c922e8a3147ddab510706be8e24">woodBox::storage::IStorage</a>
+: <a class="el" href="classwood_box_1_1storage_1_1_arduino_e_e_p_r_o_m.html#af78d2077806af7e1aac65d6890915d77">woodBox::storage::ArduinoEEPROM</a>
+, <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html#a5eb82c922e8a3147ddab510706be8e24">woodBox::storage::IStorage</a>
 </li>
 </ul>
 </div><!-- contents -->

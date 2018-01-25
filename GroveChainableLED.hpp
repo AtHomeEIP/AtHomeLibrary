@@ -1,7 +1,7 @@
 #ifndef CHAINABLELED_HPP
 # define CHAINABLELED_HPP
 
-# ifdef GROVE_RGB_CHAINABLE_LED_ENABLED
+# ifdef ARDUINO
 
 #  include <ChainableLED.h>
 #  include "ARGBLed.hpp"

@@ -16,15 +16,6 @@ namespace woodBox {
                                  _storage(storage) {
         }
 
-        /* ABaseModule::ABaseModule(ABaseModule &other) {
-            (void*)other;
-        }
-
-        ABaseModule &ABaseModule::operator=(ABaseModule &other) {
-            (void*)other;
-            return *this;
-        } */
-
         ABaseModule::~ABaseModule() {}
 
         Stream **ABaseModule::getStreams() {
@@ -43,7 +34,7 @@ namespace woodBox {
             _display = display;
         }
 
-        const power::IPower *ABaseModule::getPowerSource() const {
+        power::IPower *ABaseModule::getPowerSource() {
             return _power;
         }
 
@@ -51,7 +42,7 @@ namespace woodBox {
             _power = power;
         }
 
-        const sensor::ISensor *ABaseModule::getSensor() const {
+        sensor::ISensor *ABaseModule::getSensor() {
             return _sensor;
         }
 
@@ -59,7 +50,7 @@ namespace woodBox {
             _sensor = sensor;
         }
 
-        const storage::IStorage *ABaseModule::getStorage() const {
+        storage::IStorage *ABaseModule::getStorage() {
             return _storage;
         }
 

@@ -1,4 +1,4 @@
-#ifdef GROVE_RGB_CHAINABLE_LED_ENABLED
+#ifdef ARDUINO
 
 # include "GroveChainableLED.hpp"
 
