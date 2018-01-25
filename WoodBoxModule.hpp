@@ -88,32 +88,21 @@ namespace woodBox {
                     return reinterpret_cast<U *>(_instance);
                 }
 
-                /*void setScheduler(Scheduler &scheduler) {
-                    if (_scheduler != nullptr) {
-                        _scheduler.deleteTask(_sensorTask);
-                        //_scheduler.deleteTask(_displayTask);
-                        _scheduler.deleteTask(_communicationTask);
-                        _scheduler.deleteTask(_uploadDataTask);
-                    }
-                    _scheduler = &scheduler;
-                    _scheduler.addTask(_sensorTask);
-                    //_scheduler.addTask(_displayTask);
-                    _scheduler.addTask(_communicationTask);
-                    _scheduler.addTask(_uploadDataTask);
-                    _sensorTask.enableIfNot();
-                    _communicationTask.enableIfNot();
-                    _uploadDataTask.enableIfNot();
-                }*/
-
+                /**
+                 * Get a reference on the scheduler instance used to manage tasks used by the module or for the user to add new custom tasks to execute.
+                 * It's based on the TaskScheduler library, see here for the documentation: https://github.com/arkhipenko/TaskScheduler/wiki
+                 * See there for the license of this library: https://github.com/arkhipenko/TaskScheduler/blob/master/LICENSE.txt
+                 */
                 Scheduler &getScheduler() {
                     return _scheduler;
                 }
 
+                /**
+                 * Initialize (or reinitialize) Module
+                 */
                 void setup() {
                     onRestoreFromStorage();
-                    onStart();
                     _sensorTask.set(_sensorInterval, TASK_FOREVER, &WoodBoxModule::_onSampleSensor);
-                    //_displayTask.set(_displayInterval, TASK_FOREVER, &WoodBoxModule::_onUpdateDisplay);
                     _communicationTask.set(_communicationInterval, TASK_FOREVER, &WoodBoxModule::_onCommunicate);
                     _uploadDataTask.set(_uploadDataInterval, TASK_FOREVER, &WoodBoxModule::_uploadData);
                     _scheduler.addTask(_sensorTask);
@@ -124,15 +113,26 @@ namespace woodBox {
                     _uploadDataTask.enableIfNot();
                 }
 
+                /**
+                 * Main function used to execute the Module.
+                 * It doesn't use an infinite loop to allow user to execute code around each iterations of the module code,
+                 * so it must be called in an infinite loop.
+                 */
                 void run() {
                     _scheduler.execute();
                 }
 
+                /**
+                 * Stop the module features and deinitialize it.
+                 */
                 void stop() {
                     onBackupOnStorage();
-                    onStop();
+                    // Todo: need to implement it
                 }
 
+                /**
+                 * Set the interval between each sensor sampling in milliseconds.
+                 */
                 void setSensorExecutionInterval(unsigned long ms) {
                     if (ms && ms != _sensorInterval) {
                         _sensorInterval = ms;
@@ -140,13 +140,9 @@ namespace woodBox {
                     }
                 }
 
-                /* void setDisplayExecutionInterval(unsigned long ms) {
-                    if (ms && ms != _displayInterval) {
-                        _displayInterval = ms;
-                        _displayTask.setInterval(_displayInterval * TASK_MILLISECOND);
-                    }
-                } */
-
+                /**
+                 * Set the interval between each time the module listen for received commands on its streams.
+                 */
                 void setCommunicationExecutionInterval(unsigned long ms) {
                     if (ms && ms != _communicationInterval) {
                         _communicationInterval = ms;
@@ -154,6 +150,9 @@ namespace woodBox {
                     }
                 }
 
+                /**
+                 * Set the interval between each time the module sends its stored sensor readings over streams.
+                 */
                 void setUploadDataExecutionInterval(unsigned long ms) {
                     if (ms && ms != _uploadDataInterval) {
                         _uploadDataInterval = ms;
@@ -161,6 +160,9 @@ namespace woodBox {
                     }
                 }
 
+                /**
+                 * Get the interval between each time the module samples its sensor.
+                 */
                 unsigned long getSensorExecutionInterval() const {
                     return _sensorInterval;
                 }
@@ -169,15 +171,26 @@ namespace woodBox {
                     return _displayInterval;
                 } */
 
+                /**
+                 * Get the interval between each time the module listens for received commands on its streams.
+                 */
                 unsigned long getCommunicationExecutionInterval() const {
                     return _communicationInterval;
                 }
 
+                /**
+                 * Get the interval between each time the module sends its stored sensor readings over its streams.
+                 */
                 unsigned long getUploadDataExecutionInterval() const {
                     return _uploadDataInterval;
                 }
 
-                void setSensorExecutionCallback(customCallback f) {
+                /**
+                 * Set the callback called when the module sample a sensor.
+                 * By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
+                 * Calling this function passing no parameter or nullptr will restore the default callback of this class.
+                 */
+                void setSensorExecutionCallback(customCallback f = nullptr) {
                     _sensorTask.setCallback((f == nullptr) ? &WoodBoxModule::_onSampleSensor : f);
                 }
 
@@ -185,44 +198,81 @@ namespace woodBox {
                     _displayTask.setCallback((f == nullptr) ? &WoodBoxModule::_onUpdateDisplay : f);
                 } */
 
-                void setCommunicationExecutionCallback(customCallback f) {
+                /**
+                 * Set the callback called when the module listens for received inputs.
+                 * By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
+                 * Calling this function passing no parameter or nullptr will restore the default callback of this class.
+                 */
+                void setCommunicationExecutionCallback(customCallback f = nullptr) {
                     _communicationTask.setCallback((f == nullptr) ? &WoodBoxModule::_onCommunicate : f);
                 }
 
-                void setUploadDataExecutionCallback(customCallback f) {
+                /**
+                 * Set the callback called when the module sends its stored sensor readings over its streams..
+                 * By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
+                 * Calling this function passing no parameter or nullptr will restore the default callback of this class.
+                 */
+                void setUploadDataExecutionCallback(customCallback f = nullptr) {
                     _uploadDataTask.setCallback((f == nullptr) ? &WoodBoxModule::_uploadData() : f);
                 }
 
+                /**
+                 * Set a callback called after default command interpreter executed and wasn't able to execute received input, passing the command string and a reference to the stream to the callback.
+                 */
                 void setCommandPlugin(WoodBoxCommandPlugin plugin) {
                     _communicationPlugin = plugin;
                 }
 
+                /**
+                 * Set a callback called after module backup was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used.
+                 */
                 void setOnBackupPlugin(WoodBoxStoragePlugin plugin) {
                     _onBackupPlugin = plugin;
                 }
 
+                /**
+                 * Set a callback called after module data loading was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used.
+                 */
                 void setOnRestorePlugin(WoodBoxStoragePlugin plugin) {
                     _onRestorePlugin = plugin;
                 }
 
+                /**
+                 * Return the type of the module, using woodBox::module::WoodBoxModule::moduleType enumeration.
+                 */
                 moduleType          getType() const { return _type; }
 
+                /**
+                 * Return a reference to the vendor ID of the module ("WoodBox" for WoodBox modules).
+                 */
                 const moduleVendor &getVendor() const { return _vendor; }
 
+                /**
+                 * Return the unique serial of the module, used to identify it.
+                 */
                 const moduleSerial &getSerial() const { return _serial; }
 
+                /**
+                 * Set the type of the module, passing a woodBox::module::WoodBoxModule::moduleType enumeration value as parameter.
+                 */
                 void                setType(moduleType type) {
                     if (type != moduleType::UNKNOWN) {
                         _type = type;
                     }
                 }
 
+                /**
+                 * Set the vendor ID of the module.
+                 */
                 void                setVendor(const moduleVendor &vendor) {
                     if (vendor != nullptr) {
                         memcpy(_vendor, &vendor, sizeof(moduleVendor));
                     }
                 }
 
+                /**
+                 * Set the unique serial used to identify the module.
+                 */
                 void                setSerial(const moduleSerial &serial) {
                     if (serial != nullptr) {
                         memcpy(_serial, &serial, sizeof(moduleSerial));
@@ -236,11 +286,7 @@ namespace woodBox {
                         instance->onSampleSensor();
                     }
                 }
-                /* static void _onUpdateDisplay() {
-                    if (_instance != nullptr) {
-                        _instance->onUpdateDisplay();
-                    }
-                } */
+
                 static void _onCommunicate() {
                     WoodBoxModule *instance = getInstance();
                     if (instance != nullptr) {
@@ -259,7 +305,6 @@ namespace woodBox {
                 WoodBoxModule():
                     ABaseModule(),
                     _sensorInterval(TASK_SECOND),
-                    //_displayInterval(TASK_SECOND),
                     _communicationInterval(TASK_MILLISECOND * 10),
                     _uploadDataInterval(TASK_SECOND * 15),
                     _type(UNKNOWN),
@@ -274,6 +319,9 @@ namespace woodBox {
                     memset(_timestamps, 0, sizeof(T) * n);
                 }
 
+                /**
+                 * Broadcast the data passed as parameter over all module streams.
+                 */
                 template <typename U>
                 void        broadcast(const U &data) {
                     if (_streams == nullptr) {
@@ -284,12 +332,18 @@ namespace woodBox {
                     }
                 }
 
+                /**
+                 * Broadcast the data passed as parameter over all module streams, followed by line return string "\r\n".
+                 */
                 template <typename U>
                 void        broadcastln(const U &data) {
                     broadcast(data);
                     broadcast(communication::commands::end_of_line);
                 }
 
+                /**
+                 * Sends stored sensor readings over module streams.
+                 */
                 void        uploadData() {
                     // Forward version of uploadData
                     // Todo: implement a more resource efficient and generic version
@@ -313,26 +367,9 @@ namespace woodBox {
                     _nbMeasures = 0;
                 }
 
-                void        onReset() {
-                    // Todo: need to implement
-                }
-
-                void        onStart() {
-                    // Todo: need to implement
-                }
-
-                void        onStop() {
-                    // Todo: need to implement
-                }
-
-                void        onPause() {
-                    // Todo: need to implement
-                }
-
-                void        onResume() {
-                    // Todo: need to implement
-                }
-
+                /**
+                 * Called (or trigger if called) when module backup its data on a storage.
+                 */
                 void        onBackupOnStorage() {
                     if (_storage != nullptr) {
                         _storage->write(0, reinterpret_cast<const void *>(_vendor), sizeof(moduleVendor));
@@ -344,6 +381,9 @@ namespace woodBox {
                     }
                 }
 
+                /**
+                 * Called (or trigger if called) when module restore data from a storage.
+                 */
                 void        onRestoreFromStorage() {
                     if (_storage != nullptr) {
                         _storage->read(0, reinterpret_cast<void *>(_vendor), sizeof(moduleVendor));
@@ -355,6 +395,9 @@ namespace woodBox {
                     }
                 }
 
+                /**
+                 * Called (or trigger if called) when a module samples its sensor.
+                 */
                 void        onSampleSensor() {
                     if (_sensor != nullptr && _nbMeasures < n) {
                         uint8_t* rawData = _sensor->getSample();
@@ -370,6 +413,9 @@ namespace woodBox {
                     }
                 }
 
+                /**
+                 * Called (or trigger if called) when a module update its display.
+                 */
                 void        onUpdateDisplay() {
                     if (_display == nullptr || _sensor == nullptr) {
                         return;
@@ -386,6 +432,9 @@ namespace woodBox {
                     display->update();
                 }
 
+                /**
+                 * Called (or trigger if called) when a module listens for received commands.
+                 */
                 void        onCommunicate() {
                     if (_streams == nullptr) {
                         return;
@@ -413,6 +462,9 @@ namespace woodBox {
                     }
                 }
 
+                /**
+                 * Flush all streams used by the module.
+                 */
                 void        flushStreams() {
                     if (_streams == nullptr) {
                         return;
@@ -423,7 +475,6 @@ namespace woodBox {
                 }
             private:
                 unsigned long               _sensorInterval;
-                //unsigned long               _displayInterval;
                 unsigned long               _communicationInterval;
                 unsigned long               _uploadDataInterval;
                 moduleType                  _type;
@@ -439,7 +490,6 @@ namespace woodBox {
                 timestamp                   _timestamps[n];
                 Task                        _uploadDataTask;
                 Task                        _sensorTask;
-                //Task                        _displayTask;
                 Task                        _communicationTask;
                 static void                 *_instance;
         };

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['s_5fhost',['s_host',['../structwood_box_1_1communication_1_1ip_1_1s__host.html',1,'woodBox::communication::ip']]],
-  ['s_5fwifi_5faccess_5fpoint',['s_wifi_access_point',['../structwood_box_1_1communication_1_1wifi_1_1s__wifi__access__point.html',1,'woodBox::communication::wifi']]],
-  ['s_5fwifi_5fclient',['s_wifi_client',['../structwood_box_1_1communication_1_1wifi_1_1s__wifi__client.html',1,'woodBox::communication::wifi']]]
+  ['readme',['README',['../md__r_e_a_d_m_e.html',1,'']]],
+  ['read',['read',['../classwood_box_1_1storage_1_1_i_storage.html#a01bab924be0844e3866b27279caa506d',1,'woodBox::storage::IStorage']]],
+  ['run',['run',['../classwood_box_1_1module_1_1_wood_box_module.html#ac65e58ab2338b1e3f57e4ce5d9e70c6c',1,'woodBox::module::WoodBoxModule']]]
 ];
