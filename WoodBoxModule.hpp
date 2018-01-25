@@ -167,10 +167,6 @@ namespace woodBox {
                     return _sensorInterval;
                 }
 
-                /* unsigned long getDisplayExecutionInterval() const {
-                    return _displayInterval;
-                } */
-
                 /**
                  * Get the interval between each time the module listens for received commands on its streams.
                  */
@@ -193,10 +189,6 @@ namespace woodBox {
                 void setSensorExecutionCallback(customCallback f = nullptr) {
                     _sensorTask.setCallback((f == nullptr) ? &WoodBoxModule::_onSampleSensor : f);
                 }
-
-                /* void setDisplayExecutionCallback(customCallback f) {
-                    _displayTask.setCallback((f == nullptr) ? &WoodBoxModule::_onUpdateDisplay : f);
-                } */
 
                 /**
                  * Set the callback called when the module listens for received inputs.
