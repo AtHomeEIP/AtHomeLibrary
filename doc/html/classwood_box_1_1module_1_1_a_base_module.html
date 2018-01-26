@@ -258,8 +258,9 @@ Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set the pointer on the <a class="el" href="classwood_box_1_1display_1_1_i_display.html">woodBox::display::IDisplay</a> interface used by the module. </p>
-
+<p>Set the pointer on the <a class="el" href="classwood_box_1_1display_1_1_i_display.html">woodBox::display::IDisplay</a> interface used by the module.</p>
+<p>Example on Arduino to use a common cathode RGB LED and the implementation <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a> of this class:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;woodBox.h&gt;</span></div><div class="line"></div><div class="line">CommonCathodeLED led(2, 3, 4); <span class="comment">// Create a common cathode LED object and defining the pins connected to red, green and blue anodes of the LED</span></div><div class="line">WoodBoxModule&lt;uint16_t, 15&gt; *module = <a class="code" href="classwood_box_1_1module_1_1_wood_box_module.html#a3f13bd3a6318ddf2a7db84f86b198a49">WoodBoxModule&lt;uint16_t, 15&gt;::getInstance</a>(); <span class="comment">// Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor</span></div><div class="line"></div><div class="line"><span class="keywordtype">void</span> setup() {</div><div class="line">  module-&gt;setDisplay(&amp;led);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> loop() {</div><div class="line">}</div></div><!-- fragment --> 
 </div>
 </div>
 <a id="a117ce9fbbcef048ccde38f0b6a11aa91"></a>
@@ -277,7 +278,8 @@ Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set the pointer on the <a class="el" href="classwood_box_1_1power_1_1_i_power.html">woodBox::power::IPower</a> interface used by the module. </p>
+<p>Set the pointer on the <a class="el" href="classwood_box_1_1power_1_1_i_power.html">woodBox::power::IPower</a> interface used by the module.</p>
+<p>For now, there is now implementation of <a class="el" href="classwood_box_1_1power_1_1_i_power.html">woodBox::power::IPower</a> in the library. </p>
 
 </div>
 </div>
@@ -296,8 +298,9 @@ Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set the pointer on the <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">woodBox::sensor::ISensor</a> interface used by the module. </p>
-
+<p>Set the pointer on the <a class="el" href="classwood_box_1_1sensor_1_1_i_sensor.html">woodBox::sensor::ISensor</a> interface used by the module.</p>
+<p>Example on Arduino using the generic AnalogSensor class to get measures from a sensor and the implementation <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a> of this class:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;woodBox.h&gt;</span></div><div class="line"></div><div class="line">WoodBoxModule&lt;uint16_t, 15&gt; *module = WoodBoxModule::&lt;uint16_t, 15&gt;::getInstance(); <span class="comment">// Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor</span></div><div class="line">AnalogSensor sensor(A0); <span class="comment">// Create an object AnalogSensor reading a sensor on pin A0 of an Arduino</span></div><div class="line"></div><div class="line"><span class="keywordtype">void</span> setup() {</div><div class="line">  module-&gt;setSensor(&amp;sensor);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> loop() {</div><div class="line">}</div></div><!-- fragment --> 
 </div>
 </div>
 <a id="af9e009af37d04062c2da7d977baded80"></a>
@@ -315,8 +318,9 @@ Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set the pointer on the <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">woodBox::storage::IStorage</a> interface used by the module. </p>
-
+<p>Set the pointer on the <a class="el" href="classwood_box_1_1storage_1_1_i_storage.html">woodBox::storage::IStorage</a> interface used by the module.</p>
+<p>Example on an AVR Arduino (like Uno, Pro Mini, Nano, Micro, Leonardo, Mega) using the implementation <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a> of this class and the ArduinoEEPROM class to enable storage on the internal EEPROM of these boards:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;woodBox.h&gt;</span></div><div class="line"></div><div class="line">WoodBoxModule&lt;uint16_t, 15&gt; *module = WoodBoxModule::&lt;uint16_t, 15&gt;::getInstance(); <span class="comment">// Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor</span></div><div class="line">ArduinoEEPROM eeprom;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> setup() {</div><div class="line">  module-&gt;setStorage(&amp;eeprom);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> loop() {</div><div class="line">}</div></div><!-- fragment --> 
 </div>
 </div>
 <a id="a6e3b73bd36f668f5d621dee3070c131a"></a>
@@ -335,8 +339,9 @@ Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td
       </table>
 </div><div class="memdoc">
 <p>Set the array of pointers on Stream derived objects used by module for communications.</p>
-<p>For example: <code>Stream *my_array[] = {&amp;Serial, &amp;Serial1, &amp;<a class="el" href="classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html">woodBox::communication::wifi::ESP8266WiFiCommunicator</a>, nullptr};</code> </p>
-
+<p>For example: <code>Stream *my_array[] = {&amp;Serial, &amp;Serial1, &amp;<a class="el" href="classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html">woodBox::communication::wifi::ESP8266WiFiCommunicator</a>, nullptr};</code></p>
+<p>Example on Arduino with the implementation <a class="el" href="classwood_box_1_1module_1_1_wood_box_module.html">woodBox::module::WoodBoxModule</a> of this class:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;woodBox.h&gt;</span></div><div class="line"></div><div class="line">WoodBoxModule&lt;uint16_t, 15&gt; *module = WoodBoxModule::&lt;uint16_t, 15&gt;::getInstance(); <span class="comment">// Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor</span></div><div class="line"></div><div class="line"><span class="keywordtype">void</span> setup() {</div><div class="line">  Stream *streams[] = {&amp;Serial, <span class="keyword">nullptr</span>};</div><div class="line">  module-&gt;setStreams(streams);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> loop() {</div><div class="line">}</div></div><!-- fragment --> 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>

@@ -28,9 +28,7 @@ namespace woodBox {
 				 * Examples of use:
 				 *
 				 * \code{.cpp}
-				 * AnalogSensor my_sensor(0); // Or A0 for example if using Arduino
-				 *
-				 * void my_func_reading_my_sensor() {
+				 * void my_func_reading_my_sensor(ISensor &my_sensor) {
 				 *   uint8_t *pointer = my_sensor.getSample();
 				 *   if (pointer == nullptr) {
 				 *     // Invalid pointer -> might be caused by a sample error from the sensor.

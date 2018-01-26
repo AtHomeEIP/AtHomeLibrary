@@ -81,9 +81,7 @@ Examples of use\+:
 
 
 \begin{DoxyCode}
-\mbox{\hyperlink{classwood_box_1_1sensor_1_1_analog_sensor_a41d8ff91cf91d2bdbccffe8f1316421b}{AnalogSensor}} my\_sensor(0); \textcolor{comment}{// Or A0 for example if using Arduino}
-
-\textcolor{keywordtype}{void} my\_func\_reading\_my\_sensor() \{
+\textcolor{keywordtype}{void} my\_func\_reading\_my\_sensor(ISensor &my\_sensor) \{
   uint8\_t *pointer = my\_sensor.getSample();
   \textcolor{keywordflow}{if} (pointer == \textcolor{keyword}{nullptr}) \{
     \textcolor{comment}{// Invalid pointer -> might be caused by a sample error from the sensor.}

@@ -37,6 +37,22 @@ namespace woodBox {
                  * Set the array of pointers on Stream derived objects used by module for communications.
                  *
                  * For example: `Stream *my_array[] = {&Serial, &Serial1, &woodBox::communication::wifi::ESP8266WiFiCommunicator, nullptr};`
+                 *
+                 * Example on Arduino with the implementation woodBox::module::WoodBoxModule of this class:
+                 *
+                 * \code{.cpp}
+                 * #include <woodBox.h>
+                 *
+                 * WoodBoxModule<uint16_t, 15> *module = WoodBoxModule::<uint16_t, 15>::getInstance(); // Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor
+                 *
+                 * void setup() {
+                 *   Stream *streams[] = {&Serial, nullptr};
+                 *   module->setStreams(streams);
+                 * }
+                 *
+                 * void loop() {
+                 * }
+                 * \endcode
                  */
                 void setStreams(Stream **);
                 /**
@@ -49,6 +65,22 @@ namespace woodBox {
                 display::IDisplay *getDisplay();
                 /**
                  * Set the pointer on the woodBox::display::IDisplay interface used by the module.
+                 *
+                 * Example on Arduino to use a common cathode RGB LED and the implementation woodBox::module::WoodBoxModule of this class:
+                 *
+                 * \code{.cpp}
+                 * #include <woodBox.h>
+                 *
+                 * CommonCathodeLED led(2, 3, 4); // Create a common cathode LED object and defining the pins connected to red, green and blue anodes of the LED
+                 * WoodBoxModule<uint16_t, 15> *module = WoodBoxModule<uint16_t, 15>::getInstance(); // Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor
+                 *
+                 * void setup() {
+                 *   module->setDisplay(&led);
+                 * }
+                 *
+                 * void loop() {
+                 * }
+                 * \endcode
                  */
                 void setDisplay(display::IDisplay *);
                 /**
@@ -61,6 +93,8 @@ namespace woodBox {
                 power::IPower *getPowerSource();
                 /**
                  * Set the pointer on the woodBox::power::IPower interface used by the module.
+                 *
+                 * For now, there is now implementation of woodBox::power::IPower in the library.
                  */
                 void setPowerSource(power::IPower *);
                 /**
@@ -73,6 +107,22 @@ namespace woodBox {
                 sensor::ISensor *getSensor();
                 /**
                  * Set the pointer on the woodBox::sensor::ISensor interface used by the module.
+                 *
+                 * Example on Arduino using the generic AnalogSensor class to get measures from a sensor and the implementation woodBox::module::WoodBoxModule of this class:
+                 *
+                 * \code{.cpp}
+                 * #include <woodBox.h>
+                 *
+                 * WoodBoxModule<uint16_t, 15> *module = WoodBoxModule::<uint16_t, 15>::getInstance(); // Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor
+                 * AnalogSensor sensor(A0); // Create an object AnalogSensor reading a sensor on pin A0 of an Arduino
+                 *
+                 * void setup() {
+                 *   module->setSensor(&sensor);
+                 * }
+                 *
+                 * void loop() {
+                 * }
+                 * \endcode
                  */
                 void setSensor(sensor::ISensor *);
                 /**
@@ -85,6 +135,23 @@ namespace woodBox {
                 storage::IStorage *getStorage();
                 /**
                  * Set the pointer on the woodBox::storage::IStorage interface used by the module.
+                 *
+                 * Example on an AVR Arduino (like Uno, Pro Mini, Nano, Micro, Leonardo, Mega) using the implementation woodBox::module::WoodBoxModule of this class and
+                 * the ArduinoEEPROM class to enable storage on the internal EEPROM of these boards:
+                 *
+                 * \code{.cpp}
+                 * #include <woodBox.h>
+                 *
+                 * WoodBoxModule<uint16_t, 15> *module = WoodBoxModule::<uint16_t, 15>::getInstance(); // Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor
+                 * ArduinoEEPROM eeprom;
+                 *
+                 * void setup() {
+                 *   module->setStorage(&eeprom);
+                 * }
+                 *
+                 * void loop() {
+                 * }
+                 * \endcode
                  */
                 void setStorage(storage::IStorage *);
             protected:

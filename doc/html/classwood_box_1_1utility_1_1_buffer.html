@@ -72,6 +72,8 @@ $(function() {
 <div class="title">woodBox::utility::Buffer&lt; T, size &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="_buffer_8hpp_source.html">Buffer.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -81,22 +83,173 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a051d336a9ee59bc40b7723ec3a54521e"><td class="memItemLeft" align="right" valign="top"><a id="a051d336a9ee59bc40b7723ec3a54521e"></a>
 <a class="el" href="classwood_box_1_1utility_1_1_buffer.html">Buffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classwood_box_1_1utility_1_1_buffer.html">Buffer</a> &amp;other)</td></tr>
 <tr class="separator:a051d336a9ee59bc40b7723ec3a54521e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d7857dc93d7e229941ca36a018587e9"><td class="memItemLeft" align="right" valign="top"><a id="a2d7857dc93d7e229941ca36a018587e9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>write</b> (T data)</td></tr>
+<tr class="memitem:a2d7857dc93d7e229941ca36a018587e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1utility_1_1_buffer.html#a2d7857dc93d7e229941ca36a018587e9">write</a> (T data)</td></tr>
 <tr class="separator:a2d7857dc93d7e229941ca36a018587e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8832f6e544e23f738ee50216d805572d"><td class="memItemLeft" align="right" valign="top"><a id="a8832f6e544e23f738ee50216d805572d"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>read</b> ()</td></tr>
+<tr class="memitem:a8832f6e544e23f738ee50216d805572d"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1utility_1_1_buffer.html#a8832f6e544e23f738ee50216d805572d">read</a> ()</td></tr>
 <tr class="separator:a8832f6e544e23f738ee50216d805572d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bcef18ccdd923a401608a257e4283ca"><td class="memItemLeft" align="right" valign="top"><a id="a2bcef18ccdd923a401608a257e4283ca"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>available</b> ()</td></tr>
+<tr class="memitem:a2bcef18ccdd923a401608a257e4283ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1utility_1_1_buffer.html#a2bcef18ccdd923a401608a257e4283ca">available</a> ()</td></tr>
 <tr class="separator:a2bcef18ccdd923a401608a257e4283ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9aa51ab0987fdbcfb72fccc1c806ba50"><td class="memItemLeft" align="right" valign="top"><a id="a9aa51ab0987fdbcfb72fccc1c806ba50"></a>
-T&#160;</td><td class="memItemRight" valign="bottom"><b>peek</b> ()</td></tr>
+<tr class="memitem:a9aa51ab0987fdbcfb72fccc1c806ba50"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1utility_1_1_buffer.html#a9aa51ab0987fdbcfb72fccc1c806ba50">peek</a> ()</td></tr>
 <tr class="separator:a9aa51ab0987fdbcfb72fccc1c806ba50"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a747e6bb3cd527dcf1651aa6758233666"><td class="memItemLeft" align="right" valign="top"><a id="a747e6bb3cd527dcf1651aa6758233666"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>flush</b> ()</td></tr>
+<tr class="memitem:a747e6bb3cd527dcf1651aa6758233666"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classwood_box_1_1utility_1_1_buffer.html#a747e6bb3cd527dcf1651aa6758233666">flush</a> ()</td></tr>
 <tr class="separator:a747e6bb3cd527dcf1651aa6758233666"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;typename T, size_t size&gt;<br />
+class woodBox::utility::Buffer&lt; T, size &gt;</h3>
+
+<p>Templated buffer, taking as template parameters the type of hold data and their numbers.</p>
+<p>Example of use:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;Buffer.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;String.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="classwood_box_1_1utility_1_1_buffer.html">woodBox::utility::Buffer</a>;</div><div class="line"></div><div class="line">String my_string1(<span class="stringliteral">&quot;Hello, World!&quot;</span>);</div><div class="line">String my_string2(<span class="stringliteral">&quot;foobar&quot;</span>);</div><div class="line">String my_string3(<span class="stringliteral">&quot;Philipe ! Je sais ou tu te caches !&quot;</span>); <span class="comment">// Sorry for non-french readers :)</span></div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_using_a_buffer() {</div><div class="line">  Buffer&lt;const String &amp;, 2&gt; my_buffer; <span class="comment">// Create a buffer able to store 2 references on constant String objects</span></div><div class="line">  my_buffer.write(my_string1); <span class="comment">// Add a reference on constant my_string1 to the buffer</span></div><div class="line">  my_buffer.write(my_string2); <span class="comment">// Add a reference on constant my_string2 to the buffer</span></div><div class="line">  my_buffer.write(my_string3); <span class="comment">// Won&#39;t work! The buffer is full</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 2</span></div><div class="line">  <span class="keyword">const</span> String &amp;re_string1 = my_buffer.read(); <span class="comment">// Return a reference on constant String my_string1 and free a space in the buffer</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 1</span></div><div class="line">  <span class="keyword">const</span> String &amp;re_string2 = my_buffer.peek(); <span class="comment">// Return a reference on constant String my_string2, don&#39;t modify the buffer</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 1</span></div><div class="line">  my_buffer.write(my_string3); <span class="comment">// Add a reference on constant my_string3 to the buffer, storing now references on my_string2 and my_string3</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 2</span></div><div class="line">  my_buffer.flush(); <span class="comment">// Clear the buffer</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 0</span></div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2bcef18ccdd923a401608a257e4283ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bcef18ccdd923a401608a257e4283ca">&#9670;&nbsp;</a></span>available()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, size_t size&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int <a class="el" href="classwood_box_1_1utility_1_1_buffer.html">woodBox::utility::Buffer</a>&lt; T, size &gt;::available </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This method return the number of elements stored in the buffer.</p>
+<p>See class detailed documentation for example of usage. </p>
+
+</div>
+</div>
+<a id="a747e6bb3cd527dcf1651aa6758233666"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a747e6bb3cd527dcf1651aa6758233666">&#9670;&nbsp;</a></span>flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, size_t size&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classwood_box_1_1utility_1_1_buffer.html">woodBox::utility::Buffer</a>&lt; T, size &gt;::flush </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This method remove all elements from the buffer.</p>
+<p>See class detailed documentation for example of usage. </p>
+
+</div>
+</div>
+<a id="a9aa51ab0987fdbcfb72fccc1c806ba50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aa51ab0987fdbcfb72fccc1c806ba50">&#9670;&nbsp;</a></span>peek()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, size_t size&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classwood_box_1_1utility_1_1_buffer.html">woodBox::utility::Buffer</a>&lt; T, size &gt;::peek </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This method return the oldest stored element in the buffer and doesn't remove it from the buffer.</p>
+<p>See class detailed documentation for example of usage. </p>
+
+</div>
+</div>
+<a id="a8832f6e544e23f738ee50216d805572d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8832f6e544e23f738ee50216d805572d">&#9670;&nbsp;</a></span>read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, size_t size&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T <a class="el" href="classwood_box_1_1utility_1_1_buffer.html">woodBox::utility::Buffer</a>&lt; T, size &gt;::read </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This method return the oldest stored element in the buffer and remove it from the buffer.</p>
+<p>See class detailed documentation for example of usage. </p>
+
+</div>
+</div>
+<a id="a2d7857dc93d7e229941ca36a018587e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d7857dc93d7e229941ca36a018587e9">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, size_t size&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classwood_box_1_1utility_1_1_buffer.html">woodBox::utility::Buffer</a>&lt; T, size &gt;::write </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This method store the data passed as parameter into the buffer.</p>
+<p>Note: if the buffer is already full, this method does nothing.</p>
+<p>Check with the method <a class="el" href="classwood_box_1_1utility_1_1_buffer.html#a2bcef18ccdd923a401608a257e4283ca">woodBox::utility::Buffer::available()</a> if you're unsure if the buffer has free space.</p>
+<p>If the buffer has free space, the method <a class="el" href="classwood_box_1_1utility_1_1_buffer.html#a2bcef18ccdd923a401608a257e4283ca">woodBox::utility::Buffer::available()</a> should return an integer inferior to the size of the buffer.</p>
+<p>See class detailed documentation for example of usage. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li><a class="el" href="_buffer_8hpp_source.html">Buffer.hpp</a></li>
 </ul>

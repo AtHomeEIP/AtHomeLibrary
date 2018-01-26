@@ -125,25 +125,85 @@ If there\textquotesingle{}s no {\ttfamily Stream}s used by the module, this meth
 \subsubsection{\texorpdfstring{set\+Display()}{setDisplay()}}
 {\footnotesize\ttfamily void wood\+Box\+::module\+::\+A\+Base\+Module\+::set\+Display (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1display_1_1_i_display}{display\+::\+I\+Display}} $\ast$}]{display }\end{DoxyParamCaption})}
 
-Set the pointer on the \mbox{\hyperlink{classwood_box_1_1display_1_1_i_display}{wood\+Box\+::display\+::\+I\+Display}} interface used by the module. \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a117ce9fbbcef048ccde38f0b6a11aa91}\label{classwood_box_1_1module_1_1_a_base_module_a117ce9fbbcef048ccde38f0b6a11aa91}} 
+Set the pointer on the \mbox{\hyperlink{classwood_box_1_1display_1_1_i_display}{wood\+Box\+::display\+::\+I\+Display}} interface used by the module.
+
+Example on Arduino to use a common cathode R\+GB L\+ED and the implementation \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}} of this class\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <woodBox.h>}
+
+CommonCathodeLED led(2, 3, 4); \textcolor{comment}{// Create a common cathode LED object and defining the pins connected to
+       red, green and blue anodes of the LED}
+WoodBoxModule<uint16\_t, 15> *module = \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a3f13bd3a6318ddf2a7db84f86b198a49}{WoodBoxModule<uint16\_t, 15>::getInstance}}
+      (); \textcolor{comment}{// Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor}
+
+\textcolor{keywordtype}{void} setup() \{
+  module->setDisplay(&led);
+\}
+
+\textcolor{keywordtype}{void} loop() \{
+\}
+\end{DoxyCode}
+ \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a117ce9fbbcef048ccde38f0b6a11aa91}\label{classwood_box_1_1module_1_1_a_base_module_a117ce9fbbcef048ccde38f0b6a11aa91}} 
 \index{wood\+Box\+::module\+::\+A\+Base\+Module@{wood\+Box\+::module\+::\+A\+Base\+Module}!set\+Power\+Source@{set\+Power\+Source}}
 \index{set\+Power\+Source@{set\+Power\+Source}!wood\+Box\+::module\+::\+A\+Base\+Module@{wood\+Box\+::module\+::\+A\+Base\+Module}}
 \subsubsection{\texorpdfstring{set\+Power\+Source()}{setPowerSource()}}
 {\footnotesize\ttfamily void wood\+Box\+::module\+::\+A\+Base\+Module\+::set\+Power\+Source (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1power_1_1_i_power}{power\+::\+I\+Power}} $\ast$}]{power }\end{DoxyParamCaption})}
 
-Set the pointer on the \mbox{\hyperlink{classwood_box_1_1power_1_1_i_power}{wood\+Box\+::power\+::\+I\+Power}} interface used by the module. \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_ac3fd88feae532ca88b14642f76ef8def}\label{classwood_box_1_1module_1_1_a_base_module_ac3fd88feae532ca88b14642f76ef8def}} 
+Set the pointer on the \mbox{\hyperlink{classwood_box_1_1power_1_1_i_power}{wood\+Box\+::power\+::\+I\+Power}} interface used by the module.
+
+For now, there is now implementation of \mbox{\hyperlink{classwood_box_1_1power_1_1_i_power}{wood\+Box\+::power\+::\+I\+Power}} in the library. \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_ac3fd88feae532ca88b14642f76ef8def}\label{classwood_box_1_1module_1_1_a_base_module_ac3fd88feae532ca88b14642f76ef8def}} 
 \index{wood\+Box\+::module\+::\+A\+Base\+Module@{wood\+Box\+::module\+::\+A\+Base\+Module}!set\+Sensor@{set\+Sensor}}
 \index{set\+Sensor@{set\+Sensor}!wood\+Box\+::module\+::\+A\+Base\+Module@{wood\+Box\+::module\+::\+A\+Base\+Module}}
 \subsubsection{\texorpdfstring{set\+Sensor()}{setSensor()}}
 {\footnotesize\ttfamily void wood\+Box\+::module\+::\+A\+Base\+Module\+::set\+Sensor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor}{sensor\+::\+I\+Sensor}} $\ast$}]{sensor }\end{DoxyParamCaption})}
 
-Set the pointer on the \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor}{wood\+Box\+::sensor\+::\+I\+Sensor}} interface used by the module. \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_af9e009af37d04062c2da7d977baded80}\label{classwood_box_1_1module_1_1_a_base_module_af9e009af37d04062c2da7d977baded80}} 
+Set the pointer on the \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor}{wood\+Box\+::sensor\+::\+I\+Sensor}} interface used by the module.
+
+Example on Arduino using the generic Analog\+Sensor class to get measures from a sensor and the implementation \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}} of this class\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <woodBox.h>}
+
+WoodBoxModule<uint16\_t, 15> *module = WoodBoxModule::<uint16\_t, 15>::getInstance(); \textcolor{comment}{// Create a
+       WoodBoxModule instance able to buffer 15 measures from an analog sensor}
+AnalogSensor sensor(A0); \textcolor{comment}{// Create an object AnalogSensor reading a sensor on pin A0 of an Arduino}
+
+\textcolor{keywordtype}{void} setup() \{
+  module->setSensor(&sensor);
+\}
+
+\textcolor{keywordtype}{void} loop() \{
+\}
+\end{DoxyCode}
+ \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_af9e009af37d04062c2da7d977baded80}\label{classwood_box_1_1module_1_1_a_base_module_af9e009af37d04062c2da7d977baded80}} 
 \index{wood\+Box\+::module\+::\+A\+Base\+Module@{wood\+Box\+::module\+::\+A\+Base\+Module}!set\+Storage@{set\+Storage}}
 \index{set\+Storage@{set\+Storage}!wood\+Box\+::module\+::\+A\+Base\+Module@{wood\+Box\+::module\+::\+A\+Base\+Module}}
 \subsubsection{\texorpdfstring{set\+Storage()}{setStorage()}}
 {\footnotesize\ttfamily void wood\+Box\+::module\+::\+A\+Base\+Module\+::set\+Storage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classwood_box_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} $\ast$}]{storage }\end{DoxyParamCaption})}
 
-Set the pointer on the \mbox{\hyperlink{classwood_box_1_1storage_1_1_i_storage}{wood\+Box\+::storage\+::\+I\+Storage}} interface used by the module. \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a6e3b73bd36f668f5d621dee3070c131a}\label{classwood_box_1_1module_1_1_a_base_module_a6e3b73bd36f668f5d621dee3070c131a}} 
+Set the pointer on the \mbox{\hyperlink{classwood_box_1_1storage_1_1_i_storage}{wood\+Box\+::storage\+::\+I\+Storage}} interface used by the module.
+
+Example on an A\+VR Arduino (like Uno, Pro Mini, Nano, Micro, Leonardo, Mega) using the implementation \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}} of this class and the Arduino\+E\+E\+P\+R\+OM class to enable storage on the internal E\+E\+P\+R\+OM of these boards\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <woodBox.h>}
+
+WoodBoxModule<uint16\_t, 15> *module = WoodBoxModule::<uint16\_t, 15>::getInstance(); \textcolor{comment}{// Create a
+       WoodBoxModule instance able to buffer 15 measures from an analog sensor}
+ArduinoEEPROM eeprom;
+
+\textcolor{keywordtype}{void} setup() \{
+  module->setStorage(&eeprom);
+\}
+
+\textcolor{keywordtype}{void} loop() \{
+\}
+\end{DoxyCode}
+ \mbox{\Hypertarget{classwood_box_1_1module_1_1_a_base_module_a6e3b73bd36f668f5d621dee3070c131a}\label{classwood_box_1_1module_1_1_a_base_module_a6e3b73bd36f668f5d621dee3070c131a}} 
 \index{wood\+Box\+::module\+::\+A\+Base\+Module@{wood\+Box\+::module\+::\+A\+Base\+Module}!set\+Streams@{set\+Streams}}
 \index{set\+Streams@{set\+Streams}!wood\+Box\+::module\+::\+A\+Base\+Module@{wood\+Box\+::module\+::\+A\+Base\+Module}}
 \subsubsection{\texorpdfstring{set\+Streams()}{setStreams()}}
@@ -151,7 +211,26 @@ Set the pointer on the \mbox{\hyperlink{classwood_box_1_1storage_1_1_i_storage}{
 
 Set the array of pointers on Stream derived objects used by module for communications.
 
-For example\+: {\ttfamily Stream $\ast$my\+\_\+array\mbox{[}\mbox{]} = \{\&Serial, \&Serial1, \&\mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator}{wood\+Box\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, nullptr\};} 
+For example\+: {\ttfamily Stream $\ast$my\+\_\+array\mbox{[}\mbox{]} = \{\&Serial, \&Serial1, \&\mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator}{wood\+Box\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, nullptr\};}
+
+Example on Arduino with the implementation \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module}{wood\+Box\+::module\+::\+Wood\+Box\+Module}} of this class\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <woodBox.h>}
+
+WoodBoxModule<uint16\_t, 15> *module = WoodBoxModule::<uint16\_t, 15>::getInstance(); \textcolor{comment}{// Create a
+       WoodBoxModule instance able to buffer 15 measures from an analog sensor}
+
+\textcolor{keywordtype}{void} setup() \{
+  Stream *streams[] = \{&Serial, \textcolor{keyword}{nullptr}\};
+  module->setStreams(streams);
+\}
+
+\textcolor{keywordtype}{void} loop() \{
+\}
+\end{DoxyCode}
+ 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 

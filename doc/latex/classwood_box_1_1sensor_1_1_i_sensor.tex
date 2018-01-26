@@ -59,7 +59,26 @@ Enumeration used to represent the estimation of safety of a sensor value on a sc
 \subsubsection{\texorpdfstring{get\+Estimate()}{getEstimate()}}
 {\footnotesize\ttfamily virtual \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor_aa377bda61ed0d4a1d7e1a7bffe459452}{I\+Sensor\+Scale}} wood\+Box\+::sensor\+::\+I\+Sensor\+::get\+Estimate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
-Returns the estimation of safety from the current sensor value 
+Returns the estimation of safety from the current sensor value
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor &my\_sensor) \{
+  \mbox{\hyperlink{classwood_box_1_1sensor_1_1_i_sensor_aa377bda61ed0d4a1d7e1a7bffe459452}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate();
+  \textcolor{keywordflow}{if} (sensor\_estimate == ISensor::ZERO) \{
+    Serial.println(\textcolor{stringliteral}{"The sensor returned an invalid value"});
+  \}
+  \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (sensor\_estimate > ISensor::ZERO && sensor\_estimate < 6) \{
+    Serial.println(\textcolor{stringliteral}{"Boouh, it's not good :("});
+  \}
+  \textcolor{keywordflow}{else} \{
+    Serial.println(\textcolor{stringliteral}{"Yaaaay!"});
+  \}
+\}
+\end{DoxyCode}
+ 
 
 Implemented in \mbox{\hyperlink{classwood_box_1_1sensor_1_1_analog_sensor_a74ddcfe84f3f5b9d7010442f365c4eee}{wood\+Box\+::sensor\+::\+Analog\+Sensor}}.
 

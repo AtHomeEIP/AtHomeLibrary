@@ -37,6 +37,23 @@ namespace woodBox {
                 virtual uint8_t *getSample() = 0;
                 /**
                  * Returns the estimation of safety from the current sensor value
+                 *
+                 * Example:
+                 *
+                 * \code{.cpp}
+                 * void my_function_telling_if_a_sensor_value_is_good_or_not(ISensor &my_sensor) {
+                 *   ISensorScale sensor_estimate = my_sensor.getEstimate();
+                 *   if (sensor_estimate == ISensor::ZERO) {
+                 *     Serial.println("The sensor returned an invalid value");
+                 *   }
+                 *   else if (sensor_estimate > ISensor::ZERO && sensor_estimate < 6) {
+                 *     Serial.println("Boouh, it's not good :(");
+                 *   }
+                 *   else {
+                 *     Serial.println("Yaaaay!");
+                 *   }
+                 * }
+                 * \endcode
                  */
                 virtual ISensorScale getEstimate() = 0;
         };

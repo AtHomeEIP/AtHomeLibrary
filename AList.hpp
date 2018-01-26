@@ -5,6 +5,9 @@
 
 namespace woodBox {
     namespace utility {
+        /**
+         * Class created for internal use of this library, but not used right now. Could be removed if considered useless.
+         */
         template <typename T>
         class AList : public AIterable<T> {
         public:
