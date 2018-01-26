@@ -71,7 +71,7 @@ namespace woodBox {
                  * \code{.cpp}
                  * #include <woodBox.h>
                  *
-                 * CommonCathodeLED led(2, 3, 4); // Create a common cathode LED object and defining the pins connected to red, green and blue anodes of the LED
+                 * CommonCathodeRGBLed led(2, 3, 4); // Create a common cathode LED object and defining the pins connected to red, green and blue anodes of the LED
                  * WoodBoxModule<uint16_t, 15> *module = WoodBoxModule<uint16_t, 15>::getInstance(); // Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor
                  *
                  * void setup() {
