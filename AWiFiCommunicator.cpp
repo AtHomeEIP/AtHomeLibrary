@@ -30,29 +30,23 @@ namespace woodBox {
             }
 
             void AWiFiCommunicator::setAccessPoint(const WiFi_ap &ap) {
-                //disconnectFromHost();
                 disconnect();
                 memcpy(&_ap, &ap, sizeof(WiFi_ap));
-                // Should not connect automatically, yes?
-                //connect();
-                //connectToHost();
             }
 
             void AWiFiCommunicator::setConnectionAddresses(const WiFi_client &client) {
-                disconnectFromHost();
+                disconnect();
                 memcpy(&_me, &client, sizeof(WiFi_client));
-                //connectToHost();
             }
 
             void AWiFiCommunicator::setHost(const ip::tcp_host &host) {
+                disconnectFromHost();
                 memcpy(&_host, &host, sizeof(ip::tcp_host));
             }
 
             void AWiFiCommunicator::setWiFiMode(wifi_mode mode) {
-                //disconnectFromHost();
                 disconnect();
                 _mode = mode;
-                //connect();
             }
 
             void AWiFiCommunicator::setStreamToChipset(Stream *stream) {

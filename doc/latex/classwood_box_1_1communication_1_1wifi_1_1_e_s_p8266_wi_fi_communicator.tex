@@ -42,7 +42,7 @@ virtual int \mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_e_s_p826
 \item 
 virtual int \mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a5a407734df1ae47ac32575fa6346cfd4}{disconnect\+From\+Host}} ()
 \item 
-virtual bool \mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a66b7f8adaae85dbf94062b1cd472d98a}{is\+Connected}} ()
+virtual bool \mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a2a1d8b14bca4b6964f043b874d23090c}{is\+Connected}} () const
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
@@ -81,10 +81,10 @@ Example\+:
 
 \textcolor{keywordtype}{void} my\_function\_connecting\_wifi\_to\_network\_called\_foobar(\mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a9d1dc13ca9243170b04211bef2b86ed2}{AWiFiCommunicator}} &wifi) \{
   WiFi\_ap network; \textcolor{comment}{// Declare a WiFi\_ap structure}
-  strcpy(network.ssid, \textcolor{stringliteral}{"foobar"}); \textcolor{comment}{// Copy "foobar" in the ssid field of the structure, as the SSID of a
-       WiFi network is the name shown to humans}
-  strcpy(network.password, \textcolor{stringliteral}{"12345678"}); \textcolor{comment}{// Copy "12345678" in the password field, to set the password used
-       by the WiFi network}
+  strncpy(network.ssid, \textcolor{stringliteral}{"foobar"}, \textcolor{keyword}{sizeof}(network.ssid)); \textcolor{comment}{// Copy "foobar" in the ssid field of the
+       structure, as the SSID of a WiFi network is the name shown to humans}
+  strncpy(network.password, \textcolor{stringliteral}{"12345678"}, \textcolor{keyword}{sizeof}(network.password)); \textcolor{comment}{// Copy "12345678" in the password
+       field, to set the password used by the WiFi network}
   wifi.setAccessPoint(network); \textcolor{comment}{// Set the WiFi network parameters we created}
   \textcolor{keywordflow}{if} (!wifi.connect()) \{ \textcolor{comment}{// Connect to this network}
     Serial.println(\textcolor{stringliteral}{"Successfully connected to WiFi network"});
@@ -206,11 +206,11 @@ Virtual method inherited from Stream interface. \href{https://www.arduino.cc/ref
 
 Implements \mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a1c74b8bc27a89604b4b7daa94c0168a6}{wood\+Box\+::communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator}}.
 
-\mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a66b7f8adaae85dbf94062b1cd472d98a}\label{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a66b7f8adaae85dbf94062b1cd472d98a}} 
+\mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a2a1d8b14bca4b6964f043b874d23090c}\label{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a2a1d8b14bca4b6964f043b874d23090c}} 
 \index{wood\+Box\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator@{wood\+Box\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}!is\+Connected@{is\+Connected}}
 \index{is\+Connected@{is\+Connected}!wood\+Box\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator@{wood\+Box\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}
 \subsubsection{\texorpdfstring{is\+Connected()}{isConnected()}}
-{\footnotesize\ttfamily bool wood\+Box\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator\+::is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily bool wood\+Box\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator\+::is\+Connected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
 
 Virtual method to know if the adapter is connected to a Wi\+Fi network.
 
@@ -224,7 +224,7 @@ Example\+:
 
 \textcolor{keyword}{using} \mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{woodBox::communication::wifi::AWiFiCommunicator}};
 
-\textcolor{keywordtype}{void} my\_function\_printing\_if\_adapter\_is\_connected\_to\_network\_or\_not(
+\textcolor{keywordtype}{void} my\_function\_printing\_if\_adapter\_is\_connected\_to\_network\_or\_not(\textcolor{keyword}{const} 
       \mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a9d1dc13ca9243170b04211bef2b86ed2}{AWiFiCommunicator}} &wifi) \{
   Serial.println((wifi.isConnected) ? \textcolor{stringliteral}{"Adapter is connected to WiFi network"} : \textcolor{stringliteral}{"Adapter isn't connected to
        WiFi network"});
@@ -232,7 +232,7 @@ Example\+:
 \end{DoxyCode}
  
 
-Implements \mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_afe42af0100dd483564995b8fc54b2e71}{wood\+Box\+::communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator}}.
+Implements \mbox{\hyperlink{classwood_box_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_aa2a58b4178054b3129d711f62640a6bf}{wood\+Box\+::communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator}}.
 
 \mbox{\Hypertarget{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_accc6832fa7351cb977b9e3a805dc8107}\label{classwood_box_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_accc6832fa7351cb977b9e3a805dc8107}} 
 \index{wood\+Box\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator@{wood\+Box\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}!peek@{peek}}

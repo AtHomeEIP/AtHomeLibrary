@@ -32,7 +32,7 @@ namespace woodBox {
                 virtual int disconnect();
                 virtual int connectToHost();
                 virtual int disconnectFromHost();
-                virtual bool isConnected();
+                virtual bool isConnected() const;
             /* private:
                 virtual ~ESP8266WiFiCommunicator(); */
             private:

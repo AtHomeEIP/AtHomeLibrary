@@ -188,7 +188,7 @@ namespace woodBox {
                 return 0;
             }
 
-            bool ESP8266WiFiCommunicator::isConnected() {
+            bool ESP8266WiFiCommunicator::isConnected() const {
                 if (_mode == ACCESS_POINT) {
                     return _connected;
                 }
