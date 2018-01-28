@@ -12,6 +12,10 @@ namespace woodBox {
         GroveAirQualitySensor::~GroveAirQualitySensor() {}
 
         uint8_t *GroveAirQualitySensor::getSample() {
+            _sensor.last_vol = _sensor.first_vol;
+            _sensor.first_vol = analogRead(A0);
+            _sensor.counter = 0;
+            _sensor.timer_index = 1;
             _lastMeasure = _sensor.slope();
             return &_lastMeasure;
         }
