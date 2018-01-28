@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queue',['Queue',['../classwood_box_1_1utility_1_1_queue.html',1,'woodBox::utility']]]
+  ['pins',['Pins',['../structwood_box_1_1display_1_1_grove_chainable_l_e_d_1_1_pins.html',1,'woodBox::display::GroveChainableLED']]]
 ];

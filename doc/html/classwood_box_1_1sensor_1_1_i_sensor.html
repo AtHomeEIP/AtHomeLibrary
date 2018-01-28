@@ -81,7 +81,8 @@ Inheritance diagram for woodBox::sensor::ISensor:</div>
  <div class="center">
   <img src="classwood_box_1_1sensor_1_1_i_sensor.png" usemap="#woodBox::sensor::ISensor_map" alt=""/>
   <map id="woodBox::sensor::ISensor_map" name="woodBox::sensor::ISensor_map">
-<area href="classwood_box_1_1sensor_1_1_analog_sensor.html" alt="woodBox::sensor::AnalogSensor" shape="rect" coords="0,56,193,80"/>
+<area href="classwood_box_1_1sensor_1_1_analog_sensor.html" alt="woodBox::sensor::AnalogSensor" shape="rect" coords="0,56,245,80"/>
+<area href="classwood_box_1_1sensor_1_1_grove_air_quality_sensor.html" alt="woodBox::sensor::GroveAirQualitySensor" shape="rect" coords="255,56,500,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -157,7 +158,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns the estimation of safety from the current sensor value</p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_telling_if_a_sensor_value_is_good_or_not(ISensor &amp;my_sensor) {</div><div class="line">  <a class="code" href="classwood_box_1_1sensor_1_1_i_sensor.html#aa377bda61ed0d4a1d7e1a7bffe459452">ISensorScale</a> sensor_estimate = my_sensor.getEstimate();</div><div class="line">  <span class="keywordflow">if</span> (sensor_estimate == ISensor::ZERO) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;The sensor returned an invalid value&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sensor_estimate &gt; ISensor::ZERO &amp;&amp; sensor_estimate &lt; 6) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Boouh, it&#39;s not good :(&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Yaaaay!&quot;</span>);</div><div class="line">  }</div><div class="line">}</div></div><!-- fragment --> 
-<p>Implemented in <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a74ddcfe84f3f5b9d7010442f365c4eee">woodBox::sensor::AnalogSensor</a>.</p>
+<p>Implemented in <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#a74ddcfe84f3f5b9d7010442f365c4eee">woodBox::sensor::AnalogSensor</a>, and <a class="el" href="classwood_box_1_1sensor_1_1_grove_air_quality_sensor.html#a457e99f530b79f14db1de00cba3e81ff">woodBox::sensor::GroveAirQualitySensor</a>.</p>
 
 </div>
 </div>
@@ -185,7 +186,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns a pointer on sensor sample raw memory, as an array of bytes </p>
 
-<p>Implemented in <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#ae78c25d8c01ba9acd03f90f278966189">woodBox::sensor::AnalogSensor</a>.</p>
+<p>Implemented in <a class="el" href="classwood_box_1_1sensor_1_1_analog_sensor.html#ae78c25d8c01ba9acd03f90f278966189">woodBox::sensor::AnalogSensor</a>, and <a class="el" href="classwood_box_1_1sensor_1_1_grove_air_quality_sensor.html#a204d677110c9fe3c6b495bf9112e9afd">woodBox::sensor::GroveAirQualitySensor</a>.</p>
 
 </div>
 </div>

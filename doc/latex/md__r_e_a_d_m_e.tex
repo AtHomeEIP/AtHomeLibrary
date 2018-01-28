@@ -1,9 +1,50 @@
-Requirements\+:
+\#\+Wood\+Box Development Framework
+
+\subsection*{Requirements\+:}
+
+
 \begin{DoxyItemize}
 \item Partial Arduino Core implementing interfaces Print, Printable and Stream -\/$>$ Used for generic interfaces and avoid duplicates between Arduino and non-\/\+Arduino projects
 \item Arduino\+Json library, despite it\textquotesingle{}s name it\textquotesingle{}s fully portable
-\item If using Arduino Core\+:
-\begin{DoxyItemize}
-\item If using Grove R\+GB L\+ED\+: Chainable\+L\+ED library 
+\item Grove\textquotesingle{} Air\+Quality library
+\item Grove\textquotesingle{} Chainable\+L\+ED library
+\item Adafruit Neo\+Piel library
+\item Task\+Scheduler library
+\item Adafruit D\+HT universal library
 \end{DoxyItemize}
-\end{DoxyItemize}
+
+\subsection*{Compatible environments\+:}
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Environment  }&\textbf{ Arduino  }&\textbf{ Energia  }&\textbf{ m\+B\+ED  }&\textbf{ Bare-\/\+Metal   }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Environment  }&\textbf{ Arduino  }&\textbf{ Energia  }&\textbf{ m\+B\+ED  }&\textbf{ Bare-\/\+Metal   }\\\cline{1-5}
+\endhead
+Support  &Y  &Y  &Not yet (not tested and need C++14 support in incoming release)  &Not yet   \\\cline{1-5}
+\end{longtabu}
+
+
+\subsection*{Compatible platforms\+:}
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{6}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Component / Platform  }&\textbf{ A\+VR  }&\textbf{ A\+RM  }&\textbf{ M\+S\+P430  }&\textbf{ M\+S\+P432  }&\textbf{ P\+I\+C32   }\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Component / Platform  }&\textbf{ A\+VR  }&\textbf{ A\+RM  }&\textbf{ M\+S\+P430  }&\textbf{ M\+S\+P432  }&\textbf{ P\+I\+C32   }\\\cline{1-6}
+\endhead
+E\+S\+P8266  &Y (not tested)  &Y (not tested)  &N  &Y  &Y (not tested)   \\\cline{1-6}
+Grove Chainable L\+ED  &Y  &Y (not tested)  &Y (not tested, need a small patch but I\textquotesingle{}m unable to check as I don\textquotesingle{}t have one)  &Y (not tested)  &Y (not tested)   \\\cline{1-6}
+Analog\+Sensor  &Y (not tested)  &Y (not tested)  &Y (not tested)  &Y  &Y (not tested)   \\\cline{1-6}
+Common cathode R\+GB L\+ED  &Y (not tested)  &Y (not tested)  &Y (not tested)  &Y  &Y (not tested)   \\\cline{1-6}
+Grove Air Quality sensor  &Y$\ast$ (not all)  &N  &N  &N  &N   \\\cline{1-6}
+Neo\+Pixel  &Y  &Y$\ast$ (not all, not tested)  &N  &N  &N   \\\cline{1-6}
+\end{longtabu}
