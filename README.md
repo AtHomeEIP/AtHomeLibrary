@@ -1,6 +1,6 @@
-#WoodBox Development Framework
+# WoodBox Development Framework
 
-##Requirements:
+## Requirements:
 - Partial Arduino Core implementing interfaces Print, Printable and Stream -> Used for generic interfaces and avoid duplicates between Arduino and non-Arduino projects
 - ArduinoJson library, despite it's name it's fully portable
 - Grove' AirQuality library
