@@ -4,6 +4,7 @@
 # include <stdio.h>
 # include <ArduinoJson.h>
 # include "WoodBoxModule.hpp"
+# include "WoodBoxFlashCommon.h"
 
 namespace woodBox {
     namespace module {
@@ -71,8 +72,8 @@ namespace woodBox {
                         buffer[len] = '\0';
                         StaticJsonBuffer<100> json;
                         JsonObject &root = json.parseObject(buffer);
-                        const char *ssid = root.get<const char*>(communication::commands::ssid_key);
-                        const char *password = root.get<const char *>(communication::commands::password_key);
+                        const char *ssid = root[FH(communication::commands::ssid_key)];
+                        const char *password = root[FH(communication::commands::password_key)];
                         if (ssid != nullptr && password != nullptr) {
                             communication::wifi::WiFi_ap ap;
                             strncpy(ap.ssid, ssid, 32);
@@ -99,8 +100,8 @@ namespace woodBox {
                         buffer[len] = '\0';
                         StaticJsonBuffer<42> json;
                         JsonObject &root = json.parseObject(buffer);
-                        const char *ip = root.get<const char *>(communication::commands::ip_key);
-                        communication::ip::port p = root.get<communication::ip::port>(communication::commands::port_key);
+                        const char *ip = root[FH(communication::commands::ip_key)];
+                        communication::ip::port p = root[FH(communication::commands::port_key)];
                         if (ip != nullptr) {
                             communication::ip::s_host host;
                             SSCANF(ip, communication::ip::ip_format,

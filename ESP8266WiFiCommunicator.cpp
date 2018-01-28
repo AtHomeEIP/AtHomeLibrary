@@ -2,52 +2,13 @@
 #include <string.h>
 #include <stdio.h>
 #include "ESP8266WiFiCommunicator.hpp"
+#include "WoodBoxFlashCommon.h"
 
 namespace woodBox {
     namespace communication {
         namespace wifi {
             namespace {
-                const char at_nl =          '\n';
-#ifndef __AVR__
-# define STRCMP strcmp
-# define SNPRINTF snprintf
-                const char at_eol[] =           "\r\n";
-                const char at_at[] =            "AT";
-                const char at_rst[] =           "RST";
-                const char at_gmr[] =           "GMR";
-                const char at_gslp[] =          "GLSP";
-                const char at_ate[] =           "ATE";
-                const char at_cwmode[] =        "CWMODE";
-                const char at_cwjap[] =         "CWJAP";
-                const char at_cwlap[] =         "CWLAP";
-                const char at_cwqap[] =         "CWQAP";
-                const char at_cwsap[] =         "CWSAP";
-                const char at_cwlif[] =         "CWLIF";
-                const char at_cwdhcp[] =        "CWDHCP";
-                const char at_cipstamac[] =     "CIPSTAMAC";
-                const char at_cipapmac[] =      "CIPAPMAC";
-                const char at_cipsta[] =        "CIPSTA";
-                const char at_ciap[] =          "CIPAP";
-                const char at_cipstatus[] =     "CIPSTATUS";
-                const char at_cipstart[] =      "CIPSTART";
-                const char at_cipsend[] =       "CIPSEND";
-                const char at_cipclose[] =      "CIPCLOSE";
-                const char at_cifsr[] =         "CIFSR";
-                const char at_cipmux[] =        "CIPMUX";
-                const char at_cipserver[] =     "CIPSERVER";
-                const char at_cipmode[] =       "CIPMODE";
-                const char at_cipsto[] =        "CIPSTO";
-                const char at_ciupdate[] =      "CIUPDATE";
-                const char at_ipd[] =           "+IPD";
-                const char at_ok[] =            "OK";
-                const char at_error[] =         "ERROR";
-                const char at_ready[] =         "ready";
-                const char at_listen[] =        ">";
-                const char channel_format[] =   "%hhu";
-#else
-# include <avr/pgmspace.h>
-# define STRCMP strcmp_P
-# define SNPRINTF snprintf_P
+                const char at_nl =                      '\n';
                 const PROGMEM char at_eol[] =           "\r\n";
                 const PROGMEM char at_at[] =            "AT";
                 const PROGMEM char at_rst[] =           "RST";
@@ -81,7 +42,6 @@ namespace woodBox {
                 const PROGMEM char at_ready[] =         "ready";
                 const PROGMEM char at_listen[] =        ">";
                 const PROGMEM char channel_format[] =   "%hhu";
-#endif
             }
 
             ESP8266WiFiCommunicator::ESP8266WiFiCommunicator(int enable_pin, int reset_pin):

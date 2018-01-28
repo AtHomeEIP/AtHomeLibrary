@@ -1,7 +1,7 @@
 #ifndef WOODBOX_COMMUNICATION_PROTOCOL_HPP
 # define WOODBOX_COMMUNICATION_PROTOCOL_HPP
 
-#include <Arduino.h>
+#include "WoodBoxFlashCommon.h"
 
 namespace woodBox {
     namespace communication {
@@ -9,28 +9,7 @@ namespace woodBox {
             extern const char spacer;
             extern const char end_of_command;
             extern const char end_of_communication;
-# ifndef __AVR__
-#  define STRCMP    strcmp
-#  define SNPRINTF  snprintf
-#  define SSCANF    sscanf
-            extern const char end_of_line[];
-            extern const char part_separator[];
 
-            extern const char enumerate[];
-            extern const char uploadData[];
-            extern const char syncTime[];
-            extern const char setWiFi[];
-            extern const char setEndPoint[];
-            extern const char setProfile[];
-
-            extern const char ssid_key[];
-            extern const char password_key[];
-            extern const char ip_key[];
-            extern const char port_key[];
-# else
-#  define STRCMP    strcmp_P
-#  define SNPRINTF  snprintf_P
-#  define SSCANF    sscanf_P
             extern const PROGMEM char end_of_line[];
             extern const PROGMEM char part_separator[];
 
@@ -45,7 +24,6 @@ namespace woodBox {
             extern const PROGMEM char password_key[];
             extern const PROGMEM char ip_key[];
             extern const PROGMEM char port_key[];
-# endif
 
 /*
  * Thinking communication wisely
