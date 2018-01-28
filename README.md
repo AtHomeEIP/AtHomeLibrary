@@ -19,9 +19,10 @@
 
 | Component / Platform     | AVR            | ARM                      | MSP430                                                                         | MSP432         | PIC32          |
 |--------------------------|----------------|--------------------------|--------------------------------------------------------------------------------|----------------|----------------|
-| ESP8266                  | Y (not tested) | Y (not tested)           | N                                                                              | Y              | Y (not tested) |
+| ESP8266 AT Firmware      | Y (not tested) | Y (not tested)           | N                                                                              | Y              | Y (not tested) |
 | Grove Chainable LED      | Y              | Y (not tested)           | Y (not tested, need a small patch but I'm unable to check as I don't have one) | Y (not tested) | Y (not tested) |
 | AnalogSensor             | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) |
+| ArduinoEEPROM            | Y              | N                        | N                                                                              | N              | N              |
 | Common cathode RGB LED   | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) |
 | Grove Air Quality sensor | Y* (not all)   | N                        | N                                                                              | N              | N              |
 | NeoPixel                 | Y              | Y* (not all, not tested) | N                                                                              | N              | N              |
