@@ -27,11 +27,5 @@ namespace woodBox {
             analogWrite(_pin_green, color.green);
             analogWrite(_pin_blue, color.blue);
         }
-
-        void CommonCathodeRGBLed::clear() {
-            analogWrite(_pin_red, 0);
-            analogWrite(_pin_green, 0);
-            analogWrite(_pin_blue, 0);
-        }
     }
 }

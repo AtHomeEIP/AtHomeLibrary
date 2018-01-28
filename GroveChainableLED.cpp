@@ -37,11 +37,6 @@ namespace woodBox {
 				delete _led;
 		}
 
-		void GroveChainableLED::clear() {
-			ARGBLed::Color black = {0, 0, 0};
-			setColor(black);
-		}
-
 		void GroveChainableLED::update() {
 		    const ARGBLed::Color &color = getColor();
 			_led->setColorRGB(0, color.red, color.green, color.blue);

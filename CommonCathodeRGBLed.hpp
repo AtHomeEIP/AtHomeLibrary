@@ -12,9 +12,8 @@ namespace woodBox {
             CommonCathodeRGBLed(const CommonCathodeRGBLed &) = delete;
             CommonCathodeRGBLed &operator=(const CommonCathodeRGBLed &);
             ~CommonCathodeRGBLed();
-
-            void clear();
             void update();
+
         private:
             uint8_t _pin_red;
             uint8_t _pin_green;

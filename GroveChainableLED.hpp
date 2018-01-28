@@ -19,8 +19,7 @@ namespace woodBox {
                 GroveChainableLED(const ARGBLed &, const Pins * = nullptr);
                 GroveChainableLED &operator=(const ARGBLed &);
                 GroveChainableLED &operator=(const ARGBLed::Color &);
-                virtual ~GroveChainableLED();
-                virtual void clear();
+                ~GroveChainableLED();
                 virtual void update();
                 /* virtual const ARGBLed::Color &getColor() const;
                 virtual void setColor(const ARGBLed::Color &); */

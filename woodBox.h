@@ -29,6 +29,9 @@
 #  include "ArduinoEEPROM.hpp"
 using woodBox::storage::ArduinoEEPROM;
 # endif /* __AVR__ && ARDUINO */
+# if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
+#  include "NeoPixel.hpp"
+# endif /* List of incompatible architectures */
 
 using woodBox::module::WoodBoxModule;
 # ifndef __MSP430__
@@ -46,5 +49,8 @@ using woodBox::display::GroveChainableLED;
         defined(AVR_DUEMILANOVE) || defined(AVR_UNO)
 using woodBox::sensor::GroveAirQualitySensor;
 # endif /* List of compatible Arduino boards */
+# if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
+using woodBox::display::NeoPixel;
+# endif /* List of incompatible architectures */
 
 #endif /* WOODBOX_H */

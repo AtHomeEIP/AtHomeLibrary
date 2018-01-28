@@ -48,7 +48,11 @@ namespace woodBox {
                 ARGBLed():_color({0, 0, 0}) {}
                 ARGBLed(ARGBLed const &) = delete;
                 ARGBLed &operator=(ARGBLed const &) = delete;
-                virtual void clear() = 0;
+                void clear() {
+                    ARGBLed::Color black = {0, 0, 0};
+                    setColor(black);
+                    update();
+                }
                 virtual void update() = 0;
                 /**
                  * Return a reference on the Color structure representing the current color displayed (or next color, if LED color hasn't been updated since last change of color made by setColor)
