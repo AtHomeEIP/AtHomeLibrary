@@ -18,10 +18,13 @@
 # endif /* __MSP430__ */
 # include "AnalogSensor.hpp"
 # include "CommonCathodeRGBLed.hpp"
-# ifdef __AVR__
+#if defined(AVR_PRO) || defined(AVR_UNO_WIFI_DEV_ED) || defined(AVR_NG) || \
+        defined(AVR_LILYPAD) || defined(AVR_BT) || defined(AVR_FIO) || \
+        defined(AVR_ETHERNET) || defined(AVR_MINI) || defined(AVR_NANO) || \
+        defined(AVR_DUEMILANOVE) || defined(AVR_UNO)
 // The Grove air quality sensor library uses AVR registers, and is not portable to other platforms
 #  include "GroveAirQualitySensor.hpp"
-# endif /* __AVR__ */
+# endif /* List of compatible Arduino boards */
 # if defined(__AVR__) && defined(ARDUINO)
 #  include "ArduinoEEPROM.hpp"
 using woodBox::storage::ArduinoEEPROM;
@@ -37,8 +40,11 @@ using woodBox::display::CommonCathodeRGBLed;
 # ifdef ARDUINO
 using woodBox::display::GroveChainableLED;
 # endif /* ARDUINO */
-# ifdef __AVR__
+#if defined(AVR_PRO) || defined(AVR_UNO_WIFI_DEV_ED) || defined(AVR_NG) || \
+        defined(AVR_LILYPAD) || defined(AVR_BT) || defined(AVR_FIO) || \
+        defined(AVR_ETHERNET) || defined(AVR_MINI) || defined(AVR_NANO) || \
+        defined(AVR_DUEMILANOVE) || defined(AVR_UNO)
 using woodBox::sensor::GroveAirQualitySensor;
-# endif /* __AVR__ */
+# endif /* List of compatible Arduino boards */
 
 #endif /* WOODBOX_H */

@@ -1,7 +1,10 @@
 #ifndef GROVEAIRQUALITYSENSOR_HPP
 # define GROVEAIRQUALITYSENSOR_HPP
 
-# ifdef __AVR__
+#if defined(AVR_PRO) || defined(AVR_UNO_WIFI_DEV_ED) || defined(AVR_NG) || \
+        defined(AVR_LILYPAD) || defined(AVR_BT) || defined(AVR_FIO) || \
+        defined(AVR_ETHERNET) || defined(AVR_MINI) || defined(AVR_NANO) || \
+        defined(AVR_DUEMILANOVE) || defined(AVR_UNO)
 
 #  include <AirQuality.h>
 #  include <stdint.h>
@@ -26,6 +29,6 @@ namespace woodBox {
     }
 }
 
-# endif /* __AVR__ */
+# endif /* List of compatible Arduino boards */
 
 #endif /* GROVEAIRQUALITYSENSOR_HPP */
