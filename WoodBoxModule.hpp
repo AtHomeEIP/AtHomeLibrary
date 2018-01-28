@@ -357,8 +357,8 @@ namespace woodBox {
                 void        uploadData() {
                     // Forward version of uploadData
                     // Todo: implement a more resource efficient and generic version
-                    broadcastln(communication::commands::uploadData);
-                    broadcastln(communication::commands::part_separator);
+                    broadcastln(reinterpret_cast<const __FlashStringHelper *>(communication::commands::uploadData));
+                    broadcastln(reinterpret_cast<const __FlashStringHelper *>(communication::commands::part_separator));
                     broadcast(F("{\"Serial\":\""));
                     broadcast(_serial);
                     broadcast(F("\",\"Data\":["));
@@ -373,7 +373,7 @@ namespace woodBox {
                         }
                     }
                     broadcastln(F("]}"));
-                    broadcast(communication::commands::end_of_command);
+                    broadcast(reinterpret_cast<const __FlashStringHelper *>(communication::commands::end_of_command));
                     _nbMeasures = 0;
                 }
 
