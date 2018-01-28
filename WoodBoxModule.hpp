@@ -2,6 +2,7 @@
 # define WOODBOXMODULE_HPP
 
 # include <stdint.h>
+# include <alloca.h>
 # include "ARGBLed.hpp"
 # include "ABaseModule.hpp"
 # include "AWiFiCommunicator.hpp"
@@ -454,20 +455,21 @@ namespace woodBox {
                             String commandName = _streams[i]->readStringUntil('\n');
                             commandName.replace('\r', '\0');
                             if (!STRCMP(commandName.c_str(), communication::commands::setProfile)) {
-                                // TODO: need to implement set profile command -> set conf of module itself (vendor, serial, ...etc)
-                                _streams[i]->println(F("Not implemented yet"));
+                                _setProfile(*_streams[i]);
                             }
                             else if (!STRCMP(commandName.c_str(), communication::commands::enumerate)) {
-                                // TODO: need to implement enumerate command
-                                _streams[i]->println(F("Not implemented yet"));
+                                _enumerate(*_streams[i]);
                             }
                             else if (!STRCMP(commandName.c_str(), communication::commands::syncTime)) {
-                                // TODO: need to implement syncTime command
-                                _streams[i]->println(F("Not implemented yet"));
+                                _syncTime(*_streams[i]);
                             }
                             else if (_communicationPlugin != nullptr) {
                                 _communicationPlugin(commandName, *_streams[i]);
                             }
+                            else {
+                                while (_streams[i]->read() != communication::commands::end_of_command);
+                            }
+                            while (_streams[i]->read() != -1); // Remove the rest of the input
                         }
                     }
                 }
@@ -482,6 +484,76 @@ namespace woodBox {
                     for (size_t i = 0; _streams[i] != nullptr; i++) {
                         _streams[i]->flush();
                     }
+                }
+
+            private:
+                void        _enumerate(Stream &stream) {
+                    while (stream.read() != communication::commands::end_of_command);
+                    stream.print(FH(communication::commands::enumerate));
+                    stream.print(FH(communication::commands::end_of_line));
+                    stream.print(FH(communication::commands::part_separator));
+                    stream.print(FH(communication::commands::end_of_line));
+                    stream.print(F("{\"serial\":\""));
+                    stream.print(_serial);
+                    stream.print(F("\",\"vendor\":\""));
+                    stream.print(_vendor);
+                    stream.print(F("\",\"type\":\""));
+                    stream.print(_type);
+                    stream.print(F("\"}"));
+                    stream.print(FH(communication::commands::end_of_line));
+                    stream.print(communication::commands::end_of_command);
+                }
+
+                void        _setProfile(Stream &stream) {
+                    /* Version opti if you have enough RAM to store a copy of all data:
+                    size_t size = sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType);
+                    char *buffer = reinterpret_cast<char *>(alloca(size));
+                    if (stream.readBytesUntil(communication::commands::end_of_command, buffer, size) != size) {
+                        return;
+                    }
+                    memcpy(_vendor, buffer, sizeof(moduleVendor));
+                    buffer += sizeof(moduleVendor);
+                    memcpy(_serial, buffer, sizeof(moduleSerial));
+                    buffer += sizeof(moduleSerial);
+                    memcpy(&_type, sizeof(moduleType)); */
+                    uint8_t data;
+                    uint8_t *ptr = reinterpret_cast<uint8_t *>(_vendor);
+                    for (size_t i = 0; i < sizeof(moduleVendor); i++) {
+                        while ((data = stream.read()) < 0);
+                        if (data == communication::commands::end_of_command) {
+                            return;
+                        }
+                        ptr[i] = data;
+                    }
+                    ptr = reinterpret_cast<uint8_t *>(_serial);
+                    for (size_t i = 0; i < sizeof(moduleSerial); i++) {
+                        while ((data = stream.read()) < 0);
+                        if (data == communication::commands::end_of_command) {
+                            return;
+                        }
+                        ptr[i] = data;
+                    }
+                    ptr = reinterpret_cast<uint8_t *>(&_type);
+                    for (size_t i = 0; i < sizeof(moduleType); i++) {
+                        while ((data = stream.read()) < 0);
+                        if (data == communication::commands::end_of_command) {
+                            return;
+                        }
+                        ptr[i] = data;
+                    }
+                    while (stream.read() != communication::commands::end_of_command);
+                }
+
+                void        _syncTime(Stream &stream) {
+                    /* String refTime = stream.readStringUntil(communication::commands::end_of_command);
+                    _refTimestamp = refTime.toInt(); */
+                    uint8_t *ptr = reinterpret_cast<uint8_t *>(&_refTimestamp);
+                    uint8_t data;
+                    for (size_t i = 0; i < sizeof(timestamp); i++) {
+                        while ((data = stream.read()) < 0);
+                        ptr[i] = data;
+                    }
+                    while (stream.read() != communication::commands::end_of_command);
                 }
             private:
                 unsigned long               _sensorInterval;
