@@ -133,7 +133,7 @@ Example on Arduino to use a common cathode R\+GB L\+ED and the implementation \m
 \begin{DoxyCode}
 \textcolor{preprocessor}{#include <woodBox.h>}
 
-CommonCathodeLED led(2, 3, 4); \textcolor{comment}{// Create a common cathode LED object and defining the pins connected to
+CommonCathodeRGBLed led(2, 3, 4); \textcolor{comment}{// Create a common cathode LED object and defining the pins connected to
        red, green and blue anodes of the LED}
 WoodBoxModule<uint16\_t, 15> *module = \mbox{\hyperlink{classwood_box_1_1module_1_1_wood_box_module_a3f13bd3a6318ddf2a7db84f86b198a49}{WoodBoxModule<uint16\_t, 15>::getInstance}}
       (); \textcolor{comment}{// Create a WoodBoxModule instance able to buffer 15 measures from an analog sensor}
