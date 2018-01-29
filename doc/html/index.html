@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>WoodBox Framework: Main Page</title>
+<title>WoodBox Framework: WoodBox Development Kit</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">WoodBox Framework
    </div>
@@ -62,10 +63,82 @@ $(function() {
 
 <div class="header">
   <div class="headertitle">
-<div class="title">WoodBox Framework Documentation</div>  </div>
+<div class="title">WoodBox Development Kit </div>  </div>
 </div><!--header-->
 <div class="contents">
-</div><!-- contents -->
+<div class="textblock"><p>This repository holds the source code of the WoodBox Development Kit (Framework + examples + PCBs and schematics).</p>
+<h2>What is WoodBox?</h2>
+<p>WoodBox is a set of smart devices enabling to monitor a house's environment and the possible effects on human health. A smartphone application communicating with sensing devices put into the house, enable the user to get advices, tips and solutions to potential problems, and to communicate with other members of WoodBox community, to be able to live better at home.</p>
+<h2>Installation and requirements to use this kit:</h2>
+<p>This development kit requires some external libraries to be present on your environment. If you use Arduino, just download these into your "libraries" folder into your "Arduino" directory.</p>
+<p>In the same way, to use this development kit, just download this repository in your "libraries" folder. Once all libraries are downloaded, just open the "Library manager" in the Arduino IDE for it to update your libraries list.</p>
+<p>Usual locations of Arduino directory:</p><ul>
+<li>Windows: Documents</li>
+<li>Linux: ~/Arduino (ie, in your home folder)</li>
+<li>OS X: ~/Arduino (ie, in your home folder)</li>
+</ul>
+<p>Libraries required:</p><ul>
+<li>Partial Arduino Core implementing interfaces Print, Printable and Stream -&gt; Used for generic interfaces and avoid duplicates between Arduino and non-Arduino projects</li>
+<li>ArduinoJson library, despite it's name it's fully portable: <a href="https://github.com/bblanchon/ArduinoJson">https://github.com/bblanchon/ArduinoJson</a></li>
+<li>Grove LightSensor library: <a href="https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor">https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor</a></li>
+<li>Grove AirQuality library: <a href="https://github.com/Seeed-Studio/Grove_Air_quality_Sensor">https://github.com/Seeed-Studio/Grove_Air_quality_Sensor</a></li>
+<li>Grove ChainableLED library: <a href="https://github.com/pjpmarques/ChainableLED">https://github.com/pjpmarques/ChainableLED</a></li>
+<li>Adafruit NeoPiel library: <a href="https://github.com/adafruit/Adafruit_NeoPixel">https://github.com/adafruit/Adafruit_NeoPixel</a></li>
+<li>TaskScheduler library: <a href="https://github.com/arkhipenko/TaskScheduler">https://github.com/arkhipenko/TaskScheduler</a></li>
+<li>Adafruit Sensor library: <a href="https://github.com/adafruit/Adafruit_Sensor">https://github.com/adafruit/Adafruit_Sensor</a></li>
+<li>Adafruit TSL2561 library: <a href="https://github.com/adafruit/Adafruit_TSL2561">https://github.com/adafruit/Adafruit_TSL2561</a></li>
+</ul>
+<h2>Compatible environments:</h2>
+<p>Here is the satatus of compatibility of this development kit with several commonly used environments:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Environment  </th><th class="markdownTableHeadNone">Arduino  </th><th class="markdownTableHeadNone">Energia  </th><th class="markdownTableHeadNone">Mbed  </th><th class="markdownTableHeadNone">Bare-Metal  </th><th class="markdownTableHeadNone">PlatformIO   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Support  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Not yet (not tested and need C++14 support in incoming release)  </td><td class="markdownTableBodyNone">Not yet  </td><td class="markdownTableBodyNone">Y (not tested)   </td></tr>
+</table>
+<h2>Compatible architectures:</h2>
+<p>Here is the status of compatibility of components available in this development kit with several common architectures of microcontrollers:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Component / Platform  </th><th class="markdownTableHeadNone">AVR  </th><th class="markdownTableHeadNone">ARM  </th><th class="markdownTableHeadNone">MSP430  </th><th class="markdownTableHeadNone">MSP432  </th><th class="markdownTableHeadNone">PIC32  </th><th class="markdownTableHeadNone">PIC18  </th><th class="markdownTableHeadNone">ESP8266  </th><th class="markdownTableHeadNone">ESP32   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">WoodBox Core  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">WoodBox WiFi Module  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ESP8266 AT Firmware  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Grove Chainable LED  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested, need a small patch but I'm unable to check as I don't have one)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">AnalogSensor  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">ArduinoEEPROM  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Common cathode RGB LED  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Grove Air Quality sensor  </td><td class="markdownTableBodyNone">Y (not all)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Grove Light Sensor (NI)  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MQ2 Gas sensor (NI)  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">NeoPixel  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not all, not tested)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Blynk (NI)  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A   </td></tr>
+</table>
+<h2>Low Power Mode</h2>
+<p>For battery powered modules, here is the list of low power operation mode on several architectures and environment:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Environment / Architecture  </th><th class="markdownTableHeadNone">AVR  </th><th class="markdownTableHeadNone">ARM  </th><th class="markdownTableHeadNone">MSP430  </th><th class="markdownTableHeadNone">MSP432  </th><th class="markdownTableHeadNone">PIC32  </th><th class="markdownTableHeadNone">PIC18  </th><th class="markdownTableHeadNone">ESP8266  </th><th class="markdownTableHeadNone">ESP32   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Arduino (and Energia)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">Not all  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Mbed  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Bare-Metal  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N   </td></tr>
+</table>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>WoodBox Framework: README</title>
+<title>WoodBox Framework: WoodBox Development Framework</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,18 +62,17 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">README </div>  </div>
+<div class="title">WoodBox Development Framework </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>#WoodBox Development Framework</p>
-<h2>Requirements:</h2>
+<div class="textblock"><h2>Requirements:</h2>
 <ul>
 <li>Partial Arduino Core implementing interfaces Print, Printable and Stream -&gt; Used for generic interfaces and avoid duplicates between Arduino and non-Arduino projects</li>
 <li>ArduinoJson library, despite it's name it's fully portable</li>
 <li>Grove' AirQuality library</li>
 <li>Grove' ChainableLED library</li>
 <li>Adafruit NeoPiel library</li>
-<li>TaskScheduler library</li>
+<li>TaskScheduler library|</li>
 <li>Adafruit DHT universal library</li>
 </ul>
 <h2>Compatible environments:</h2>
@@ -86,19 +85,21 @@ $(function() {
 <h2>Compatible platforms:</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Component / Platform  </th><th class="markdownTableHeadNone">AVR  </th><th class="markdownTableHeadNone">ARM  </th><th class="markdownTableHeadNone">MSP430  </th><th class="markdownTableHeadNone">MSP432  </th><th class="markdownTableHeadNone">PIC32   </th></tr>
+<th class="markdownTableHeadNone">Component / Platform  </th><th class="markdownTableHeadNone">AVR  </th><th class="markdownTableHeadNone">ARM  </th><th class="markdownTableHeadNone">MSP430  </th><th class="markdownTableHeadNone">MSP432  </th><th class="markdownTableHeadNone">PIC32  </th><th class="markdownTableHeadNone">PIC18  </th><th class="markdownTableHeadNone">ESP8266  </th><th class="markdownTableHeadNone">ESP32   </th></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ESP8266  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)   </td></tr>
+<td class="markdownTableBodyNone">ESP8266 AT Firmware  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Grove Chainable LED  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested, need a small patch but I'm unable to check as I don't have one)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)   </td></tr>
+<td class="markdownTableBodyNone">Grove Chainable LED  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested, need a small patch but I'm unable to check as I don't have one)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">AnalogSensor  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)   </td></tr>
+<td class="markdownTableBodyNone">AnalogSensor  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Common cathode RGB LED  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)   </td></tr>
+<td class="markdownTableBodyNone">ArduinoEEPROM  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Grove Air Quality sensor  </td><td class="markdownTableBodyNone">Y* (not all)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N   </td></tr>
+<td class="markdownTableBodyNone">Common cathode RGB LED  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyNone">NeoPixel  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y* (not all, not tested)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N   </td></tr>
+<td class="markdownTableBodyNone">Grove Air Quality sensor  </td><td class="markdownTableBodyNone">Y* (not all)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">NeoPixel  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y* (not all, not tested)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
 </table>
 </div></div><!-- contents -->
 <!-- start footer part -->
