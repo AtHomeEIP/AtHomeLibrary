@@ -23,7 +23,7 @@ Libraries required:
 - Grove LightSensor library: https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor
 - Grove AirQuality library: https://github.com/Seeed-Studio/Grove_Air_quality_Sensor
 - Grove ChainableLED library: https://github.com/pjpmarques/ChainableLED
-- Adafruit NeoPiel library: https://github.com/adafruit/Adafruit_NeoPixel
+- Adafruit NeoPixel library: https://github.com/adafruit/Adafruit_NeoPixel
 - TaskScheduler library: https://github.com/arkhipenko/TaskScheduler
 - Adafruit Sensor library: https://github.com/adafruit/Adafruit_Sensor
 - Adafruit TSL2561 library: https://github.com/adafruit/Adafruit_TSL2561
