@@ -64,3 +64,18 @@ For battery powered modules, here is the list of low power operation mode on sev
 | Arduino (and Energia)      | Y   | N   | Not all | Y      | N     | N     | N       | N     |
 | Mbed                       | N/A | Y   | N/A     | N/A    | N/A   | N/A   | N/A     | N/A   |
 | Bare-Metal                 | N   | N   | N       | N      | N     | N     | N       | N     |
+
+## Secured communication
+
+Status of secured communication between modules and their server (the WoodBox when the set is built by the WoodBox team):
+
+| Platform / Environment | Arduino | Mbed | Bare-Metal |
+|------------------------|---------|------|------------|
+| AVR                    | N       | N/A  | N          |
+| ARM                    | N       | N    | N          |
+| MSP430                 | N       | N/A  | N          |
+| MSP432                 | N       | N/A  | N          |
+| PIC32                  | N       | N/A  | N          |
+| PIC18                  | N       | N/A  | N          |
+| ESP8266                | N       | N/A  | N          |
+| ESP32                  | N       | N/A  | N          |
