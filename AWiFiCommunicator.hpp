@@ -3,7 +3,7 @@
 
 # include <Arduino.h>
 # include <Stream.h>
-# include "WifiTypes.hpp"
+# include "WiFiTypes.hpp"
 
 namespace athome {
 	namespace communication {
