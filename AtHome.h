@@ -8,7 +8,7 @@
 
 # include "AtHomeModule.hpp"
 # include "NetworkIPTypes.hpp"
-# include "WifiTypes.hpp"
+# include "WiFiTypes.hpp"
 # ifdef ARDUINO
 #  include "GroveChainableLED.hpp"
 # endif /* ARDUINO */
