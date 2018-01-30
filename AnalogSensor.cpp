@@ -3,7 +3,7 @@
 #endif /* ARDUINO */
 #include "AnalogSensor.hpp"
 
-namespace woodBox {
+namespace athome {
     namespace sensor {
         AnalogSensor::AnalogSensor(uint8_t pin):
             _analog_pin(pin),

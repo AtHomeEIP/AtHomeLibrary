@@ -10,7 +10,7 @@
 #  include <stdint.h>
 #  include "ISensor.hpp"
 
-namespace woodBox {
+namespace athome {
     namespace sensor {
         class GroveAirQualitySensor : public ISensor {
         public:

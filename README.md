@@ -1,10 +1,10 @@
-# WoodBox Development Kit
+# @@Home Development Kit
 
-This repository holds the source code of the WoodBox Development Kit (Framework + examples + PCBs and schematics).
+This repository holds the source code of the @HOME Development Kit (Framework + examples + PCBs and schematics).
 
-## What is WoodBox?
+## What is @@Home?
 
-WoodBox is a set of smart devices enabling to monitor a house's environment and the possible effects on human health. A smartphone application communicating with sensing devices put into the house, enable the user to get advices, tips and solutions to potential problems, and to communicate with other members of WoodBox community, to be able to live better at home.
+@@Home is a set of smart devices enabling to monitor a house's environment and the possible effects on human health. A smartphone application communicating with sensing devices put into the house, enable the user to get advices, tips and solutions to potential problems, and to communicate with other members of @@Home community, to be able to live better at home.
 
 ## Installation and requirements to use this kit:
 
@@ -42,8 +42,8 @@ Here is the status of compatibility of components available in this development 
 
 | Component / Platform     | AVR            | ARM                      | MSP430                                                                         | MSP432         | PIC32          | PIC18 | ESP8266 | ESP32 |
 |--------------------------|----------------|--------------------------|--------------------------------------------------------------------------------|----------------|----------------|-------|---------|-------|
-| WoodBox Core             | Y              | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | ?       | ?     |
-| WoodBox WiFi Module      | Y              | Y (not tested)           | N                                                                              | Y              | Y              | ?     | ?       | ?     |
+| AtHome Core             | Y              | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | ?       | ?     |
+| AtHome WiFi Module      | Y              | Y (not tested)           | N                                                                              | Y              | Y              | ?     | ?       | ?     |
 | ESP8266 AT Firmware      | Y (not tested) | Y (not tested)           | N                                                                              | Y              | Y (not tested) | ?     | ?       | ?     |
 | Grove Chainable LED      | Y              | Y (not tested)           | Y (not tested, need a small patch but I'm unable to check as I don't have one) | Y (not tested) | Y (not tested) | ?     | ?       | ?     |
 | AnalogSensor             | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | ?       | ?     |
@@ -67,7 +67,7 @@ For battery powered modules, here is the list of low power operation mode on sev
 
 ## Secured communication
 
-Status of secured communication between modules and their server (the WoodBox when the set is built by the WoodBox team):
+Status of secured communication between modules and their server (the @@Home when the set is built by the @@Home team):
 
 | Platform / Environment | Arduino | Mbed | Bare-Metal |
 |------------------------|---------|------|------------|

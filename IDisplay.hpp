@@ -1,7 +1,7 @@
 #ifndef IDISPLAY_HPP
 # define IDISPLAY_HPP
 
-namespace woodBox {
+namespace athome {
     namespace display {
         /**
          * Interface used to control any kind of display.

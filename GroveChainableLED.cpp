@@ -2,7 +2,7 @@
 
 # include "GroveChainableLED.hpp"
 
-namespace woodBox {
+namespace athome {
 	namespace display {
 		GroveChainableLED::GroveChainableLED(const Pins *pins):
 			_led(nullptr)

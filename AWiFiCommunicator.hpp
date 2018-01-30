@@ -3,9 +3,9 @@
 
 # include <Arduino.h>
 # include <Stream.h>
-# include "wifi_types.hpp"
+# include "WifiTypes.hpp"
 
-namespace woodBox {
+namespace athome {
 	namespace communication {
 	    namespace wifi {
 	        /**
@@ -16,7 +16,7 @@ namespace woodBox {
 	         * \code{.cpp}
 	         * #include <AWiFiCommunicator.hpp>
 	         *
-	         * using woodBox::communication::wifi::AWiFiCommunicator;
+	         * using athome::communication::wifi::AWiFiCommunicator;
 	         *
 	         * class MyUARTBridge : public AWiFiCommunicator {
 	         *   public:
@@ -74,10 +74,10 @@ namespace woodBox {
 				     *
 				     * \code{.cpp}
 				     * #include <string.h>
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
-				     * using woodBox::communication::wifi::WiFi_ap; // Use this to not have to write the full namespace names further
-				     * using woodBox::communication::wifi::AWiFiCommunicator;
+				     * using athome::communication::wifi::WiFi_ap; // Use this to not have to write the full namespace names further
+				     * using athome::communication::wifi::AWiFiCommunicator;
 				     *
 				     * void my_function_connecting_wifi_to_network_called_foobar(AWiFiCommunicator &wifi) {
 				     *   WiFi_ap network; // Declare a WiFi_ap structure
@@ -103,7 +103,7 @@ namespace woodBox {
 				     * \code{.cpp}
 				     * #include <AWiFiCommunicator.hpp>
 				     *
-				     * using woodBox::communication::wifi::AWiFiCommunicator;
+				     * using athome::communication::wifi::AWiFiCommunicator;
 				     *
 				     * void my_function_disconnecting_wifi_adapters(AWiFiCommuncator &wifi) {
 				     *   if (!wifi.disconnect()) {
@@ -122,11 +122,11 @@ namespace woodBox {
 				     * Example:
 				     *
 				     * \code{.cpp}
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
-				     * using woodBox::communication::ip::tcp_host; // Use this to not have to write the full namespace names further
-				     * using woodBox::communication::wifi::WiFi_client;
-				     * using woodBox::communication::wifi::AWiFiCommunicator;
+				     * using athome::communication::ip::tcp_host; // Use this to not have to write the full namespace names further
+				     * using athome::communication::wifi::WiFi_client;
+				     * using athome::communication::wifi::AWiFiCommunicator;
 				     *
 				     * void my_function_connecting_to_http_port_on_router(AWiFiCommunicator &wifi) {
 				     *   const WiFi_client &my_ip = wifi.getConnectionAddresses(); // Get our actual MAC and IP (IPv4 or IPv6) addresses
@@ -151,7 +151,7 @@ namespace woodBox {
 				     * \code{.cpp}
 				     * #include <AWiFiCommunicator.hpp>
 				     *
-				     * using woodBox::communication::wifi::AWiFiCommunicator;
+				     * using athome::communication::wifi::AWiFiCommunicator;
 				     *
 				     * void my_function_disconnecting_an_adapter_from_host(AWiFiCommunicator &wifi) {
 				     *   if (!wifi.disconnectFromHost()) {
@@ -173,7 +173,7 @@ namespace woodBox {
 				     * \code{.cpp}
 				     * #include <AWiFiCommunicator.hpp>
 				     *
-				     * using woodBox::communication::wifi::AWiFiCommunicator;
+				     * using athome::communication::wifi::AWiFiCommunicator;
 				     *
 				     * void my_function_printing_if_adapter_is_connected_to_network_or_not(const AWiFiCommunicator &wifi) {
 				     *   Serial.println((wifi.isConnected) ? "Adapter is connected to WiFi network" : "Adapter isn't connected to WiFi network");
@@ -184,15 +184,15 @@ namespace woodBox {
 				    /**
 				     * Method returning a reference on the current configured access point into the instance of AWiFiCommunicator.
 				     *
-				     * See woodBox::communication::wifi::WiFi_ap for more information on the content of this structure.
+				     * See athome::communication::wifi::WiFi_ap for more information on the content of this structure.
 				     *
 				     * Example:
 				     *
 				     * \code{.cpp}
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
-				     * using woodBox::communication::wifi::WiFi_ap;
-				     * using woodBox::communication::wifi::AWiFiCommunicator;
+				     * using athome::communication::wifi::WiFi_ap;
+				     * using athome::communication::wifi::AWiFiCommunicator;
 				     *
 				     * void my_function_printing_current_access_point_info(const AWiFiCommunicator &wifi) {
 				     *   const WiFi_ap &access_point = wifi.getAccessPoint;
@@ -207,16 +207,16 @@ namespace woodBox {
 				    /**
 				     * Method returning a reference on the current (or last if the module is currently disconnected) IP and MAC addresses of this instance of AWiFiCommunicator.
 				     *
-				     * See woodBox::communication::wifi::WiFi_client for more information on the content of this structure.
+				     * See athome::communication::wifi::WiFi_client for more information on the content of this structure.
 				     *
 				     * Example:
 				     *
 				     * \code{.cpp}
 				     * #include <stdio.h>
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
-				     * using woodBox::communication::wifi::WiFi_client;
-				     * using woodBox::communication::wifi::AWiFiCommunicator;
+				     * using athome::communication::wifi::WiFi_client;
+				     * using athome::communication::wifi::AWiFiCommunicator;
 				     *
 				     * void my_function_printing_current_ip_and_mac_addresses(const AWiFiCommunicator &wifi) {
 				     *   const WiFi_client &addresses = wifi.getConnectionAddresses();
@@ -238,16 +238,16 @@ namespace woodBox {
 				    /**
 				     * Method returning a reference on the current (or last if the module is currently disconnected) connection to a host of this instance of AWiFiCommunicator.
 				     *
-				     * See woodBox::communication::ip::tcp_host for more information on the content of this structure.
+				     * See athome::communication::ip::tcp_host for more information on the content of this structure.
 				     *
 				     * Example:
 				     *
 				     * \code{.cpp}
 				     * #include <stdio.h>
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
-				     * using woodBox::communication::ip::tcp_host;
-				     * using woodBox::communication::wifi::AWiFiCommunicator;
+				     * using athome::communication::ip::tcp_host;
+				     * using athome::communication::wifi::AWiFiCommunicator;
 				     *
 				     * void my_function_printing_current_connection_to_a_host(const AWiFiCommunicator &wifi) {
 				     *   const tcp_host &my_host = wifi.getHost();
@@ -262,18 +262,18 @@ namespace woodBox {
 				     */
 				    const ip::tcp_host &getHost() const;
 				    /**
-				     * Method returning a value of woodBox::communication::ip::wifi_mode enumeration, being STATION if the adapter connects to a WiFi network,
+				     * Method returning a value of athome::communication::ip::wifi_mode enumeration, being STATION if the adapter connects to a WiFi network,
 				     * or ACCESS_POINT if it creates one.
 				     *
-				     * See woodBox::communication::ip::wifi_mode for more information about this enumeration.
+				     * See athome::communication::ip::wifi_mode for more information about this enumeration.
 				     *
 				     * Example:
 				     *
 				     * \code{.cpp}
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
-				     * using woodBox::communication::wifi::wifi_mode;
-				     * using woodBox::communication::wifi::AWiFiCommunicator;
+				     * using athome::communication::wifi::wifi_mode;
+				     * using athome::communication::wifi::AWiFiCommunicator;
 				     *
 				     * void my_function_printing_current_wifi_mode(const AWiFiCommunicator &wifi) {
 				     *   wifi_mode mode = wifi.getWiFiMode();
@@ -285,7 +285,7 @@ namespace woodBox {
 				     *       Serial.println("The WiFi adapter creates a new Access Point (network)");
 				     *       break;
 				     *     default:
-				     *       Serial.println("The WiFi adapter use a less common mode. See woodBox::communication::ip::wifi_mode for more information");
+				     *       Serial.println("The WiFi adapter use a less common mode. See athome::communication::ip::wifi_mode for more information");
 				     *       Serial.println(mode);
 				     *       break;
 				     *   }
@@ -298,15 +298,15 @@ namespace woodBox {
 				     *
 				     * Calling this method will disconnect the adapter from current network to update adapter configuration, but will not reconnect it automatically.
 				     *
-				     * A call to woodBox::communication::wifi::AWiFiCommunicator::connect is required to connect to the new network after calling this method.
+				     * A call to athome::communication::wifi::AWiFiCommunicator::connect is required to connect to the new network after calling this method.
 				     *
 				     * Example:
 				     *
 				     * \code{.cpp}
 				     * #include <string.h>
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
-				     * using woodBox::communication::wifi::WiFi_ap;
+				     * using athome::communication::wifi::WiFi_ap;
 				     *
 				     * // ESP8266WiFiCommunicator is an implementation of AWiFiCommunicator for ESP8266 using default AT firmware
 				     * // Note: using global variables is normally a dirty way of doing this,
@@ -338,14 +338,14 @@ namespace woodBox {
 				     *
 				     * If you're not sure about how your WiFi network is configured, don't use this method. Most of WiFi networks attributes IP addresses to devices automatically through DHCP.
 				     *
-				     * See woodBox::communication::wifi::WiFi_client for more information on the content of this structure.
+				     * See athome::communication::wifi::WiFi_client for more information on the content of this structure.
 				     *
 				     * Example:
 				     *
 				     * \code{.cpp}
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
-				     * using woodBox::communication::wifi::WiFi_client;
+				     * using athome::communication::wifi::WiFi_client;
 				     *
 				     * ESP8266WiFiCommunicator wifi(2, 3); // ESP8266WiFiCommunicator need to know on which pins of the board are connected the CH_PD and RST pins of the ESP8266
 				     * WiFi_client addresses = {{0x5C, 0xCF, 0x7F, 0x00, 0x00, 0x00}, {127, 0, 0, 1}}; // Users of this method should know why setting this IP address will be pretty useless
@@ -365,21 +365,21 @@ namespace woodBox {
 				     */
 				    void setConnectionAddresses(const WiFi_client &);
 				    /**
-				     * Method used to set on which host and port the adapter should connect by passing a reference on a woodBox::communication::ip::tcp_host as parameter.
+				     * Method used to set on which host and port the adapter should connect by passing a reference on a athome::communication::ip::tcp_host as parameter.
 				     *
 				     * You should note that calling this method will close any existing connection to a previous host and that connection to the new host is not automatic,
-				     * thus, the user must call the method woodBox::communication::wifi::AWiFiCommunicator::connectToHost when he wants to connect to the host.
+				     * thus, the user must call the method athome::communication::wifi::AWiFiCommunicator::connectToHost when he wants to connect to the host.
 				     *
-				     * See woodBox::communication::ip::tcp_host for more information on the content of this structure.
+				     * See athome::communication::ip::tcp_host for more information on the content of this structure.
 				     *
 				     * Example:
 				     *
 				     * \code{.cpp}
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
-				     * using woodBox::communication::ip::tcp_host;
-				     * using woodBox::communication::wifi::WiFi_client;
-				     * using woodBox::module::ABaseModule;
+				     * using athome::communication::ip::tcp_host;
+				     * using athome::communication::wifi::WiFi_client;
+				     * using athome::module::ABaseModule;
 				     *
 				     * void my_function_connecting_an_adapter_to_web_server_on_router(ABaseModule &wifi) {
 				     *   if (!wifi.isConnected()) {
@@ -396,18 +396,18 @@ namespace woodBox {
 				    /**
 				     * Method used to define if the WiFi adapter is used to connect to an existing network, or to create a new access point.
 				     *
-				     * Note: this method will not call automatically the woodBox::communication::wifi::AWiFiCommunicator::connect method to create or to connect to the set up network.
+				     * Note: this method will not call automatically the athome::communication::wifi::AWiFiCommunicator::connect method to create or to connect to the set up network.
 				     *
-				     * See woodBox::communication::wifi::wifi_mode for more information about values of this enumeration.
+				     * See athome::communication::wifi::wifi_mode for more information about values of this enumeration.
 				     *
 				     * Example to create a new access point named "foobar" protected by the password "12345678":
 				     *
 				     * \code{.cpp}
 				     * #include <string.h>
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
-				     * using woodBox::communication::wifi::WiFi_ap;
-				     * using woodBox::communication::wifi::wifi_mode;
+				     * using athome::communication::wifi::WiFi_ap;
+				     * using athome::communication::wifi::wifi_mode;
 				     *
 				     * ESP8266WiFiCommunicator wifi(2, 3); // ESP8266WiFiCommunicator need to know on which pins of the board are connected the CH_PD and RST pins of the ESP8266
 				     * WiFi_ap ap;
@@ -434,10 +434,10 @@ namespace woodBox {
 				     *
 				     * \code{.cpp}
                      * #include <string.h>
-                     * #include <woodBox.h>
+                     * #include <AtHome.h>
                      *
-                     * using woodBox::communication::wifi::WiFi_ap;
-                     * using woodBox::communication::wifi::wifi_mode;
+                     * using athome::communication::wifi::WiFi_ap;
+                     * using athome::communication::wifi::wifi_mode;
                      *
                      * ESP8266WiFiCommunicator wifi(2, 3); // ESP8266WiFiCommunicator need to know on which pins of the board are connected the CH_PD and RST pins of the ESP8266
                      * WiFi_ap ap;
@@ -469,7 +469,7 @@ namespace woodBox {
 				     * Example for an ESP8266 connected to the serial port of an Arduino (pins 0 and 1):
 				     *
 				     * \code{.cpp}
-				     * #include <woodBox.h>
+				     * #include <AtHome.h>
 				     *
 				     * ESP8266WiFiCommunicator wifi(2, 3);
 				     *

@@ -1,0 +1,82 @@
+\hypertarget{classathome_1_1storage_1_1_i_storage}{}\section{athome\+:\+:storage\+:\+:I\+Storage Class Reference}
+\label{classathome_1_1storage_1_1_i_storage}\index{athome\+::storage\+::\+I\+Storage@{athome\+::storage\+::\+I\+Storage}}
+
+
+{\ttfamily \#include $<$I\+Storage.\+hpp$>$}
+
+Inheritance diagram for athome\+:\+:storage\+:\+:I\+Storage\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classathome_1_1storage_1_1_i_storage}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1storage_1_1_i_storage_af623393cdf559addf167463ce4e7005e}{read}} (size\+\_\+t, void $\ast$, size\+\_\+t)=0
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1storage_1_1_i_storage_a1017bb6ad438313b98197893954e52f1}{write}} (size\+\_\+t, const void $\ast$, size\+\_\+t)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface used to be able to store and read raw data from any source, by transferring memory buffers 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1storage_1_1_i_storage_af623393cdf559addf167463ce4e7005e}\label{classathome_1_1storage_1_1_i_storage_af623393cdf559addf167463ce4e7005e}} 
+\index{athome\+::storage\+::\+I\+Storage@{athome\+::storage\+::\+I\+Storage}!read@{read}}
+\index{read@{read}!athome\+::storage\+::\+I\+Storage@{athome\+::storage\+::\+I\+Storage}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily virtual void athome\+::storage\+::\+I\+Storage\+::read (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{,  }\item[{void $\ast$}]{,  }\item[{size\+\_\+t}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Copy n bytes (3rd parameter) in dest (2nd parameter) from offset x (1st parameter)
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_reading\_something(IStorage &storage) \{
+  \textcolor{keywordtype}{char} my\_string[33];
+  \textcolor{keywordtype}{int} my\_number;
+
+  storage.read(0, my\_string, \textcolor{keyword}{sizeof}(my\_string)); \textcolor{comment}{// Reading a string (array of 33 char) at offset 0 of
+       storage instance into my\_string}
+  storage.read(\textcolor{keyword}{sizeof}(my\_string), &my\_number, \textcolor{keyword}{sizeof}(my\_number)); \textcolor{comment}{// Reading an integer at offset 33 (after
+       content put into my\_string) from storage instance into my\_number}
+\}
+\end{DoxyCode}
+ 
+
+Implemented in \mbox{\hyperlink{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_a853674189981dd3395ea76911d2eb1a0}{athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM}}.
+
+\mbox{\Hypertarget{classathome_1_1storage_1_1_i_storage_a1017bb6ad438313b98197893954e52f1}\label{classathome_1_1storage_1_1_i_storage_a1017bb6ad438313b98197893954e52f1}} 
+\index{athome\+::storage\+::\+I\+Storage@{athome\+::storage\+::\+I\+Storage}!write@{write}}
+\index{write@{write}!athome\+::storage\+::\+I\+Storage@{athome\+::storage\+::\+I\+Storage}}
+\subsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily virtual void athome\+::storage\+::\+I\+Storage\+::write (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{,  }\item[{const void $\ast$}]{,  }\item[{size\+\_\+t}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Write n bytes (3rd parameter) in offset x (1st parameter) from src (2nd parameter)
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_writing\_something(IStorage &storage) \{
+  \textcolor{keywordtype}{char} my\_string[] = \textcolor{stringliteral}{"Hello, World!"};
+  \textcolor{keywordtype}{int} my\_number = 42;
+
+  storage.write(0, my\_string, \textcolor{keyword}{sizeof}(my\_string)); \textcolor{comment}{// Writing the string (array of 14 char) my\_string at
+       offset 0 of storage instance}
+  storage.write(\textcolor{keyword}{sizeof}(my\_string), &my\_number, \textcolor{keyword}{sizeof}(my\_number)); \textcolor{comment}{// Writing my\_number at offset 14 (after
+       my\_string) of storage instance}
+\}
+\end{DoxyCode}
+ 
+
+Implemented in \mbox{\hyperlink{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_a20027ab8a5b20c1fad3e3e42daafe53d}{athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+I\+Storage.\+hpp\end{DoxyCompactItemize}

@@ -1,7 +1,7 @@
 #if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
 # include "NeoPixel.hpp"
 
-namespace woodBox {
+namespace athome {
     namespace display {
         NeoPixel::NeoPixel(uint8_t pin, neoPixelType conf):
             ARGBLed(),

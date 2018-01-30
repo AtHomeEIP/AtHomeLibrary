@@ -1,14 +1,14 @@
 {
-  "name": "WoodBox",
+  "name": "@Home",
   "keywords": "iot, sensors, home, cloud, web, air, luminosity, temperature, humidity, noise",
-  "description": "WoodBox is a set of smart devices enabling to monitor a house's environment and the possible effects on human health. A smartphone application communicating with sensing devices put into the house, enable the user to get advices, tips and solutions to potential problems, and to communicate with other members of WoodBox community, to be able to live better at home.",
+  "description": "@Home is a set of smart devices enabling to monitor a house's environment and the possible effects on human health. A smartphone application communicating with sensing devices put into the house, enable the user to get advices, tips and solutions to potential problems, and to communicate with other members of @Home community, to be able to live better at home.",
   "repository": {
     "type": "git",
     "url": "https://gitlab.com/Woodbox/modules/Framework.git"
   },
   "version": "1.0.0a",
   "authors": {
-    "name": "WoodBox team",
+    "name": "@Home team",
     "url": "https://woodbox.io"
   },
   "exclude": [

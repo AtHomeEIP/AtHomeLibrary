@@ -4,7 +4,7 @@
 # include <stdint.h>
 # include "IDisplay.hpp"
 
-namespace woodBox {
+namespace athome {
     namespace display {
         /**
          * Abstract class used to control RGB LEDs (Common cathode/anode, Grove Chainable LEDs, NeoPixels, ...etc)

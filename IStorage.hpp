@@ -3,7 +3,7 @@
 
 # include <stddef.h>
 
-namespace woodBox {
+namespace athome {
     namespace storage {
         /**
          * Interface used to be able to store and read raw data from any source, by transferring memory buffers

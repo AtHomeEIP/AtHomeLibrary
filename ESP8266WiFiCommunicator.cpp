@@ -2,9 +2,9 @@
 #include <string.h>
 #include <stdio.h>
 #include "ESP8266WiFiCommunicator.hpp"
-#include "WoodBoxFlashCommon.h"
+#include "AtHomeFlashCommon.h"
 
-namespace woodBox {
+namespace athome {
     namespace communication {
         namespace wifi {
             namespace {

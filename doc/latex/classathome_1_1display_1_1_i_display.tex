@@ -1,0 +1,56 @@
+\hypertarget{classathome_1_1display_1_1_i_display}{}\section{athome\+:\+:display\+:\+:I\+Display Class Reference}
+\label{classathome_1_1display_1_1_i_display}\index{athome\+::display\+::\+I\+Display@{athome\+::display\+::\+I\+Display}}
+
+
+{\ttfamily \#include $<$I\+Display.\+hpp$>$}
+
+Inheritance diagram for athome\+:\+:display\+:\+:I\+Display\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.213439cm]{classathome_1_1display_1_1_i_display}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1display_1_1_i_display_a0d3add1ce61c96657827fb56d250d9c6}{clear}} ()=0
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1display_1_1_i_display_a4ba7bd5d46f88578f1c846f4f5f3c5d1}{update}} ()=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface used to control any kind of display.
+
+As the content displayed can change from on display to another (text, color, pixels, ...etc),
+
+it has a very few common methods.
+
+Unfortunately, embedded platforms tends to not have runtime (no {\ttfamily dynamic\+\_\+cast} or {\ttfamily typeof}), so user will have to manage the use of derived interfaces / classes by himself 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1display_1_1_i_display_a0d3add1ce61c96657827fb56d250d9c6}\label{classathome_1_1display_1_1_i_display_a0d3add1ce61c96657827fb56d250d9c6}} 
+\index{athome\+::display\+::\+I\+Display@{athome\+::display\+::\+I\+Display}!clear@{clear}}
+\index{clear@{clear}!athome\+::display\+::\+I\+Display@{athome\+::display\+::\+I\+Display}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily virtual void athome\+::display\+::\+I\+Display\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Remove display content 
+
+Implemented in \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a9753e3a23ea5cb6b0a41079bc6128766}{athome\+::display\+::\+A\+R\+G\+B\+Led}}.
+
+\mbox{\Hypertarget{classathome_1_1display_1_1_i_display_a4ba7bd5d46f88578f1c846f4f5f3c5d1}\label{classathome_1_1display_1_1_i_display_a4ba7bd5d46f88578f1c846f4f5f3c5d1}} 
+\index{athome\+::display\+::\+I\+Display@{athome\+::display\+::\+I\+Display}!update@{update}}
+\index{update@{update}!athome\+::display\+::\+I\+Display@{athome\+::display\+::\+I\+Display}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual void athome\+::display\+::\+I\+Display\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Update display content 
+
+Implemented in \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a725ceca0c01735daa9c95148baf075ab}{athome\+::display\+::\+A\+R\+G\+B\+Led}}, \mbox{\hyperlink{classathome_1_1display_1_1_grove_chainable_l_e_d_a05a4a1381396b7fc11a24993865d8226}{athome\+::display\+::\+Grove\+Chainable\+L\+ED}}, \mbox{\hyperlink{classathome_1_1display_1_1_neo_pixel_a272bca4da78dff7dc02bcd023665e013}{athome\+::display\+::\+Neo\+Pixel}}, and \mbox{\hyperlink{classathome_1_1display_1_1_common_cathode_r_g_b_led_ab78ab6aef619d8e0941dd11d4cfbb545}{athome\+::display\+::\+Common\+Cathode\+R\+G\+B\+Led}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+I\+Display.\+hpp\end{DoxyCompactItemize}

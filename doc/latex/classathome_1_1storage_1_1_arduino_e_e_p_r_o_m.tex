@@ -1,0 +1,107 @@
+\hypertarget{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m}{}\section{athome\+:\+:storage\+:\+:Arduino\+E\+E\+P\+R\+OM Class Reference}
+\label{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m}\index{athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM@{athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM}}
+
+
+{\ttfamily \#include $<$Arduino\+E\+E\+P\+R\+O\+M.\+hpp$>$}
+
+Inheritance diagram for athome\+:\+:storage\+:\+:Arduino\+E\+E\+P\+R\+OM\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_acd5307c1483893ec3d378299dbf882bf}\label{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_acd5307c1483893ec3d378299dbf882bf}} 
+{\bfseries Arduino\+E\+E\+P\+R\+OM} (const \mbox{\hyperlink{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m}{Arduino\+E\+E\+P\+R\+OM}} \&)=delete
+\item 
+\mbox{\Hypertarget{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_a58b6acc1fbf55445a2dbb20879dc4860}\label{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_a58b6acc1fbf55445a2dbb20879dc4860}} 
+\mbox{\hyperlink{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m}{Arduino\+E\+E\+P\+R\+OM}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m}{Arduino\+E\+E\+P\+R\+OM}} \&)=delete
+\item 
+void \mbox{\hyperlink{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_a853674189981dd3395ea76911d2eb1a0}{read}} (size\+\_\+t, void $\ast$, size\+\_\+t)
+\item 
+void \mbox{\hyperlink{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_a20027ab8a5b20c1fad3e3e42daafe53d}{write}} (size\+\_\+t, const void $\ast$, size\+\_\+t)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class is only available on A\+VR platforms using Arduino, as it is a wrapper of Arduino E\+E\+P\+R\+OM library to implement non-\/volatile storage on A\+VR mcu.
+
+Usage is simple, just create an instance of this object and set is as the storage interface of your module using its set\+Storage method\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <AtHome.h>}
+
+ArduinoEEPROM eeprom; \textcolor{comment}{// Create an ArduinoEEPROM instance}
+AtHomeModule<uint16\_t, 15> *module = AtHomeModule<uint16\_t, 15>::getInstance();
+
+\textcolor{keywordtype}{void} setup() \{
+  module->setStorage(&eeprom);
+\}
+
+\textcolor{keywordtype}{void} loop() \{
+\}
+\end{DoxyCode}
+ 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_a853674189981dd3395ea76911d2eb1a0}\label{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_a853674189981dd3395ea76911d2eb1a0}} 
+\index{athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM@{athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM}!read@{read}}
+\index{read@{read}!athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM@{athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+O\+M\+::read (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{,  }\item[{void $\ast$}]{,  }\item[{size\+\_\+t}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Copy n bytes (3rd parameter) in dest (2nd parameter) from offset x (1st parameter)
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_reading\_something(IStorage &storage) \{
+  \textcolor{keywordtype}{char} my\_string[33];
+  \textcolor{keywordtype}{int} my\_number;
+
+  storage.read(0, my\_string, \textcolor{keyword}{sizeof}(my\_string)); \textcolor{comment}{// Reading a string (array of 33 char) at offset 0 of
+       storage instance into my\_string}
+  storage.read(\textcolor{keyword}{sizeof}(my\_string), &my\_number, \textcolor{keyword}{sizeof}(my\_number)); \textcolor{comment}{// Reading an integer at offset 33 (after
+       content put into my\_string) from storage instance into my\_number}
+\}
+\end{DoxyCode}
+ 
+
+Implements \mbox{\hyperlink{classathome_1_1storage_1_1_i_storage_af623393cdf559addf167463ce4e7005e}{athome\+::storage\+::\+I\+Storage}}.
+
+\mbox{\Hypertarget{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_a20027ab8a5b20c1fad3e3e42daafe53d}\label{classathome_1_1storage_1_1_arduino_e_e_p_r_o_m_a20027ab8a5b20c1fad3e3e42daafe53d}} 
+\index{athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM@{athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM}!write@{write}}
+\index{write@{write}!athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM@{athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+OM}}
+\subsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily void athome\+::storage\+::\+Arduino\+E\+E\+P\+R\+O\+M\+::write (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{,  }\item[{const void $\ast$}]{,  }\item[{size\+\_\+t}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Write n bytes (3rd parameter) in offset x (1st parameter) from src (2nd parameter)
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_writing\_something(IStorage &storage) \{
+  \textcolor{keywordtype}{char} my\_string[] = \textcolor{stringliteral}{"Hello, World!"};
+  \textcolor{keywordtype}{int} my\_number = 42;
+
+  storage.write(0, my\_string, \textcolor{keyword}{sizeof}(my\_string)); \textcolor{comment}{// Writing the string (array of 14 char) my\_string at
+       offset 0 of storage instance}
+  storage.write(\textcolor{keyword}{sizeof}(my\_string), &my\_number, \textcolor{keyword}{sizeof}(my\_number)); \textcolor{comment}{// Writing my\_number at offset 14 (after
+       my\_string) of storage instance}
+\}
+\end{DoxyCode}
+ 
+
+Implements \mbox{\hyperlink{classathome_1_1storage_1_1_i_storage_a1017bb6ad438313b98197893954e52f1}{athome\+::storage\+::\+I\+Storage}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Arduino\+E\+E\+P\+R\+O\+M.\+hpp\item 
+Arduino\+E\+E\+P\+R\+O\+M.\+cpp\end{DoxyCompactItemize}

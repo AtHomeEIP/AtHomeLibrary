@@ -1,0 +1,44 @@
+\hypertarget{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{}\section{athome\+:\+:display\+:\+:A\+R\+G\+B\+Led\+:\+:Color Struct Reference}
+\label{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}\index{athome\+::display\+::\+A\+R\+G\+B\+Led\+::\+Color@{athome\+::display\+::\+A\+R\+G\+B\+Led\+::\+Color}}
+
+
+{\ttfamily \#include $<$A\+R\+G\+B\+Led.\+hpp$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structathome_1_1display_1_1_a_r_g_b_led_1_1_color_a38384fe4c2a89f0879ad81ccaa377077}\label{structathome_1_1display_1_1_a_r_g_b_led_1_1_color_a38384fe4c2a89f0879ad81ccaa377077}} 
+uint8\+\_\+t {\bfseries red}
+\item 
+\mbox{\Hypertarget{structathome_1_1display_1_1_a_r_g_b_led_1_1_color_a568646e5c308b5791def48db8f2fe5e1}\label{structathome_1_1display_1_1_a_r_g_b_led_1_1_color_a568646e5c308b5791def48db8f2fe5e1}} 
+uint8\+\_\+t {\bfseries green}
+\item 
+\mbox{\Hypertarget{structathome_1_1display_1_1_a_r_g_b_led_1_1_color_ae851e58f84fafd51b64c81296ae8dccf}\label{structathome_1_1display_1_1_a_r_g_b_led_1_1_color_ae851e58f84fafd51b64c81296ae8dccf}} 
+uint8\+\_\+t {\bfseries blue}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Structure used to represent the color displayed on a L\+ED, composed of 3 fields (red, green and blue) accepting a value between 0 (off) and 255 (fully on) for each field.
+
+Examples of colors\+:
+
+
+\begin{DoxyCode}
+Color red = \{255, 0, 0\};
+Color green = \{0, 255, 0\};
+Color blue = \{0, 0, 255\};
+Color white = \{255, 255, 255\};
+Color off = \{0, 0, 0\}; \textcolor{comment}{// LED will be off, no light will be emit. If LED is behind a screen, it will appear
+       black}
+Color faint\_white = \{10, 10, 10\};
+Color yellow = \{255, 255, 0\};
+Color cyan = \{0, 255, 255\};
+Color magenta = \{255, 0, 255\};
+Color orange = \{255, 128, 0\};
+\end{DoxyCode}
+ 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+A\+R\+G\+B\+Led.\+hpp\end{DoxyCompactItemize}

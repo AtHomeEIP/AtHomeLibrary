@@ -3,7 +3,7 @@
 
 # include <stdint.h>
 
-namespace woodBox {
+namespace athome {
 	namespace power {
 		class IPower {
 			public:

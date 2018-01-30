@@ -1,4 +1,4 @@
-#include <woodBox.h>
+#include <AtHome.h>
 
 #ifdef __AVR__
 
@@ -12,7 +12,7 @@ ArduinoEEPROM storage;
 
 #endif
 
-using SimpleModule = WoodBoxModule<uint16_t, 15>;
+using SimpleModule = AtHomeModule<uint16_t, 15>;
 
 SimpleModule *module = SimpleModule::getInstance();
 Stream *streams[] = {&Serial, nullptr};

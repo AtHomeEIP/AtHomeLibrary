@@ -4,14 +4,14 @@
 # include <stdint.h>
 # include "ISensor.hpp"
 
-namespace woodBox {
+namespace athome {
 	namespace sensor {
 	    /**
-	     * Base class derived from woodBox::sensor::ISensor allowing to use an analog sensor.
+	     * Base class derived from athome::sensor::ISensor allowing to use an analog sensor.
 	     *
 	     * Warning: This class is only able to sample an analog sensor, not to interpret its value.
 	     *
-	     * Thus, `getEstimate` method will always return woodBox::sensor::ISensor::ISensorScale::ZERO if this method is not overriden by a specialized class.
+	     * Thus, `getEstimate` method will always return athome::sensor::ISensor::ISensorScale::ZERO if this method is not overriden by a specialized class.
 	     */
 		class AnalogSensor : public ISensor {
 			public:
@@ -32,7 +32,7 @@ namespace woodBox {
 				 *   uint8_t *pointer = my_sensor.getSample();
 				 *   if (pointer == nullptr) {
 				 *     // Invalid pointer -> might be caused by a sample error from the sensor.
-				 *     // Can't happen with base AnalogSensor class but could happen from other woodBox::sensor::ISensor derived classes, so it's good practice to always check returned pointer.
+				 *     // Can't happen with base AnalogSensor class but could happen from other athome::sensor::ISensor derived classes, so it's good practice to always check returned pointer.
 				 *     return;
 				 *   }
 				 *   // Can access value from casting pointer to its original uint16_t type:
@@ -50,7 +50,7 @@ namespace woodBox {
 				 */
 				virtual uint8_t *getSample();
 				/**
-				 * Return woodBox::sensor::ISensor::ISensorScale::ZERO if object is an instance of AnalogSensor class
+				 * Return athome::sensor::ISensor::ISensorScale::ZERO if object is an instance of AnalogSensor class
 				 */
                 virtual ISensorScale getEstimate();
                 /**

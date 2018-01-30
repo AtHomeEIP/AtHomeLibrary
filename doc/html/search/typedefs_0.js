@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['moduleserial',['moduleSerial',['../classwood_box_1_1module_1_1_wood_box_module.html#a3a6503bbd5147a06ba50081f97177b46',1,'woodBox::module::WoodBoxModule']]],
-  ['modulevendor',['moduleVendor',['../classwood_box_1_1module_1_1_wood_box_module.html#adf5d59bae2980ff138284d0fa885df19',1,'woodBox::module::WoodBoxModule']]]
+  ['moduleserial',['moduleSerial',['../classathome_1_1module_1_1_at_home_module.html#aff47a5cb8ee94041eb42fa673dea7a81',1,'athome::module::AtHomeModule']]],
+  ['modulevendor',['moduleVendor',['../classathome_1_1module_1_1_at_home_module.html#a90432f050114b268f7f7e0598dd8c9ac',1,'athome::module::AtHomeModule']]]
 ];

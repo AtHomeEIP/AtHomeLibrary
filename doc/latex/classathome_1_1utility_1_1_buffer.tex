@@ -1,0 +1,125 @@
+\hypertarget{classathome_1_1utility_1_1_buffer}{}\section{athome\+:\+:utility\+:\+:Buffer$<$ T, size $>$ Class Template Reference}
+\label{classathome_1_1utility_1_1_buffer}\index{athome\+::utility\+::\+Buffer$<$ T, size $>$@{athome\+::utility\+::\+Buffer$<$ T, size $>$}}
+
+
+{\ttfamily \#include $<$Buffer.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1_buffer_a1b2428314cc2ac68613241a55203a2e6}\label{classathome_1_1utility_1_1_buffer_a1b2428314cc2ac68613241a55203a2e6}} 
+{\bfseries Buffer} (const \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{Buffer}} \&other)
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1_buffer_a42ab6c8ec0ada7bd76cce3f097b9564b}\label{classathome_1_1utility_1_1_buffer_a42ab6c8ec0ada7bd76cce3f097b9564b}} 
+\mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{Buffer}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{Buffer}} \&other)
+\item 
+void \mbox{\hyperlink{classathome_1_1utility_1_1_buffer_a49f31b68580136d5600491bd11b1e55f}{write}} (T data)
+\item 
+T \mbox{\hyperlink{classathome_1_1utility_1_1_buffer_afc64f625641e7057b2a12dbf059cbd0c}{read}} ()
+\item 
+int \mbox{\hyperlink{classathome_1_1utility_1_1_buffer_a2c441e74e8e325e8eb6cfb7ffb04b157}{available}} ()
+\item 
+T \mbox{\hyperlink{classathome_1_1utility_1_1_buffer_a7cd2a38b3f2abc3083f686c49873656a}{peek}} ()
+\item 
+void \mbox{\hyperlink{classathome_1_1utility_1_1_buffer_a9fd6b0ad08ed7af5702b43c3b6a617e1}{flush}} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T, size\+\_\+t size$>$\newline
+class athome\+::utility\+::\+Buffer$<$ T, size $>$}
+
+Templated buffer, taking as template parameters the type of hold data and their numbers.
+
+Example of use\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <Buffer.hpp>}
+\textcolor{preprocessor}{#include <String.h>}
+
+\textcolor{keyword}{using} \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome::utility::Buffer}};
+
+String my\_string1(\textcolor{stringliteral}{"Hello, World!"});
+String my\_string2(\textcolor{stringliteral}{"foobar"});
+String my\_string3(\textcolor{stringliteral}{"Philipe ! Je sais ou tu te caches !"}); \textcolor{comment}{// Sorry for non-french readers :)}
+
+\textcolor{keywordtype}{void} my\_function\_using\_a\_buffer() \{
+  Buffer<const String &, 2> my\_buffer; \textcolor{comment}{// Create a buffer able to store 2 references on constant String
+       objects}
+  my\_buffer.write(my\_string1); \textcolor{comment}{// Add a reference on constant my\_string1 to the buffer}
+  my\_buffer.write(my\_string2); \textcolor{comment}{// Add a reference on constant my\_string2 to the buffer}
+  my\_buffer.write(my\_string3); \textcolor{comment}{// Won't work! The buffer is full}
+  Serial.println(my\_buffer.available()); \textcolor{comment}{// Will print 2}
+  \textcolor{keyword}{const} String &re\_string1 = my\_buffer.read(); \textcolor{comment}{// Return a reference on constant String my\_string1 and free
+       a space in the buffer}
+  Serial.println(my\_buffer.available()); \textcolor{comment}{// Will print 1}
+  \textcolor{keyword}{const} String &re\_string2 = my\_buffer.peek(); \textcolor{comment}{// Return a reference on constant String my\_string2, don't
+       modify the buffer}
+  Serial.println(my\_buffer.available()); \textcolor{comment}{// Will print 1}
+  my\_buffer.write(my\_string3); \textcolor{comment}{// Add a reference on constant my\_string3 to the buffer, storing now
+       references on my\_string2 and my\_string3}
+  Serial.println(my\_buffer.available()); \textcolor{comment}{// Will print 2}
+  my\_buffer.flush(); \textcolor{comment}{// Clear the buffer}
+  Serial.println(my\_buffer.available()); \textcolor{comment}{// Will print 0}
+\}
+\end{DoxyCode}
+ 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1utility_1_1_buffer_a2c441e74e8e325e8eb6cfb7ffb04b157}\label{classathome_1_1utility_1_1_buffer_a2c441e74e8e325e8eb6cfb7ffb04b157}} 
+\index{athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}!available@{available}}
+\index{available@{available}!athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}}
+\subsubsection{\texorpdfstring{available()}{available()}}
+{\footnotesize\ttfamily template$<$typename T, size\+\_\+t size$>$ \\
+int \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome\+::utility\+::\+Buffer}}$<$ T, size $>$\+::available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This method return the number of elements stored in the buffer.
+
+See class detailed documentation for example of usage. \mbox{\Hypertarget{classathome_1_1utility_1_1_buffer_a9fd6b0ad08ed7af5702b43c3b6a617e1}\label{classathome_1_1utility_1_1_buffer_a9fd6b0ad08ed7af5702b43c3b6a617e1}} 
+\index{athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}!flush@{flush}}
+\index{flush@{flush}!athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}}
+\subsubsection{\texorpdfstring{flush()}{flush()}}
+{\footnotesize\ttfamily template$<$typename T, size\+\_\+t size$>$ \\
+void \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome\+::utility\+::\+Buffer}}$<$ T, size $>$\+::flush (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This method remove all elements from the buffer.
+
+See class detailed documentation for example of usage. \mbox{\Hypertarget{classathome_1_1utility_1_1_buffer_a7cd2a38b3f2abc3083f686c49873656a}\label{classathome_1_1utility_1_1_buffer_a7cd2a38b3f2abc3083f686c49873656a}} 
+\index{athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}!peek@{peek}}
+\index{peek@{peek}!athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}}
+\subsubsection{\texorpdfstring{peek()}{peek()}}
+{\footnotesize\ttfamily template$<$typename T, size\+\_\+t size$>$ \\
+T \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome\+::utility\+::\+Buffer}}$<$ T, size $>$\+::peek (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This method return the oldest stored element in the buffer and doesn\textquotesingle{}t remove it from the buffer.
+
+See class detailed documentation for example of usage. \mbox{\Hypertarget{classathome_1_1utility_1_1_buffer_afc64f625641e7057b2a12dbf059cbd0c}\label{classathome_1_1utility_1_1_buffer_afc64f625641e7057b2a12dbf059cbd0c}} 
+\index{athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}!read@{read}}
+\index{read@{read}!athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily template$<$typename T, size\+\_\+t size$>$ \\
+T \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome\+::utility\+::\+Buffer}}$<$ T, size $>$\+::read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This method return the oldest stored element in the buffer and remove it from the buffer.
+
+See class detailed documentation for example of usage. \mbox{\Hypertarget{classathome_1_1utility_1_1_buffer_a49f31b68580136d5600491bd11b1e55f}\label{classathome_1_1utility_1_1_buffer_a49f31b68580136d5600491bd11b1e55f}} 
+\index{athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}!write@{write}}
+\index{write@{write}!athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}}
+\subsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily template$<$typename T, size\+\_\+t size$>$ \\
+void \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome\+::utility\+::\+Buffer}}$<$ T, size $>$\+::write (\begin{DoxyParamCaption}\item[{T}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This method store the data passed as parameter into the buffer.
+
+Note\+: if the buffer is already full, this method does nothing.
+
+Check with the method \mbox{\hyperlink{classathome_1_1utility_1_1_buffer_a2c441e74e8e325e8eb6cfb7ffb04b157}{athome\+::utility\+::\+Buffer\+::available()}} if you\textquotesingle{}re unsure if the buffer has free space.
+
+If the buffer has free space, the method \mbox{\hyperlink{classathome_1_1utility_1_1_buffer_a2c441e74e8e325e8eb6cfb7ffb04b157}{athome\+::utility\+::\+Buffer\+::available()}} should return an integer inferior to the size of the buffer.
+
+See class detailed documentation for example of usage. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Buffer.\+hpp\end{DoxyCompactItemize}

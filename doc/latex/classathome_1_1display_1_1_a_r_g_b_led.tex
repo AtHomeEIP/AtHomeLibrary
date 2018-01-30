@@ -1,0 +1,128 @@
+\hypertarget{classathome_1_1display_1_1_a_r_g_b_led}{}\section{athome\+:\+:display\+:\+:A\+R\+G\+B\+Led Class Reference}
+\label{classathome_1_1display_1_1_a_r_g_b_led}\index{athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}}
+
+
+{\ttfamily \#include $<$A\+R\+G\+B\+Led.\+hpp$>$}
+
+Inheritance diagram for athome\+:\+:display\+:\+:A\+R\+G\+B\+Led\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.213439cm]{classathome_1_1display_1_1_a_r_g_b_led}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_ac4556a22050f3a1beff3134977f72589}\label{classathome_1_1display_1_1_a_r_g_b_led_ac4556a22050f3a1beff3134977f72589}} 
+{\bfseries A\+R\+G\+B\+Led} (\mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led}{A\+R\+G\+B\+Led}} const \&)=delete
+\item 
+\mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_a8ff479add175bb3a99426301c2db87ce}\label{classathome_1_1display_1_1_a_r_g_b_led_a8ff479add175bb3a99426301c2db87ce}} 
+\mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led}{A\+R\+G\+B\+Led}} \& {\bfseries operator=} (\mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led}{A\+R\+G\+B\+Led}} const \&)=delete
+\item 
+void \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a9753e3a23ea5cb6b0a41079bc6128766}{clear}} ()
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a725ceca0c01735daa9c95148baf075ab}{update}} ()=0
+\item 
+const \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \& \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a2c3022a5aad43595fefc4b52d916467a}{get\+Color}} () const
+\item 
+void \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a7ca4858c1ee10cc2f7c1dcc11a6d050e}{set\+Color}} (const \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \&color)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract class used to control R\+GB L\+E\+Ds (Common cathode/anode, Grove Chainable L\+E\+Ds, Neo\+Pixels, ...etc)
+
+Example of use\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_changing\_led\_color(ARGBLed &led) \{
+  Color red = \{255, 0, 0\}; \textcolor{comment}{// Create a Color structure with red fully on, green off and blue off}
+  led.setColor(red); \textcolor{comment}{// Set the new color by calling setColor method}
+  led.update(); \textcolor{comment}{// Display the new color on the LED}
+\}
+\end{DoxyCode}
+ 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_a9753e3a23ea5cb6b0a41079bc6128766}\label{classathome_1_1display_1_1_a_r_g_b_led_a9753e3a23ea5cb6b0a41079bc6128766}} 
+\index{athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}!clear@{clear}}
+\index{clear@{clear}!athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void athome\+::display\+::\+A\+R\+G\+B\+Led\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Remove display content 
+
+Implements \mbox{\hyperlink{classathome_1_1display_1_1_i_display_a0d3add1ce61c96657827fb56d250d9c6}{athome\+::display\+::\+I\+Display}}.
+
+\mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_a2c3022a5aad43595fefc4b52d916467a}\label{classathome_1_1display_1_1_a_r_g_b_led_a2c3022a5aad43595fefc4b52d916467a}} 
+\index{athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}!get\+Color@{get\+Color}}
+\index{get\+Color@{get\+Color}!athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}}
+\subsubsection{\texorpdfstring{get\+Color()}{getColor()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}}\& athome\+::display\+::\+A\+R\+G\+B\+Led\+::get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Return a reference on the \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} structure representing the current color displayed (or next color, if L\+ED color hasn\textquotesingle{}t been updated since last change of color made by set\+Color)
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_printing\_led\_color(\textcolor{keyword}{const} ARGBLed &led) \{
+  \textcolor{keyword}{const} Color &color = led.getColor();
+\textcolor{preprocessor}{#ifdef ARDUINO}
+  Serial.print(\textcolor{stringliteral}{"Red: "});
+  Serial.print(led.red);
+  Serial.print(\textcolor{stringliteral}{", Green: "});
+  Serial.print(led.green);
+  Serial.print(\textcolor{stringliteral}{", Blue: "});
+  Serial.println(led.blue);
+\textcolor{preprocessor}{#else}
+  printf(\textcolor{stringliteral}{"Red: %u, Green: %u, Blue: %u\(\backslash\)n"}, led.red, led.green, led.blue);
+\textcolor{preprocessor}{#endif}
+\textcolor{preprocessor}{\}}
+\end{DoxyCode}
+ \mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_a7ca4858c1ee10cc2f7c1dcc11a6d050e}\label{classathome_1_1display_1_1_a_r_g_b_led_a7ca4858c1ee10cc2f7c1dcc11a6d050e}} 
+\index{athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}!set\+Color@{set\+Color}}
+\index{set\+Color@{set\+Color}!athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}}
+\subsubsection{\texorpdfstring{set\+Color()}{setColor()}}
+{\footnotesize\ttfamily void athome\+::display\+::\+A\+R\+G\+B\+Led\+::set\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Set the new color to display on the L\+ED.
+
+Note\+: You need to call the \char`\"{}update\char`\"{} method after this one, as it doesn\textquotesingle{}t update automatically the new color on the L\+ED.
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{const} Color red = \{255, 0, 0\};
+
+\textcolor{keywordtype}{void} my\_function\_changing\_a\_led\_color\_to\_red(ARGBLed &led) \{
+  led.setColor(red); \textcolor{comment}{// Set the new color in the LED object}
+  led.update(); \textcolor{comment}{// You need to call this method if you want the new color to be displayed on the LED}
+\}
+\end{DoxyCode}
+ \mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_a725ceca0c01735daa9c95148baf075ab}\label{classathome_1_1display_1_1_a_r_g_b_led_a725ceca0c01735daa9c95148baf075ab}} 
+\index{athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}!update@{update}}
+\index{update@{update}!athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily virtual void athome\+::display\+::\+A\+R\+G\+B\+Led\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Update display content 
+
+Implements \mbox{\hyperlink{classathome_1_1display_1_1_i_display_a4ba7bd5d46f88578f1c846f4f5f3c5d1}{athome\+::display\+::\+I\+Display}}.
+
+
+
+Implemented in \mbox{\hyperlink{classathome_1_1display_1_1_grove_chainable_l_e_d_a05a4a1381396b7fc11a24993865d8226}{athome\+::display\+::\+Grove\+Chainable\+L\+ED}}, \mbox{\hyperlink{classathome_1_1display_1_1_neo_pixel_a272bca4da78dff7dc02bcd023665e013}{athome\+::display\+::\+Neo\+Pixel}}, and \mbox{\hyperlink{classathome_1_1display_1_1_common_cathode_r_g_b_led_ab78ab6aef619d8e0941dd11d4cfbb545}{athome\+::display\+::\+Common\+Cathode\+R\+G\+B\+Led}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+A\+R\+G\+B\+Led.\+hpp\end{DoxyCompactItemize}

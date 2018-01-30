@@ -6,7 +6,7 @@
 #  include <ChainableLED.h>
 #  include "ARGBLed.hpp"
 
-namespace woodBox {
+namespace athome {
     namespace display {
         class GroveChainableLED : public ARGBLed {
             public:

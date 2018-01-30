@@ -5,7 +5,7 @@
 
 # include "GroveAirQualitySensor.hpp"
 
-namespace woodBox {
+namespace athome {
     namespace sensor {
         GroveAirQualitySensor::GroveAirQualitySensor(uint8_t pin):
                 _lastMeasure(0) {

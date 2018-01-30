@@ -1,5 +1,5 @@
 #include <string.h>
-#include <woodBox.h>
+#include <AtHome.h>
 
 #ifdef __AVR__
 
@@ -11,7 +11,7 @@ int freeRam () {
 
 #endif
 
-WoodBoxWiFiModule<uint16_t, 15> *me = WoodBoxModule<uint16_t, 15>::getInstance<WoodBoxWiFiModule<uint16_t, 15> >();
+AtHomeWiFiModule<uint16_t, 15> *me = AtHomeModule<uint16_t, 15>::getInstance<AtHomeWiFiModule<uint16_t, 15> >();
 ESP8266WiFiCommunicator wifi_com(2, 3);
 
 const PROGMEM char ssid[] = "ESP01Test";
@@ -24,13 +24,13 @@ void setup() {
     Serial.println(F("Setup..."));
     Serial.flush();
     wifi_com.setStreamToChipset(&Serial);
-    wifi_com.setWiFiMode(woodBox::communication::wifi::wifi_mode::ACCESS_POINT);
-    woodBox::communication::wifi::WiFi_ap ap;
+    wifi_com.setWiFiMode(athome::communication::wifi::wifi_mode::ACCESS_POINT);
+    athome::communication::wifi::WiFi_ap ap;
     strcpy_P(ap.ssid, ssid);
     strcpy_P(ap.password, password);
-    ap.norm = woodBox::communication::wifi::wifi_norm::WIFI_N;
+    ap.norm = athome::communication::wifi::wifi_norm::WIFI_N;
     ap.channel = 5;
-    ap.band = woodBox::communication::wifi::wifi_frequency_band::TWO_POINT_FOUR_GHZ;
+    ap.band = athome::communication::wifi::wifi_frequency_band::TWO_POINT_FOUR_GHZ;
 #ifdef __AVR__
     Serial.println(freeRam());
     Serial.flush();

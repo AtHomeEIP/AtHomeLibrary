@@ -1,7 +1,7 @@
 #include <string.h>
 #include "AWiFiCommunicator.hpp"
 
-namespace woodBox {
+namespace athome {
     namespace communication {
         namespace wifi {
             AWiFiCommunicator::AWiFiCommunicator(const WiFi_ap *ap, const WiFi_client *client, const wifi_mode mode, Stream *stream):

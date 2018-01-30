@@ -3,7 +3,7 @@
 
 # include <stdint.h>
 
-namespace woodBox {
+namespace athome {
     namespace sensor {
         /**
          * Interface used to grab data from a sensor in a Module class.

@@ -5,7 +5,7 @@
 #  include <Adafruit_NeoPixel.h>
 #  include "ARGBLed.hpp"
 
-namespace woodBox {
+namespace athome {
     namespace display {
         class NeoPixel : public ARGBLed {
         public:

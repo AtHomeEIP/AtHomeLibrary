@@ -1,0 +1,99 @@
+\hypertarget{classathome_1_1sensor_1_1_i_sensor}{}\section{athome\+:\+:sensor\+:\+:I\+Sensor Class Reference}
+\label{classathome_1_1sensor_1_1_i_sensor}\index{athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}}
+
+
+{\ttfamily \#include $<$I\+Sensor.\+hpp$>$}
+
+Inheritance diagram for athome\+:\+:sensor\+:\+:I\+Sensor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classathome_1_1sensor_1_1_i_sensor}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+Scale}} \{ \newline
+{\bfseries Z\+E\+RO}, 
+{\bfseries O\+NE}, 
+{\bfseries T\+WO}, 
+{\bfseries T\+H\+R\+EE}, 
+\newline
+{\bfseries F\+O\+UR}, 
+{\bfseries F\+I\+VE}, 
+{\bfseries S\+IX}, 
+{\bfseries S\+E\+V\+EN}, 
+\newline
+{\bfseries E\+I\+G\+HT}, 
+{\bfseries N\+I\+NE}, 
+{\bfseries T\+EN}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual uint8\+\_\+t $\ast$ \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a2513fd8acc5d8251439330ca0e78cf04}{get\+Sample}} ()=0
+\item 
+virtual \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+Scale}} \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a95785b54ffe3a8f7e48c81b5732e3b9f}{get\+Estimate}} ()=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Interface used to grab data from a sensor in a Module class.
+
+Configuration and treatment of sensor raw data is to be handled by derived classes, as this interfaces is intended to be able to just being able to grab raw sensors data, and an interpretation of them without any knowledge of the sensor. 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}\label{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}} 
+\index{athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}!I\+Sensor\+Scale@{I\+Sensor\+Scale}}
+\index{I\+Sensor\+Scale@{I\+Sensor\+Scale}!athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}}
+\subsubsection{\texorpdfstring{I\+Sensor\+Scale}{ISensorScale}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{athome\+::sensor\+::\+I\+Sensor\+::\+I\+Sensor\+Scale}}}
+
+Enumeration used to represent the estimation of safety of a sensor value on a scale from 1 to 10. Value 0 means invalid 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_i_sensor_a95785b54ffe3a8f7e48c81b5732e3b9f}\label{classathome_1_1sensor_1_1_i_sensor_a95785b54ffe3a8f7e48c81b5732e3b9f}} 
+\index{athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}!get\+Estimate@{get\+Estimate}}
+\index{get\+Estimate@{get\+Estimate}!athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Estimate()}{getEstimate()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+Scale}} athome\+::sensor\+::\+I\+Sensor\+::get\+Estimate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the estimation of safety from the current sensor value
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor &my\_sensor) \{
+  \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate();
+  \textcolor{keywordflow}{if} (sensor\_estimate == ISensor::ZERO) \{
+    Serial.println(\textcolor{stringliteral}{"The sensor returned an invalid value"});
+  \}
+  \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (sensor\_estimate > ISensor::ZERO && sensor\_estimate < 6) \{
+    Serial.println(\textcolor{stringliteral}{"Boouh, it's not good :("});
+  \}
+  \textcolor{keywordflow}{else} \{
+    Serial.println(\textcolor{stringliteral}{"Yaaaay!"});
+  \}
+\}
+\end{DoxyCode}
+ 
+
+Implemented in \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_a728e2f65638f488cd1829c5f318531db}{athome\+::sensor\+::\+Analog\+Sensor}}, and \mbox{\hyperlink{classathome_1_1sensor_1_1_grove_air_quality_sensor_a3eeec77eb0bbf3932cdfa9d33a708e57}{athome\+::sensor\+::\+Grove\+Air\+Quality\+Sensor}}.
+
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_i_sensor_a2513fd8acc5d8251439330ca0e78cf04}\label{classathome_1_1sensor_1_1_i_sensor_a2513fd8acc5d8251439330ca0e78cf04}} 
+\index{athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}!get\+Sample@{get\+Sample}}
+\index{get\+Sample@{get\+Sample}!athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
+{\footnotesize\ttfamily virtual uint8\+\_\+t$\ast$ athome\+::sensor\+::\+I\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns a pointer on sensor sample raw memory, as an array of bytes 
+
+Implemented in \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_ac45070688a9433256a5f847467c251fa}{athome\+::sensor\+::\+Analog\+Sensor}}, and \mbox{\hyperlink{classathome_1_1sensor_1_1_grove_air_quality_sensor_aee12d8cf6439b752c868f75cae298182}{athome\+::sensor\+::\+Grove\+Air\+Quality\+Sensor}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+I\+Sensor.\+hpp\end{DoxyCompactItemize}

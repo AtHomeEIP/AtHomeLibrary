@@ -5,7 +5,7 @@
 # include <string.h>
 # include <Stream.h>
 
-namespace woodBox {
+namespace athome {
     namespace utility {
         /**
          * Templated buffer, taking as template parameters the type of hold data and their numbers.
@@ -16,7 +16,7 @@ namespace woodBox {
          * #include <Buffer.hpp>
          * #include <String.h>
          *
-         * using woodBox::utility::Buffer;
+         * using athome::utility::Buffer;
          *
          * String my_string1("Hello, World!");
          * String my_string2("foobar");
@@ -66,9 +66,9 @@ namespace woodBox {
              *
              * Note: if the buffer is already full, this method does nothing.
              *
-             * Check with the method woodBox::utility::Buffer::available() if you're unsure if the buffer has free space.
+             * Check with the method athome::utility::Buffer::available() if you're unsure if the buffer has free space.
              *
-             * If the buffer has free space, the method woodBox::utility::Buffer::available() should return an integer inferior to the size of the buffer.
+             * If the buffer has free space, the method athome::utility::Buffer::available() should return an integer inferior to the size of the buffer.
              *
              * See class detailed documentation for example of usage.
              */

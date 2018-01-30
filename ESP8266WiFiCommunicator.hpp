@@ -13,7 +13,7 @@
 #  define ESP8266_COMMAND_BUFFER_SIZE 4
 # endif
 
-namespace woodBox {
+namespace athome {
     namespace communication {
         namespace wifi {
             class ESP8266WiFiCommunicator : public AWiFiCommunicator {

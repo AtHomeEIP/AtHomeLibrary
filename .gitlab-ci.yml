@@ -39,13 +39,13 @@ build:
     - ln -s $PWD/arduinolibs/libraries/Crypto /usr/local/share/arduino/libraries/Crypto
     - ln -s $PWD/Adafruit_TSL2561 /usr/local/share/arduino/libraries/Adafruit_TSL2561
     - ln -s $PWD/TaskScheduler /usr/local/share/arduino/libraries/TaskScheduler
-    - ln -s $PWD /usr/local/share/arduino/libraries/woodBox
+    - ln -s $PWD /usr/local/share/arduino/libraries/AtHome
     # - ln -s $PWD/Grove_Digital_Light_Sensor /usr/local/share/energia/libraries/Grove_Digital_Light_Sensor
     # - ln -s $PWD/ChainableLED /usr/local/share/arduino/energia/ChainableLED
     # - ln -s $PWD/Grove_Air_quality_Sensor /usr/local/share/energia/libraries/Grove_Air_quality_Sensor
     # - ln -s $PWD/ArduinoJson /usr/local/share/arduino/energia/ArduinoJson
     # - ln -s $PWD/arduinounit /usr/local/share/arduino/energia/ArduinoUnit
-    # - ln -s $PWD /usr/local/share/energia/libraries/woodBox
+    # - ln -s $PWD /usr/local/share/energia/libraries/AtHome
     - arduino --install-library "Adafruit NeoPixel"
     - arduino --install-boards arduino:sam
     - arduino --install-boards arduino:samd

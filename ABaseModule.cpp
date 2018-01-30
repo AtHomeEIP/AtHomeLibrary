@@ -1,6 +1,6 @@
 #include "ABaseModule.hpp"
 
-namespace woodBox {
+namespace athome {
     namespace module {
         ABaseModule::ABaseModule(
                                  display::IDisplay *display,

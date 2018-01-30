@@ -3,7 +3,7 @@
 # include "ArduinoEEPROM.hpp"
 # include <EEPROM.h>
 
-namespace woodBox {
+namespace athome {
     namespace storage {
         ArduinoEEPROM::ArduinoEEPROM() {}
 

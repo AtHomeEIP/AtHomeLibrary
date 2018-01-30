@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['moduletype',['moduleType',['../classwood_box_1_1module_1_1_wood_box_module.html#af74476c8a785de7fe587c4fb68435673',1,'woodBox::module::WoodBoxModule']]]
+  ['moduletype',['moduleType',['../classathome_1_1module_1_1_at_home_module.html#a5075522baeaab0de681c26a5e5f18cd3',1,'athome::module::AtHomeModule']]]
 ];

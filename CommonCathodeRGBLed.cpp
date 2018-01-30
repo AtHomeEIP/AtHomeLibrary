@@ -6,7 +6,7 @@ extern void analogWrite(uint8_t, int);
 
 #include "CommonCathodeRGBLed.hpp"
 
-namespace woodBox {
+namespace athome {
     namespace display {
         CommonCathodeRGBLed::CommonCathodeRGBLed(uint8_t pin_red, uint8_t pin_green, uint8_t pin_blue):
                 ARGBLed(),

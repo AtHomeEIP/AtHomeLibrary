@@ -1,7 +1,7 @@
 #ifndef AITERABLE_HPP
 # define AITERABLE_HPP
 
-namespace woodBox {
+namespace athome {
     namespace utility {
         /**
          * Class created for internal use of this library, but not used right now. Could be removed if considered useless.
