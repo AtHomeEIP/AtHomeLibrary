@@ -18,6 +18,7 @@
 # endif /* __MSP430__ */
 # include "AnalogSensor.hpp"
 # include "CommonCathodeRGBLed.hpp"
+# include "CommonAnodeRGBLed.hpp"
 #if defined(AVR_PRO) || defined(AVR_UNO_WIFI_DEV_ED) || defined(AVR_NG) || \
         defined(AVR_LILYPAD) || defined(AVR_BT) || defined(AVR_FIO) || \
         defined(AVR_ETHERNET) || defined(AVR_MINI) || defined(AVR_NANO) || \
@@ -40,6 +41,7 @@ using athome::communication::wifi::ESP8266WiFiCommunicator;
 # endif /* __MSP430__ */
 using athome::sensor::AnalogSensor;
 using athome::display::CommonCathodeRGBLed;
+using athome::display::CommonAnodeRGBLed;
 # ifdef ARDUINO
 using athome::display::GroveChainableLED;
 # endif /* ARDUINO */

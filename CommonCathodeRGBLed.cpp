@@ -17,6 +17,7 @@ namespace athome {
 
         CommonCathodeRGBLed &CommonCathodeRGBLed::operator=(const CommonCathodeRGBLed &other) {
             setColor(other.getColor());
+            return *this;
         }
 
         CommonCathodeRGBLed::~CommonCathodeRGBLed() {}
