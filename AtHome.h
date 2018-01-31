@@ -33,6 +33,8 @@ using athome::storage::ArduinoEEPROM;
 # if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
 #  include "NeoPixel.hpp"
 # endif /* List of incompatible architectures */
+# include "AHumiditySensor.hpp"
+# include "ATemperatureSensor.hpp"
 
 using athome::module::AtHomeModule;
 # ifndef __MSP430__
@@ -42,6 +44,8 @@ using athome::communication::wifi::ESP8266WiFiCommunicator;
 using athome::sensor::AnalogSensor;
 using athome::display::CommonCathodeRGBLed;
 using athome::display::CommonAnodeRGBLed;
+using athome::sensor::AHumiditySensor;
+using athome::sensor::ATemperatureSensor;
 # ifdef ARDUINO
 using athome::display::GroveChainableLED;
 # endif /* ARDUINO */
