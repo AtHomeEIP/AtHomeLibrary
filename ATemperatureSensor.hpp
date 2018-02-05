@@ -8,8 +8,8 @@ namespace athome {
         class ATemperatureSensor : public ISensor {
         public:
             ATemperatureSensor();
-            ATemperatureSensor(const ATemperatureSensor &);
-            ATemperatureSensor &operator=(const ATemperatureSensor &);
+            ATemperatureSensor(const ATemperatureSensor &) = delete;
+            ATemperatureSensor &operator=(const ATemperatureSensor &) = delete;
             ~ATemperatureSensor();
             /**
              * Returns a pointer on the sample of the sensor. This pointer needs to point on a float variable.
@@ -18,7 +18,7 @@ namespace athome {
             /**
              * Returns the last value sampled from the sensor (do not actually resample it).
              */
-            virtual float   getLastSample() = 0;
+            virtual float   getLastSample() const = 0;
             ISensorScale    getEstimate();
         };
     }

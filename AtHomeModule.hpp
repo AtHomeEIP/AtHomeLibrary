@@ -349,7 +349,7 @@ namespace athome {
                 template <typename U>
                 void        broadcastln(const U &data) {
                     broadcast(data);
-                    broadcast(communication::commands::end_of_line);
+                    broadcast(FH(communication::commands::end_of_line));
                 }
 
                 /**
