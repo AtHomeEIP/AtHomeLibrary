@@ -4,6 +4,7 @@ var searchData=
   ['ahumiditysensor',['AHumiditySensor',['../classathome_1_1sensor_1_1_a_humidity_sensor.html',1,'athome::sensor']]],
   ['aiterable',['AIterable',['../classathome_1_1utility_1_1_a_iterable.html',1,'athome::utility']]],
   ['alist',['AList',['../classathome_1_1utility_1_1_a_list.html',1,'athome::utility']]],
+  ['aluminositysensor',['ALuminositySensor',['../classathome_1_1sensor_1_1_a_luminosity_sensor.html',1,'athome::sensor']]],
   ['analogsensor',['AnalogSensor',['../classathome_1_1sensor_1_1_analog_sensor.html',1,'athome::sensor::AnalogSensor'],['../classathome_1_1sensor_1_1_analog_sensor.html#acd973b3cf9be02ca318eea594e8732d3',1,'athome::sensor::AnalogSensor::AnalogSensor()']]],
   ['arduinoeeprom',['ArduinoEEPROM',['../classathome_1_1storage_1_1_arduino_e_e_p_r_o_m.html',1,'athome::storage']]],
   ['argbled',['ARGBLed',['../classathome_1_1display_1_1_a_r_g_b_led.html',1,'athome::display']]],

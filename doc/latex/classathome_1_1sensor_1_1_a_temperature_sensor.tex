@@ -9,15 +9,15 @@ Inheritance diagram for athome\+:\+:sensor\+:\+:A\+Temperature\+Sensor\+:\begin{
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_aaa9200af64455f375e0cc2284ab856e2}\label{classathome_1_1sensor_1_1_a_temperature_sensor_aaa9200af64455f375e0cc2284ab856e2}} 
-{\bfseries A\+Temperature\+Sensor} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor}{A\+Temperature\+Sensor}} \&)
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_adc643a183aa4e4ae6b6c8c9212aa6525}\label{classathome_1_1sensor_1_1_a_temperature_sensor_adc643a183aa4e4ae6b6c8c9212aa6525}} 
+{\bfseries A\+Temperature\+Sensor} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor}{A\+Temperature\+Sensor}} \&)=delete
 \item 
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a171dca820ce036eb24e305494d2c4654}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a171dca820ce036eb24e305494d2c4654}} 
-\mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor}{A\+Temperature\+Sensor}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor}{A\+Temperature\+Sensor}} \&)
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a0eb5857e7a283d824b183eb55239e9fe}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a0eb5857e7a283d824b183eb55239e9fe}} 
+\mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor}{A\+Temperature\+Sensor}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor}{A\+Temperature\+Sensor}} \&)=delete
 \item 
 virtual uint8\+\_\+t $\ast$ \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a397794217f3163950add6d28f69a6202}{get\+Sample}} ()=0
 \item 
-virtual float \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a2f1833f5fac81baed80f75583a86491d}{get\+Last\+Sample}} ()=0
+virtual float \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a1063bddc4a031d80f68a83317b64fbb2}{get\+Last\+Sample}} () const =0
 \item 
 \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+Scale}} \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a3997ff080f6a9e444c52a63f1b40d73c}{get\+Estimate}} ()
 \end{DoxyCompactItemize}
@@ -54,11 +54,11 @@ Example\+:
 
 Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a95785b54ffe3a8f7e48c81b5732e3b9f}{athome\+::sensor\+::\+I\+Sensor}}.
 
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a2f1833f5fac81baed80f75583a86491d}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a2f1833f5fac81baed80f75583a86491d}} 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a1063bddc4a031d80f68a83317b64fbb2}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a1063bddc4a031d80f68a83317b64fbb2}} 
 \index{athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}!get\+Last\+Sample@{get\+Last\+Sample}}
 \index{get\+Last\+Sample@{get\+Last\+Sample}!athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}}
 \subsubsection{\texorpdfstring{get\+Last\+Sample()}{getLastSample()}}
-{\footnotesize\ttfamily virtual float athome\+::sensor\+::\+A\+Temperature\+Sensor\+::get\+Last\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+{\footnotesize\ttfamily virtual float athome\+::sensor\+::\+A\+Temperature\+Sensor\+::get\+Last\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 Returns the last value sampled from the sensor (do not actually resample it). \mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a397794217f3163950add6d28f69a6202}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a397794217f3163950add6d28f69a6202}} 
 \index{athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}!get\+Sample@{get\+Sample}}

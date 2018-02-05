@@ -35,6 +35,7 @@ using athome::storage::ArduinoEEPROM;
 # endif /* List of incompatible architectures */
 # include "AHumiditySensor.hpp"
 # include "ATemperatureSensor.hpp"
+# include "ALuminositySensor.hpp"
 
 using athome::module::AtHomeModule;
 # ifndef __MSP430__
@@ -46,6 +47,7 @@ using athome::display::CommonCathodeRGBLed;
 using athome::display::CommonAnodeRGBLed;
 using athome::sensor::AHumiditySensor;
 using athome::sensor::ATemperatureSensor;
+using athome::sensor::ALuminositySensor;
 # ifdef ARDUINO
 using athome::display::GroveChainableLED;
 # endif /* ARDUINO */

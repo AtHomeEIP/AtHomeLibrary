@@ -83,9 +83,10 @@ Inheritance diagram for athome::sensor::ISensor:</div>
   <img src="classathome_1_1sensor_1_1_i_sensor.png" usemap="#athome::sensor::ISensor_map" alt=""/>
   <map id="athome::sensor::ISensor_map" name="athome::sensor::ISensor_map">
 <area href="classathome_1_1sensor_1_1_a_humidity_sensor.html" alt="athome::sensor::AHumiditySensor" shape="rect" coords="0,56,234,80"/>
-<area href="classathome_1_1sensor_1_1_analog_sensor.html" alt="athome::sensor::AnalogSensor" shape="rect" coords="244,56,478,80"/>
-<area href="classathome_1_1sensor_1_1_a_temperature_sensor.html" alt="athome::sensor::ATemperatureSensor" shape="rect" coords="488,56,722,80"/>
-<area href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html" alt="athome::sensor::GroveAirQualitySensor" shape="rect" coords="732,56,966,80"/>
+<area href="classathome_1_1sensor_1_1_a_luminosity_sensor.html" alt="athome::sensor::ALuminositySensor" shape="rect" coords="244,56,478,80"/>
+<area href="classathome_1_1sensor_1_1_analog_sensor.html" alt="athome::sensor::AnalogSensor" shape="rect" coords="488,56,722,80"/>
+<area href="classathome_1_1sensor_1_1_a_temperature_sensor.html" alt="athome::sensor::ATemperatureSensor" shape="rect" coords="732,56,966,80"/>
+<area href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html" alt="athome::sensor::GroveAirQualitySensor" shape="rect" coords="976,56,1210,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -161,7 +162,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns the estimation of safety from the current sensor value</p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_telling_if_a_sensor_value_is_good_or_not(ISensor &amp;my_sensor) {</div><div class="line">  <a class="code" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a> sensor_estimate = my_sensor.getEstimate();</div><div class="line">  <span class="keywordflow">if</span> (sensor_estimate == ISensor::ZERO) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;The sensor returned an invalid value&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sensor_estimate &gt; ISensor::ZERO &amp;&amp; sensor_estimate &lt; 6) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Boouh, it&#39;s not good :(&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Yaaaay!&quot;</span>);</div><div class="line">  }</div><div class="line">}</div></div><!-- fragment --> 
-<p>Implemented in <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#a728e2f65638f488cd1829c5f318531db">athome::sensor::AnalogSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html#a3eeec77eb0bbf3932cdfa9d33a708e57">athome::sensor::GroveAirQualitySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a1da82433989c79066ce32d5606f4f675">athome::sensor::AHumiditySensor</a>, and <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a3997ff080f6a9e444c52a63f1b40d73c">athome::sensor::ATemperatureSensor</a>.</p>
+<p>Implemented in <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#a728e2f65638f488cd1829c5f318531db">athome::sensor::AnalogSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#aa6c0e60c108b0494f0132b033ce3dd82">athome::sensor::ALuminositySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html#a3eeec77eb0bbf3932cdfa9d33a708e57">athome::sensor::GroveAirQualitySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a1da82433989c79066ce32d5606f4f675">athome::sensor::AHumiditySensor</a>, and <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a3997ff080f6a9e444c52a63f1b40d73c">athome::sensor::ATemperatureSensor</a>.</p>
 
 </div>
 </div>
@@ -189,7 +190,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns a pointer on sensor sample raw memory, as an array of bytes </p>
 
-<p>Implemented in <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#ac45070688a9433256a5f847467c251fa">athome::sensor::AnalogSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html#aee12d8cf6439b752c868f75cae298182">athome::sensor::GroveAirQualitySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a2eb6de3ce2a4aeae0d9e556389d2b329">athome::sensor::AHumiditySensor</a>, and <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a397794217f3163950add6d28f69a6202">athome::sensor::ATemperatureSensor</a>.</p>
+<p>Implemented in <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#ac45070688a9433256a5f847467c251fa">athome::sensor::AnalogSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html#aee12d8cf6439b752c868f75cae298182">athome::sensor::GroveAirQualitySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#a299491729362d34f474094dfd10eb310">athome::sensor::ALuminositySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a2eb6de3ce2a4aeae0d9e556389d2b329">athome::sensor::AHumiditySensor</a>, and <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a397794217f3163950add6d28f69a6202">athome::sensor::ATemperatureSensor</a>.</p>
 
 </div>
 </div>

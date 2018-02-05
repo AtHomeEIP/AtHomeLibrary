@@ -85,16 +85,16 @@ Inheritance diagram for athome::sensor::ATemperatureSensor:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aaa9200af64455f375e0cc2284ab856e2"><td class="memItemLeft" align="right" valign="top"><a id="aaa9200af64455f375e0cc2284ab856e2"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ATemperatureSensor</b> (const <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html">ATemperatureSensor</a> &amp;)</td></tr>
-<tr class="separator:aaa9200af64455f375e0cc2284ab856e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a171dca820ce036eb24e305494d2c4654"><td class="memItemLeft" align="right" valign="top"><a id="a171dca820ce036eb24e305494d2c4654"></a>
-<a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html">ATemperatureSensor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html">ATemperatureSensor</a> &amp;)</td></tr>
-<tr class="separator:a171dca820ce036eb24e305494d2c4654"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc643a183aa4e4ae6b6c8c9212aa6525"><td class="memItemLeft" align="right" valign="top"><a id="adc643a183aa4e4ae6b6c8c9212aa6525"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ATemperatureSensor</b> (const <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html">ATemperatureSensor</a> &amp;)=delete</td></tr>
+<tr class="separator:adc643a183aa4e4ae6b6c8c9212aa6525"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eb5857e7a283d824b183eb55239e9fe"><td class="memItemLeft" align="right" valign="top"><a id="a0eb5857e7a283d824b183eb55239e9fe"></a>
+<a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html">ATemperatureSensor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html">ATemperatureSensor</a> &amp;)=delete</td></tr>
+<tr class="separator:a0eb5857e7a283d824b183eb55239e9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a397794217f3163950add6d28f69a6202"><td class="memItemLeft" align="right" valign="top">virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a397794217f3163950add6d28f69a6202">getSample</a> ()=0</td></tr>
 <tr class="separator:a397794217f3163950add6d28f69a6202"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f1833f5fac81baed80f75583a86491d"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a2f1833f5fac81baed80f75583a86491d">getLastSample</a> ()=0</td></tr>
-<tr class="separator:a2f1833f5fac81baed80f75583a86491d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1063bddc4a031d80f68a83317b64fbb2"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a1063bddc4a031d80f68a83317b64fbb2">getLastSample</a> () const =0</td></tr>
+<tr class="separator:a1063bddc4a031d80f68a83317b64fbb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3997ff080f6a9e444c52a63f1b40d73c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a3997ff080f6a9e444c52a63f1b40d73c">getEstimate</a> ()</td></tr>
 <tr class="separator:a3997ff080f6a9e444c52a63f1b40d73c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -149,8 +149,8 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a id="a2f1833f5fac81baed80f75583a86491d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f1833f5fac81baed80f75583a86491d">&#9670;&nbsp;</a></span>getLastSample()</h2>
+<a id="a1063bddc4a031d80f68a83317b64fbb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1063bddc4a031d80f68a83317b64fbb2">&#9670;&nbsp;</a></span>getLastSample()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -162,7 +162,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="memname">virtual float athome::sensor::ATemperatureSensor::getLastSample </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
