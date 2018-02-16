@@ -5,13 +5,14 @@ then
   echo "Usage: $0 firmware.hex"
   exit 1
 fi
+filename="$1"
 simulator $1 &
-enumerate > "enumerate-${1}.log" 2> "enumerate-${1}.err.log" &
+enumerate > "enumerate-$(basename $1).log" 2> "enumerate-$(basename $1).err.log" &
 sleep 10
 killall python3
 killall simulator
 simulator $1 &
-middleware > "middleware-${1}.log" 2> "middleware-${1}.err.log" &
+middleware /dev/pts/0 > "middleware-$(basename $1).log" 2> "middleware-$(basename $1).err.log" &
 sleep 10
 killall python3
 killall simulator
