@@ -86,7 +86,7 @@ build:
 test:
   stage: test
   script:
-    - apt-get update && apt-get install -y make git libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 python3-pip
+    - apt-get update && apt-get install -y make git libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 python3-pip psmisc
     - pip3 install PyQt5
     - export LD_LIBRARY_PATH=$PWD/extras/simulator/linux_x64
     - export PATH="$PATH:$PWD/extras/simulator/linux_x64:$PWD/extras/scripts"

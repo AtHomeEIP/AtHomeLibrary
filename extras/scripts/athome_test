@@ -8,10 +8,10 @@ fi
 simulator $1 &
 enumerate > "enumerate-${1}.log" 2> "enumerate-${1}.err.log" &
 sleep 10
-#killall python3
-#killall simulator
+killall python3
+killall simulator
 simulator $1 &
 middleware > "middleware-${1}.log" 2> "middleware-${1}.err.log" &
 sleep 10
-#killall python3
-#killall simulator
+killall python3
+killall simulator
