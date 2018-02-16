@@ -3,6 +3,7 @@
 
 import sys
 import struct
+import time
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 
