@@ -92,7 +92,7 @@ test:
     - apt-get update && apt-get install -y make git libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 python3-pip
     - pip3 install PyQt5
     - export LD_LIBRARY_PATH=$PWD/extras/simulator/linux_x64
-    - export PATH="$PATH:$PWD/extras/simulator/linux_x64:$PWD/extras/script"
+    - export PATH="$PATH:$PWD/extras/simulator/linux_x64:$PWD/extras/scripts"
     - chmod +x $PWD/extras/scripts/*
     - chmod +x $PWD/extras/simulator/linux_x64/simulator
     - athome_test $PWD/test/output/avr/uno/1.ino.standard.hex
