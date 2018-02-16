@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
+
+
+if __name__ == '__main__':
+    a = QCoreApplication(sys.argv)
+    stub = QSerialPortInfo()
+    ports = stub.availablePorts()
+    for i, port in enumerate(ports):
+        print('[%s]' % i, port.portName())
+    serial = QSerialPort()
+    serial.setPortName('/dev/pts/0')
+    serial.setBaudRate(QSerialPort.Baud115200, QSerialPort.AllDirections)
+    serial.setParity(QSerialPort.NoParity)
+    serial.setStopBits(QSerialPort.OneStop)
+    serial.setDataBits(QSerialPort.Data8)
+    serial.setFlowControl(QSerialPort.NoFlowControl)
+    serial.open(QSerialPort.ReadWrite)
+    serial.waitForReadyRead(30000)
+    serial.write(b'Enumerate\r\n\x03')
+    serial.waitForBytesWritten(30000)
+    while True:
+        line = serial.read(1)
+        if line != b'':
+            print(line.decode('ascii'), end='', flush=True)
+        else:
+            serial.waitForReadyRead(30000)
+    sys.exit(a.exec_())
