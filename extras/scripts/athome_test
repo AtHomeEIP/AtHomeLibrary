@@ -7,16 +7,16 @@ then
 fi
 simulator $1 &
 enumerate > "enumerate-$(basename $1).log" 2> "enumerate-$(basename $1).err.log" &
-sleep 10
+sleep 30
 killall python3
 killall simulator
 simulator $1 &
 init_module > "init_module-$(basename $1).log" 2> "init_module-$(basename $1).err.log" &
-sleep 10
+sleep 30
 killall python3
 killall simulator
 simulator $1 &
 middleware /dev/pts/0 > "middleware-$(basename $1).log" 2> "middleware-$(basename $1).err.log" &
-sleep 10
+sleep 30
 killall python3
 killall simulator
