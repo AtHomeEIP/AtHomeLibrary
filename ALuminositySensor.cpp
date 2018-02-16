@@ -6,9 +6,20 @@ namespace athome {
 
         ALuminositySensor::~ALuminositySensor() {}
 
+        /**
+         * Return an estimation of the luminosity quality in the room
+         *
+         * Values are from french norm NF EN 12464-1 https://fr.wikipedia.org/wiki/Lux_%28unit%C3%A9%29
+         * @return estimation of the luminosity on a scale from 1 (worst) to 10 (best)
+         */
         ISensor::ISensorScale ALuminositySensor::getEstimate() {
-            // TODO: Seriously, what are the values to use??? We didn't put them in Arduino sketches
-            return ISensor::ISensorScale::ZERO;
+            uint16_t lux = getLastSample();
+            if (lux < 500) {
+                return ISensor::ISensorScale::ONE;
+            }
+            else {
+                return ISensor::ISensorScale::TEN;
+            }
         }
     }
 }
