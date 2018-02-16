@@ -26,7 +26,7 @@ if __name__ == '__main__':
     while True:
         line = serial.read(1)
         if line != b'':
-            print(line.decode('ascii'), end='', flush=True)
+            print(line.decode('ascii', errors='replace'), end='', flush=True)
         else:
             serial.waitForReadyRead(30000)
     sys.exit(a.exec_())
