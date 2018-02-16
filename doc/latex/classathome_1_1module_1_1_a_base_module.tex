@@ -211,6 +211,11 @@ ArduinoEEPROM eeprom;
 
 Set the array of pointers on Stream derived objects used by module for communications.
 
+
+\begin{DoxyParams}{Parameters}
+{\em streams} & N\+U\+LL terminated array of pointers on Stream instances\\
+\hline
+\end{DoxyParams}
 For example\+: {\ttfamily Stream $\ast$my\+\_\+array\mbox{[}\mbox{]} = \{\&Serial, \&Serial1, \&\mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, nullptr\};}
 
 Example on Arduino with the implementation \mbox{\hyperlink{classathome_1_1module_1_1_at_home_module}{athome\+::module\+::\+At\+Home\+Module}} of this class\+:

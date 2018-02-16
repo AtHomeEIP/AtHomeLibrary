@@ -36,6 +36,8 @@ namespace athome {
                 /**
                  * Set the array of pointers on Stream derived objects used by module for communications.
                  *
+                 * \param   streams NULL terminated array of pointers on Stream instances
+                 *
                  * For example: `Stream *my_array[] = {&Serial, &Serial1, &athome::communication::wifi::ESP8266WiFiCommunicator, nullptr};`
                  *
                  * Example on Arduino with the implementation athome::module::AtHomeModule of this class:

@@ -340,6 +340,12 @@ Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td
       </table>
 </div><div class="memdoc">
 <p>Set the array of pointers on Stream derived objects used by module for communications.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">streams</td><td>NULL terminated array of pointers on Stream instances</td></tr>
+  </table>
+  </dd>
+</dl>
 <p>For example: <code>Stream *my_array[] = {&amp;Serial, &amp;Serial1, &amp;<a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html">athome::communication::wifi::ESP8266WiFiCommunicator</a>, nullptr};</code></p>
 <p>Example on Arduino with the implementation <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a> of this class:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;AtHome.h&gt;</span></div><div class="line"></div><div class="line">AtHomeModule&lt;uint16_t, 15&gt; *module = AtHomeModule::&lt;uint16_t, 15&gt;::getInstance(); <span class="comment">// Create a AtHomeModule instance able to buffer 15 measures from an analog sensor</span></div><div class="line"></div><div class="line"><span class="keywordtype">void</span> setup() {</div><div class="line">  Stream *streams[] = {&amp;Serial, <span class="keyword">nullptr</span>};</div><div class="line">  module-&gt;setStreams(streams);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> loop() {</div><div class="line">}</div></div><!-- fragment --> 
