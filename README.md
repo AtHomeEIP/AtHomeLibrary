@@ -42,14 +42,14 @@ Here is the status of compatibility of components available in this development 
 
 | Component / Platform     | AVR            | ARM                      | MSP430                                                                         | MSP432         | PIC32          | PIC18 | ESP8266 | ESP32 |
 |--------------------------|----------------|--------------------------|--------------------------------------------------------------------------------|----------------|----------------|-------|---------|-------|
-| AtHome Core             | Y              | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | ?       | ?     |
-| AtHome WiFi Module      | Y              | Y (not tested)           | N                                                                              | Y              | Y              | ?     | ?       | ?     |
-| ESP8266 AT Firmware      | Y (not tested) | Y (not tested)           | N                                                                              | Y              | Y (not tested) | ?     | ?       | ?     |
+| AtHome Core              | Y              | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | Y       | ?     |
+| AtHome WiFi Module       | Y              | Y (not tested)           | N                                                                              | Y              | Y              | ?     | ?       | ?     |
+| ESP8266 AT Firmware      | Y (not tested) | Y (not tested)           | N                                                                              | Y              | Y (not tested) | ?     | N/A     | ?     |
 | Grove Chainable LED      | Y              | Y (not tested)           | Y (not tested, need a small patch but I'm unable to check as I don't have one) | Y (not tested) | Y (not tested) | ?     | ?       | ?     |
-| AnalogSensor             | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | ?       | ?     |
+| AnalogSensor             | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | Y       | ?     |
 | ArduinoEEPROM            | Y              | N                        | N                                                                              | N              | N              | ?     | ?       | ?     |
-| Common cathode RGB LED   | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | ?       | ?     |
-| Common anode RGB LED     | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y (not tested) | Y (not tested) | ?     | ?       | ?     |
+| Common cathode RGB LED   | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | Y       | ?     |
+| Common anode RGB LED     | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y (not tested) | Y (not tested) | ?     | Y       | ?     |
 | Grove Air Quality sensor | Y (not all)    | N                        | N                                                                              | N              | N              | ?     | ?       | ?     |
 | Grove Light Sensor (NI)  | N/A            | N/A                      | N/A                                                                            | N/A            | N/A            | N/A   | N/A     | N/A   |
 | MQ2 Gas sensor (NI)      | N/A            | N/A                      | N/A                                                                            | N/A            | N/A            | N/A   | N/A     | N/A   |
@@ -62,7 +62,7 @@ For battery powered modules, here is the list of low power operation mode on sev
 
 | Environment / Architecture | AVR | ARM | MSP430  | MSP432 | PIC32 | PIC18 | ESP8266 | ESP32 |
 |----------------------------|-----|-----|---------|--------|-------|-------|---------|-------|
-| Arduino (and Energia)      | Y   | N   | Not all | Y      | N     | N     | N       | N     |
+| Arduino (and Energia)      | Y   | N   | Not all | Y      | N     | N     | Y       | N     |
 | Mbed                       | N/A | Y   | N/A     | N/A    | N/A   | N/A   | N/A     | N/A   |
 | Bare-Metal                 | N   | N   | N       | N      | N     | N     | N       | N     |
 
