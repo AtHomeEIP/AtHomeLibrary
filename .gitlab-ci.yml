@@ -67,8 +67,8 @@ buildTests:Energia:
     - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
     - sleep 3
     - export DISPLAY=:1.0
-    - wget http://energia.nu/downloads/downloadv4.php?file=energia-${ENERGIA_VERSION}-linux64.tar.xz
-    - tar xf energia-${ENERGIA_VERSION}-linux64.tar.xz
+    - wget --quiet http://energia.nu/downloads/downloadv4.php?file=energia-${ENERGIA_VERSION}-linux64.tar.xz
+    - tar xf energia*.tar.xz
     - mv energia-${ENERGIA_VERSION} ${SHARE_PATH}/energia
     - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
     - git clone https://github.com/pjpmarques/ChainableLED.git
@@ -149,7 +149,6 @@ unitTest:
   stage: test
   allow_failure: yes
   script:
-    - rm *.log
     - echo "Hello, World! I'm still not implemented"
   artifacts:
     paths:
@@ -165,8 +164,8 @@ deploy:
     paths:
       - "AtHome"
 
-genDoc:
-  stage: build
+pages:
+  stage: deploy
   when: always
   allow_failure: yes
   before_script:
@@ -174,18 +173,7 @@ genDoc:
   script:
     - rm -rf doc/html doc/latex
     - doxygen Doxyfile
-  artifacts:
-    paths:
-      - "doc/html"
-      
-pages:
-  stage: deploy
-  when: always
-  allow_failure: yes
-  dependencies:
-    - genDoc
-  script:
-    - cp -r doc/html public
+    - mv doc/html public
   artifacts:
     paths:
       - "public"
