@@ -1,67 +1,81 @@
-# This file is a template, and might need editing before it works on your project.
-# use the official gcc image, based on debian
-# can use verions as well, like gcc:5.2
-# see https://hub.docker.com/_/gcc/
 image: debian
+
+variables:
+  ARDUINO_VERSION: 1.8.5
+  ENERGIA_VERSION: 1.6.10E18
+  SHARE_PATH: /usr/local/share
+  BIN_PATH: /usr/local/bin
+
+stages:
+  - build
+  - test
+  - unitTest
+
+before_script:
+  - apt update && apt -y install build-essential git xvfb wget xz-utils libxext6 libxtst6 libxrender1 libgtk2.0.0 \
+    default-jre libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 python3-pip \
+    psmisc
+  - pip3 install PyQt5
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
+  - sleep 3
+  - export DISPLAY=:1.0
+  - wget http://downloads.arduino.cc/arduino-${ARDUINO_VERSION}-linux64.tar.xz
+  - tar xf arduino-${ARDUINO_VERSION}-linux64.tar.xz
+  - mv arduino-${ARDUINO_VERSION} ${SHARE_PATH}/arduino
+  - ln -s ${SHARE_PATH}/arduino/arduino ${BIN_PATH}/
+  # - wget http://energia.nu/downloads/downloadv4.php?file=energia-${ENERGIA_VERSION}-linux64.tar.xz
+  # - tar xf energia-${ENERGIA_VERSION}-linux64.tar.xz
+  # - mv energia-${ENERGIA_VERSION} ${SHARE_PATH}/energia
+  # - ln -s ${SHARE_PATH}/energia/energia ${BIN_PATH}/
+  - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
+  - git clone https://github.com/pjpmarques/ChainableLED.git
+  - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
+  - git clone https://github.com/bblanchon/ArduinoJson.git
+  - git clone https://github.com/mmurdoch/arduinounit.git
+  - git clone https://github.com/adafruit/Adafruit_Sensor.git
+  - git clone https://github.com/rweather/arduinolibs.git
+  - git clone https://github.com/adafruit/Adafruit_TSL2561.git
+  - git clone -b testing https://github.com/arkhipenko/TaskScheduler.git
+  - ln -s $PWD/Grove_Digital_Light_Sensor ${SHARE_PATH}/arduino/libraries/Grove_Digital_Light_Sensor
+  - ln -s $PWD/ChainableLED ${SHARE_PATH}/arduino/libraries/ChainableLED
+  - ln -s $PWD/Grove_Air_quality_Sensor ${SHARE_PATH}/arduino/libraries/Grove_Air_quality_Sensor
+  - ln -s $PWD/ArduinoJson ${SHARE_PATH}/arduino/libraries/ArduinoJson
+  - ln -s $PWD/arduinounit ${SHARE_PATH}/arduino/libraries/ArduinoUnit
+  - ln -s $PWD/Adafruit_Sensor ${SHARE_PATH}/arduino/libraries/Adafruit_Sensor
+  - ln -s $PWD/arduinolibs/libraries/Crypto ${SHARE_PATH}/arduino/libraries/Crypto
+  - ln -s $PWD/Adafruit_TSL2561 ${SHARE_PATH}/arduino/libraries/Adafruit_TSL2561
+  - ln -s $PWD/TaskScheduler ${SHARE_PATH}/arduino/libraries/TaskScheduler
+  - ln -s $PWD ${SHARE_PATH}/arduino/libraries/AtHome
+  # - ln -s $PWD/Grove_Digital_Light_Sensor ${SHARE_PATH}/energia/libraries/Grove_Digital_Light_Sensor
+  # - ln -s $PWD/ChainableLED ${SHARE_PATH}/arduino/energia/ChainableLED
+  # - ln -s $PWD/Grove_Air_quality_Sensor ${SHARE_PATH}/energia/libraries/Grove_Air_quality_Sensor
+  # - ln -s $PWD/ArduinoJson ${SHARE_PATH}/arduino/energia/ArduinoJson
+  # - ln -s $PWD/arduinounit ${SHARE_PATH}/arduino/energia/ArduinoUnit
+  # - ln -s $PWD ${SHARE_PATH}/energia/libraries/AtHome
+  - arduino --install-library "Adafruit NeoPixel"
+  - arduino --install-boards arduino:sam
+  - arduino --install-boards arduino:samd
+  # - arduino --install-boards chipKIT:pic32
+  # - energia --install-boards energia:msp430
+  # - energia --install-boards energia:msp432
+  # - energia --install-library "Adafruit NeoPixel"
+  # - cp $PWD/test/platforms/msp432/platform.txt ~/.energia15/packages/hardware/msp432/3.8.0/platform.txt
+  - mkdir -p $PWD/test/output/avr/uno # test the most classical arduino
+  - mkdir -p $PWD/test/output/avr/leonardo # test avr based arduino with native usb port
+  - mkdir -p $PWD/test/output/arm/zero # test official arm cortex m0+ board
+  - mkdir -p $PWD/test/output/arm/due # test official arm cortex m3 board
+  # - mkdir -p $PWD/test/output/pic32/fubarino_mini # test pic32mx250 based board
+  # - mkdir -p $PWD/test/output/msp430/launchpad_fr2433 # test msp430fr2433 board
+  # - mkdir -p $PWD/test/output/msp432/launchpad # test msp432 board, it's an arm cortex m4f
+  # - apt update && apt -y install make autoconf
+  - export LD_LIBRARY_PATH=$PWD/extras/simulator/linux_x64
+  - export PATH="$PATH:$PWD/extras/simulator/linux_x64:$PWD/extras/scripts"
+  - chmod +x $PWD/extras/scripts/*
+  - chmod +x $PWD/extras/simulator/linux_x64/simulator
 
 build:
   stage: build
-  # instead of calling g++ directly you can also use some build toolkit like make
-  # install the necessary build tools when needed
-  before_script:
-    - apt update && apt -y install build-essential git xvfb wget xz-utils libxext6 libxtst6 libxrender1 libgtk2.0.0 default-jre
-    - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
-    - sleep 3
-    - export DISPLAY=:1.0
-    - wget http://downloads.arduino.cc/arduino-1.8.5-linux64.tar.xz
-    - tar xf arduino-1.8.5-linux64.tar.xz
-    - mv arduino-1.8.5 /usr/local/share/arduino
-    - ln -s /usr/local/share/arduino/arduino /usr/local/bin/
-    # - wget http://energia.nu/downloads/downloadv4.php?file=energia-1.6.10E18-linux64.tar.xz
-    # - tar xf energia-1.6.10E18-linux64.tar.xz
-    # - mv energia-1.6.10E18 /usr/local/share/energia
-    # - ln -s /usr/local/share/energia/energia /usr/local/bin/
-    - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
-    - git clone https://github.com/pjpmarques/ChainableLED.git
-    - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
-    - git clone https://github.com/bblanchon/ArduinoJson.git
-    - git clone https://github.com/mmurdoch/arduinounit.git
-    - git clone https://github.com/adafruit/Adafruit_Sensor.git
-    - git clone https://github.com/rweather/arduinolibs.git
-    - git clone https://github.com/adafruit/Adafruit_TSL2561.git
-    - git clone -b testing https://github.com/arkhipenko/TaskScheduler.git
-    - ln -s $PWD/Grove_Digital_Light_Sensor /usr/local/share/arduino/libraries/Grove_Digital_Light_Sensor
-    - ln -s $PWD/ChainableLED /usr/local/share/arduino/libraries/ChainableLED
-    - ln -s $PWD/Grove_Air_quality_Sensor /usr/local/share/arduino/libraries/Grove_Air_quality_Sensor
-    - ln -s $PWD/ArduinoJson /usr/local/share/arduino/libraries/ArduinoJson
-    - ln -s $PWD/arduinounit /usr/local/share/arduino/libraries/ArduinoUnit
-    - ln -s $PWD/Adafruit_Sensor /usr/local/share/arduino/libraries/Adafruit_Sensor
-    - ln -s $PWD/arduinolibs/libraries/Crypto /usr/local/share/arduino/libraries/Crypto
-    - ln -s $PWD/Adafruit_TSL2561 /usr/local/share/arduino/libraries/Adafruit_TSL2561
-    - ln -s $PWD/TaskScheduler /usr/local/share/arduino/libraries/TaskScheduler
-    - ln -s $PWD /usr/local/share/arduino/libraries/AtHome
-    # - ln -s $PWD/Grove_Digital_Light_Sensor /usr/local/share/energia/libraries/Grove_Digital_Light_Sensor
-    # - ln -s $PWD/ChainableLED /usr/local/share/arduino/energia/ChainableLED
-    # - ln -s $PWD/Grove_Air_quality_Sensor /usr/local/share/energia/libraries/Grove_Air_quality_Sensor
-    # - ln -s $PWD/ArduinoJson /usr/local/share/arduino/energia/ArduinoJson
-    # - ln -s $PWD/arduinounit /usr/local/share/arduino/energia/ArduinoUnit
-    # - ln -s $PWD /usr/local/share/energia/libraries/AtHome
-    - arduino --install-library "Adafruit NeoPixel"
-    - arduino --install-boards arduino:sam
-    - arduino --install-boards arduino:samd
-    # - arduino --install-boards chipKIT:pic32
-    # - energia --install-boards energia:msp430
-    # - energia --install-boards energia:msp432
-    # - energia --install-library "Adafruit NeoPixel"
-    # - cp $PWD/test/platforms/msp432/platform.txt ~/.energia15/packages/hardware/msp432/3.8.0/platform.txt
-    - mkdir -p $PWD/test/output/avr/uno # test the most classical arduino
-    - mkdir -p $PWD/test/output/avr/leonardo # test avr based arduino with native usb port
-    - mkdir -p $PWD/test/output/arm/zero # test official arm cortex m0+ board
-    - mkdir -p $PWD/test/output/arm/due # test official arm cortex m3 board
-    # - mkdir -p $PWD/test/output/pic32/fubarino_mini # test pic32mx250 based board
-    # - mkdir -p $PWD/test/output/msp430/launchpad_fr2433 # test msp430fr2433 board
-    # - mkdir -p $PWD/test/output/msp432/launchpad # test msp432 board, it's an arm cortex m4f
-    # - apt update && apt -y install make autoconf 
+
   script:
     - arduino --verify --board arduino:avr:uno $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/1/
     - arduino --verify --board arduino:avr:leonardo $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/1/
@@ -76,25 +90,28 @@ build:
   artifacts:
     paths:
       - "$PWD/test/output"
-      # - "$PWD/test/output/pic32/fubarino_mini/*.hex"
-  # depending on your build setup it's most likely a good idea to cache outputs to reduce the build time
-  # cache:
-  #   paths:
-  #     - "*.o"
+  cache:
+    paths:
+      - "*.o"
+      - "*.d"
+      - "*.cache"
+      - "*build.options.json"
 
 # run tests using the binary built before
 test:
   stage: test
   script:
-    - apt-get update && apt-get install -y make git libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 python3-pip psmisc
-    - pip3 install PyQt5
-    - export LD_LIBRARY_PATH=$PWD/extras/simulator/linux_x64
-    - export PATH="$PATH:$PWD/extras/simulator/linux_x64:$PWD/extras/scripts"
-    - chmod +x $PWD/extras/scripts/*
-    - chmod +x $PWD/extras/simulator/linux_x64/simulator
     - athome_test $PWD/test/output/avr/uno/1/1.ino.hex
     - athome_test $PWD/test/output/avr/uno/2/2.ino.hex
     # - ./simavr/simavr/run_avr -m atmega328p -f 16000000 $PWD/test/output/avr/uno/1.ino.hex
+  artifacts:
+    paths:
+      - "$PWD/*.log"
+
+unitTest:
+  stage: unitTest
+  script:
+    - echo "Hello, World! I'm still not implemented"
   artifacts:
     paths:
       - "$PWD/*.log"
