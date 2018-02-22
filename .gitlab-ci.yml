@@ -127,7 +127,7 @@ deploy:
   stage: deploy
   script:
     - mkdir AtHome
-    - cp -r *.c *.cpp *.h *.hpp *.htt library.* examples AtHome
+    - cp -r *.cpp *.h *.hpp library.* examples AtHome
     - echo "Need to implement release on a server"
   artifacts:
     paths:
