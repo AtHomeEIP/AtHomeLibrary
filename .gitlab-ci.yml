@@ -147,7 +147,7 @@ genDoc:
       - "doc/html"
       
 pages:
-  stage: deployDoc
+  stage: deploy
   when: always
   allow_failure: yes
   dependencies:
