@@ -84,26 +84,15 @@ buildTests:
   artifacts:
     paths:
       - "test/output"
-  cache:
-    paths:
-      - "*.o"
-      - "*.d"
-      - "*.cache"
-      - "*build.options.json"
 
 buildExamples:
   stage: buildExamples
+  allow_failure: yes
   script:
     - echo "Not yet implemented"
   artifacts:
     paths:
       - "examples/output"
-  cache:
-    paths:
-      - "*.o"
-      - "*.d"
-      - "*.cache"
-      - "*build.options.json"
 
 # run tests using the binary built before
 test:
@@ -116,7 +105,6 @@ test:
     - chmod +x $PWD/extras/scripts/*
     - chmod +x $PWD/extras/simulator/linux_x64/simulator
   script:
-    - rm *.log
     - athome_test $PWD/test/output/avr/uno/1/1.ino.hex
     - athome_test $PWD/test/output/avr/uno/2/2.ino.hex
     # - ./simavr/simavr/run_avr -m atmega328p -f 16000000 $PWD/test/output/avr/uno/1.ino.hex
@@ -126,6 +114,7 @@ test:
 
 unitTest:
   stage: unitTest
+  allow_failure: yes
   script:
     - rm *.log
     - echo "Hello, World! I'm still not implemented"
@@ -145,6 +134,8 @@ deploy:
 
 genDoc:
   stage: genDoc
+  when: always
+  allow_failure: yes
   before_script:
     - apt-get update && apt-get install -y --install-suggests doxygen
   script:
