@@ -10,12 +10,12 @@ stages:
   - build
   - test
   - unitTest
+  - genDoc
+  - deploy
 
 before_script:
   - apt update && apt -y install build-essential git xvfb wget xz-utils libxext6 libxtst6 libxrender1 libgtk2.0.0 \
-    default-jre libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 python3-pip \
-    psmisc
-  - pip3 install PyQt5
+    default-jre
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3
   - export DISPLAY=:1.0
@@ -68,14 +68,9 @@ before_script:
   # - mkdir -p $PWD/test/output/msp430/launchpad_fr2433 # test msp430fr2433 board
   # - mkdir -p $PWD/test/output/msp432/launchpad # test msp432 board, it's an arm cortex m4f
   # - apt update && apt -y install make autoconf
-  - export LD_LIBRARY_PATH=$PWD/extras/simulator/linux_x64
-  - export PATH="$PATH:$PWD/extras/simulator/linux_x64:$PWD/extras/scripts"
-  - chmod +x $PWD/extras/scripts/*
-  - chmod +x $PWD/extras/simulator/linux_x64/simulator
 
 build:
   stage: build
-
   script:
     - arduino --verify --board arduino:avr:uno $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/1/
     - arduino --verify --board arduino:avr:leonardo $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/1/
@@ -89,7 +84,7 @@ build:
     # - energia --verify --board energia:msp432:MSP-EXP432P401R /c/Users/toshiba/Documents/Arduino/libraries/woodBox/test/1/main/main.ino
   artifacts:
     paths:
-      - "$PWD/test/output"
+      - "test/output"
   cache:
     paths:
       - "*.o"
@@ -100,18 +95,49 @@ build:
 # run tests using the binary built before
 test:
   stage: test
+  before_script:
+    - apt-get install -y libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 \
+      python3-pip psmisc
+    - pip3 install PyQt5
+    - export LD_LIBRARY_PATH=$PWD/extras/simulator/linux_x64
+    - export PATH="$PATH:$PWD/extras/simulator/linux_x64:$PWD/extras/scripts"
+    - chmod +x $PWD/extras/scripts/*
+    - chmod +x $PWD/extras/simulator/linux_x64/simulator
   script:
+    - rm *.log
     - athome_test $PWD/test/output/avr/uno/1/1.ino.hex
     - athome_test $PWD/test/output/avr/uno/2/2.ino.hex
     # - ./simavr/simavr/run_avr -m atmega328p -f 16000000 $PWD/test/output/avr/uno/1.ino.hex
   artifacts:
     paths:
-      - "$PWD/*.log"
+      - "$*.log"
 
 unitTest:
   stage: unitTest
   script:
+    - rm *.log
     - echo "Hello, World! I'm still not implemented"
   artifacts:
     paths:
-      - "$PWD/*.log"
+      - "*.log"
+
+deploy:
+  stage: deploy
+  script:
+    - mkdir AtHome
+    - cp -r *.c *.cpp *.h *.hpp *.htt library.* examples AtHome
+    - echo "Need to implement release on a server"
+  artifacts:
+    path:
+      - "AtHome"
+
+genDoc:
+  stage: genDoc
+  before_script:
+    - apt-get install -y --install-suggests doxygen
+  script:
+    - rm -rf doc/html doc/latex
+    - doxygen Doxyfile
+  artifacts:
+    paths:
+      - "doc/html"
