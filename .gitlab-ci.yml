@@ -15,8 +15,7 @@ stages:
   - deploy
 
 before_script:
-  - apt update && apt -y install build-essential git xvfb wget xz-utils libxext6 libxtst6 libxrender1 libgtk2.0.0 \
-    default-jre
+  - apt update && apt -y install build-essential git xvfb wget xz-utils libxext6 libxtst6 libxrender1 libgtk2.0.0 default-jre
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
   - sleep 3
   - export DISPLAY=:1.0
@@ -113,8 +112,7 @@ buildExamples:
 test:
   stage: test
   before_script:
-    - apt-get install -y libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 \
-      python3-pip psmisc
+    - apt-get install -y libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 python3-pip psmisc
     - pip3 install PyQt5
     - export LD_LIBRARY_PATH=$PWD/extras/simulator/linux_x64
     - export PATH="$PATH:$PWD/extras/simulator/linux_x64:$PWD/extras/scripts"
