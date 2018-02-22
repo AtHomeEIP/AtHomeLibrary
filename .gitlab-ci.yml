@@ -7,7 +7,8 @@ variables:
   BIN_PATH: /usr/local/bin
 
 stages:
-  - build
+  - buildTests
+  - buildExamples
   - test
   - unitTest
   - genDoc
@@ -69,8 +70,8 @@ before_script:
   # - mkdir -p $PWD/test/output/msp432/launchpad # test msp432 board, it's an arm cortex m4f
   # - apt update && apt -y install make autoconf
 
-build:
-  stage: build
+buildTests:
+  stage: buildTests
   script:
     - arduino --verify --board arduino:avr:uno $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/1/
     - arduino --verify --board arduino:avr:leonardo $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/1/
@@ -91,6 +92,19 @@ build:
       - "*.d"
       - "*.cache"
       - "*build.options.json"
+
+  buildExamples:
+    stage: buildExamples
+    script:
+      - echo "Not yet implemented"
+    artifacts:
+      - "examples/output"
+    cache:
+      paths:
+        - "*.o"
+        - "*.d"
+        - "*.cache"
+        - "*build.options.json"
 
 # run tests using the binary built before
 test:
