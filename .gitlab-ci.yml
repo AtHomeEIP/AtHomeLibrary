@@ -13,7 +13,7 @@ buildTests:Arduino:
     - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
     - sleep 3
     - export DISPLAY=:1.0
-    - wget http://downloads.arduino.cc/arduino-${ARDUINO_VERSION}-linux64.tar.xz
+    - wget --quiet http://downloads.arduino.cc/arduino-${ARDUINO_VERSION}-linux64.tar.xz
     - tar xf arduino-${ARDUINO_VERSION}-linux64.tar.xz
     - mv arduino-${ARDUINO_VERSION} ${SHARE_PATH}/arduino
     - ln -s ${SHARE_PATH}/arduino/arduino ${BIN_PATH}/
@@ -67,8 +67,8 @@ buildTests:Energia:
     - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
     - sleep 3
     - export DISPLAY=:1.0
-    - wget --quiet http://energia.nu/downloads/downloadv4.php?file=energia-${ENERGIA_VERSION}-linux64.tar.xz
-    - tar xf energia*.tar.xz
+    - wget --quiet -O energia-${ENERGIA_VERSION}-linux64.tar.xz http://energia.nu/downloads/downloadv4.php?file=energia-${ENERGIA_VERSION}-linux64.tar.xz
+    - tar xf energia-${ENERGIA_VERSION}-linux64.tar.xz
     - mv energia-${ENERGIA_VERSION} ${SHARE_PATH}/energia
     - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
     - git clone https://github.com/pjpmarques/ChainableLED.git
