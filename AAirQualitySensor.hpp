@@ -13,7 +13,7 @@ namespace athome {
             ~AAirQualitySensor();
 
             virtual uint8_t*        getSample() = 0;
-            virtual ISensorScale    getLastSample() = 0;
+            virtual ISensorScale    getLastSample() const = 0;
             virtual ISensorScale    getEstimate();
         };
     }
