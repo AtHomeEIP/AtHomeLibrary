@@ -6,17 +6,8 @@ variables:
   SHARE_PATH: /usr/local/share
   BIN_PATH: /usr/local/bin
 
-stages:
-  - buildTests
-  - buildExamples
-  - test
-  - unitTest
-  - genDoc
-  - deploy
-  - deployDoc
-
 buildTests:
-  stage: buildTests
+  stage: build
   before_script:
     - apt update && apt -y install build-essential git xvfb wget xz-utils libxext6 libxtst6 libxrender1 libgtk2.0.0 default-jre
     - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
@@ -87,7 +78,7 @@ buildTests:
       - "test/output"
 
 buildExamples:
-  stage: buildExamples
+  stage: build
   allow_failure: yes
   script:
     - echo "Not yet implemented"
@@ -114,7 +105,7 @@ test:
       - "*.log"
 
 unitTest:
-  stage: unitTest
+  stage: test
   allow_failure: yes
   script:
     - rm *.log
@@ -134,7 +125,7 @@ deploy:
       - "AtHome"
 
 genDoc:
-  stage: genDoc
+  stage: build
   when: always
   allow_failure: yes
   before_script:
