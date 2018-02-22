@@ -93,18 +93,21 @@ buildTests:
       - "*.cache"
       - "*build.options.json"
 
-  buildExamples:
-    stage: buildExamples
-    script:
-      - echo "Not yet implemented"
-    artifacts:
+buildExamples:
+  stage: buildExamples
+  before_script:
+    - echo "To remove when examples will have been written"
+  script:
+    - echo "Not yet implemented"
+  artifacts:
+    paths:
       - "examples/output"
-    cache:
-      paths:
-        - "*.o"
-        - "*.d"
-        - "*.cache"
-        - "*build.options.json"
+  cache:
+    paths:
+      - "*.o"
+      - "*.d"
+      - "*.cache"
+      - "*build.options.json"
 
 # run tests using the binary built before
 test:
@@ -128,6 +131,8 @@ test:
 
 unitTest:
   stage: unitTest
+  before_script:
+    - echo "copy paste before_script from test stage"
   script:
     - rm *.log
     - echo "Hello, World! I'm still not implemented"
@@ -137,12 +142,14 @@ unitTest:
 
 deploy:
   stage: deploy
+  before_script:
+    - echo "nothing special to do"
   script:
     - mkdir AtHome
     - cp -r *.c *.cpp *.h *.hpp *.htt library.* examples AtHome
     - echo "Need to implement release on a server"
   artifacts:
-    path:
+    paths:
       - "AtHome"
 
 genDoc:
