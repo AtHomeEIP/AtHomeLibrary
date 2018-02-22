@@ -6,7 +6,7 @@ namespace athome {
 
         AAirQualitySensor::~AAirQualitySensor() {}
 
-        ISensorScale AAirQualitySensor::getEstimate() {
+        ISensor::ISensorScale AAirQualitySensor::getEstimate() {
             return getLastSample();
         }
     }
