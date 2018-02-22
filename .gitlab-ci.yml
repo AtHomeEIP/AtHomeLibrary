@@ -13,6 +13,7 @@ stages:
   - unitTest
   - genDoc
   - deploy
+  - deployDoc
 
 buildTests:
   stage: buildTests
@@ -110,7 +111,7 @@ test:
     # - ./simavr/simavr/run_avr -m atmega328p -f 16000000 $PWD/test/output/avr/uno/1.ino.hex
   artifacts:
     paths:
-      - "$*.log"
+      - "*.log"
 
 unitTest:
   stage: unitTest
@@ -137,10 +138,24 @@ genDoc:
   when: always
   allow_failure: yes
   before_script:
-    - apt-get update && apt-get install -y --install-suggests doxygen
+    - apt-get update && apt-get install -y doxygen graphviz
   script:
     - rm -rf doc/html doc/latex
     - doxygen Doxyfile
   artifacts:
     paths:
       - "doc/html"
+      
+pages:
+  stage: deployDoc
+  when: always
+  allow_failure: yes
+  dependencies:
+    - genDoc
+  script:
+    - cp -r doc/html public
+  artifacts:
+    paths:
+      - "public"
+  only:
+    - "master"
