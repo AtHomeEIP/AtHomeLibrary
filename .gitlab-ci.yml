@@ -90,12 +90,6 @@ buildTests:Energia:
     - ln -s $PWD/TaskScheduler ${SHARE_PATH}/energia/libraries/TaskScheduler
     - ln -s $PWD ${SHARE_PATH}/energia/libraries/AtHome
     - ln -s ${SHARE_PATH}/energia/energia ${BIN_PATH}/
-    - ln -s $PWD/Grove_Digital_Light_Sensor ${SHARE_PATH}/energia/libraries/Grove_Digital_Light_Sensor
-    - ln -s $PWD/ChainableLED ${SHARE_PATH}/energia/energia/ChainableLED
-    - ln -s $PWD/Grove_Air_quality_Sensor ${SHARE_PATH}/energia/libraries/Grove_Air_quality_Sensor
-    - ln -s $PWD/ArduinoJson ${SHARE_PATH}/energia/energia/ArduinoJson
-    - ln -s $PWD/arduinounit ${SHARE_PATH}/energia/energia/ArduinoUnit
-    - ln -s $PWD ${SHARE_PATH}/energia/libraries/AtHome
     # - energia --install-boards energia:msp430
     - energia --install-boards energia:msp432
     - energia --install-library "Adafruit NeoPixel"
@@ -164,18 +158,18 @@ deploy:
     paths:
       - "AtHome"
 
-pages:
-  stage: deploy
-  when: always
-  allow_failure: yes
-  before_script:
-    - apt-get update && apt-get install -y doxygen graphviz
-  script:
-    - rm -rf doc/html doc/latex
-    - doxygen Doxyfile
-    - mv doc/html public
-  artifacts:
-    paths:
-      - "public"
-  only:
-    - "master"
+#pages:
+#  stage: deploy
+#  when: always
+#  allow_failure: yes
+#  before_script:
+#    - apt-get update && apt-get install -y doxygen graphviz
+#  script:
+#    - rm -rf doc/html doc/latex
+#    - doxygen Doxyfile
+#    - mv doc/html public
+#  artifacts:
+#    paths:
+#      - "public"
+#  only:
+#    - "master"
