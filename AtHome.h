@@ -36,6 +36,9 @@ using athome::storage::ArduinoEEPROM;
 # include "AHumiditySensor.hpp"
 # include "ATemperatureSensor.hpp"
 # include "ALuminositySensor.hpp"
+# include "ANoiseSensor.hpp"
+# include "AAirQualitySensor.hpp"
+# include "DummySensor.hpp"
 
 using athome::module::AtHomeModule;
 # ifndef __MSP430__
@@ -48,6 +51,9 @@ using athome::display::CommonAnodeRGBLed;
 using athome::sensor::AHumiditySensor;
 using athome::sensor::ATemperatureSensor;
 using athome::sensor::ALuminositySensor;
+using athome::sensor::ANoiseSensor;
+using athome::sensor::AAirQualitySensor;
+using athome::sensor::DummySensor;
 # ifdef ARDUINO
 using athome::display::GroveChainableLED;
 # endif /* ARDUINO */
