@@ -92,7 +92,9 @@ buildTests:Energia:
     - ln -s ${SHARE_PATH}/energia/energia ${BIN_PATH}/
     # - energia --install-boards energia:msp430
     - energia --install-boards energia:msp432
-    - energia --install-library "Adafruit NeoPixel"
+    - git clone https://github.com/adafruit/Adafruit_NeoPixel.git
+    - ln -s $PWD/Adafruit_NeoPixel ${SHARE_PATH}/energia/libraries/Adafruit_NeoPixel
+    # - energia --install-library "Adafruit NeoPixel"
     # - cp $PWD/test/platforms/msp432/platform.txt ~/.energia15/packages/hardware/msp432/3.8.0/platform.txt
     # - mkdir -p $PWD/test/output/msp430/launchpad_fr2433 # test msp430fr2433 board
     - mkdir -p $PWD/test/energia/output/msp432 # test msp432 board, it's an arm cortex m4f
