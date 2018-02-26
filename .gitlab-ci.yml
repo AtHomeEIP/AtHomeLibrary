@@ -132,7 +132,7 @@ test:
     - pip3 install PyQt5
     - export LD_LIBRARY_PATH=$PWD/extras/simulator/linux_x64
     - export PATH="$PATH:$PWD/extras/simulator/linux_x64:$PWD/extras/scripts:$PWD/extras/scripts/middleware"
-    - chmod -r +x $PWD/extras/scripts/*
+    - chmod +x -r $PWD/extras/scripts/*
     - chmod +x $PWD/extras/simulator/linux_x64/simulator
   script:
     - athome_test $PWD/test/output/avr/uno/1/1.ino.hex
