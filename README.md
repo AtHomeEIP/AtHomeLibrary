@@ -1,10 +1,12 @@
-# @@Home Development Kit
+# AtHome Development Kit
 
-This repository holds the source code of the @HOME Development Kit (Framework + examples + PCBs and schematics).
+This repository holds the source code of the AtHome Development Kit (Framework + examples + PCBs and schematics).
 
-## What is @@Home?
+## What is AtHome?
 
-@@Home is a set of smart devices enabling to monitor a house's environment and the possible effects on human health. A smartphone application communicating with sensing devices put into the house, enable the user to get advices, tips and solutions to potential problems, and to communicate with other members of @@Home community, to be able to live better at home.
+AtHome is a set of smart devices enabling to monitor a house's environment and the possible effects on human health.
+A smartphone application communicating with sensing devices put into the house, enable the user to get advices, tips and solutions to potential problems,
+and to communicate with other members of AtHome community, to be able to live better at home.
 
 ## Installation and requirements to use this kit:
 
@@ -68,7 +70,7 @@ For battery powered modules, here is the list of low power operation mode on sev
 
 ## Secured communication
 
-Status of secured communication between modules and their server (the @@Home when the set is built by the @@Home team):
+Status of secured communication between modules and their server (the AtHome when the set is built by the AtHome team):
 
 | Platform / Environment | Arduino | Mbed | Bare-Metal |
 |------------------------|---------|------|------------|
