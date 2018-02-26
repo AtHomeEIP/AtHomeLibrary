@@ -5,6 +5,7 @@ variables:
   ENERGIA_VERSION: 1.6.10E18
   SHARE_PATH: /usr/local/share
   BIN_PATH: /usr/local/bin
+  GIT_SUBMODULE_STRATEGY: recursive
 
 buildTests:Arduino:
   stage: build
