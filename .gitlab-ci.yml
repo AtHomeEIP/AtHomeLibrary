@@ -132,7 +132,8 @@ test:
     - pip3 install PyQt5
     - export LD_LIBRARY_PATH=$PWD/extras/simulator/linux_x64
     - export PATH="$PATH:$PWD/extras/simulator/linux_x64:$PWD/extras/scripts:$PWD/extras/scripts/middleware"
-    - chmod +x -r $PWD/extras/scripts/*
+    - chmod +x $PWD/extras/scripts/*
+    - chmod +x $PWD/extras/scripts/middleware/*
     - chmod +x $PWD/extras/simulator/linux_x64/simulator
   script:
     - athome_test $PWD/test/output/avr/uno/1/1.ino.hex
@@ -161,18 +162,18 @@ deploy:
     paths:
       - "AtHome"
 
-#pages:
-#  stage: deploy
-#  when: always
-#  allow_failure: yes
-#  before_script:
-#    - apt-get update && apt-get install -y doxygen graphviz
-#  script:
-#    - rm -rf doc/html doc/latex
-#    - doxygen Doxyfile
-#    - mv doc/html public
-#  artifacts:
-#    paths:
-#      - "public"
-#  only:
-#    - "master"
+pages:
+  stage: deploy
+  when: always
+  allow_failure: yes
+  before_script:
+    - apt-get update && apt-get install -y doxygen graphviz
+  script:
+    - rm -rf doc/html doc/latex
+    - doxygen Doxyfile
+    - mv doc/html public
+  artifacts:
+    paths:
+      - "public"
+  only:
+    - "master"
