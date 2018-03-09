@@ -1,4 +1,6 @@
 #ifdef ARDUINO
+# include <Wire.h>
+# include <Digital_Light_TSL2561.h>
 # include "GroveDigitalLightSensor.hpp"
 
 namespace athome {
@@ -10,7 +12,7 @@ namespace athome {
 
         GroveDigitalLightSensor::~GroveDigitalLightSensor() {}
 
-        GroveDigitalLightSensor &GroveDigitalLightSensor::getInstance() {
+        GroveDigitalLightSensor *GroveDigitalLightSensor::getInstance() {
             if (_instance == nullptr) {
                 _instance = new GroveDigitalLightSensor();
             }
@@ -25,6 +27,8 @@ namespace athome {
         uint16_t GroveDigitalLightSensor::getLastSample() const {
             return _sample;
         }
+
+        GroveDigitalLightSensor *GroveDigitalLightSensor::_instance = nullptr;
     }
 }
 #endif /* ARDUINO */

@@ -12,7 +12,7 @@ namespace athome {
             GroveDigitalLightSensor(const GroveDigitalLightSensor &) = delete;
             GroveDigitalLightSensor &operator=(const GroveDigitalLightSensor &) = delete;
 
-            GroveDigitalLightSensor         &getInstance();
+            static GroveDigitalLightSensor  *getInstance();
             uint8_t                         *getSample();
             uint16_t                        getLastSample() const;
         protected:
