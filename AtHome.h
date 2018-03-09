@@ -11,6 +11,7 @@
 # include "WiFiTypes.hpp"
 # ifdef ARDUINO
 #  include "GroveChainableLED.hpp"
+#  include "GroveDigitalLightSensor.hpp"
 # endif /* ARDUINO */
 # ifndef __MSP430__
 # include "AtHomeWiFiModule.hpp"
@@ -56,6 +57,7 @@ using athome::sensor::AAirQualitySensor;
 using athome::sensor::DummySensor;
 # ifdef ARDUINO
 using athome::display::GroveChainableLED;
+using athome::sensor::GroveDigitalLightSensor;
 # endif /* ARDUINO */
 #if defined(AVR_PRO) || defined(AVR_UNO_WIFI_DEV_ED) || defined(AVR_NG) || \
         defined(AVR_LILYPAD) || defined(AVR_BT) || defined(AVR_FIO) || \
