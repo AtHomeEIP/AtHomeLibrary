@@ -12,6 +12,7 @@
 # ifdef ARDUINO
 #  include "GroveChainableLED.hpp"
 #  include "GroveDigitalLightSensor.hpp"
+#  include "SoundSensor.hpp"
 # endif /* ARDUINO */
 # ifndef __MSP430__
 # include "AtHomeWiFiModule.hpp"
@@ -56,6 +57,7 @@ using athome::sensor::ANoiseSensor;
 using athome::sensor::AAirQualitySensor;
 using athome::sensor::DummySensor;
 # ifdef ARDUINO
+using athome::sensor::SoundSensor;
 using athome::display::GroveChainableLED;
 using athome::sensor::GroveDigitalLightSensor;
 # endif /* ARDUINO */
