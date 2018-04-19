@@ -2,6 +2,7 @@
 // Created by Alexis Lina on 19/04/2018.
 //
 
+#ifdef ARDUINO
 #include <math.h>
 #include <time.h>
 #include <unistd.h>
@@ -124,3 +125,4 @@ int *athome::sensor::MQ2GasSensor::getValue() {
     return array_value;
 }
 
+#endif /* ARDUINO */
