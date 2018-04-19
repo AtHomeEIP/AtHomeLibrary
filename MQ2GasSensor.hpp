@@ -26,7 +26,7 @@
 
 /*****************************Globals***********************************************/
 
-//#ifdef ARDUINO
+#ifdef ARDUINO
 
 namespace athome{
     namespace sensor {
@@ -54,5 +54,5 @@ namespace athome{
     }
 }
 
-//#endif /* ARDUINO */
+#endif /* ARDUINO */
 #endif //FRAMEWORK_MQ2GASSENSOR_HPP
