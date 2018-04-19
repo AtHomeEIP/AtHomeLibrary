@@ -8,9 +8,12 @@
 
 
 athome::sensor::MQ2GasSensor::MQ2GasSensor(int pin) : _pin(pin),
-                                                      _sampleValue(false)
+                                                      _sampleValue(false),
+                                                      _LPGCurve({2.3, 0.21, static_cast<float>(-0.47)}),
+                                                      _COCurve({2.3, 0.72, static_cast<float>(-0.34)}),
+                                                      _SmokeCurve({2.3, 0.53, static_cast<float>(-0.44)}),
+                                                      _R0(10)
 {
-    _LPGCurve[3] = {2.3, 0.21, static_cast<float>(-0.47)};
 }
 
 athome::sensor::MQ2GasSensor::~MQ2GasSensor()
@@ -84,13 +87,13 @@ Remarks: This function passes different curves to the MQGetPercentage function w
 ************************************************************************************/
 int athome::sensor::MQ2GasSensor::MQGetGasPercentage(float rs_ro_ratio, int gas_id) {
     if (gas_id == GAS_LPG){
-        return MQGetPercentage(rs_ro_ratio, _LPGCurve);
+        return MQGetPercentage(rs_ro_ratio, const_cast<float *>(_LPGCurve));
     }
     else if (gas_id == GAS_CO){
-        return MQGetPercentage(rs_ro_ratio, _COCurve);
+        return MQGetPercentage(rs_ro_ratio, const_cast<float *>(_COCurve));
     }
     else if (gas_id == GAS_SMOKE){
-        return MQGetPercentage(rs_ro_ratio, _SmokeCurve);
+        return MQGetPercentage(rs_ro_ratio, const_cast<float *>(_SmokeCurve));
     }
     return 0;
 }

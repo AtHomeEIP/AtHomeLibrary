@@ -26,7 +26,7 @@
 
 /*****************************Globals***********************************************/
 
-#ifdef ARDUINO
+//#ifdef ARDUINO
 
 namespace athome{
     namespace sensor {
@@ -39,13 +39,14 @@ namespace athome{
             int   MQGetPercentage(float rs_ro_ratio, float *pcurve);
             void setpin(int pin);
             int getpin() const;
+
         private:
             int _pin;
             bool _sampleValue;
-            float _LPGCurve[3] = {2.3, 0.21, static_cast<float>(-0.47)};
-            float _COCurve[3] = {2.3, 0.72, static_cast<float>(-0.34)};
-            float _SmokeCurve[3] = {2.3, 0.53, static_cast<float>(-0.44)};;
-            float _R0 = 10;
+            const float _LPGCurve[3];
+            const float _COCurve[3];
+            const float _SmokeCurve[3];
+            const float _R0;
             float MQResistanceCalculation(int raw_adc);
             float MQCalibration(int mqpin);
             float MQRead(int mq_pin);
@@ -54,5 +55,5 @@ namespace athome{
     }
 }
 
-#endif /* ARDUINO */
+//#endif /* ARDUINO */
 #endif //FRAMEWORK_MQ2GASSENSOR_HPP
