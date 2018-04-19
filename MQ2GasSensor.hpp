@@ -6,6 +6,7 @@
 #define FRAMEWORK_MQ2GASSENSOR_HPP
 
 #include <ISensor.hpp>
+#include "ISensor.hpp"
 
 #define RL_value (5)            //define the load resistance on the board, in kilo ohms
 #define R0_CLEAN_AIR_FACTOR (9.83) //RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO
@@ -31,7 +32,7 @@ namespace athome{
     namespace sensor {
         class MQ2GasSensor : public ISensor{
         public:
-            MQ2GasSensor(int pin);
+            explicit MQ2GasSensor(int pin);
             MQ2GasSensor(const MQ2GasSensor &) = delete;
             MQ2GasSensor &operator=(const MQ2GasSensor &) = delete;
             ~MQ2GasSensor();
