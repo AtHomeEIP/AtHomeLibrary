@@ -2,8 +2,6 @@
 // Created by Alexis Lina on 19/04/2018.
 //
 
-#include <chrono>
-#include <cmath> #include <thread>
 #include <unistd.h>
 #include <cmath>
 #include "MQ2GasSensor.hpp"
@@ -29,7 +27,6 @@ int athome::sensor::MQ2GasSensor::getpin() const {
 float athome::sensor::MQ2GasSensor::MQResistanceCalculation(int raw_adc) {
     return ((static_cast<float>RL_value*(1023-raw_adc)/raw_adc));
 }
-
 
 float athome::sensor::MQ2GasSensor::MQCalibration(int mqpin) {
     float val = 0;
