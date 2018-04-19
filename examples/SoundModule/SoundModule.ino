@@ -5,7 +5,7 @@ using SoundModule = AtHomeModule<bool, 15>;
 ArduinoEEPROM storage;
 Stream *streams[] = {&Serial, nullptr};
 NeoPixel led(6);
-SoundSensor soundSensor;
+SoundSensor soundSensor(8);
 SoundModule *module = SoundModule::getInstance();
 
 void setup() {
