@@ -3,6 +3,7 @@
 //
 
 #include <unistd.h>
+#include <math.h>
 #include "MQ2GasSensor.hpp"
 
 
@@ -64,7 +65,7 @@ int athome::sensor::MQ2GasSensor::MQGetGasPercentage(float rs_ro_ratio, int gas_
 }
 
 int athome::sensor::MQ2GasSensor::MQGetPercentage(float rs_ro_ratio, float *pcurve) {
-    return static_cast<int>(std::pow(10, ((std::log(rs_ro_ratio) - pcurve[1]) / pcurve[2]) + pcurve[0]));
+    return static_cast<int>(pow(10, ((log(rs_ro_ratio) - pcurve[1]) / pcurve[2]) + pcurve[0]));
 }
 
 
