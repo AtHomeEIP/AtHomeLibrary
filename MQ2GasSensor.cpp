@@ -5,7 +5,7 @@
 #ifdef ARDUINO
 #include <math.h>
 #include <time.h>
-#include <unistd.h>
+#include <Arduino.h>
 #include "MQ2GasSensor.hpp"
 
 
