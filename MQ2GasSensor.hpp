@@ -39,7 +39,8 @@ namespace athome{
             int   MQGetPercentage(float rs_ro_ratio, float *pcurve);
             void    setpin(int pin);
             int     getpin() const;
-            int     *getValue();
+            void    *getValue();
+            ISensorScale getEstimate();
 
         private:
             int _pin;

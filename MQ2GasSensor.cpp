@@ -55,7 +55,7 @@ float athome::sensor::MQ2GasSensor::MQCalibration(int mqpin) {
 
     for (int j = 0; j < CALIBARAION_SAMPLE_TIMES; j++) {
         val += MQResistanceCalculation(digitalRead(_pin));
-        usleep(CALIBRATION_SAMPLE_INTERVAL);
+        delay(CALIBRATION_SAMPLE_INTERVAL);
     }
     val = val / CALIBARAION_SAMPLE_TIMES;
     val = static_cast<float>(val / R0_CLEAN_AIR_FACTOR);
@@ -75,7 +75,7 @@ float athome::sensor::MQ2GasSensor::MQRead(int mq_pin) {
 
     for (int j = 0; j < READ_SAMPLE_TIMES; ++j) {
         rs += MQResistanceCalculation(digitalRead(_pin));
-        usleep(READ_SAMPLE_INTERVAL);
+        delay(READ_SAMPLE_INTERVAL);
     }
     rs = rs / READ_SAMPLE_TIMES;
     return rs;
@@ -114,15 +114,18 @@ int athome::sensor::MQ2GasSensor::MQGetPercentage(float rs_ro_ratio, float *pcur
     return static_cast<int>(pow(10, ((log(rs_ro_ratio) - pcurve[1]) / pcurve[2]) + pcurve[0]));
 }
 
-int *athome::sensor::MQ2GasSensor::getValue() {
-    array_value[3] = ({MQGetGasPercentage(MQRead(_pin)/_R0,GAS_LPG),
-                        MQGetGasPercentage(MQRead(_pin)/_R0,GAS_CO),
-                        MQGetGasPercentage(MQRead(_pin)/_R0,GAS_SMOKE)
-    });
+void *athome::sensor::MQ2GasSensor::getValue() {
+    array_value[0] = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_LPG);
+    array_value[1] = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_CO);
+    array_value[2] = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_SMOKE);
     /*int LPG = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_LPG);
     int CO = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_CO);
     int SMOKE = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_SMOKE);*/
-    return array_value;
+    return reinterpret_cast<void *>(array_value);
+}
+
+athome::sensor::ISensor::ISensorScale athome::sensor::MQ2GasSensor::getEstimate() {
+    return athome::sensor::ISensor::ISensorScale::ZERO;
 }
 
 #endif /* ARDUINO */
