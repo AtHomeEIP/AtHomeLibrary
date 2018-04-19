@@ -3,7 +3,6 @@
 //
 
 #include <unistd.h>
-#include <cmath>
 #include "MQ2GasSensor.hpp"
 
 
