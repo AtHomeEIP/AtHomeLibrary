@@ -26,7 +26,7 @@
 
 /*****************************Globals***********************************************/
 
-//#ifdef ARDUINO
+#ifdef ARDUINO
 
 namespace athome{
     namespace sensor {
@@ -37,11 +37,13 @@ namespace athome{
             MQ2GasSensor &operator=(const MQ2GasSensor &) = delete;
             ~MQ2GasSensor();
             int   MQGetPercentage(float rs_ro_ratio, float *pcurve);
-            void setpin(int pin);
-            int getpin() const;
+            void    setpin(int pin);
+            int     getpin() const;
+            int     *getValue();
 
         private:
             int _pin;
+            int array_value[3];
             bool _sampleValue;
             const float _LPGCurve[3];
             const float _COCurve[3];
@@ -55,5 +57,5 @@ namespace athome{
     }
 }
 
-//#endif /* ARDUINO */
+#endif /* ARDUINO */
 #endif //FRAMEWORK_MQ2GASSENSOR_HPP

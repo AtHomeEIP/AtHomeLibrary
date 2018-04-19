@@ -2,8 +2,9 @@
 // Created by Alexis Lina on 19/04/2018.
 //
 
-#include <unistd.h>
 #include <math.h>
+#include <time.h>
+#include <unistd.h>
 #include "MQ2GasSensor.hpp"
 
 
@@ -14,6 +15,7 @@ athome::sensor::MQ2GasSensor::MQ2GasSensor(int pin) : _pin(pin),
                                                       _SmokeCurve({2.3, 0.53, static_cast<float>(-0.44)}),
                                                       _R0(10)
 {
+    MQCalibration(pin);
 }
 
 athome::sensor::MQ2GasSensor::~MQ2GasSensor()
@@ -110,3 +112,15 @@ Remarks: By using the slope and a point of the line. The x(logarithmic value of 
 int athome::sensor::MQ2GasSensor::MQGetPercentage(float rs_ro_ratio, float *pcurve) {
     return static_cast<int>(pow(10, ((log(rs_ro_ratio) - pcurve[1]) / pcurve[2]) + pcurve[0]));
 }
+
+int *athome::sensor::MQ2GasSensor::getValue() {
+    array_value[3] = ({MQGetGasPercentage(MQRead(_pin)/_R0,GAS_LPG),
+                        MQGetGasPercentage(MQRead(_pin)/_R0,GAS_CO),
+                        MQGetGasPercentage(MQRead(_pin)/_R0,GAS_SMOKE)
+    });
+    /*int LPG = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_LPG);
+    int CO = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_CO);
+    int SMOKE = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_SMOKE);*/
+    return array_value;
+}
+
