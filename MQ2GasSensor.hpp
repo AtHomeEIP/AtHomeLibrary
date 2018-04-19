@@ -5,8 +5,8 @@
 #ifndef FRAMEWORK_MQ2GASSENSOR_HPP
 #define FRAMEWORK_MQ2GASSENSOR_HPP
 
-#include <ISensor.hpp>
 #include "ISensor.hpp"
+
 
 #define RL_value (5)            //define the load resistance on the board, in kilo ohms
 #define R0_CLEAN_AIR_FACTOR (9.83) //RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO
@@ -26,7 +26,7 @@
 
 /*****************************Globals***********************************************/
 
-#ifdef ARDUINO
+//#ifdef ARDUINO
 
 namespace athome{
     namespace sensor {
@@ -54,5 +54,5 @@ namespace athome{
     }
 }
 
-#endif /* ARDUINO */
+//#endif /* ARDUINO */
 #endif //FRAMEWORK_MQ2GASSENSOR_HPP
