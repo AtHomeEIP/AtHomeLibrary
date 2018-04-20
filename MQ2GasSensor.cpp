@@ -2,7 +2,7 @@
 // Created by Alexis Lina on 19/04/2018.
 //
 
-//#ifdef ARDUINO
+#ifdef ARDUINO
 #include <math.h>
 #include <time.h>
 #include <Arduino.h>
@@ -29,6 +29,30 @@ void athome::sensor::MQ2GasSensor::setpin(int pin) {
 
 int athome::sensor::MQ2GasSensor::getpin() const {
     return _pin;
+}
+
+/******************************* GetLPG **********************************************
+ * Only Possible when getValue is called /!\
+ * @return value of LPG contain in array_value[0]
+ */
+int athome::sensor::MQ2GasSensor::getLPG() const {
+    return array_value[0];
+}
+
+/******************************* GetCO **********************************************
+ * Only Possible when getValue is called /!\
+ * @return value of CO contain in array_value[1]
+ */
+int athome::sensor::MQ2GasSensor::getCO() const {
+    return array_value[1];
+}
+
+/******************************* GetSMOKE **********************************************
+ * Only Possible when getValue is called /!\
+ * @return value of SMOKE contain in array_value[2]
+ */
+int athome::sensor::MQ2GasSensor::getSMOKE() const {
+    return array_value[2];
 }
 
 /****************** MQResistanceCalculation ****************************************
@@ -125,7 +149,14 @@ void *athome::sensor::MQ2GasSensor::getValue() {
 }
 
 athome::sensor::ISensor::ISensorScale athome::sensor::MQ2GasSensor::getEstimate() {
+    getValue();
+    if (array_value[0] >= 10)
+        return athome::sensor::ISensor::ISensorScale::TEN;
+    if (array_value[1] >= 10)
+        return athome::sensor::ISensor::ISensorScale::TEN;
+    if (array_value[2] > 9)
+        return athome::sensor::ISensor::ISensorScale::TEN;
     return athome::sensor::ISensor::ISensorScale::ZERO;
 }
 
-//#endif /* ARDUINO */
+#endif /* ARDUINO */
