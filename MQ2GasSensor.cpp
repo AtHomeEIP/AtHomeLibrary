@@ -2,7 +2,7 @@
 // Created by Alexis Lina on 19/04/2018.
 //
 
-#ifdef ARDUINO
+//#ifdef ARDUINO
 #include <math.h>
 #include <time.h>
 #include <Arduino.h>
@@ -11,9 +11,9 @@
 
 athome::sensor::MQ2GasSensor::MQ2GasSensor(int pin) : _pin(pin),
                                                       _sampleValue(false),
-                                                      _LPGCurve({2.3, 0.21, static_cast<float>(-0.47)}),
-                                                      _COCurve({2.3, 0.72, static_cast<float>(-0.34)}),
-                                                      _SmokeCurve({2.3, 0.53, static_cast<float>(-0.44)}),
+                                                      _LPGCurve{2.3, 0.21, static_cast<float>(-0.47)},
+                                                      _COCurve{2.3, 0.72, static_cast<float>(-0.34)},
+                                                      _SmokeCurve{2.3, 0.53, static_cast<float>(-0.44)},
                                                       _R0(10)
 {
     MQCalibration(pin);
@@ -128,4 +128,4 @@ athome::sensor::ISensor::ISensorScale athome::sensor::MQ2GasSensor::getEstimate(
     return athome::sensor::ISensor::ISensorScale::ZERO;
 }
 
-#endif /* ARDUINO */
+//#endif /* ARDUINO */
