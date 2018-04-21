@@ -150,13 +150,10 @@ void *athome::sensor::MQ2GasSensor::getValue() {
 
 athome::sensor::ISensor::ISensorScale athome::sensor::MQ2GasSensor::getEstimate() {
     getValue();
-    if (array_value[0] >= 10)
-        return athome::sensor::ISensor::ISensorScale::TEN;
-    if (array_value[1] >= 10)
-        return athome::sensor::ISensor::ISensorScale::TEN;
-    if (array_value[2] > 9)
-        return athome::sensor::ISensor::ISensorScale::TEN;
+    if (array_value[0] >= 10 || array_value[1] >= 10 || array_value[2] >= 9)
+        return athome::sensor::ISensor::ISensorScale::ONE;
     return athome::sensor::ISensor::ISensorScale::ZERO;
 }
+
 
 #endif /* ARDUINO */
