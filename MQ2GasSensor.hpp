@@ -37,8 +37,8 @@ namespace athome{
             MQ2GasSensor &operator=(const MQ2GasSensor &) = delete;
             ~MQ2GasSensor();
             int   MQGetPercentage(float rs_ro_ratio, float *pcurve);
-            void        setpin(int pin);
-            int         getpin() const;
+            void        setPin(int pin);
+            int         getPin() const;
             int         getLPG() const;
             int         getSMOKE() const;
             int         getCO() const;
