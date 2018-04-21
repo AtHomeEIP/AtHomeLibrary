@@ -30,7 +30,7 @@
 
 namespace athome{
     namespace sensor {
-        class MQ2GasSensor : public ISensor{
+        class MQ2GasSensor : public ISensor {
         public:
             explicit MQ2GasSensor(int pin);
             MQ2GasSensor(const MQ2GasSensor &) = delete;
