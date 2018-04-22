@@ -144,11 +144,13 @@ namespace athome {
             return reinterpret_cast<void *>(array_value);
         }
 
-athome::sensor::ISensor::ISensorScale athome::sensor::MQ2GasSensor::getEstimate() {
-    getValue();
-    if (array_value[0] >= 10 || array_value[1] >= 10 || array_value[2] >= 9)
-        return athome::sensor::ISensor::ISensorScale::ONE;
-    return athome::sensor::ISensor::ISensorScale::ZERO;
+        ISensor::ISensorScale MQ2GasSensor::getEstimate() {
+            //getValue();
+            if (array_value[0] >= 10 || array_value[1] >= 10 || array_value[2] >= 9)
+                return athome::sensor::ISensor::ISensorScale::ONE;
+            return athome::sensor::ISensor::ISensorScale::TEN;
+        }
+    }
 }
 
 #endif /* ARDUINO */
