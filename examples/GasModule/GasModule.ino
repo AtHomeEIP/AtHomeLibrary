@@ -2,7 +2,9 @@
 
 using GasModule = AtHomeModule<MQ2GasSensor::Values, 15>;
 
+#ifdef __AVR__
 ArduinoEEPROM storage;
+#endif
 Stream *streams[] = {&Serial, nullptr};
 MQ2GasSensor sensor(8);
 GasModule *module = GasModule::getInstance();
@@ -12,7 +14,9 @@ void setup() {
     Serial.begin(115200);
     module->setSensor(&sensor);
     module->setStreams(streams);
+#ifdef __AVR__
     module->setStorage(&storage);
+#endif
     module->setup();
 }
 

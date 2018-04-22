@@ -1,5 +1,7 @@
 // For documentation of the API, see https://woodbox.gitlab.io/Framework/
-#include <SoftwareSerial.h>
+#if !defined(ARDUINO_SAMD_ZERO)
+# include <SoftwareSerial.h>
+#endif
 #include <AtHome.h>
 
 #define SENSOR_INTERVAL (60000)
@@ -7,13 +9,19 @@
 
 using MyModule = AtHomeWiFiModule<float, 15>; // Create an alias on a specialized template version of the module, to shorten next uses
 
-MyModule *module = MyModule::getInstance(); // Create a module instance, able to buffer 15 values
+MyModule *module = reinterpret_cast<MyModule *>(MyModule::getInstance()); // Create a module instance, able to buffer 15 values
 CommonCathodeRGBLed led(9, 10, 11); // pin9 => PWM red, pin10 => PWM green, pin11 => PWM blue
+#if defined(ARDUINO_SAMD_ZERO)
+HardwareSerial &espSerial = Serial1;
+#else
 SoftwareSerial espSerial(7, 8); // pin7 => soft RX, pin8 => soft TX
+#endif
 ESP8266WiFiCommunicator esp8266(2, 3); // pin2 => CH_ED and pin3 => RST of the ESP8266
 Stream *streams[] = {&Serial, &esp8266, nullptr}; // Streams are the hardware UART (used for USB) and software UART (used to communicate with the ESP)
 DummySensor<ATemperatureSensor, float, 50> dummyTemperatureSensor; // Generate random values
+#ifdef __AVR__
 ArduinoEEPROM eeprom;
+#endif
 const char vendor[] = "AtHome\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
 const char serial[] = "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO";
 
@@ -26,7 +34,9 @@ void setup() {
     module->setStreams(streams); // Set the streams used by the module to communicate. It can be as much as you want
     module->setSensor(&dummyTemperatureSensor); // Set the sensor of the module, which will be sampled to get the data to send
     module->setDisplay(&led); // Set the led used to display the color of the module, if it's good or bad
+#ifdef __AVR__
     module->setStorage(&eeprom); // Set the storage used to store permanent data such as the type, serial and vendor of the module
+#endif
     module->setType(MyModule::TEMPERATURE); // Set the type of the module
     module->setVendor(vendor); // Set the vendor of the module -> Always an array of 32 bytes
     module->setSerial(serial); // Set the serial of the module -> Always an array of 32 bytes

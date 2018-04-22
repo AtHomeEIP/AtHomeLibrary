@@ -2,7 +2,9 @@
 
 using SoundModule = AtHomeModule<bool, 15>;
 
+#ifdef __AVR__
 ArduinoEEPROM storage;
+#endif
 Stream *streams[] = {&Serial, nullptr};
 NeoPixel led(6);
 SoundSensor soundSensor(8);
@@ -17,7 +19,9 @@ void setup() {
     module->setCommunicationExecutionInterval(10);
     module->setSensorExecutionInterval(100);
     module->setUploadDataExecutionInterval(1500);
+#ifdef __AVR__
     module->setStorage(&storage);
+#endif
     module->setup();
 }
 
