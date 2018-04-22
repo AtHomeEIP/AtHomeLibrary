@@ -110,8 +110,64 @@ buildTests:Energia:
 buildExamples:Arduino:
   stage: build
   allow_failure: yes
+  before_script:
+    - apt update && apt -y install build-essential git xvfb wget xz-utils libxext6 libxtst6 libxrender1 libgtk2.0.0 default-jre
+    - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_1.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :1 -ac -screen 0 1280x1024x16"
+    - sleep 3
+    - export DISPLAY=:1.0
+    - wget --quiet http://downloads.arduino.cc/arduino-${ARDUINO_VERSION}-linux64.tar.xz
+    - tar xf arduino-${ARDUINO_VERSION}-linux64.tar.xz
+    - mv arduino-${ARDUINO_VERSION} ${SHARE_PATH}/arduino
+    - ln -s ${SHARE_PATH}/arduino/arduino ${BIN_PATH}/
+    - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
+    - git clone https://github.com/pjpmarques/ChainableLED.git
+    - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
+    - git clone https://github.com/bblanchon/ArduinoJson.git
+    - git clone https://github.com/mmurdoch/arduinounit.git
+    - git clone https://github.com/adafruit/Adafruit_Sensor.git
+    - git clone https://github.com/rweather/arduinolibs.git
+    - git clone https://github.com/adafruit/Adafruit_TSL2561.git
+    - git clone -b testing https://github.com/arkhipenko/TaskScheduler.git
+    - ln -s $PWD/Grove_Digital_Light_Sensor ${SHARE_PATH}/arduino/libraries/Grove_Digital_Light_Sensor
+    - ln -s $PWD/ChainableLED ${SHARE_PATH}/arduino/libraries/ChainableLED
+    - ln -s $PWD/Grove_Air_quality_Sensor ${SHARE_PATH}/arduino/libraries/Grove_Air_quality_Sensor
+    - ln -s $PWD/ArduinoJson ${SHARE_PATH}/arduino/libraries/ArduinoJson
+    - ln -s $PWD/arduinounit ${SHARE_PATH}/arduino/libraries/ArduinoUnit
+    - ln -s $PWD/Adafruit_Sensor ${SHARE_PATH}/arduino/libraries/Adafruit_Sensor
+    - ln -s $PWD/arduinolibs/libraries/Crypto ${SHARE_PATH}/arduino/libraries/Crypto
+    - ln -s $PWD/Adafruit_TSL2561 ${SHARE_PATH}/arduino/libraries/Adafruit_TSL2561
+    - ln -s $PWD/TaskScheduler ${SHARE_PATH}/arduino/libraries/TaskScheduler
+    - ln -s $PWD ${SHARE_PATH}/arduino/libraries/AtHome
+    - arduino --install-library "Adafruit NeoPixel"
+    - arduino --install-boards arduino:sam
+    - arduino --install-boards arduino:samd
+    # - arduino --install-boards chipKIT:pic32
+    - mkdir -p $PWD/examples/output/avr/uno # test the most classical arduino
+    - mkdir -p $PWD/examples/output/avr/leonardo # test avr based arduino with native usb port
+    - mkdir -p $PWD/examples/output/arm/zero # test official arm cortex m0+ board
+    - mkdir -p $PWD/examples/output/arm/due # test official arm cortex m3 board
+    # - mkdir -p $PWD/examples/output/pic32/fubarino_mini # test pic32mx250 based board
   script:
-    - echo "Not yet implemented"
+    - arduino --verify --board arduino:avr:uno $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/HelloWorld/
+    - arduino --verify --board arduino:avr:leonardo $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/HelloWorld/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/HelloWorld/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/HelloWorld/
+    - arduino --verify --board arduino:avr:uno $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/ModuleDemo/
+    - arduino --verify --board arduino:avr:leonardo $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/ModuleDemo/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/ModuleDemo/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/ModuleDemo/
+    - arduino --verify --board arduino:avr:uno $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/LuminosityModule/
+    - arduino --verify --board arduino:avr:leonardo $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/LuminosityModule/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/LuminosityModule/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/LuminosityModule/
+    - arduino --verify --board arduino:avr:uno $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/SoundModule/
+    - arduino --verify --board arduino:avr:leonardo $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/SoundModule/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/SoundModule/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/SoundModule/
+    - arduino --verify --board arduino:avr:uno $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/GasModule/
+    - arduino --verify --board arduino:avr:leonardo $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/GasModule/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/GasModule/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/GasModule/
   artifacts:
     paths:
       - "examples/output"

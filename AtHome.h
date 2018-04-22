@@ -13,6 +13,7 @@
 #  include "GroveChainableLED.hpp"
 #  include "GroveDigitalLightSensor.hpp"
 #  include "SoundSensor.hpp"
+#  include "MQ2GasSensor.hpp"
 # endif /* ARDUINO */
 # ifndef __MSP430__
 # include "AtHomeWiFiModule.hpp"
@@ -60,6 +61,7 @@ using athome::sensor::DummySensor;
 using athome::sensor::SoundSensor;
 using athome::display::GroveChainableLED;
 using athome::sensor::GroveDigitalLightSensor;
+using athome::sensor::MQ2GasSensor;
 # endif /* ARDUINO */
 #if defined(AVR_PRO) || defined(AVR_UNO_WIFI_DEV_ED) || defined(AVR_NG) || \
         defined(AVR_LILYPAD) || defined(AVR_BT) || defined(AVR_FIO) || \

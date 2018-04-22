@@ -28,25 +28,36 @@
 
 namespace athome{
     namespace sensor {
-        class MQ2GasSensor : public ISensor{
+        class MQ2GasSensor : public ISensor {
         public:
+            struct Values : public Printable {
+                int lpg;
+                int co;
+                int smoke;
+                virtual size_t printTo(Print &p) const {
+                    p.print(lpg);
+                    p.print(co);
+                    p.print(smoke);
+                }
+            };
+
             explicit MQ2GasSensor(int pin);
             MQ2GasSensor(const MQ2GasSensor &) = delete;
             MQ2GasSensor &operator=(const MQ2GasSensor &) = delete;
             ~MQ2GasSensor();
             int   MQGetPercentage(float rs_ro_ratio, float *pcurve);
-            void        setpin(int pin);
-            int         getpin() const;
+            void        setPin(int pin);
+            int         getPin() const;
             int         getLPG() const;
-            int         getSMOKE() const;
+            int         getSmoke() const;
             int         getCO() const;
-            void        *getValue();
+            uint8_t     *getSample();
 
             ISensorScale getEstimate();
 
         private:
             int _pin;
-            int array_value[3];
+            Values _values;
             bool _sampleValue;
             const float _LPGCurve[3];
             const float _COCurve[3];

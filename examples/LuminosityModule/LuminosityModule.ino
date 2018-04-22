@@ -2,7 +2,9 @@
 
 using LightModule = AtHomeModule<uint16_t, 15>;
 
+#ifdef __AVR__
 ArduinoEEPROM storage;
+#endif
 Stream *streams[] = {&Serial, nullptr};
 GroveChainableLED::Pins grovePins = {7, 8};
 GroveChainableLED led(&grovePins);
@@ -18,7 +20,9 @@ void setup() {
     module->setCommunicationExecutionInterval(10);
     module->setSensorExecutionInterval(100);
     module->setUploadDataExecutionInterval(1500);
+#ifdef __AVR__
     module->setStorage(&storage);
+#endif
     module->setup();
 }
 
