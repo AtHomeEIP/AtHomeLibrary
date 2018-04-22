@@ -1,5 +1,5 @@
 // For documentation of the API, see https://woodbox.gitlab.io/Framework/
-#if !defined(ARDUINO_SAMD_ZERO)
+#ifdef ARDUINO_AVR_UNO
 # include <SoftwareSerial.h>
 #endif
 #include <AtHome.h>
@@ -11,10 +11,10 @@ using MyModule = AtHomeWiFiModule<float, 15>; // Create an alias on a specialize
 
 MyModule *module = reinterpret_cast<MyModule *>(MyModule::getInstance()); // Create a module instance, able to buffer 15 values
 CommonCathodeRGBLed led(9, 10, 11); // pin9 => PWM red, pin10 => PWM green, pin11 => PWM blue
-#if defined(ARDUINO_SAMD_ZERO)
-HardwareSerial &espSerial = Serial1;
-#else
+#ifdef ARDUINO_AVR_UNO
 SoftwareSerial espSerial(7, 8); // pin7 => soft RX, pin8 => soft TX
+#else
+HardwareSerial &espSerial = Serial1;
 #endif
 ESP8266WiFiCommunicator esp8266(2, 3); // pin2 => CH_ED and pin3 => RST of the ESP8266
 Stream *streams[] = {&Serial, &esp8266, nullptr}; // Streams are the hardware UART (used for USB) and software UART (used to communicate with the ESP)
