@@ -35,7 +35,7 @@ namespace athome {
         * @return value of LPG contain in array_value[0]
         */
         int MQ2GasSensor::getLPG() const {
-            return array_value[0];
+            return _values.lpg;
         }
 
         /******************************* GetCO **********************************************
@@ -43,7 +43,7 @@ namespace athome {
         * @return value of CO contain in array_value[1]
         */
         int MQ2GasSensor::getCO() const {
-            return array_value[1];
+            return _values.co;
         }
 
         /******************************* GetSMOKE **********************************************
@@ -51,7 +51,7 @@ namespace athome {
         * @return value of SMOKE contain in array_value[2]
         */
         int MQ2GasSensor::getSMOKE() const {
-            return array_value[2];
+            return _values.smoke;
         }
 
         /****************** MQResistanceCalculation ****************************************
@@ -138,15 +138,15 @@ namespace athome {
         }
 
         void *MQ2GasSensor::getValue() {
-            array_value[0] = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_LPG);
-            array_value[1] = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_CO);
-            array_value[2] = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_SMOKE);
+            _values.lpg = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_LPG);
+            _values.co = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_CO);
+            _values.smoke = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_SMOKE);
             return reinterpret_cast<void *>(array_value);
         }
 
         ISensor::ISensorScale MQ2GasSensor::getEstimate() {
             //getValue();
-            if (array_value[0] >= 10 || array_value[1] >= 10 || array_value[2] >= 9)
+            if (_values.lpg >= 10 || _values.co >= 10 || _values.smoke >= 9)
                 return athome::sensor::ISensor::ISensorScale::ONE;
             return athome::sensor::ISensor::ISensorScale::TEN;
         }

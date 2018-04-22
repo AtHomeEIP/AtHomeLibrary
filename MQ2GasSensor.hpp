@@ -30,6 +30,12 @@ namespace athome{
     namespace sensor {
         class MQ2GasSensor : public ISensor {
         public:
+            struct Values {
+                int lpg;
+                int co;
+                int smoke;
+            };
+
             explicit MQ2GasSensor(int pin);
             MQ2GasSensor(const MQ2GasSensor &) = delete;
             MQ2GasSensor &operator=(const MQ2GasSensor &) = delete;
@@ -46,7 +52,7 @@ namespace athome{
 
         private:
             int _pin;
-            int array_value[3];
+            Values _values;
             bool _sampleValue;
             const float _LPGCurve[3];
             const float _COCurve[3];
