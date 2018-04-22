@@ -13,6 +13,6 @@ void setup() {
     module->setup();
 }
 
-void run() {
+void loop() {
     module->run();
 }

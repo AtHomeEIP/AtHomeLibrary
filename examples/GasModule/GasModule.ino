@@ -1,24 +1,19 @@
 #include <AtHome.h>
 
-using SoundModule = AtHomeModule<bool, 15>;
+using GasModule = AtHomeModule<MQ2GasSensor::Values, 15>;
 
 #ifdef __AVR__
 ArduinoEEPROM storage;
 #endif
 Stream *streams[] = {&Serial, nullptr};
-NeoPixel led(6);
-SoundSensor soundSensor(8);
-SoundModule *module = SoundModule::getInstance();
+MQ2GasSensor sensor(8);
+GasModule *module = GasModule::getInstance();
 
 void setup() {
     // put your setup code here, to run once:
     Serial.begin(115200);
+    module->setSensor(&sensor);
     module->setStreams(streams);
-    module->setSensor(&soundSensor);
-    module->setDisplay(&led);
-    module->setCommunicationExecutionInterval(10);
-    module->setSensorExecutionInterval(100);
-    module->setUploadDataExecutionInterval(1500);
 #ifdef __AVR__
     module->setStorage(&storage);
 #endif
