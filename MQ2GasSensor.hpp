@@ -52,7 +52,6 @@ namespace athome{
             int         getSmoke() const;
             int         getCO() const;
             uint8_t     *getSample();
-
             ISensorScale getEstimate();
 
         private:

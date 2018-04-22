@@ -17,8 +17,8 @@ namespace athome {
       ISensorScale getEstimate(){ return (_sampleValue) ? ISensorScale::TEN : ISensorScale::ONE; }
       void setPin(int pin) { _pin = pin; }
       int getPin() const { return _pin; }
-    private:
       int _pin;
+    private:
       bool _sampleValue;
     };
   }
