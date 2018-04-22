@@ -53,7 +53,7 @@ namespace athome {
          *
          * @return value of SMOKE contain in a struct (struct.smoke)
          */
-        int MQ2GasSensor::getSMOKE() const {
+        int MQ2GasSensor::getSmoke() const {
             return _values.smoke;
         }
 
@@ -166,8 +166,8 @@ namespace athome {
         ISensor::ISensorScale MQ2GasSensor::getEstimate() {
             //getValue();
             if (_values.lpg >= 10 || _values.co >= 10 || _values.smoke >= 9)
-                return athome::sensor::ISensor::ISensorScale::ONE;
-            return athome::sensor::ISensor::ISensorScale::TEN;
+                return ISensor::ISensorScale::ONE;
+            return ISensor::ISensorScale::TEN;
         }
     }
 }

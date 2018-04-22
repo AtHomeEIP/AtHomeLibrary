@@ -49,7 +49,7 @@ namespace athome{
             void        setPin(int pin);
             int         getPin() const;
             int         getLPG() const;
-            int         getSMOKE() const;
+            int         getSmoke() const;
             int         getCO() const;
             uint8_t     *getSample();
 
