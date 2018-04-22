@@ -164,7 +164,7 @@ namespace athome {
         }
 
         ISensor::ISensorScale MQ2GasSensor::getEstimate() {
-            getSample();
+            //getSample();
             if (_values.lpg >= 10 || _values.co >= 10 || _values.smoke >= 9)
                 return ISensor::ISensorScale::TEN;
             return ISensor::ISensorScale::ONE;
