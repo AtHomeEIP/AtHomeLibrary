@@ -137,11 +137,11 @@ namespace athome {
             return static_cast<int>(pow(10, ((log(rs_ro_ratio) - pcurve[1]) / pcurve[2]) + pcurve[0]));
         }
 
-        void *MQ2GasSensor::getValue() {
+        uint8_t *MQ2GasSensor::getSample() {
             _values.lpg = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_LPG);
             _values.co = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_CO);
             _values.smoke = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_SMOKE);
-            return reinterpret_cast<void *>(array_value);
+            return reinterpret_cast<uint8_t *>(&_values);
         }
 
         ISensor::ISensorScale MQ2GasSensor::getEstimate() {

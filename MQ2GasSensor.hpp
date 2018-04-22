@@ -30,10 +30,15 @@ namespace athome{
     namespace sensor {
         class MQ2GasSensor : public ISensor {
         public:
-            struct Values {
+            struct Values : public Printable {
                 int lpg;
                 int co;
                 int smoke;
+                virtual size_t printTo(Print &p) const {
+                    p.print(lpg);
+                    p.print(co);
+                    p.print(smoke);
+                }
             };
 
             explicit MQ2GasSensor(int pin);
@@ -46,7 +51,7 @@ namespace athome{
             int         getLPG() const;
             int         getSMOKE() const;
             int         getCO() const;
-            void        *getValue();
+            uint8_t     *getSample();
 
             ISensorScale getEstimate();
 
