@@ -24,8 +24,6 @@
 #define         GAS_CO                       (1)
 #define         GAS_SMOKE                    (2)
 
-/*****************************Globals***********************************************/
-
 #ifdef ARDUINO
 
 namespace athome{
