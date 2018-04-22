@@ -164,20 +164,12 @@ namespace athome {
         }
 
         ISensor::ISensorScale MQ2GasSensor::getEstimate() {
-            //getValue();
+            getSample();
             if (_values.lpg >= 10 || _values.co >= 10 || _values.smoke >= 9)
+                return ISensor::ISensorScale::TEN;
+            return ISensor::ISensorScale::ONE;
         }
-            return ISensor::ISensorScale::TEN;
-                return ISensor::ISensorScale::ONE;
     }
 }
-
-athome::sensor::ISensor::ISensorScale athome::sensor::MQ2GasSensor::getEstimate() {
-    getValue();
-    if (array_value[0] >= 10 || array_value[1] >= 10 || array_value[2] >= 9)
-        return athome::sensor::ISensor::ISensorScale::ONE;
-    return athome::sensor::ISensor::ISensorScale::ZERO;
-}
-
 
 #endif /* ARDUINO */
