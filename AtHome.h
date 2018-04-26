@@ -42,6 +42,7 @@ using athome::storage::ArduinoEEPROM;
 # include "ANoiseSensor.hpp"
 # include "AAirQualitySensor.hpp"
 # include "DummySensor.hpp"
+# include "MonochromaticLED.hpp"
 
 using athome::module::AtHomeModule;
 # ifndef __MSP430__
@@ -57,6 +58,7 @@ using athome::sensor::ALuminositySensor;
 using athome::sensor::ANoiseSensor;
 using athome::sensor::AAirQualitySensor;
 using athome::sensor::DummySensor;
+using athome::display::MonochromaticLED;
 # ifdef ARDUINO
 using athome::sensor::SoundSensor;
 using athome::display::GroveChainableLED;
