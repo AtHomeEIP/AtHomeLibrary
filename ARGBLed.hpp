@@ -2,6 +2,7 @@
 # define ARGBLED_HPP
 
 # include <stdint.h>
+# include <string.h>
 # include "IDisplay.hpp"
 
 namespace athome {
@@ -45,7 +46,21 @@ namespace athome {
                     uint8_t blue;
                 };
                 ~ARGBLed() {}
-                ARGBLed():_color({0, 0, 0}) {}
+                ARGBLed():
+                    _color({0, 0, 0}),
+                    _colorsScale({
+                    {0, 0, 0},
+                    {255, 0, 0},
+                    {230, 0, 0},
+                    {205, 0, 0},
+                    {180, 0, 0},
+                    {155, 0, 0},
+                    {0, 5, 0},
+                    {0, 5, 0},
+                    {0, 5, 0},
+                    {0, 5, 0},
+                    {0, 5, 0}
+                }) {}
                 ARGBLed(ARGBLed const &) = delete;
                 ARGBLed &operator=(ARGBLed const &) = delete;
                 void clear() {
@@ -93,8 +108,18 @@ namespace athome {
                  * \endcode
                  */
                 void setColor(const Color &color) { _color = color; }
+                virtual void setDisplayedEstimate(sensor::ISensor::ISensorScale value) { _color = _colorsScale[value]; }
+                /**
+                 * Change the scale of colors associated to each values of ISensorScale by passing an array containing all colors as a parameter
+                 */
+                void setColorsScale(const Color scale[11]) { memcpy(_colorsScale, scale, sizeof(scale)); }
+                /**
+                 * Change the color associated to a certain value of the scale ISensorScale
+                 */
+                void setIndividualColorScale(const Color &color, sensor::ISensor::ISensorScale value) { _colorsScale[value] = color; }
             private:
                 Color   _color;
+                Color   _colorsScale[11];
         };
     }
 }

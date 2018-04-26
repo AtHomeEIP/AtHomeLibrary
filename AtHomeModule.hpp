@@ -431,16 +431,8 @@ namespace athome {
                     if (_display == nullptr || _sensor == nullptr) {
                         return;
                     }
-                    display::ARGBLed *display = (display::ARGBLed *)_display;
-                    display::ARGBLed::Color color;
-                    if (_sensor->getEstimate() >= sensor::ISensor::ISensorScale::FIVE) {
-                        color = {0, 5, 0};
-                    }
-                    else {
-                        color = {255, 0, 0};
-                    }
-                    display->setColor(color);
-                    display->update();
+                    _display->setDisplayedEstimate(_sensor->getEstimate());
+                    _display->update();
                 }
 
                 /**
