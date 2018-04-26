@@ -1,11 +1,6 @@
 #ifndef ATHOME_H
 # define ATHOME_H
 
-# ifdef __MSP430__
-#  include <stdlib.h>
-#  define nullptr NULL
-# endif
-
 # include "AtHomeModule.hpp"
 # include "NetworkIPTypes.hpp"
 # include "WiFiTypes.hpp"
@@ -31,7 +26,6 @@
 # endif /* List of compatible Arduino boards */
 # if defined(__AVR__) && defined(ARDUINO)
 #  include "ArduinoEEPROM.hpp"
-using athome::storage::ArduinoEEPROM;
 # endif /* __AVR__ && ARDUINO */
 # if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
 #  include "NeoPixel.hpp"
@@ -42,6 +36,9 @@ using athome::storage::ArduinoEEPROM;
 # include "ANoiseSensor.hpp"
 # include "AAirQualitySensor.hpp"
 # include "DummySensor.hpp"
+# ifdef __MSP430__
+#  include "MSP430FRAM.hpp"
+# endif
 
 using athome::module::AtHomeModule;
 # ifndef __MSP430__
@@ -72,5 +69,11 @@ using athome::sensor::GroveAirQualitySensor;
 # if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
 using athome::display::NeoPixel;
 # endif /* List of incompatible architectures */
+# if defined(__AVR__) && defined(ARDUINO)
+using athome::storage::ArduinoEEPROM;
+# endif /* __AVR__ && ARDUINO */
+# ifdef __MSP430__
+using athome::storage::MSP430FRAM;
+# endif
 
 #endif /* ATHOME_H */
