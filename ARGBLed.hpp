@@ -112,7 +112,7 @@ namespace athome {
                 /**
                  * Change the scale of colors associated to each values of ISensorScale by passing an array containing all colors as a parameter
                  */
-                void setColorsScale(const Color scale[11]) { memcpy(_colorsScale, scale, sizeof(scale)); }
+                void setColorsScale(const Color scale[]) { memcpy(_colorsScale, scale, sizeof(Color) * 11); }
                 /**
                  * Change the color associated to a certain value of the scale ISensorScale
                  */
