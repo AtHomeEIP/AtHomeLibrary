@@ -36,6 +36,7 @@
 # include "ANoiseSensor.hpp"
 # include "AAirQualitySensor.hpp"
 # include "DummySensor.hpp"
+# include "MonochromaticLED.hpp"
 # ifdef __MSP430__
 #  include "MSP430FRAM.hpp"
 # endif
@@ -54,6 +55,7 @@ using athome::sensor::ALuminositySensor;
 using athome::sensor::ANoiseSensor;
 using athome::sensor::AAirQualitySensor;
 using athome::sensor::DummySensor;
+using athome::display::MonochromaticLED;
 # ifdef ARDUINO
 using athome::sensor::SoundSensor;
 using athome::display::GroveChainableLED;
