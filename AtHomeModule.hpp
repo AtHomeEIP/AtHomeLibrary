@@ -225,7 +225,7 @@ namespace athome {
                  * Calling this function passing no parameter or nullptr will restore the default callback of this class.
                  */
                 void setUploadDataExecutionCallback(customCallback f = nullptr) {
-                    _uploadDataTask.setCallback((f == nullptr) ? &AtHomeModule::_uploadData() : f);
+                    _uploadDataTask.setCallback((f == nullptr) ? &AtHomeModule::_uploadData : f);
                 }
 
                 /**
