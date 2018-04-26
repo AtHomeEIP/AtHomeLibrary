@@ -22,6 +22,14 @@ namespace athome {
         #  else
                     extern uint8_t __attribute__((persistent))  FRAM_storage[ATHOME_FRAM_STORAGE_SIZE];
         #  endif
+
+        /**
+         * Singleton enabling to store persistent data in the FRAM of TI Launchpads.
+         *
+         * The size of the persistent storage is defined by the macro ATHOME_FRAM_STORAGE_SIZE and has a default value of 255 bytes.
+         *
+         * This can be overriden by the user by defining this macro at the compilation, such as passing the `-DATHOME_FRAM_STORAGE_SIZE=` option with GCC
+         */
         class MSP430FRAM : public IStorage {
         public:
             MSP430FRAM(const MSP430FRAM &) = delete;
