@@ -19,7 +19,7 @@ namespace athome {
         private:
             int     _pin;
             bool    _reversed;
-            int     _value;
+            uint8_t _value;
         };
     }
 }

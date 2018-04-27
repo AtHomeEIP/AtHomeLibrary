@@ -6,7 +6,11 @@
 
 namespace athome {
     namespace display {
-        MonochromaticLED::MonochromaticLED(int pin, bool reversed):_pin(pin), _reversed(reversed), _value(0) {}
+        MonochromaticLED::MonochromaticLED(int pin, bool reversed):_pin(pin), _reversed(reversed), _value(0) {
+#ifdef ARDUINO
+            pinMode(_pin, OUTPUT);
+#endif
+        }
 
         MonochromaticLED::~MonochromaticLED() { clear(); }
 
