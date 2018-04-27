@@ -55,18 +55,18 @@ namespace athome {
              * Return the biggest integer equal or below to the passed value
              */
             template <typename T>
-            constexpr T static_floor(T a) { return a - (a - static_cast<ssize_t>(a)); }
+            constexpr T static_floor(T a) { return a - (a - static_cast<int32_t>(a)); }
 
             /**
              * Return the smallest integer equal or above to the passed value
              */
             template <typename T>
-            constexpr T static_ceil(T a) { return (a - static_cast<ssize_t>(a)) ? (a + 1) - (a - static_cast<ssize_t>(a)) : a; }
+            constexpr T static_ceil(T a) { return (a - static_cast<int32_t>(a)) ? (a + 1) - (a - static_cast<int32_t>(a)) : a; }
 
             template <typename T>
             constexpr T static_rec_sqrt(T i, T n) {
                 return (n <= 0) ? 0 : ((n == 1) ? 1 : (
-                        (static_cast<ssize_t>(i * i) == static_cast<ssize_t>(n)) ? i : (
+                        (static_cast<int32_t>(i * i) == static_cast<int32_t>(n)) ? i : (
                                 (i >= n) ? 0 : static_rec_sqrt(i + 1, n))));
             }
 
@@ -85,7 +85,7 @@ namespace athome {
              * Return the power of the x value (1st parameter) by the y value (2nd parameter)
              */
             template <typename T>
-            constexpr T static_pow(T x, T y) { return (static_cast<ssize_t>(y) == 1) ? x : x * static_pow<T>(x, y - 1); }
+            constexpr T static_pow(T x, T y) { return (static_cast<int32_t>(y) == 1) ? x : x * static_pow<T>(x, y - 1); }
 
             template <typename T>
             constexpr T static_m_precision(T x, T p, T m = 1) {
