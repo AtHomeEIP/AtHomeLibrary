@@ -114,6 +114,13 @@ namespace athome {
                 return static_rec_integrate<T>(f, a, b, n, (b - a) / n, 0);
             }
 
+            template <typename T>
+            constexpr T static_log(T z, size_t iterations = 150, T n = 0) {
+                return (z > 0 && n < iterations) ? (
+                        (n == 0) ? 2 * (((1 / (2 * n + 1)) * static_pow<T>((z - 1) / (z + 1), 2 * n + 1) + static_log(z, iterations, n + 1))) :
+                                ((1 / (2 * n + 1)) * static_pow<T>((z - 1) / (z + 1), 2 * n + 1) + static_log(z, iterations, n + 1))) : 0;
+            }
+
             /* template <typename T>
             static constexpr T static_m_precision(T x, T p, T m = 1) {
                 return (x * static_pow(2, m) > static_pow<T>(2, p / 2)) ? m : static_m_precision<T>(x, p, m + 1);
@@ -130,6 +137,7 @@ namespace athome {
             template <typename T>
             constexpr T static_agm(T x, T y) { return (M_PI / 4) * ((x + y) / static_k((x - y) / (x + y))); }
 
+            // Was supposed to use arithmetic geometric approximation
             template <typename T>
             constexpr T static_ln(T x) {
                 return M_PI / (2 * static_agm(1, static_pow(2, 2 - static_m_precision(x, 23)) / x)) - static_m_precision(x, 23) * LN2;
