@@ -52,10 +52,14 @@ Here is the status of compatibility of components available in this development 
 | ArduinoEEPROM            | Y              | N                        | N                                                                              | N              | N              | ?     | ?       | ?     |
 | Common cathode RGB LED   | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | Y       | ?     |
 | Common anode RGB LED     | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y (not tested) | Y (not tested) | ?     | Y       | ?     |
-| Grove Air Quality sensor | Y (not all)    | N                        | N                                                                              | N              | N              | ?     | ?       | ?     |
-| Grove Light Sensor (NI)  | N/A            | N/A                      | N/A                                                                            | N/A            | N/A            | N/A   | N/A     | N/A   |
-| MQ2 Gas sensor (NI)      | N/A            | N/A                      | N/A                                                                            | N/A            | N/A            | N/A   | N/A     | N/A   |
+| Grove Air Quality sensor | Y (not all)    | N                        | N                                                                              | N              | ?              | ?     | ?       | ?     |
+| Grove Light Sensor       | Y              | Y                        | N                                                                              | N              | ?              | ?     | ?       | ?     |
+| MQ2 Gas sensor           | Y              | Y                        | Y                                                                              | Y              | ?              | ?     | ?       | ?     |
 | NeoPixel                 | Y              | Y (not all, not tested)  | N                                                                              | N              | N              | ?     | ?       | ?     |
+| Binary Sound Sensor      | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
+| Dummy Sensor             | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
+| PWM LED                  | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
+| Thermistor               | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
 | Blynk (NI)               | N/A            | N/A                      | N/A                                                                            | N/A            | N/A            | N/A   | N/A     | N/A   |
 
 ## Low Power Mode
