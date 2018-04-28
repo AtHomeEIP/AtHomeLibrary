@@ -84,7 +84,19 @@ namespace athome {
              * Return the power of the x value (1st parameter) by the y value (2nd parameter)
              */
             template <typename T>
-            constexpr T static_pow(T x, T y) { return (static_cast<int32_t>(y) == 1) ? x : x * static_pow<T>(x, y - 1); }
+            constexpr T static_pow(T x, T y) { return (y < 1) ? NAN : ((static_cast<int32_t>(y) == 1) ? x : x * static_pow<T>(x, y - 1)); }
+
+            template <typename T>
+            T pow(T x, T y) {
+                if (y == 0) {
+                    return 1;
+                }
+                T res = x;
+                for (size_t i = 1; i < y; i++) {
+                    res *= x;
+                }
+                return res;
+            }
 
             /**
              * Return the value of e^x
@@ -119,6 +131,15 @@ namespace athome {
                 return (z > 0 && n < iterations) ? (
                         (n == 0) ? 2 * (((1 / (2 * n + 1)) * static_pow<T>((z - 1) / (z + 1), 2 * n + 1) + static_log(z, iterations, n + 1))) :
                                 ((1 / (2 * n + 1)) * static_pow<T>((z - 1) / (z + 1), 2 * n + 1) + static_log(z, iterations, n + 1))) : 0;
+            }
+
+            template <typename T>
+            T log(T z) {
+                T res = 0;
+                for (T n = 0; n < 150; n++) {
+                    res += (1 / (2 * n + 1)) * pow<T>((z - 1) / (z + 1), 2 * n + 1);
+                }
+                return res * 2;
             }
 
             /* template <typename T>
