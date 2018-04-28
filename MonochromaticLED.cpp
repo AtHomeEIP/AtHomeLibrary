@@ -6,32 +6,26 @@
 
 namespace athome {
     namespace display {
-        MonochromaticLED::MonochromaticLED(int pin, bool reversed):_pin(pin), _reversed(reversed), _value(0) {
-#ifdef ARDUINO
-            pinMode(_pin, OUTPUT);
-#endif
+        MonochromaticLED::MonochromaticLED(int pin, bool reversed):_pin(pin), _reversed(reversed) {
+            _state = (_reversed) ? HIGH : LOW;
         }
 
-        MonochromaticLED::~MonochromaticLED() { clear(); }
+        MonochromaticLED::~MonochromaticLED() {}
 
         void MonochromaticLED::clear() {
 #ifdef ARDUINO
-            analogWrite(_pin, 0);
+            digitalWrite(_pin, (_reversed) ? HIGH : LOW);
 #else
-# warning Not implemented for your platform
+# warning Your platform is not yet supported
 #endif
         }
 
         void MonochromaticLED::update() {
-#ifdef ARDUINO
-            analogWrite(_pin, _value);
-#else
-# warning Not implemented for your platform
-#endif
+            digitalWrite(_pin, (_reversed) ? !_state : _state);
         }
 
         void MonochromaticLED::setDisplayedEstimate(sensor::ISensor::ISensorScale value) {
-            _value = (_reversed) ? value * 25 : 250 - (25 * value);
+            _state = (value > sensor::ISensor::ISensorScale::FIVE) ? HIGH : LOW;
         }
     }
 }

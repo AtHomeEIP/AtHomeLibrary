@@ -37,6 +37,7 @@
 # include "AAirQualitySensor.hpp"
 # include "DummySensor.hpp"
 # include "MonochromaticLED.hpp"
+# include "PWMLED.hpp"
 # include "Thermistor.hpp"
 # include "Maths.hpp"
 # ifdef __MSP430__
@@ -58,6 +59,7 @@ using athome::sensor::ANoiseSensor;
 using athome::sensor::AAirQualitySensor;
 using athome::sensor::DummySensor;
 using athome::display::MonochromaticLED;
+using athome::display::PWMLED;
 using athome::sensor::Thermistor;
 # ifdef ARDUINO
 using athome::sensor::SoundSensor;
