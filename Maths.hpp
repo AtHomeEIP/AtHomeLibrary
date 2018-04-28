@@ -137,7 +137,7 @@ namespace athome {
             T log(T z) {
                 T res = 0;
                 for (T n = 0; n < 150; n++) {
-                    res += (1 / (2 * n + 1)) * pow<T>((z - 1) / (z + 1), 2 * n + 1);
+                    res += (1 / (2 * n + 1)) * athome::utility::math::pow<T>((z - 1) / (z + 1), 2 * n + 1);
                 }
                 return res * 2;
             }

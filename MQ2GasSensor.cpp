@@ -3,10 +3,10 @@
 //
 
 #ifdef ARDUINO
-#include <math.h>
 #include <time.h>
 #include <Arduino.h>
 #include "MQ2GasSensor.hpp"
+#include "Maths.hpp"
 
 namespace athome {
     namespace sensor {
@@ -153,7 +153,7 @@ namespace athome {
          * value.
          */
         int MQ2GasSensor::MQGetPercentage(float rs_ro_ratio, float *pcurve) {
-            return static_cast<int>(pow(10, ((log(rs_ro_ratio) - pcurve[1]) / pcurve[2]) + pcurve[0]));
+            return static_cast<int>(utility::math::pow<float>(10, ((utility::math::log<float>(rs_ro_ratio) - pcurve[1]) / pcurve[2]) + pcurve[0]));
         }
 
         uint8_t *MQ2GasSensor::getSample() {

@@ -38,7 +38,7 @@
 # include "DummySensor.hpp"
 # include "MonochromaticLED.hpp"
 # include "Thermistor.hpp"
-# include "StaticMaths.hpp"
+# include "Maths.hpp"
 # ifdef __MSP430__
 #  include "MSP430FRAM.hpp"
 # endif
