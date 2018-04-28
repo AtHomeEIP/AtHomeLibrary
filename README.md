@@ -61,6 +61,7 @@ Here is the status of compatibility of components available in this development 
 | Monochromatic LED        | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
 | PWM LED                  | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
 | Thermistor               | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
+| MSP430FRAM               | N              | N                        | Y                                                                              | N              | N              | N     | N       | N     |
 | Blynk (NI)               | N/A            | N/A                      | N/A                                                                            | N/A            | N/A            | N/A   | N/A     | N/A   |
 
 ## Low Power Mode
