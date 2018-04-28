@@ -20,7 +20,7 @@ namespace athome {
              * }
              *
              * int main(void) {
-             *   constexpr float a = athome::utility::math::static_integrate<float>(square<flo$
+             *   constexpr float a = athome::utility::math::static_integrate<float>(square<float>, 0, 5);
              *   constexpr float b = athome::utility::math::static_floor<float>(42.3);
              *   constexpr float c = athome::utility::math::static_ceil<float>(3.14);
              *   constexpr float d = athome::utility::math::static_sqrt<float>(4.0);
@@ -64,22 +64,21 @@ namespace athome {
             constexpr T static_ceil(T a) { return (a - static_cast<int32_t>(a)) ? (a + 1) - (a - static_cast<int32_t>(a)) : a; }
 
             template <typename T>
-            constexpr T static_rec_sqrt(T i, T n) {
-                return (n <= 0) ? 0 : ((n == 1) ? 1 : (
-                        (static_cast<int32_t>(i * i) == static_cast<int32_t>(n)) ? i : (
-                                (i >= n) ? 0 : static_rec_sqrt(i + 1, n))));
+            static constexpr T static_rec_sqrt(T ix, double x0) {
+                return (static_abs<T>(2 * x0) < M_E) ? (x0 * x0) - ix : (
+                        (static_abs<T>((x0 - ((x0 * x0 - ix) / (2 * x0))) - x0) <=
+                                (0.00000001 * static_abs<T>((x0 - ((x0 * x0 - ix) / (2 * x0)))))) ?
+                                        (x0 - ((x0 * x0 - ix) / (2 * x0))) :
+                                        static_rec_sqrt(ix, (x0 - ((x0 * x0 - ix) / (2 * x0)))));
             }
 
             /**
-             * Return the integer square root of passed value (the value passed in parameter can be a floating value).
-             *
-             * Based on the runtime implementation of my C library a few years ago, I don't remember the the algorithm but it was
-             * intended to be rather fast instead of having precision.
-             *
-             * TODO: Reimplement it with a more precise algorithm, especially usable with reals
+             * Return the square root of the passed value as parameter
              */
             template <typename T>
-            constexpr T static_sqrt(T n) { return static_rec_sqrt<T>(2, n); }
+            constexpr T static_sqrt(T x) {
+                return static_rec_sqrt<T>(x, 10);
+            }
 
             /**
              * Return the power of the x value (1st parameter) by the y value (2nd parameter)
@@ -87,18 +86,20 @@ namespace athome {
             template <typename T>
             constexpr T static_pow(T x, T y) { return (static_cast<int32_t>(y) == 1) ? x : x * static_pow<T>(x, y - 1); }
 
+            /**
+             * Return the value of e^x
+             */
             template <typename T>
-            constexpr T static_m_precision(T x, T p, T m = 1) {
-                return (x * static_pow(2, m) > static_pow<T>(2, p / 2)) ? m : static_m_precision<T>(x, p, m + 1);
-            }
+            constexpr T static_exp(T x) { return static_pow<T>(M_E, x); }
 
-            /* template <typename T>
-            constexpr T static_fk(T k) {
-                return k;
-            } */
+            /**
+             * Return the value of 2^x
+             */
+            template <typename T>
+            constexpr T static_exp2(T x) { return static_pow<T>(2, x); }
 
             template <typename T>
-            constexpr T static_rec_integrate(T (*f)(T x), T a, T b, int n, T step, T area, size_t i = 0) {
+            static constexpr T static_rec_integrate(T (*f)(T x), T a, T b, int n, T step, T area, size_t i = 0) {
                 return (i < n) ? static_rec_integrate(f, a, b, n, step, area + f(a + (i + 0.5) * step) * step, i + 1) : area;
             }
 
@@ -114,6 +115,16 @@ namespace athome {
             }
 
             /* template <typename T>
+            static constexpr T static_m_precision(T x, T p, T m = 1) {
+                return (x * static_pow(2, m) > static_pow<T>(2, p / 2)) ? m : static_m_precision<T>(x, p, m + 1);
+            }
+
+            template <typename T>
+            constexpr T static_fk(T k) {
+                return k;
+            }
+
+            template <typename T>
             constexpr T static_k(T k) { return static_integral(static_fk, 0, M_PI / 2); }
 
             template <typename T>
