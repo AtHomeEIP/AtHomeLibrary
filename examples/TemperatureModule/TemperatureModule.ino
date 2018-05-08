@@ -1,11 +1,11 @@
 #include <AtHome.h>
 
-using TemperatureModule = AtHomeModule<float, 11>;
+using TemperatureModule = AtHomeModule<int32_t, 11>;
 
 Stream *streams[] = {&Serial, nullptr};
 TMP36GZTemperatureSensor3V3 tempSensor(A6);
 TemperatureModule *module = TemperatureModule::getInstance();
-MonochromaticLED led(2);
+MonochromaticLED led(2, true);
 #ifdef __MSP430__
 MSP430FRAM *storage = MSP430FRAM::getInstance();
 #elif defined(__AVR__)
@@ -17,6 +17,7 @@ IStorage *storage = nullptr;
 
 void setup() {
   // put your setup code here, to run once:
+  pinMode(2, OUTPUT);
   Serial.begin(9600);
   module->setStreams(streams);
   module->setSensor(&tempSensor);

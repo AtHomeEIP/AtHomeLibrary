@@ -13,11 +13,11 @@ namespace athome {
          * @return estimation of temperature on a scale from 1 (worst) to 10 (best)
          */
         ISensor::ISensorScale ATemperatureSensor::getEstimate() {
-            int temp = getLastSample();
-            if (temp < 16) {
+            int32_t temp = getLastSample();
+            if (temp < 16000000) {
                 return ISensor::ISensorScale::ONE;
             }
-            else if (temp >= 16 && temp <= 18) {
+            else if (temp >= 16000000 && temp <= 18000000) {
                 return ISensor::ISensorScale::FOUR;
             }
             else {

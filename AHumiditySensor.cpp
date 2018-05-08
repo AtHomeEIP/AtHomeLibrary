@@ -13,11 +13,12 @@ namespace athome {
          * @return estimation of humidity quality on a scale from 1 (worst) to 10 (best)
          */
         ISensor::ISensorScale AHumiditySensor::getEstimate() {
-            int humidity = getLastSample();
-            if (humidity < 30 || humidity > 65) {
+            // Compute using 10^-6 values
+            int32_t humidity = getLastSample();
+            if (humidity < 30000000 || humidity > 65000000) {
                 return ISensor::ISensorScale::ONE;
             }
-            else if (humidity >= 50 && humidity <= 55) {
+            else if (humidity >= 50000000 && humidity <= 55000000) {
                 return ISensor::ISensorScale::TEN;
             }
             else {

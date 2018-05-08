@@ -20,17 +20,17 @@ namespace athome {
             uint8_t *getSample() {
 # ifdef ARDUINO
                 constexpr uint32_t step = REF / utility::math::static_exp2<uint32_t>(RES);
-                _temp = static_cast<float>(((analogRead(_pin) * step) - 500000)) / 10000.;
+                _temp = ((analogRead(_pin) * step) - 500000) * 100;
 # endif /* ARDUINO */
                 return reinterpret_cast<uint8_t *>(&_temp);
             }
-            float   getLastSample() const {
+            int32_t getLastSample() const {
                 return _temp;
             }
 
         private:
             uint8_t     _pin;
-            float       _temp;
+            int32_t     _temp;
         };
     }
 }

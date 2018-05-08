@@ -18,7 +18,7 @@ namespace athome {
             /**
              * Returns the last value sampled from the sensor (do not actually resample it).
              */
-            virtual float   getLastSample() const = 0;
+            virtual int32_t getLastSample() const = 0;
             ISensorScale    getEstimate();
         };
     }

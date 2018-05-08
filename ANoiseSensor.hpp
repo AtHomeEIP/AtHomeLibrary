@@ -13,7 +13,7 @@ namespace athome {
             ~ANoiseSensor();
 
             virtual uint8_t *getSample() = 0;
-            virtual float   getLastSample() const = 0;
+            virtual int32_t getLastSample() const = 0;
             ISensorScale    getEstimate();
         };
     }
