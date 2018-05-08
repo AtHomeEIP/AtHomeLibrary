@@ -40,6 +40,7 @@
 # include "PWMLED.hpp"
 # include "Thermistor.hpp"
 # include "Maths.hpp"
+# include "TMP36GZTemperatureSensor.hpp"
 # ifdef __MSP430__
 #  include "MSP430FRAM.hpp"
 # endif
@@ -61,6 +62,7 @@ using athome::sensor::DummySensor;
 using athome::display::MonochromaticLED;
 using athome::display::PWMLED;
 using athome::sensor::Thermistor;
+using athome::sensor::TMP36GZTemperatureSensor;
 # ifdef ARDUINO
 using athome::sensor::SoundSensor;
 using athome::display::GroveChainableLED;
