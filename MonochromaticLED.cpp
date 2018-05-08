@@ -2,11 +2,14 @@
 
 #ifdef ARDUINO
 # include <Arduino.h>
-#endif
+#endif /* ARDUINO */
 
 namespace athome {
     namespace display {
         MonochromaticLED::MonochromaticLED(int pin, bool reversed):_pin(pin), _reversed(reversed) {
+#ifdef ARDUINO
+            pinMode(pin, OUTPUT);
+#endif /* ARDUINO */
             _state = (_reversed) ? HIGH : LOW;
         }
 

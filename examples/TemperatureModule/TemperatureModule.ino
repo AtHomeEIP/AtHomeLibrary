@@ -17,7 +17,6 @@ IStorage *storage = nullptr;
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(2, OUTPUT);
   Serial.begin(9600);
   module->setStreams(streams);
   module->setSensor(&tempSensor);
