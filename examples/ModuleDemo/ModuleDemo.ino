@@ -3,11 +3,12 @@
 # include <SoftwareSerial.h>
 #endif
 #include <AtHome.h>
+#include <stdint.h>
 
 #define SENSOR_INTERVAL (60000)
 #define UPLOAD_INTERVAL (SENSOR_INTERVAL * 15)
 
-using MyModule = AtHomeWiFiModule<float, 15>; // Create an alias on a specialized template version of the module, to shorten next uses
+using MyModule = AtHomeWiFiModule<int32_t, 15>; // Create an alias on a specialized template version of the module, to shorten next uses
 
 MyModule *module = reinterpret_cast<MyModule *>(MyModule::getInstance()); // Create a module instance, able to buffer 15 values
 CommonCathodeRGBLed led(9, 10, 11); // pin9 => PWM red, pin10 => PWM green, pin11 => PWM blue
