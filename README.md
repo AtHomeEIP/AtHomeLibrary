@@ -23,7 +23,7 @@ Libraries required:
 - Partial Arduino Core implementing interfaces Print, Printable and Stream -> Used for generic interfaces and avoid duplicates between Arduino and non-Arduino projects
 - ArduinoJson library, despite it's name it's fully portable: https://github.com/bblanchon/ArduinoJson
 - Grove LightSensor library: https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor
-- Grove AirQuality library: https://github.com/Seeed-Studio/Grove_Air_quality_Sensor
+- Grove AirQuality library: https://github.com/SeeedDocument/Grove_Air_Quality_Sensor_v1.3/raw/master/
 - Grove ChainableLED library: https://github.com/pjpmarques/ChainableLED
 - Adafruit NeoPixel library: https://github.com/adafruit/Adafruit_NeoPixel
 - TaskScheduler library: https://github.com/arkhipenko/TaskScheduler
