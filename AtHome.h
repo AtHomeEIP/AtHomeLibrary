@@ -62,7 +62,8 @@ using athome::sensor::DummySensor;
 using athome::display::MonochromaticLED;
 using athome::display::PWMLED;
 using athome::sensor::Thermistor;
-using athome::sensor::TMP36GZTemperatureSensor;
+using TMP36GZTemperatureSensor5V = athome::sensor::TMP36GZTemperatureSensor<5000000, 10>;
+using TMP36GZTemperatureSensor3V3 = athome::sensor::TMP36GZTemperatureSensor<3300000, 10>;
 # ifdef ARDUINO
 using athome::sensor::SoundSensor;
 using athome::display::GroveChainableLED;

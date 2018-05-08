@@ -9,7 +9,7 @@
 
 namespace athome {
     namespace sensor {
-        template <uint32_t REF = 3300000, uint8_t RES = 10>
+        template <uint32_t REF, uint8_t RES>
         class TMP36GZTemperatureSensor : public ATemperatureSensor {
         public:
             TMP36GZTemperatureSensor(uint8_t pin):_pin(pin) {}
@@ -19,8 +19,8 @@ namespace athome {
 
             uint8_t *getSample() {
 # ifdef ARDUINO
-                constexpr uint32_t step = REF / utility::math::static_exp2(RES);
-                _temp = (analogRead(_pin) * step) / 1000000.;
+                constexpr uint32_t step = REF / utility::math::static_exp2<uint32_t>(RES);
+                _temp = static_cast<float>(((analogRead(_pin) * step) - 500000)) / 10000.;
 # endif /* ARDUINO */
                 return reinterpret_cast<uint8_t *>(&_temp);
             }
@@ -29,8 +29,8 @@ namespace athome {
             }
 
         private:
-            uint8_t _pin;
-            float   _temp;
+            uint8_t     _pin;
+            float       _temp;
         };
     }
 }
