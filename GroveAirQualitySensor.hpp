@@ -1,18 +1,15 @@
 #ifndef GROVEAIRQUALITYSENSOR_HPP
 # define GROVEAIRQUALITYSENSOR_HPP
 
-#if defined(AVR_PRO) || defined(AVR_UNO_WIFI_DEV_ED) || defined(AVR_NG) || \
-        defined(AVR_LILYPAD) || defined(AVR_BT) || defined(AVR_FIO) || \
-        defined(AVR_ETHERNET) || defined(AVR_MINI) || defined(AVR_NANO) || \
-        defined(AVR_DUEMILANOVE) || defined(AVR_UNO)
+# if defined(__AVR__) && defined(ARDUINO)
 
 #  include <AirQuality.h>
 #  include <stdint.h>
-#  include "ISensor.hpp"
+#  include "AAirQualitySensor.hpp"
 
 namespace athome {
     namespace sensor {
-        class GroveAirQualitySensor : public ISensor {
+        class GroveAirQualitySensor : public AAirQualitySensor {
         public:
             GroveAirQualitySensor(uint8_t);
             GroveAirQualitySensor(const GroveAirQualitySensor &) = delete;
@@ -20,7 +17,8 @@ namespace athome {
             ~GroveAirQualitySensor();
 
             uint8_t                 *getSample();
-            ISensor::ISensorScale   getEstimate();
+            ISensor::ISensorScale   getLastSample() const { return getEstimate(); }
+            ISensor::ISensorScale   getEstimate() const;
 
         private:
             uint8_t                 _lastMeasure;

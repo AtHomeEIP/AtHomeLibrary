@@ -17,15 +17,9 @@
 # include "AnalogSensor.hpp"
 # include "CommonCathodeRGBLed.hpp"
 # include "CommonAnodeRGBLed.hpp"
-#if defined(AVR_PRO) || defined(AVR_UNO_WIFI_DEV_ED) || defined(AVR_NG) || \
-        defined(AVR_LILYPAD) || defined(AVR_BT) || defined(AVR_FIO) || \
-        defined(AVR_ETHERNET) || defined(AVR_MINI) || defined(AVR_NANO) || \
-        defined(AVR_DUEMILANOVE) || defined(AVR_UNO)
-// The Grove air quality sensor library uses AVR registers, and is not portable to other platforms
-#  include "GroveAirQualitySensor.hpp"
-# endif /* List of compatible Arduino boards */
 # if defined(__AVR__) && defined(ARDUINO)
 #  include "ArduinoEEPROM.hpp"
+#  include "GroveAirQualitySensor.hpp"
 # endif /* __AVR__ && ARDUINO */
 # if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
 #  include "NeoPixel.hpp"
@@ -67,17 +61,12 @@ using athome::display::GroveChainableLED;
 using athome::sensor::GroveDigitalLightSensor;
 using athome::sensor::MQ2GasSensor;
 # endif /* ARDUINO */
-#if defined(AVR_PRO) || defined(AVR_UNO_WIFI_DEV_ED) || defined(AVR_NG) || \
-        defined(AVR_LILYPAD) || defined(AVR_BT) || defined(AVR_FIO) || \
-        defined(AVR_ETHERNET) || defined(AVR_MINI) || defined(AVR_NANO) || \
-        defined(AVR_DUEMILANOVE) || defined(AVR_UNO)
-using athome::sensor::GroveAirQualitySensor;
-# endif /* List of compatible Arduino boards */
 # if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
 using athome::display::NeoPixel;
 # endif /* List of incompatible architectures */
 # if defined(__AVR__) && defined(ARDUINO)
 using athome::storage::ArduinoEEPROM;
+using athome::sensor::GroveAirQualitySensor;
 # endif /* __AVR__ && ARDUINO */
 # ifdef __MSP430__
 using athome::storage::MSP430FRAM;
