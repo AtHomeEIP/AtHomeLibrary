@@ -4,6 +4,7 @@
 # include "AtHomeModule.hpp"
 # include "NetworkIPTypes.hpp"
 # include "WiFiTypes.hpp"
+# include "LDRLuminositySensor.hpp"
 # ifdef ARDUINO
 #  include "GroveChainableLED.hpp"
 #  include "SoundSensor.hpp"
@@ -63,6 +64,8 @@ using athome::display::PWMLED;
 using athome::sensor::Thermistor;
 using TMP36GZTemperatureSensor5V = athome::sensor::TMP36GZTemperatureSensor<5000000, 10>;
 using TMP36GZTemperatureSensor3V3 = athome::sensor::TMP36GZTemperatureSensor<3300000, 10>;
+using LDRLuminositySensor5V = athome::sensor::LDRLuminositySensor<5000000, 10, 10000>;
+using LDRLuminositySensor3V3 = athome::sensor::LDRLuminositySensor<3300000, 10, 10000>;
 # ifdef ARDUINO
 using athome::sensor::SoundSensor;
 using athome::display::GroveChainableLED;
