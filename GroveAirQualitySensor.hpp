@@ -1,7 +1,7 @@
 #ifndef GROVEAIRQUALITYSENSOR_HPP
 # define GROVEAIRQUALITYSENSOR_HPP
 
-# if defined(__AVR__) && defined(ARDUINO)
+# ifdef ARDUINO_AVR_UNO
 
 #  include <AirQuality.h>
 #  include <stdint.h>

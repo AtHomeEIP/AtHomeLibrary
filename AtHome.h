@@ -19,8 +19,10 @@
 # include "CommonAnodeRGBLed.hpp"
 # if defined(__AVR__) && defined(ARDUINO)
 #  include "ArduinoEEPROM.hpp"
-#  include "GroveAirQualitySensor.hpp"
 # endif /* __AVR__ && ARDUINO */
+# ifdef ARDUINO_AVR_UNO
+#  include "GroveAirQualitySensor.hpp"
+# endif /* ARDUINO_AVR_UNO */
 # if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
 #  include "NeoPixel.hpp"
 # endif /* List of incompatible architectures */
@@ -69,8 +71,10 @@ using athome::display::NeoPixel;
 # endif /* List of incompatible architectures */
 # if defined(__AVR__) && defined(ARDUINO)
 using athome::storage::ArduinoEEPROM;
-using athome::sensor::GroveAirQualitySensor;
 # endif /* __AVR__ && ARDUINO */
+# ifdef ARDUINO_AVR_UNO
+using athome::sensor::GroveAirQualitySensor;
+# endif /* ARDUINO_AVR_UNO */
 # ifdef __MSP430__
 using athome::storage::MSP430FRAM;
 # endif

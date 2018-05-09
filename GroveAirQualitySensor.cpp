@@ -1,4 +1,4 @@
-# if defined(__AVR__) && defined(ARDUINO)
+#ifdef ARDUINO_AVR_UNO
 
 # include "GroveAirQualitySensor.hpp"
 
