@@ -1,7 +1,4 @@
-#if defined(AVR_PRO) || defined(AVR_UNO_WIFI_DEV_ED) || defined(AVR_NG) || \
-        defined(AVR_LILYPAD) || defined(AVR_BT) || defined(AVR_FIO) || \
-        defined(AVR_ETHERNET) || defined(AVR_MINI) || defined(AVR_NANO) || \
-        defined(AVR_DUEMILANOVE) || defined(AVR_UNO)
+# if defined(__AVR__) && defined(ARDUINO)
 
 # include "GroveAirQualitySensor.hpp"
 
@@ -19,11 +16,11 @@ namespace athome {
             _sensor.first_vol = analogRead(A0);
             _sensor.counter = 0;
             _sensor.timer_index = 1;
-            _lastMeasure = _sensor.slope();
+            //_lastMeasure = _sensor.slope();
             return &_lastMeasure;
         }
 
-        ISensor::ISensorScale GroveAirQualitySensor::getEstimate() {
+        ISensor::ISensorScale GroveAirQualitySensor::getEstimate() const {
             switch (_lastMeasure) {
             case 0:
                 return ISensor::ISensorScale::ONE;
