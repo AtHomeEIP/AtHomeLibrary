@@ -1,4 +1,5 @@
-#ifdef ARDUINO
+# if defined(ARDUINO) && (defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega32U4__) ||\
+     defined(__AVR_ATmega2560__))
 # include <Wire.h>
 # include <Digital_Light_TSL2561.h>
 # include "GroveDigitalLightSensor.hpp"

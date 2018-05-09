@@ -1,7 +1,8 @@
 #ifndef GROVEDIGITALLIGHTSENSOR_HPP
 # define GROVEDIGITALLIGHTSENSOR_HPP
 
-# ifdef ARDUINO
+# if defined(ARDUINO) && (defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega32U4__) ||\
+     defined(__AVR_ATmega2560__))
 #  include <stdint.h>
 #  include "ALuminositySensor.hpp"
 

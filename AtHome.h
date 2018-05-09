@@ -6,7 +6,6 @@
 # include "WiFiTypes.hpp"
 # ifdef ARDUINO
 #  include "GroveChainableLED.hpp"
-#  include "GroveDigitalLightSensor.hpp"
 #  include "SoundSensor.hpp"
 #  include "MQ2GasSensor.hpp"
 # endif /* ARDUINO */
@@ -23,6 +22,10 @@
 # ifdef ARDUINO_AVR_UNO
 #  include "GroveAirQualitySensor.hpp"
 # endif /* ARDUINO_AVR_UNO */
+# if defined(ARDUINO) && (defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega32U4__) ||\
+     defined(__AVR_ATmega2560__))
+#  include "GroveDigitalLightSensor.hpp"
+# endif /* defined(ARDUINO) && (defined(__ATmega328__) || defined(__ATmega32U4__) || defined(__ATmega2560__)) */
 # if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
 #  include "NeoPixel.hpp"
 # endif /* List of incompatible architectures */
@@ -63,9 +66,12 @@ using TMP36GZTemperatureSensor3V3 = athome::sensor::TMP36GZTemperatureSensor<330
 # ifdef ARDUINO
 using athome::sensor::SoundSensor;
 using athome::display::GroveChainableLED;
-using athome::sensor::GroveDigitalLightSensor;
 using athome::sensor::MQ2GasSensor;
 # endif /* ARDUINO */
+# if defined(ARDUINO) && (defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega32U4__) ||\
+     defined(__AVR_ATmega2560__))
+using athome::sensor::GroveDigitalLightSensor;
+# endif /* defined(ARDUINO) && (defined(__ATmega328__) || defined(__ATmega32U4__) || defined(__ATmega2560__)) */
 # if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
 using athome::display::NeoPixel;
 # endif /* List of incompatible architectures */
