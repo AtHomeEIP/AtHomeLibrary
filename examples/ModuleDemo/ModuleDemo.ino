@@ -19,7 +19,7 @@ HardwareSerial &espSerial = Serial1;
 #endif
 ESP8266WiFiCommunicator esp8266(2, 3); // pin2 => CH_ED and pin3 => RST of the ESP8266
 Stream *streams[] = {&Serial, &esp8266, nullptr}; // Streams are the hardware UART (used for USB) and software UART (used to communicate with the ESP)
-DummySensor<ATemperatureSensor, float, 50> dummyTemperatureSensor; // Generate random values
+DummySensor<ATemperatureSensor, int32_t, 50000000> dummyTemperatureSensor; // Generate random values
 #ifdef __AVR__
 ArduinoEEPROM eeprom;
 #endif
