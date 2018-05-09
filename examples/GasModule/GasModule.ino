@@ -17,6 +17,9 @@ void setup() {
 #ifdef __AVR__
     module->setStorage(&storage);
 #endif
+    module->setCommunicationExecutionInterval(1);
+    module->setSensorExecutionInterval(100);
+    module->setUploadDataExecutionInterval(1001);
     module->setup();
 }
 
