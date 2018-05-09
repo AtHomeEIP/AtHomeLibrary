@@ -16,9 +16,7 @@ namespace athome {
                                               _COCurve{2.3, 0.72, static_cast<float>(-0.34)},
                                               _SmokeCurve{2.3, 0.53, static_cast<float>(-0.44)},
                                               _R0(10)
-        {
-            MQCalibration(pin);
-        }
+        {}
 
         MQ2GasSensor::~MQ2GasSensor() {}
 
@@ -85,7 +83,7 @@ namespace athome {
             float val = 0;
 
             for (int j = 0; j < CALIBARAION_SAMPLE_TIMES; j++) {
-                val += MQResistanceCalculation(digitalRead(_pin));
+                val += MQResistanceCalculation(analogRead(_pin));
                 delay(CALIBRATION_SAMPLE_INTERVAL);
             }
             val = val / CALIBARAION_SAMPLE_TIMES;
@@ -110,7 +108,7 @@ namespace athome {
             float   rs = 0;
 
             for (int j = 0; j < READ_SAMPLE_TIMES; ++j) {
-                rs += MQResistanceCalculation(digitalRead(_pin));
+                rs += MQResistanceCalculation(analogRead(_pin));
                 delay(READ_SAMPLE_INTERVAL);
             }
             rs = rs / READ_SAMPLE_TIMES;
