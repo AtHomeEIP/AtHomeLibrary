@@ -363,7 +363,7 @@ namespace athome {
                     broadcast(F("{\"Serial\":\""));
                     broadcast(_serial);
                     broadcast(F("\",\"Data\":["));
-                    for (size_t i = 0; i <= _nbMeasures; i++) {
+                    for (size_t i = 0; i < _nbMeasures; i++) {
                         broadcast(F("{\"Measure\":\""));
                         broadcast(_measures[i]);
                         broadcast(F("\",\"Timestamp\":\""));
@@ -376,7 +376,6 @@ namespace athome {
                     broadcastln(F("]}"));
                     broadcast(FH(communication::commands::end_of_command));
                     _nbMeasures = 0;
-                    delay(1000); // Wait a few milliseconds to allow the buffer of the serial port to be flushed
                 }
 
                 /**
