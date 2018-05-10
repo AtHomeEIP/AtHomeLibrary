@@ -376,7 +376,7 @@ namespace athome {
                     broadcastln(F("]}"));
                     broadcast(FH(communication::commands::end_of_command));
                     _nbMeasures = 0;
-                    delay(20); // Wait a few milliseconds to allow the buffer of the serial port to be flushed
+                    delay(1000); // Wait a few milliseconds to allow the buffer of the serial port to be flushed
                 }
 
                 /**
