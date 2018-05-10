@@ -36,13 +36,13 @@ namespace athome{
                 int smoke;
                 virtual size_t printTo(Print &p) const {
                     // TOOD: To replace with a binary serialization when uploadData will not use json anymore
-                    p.print(F("{\"lpg\":\""));
+                    p.print(F("{\\\"lpg\\\":\\\""));
                     p.print(lpg);
-                    p.print(F("\",\"co\":\""));
+                    p.print(F("\\\",\\\"co\\\":\\\""));
                     p.print(co);
-                    p.print(F("\",\"smoke\":"));
+                    p.print(F("\\\",\\\"smoke\\\":\\\""));
                     p.print(smoke);
-                    p.print(F("\"}"));
+                    p.print(F("\\\"}"));
                 }
             };
 
