@@ -369,7 +369,7 @@ namespace athome {
                         broadcast(F("\",\"Timestamp\":\""));
                         broadcast(_timestamps[i]);
                         broadcast(F("\"}"));
-                        if (i < _nbMeasures) {
+                        if (i < (_nbMeasures - 1)) {
                             broadcast(F(","));
                         }
                     }
