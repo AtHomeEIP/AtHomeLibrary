@@ -43,6 +43,7 @@ namespace athome{
                     p.print(F("\\\",\\\"smoke\\\":\\\""));
                     p.print(smoke);
                     p.print(F("\\\"}"));
+                    delay(10);
                 }
             };
 
