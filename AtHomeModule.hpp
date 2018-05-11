@@ -363,13 +363,13 @@ namespace athome {
                     broadcast(F("{\"Serial\":\""));
                     broadcast(_serial);
                     broadcast(F("\",\"Data\":["));
-                    for (size_t i = 0; i <= _nbMeasures; i++) {
+                    for (size_t i = 0; i < _nbMeasures; i++) {
                         broadcast(F("{\"Measure\":\""));
                         broadcast(_measures[i]);
                         broadcast(F("\",\"Timestamp\":\""));
                         broadcast(_timestamps[i]);
                         broadcast(F("\"}"));
-                        if (i < _nbMeasures) {
+                        if (i < (_nbMeasures - 1)) {
                             broadcast(F(","));
                         }
                     }

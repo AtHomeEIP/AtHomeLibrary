@@ -1,6 +1,6 @@
 #include <AtHome.h>
 
-using GasModule = AtHomeModule<MQ2GasSensor::Values, 15>;
+using GasModule = AtHomeModule<MQ2GasSensor::Values, 10>;
 
 #ifdef __AVR__
 ArduinoEEPROM storage;
