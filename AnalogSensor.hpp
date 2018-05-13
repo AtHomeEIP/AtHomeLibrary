@@ -1,8 +1,10 @@
 #ifndef ANALOG_SENSOR_HPP
 # define ANALOG_SENSOR_HPP
 
-# include <stdint.h>
-# include "ISensor.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_ANALOG_SENSOR)
+#  include <stdint.h>
+#  include "ISensor.hpp"
 
 namespace athome {
 	namespace sensor {
@@ -65,4 +67,5 @@ namespace athome {
 	}
 }
 
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_ANALOG_SENSOR) */
 #endif /* ANALOG_SENSOR_HPP */

@@ -1,4 +1,6 @@
-#ifdef ARDUINO_AVR_UNO
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) && !defined(DISABLE_GROVE_AIR_QUALITY_SENSOR)
+# ifdef ARDUINO_AVR_UNO
 
 # include "GroveAirQualitySensor.hpp"
 
@@ -37,4 +39,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) && !defined(DISABLE_GROVE_AIR_QUALITY_SENSOR) */
 #endif /* __AVR__ */

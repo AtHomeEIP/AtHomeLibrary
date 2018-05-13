@@ -5,26 +5,28 @@
 #ifndef FRAMEWORK_MQ2GASSENSOR_HPP
 #define FRAMEWORK_MQ2GASSENSOR_HPP
 
-#include "ISensor.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) && !defined(DISABLE_MQ2_SENSOR)
+#  include "ISensor.hpp"
 
 
-#define RL_value (5)            //define the load resistance on the board, in kilo ohms
-#define R0_CLEAN_AIR_FACTOR (9.83) //RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO
+#  define RL_value (5)            //define the load resistance on the board, in kilo ohms
+#  define R0_CLEAN_AIR_FACTOR (9.83) //RO_CLEAR_AIR_FACTOR=(Sensor resistance in clean air)/RO
 
 /***********************Software Related Macros************************************/
-#define         CALIBARAION_SAMPLE_TIMES     (50)    //define how many samples you are going to take in the calibration phase
-#define         CALIBRATION_SAMPLE_INTERVAL  (500)   //define the time interal(in milisecond) between each samples in the
+#  define         CALIBARAION_SAMPLE_TIMES     (50)    //define how many samples you are going to take in the calibration phase
+#  define         CALIBRATION_SAMPLE_INTERVAL  (500)   //define the time interal(in milisecond) between each samples in the
 //cablibration phase
-#define         READ_SAMPLE_INTERVAL         (50)    //define how many samples you are going to take in normal operation
-#define         READ_SAMPLE_TIMES            (5)     //define the time interal(in milisecond) between each samples in
+#  define         READ_SAMPLE_INTERVAL         (50)    //define how many samples you are going to take in normal operation
+#  define         READ_SAMPLE_TIMES            (5)     //define the time interal(in milisecond) between each samples in
 //normal operation
 
 /**********************Application Related Macros**********************************/
-#define         GAS_LPG                      (0)
-#define         GAS_CO                       (1)
-#define         GAS_SMOKE                    (2)
+#  define         GAS_LPG                      (0)
+#  define         GAS_CO                       (1)
+#  define         GAS_SMOKE                    (2)
 
-#ifdef ARDUINO
+#  ifdef ARDUINO
 
 namespace athome{
     namespace sensor {
@@ -75,5 +77,6 @@ namespace athome{
     }
 }
 
-#endif /* ARDUINO */
+#  endif /* ARDUINO */
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) && !defined(DISABLE_MQ2_SENSOR) */
 #endif //FRAMEWORK_MQ2GASSENSOR_HPP

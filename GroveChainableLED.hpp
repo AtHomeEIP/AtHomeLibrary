@@ -1,10 +1,11 @@
 #ifndef CHAINABLELED_HPP
 # define CHAINABLELED_HPP
 
-# ifdef ARDUINO
-
-#  include <ChainableLED.h>
-#  include "ARGBLed.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_DISPLAY) && !defined(DISABLE_GROVE_CHAINABLE_LED)
+#  ifdef ARDUINO
+#   include <ChainableLED.h>
+#   include "ARGBLed.hpp"
 
 namespace athome {
     namespace display {
@@ -32,6 +33,6 @@ namespace athome {
     }
 }
 
-# endif /* GROVE_RGB_CHAINABLE_LED_ENABLED */
-
+#  endif /* GROVE_RGB_CHAINABLE_LED_ENABLED */
+# endif /* !defined(DISABLE_DISPLAY) && !defined(DISABLE_GROVE_CHAINABLE_LED) */
 #endif /* CHAINABLELED_HPP */

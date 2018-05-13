@@ -1,6 +1,7 @@
-#ifdef ARDUINO
-
-# include "GroveChainableLED.hpp"
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_DISPLAY) && !defined(DISABLE_GROVE_CHAINABLE_LED)
+# ifdef ARDUINO
+#  include "GroveChainableLED.hpp"
 
 namespace athome {
 	namespace display {
@@ -60,4 +61,5 @@ namespace athome {
 	}
 }
 
-#endif /* GROVE_RGB_CHAINABLE_LED_ENABLED */
+# endif /* GROVE_RGB_CHAINABLE_LED_ENABLED */
+#endif /* !defined(DISABLE_DISPLAY) && !defined(DISABLE_GROVE_CHAINABLE_LED) */

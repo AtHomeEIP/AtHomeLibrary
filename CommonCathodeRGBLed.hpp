@@ -1,8 +1,10 @@
 #ifndef COMMONCATHODERGBLED_HPP
 # define COMMONCATHODERGBLED_HPP
 
-# include <stdint.h>
-# include "ARGBLed.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_COMMON_CATHODE_RGB_LED) && !defined(DISABLE_DISPLAY)
+#  include <stdint.h>
+#  include "ARGBLed.hpp"
 
 namespace athome {
     namespace display {
@@ -22,4 +24,5 @@ namespace athome {
     }
 }
 
+#endif /* !defined(DISABLE_COMMON_CATHODE_RGB_LED) && !defined(DISABLE_DISPLAY) */
 #endif /* COMMONCATHODERGBLED_HPP */

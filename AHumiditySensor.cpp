@@ -1,4 +1,6 @@
-#include "AHumiditySensor.hpp"
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_SENSOR) && !defined(DISABLE_HUMIDITY_SENSOR)
+# include "AHumiditySensor.hpp"
 
 namespace athome {
     namespace sensor {
@@ -27,3 +29,4 @@ namespace athome {
         }
     }
 }
+#endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_HUMIDITY_SENSOR) */

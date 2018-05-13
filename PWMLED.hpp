@@ -1,7 +1,9 @@
 #ifndef PWMLED_HPP
 # define PWMLED_HPP
 
-# include "IDisplay.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_DISPLAY) && !defined(DISABLE_PWM_LED)
+#  include "IDisplay.hpp"
 
 namespace athome {
     namespace display {
@@ -24,4 +26,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_DISPLAY) && !defined(DISABLE_PWM_LED) */
 #endif /* PWMLED_HPP */

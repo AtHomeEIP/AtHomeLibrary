@@ -1,4 +1,6 @@
-#include "ANoiseSensor.hpp"
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_SENSOR) && !defined(DISABLE_ANALOG_SENSOR)
+# include "ANoiseSensor.hpp"
 
 namespace athome {
     namespace sensor {
@@ -11,3 +13,5 @@ namespace athome {
         }
     }
 }
+
+#endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_ANALOG_SENSOR) */

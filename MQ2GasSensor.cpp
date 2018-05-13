@@ -2,11 +2,13 @@
 // Created by Alexis Lina on 19/04/2018.
 //
 
-#ifdef ARDUINO
-#include <time.h>
-#include <Arduino.h>
-#include "MQ2GasSensor.hpp"
-#include "Maths.hpp"
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) && !defined(DISABLE_MQ2_SENSOR)
+# ifdef ARDUINO
+#  include <time.h>
+#  include <Arduino.h>
+#  include "MQ2GasSensor.hpp"
+#  include "Maths.hpp"
 
 namespace athome {
     namespace sensor {
@@ -170,4 +172,5 @@ namespace athome {
     }
 }
 
-#endif /* ARDUINO */
+# endif /* ARDUINO */
+#endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) && !defined(DISABLE_MQ2_SENSOR) */

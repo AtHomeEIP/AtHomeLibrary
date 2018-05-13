@@ -1,12 +1,13 @@
 #ifndef THERMISTOR_HPP
 # define THERMISTOR_HPP
 
-# include "ATemperatureSensor.hpp"
-# include "Maths.hpp"
-
-# ifdef ARDUINO
-#  include <Arduino.h>
-# endif /* ARDUINO */
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_TEMPERATURE_SENSOR) && !defined(DISABLE_THERMISTOR_SENSOR)
+#  include "ATemperatureSensor.hpp"
+#  include "Maths.hpp"
+#  ifdef ARDUINO
+#   include <Arduino.h>
+#  endif /* ARDUINO */
 
 namespace athome {
     namespace sensor {
@@ -27,11 +28,11 @@ namespace athome {
             Thermistor &operator=(const Thermistor &) = delete;
             ~Thermistor() {}
             virtual uint8_t *getSample() {
-# ifdef ARDUINO
+#  ifdef ARDUINO
                 uint16_t adc = analogRead(_pin);
-# else
-#  warning Not yet implemented for your platform
-# endif /* ARDUINO */
+#  else
+#   warning Not yet implemented for your platform
+#  endif /* ARDUINO */
                 float voltage = adc * _increment;
                 float resistance = voltage * RREF / (VREF - voltage);
                 _sample = (1 / (_a + (_b * utility::math::log<float>(resistance)) + (_c * utility::math::pow<float>(utility::math::log<float>(resistance), 3)))) - 273.15;
@@ -60,4 +61,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_TEMPERATURE_SENSOR) && !defined(DISABLE_THERMISTOR_SENSOR) */
 #endif /* THERMISTOR_HPP */

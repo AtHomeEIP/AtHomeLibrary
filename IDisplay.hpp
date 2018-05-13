@@ -1,7 +1,9 @@
 #ifndef IDISPLAY_HPP
 # define IDISPLAY_HPP
 
-# include "ISensor.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_DISPLAY)
+#  include "ISensor.hpp"
 
 namespace athome {
     namespace display {
@@ -44,4 +46,5 @@ namespace athome {
     }
 }
 
+# endif /* DISABLE_DISPLAY */
 #endif /* IDISPLAY_HPP */

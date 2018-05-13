@@ -1,26 +1,27 @@
-#include "MonochromaticLED.hpp"
-
-#ifdef ARDUINO
-# include <Arduino.h>
-#endif /* ARDUINO */
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_DISPLAY) && !defined(DISABLE_MONOCHROMATIC_LED)
+# include "MonochromaticLED.hpp"
+# ifdef ARDUINO
+#  include <Arduino.h>
+# endif /* ARDUINO */
 
 namespace athome {
     namespace display {
         MonochromaticLED::MonochromaticLED(int pin, bool reversed):_pin(pin), _reversed(reversed) {
-#ifdef ARDUINO
+# ifdef ARDUINO
             pinMode(pin, OUTPUT);
-#endif /* ARDUINO */
+# endif /* ARDUINO */
             _state = (_reversed) ? HIGH : LOW;
         }
 
         MonochromaticLED::~MonochromaticLED() {}
 
         void MonochromaticLED::clear() {
-#ifdef ARDUINO
+# ifdef ARDUINO
             digitalWrite(_pin, (_reversed) ? HIGH : LOW);
-#else
-# warning Your platform is not yet supported
-#endif
+# else
+#  warning Your platform is not yet supported
+# endif
         }
 
         void MonochromaticLED::update() {
@@ -32,3 +33,4 @@ namespace athome {
         }
     }
 }
+#endif /* !defined(DISABLE_DISPLAY) && !defined(DISABLE_MONOCHROMATIC_LED) */

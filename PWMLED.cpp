@@ -1,33 +1,34 @@
-#include "PWMLED.hpp"
-
-#ifdef ARDUINO
-# include <Arduino.h>
-#endif
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_DISPLAY) && !defined(DISABLE_PWM_LED)
+# include "PWMLED.hpp"
+# ifdef ARDUINO
+#  include <Arduino.h>
+# endif
 
 namespace athome {
     namespace display {
         PWMLED::PWMLED(int pin, bool reversed):_pin(pin), _reversed(reversed), _value(0) {
-#ifdef ARDUINO
+# ifdef ARDUINO
             pinMode(_pin, OUTPUT);
-#endif
+# endif /* ARDUINO */
         }
 
         PWMLED::~PWMLED() { clear(); }
 
         void PWMLED::clear() {
-#ifdef ARDUINO
+# ifdef ARDUINO
             analogWrite(_pin, 0);
-#else
-# warning Not implemented for your platform
-#endif
+# else
+#  warning Not implemented for your platform
+# endif /* ARDUINO */
         }
 
         void PWMLED::update() {
-#ifdef ARDUINO
+# ifdef ARDUINO
             analogWrite(_pin, _value);
-#else
-# warning Not implemented for your platform
-#endif
+# else
+#  warning Not implemented for your platform
+# endif /* ARDUINO */
         }
 
         void PWMLED::setDisplayedEstimate(sensor::ISensor::ISensorScale value) {
@@ -35,3 +36,4 @@ namespace athome {
         }
     }
 }
+#endif /* !defined(DISABLE_DISPLAY) && !defined(DISABLE_PWM_LED) */

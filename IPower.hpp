@@ -1,7 +1,9 @@
 #ifndef IPOWER_HPP
 # define IPOWER_HPP
 
-# include <stdint.h>
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_POWER_MANAGEMENT)
+#  include <stdint.h>
 
 namespace athome {
 	namespace power {
@@ -14,4 +16,5 @@ namespace athome {
 	}
 }
 
+# endif /* DISABLE_POWER_MANAGEMENT */
 #endif /* IPOWER_HPP */

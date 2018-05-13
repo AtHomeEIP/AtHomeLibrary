@@ -1,7 +1,9 @@
 #ifndef NETWORKIPTYPES_HPP
 # define NETWORKIPTYPES_HPP
 
-# include <stdint.h>
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK)
+#  include <stdint.h>
 
 namespace athome {
     namespace communication {
@@ -26,15 +28,16 @@ namespace athome {
             typedef s_host                    tcp_host;
             typedef s_host                    udp_host;
 
-# ifndef __AVR__
+#  ifndef __AVR__
             extern const char ip_format[];
-# else
-#  include <avr/pgmspace.h>
+#  else
+#   include <avr/pgmspace.h>
             extern const PROGMEM char ip_format[];
-# endif
+#  endif /* __AVR__ */
 
         }
     }
 }
 
+# endif /* defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) */
 #endif /* NETWORKIPTYPES_HPP */

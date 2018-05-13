@@ -1,6 +1,9 @@
 #ifndef ESP8266WIFICOMMUNICATOR_HPP
 # define ESP8266WIFICOMMUNICATOR_HPP
 
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI) &&\
+     !defined(DISABLE_ESP_AT_MODULE)
 # include <stdint.h>
 # include "AWiFiCommunicator.hpp"
 # include "Buffer.hpp"
@@ -71,4 +74,6 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI) &&\
+    !defined(DISABLE_ESP_AT_MODULE) */
 #endif /* ESP8266WIFICOMMUNICATOR_HPP */

@@ -1,7 +1,9 @@
-#ifdef ARDUINO
-# include <Arduino.h>
-#endif /* ARDUINO */
-#include "AnalogSensor.hpp"
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_SENSOR) && !defined(DISABLE_ANALOG_SENSOR)
+# ifdef ARDUINO
+#  include <Arduino.h>
+# endif /* ARDUINO */
+# include "AnalogSensor.hpp"
 
 namespace athome {
     namespace sensor {
@@ -13,11 +15,11 @@ namespace athome {
         AnalogSensor::~AnalogSensor() {}
 
         uint8_t *AnalogSensor::getSample() {
-#ifdef ARDUINO
+# ifdef ARDUINO
             _last_sample = analogRead(_analog_pin);
-#else
-#error not implemented yet
-#endif /* ARDUINO */
+# else
+#  error not implemented yet
+# endif /* ARDUINO */
             return reinterpret_cast<uint8_t *>(&_last_sample);
         }
 
@@ -28,3 +30,4 @@ namespace athome {
         }
     }
 }
+#endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_ANALOG_SENSOR) */

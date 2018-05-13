@@ -1,7 +1,9 @@
 #ifndef ALIST_HPP
 # define ALIST_HPP
 
-# include "AIterable.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_ITERABLE) && !defined(DISABLE_LIST)
+#  include "AIterable.hpp"
 
 namespace athome {
     namespace utility {
@@ -37,4 +39,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_ITERABLE) && !defined(DISABLE_LIST) */
 #endif /* ALIST_HPP */

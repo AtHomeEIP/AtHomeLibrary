@@ -1,8 +1,11 @@
-#include <Arduino.h>
-#include <string.h>
-#include <stdio.h>
-#include "ESP8266WiFiCommunicator.hpp"
-#include "AtHomeFlashCommon.h"
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI) &&\
+    !defined(DISABLE_ESP_AT_MODULE)
+# include <Arduino.h>
+# include <string.h>
+# include <stdio.h>
+# include "ESP8266WiFiCommunicator.hpp"
+# include "AtHomeFlashCommon.h"
 
 namespace athome {
     namespace communication {
@@ -413,3 +416,4 @@ namespace athome {
         }
     }
 }
+#endif /* !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI) && !defined(DISABLE_ESP_AT_MODULE) */

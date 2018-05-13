@@ -1,7 +1,9 @@
 #ifndef ISTORAGE_HPP
 # define ISTORAGE_HPP
 
-# include <stddef.h>
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_PERSISTENT_STORAGE)
+#  include <stddef.h>
 
 namespace athome {
     namespace storage {
@@ -47,4 +49,5 @@ namespace athome {
     }
 }
 
+# endif /* DISABLE_PERSISTENT_STORAGE */
 #endif /* ISTORAGE_HPP */

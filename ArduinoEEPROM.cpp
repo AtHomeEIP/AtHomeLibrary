@@ -1,4 +1,5 @@
-#if defined(__AVR__) && defined(ARDUINO)
+#include "AtHomeConfig.h"
+#if defined(__AVR__) && !defined(DISABLE_PERSISTENT_STORAGE) && !defined(DISABLE_AVR_EEPROM)
 
 # include "ArduinoEEPROM.hpp"
 # include <EEPROM.h>
@@ -29,4 +30,4 @@ namespace athome {
     }
 }
 
-#endif
+#endif /* defined(__AVR__) && !defined(DISABLE_PERSISTENT_STORAGE) && !defined(DISABLE_AVR_EEPROM) */

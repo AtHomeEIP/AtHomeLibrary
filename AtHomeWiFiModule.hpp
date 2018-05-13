@@ -1,10 +1,12 @@
 #ifndef ATHOMEWIFIMODULE_HPP
 # define ATHOMEWIFIMODULE_HPP
 
-# include <stdio.h>
-# include <ArduinoJson.h>
-# include "AtHomeModule.hpp"
-# include "AtHomeFlashCommon.h"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI)
+#  include <stdio.h>
+#  include <ArduinoJson.h>
+#  include "AtHomeModule.hpp"
+#  include "AtHomeFlashCommon.h"
 
 namespace athome {
     namespace module {
@@ -188,4 +190,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI) */
 #endif /* ATHOMEWIFIMODULE_HPP */

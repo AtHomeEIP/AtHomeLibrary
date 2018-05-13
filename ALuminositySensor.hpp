@@ -1,7 +1,9 @@
 #ifndef ALUMINOSITYSENSOR_HPP
 # define ALUMINOSITYSENSOR_HPP
 
-# include "ISensor.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_LUMINOSITY_SENSOR)
+#  include "ISensor.hpp"
 
 namespace athome {
     namespace sensor {
@@ -25,4 +27,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_LUMINOSITY_SENSOR) */
 #endif /* ALUMINOSITYSENSOR_HPP */

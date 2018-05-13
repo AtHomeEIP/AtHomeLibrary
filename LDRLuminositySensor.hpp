@@ -1,8 +1,10 @@
 #ifndef LDRLUMINOSITYMODULE_HPP
 # define LDRLUMINOSITYMODULE_HPP
 
-# include "ALuminositySensor.hpp"
-# include "Maths.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_LUMINOSITY_SENSOR) && !defined(DISABLE_LDR_LUMINOSITY_SENSOR)
+#  include "ALuminositySensor.hpp"
+#  include "Maths.hpp"
 
 namespace athome {
     namespace sensor {
@@ -33,4 +35,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_LUMINOSITY_SENSOR) && !defined(DISABLE_LDR_LUMINOSITY_SENSOR) */
 #endif /* LDRLUMINOSITYMODULE_HPP */

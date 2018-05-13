@@ -1,6 +1,7 @@
 #ifndef ATHOMEMODULE_HPP
 # define ATHOMEMODULE_HPP
 
+# include "AtHomeConfig.h"
 # include <stdint.h>
 # include <alloca.h>
 # include "ARGBLed.hpp"
@@ -63,6 +64,8 @@ namespace athome {
                  * \fn void name()
                  */
                 typedef void (*customCallback)();
+
+# ifndef DISABLE_COMMUNICATION
                 /**
                  * AtHomeCommandCommandPlugin callback is used to extend command interpreter and called when an unknown command is the received.
                  *
@@ -72,6 +75,8 @@ namespace athome {
                  * \fn void name(const String &, Stream &)
                  */
                 typedef void (*AtHomeCommandPlugin)(const String &, Stream &);
+# endif /* DISABLE_COMMUNICATION */
+# ifndef DISABLE_PERSISTENT_STORAGE
                 /**
                  * AtHomeStoragePlugin callback is used to save or restore additional data from actual storage.
                  *
@@ -81,6 +86,7 @@ namespace athome {
                  * \fn void name(size_t, athome::storage::IStorage &)
                  */
                 typedef void (*AtHomeStoragePlugin)(size_t, storage::IStorage &);
+# endif /* DISABLE_PERSISTENT_STORAGE */
 
                 /**
                  * Template function used to get the address of the current AtHomeModule or derived class or instanciates it if there's still no instances existing.
@@ -114,16 +120,22 @@ namespace athome {
                  * Initialize (or reinitialize) Module
                  */
                 void setup() {
+# ifndef DISABLE_PERSISTENT_STORAGE
                     onRestoreFromStorage();
+# endif /* DISABLE_PERSISTENT_STORAGE */
+# ifndef DISABLE_SENSOR
                     _sensorTask.set(_sensorInterval, TASK_FOREVER, &AtHomeModule::_onSampleSensor);
+                    _scheduler.addTask(_sensorTask);
+                    _sensorTask.enableIfNot();
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_COMMUNICATION
                     _communicationTask.set(_communicationInterval, TASK_FOREVER, &AtHomeModule::_onCommunicate);
                     _uploadDataTask.set(_uploadDataInterval, TASK_FOREVER, &AtHomeModule::_uploadData);
-                    _scheduler.addTask(_sensorTask);
                     _scheduler.addTask(_communicationTask);
                     _scheduler.addTask(_uploadDataTask);
-                    _sensorTask.enableIfNot();
                     _communicationTask.enableIfNot();
                     _uploadDataTask.enableIfNot();
+# endif /* DISABLE_COMMUNICATION */
                 }
 
                 /**
@@ -140,10 +152,13 @@ namespace athome {
                  * Stop the module features and deinitialize it.
                  */
                 void stop() {
+# ifndef DISABLE_PERSISTENT_STORAGE
                     onBackupOnStorage();
+# endif /* DISABLE_PERSISTENT_STORAGE */
                     // Todo: need to implement it
                 }
 
+# ifndef DISABLE_SENSOR
                 /**
                  * Set the interval between each sensor sampling in milliseconds.
                  */
@@ -155,44 +170,10 @@ namespace athome {
                 }
 
                 /**
-                 * Set the interval between each time the module listen for received commands on its streams.
-                 */
-                void setCommunicationExecutionInterval(unsigned long ms) {
-                    if (ms && ms != _communicationInterval) {
-                        _communicationInterval = ms;
-                        _communicationTask.setInterval(_communicationInterval * TASK_MILLISECOND);
-                    }
-                }
-
-                /**
-                 * Set the interval between each time the module sends its stored sensor readings over streams.
-                 */
-                void setUploadDataExecutionInterval(unsigned long ms) {
-                    if (ms && ms != _uploadDataInterval) {
-                        _uploadDataInterval = ms;
-                        _uploadDataTask.setInterval(_uploadDataInterval * TASK_MILLISECOND);
-                    }
-                }
-
-                /**
                  * Get the interval between each time the module samples its sensor.
                  */
                 unsigned long getSensorExecutionInterval() const {
                     return _sensorInterval;
-                }
-
-                /**
-                 * Get the interval between each time the module listens for received commands on its streams.
-                 */
-                unsigned long getCommunicationExecutionInterval() const {
-                    return _communicationInterval;
-                }
-
-                /**
-                 * Get the interval between each time the module sends its stored sensor readings over its streams.
-                 */
-                unsigned long getUploadDataExecutionInterval() const {
-                    return _uploadDataInterval;
                 }
 
                 /**
@@ -204,6 +185,54 @@ namespace athome {
                  */
                 void setSensorExecutionCallback(customCallback f = nullptr) {
                     _sensorTask.setCallback((f == nullptr) ? &AtHomeModule::_onSampleSensor : f);
+                }
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_COMMUNICATION
+                /**
+                 * Set the interval between each time the module listen for received commands on its streams.
+                 */
+                void setCommunicationExecutionInterval(unsigned long ms) {
+                    if (ms && ms != _communicationInterval) {
+                        _communicationInterval = ms;
+                        _communicationTask.setInterval(_communicationInterval * TASK_MILLISECOND);
+                    }
+                }
+
+#  ifndef DISABLE_SENSOR
+                /**
+                 * Set the interval between each time the module sends its stored sensor readings over streams.
+                 */
+                void setUploadDataExecutionInterval(unsigned long ms) {
+                    if (ms && ms != _uploadDataInterval) {
+                        _uploadDataInterval = ms;
+                        _uploadDataTask.setInterval(_uploadDataInterval * TASK_MILLISECOND);
+                    }
+                }
+
+                /**
+                 * Get the interval between each time the module sends its stored sensor readings over its streams.
+                 */
+                unsigned long getUploadDataExecutionInterval() const {
+                    return _uploadDataInterval;
+                }
+
+                /**
+                 * Set the callback called when the module sends its stored sensor readings over its streams.
+                 *
+                 * By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
+                 *
+                 * Calling this function passing no parameter or nullptr will restore the default callback of this class.
+                 */
+                void setUploadDataExecutionCallback(customCallback f = nullptr) {
+                    _uploadDataTask.setCallback((f == nullptr) ? &AtHomeModule::_uploadData : f);
+                }
+#  endif /* DISABLE_SENSOR */
+
+                /**
+                 * Get the interval between each time the module listens for received commands on its streams.
+                 */
+                unsigned long getCommunicationExecutionInterval() const {
+                    return _communicationInterval;
                 }
 
                 /**
@@ -218,23 +247,13 @@ namespace athome {
                 }
 
                 /**
-                 * Set the callback called when the module sends its stored sensor readings over its streams.
-                 *
-                 * By default, the module has already a callback for this task, but the user can change it by its own passed in parameter of this function.
-                 *
-                 * Calling this function passing no parameter or nullptr will restore the default callback of this class.
-                 */
-                void setUploadDataExecutionCallback(customCallback f = nullptr) {
-                    _uploadDataTask.setCallback((f == nullptr) ? &AtHomeModule::_uploadData : f);
-                }
-
-                /**
                  * Set a callback called after default command interpreter executed and wasn't able to execute received input, passing the command string and a reference to the stream to the callback.
                  */
                 void setCommandPlugin(AtHomeCommandPlugin plugin) {
                     _communicationPlugin = plugin;
                 }
-
+# endif /* DISABLE_COMMUNICATION */
+# ifndef DISABLE_PERSISTENT_STORAGE
                 /**
                  * Set a callback called after module backup was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used.
                  */
@@ -248,7 +267,7 @@ namespace athome {
                 void setOnRestorePlugin(AtHomeStoragePlugin plugin) {
                     _onRestorePlugin = plugin;
                 }
-
+# endif /* DISABLE_PERSISTENT_STORAGE */
                 /**
                  * Return the type of the module, using athome::module::AtHomeModule::moduleType enumeration.
                  */
@@ -292,44 +311,61 @@ namespace athome {
                 }
 
             private:
+# ifndef DISABLE_SENSOR
                 static void _onSampleSensor() {
                     AtHomeModule *instance = getInstance();
                     if (instance != nullptr) {
                         instance->onSampleSensor();
                     }
                 }
-
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_COMMUNICATION
                 static void _onCommunicate() {
                     AtHomeModule *instance = getInstance();
                     if (instance != nullptr) {
                         instance->onCommunicate();
                     }
                 }
+#  ifndef DISABLE_SENSOR
                 static void _uploadData() {
                     AtHomeModule *instance = getInstance();
                     if (instance != nullptr) {
                         instance->uploadData();
                     }
                 }
-
+#  endif /* DISABLE_SENSOR */
+# endif /* DISABLE_COMMUNICATION */
             protected:
                 AtHomeModule():
                     ABaseModule(),
+# ifndef DISABLE_SENSOR
                     _sensorInterval(TASK_SECOND),
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_COMMUNICATION
                     _communicationInterval(TASK_MILLISECOND * 10),
                     _uploadDataInterval(TASK_SECOND * 15),
+# endif /* DISABLE_COMMUNICATION */
                     _type(UNKNOWN),
+# ifndef DISABLE_SENSOR
                     _nbMeasures(0),
                     _refTimestamp(0),
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_COMMUNICATION
                     _communicationPlugin(nullptr),
+# endif /* DISABLE_COMMUNICATION */
+# ifndef DISABLE_PERSISTENT_STORAGE
                     _onBackupPlugin(nullptr),
-                    _onRestorePlugin(nullptr) {
+                    _onRestorePlugin(nullptr)
+# endif /* DISABLE_PERSISTENT_STORAGE */
+                {
                     memset(_vendor, 0, sizeof(moduleVendor));
                     memset(_serial, 0, sizeof(moduleSerial));
+# ifndef DISABLE_SENSOR
                     memset(_measures, 0, sizeof(T) * n);
                     memset(_timestamps, 0, sizeof(T) * n);
+# endif /* DISABLE_SENSOR */
                 }
-
+# ifndef DISABLE_COMMUNICATION
                 /**
                  * Broadcast the data passed as parameter over all module streams.
                  */
@@ -351,7 +387,7 @@ namespace athome {
                     broadcast(data);
                     broadcast(FH(communication::commands::end_of_line));
                 }
-
+#  ifndef DISABLE_SENSOR
                 /**
                  * Sends stored sensor readings over module streams.
                  */
@@ -377,64 +413,7 @@ namespace athome {
                     broadcast(FH(communication::commands::end_of_command));
                     _nbMeasures = 0;
                 }
-
-                /**
-                 * Called (or trigger if called) when module backup its data on a storage.
-                 */
-                void        onBackupOnStorage() {
-                    if (_storage != nullptr) {
-                        _storage->write(0, reinterpret_cast<const void *>(_vendor), sizeof(moduleVendor));
-                        _storage->write(sizeof(moduleVendor), reinterpret_cast<const void *>(_serial), sizeof(moduleSerial));
-                        _storage->write(sizeof(moduleVendor) + sizeof(moduleSerial), reinterpret_cast<const void *>(&_type), sizeof(moduleType));
-                        if (_onBackupPlugin != nullptr) {
-                            _onBackupPlugin(sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType), *_storage);
-                        }
-                    }
-                }
-
-                /**
-                 * Called (or trigger if called) when module restore data from a storage.
-                 */
-                void        onRestoreFromStorage() {
-                    if (_storage != nullptr) {
-                        _storage->read(0, reinterpret_cast<void *>(_vendor), sizeof(moduleVendor));
-                        _storage->read(sizeof(moduleVendor), reinterpret_cast<void *>(_serial), sizeof(moduleSerial));
-                        _storage->read(sizeof(moduleVendor) + sizeof(moduleSerial), reinterpret_cast<void *>(&_type), sizeof(moduleType));
-                        if (_onRestorePlugin != nullptr) {
-                            _onRestorePlugin(sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType), *_storage);
-                        }
-                    }
-                }
-
-                /**
-                 * Called (or trigger if called) when a module samples its sensor.
-                 */
-                void        onSampleSensor() {
-                    if (_sensor != nullptr && _nbMeasures < n) {
-                        uint8_t* rawData = _sensor->getSample();
-                        if (rawData != nullptr) {
-                            memcpy(&(_measures[_nbMeasures]), rawData, sizeof(T));
-                        }
-                        else {
-                            memset(&(_measures[_nbMeasures]), 0, sizeof(T));
-                        }
-                        _timestamps[_nbMeasures] = _refTimestamp + millis();
-                        _nbMeasures++;
-                        onUpdateDisplay();
-                    }
-                }
-
-                /**
-                 * Called (or trigger if called) when a module update its display.
-                 */
-                void        onUpdateDisplay() {
-                    if (_display == nullptr || _sensor == nullptr) {
-                        return;
-                    }
-                    _display->setDisplayedEstimate(_sensor->getEstimate());
-                    _display->update();
-                }
-
+#  endif /* DISABLE_SENSOR */
                 /**
                  * Called (or trigger if called) when a module listens for received commands.
                  */
@@ -478,8 +457,69 @@ namespace athome {
                         _streams[i]->flush();
                     }
                 }
+# endif /* DISABLE_COMMUNICATION */
+# ifndef DISABLE_PERSISTENT_STORAGE
+                /**
+                 * Called (or trigger if called) when module backup its data on a storage.
+                 */
+                void        onBackupOnStorage() {
+                    if (_storage != nullptr) {
+                        _storage->write(0, reinterpret_cast<const void *>(_vendor), sizeof(moduleVendor));
+                        _storage->write(sizeof(moduleVendor), reinterpret_cast<const void *>(_serial), sizeof(moduleSerial));
+                        _storage->write(sizeof(moduleVendor) + sizeof(moduleSerial), reinterpret_cast<const void *>(&_type), sizeof(moduleType));
+                        if (_onBackupPlugin != nullptr) {
+                            _onBackupPlugin(sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType), *_storage);
+                        }
+                    }
+                }
 
+                /**
+                 * Called (or trigger if called) when module restore data from a storage.
+                 */
+                void        onRestoreFromStorage() {
+                    if (_storage != nullptr) {
+                        _storage->read(0, reinterpret_cast<void *>(_vendor), sizeof(moduleVendor));
+                        _storage->read(sizeof(moduleVendor), reinterpret_cast<void *>(_serial), sizeof(moduleSerial));
+                        _storage->read(sizeof(moduleVendor) + sizeof(moduleSerial), reinterpret_cast<void *>(&_type), sizeof(moduleType));
+                        if (_onRestorePlugin != nullptr) {
+                            _onRestorePlugin(sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType), *_storage);
+                        }
+                    }
+                }
+# endif /* DISABLE_PERSISTENT_STORAGE */
+# ifndef DISABLE_SENSOR
+                /**
+                 * Called (or trigger if called) when a module samples its sensor.
+                 */
+                void        onSampleSensor() {
+                    if (_sensor != nullptr && _nbMeasures < n) {
+                        uint8_t* rawData = _sensor->getSample();
+                        if (rawData != nullptr) {
+                            memcpy(&(_measures[_nbMeasures]), rawData, sizeof(T));
+                        }
+                        else {
+                            memset(&(_measures[_nbMeasures]), 0, sizeof(T));
+                        }
+                        _timestamps[_nbMeasures] = _refTimestamp + millis();
+                        _nbMeasures++;
+                        onUpdateDisplay();
+                    }
+                }
+#  ifndef DISABLE_DISPLAY
+                /**
+                 * Called (or trigger if called) when a module update its display.
+                 */
+                void        onUpdateDisplay() {
+                    if (_display == nullptr || _sensor == nullptr) {
+                        return;
+                    }
+                    _display->setDisplayedEstimate(_sensor->getEstimate());
+                    _display->update();
+                }
+#  endif /* DISABLE_DISPLAY */
+# endif /* DISABLE_SENSOR */
             private:
+# ifndef DISABLE_COMMUNICATION
                 void        _enumerate(Stream &stream) {
                     while (stream.read() != communication::commands::end_of_command);
                     stream.print(FH(communication::commands::enumerate));
@@ -548,24 +588,43 @@ namespace athome {
                     }
                     while (stream.read() != communication::commands::end_of_command);
                 }
+# endif /* DISABLE_COMMUNICATION */
             private:
+# ifndef DISABLE_SENSOR
                 unsigned long               _sensorInterval;
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_COMMUNICATION
                 unsigned long               _communicationInterval;
                 unsigned long               _uploadDataInterval;
+# endif /* DISABLE_COMMUNICATION */
                 moduleType                  _type;
+# ifndef DISABLE_SENSOR
                 size_t                      _nbMeasures;
                 timestamp                   _refTimestamp;
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_COMMUNICATION
                 AtHomeCommandPlugin        _communicationPlugin;
+# endif /* DISABLE_COMMUNICATION */
+# ifndef DISABLE_PERSISTENT_STORAGE
                 AtHomeStoragePlugin        _onBackupPlugin;
                 AtHomeStoragePlugin        _onRestorePlugin;
+# endif /* DISABLE_PERSISTENT_STORAGE */
                 Scheduler                   _scheduler;
                 moduleVendor                _vendor;
                 moduleSerial                _serial;
+# ifndef DISABLE_SENSOR
                 T                           _measures[n];
                 timestamp                   _timestamps[n];
+# endif /* DISABLE_SENSOR */
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION)
                 Task                        _uploadDataTask;
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION) */
+# ifndef DISABLE_SENSOR
                 Task                        _sensorTask;
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_COMMUNICATION
                 Task                        _communicationTask;
+# endif /* DISABLE_COMMUNICATION */
                 static void                 *_instance;
         };
 

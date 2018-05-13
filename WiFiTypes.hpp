@@ -1,7 +1,9 @@
 #ifndef WIFITYPES_HPP
 # define WIFITYPES_HPP
 
-# include "NetworkIPTypes.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI)
+#  include "NetworkIPTypes.hpp"
 
 namespace athome {
     namespace communication {
@@ -77,4 +79,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI) */
 #endif /* WIFITYPESHPP */

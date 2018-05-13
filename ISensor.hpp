@@ -1,7 +1,9 @@
 #ifndef ISENSOR_HPP
 # define ISENSOR_HPP
 
-# include <stdint.h>
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR)
+#  include <stdint.h>
 
 namespace athome {
     namespace sensor {
@@ -60,4 +62,5 @@ namespace athome {
     }
 }
 
+# endif /* DISABLE_SENSOR */
 #endif /* ISENSOR_HPP */

@@ -1,9 +1,10 @@
-#ifdef __MSP430__
-
-# include <string.h>
-# include <stdint.h>
-# include <stddef.h>
-# include "MSP430FRAM.hpp"
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_PERSISTENT_STORAGE) && !defined(DISABLE_MSP430_FRAM)
+# ifdef __MSP430__
+#  include <string.h>
+#  include <stdint.h>
+#  include <stddef.h>
+#  include "MSP430FRAM.hpp"
 
 namespace athome {
     namespace storage {
@@ -36,4 +37,5 @@ namespace athome {
     }
 }
 
-#endif /* __MSP430__ && __MSP430_HAS_FRAM__ */
+# endif /* __MSP430__ && __MSP430_HAS_FRAM__ */
+#endif /* !defined(DISABLE_PERSISTENT_STORAGE) && !defined(DISABLE_MSP430_FRAM) */

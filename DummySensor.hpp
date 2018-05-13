@@ -1,9 +1,11 @@
 #ifndef DUMMYSENSOR_HPP
 # define DUMMYSENSOR_HPP
 
-# include <stdlib.h>
-# include <string.h>
-# include "ISensor.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_DUMMY_SENSOR)
+#  include <stdlib.h>
+#  include <string.h>
+#  include "ISensor.hpp"
 
 namespace athome {
     namespace sensor {
@@ -30,4 +32,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_DUMMY_SENSOR) */
 #endif /* DUMMYSENSOR_HPP */

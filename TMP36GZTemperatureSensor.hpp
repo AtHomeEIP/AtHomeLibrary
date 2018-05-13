@@ -1,11 +1,13 @@
 #ifndef TMP36GZTEMPERATURESENSOR_HPP
 # define TMP36GZTEMPERATURESENSOR_HPP
 
-# ifdef ARDUINO
-#  include <Arduino.h>
-# endif /* ARDUNINO */
-# include "ATemperatureSensor.hpp"
-# include "Maths.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_TEMPERATURE_SENSOR) && !defined(DISABLE_TMP36GZ_TEMPERATURE_SENSOR)
+#  ifdef ARDUINO
+#   include <Arduino.h>
+#  endif /* ARDUNINO */
+#  include "ATemperatureSensor.hpp"
+#  include "Maths.hpp"
 
 namespace athome {
     namespace sensor {
@@ -18,10 +20,10 @@ namespace athome {
             ~TMP36GZTemperatureSensor() {}
 
             uint8_t *getSample() {
-# ifdef ARDUINO
+#  ifdef ARDUINO
                 constexpr uint32_t step = REF / utility::math::static_exp2<uint32_t>(RES);
                 _temp = ((analogRead(_pin) * step) - 500000) * 100;
-# endif /* ARDUINO */
+#  endif /* ARDUINO */
                 return reinterpret_cast<uint8_t *>(&_temp);
             }
             int32_t getLastSample() const {
@@ -35,4 +37,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_TEMPERATURE_SENSOR) && !defined(DISABLE_TMP36GZ_TEMPERATURE_SENSOR) */
 #endif /* TMP36GZTEMPERATURESENSOR_HPP */

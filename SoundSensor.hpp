@@ -1,9 +1,10 @@
 #ifndef SOUNDSENSOR_HPP
 # define SOUNDSENSOR_HPP
 
-# include <ISensor.hpp>
-
-# ifdef ARDUINO
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_NOISE_SENSOR) && !defined(DISABLE_SOUND_SENSOR)
+#  include "ISensor.hpp"
+#  ifdef ARDUINO
 
 namespace athome {
   namespace sensor {
@@ -24,5 +25,6 @@ namespace athome {
   }
 }
 
-# endif /* ARDUINO */
+#  endif /* ARDUINO */
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_NOISE_SENSOR) && !defined(DISABLE_SOUND_SENSOR) */
 #endif /* SOUNDSENSOR_HPP */

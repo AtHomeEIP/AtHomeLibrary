@@ -1,6 +1,9 @@
 #ifndef AITERABLE_HPP
 # define AITERABLE_HPP
 
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_ITERABLE)
+
 namespace athome {
     namespace utility {
         /**
@@ -28,4 +31,5 @@ namespace athome {
     }
 }
 
+# endif /* DISABLE_ITERABLE */
 #endif /* AITERABLE_HPP */

@@ -1,10 +1,12 @@
-#ifdef ARDUINO
-# include <Arduino.h>
-#else
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_COMMON_CATHODE_RGB_LED) && !defined(DISABLE_DISPLAY)
+# ifdef ARDUINO
+#  include <Arduino.h>
+# else
 extern void analogWrite(uint8_t, int);
-#endif
+# endif
 
-#include "CommonCathodeRGBLed.hpp"
+# include "CommonCathodeRGBLed.hpp"
 
 namespace athome {
     namespace display {
@@ -30,3 +32,4 @@ namespace athome {
         }
     }
 }
+#endif /* !defined(DISABLE_COMMON_CATHODE_RGB_LED) && !defined(DISABLE_DISPLAY) */

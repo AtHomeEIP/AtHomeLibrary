@@ -1,6 +1,8 @@
 #ifndef ABASEMODULE_HPP
 # define ABASEMODULE_HPP
 
+# include "AtHomeConfig.h"
+
 # define _TASK_INLINE // Macro used by TaskScheduler library
 
 # include <stdint.h>
@@ -21,10 +23,26 @@ namespace athome {
                 ABaseModule &operator=(ABaseModule &) = delete; // Singleton class
                 ~ABaseModule();
             protected:
-                ABaseModule(display::IDisplay * = nullptr, Stream ** = nullptr,
-                            power::IPower * = nullptr, sensor::ISensor * = nullptr, storage::IStorage * = nullptr);
+                ABaseModule(
+# ifndef DISABLE_DISPLAY
+                            display::IDisplay * = nullptr,
+# endif /* DISABLE_DISPLAY */
+# ifndef DISABLE_COMMUNICATION
+                            Stream ** = nullptr,
+# endif /* DISABLE_COMMUNICATION */
+# ifndef DISABLE_POWER_MANAGEMENT
+                            power::IPower * = nullptr,
+# endif /* DISABLE_POWER_MANAGEMENT */
+# ifndef DISABLE_SENSOR
+                            sensor::ISensor * = nullptr,
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_PERSISTENT_STORAGE
+                            storage::IStorage * = nullptr
+# endif /* DISABLE_PERSISTENT_STORAGE */
+                           );
                 ABaseModule(ABaseModule &) = delete; // Singleton class
             public:
+# ifndef DISABLE_COMMUNICATION
                 /**
                  * Return an array of pointers on `Stream` derived objects terminated by a `nullptr`.
                  *
@@ -57,6 +75,8 @@ namespace athome {
                  * \endcode
                  */
                 void setStreams(Stream **);
+# endif /* DISABLE_COMMUNICATION */
+# ifndef DISABLE_DISPLAY
                 /**
                  * Return a athome::display::IDisplay interface pointer on the display currently used by the module.
                  *
@@ -85,6 +105,8 @@ namespace athome {
                  * \endcode
                  */
                 void setDisplay(display::IDisplay *);
+# endif /* DISABLE_DISPLAY */
+# ifndef DISABLE_POWER_MANAGEMENT
                 /**
                   * Return a athome::power::IPower interface pointer on the power supply currently used by the module.
                   *
@@ -99,6 +121,8 @@ namespace athome {
                  * For now, there is now implementation of athome::power::IPower in the library.
                  */
                 void setPowerSource(power::IPower *);
+# endif /* DISABLE_POWER_MANAGEMENT */
+# ifndef DISABLE_SENSOR
                 /**
                   * Return a athome::sensor::ISensor interface pointer on the sensor currently used by the module.
                   *
@@ -127,6 +151,8 @@ namespace athome {
                  * \endcode
                  */
                 void setSensor(sensor::ISensor *);
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_PERSISTENT_STORAGE
                 /**
                   * Return a athome::storage::IStorage interface pointer on the storage currently used by the module.
                   *
@@ -156,12 +182,23 @@ namespace athome {
                  * \endcode
                  */
                 void setStorage(storage::IStorage *);
+# endif /* DISABLE_PERSISTENT_STORAGE */
             protected:
+# ifndef DISABLE_DISPLAY
                 display::IDisplay   *_display;
+# endif /* DISABLE_DISPLAY */
+# ifndef DISABLE_COMMUNICATION
                 Stream              **_streams;
+# endif /* DISABLE_COMMUNICATION */
+# ifndef DISABLE_POWER_MANAGEMENT
                 power::IPower       *_power;
+# endif /* DISABLE_POWER_MANAGEMENT */
+# ifndef DISABLE_SENSOR
                 sensor::ISensor     *_sensor;
+# endif /* DISABLE_SENSOR */
+# ifndef DISABLE_PERSISTENT_STORAGE
                 storage::IStorage   *_storage;
+# endif /* DISABLE_PERSISTENT_STORAGE */
         };
     }
 }

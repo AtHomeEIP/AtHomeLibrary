@@ -1,7 +1,9 @@
 #ifndef ATHOMECOMMUNICATIONPROTOCOL_HPP
 # define ATHOMECOMMUNICATIONPROTOCOL_HPP
 
-#include "AtHomeFlashCommon.h"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_COMMUNICATION)
+#  include "AtHomeFlashCommon.h"
 
 namespace athome {
     namespace communication {
@@ -16,14 +18,22 @@ namespace athome {
             extern const PROGMEM char enumerate[];
             extern const PROGMEM char uploadData[];
             extern const PROGMEM char syncTime[];
+#  if !defined(DISABLE_NETWORK)
+#   if !defined(DISABLE_WIFI)
             extern const PROGMEM char setWiFi[];
+#   endif /* !defined(DISABLE_WIFI) */
             extern const PROGMEM char setEndPoint[];
+#  endif /* !defined(DISABLE_NETWORK) */
             extern const PROGMEM char setProfile[];
 
+#  if !defined(DISABLE_NETWORK)
+#   if !defined(DISABLE_WIFI)
             extern const PROGMEM char ssid_key[];
             extern const PROGMEM char password_key[];
+#   endif /* !defined(DISABLE_WIFI) */
             extern const PROGMEM char ip_key[];
             extern const PROGMEM char port_key[];
+#  endif /* !defined(DISABLE_NETWORK) */
 
 /*
  * Thinking communication wisely
@@ -74,4 +84,5 @@ namespace athome {
     }
 }
 
+# endif /* if !defined(DISABLE_COMMUNICATION) */
 #endif /* ATHOMECOMMUNICATIONPROTOCOL */

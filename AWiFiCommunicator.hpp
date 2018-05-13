@@ -1,9 +1,11 @@
 #ifndef AWIFICOMMUNICATOR_HPP
 # define AWIFICOMMUNICATOR_HPP
 
-# include <Arduino.h>
-# include <Stream.h>
-# include "WiFiTypes.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI)
+#  include <Arduino.h>
+#  include <Stream.h>
+#  include "WiFiTypes.hpp"
 
 namespace athome {
 	namespace communication {
@@ -497,4 +499,5 @@ namespace athome {
 	}
 }
 
+# endif /* !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI) */
 #endif /* AWIFICOMMUNICATOR_HPP */

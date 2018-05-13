@@ -1,16 +1,16 @@
 #ifndef MSP430FRAM_HPP
 # define MSP430FRAM_HPP
 
-# ifdef __MSP430__
-
-#  include <IStorage.hpp>
-#  include <driverlib.h>
-#  include <stdint.h>
-#  include <stddef.h>
-
-#  ifndef ATHOME_FRAM_STORAGE_SIZE
-#   define ATHOME_FRAM_STORAGE_SIZE 255
-#  endif
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_PERSISTENT_STORAGE) && !defined(DISABLE_MSP430_FRAM)
+#  ifdef __MSP430__
+#   include <IStorage.hpp>
+#   include <driverlib.h>
+#   include <stdint.h>
+#   include <stddef.h>
+#   ifndef ATHOME_FRAM_STORAGE_SIZE
+#    define ATHOME_FRAM_STORAGE_SIZE 255
+#   endif
 
 namespace athome {
     namespace storage {
@@ -52,6 +52,6 @@ namespace athome {
     }
 }
 
-# endif
-
+#  endif /* __MSP430__ */
+# endif /* !defined(DISABLE_PERSISTENT_STORAGE) && !defined(DISABLE_MSP430_FRAM) */
 #endif /* MSP430FRAM_HPP */

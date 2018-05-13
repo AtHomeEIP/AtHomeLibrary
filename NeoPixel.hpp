@@ -1,9 +1,11 @@
 #ifndef NEOPIXEL_HPP
 # define NEOPIXEL_HPP
 
-# if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
-#  include <Adafruit_NeoPixel.h>
-#  include "ARGBLed.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_DISPLAY) && !defined(DISABLE_NEOPIXEL)
+#  if !defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && !defined(__PIC32MX__)
+#   include <Adafruit_NeoPixel.h>
+#   include "ARGBLed.hpp"
 
 namespace athome {
     namespace display {
@@ -22,6 +24,7 @@ namespace athome {
         };
     }
 }
-# endif /* List of incompatible architectures */
 
+#  endif /* List of incompatible architectures */
+# endif /* !defined(DISABLE_DISPLAY) && !defined(DISABLE_NEOPIXEL) */
 #endif /* NEOPIXEL_HPP */

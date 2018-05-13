@@ -1,4 +1,7 @@
-#include "AAirQualitySensor.hpp"
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR)
+
+# include "AAirQualitySensor.hpp"
 
 namespace athome {
     namespace sensor {
@@ -11,3 +14,5 @@ namespace athome {
         }
     }
 }
+
+#endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) */

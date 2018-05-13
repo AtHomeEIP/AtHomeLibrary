@@ -1,8 +1,10 @@
 #ifndef COMMONANODERGBLED_HPP
 # define COMMONANODERGBLED_HPP
 
-# include <stdint.h>
-# include "ARGBLed.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_DISPLAY) && !defined(DISABLE_COMMON_ANODE_RGB_LED)
+#  include <stdint.h>
+#  include "ARGBLed.hpp"
 
 namespace athome {
     namespace display {
@@ -22,4 +24,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_DISPLAY) && !defined(DISABLE_COMMON_ANODE_RGB_LED) */
 #endif /* COMMONANODERGBLED_HPP */

@@ -1,9 +1,12 @@
 #ifndef ARGBLED_HPP
 # define ARGBLED_HPP
 
-# include <stdint.h>
-# include <string.h>
-# include "IDisplay.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_DISPLAY)
+
+#  include <stdint.h>
+#  include <string.h>
+#  include "IDisplay.hpp"
 
 namespace athome {
     namespace display {
@@ -124,4 +127,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_DISPLAY) */
 #endif /* ARGBLED_HPP */

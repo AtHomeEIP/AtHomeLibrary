@@ -1,7 +1,9 @@
 #ifndef QUEUE_HPP
 # define QUEUE_HPP
 
-# include "AList.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_LIST) && !defined(DISABLE_QUEUE)
+#  include "AList.hpp"
 
 // Todo: Recursive algorithms aren't great on embedded platforms :(
 
@@ -31,4 +33,5 @@ namespace athome {
     }
 }
 
+# endif /* !defined(DISABLE_LIST) && !defined(DISABLE_QUEUE) */
 #endif /* QUEUE_HPP */

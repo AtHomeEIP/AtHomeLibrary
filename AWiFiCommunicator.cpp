@@ -1,5 +1,7 @@
-#include <string.h>
-#include "AWiFiCommunicator.hpp"
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI)
+# include <string.h>
+# include "AWiFiCommunicator.hpp"
 
 namespace athome {
     namespace communication {
@@ -55,3 +57,4 @@ namespace athome {
         }
     }
 }
+#endif /* !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI) */

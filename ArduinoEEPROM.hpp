@@ -1,7 +1,8 @@
 #ifndef ARDUINOEEPROM_HPP
 # define ARDUINOEEPROM_HPP
 
-# if defined(__AVR__) && defined(ARDUINO)
+# include "AtHomeConfig.h"
+# if defined(__AVR__) && !defined(DISABLE_PERSISTENT_STORAGE) && !defined(DISABLE_AVR_EEPROM)
 
 # include "IStorage.hpp"
 
@@ -39,6 +40,6 @@ namespace athome {
     }
 }
 
-# endif
+# endif /* defined(__AVR__) && !defined(DISABLE_PERSISTENT_STORAGE) && !defined(DISABLE_AVR_EEPROM) */
 
 #endif /* ARDUINOEEPROM_HPP */

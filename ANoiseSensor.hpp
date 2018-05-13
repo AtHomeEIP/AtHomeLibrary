@@ -1,7 +1,9 @@
 #ifndef ATHOME_ANOISESENSOR_HPP
 # define ATHOME_ANOISESENSOR_HPP
 
-# include "ISensor.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_NOISE_SENSOR)
+#  include "ISensor.hpp"
 
 namespace athome {
     namespace sensor {
@@ -19,4 +21,5 @@ namespace athome {
     }
 }
 
+# endif /*  !defined(DISABLE_SENSOR) && !defined(DISABLE_ANALOG_SENSOR) */
 #endif //ATHOME_ANOISESENSOR_HPP

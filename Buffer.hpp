@@ -1,9 +1,11 @@
 #ifndef BUFFER_HPP
 # define BUFFER_HPP
 
-# include <stdint.h>
-# include <string.h>
-# include <Stream.h>
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_BUFFER)
+#  include <stdint.h>
+#  include <string.h>
+#  include <Stream.h>
 
 namespace athome {
     namespace utility {
@@ -141,4 +143,5 @@ namespace athome {
     }
 }
 
+# endif /* DISABLE_BUFFER */
 #endif /* BUFFER_HPP */

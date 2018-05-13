@@ -1,7 +1,9 @@
 #ifndef AAIRQUALITYSENSOR_HPP
 # define AAIRQUALITYSENSOR_HPP
 
-# include "ISensor.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR)
+#  include "ISensor.hpp"
 
 namespace athome {
     namespace sensor {
@@ -18,5 +20,7 @@ namespace athome {
         };
     }
 }
+
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) */
 
 #endif /* AAIRQUALITYSENSOR_HPP */

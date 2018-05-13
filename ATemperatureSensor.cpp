@@ -1,4 +1,6 @@
-#include "ATemperatureSensor.hpp"
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_SENSOR) && !defined(DISABLE_TEMPERATURE_SENSOR)
+# include "ATemperatureSensor.hpp"
 
 namespace athome {
     namespace sensor {
@@ -26,3 +28,4 @@ namespace athome {
         }
     }
 }
+#endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_TEMPERATURE_SENSOR) */

@@ -1,11 +1,12 @@
 #ifndef GROVEAIRQUALITYSENSOR_HPP
 # define GROVEAIRQUALITYSENSOR_HPP
 
-# ifdef ARDUINO_AVR_UNO
-
-#  include <AirQuality.h>
-#  include <stdint.h>
-#  include "AAirQualitySensor.hpp"
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) && !defined(DISABLE_GROVE_AIR_QUALITY_SENSOR)
+#  ifdef ARDUINO_AVR_UNO
+#   include <AirQuality.h>
+#   include <stdint.h>
+#   include "AAirQualitySensor.hpp"
 
 namespace athome {
     namespace sensor {
@@ -27,6 +28,6 @@ namespace athome {
     }
 }
 
-# endif /* List of compatible Arduino boards */
-
+#  endif /* List of compatible Arduino boards */
+# endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) && !defined(DISABLE_GROVE_AIR_QUALITY_SENSOR) */
 #endif /* GROVEAIRQUALITYSENSOR_HPP */
