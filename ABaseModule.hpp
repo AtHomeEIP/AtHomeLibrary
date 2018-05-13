@@ -25,16 +25,33 @@ namespace athome {
             protected:
                 ABaseModule(
 # ifndef DISABLE_DISPLAY
+#  if !defined(DISABLE_COMMUNICATION) || !defined(DISABLE_POWER_MANAGEMENT) ||\
+      !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
                             display::IDisplay * = nullptr,
+#  else
+                            display::IDisplay * = nullptr
+#  endif /* ... */
 # endif /* DISABLE_DISPLAY */
 # ifndef DISABLE_COMMUNICATION
+#  if !defined(DISABLE_POWER_MANAGEMENT) || !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
                             Stream ** = nullptr,
+#  else
+                            Stream ** = nullptr
+#  endif /* ... */
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_POWER_MANAGEMENT
+#  if !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
                             power::IPower * = nullptr,
+#  else
+                            power::IPower * = nullptr
+#  endif /* ... */
 # endif /* DISABLE_POWER_MANAGEMENT */
 # ifndef DISABLE_SENSOR
+#  if !defined(DISABLE_PERSISTENT_STORAGE)
                             sensor::ISensor * = nullptr,
+#  else
+                            sensor::ISensor * = nullptr
+#  endif /* ... */
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_PERSISTENT_STORAGE
                             storage::IStorage * = nullptr

@@ -269,11 +269,6 @@ namespace athome {
                 }
 # endif /* DISABLE_PERSISTENT_STORAGE */
                 /**
-                 * Return the type of the module, using athome::module::AtHomeModule::moduleType enumeration.
-                 */
-                moduleType          getType() const { return _type; }
-
-                /**
                  * Return a reference to the vendor ID of the module ("AtHome" for AtHome modules).
                  */
                 const moduleVendor &getVendor() const { return _vendor; }
@@ -282,15 +277,6 @@ namespace athome {
                  * Return the unique serial of the module, used to identify it.
                  */
                 const moduleSerial &getSerial() const { return _serial; }
-
-                /**
-                 * Set the type of the module, passing a athome::module::AtHomeModule::moduleType enumeration value as parameter.
-                 */
-                void                setType(moduleType type) {
-                    if (type != moduleType::UNKNOWN) {
-                        _type = type;
-                    }
-                }
 
                 /**
                  * Set the vendor ID of the module.
@@ -345,25 +331,22 @@ namespace athome {
                     _communicationInterval(TASK_MILLISECOND * 10),
                     _uploadDataInterval(TASK_SECOND * 15),
 # endif /* DISABLE_COMMUNICATION */
-                    _type(UNKNOWN),
 # ifndef DISABLE_SENSOR
                     _nbMeasures(0),
                     _refTimestamp(0),
+                    _measures{0},
+                    _timestamps{0},
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_COMMUNICATION
                     _communicationPlugin(nullptr),
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE
                     _onBackupPlugin(nullptr),
-                    _onRestorePlugin(nullptr)
+                    _onRestorePlugin(nullptr),
 # endif /* DISABLE_PERSISTENT_STORAGE */
+                    _vendor{0},
+                    _serial{0}
                 {
-                    memset(_vendor, 0, sizeof(moduleVendor));
-                    memset(_serial, 0, sizeof(moduleSerial));
-# ifndef DISABLE_SENSOR
-                    memset(_measures, 0, sizeof(T) * n);
-                    memset(_timestamps, 0, sizeof(T) * n);
-# endif /* DISABLE_SENSOR */
                 }
 # ifndef DISABLE_COMMUNICATION
                 /**
@@ -466,7 +449,6 @@ namespace athome {
                     if (_storage != nullptr) {
                         _storage->write(0, reinterpret_cast<const void *>(_vendor), sizeof(moduleVendor));
                         _storage->write(sizeof(moduleVendor), reinterpret_cast<const void *>(_serial), sizeof(moduleSerial));
-                        _storage->write(sizeof(moduleVendor) + sizeof(moduleSerial), reinterpret_cast<const void *>(&_type), sizeof(moduleType));
                         if (_onBackupPlugin != nullptr) {
                             _onBackupPlugin(sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType), *_storage);
                         }
@@ -480,7 +462,6 @@ namespace athome {
                     if (_storage != nullptr) {
                         _storage->read(0, reinterpret_cast<void *>(_vendor), sizeof(moduleVendor));
                         _storage->read(sizeof(moduleVendor), reinterpret_cast<void *>(_serial), sizeof(moduleSerial));
-                        _storage->read(sizeof(moduleVendor) + sizeof(moduleSerial), reinterpret_cast<void *>(&_type), sizeof(moduleType));
                         if (_onRestorePlugin != nullptr) {
                             _onRestorePlugin(sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType), *_storage);
                         }
@@ -502,7 +483,9 @@ namespace athome {
                         }
                         _timestamps[_nbMeasures] = _refTimestamp + millis();
                         _nbMeasures++;
+#  ifndef DISABLE_DISPLAY
                         onUpdateDisplay();
+#  endif /* DISABLE_DISPLAY */
                     }
                 }
 #  ifndef DISABLE_DISPLAY
@@ -530,8 +513,6 @@ namespace athome {
                     stream.print(_serial);
                     stream.print(F("\",\"vendor\":\""));
                     stream.print(_vendor);
-                    stream.print(F("\",\"type\":\""));
-                    stream.print(_type);
                     stream.print(F("\"}"));
                     stream.print(FH(communication::commands::end_of_line));
                     stream.print(communication::commands::end_of_command);
@@ -566,14 +547,6 @@ namespace athome {
                         }
                         ptr[i] = data;
                     }
-                    ptr = reinterpret_cast<uint8_t *>(&_type);
-                    for (size_t i = 0; i < sizeof(moduleType); i++) {
-                        while ((data = stream.read()) < 0);
-                        if (data == communication::commands::end_of_command) {
-                            return;
-                        }
-                        ptr[i] = data;
-                    }
                     while (stream.read() != communication::commands::end_of_command);
                 }
 
@@ -597,10 +570,11 @@ namespace athome {
                 unsigned long               _communicationInterval;
                 unsigned long               _uploadDataInterval;
 # endif /* DISABLE_COMMUNICATION */
-                moduleType                  _type;
 # ifndef DISABLE_SENSOR
                 size_t                      _nbMeasures;
                 timestamp                   _refTimestamp;
+                T                           _measures[n];
+                timestamp                   _timestamps[n];
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_COMMUNICATION
                 AtHomeCommandPlugin        _communicationPlugin;
@@ -609,13 +583,9 @@ namespace athome {
                 AtHomeStoragePlugin        _onBackupPlugin;
                 AtHomeStoragePlugin        _onRestorePlugin;
 # endif /* DISABLE_PERSISTENT_STORAGE */
-                Scheduler                   _scheduler;
                 moduleVendor                _vendor;
                 moduleSerial                _serial;
-# ifndef DISABLE_SENSOR
-                T                           _measures[n];
-                timestamp                   _timestamps[n];
-# endif /* DISABLE_SENSOR */
+                Scheduler                   _scheduler;
 # if !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION)
                 Task                        _uploadDataTask;
 # endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION) */
