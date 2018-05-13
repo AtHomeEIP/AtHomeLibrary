@@ -334,7 +334,6 @@ namespace athome {
 # ifndef DISABLE_SENSOR
                     _nbMeasures(0),
                     _refTimestamp(0),
-                    _measures{0},
                     _timestamps{0},
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_COMMUNICATION
@@ -347,6 +346,7 @@ namespace athome {
                     _vendor{0},
                     _serial{0}
                 {
+                    memset(_measures, 0, sizeof(_measures));
                 }
 # ifndef DISABLE_COMMUNICATION
                 /**
@@ -573,7 +573,6 @@ namespace athome {
 # ifndef DISABLE_SENSOR
                 size_t                      _nbMeasures;
                 timestamp                   _refTimestamp;
-                T                           _measures[n];
                 timestamp                   _timestamps[n];
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_COMMUNICATION
@@ -586,6 +585,9 @@ namespace athome {
                 moduleVendor                _vendor;
                 moduleSerial                _serial;
                 Scheduler                   _scheduler;
+# ifndef DISABLE_SENSOR
+                T                           _measures[n];
+# endif /* DISABLE_SENSOR */
 # if !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION)
                 Task                        _uploadDataTask;
 # endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION) */
