@@ -18,22 +18,6 @@ namespace athome {
         class AtHomeModule : public ABaseModule {
             public:
                 /**
-                 * Enumeration representing the type of a module
-                 */
-                enum moduleType {
-                    UNKNOWN,
-                    AIR_QUALITY, // Dust, smoke, ...etc
-                    TEMPERATURE,
-                    HUMIDITY,
-                    LUMINOSITY,
-                    NOISE,
-                    CARBON, // Monoxyde, Dioxyde, Methane, Butane, Propane, ...etc
-                    CARBON_MONOXYDE,
-                    ELECTROMAGNETIC,
-                    RADIOACTIVITY // Geiger counter
-                };
-
-                /**
                  * `moduleVendor` type represents a type holding the vendor name of a module ("AtHome" when they are built by AtHome team)
                  */
                 typedef char            moduleVendor[33];
