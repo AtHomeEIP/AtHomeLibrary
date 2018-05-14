@@ -434,7 +434,7 @@ namespace athome {
                         _storage->write(0, reinterpret_cast<const void *>(_vendor), sizeof(moduleVendor));
                         _storage->write(sizeof(moduleVendor), reinterpret_cast<const void *>(_serial), sizeof(moduleSerial));
                         if (_onBackupPlugin != nullptr) {
-                            _onBackupPlugin(sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType), *_storage);
+                            _onBackupPlugin(sizeof(moduleVendor) + sizeof(moduleSerial), *_storage);
                         }
                     }
                 }
@@ -447,7 +447,7 @@ namespace athome {
                         _storage->read(0, reinterpret_cast<void *>(_vendor), sizeof(moduleVendor));
                         _storage->read(sizeof(moduleVendor), reinterpret_cast<void *>(_serial), sizeof(moduleSerial));
                         if (_onRestorePlugin != nullptr) {
-                            _onRestorePlugin(sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType), *_storage);
+                            _onRestorePlugin(sizeof(moduleVendor) + sizeof(moduleSerial), *_storage);
                         }
                     }
                 }
