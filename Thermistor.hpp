@@ -27,19 +27,19 @@ namespace athome {
             Thermistor(const Thermistor &) = delete;
             Thermistor &operator=(const Thermistor &) = delete;
             ~Thermistor() {}
-            virtual uint8_t *getSample() {
+            virtual int32_t getSensorSample() {
 #  ifdef ARDUINO
+                int32_t sample;
                 uint16_t adc = analogRead(_pin);
 #  else
 #   warning Not yet implemented for your platform
 #  endif /* ARDUINO */
                 float voltage = adc * _increment;
                 float resistance = voltage * RREF / (VREF - voltage);
-                _sample = (1 / (_a + (_b * utility::math::log<float>(resistance)) + (_c * utility::math::pow<float>(utility::math::log<float>(resistance), 3)))) - 273.15;
+                sample = (1 / (_a + (_b * utility::math::log<float>(resistance)) + (_c * utility::math::pow<float>(utility::math::log<float>(resistance), 3)))) - 273.15;
 
-                return reinterpret_cast<uint8_t *>(&_sample);
+                return sample;
             }
-            virtual float   getLastSample() const { return _sample; }
 
         private:
             int                     _pin;
