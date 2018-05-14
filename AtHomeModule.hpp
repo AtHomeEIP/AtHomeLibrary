@@ -466,6 +466,9 @@ namespace athome {
                  * Called (or trigger if called) when a module samples its sensor.
                  */
                 void        onSampleSensor() {
+                    if (_nbMeasures >= n) {
+                        _nbMeasures = 0;
+                    }
                     if (_sensor != nullptr && _nbMeasures < n) {
                         const sensor::ISensor::ISensorValue &value = _sensor->getSample();
                         _measures[_nbMeasures].unit = value.unit;
