@@ -16,12 +16,16 @@ namespace athome {
             /**
              * Returns a pointer on the sample of the sensor. This pointer needs to point on a float variable.
              */
-            virtual uint8_t *getSample() = 0;
+            virtual const ISensorValue &getSample();
             /**
              * Returns the last value sampled from the sensor (do not actually resample it).
              */
-            virtual int32_t getLastSample() const = 0;
-            ISensorScale    getEstimate();
+            virtual int32_t getSensorSample() = 0;
+            virtual void setThresholds(const ISensorThresholds &);
+
+        private:
+            ISensorValue    _value;
+            int32_t         _temp;
         };
     }
 }

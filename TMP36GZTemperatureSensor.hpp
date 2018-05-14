@@ -19,20 +19,16 @@ namespace athome {
             TMP36GZTemperatureSensor &operator=(const TMP36GZTemperatureSensor &) = delete;
             ~TMP36GZTemperatureSensor() {}
 
-            uint8_t *getSample() {
+            int32_t getSensorSample() {
 #  ifdef ARDUINO
                 constexpr uint32_t step = REF / utility::math::static_exp2<uint32_t>(RES);
-                _temp = ((analogRead(_pin) * step) - 500000) * 100;
+                int32_t _temp = ((analogRead(_pin) * step) - 500000) * 100;
 #  endif /* ARDUINO */
-                return reinterpret_cast<uint8_t *>(&_temp);
-            }
-            int32_t getLastSample() const {
                 return _temp;
             }
 
         private:
             uint8_t     _pin;
-            int32_t     _temp;
         };
     }
 }

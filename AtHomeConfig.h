@@ -17,21 +17,21 @@
 //# define DISABLE_ESP_AT_MODULE
 
 // Macros to uncomment to disable families of sensors
-//# define DISABLE_AIR_QUALITY_SENSOR
+# define DISABLE_AIR_QUALITY_SENSOR
 //# define DISABLE_TEMPERATURE_SENSOR
-//# define DISABLE_HUMIDITY_SENSOR
-//# define DISABLE_NOISE_SENSOR
-//# define DISABLE_LUMINOSITY_SENSOR
-//# define DISABLE_ANALOG_SENSOR
+# define DISABLE_HUMIDITY_SENSOR
+# define DISABLE_NOISE_SENSOR
+# define DISABLE_LUMINOSITY_SENSOR
+# define DISABLE_ANALOG_SENSOR
 
 // Macros to uncomment to disable sensors
-//# define DISABLE_DUMMY_SENSOR
+# define DISABLE_DUMMY_SENSOR
 //# define DISABLE_LDR_LUMINOSITY_SENSOR
 //# define DISABLE_SOUND_SENSOR
 //# define DISABLE_MQ2_SENSOR
 //# define DISABLE_GROVE_AIR_QUALITY_SENSOR
 //# define DISABLE_GROVE_DIGITAL_LIGHT_SENSOR
-//# define DISABLE_THERMISTOR_SENSOR
+# define DISABLE_THERMISTOR_SENSOR
 //# define DISABLE_TMP36GZ_TEMPERATURE_SENSOR
 
 // Macros to uncomment to disable displays
@@ -47,9 +47,9 @@
 //# define DISABLE_MSP430_FRAM
 
 // Macros to uncomment to disable utilities
-//# define DISABLE_LIST
-//# define DISABLE_ITERABLE
+# define DISABLE_LIST
+# define DISABLE_ITERABLE
 //# define DISABLE_BUFFER
-//# define DISABLE_QUEUE
+# define DISABLE_QUEUE
 
 #endif /* ATHOMECONFIG_H */

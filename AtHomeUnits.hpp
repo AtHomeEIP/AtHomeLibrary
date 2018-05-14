@@ -17,7 +17,7 @@ namespace athome {
                     MOLE,
                     CANDELA,
                     // Derived units
-                            RADIAN,
+                    RADIAN,
                     STERADIAN,
                     HERTZ,
                     NEWTON,
@@ -66,6 +66,11 @@ namespace athome {
                     ATTO,
                     ZEPTO,
                     YOCTO
+                };
+
+                struct SIUnit {
+                    UNIT    unit : 4;
+                    PREFIX  prefix : 4;
                 };
             }
         }

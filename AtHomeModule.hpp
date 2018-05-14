@@ -306,21 +306,22 @@ namespace athome {
 #  endif /* DISABLE_SENSOR */
 # endif /* DISABLE_COMMUNICATION */
             protected:
+                struct AtHomeSensorMeasure {
+                    sensor::ISensor::ISensorScale   estimate;
+                    utility::units::si::SIUnit      unit;
+                    timestamp                       timestamp;
+                    T                               sample;
+                };
+
                 AtHomeModule():
                     ABaseModule(),
 # ifndef DISABLE_SENSOR
                     _sensorInterval(TASK_SECOND),
+                    _nbMeasures(0),
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_COMMUNICATION
                     _communicationInterval(TASK_MILLISECOND * 10),
                     _uploadDataInterval(TASK_SECOND * 15),
-# endif /* DISABLE_COMMUNICATION */
-# ifndef DISABLE_SENSOR
-                    _nbMeasures(0),
-                    _refTimestamp(0),
-                    _timestamps{0},
-# endif /* DISABLE_SENSOR */
-# ifndef DISABLE_COMMUNICATION
                     _communicationPlugin(nullptr),
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE
@@ -330,7 +331,9 @@ namespace athome {
                     _vendor{0},
                     _serial{0}
                 {
+# ifndef DISABLE_SENSOR
                     memset(_measures, 0, sizeof(_measures));
+# endif /* DISABLE_SENSOR */
                 }
 # ifndef DISABLE_COMMUNICATION
                 /**
@@ -367,11 +370,17 @@ namespace athome {
                     broadcast(_serial);
                     broadcast(F("\",\"Data\":["));
                     for (size_t i = 0; i < _nbMeasures; i++) {
-                        broadcast(F("{\"Measure\":\""));
-                        broadcast(_measures[i]);
-                        broadcast(F("\",\"Timestamp\":\""));
-                        broadcast(_timestamps[i]);
-                        broadcast(F("\"}"));
+                        broadcast(F("{\"Value\": "));
+                        broadcast(_measures[i].sample);
+                        broadcast(F(",\"Timestamp\":\""));
+                        broadcast(_measures[i].timestamp);
+                        broadcast(F("\",Estimate:"));
+                        broadcast(_measures[i].estimate);
+                        broadcast(F(",Unit:"));
+                        broadcast(_measures[i].unit.unit);
+                        broadcast(F(",Prefix:"));
+                        broadcast(_measures[i].unit.prefix);
+                        broadcast(F("}"));
                         if (i < (_nbMeasures - 1)) {
                             broadcast(F(","));
                         }
@@ -398,9 +407,9 @@ namespace athome {
                             else if (!STRCMP(commandName.c_str(), communication::commands::enumerate)) {
                                 _enumerate(*_streams[i]);
                             }
-                            else if (!STRCMP(commandName.c_str(), communication::commands::syncTime)) {
+                            /* else if (!STRCMP(commandName.c_str(), communication::commands::syncTime)) {
                                 _syncTime(*_streams[i]);
-                            }
+                            } */
                             else if (_communicationPlugin != nullptr) {
                                 _communicationPlugin(commandName, *_streams[i]);
                             }
@@ -458,14 +467,17 @@ namespace athome {
                  */
                 void        onSampleSensor() {
                     if (_sensor != nullptr && _nbMeasures < n) {
-                        uint8_t* rawData = _sensor->getSample();
-                        if (rawData != nullptr) {
-                            memcpy(&(_measures[_nbMeasures]), rawData, sizeof(T));
+                        const sensor::ISensor::ISensorValue &value = _sensor->getSample();
+                        _measures[_nbMeasures].unit = value.unit;
+                        _measures[_nbMeasures].estimate = value.estimate;
+                        // TODO: need a time interface
+                        _measures[_nbMeasures].timestamp = millis();
+                        if (value.sampleRawPointer != nullptr) {
+                            memcpy(&(_measures[_nbMeasures].sample), value.sampleRawPointer, sizeof(T));
                         }
                         else {
-                            memset(&(_measures[_nbMeasures]), 0, sizeof(T));
+                            memset(&(_measures[_nbMeasures].sample), 0, sizeof(T));
                         }
-                        _timestamps[_nbMeasures] = _refTimestamp + millis();
                         _nbMeasures++;
 #  ifndef DISABLE_DISPLAY
                         onUpdateDisplay();
@@ -480,7 +492,7 @@ namespace athome {
                     if (_display == nullptr || _sensor == nullptr) {
                         return;
                     }
-                    _display->setDisplayedEstimate(_sensor->getEstimate());
+                    _display->setDisplayedEstimate(_measures[_nbMeasures].estimate);
                     _display->update();
                 }
 #  endif /* DISABLE_DISPLAY */
@@ -534,32 +546,26 @@ namespace athome {
                     while (stream.read() != communication::commands::end_of_command);
                 }
 
-                void        _syncTime(Stream &stream) {
+                //void        _syncTime(Stream &stream) {
                     /* String refTime = stream.readStringUntil(communication::commands::end_of_command);
                     _refTimestamp = refTime.toInt(); */
-                    uint8_t *ptr = reinterpret_cast<uint8_t *>(&_refTimestamp);
+                    /* uint8_t *ptr = reinterpret_cast<uint8_t *>(&_refTimestamp);
                     uint8_t data;
                     for (size_t i = 0; i < sizeof(timestamp); i++) {
                         while ((data = stream.read()) < 0);
                         ptr[i] = data;
                     }
                     while (stream.read() != communication::commands::end_of_command);
-                }
+                } */
 # endif /* DISABLE_COMMUNICATION */
             private:
 # ifndef DISABLE_SENSOR
                 unsigned long               _sensorInterval;
+                size_t                      _nbMeasures;
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_COMMUNICATION
                 unsigned long               _communicationInterval;
                 unsigned long               _uploadDataInterval;
-# endif /* DISABLE_COMMUNICATION */
-# ifndef DISABLE_SENSOR
-                size_t                      _nbMeasures;
-                timestamp                   _refTimestamp;
-                timestamp                   _timestamps[n];
-# endif /* DISABLE_SENSOR */
-# ifndef DISABLE_COMMUNICATION
                 AtHomeCommandPlugin        _communicationPlugin;
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE
@@ -570,7 +576,7 @@ namespace athome {
                 moduleSerial                _serial;
                 Scheduler                   _scheduler;
 # ifndef DISABLE_SENSOR
-                T                           _measures[n];
+                AtHomeSensorMeasure         _measures[n];
 # endif /* DISABLE_SENSOR */
 # if !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION)
                 Task                        _uploadDataTask;

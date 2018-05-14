@@ -4,7 +4,11 @@
 
 namespace athome {
     namespace sensor {
-        ATemperatureSensor::ATemperatureSensor() {}
+        ATemperatureSensor::ATemperatureSensor():_value{0},_temp(0) {
+            _value.sampleRawPointer = reinterpret_cast<void *>(&_temp);
+            _value.unit.unit = utility::units::si::UNIT::DEGREE_CELSIUS;
+            _value.unit.prefix = utility::units::si::PREFIX::MICRO;
+        }
 
         ATemperatureSensor::~ATemperatureSensor() {}
 
@@ -14,17 +18,22 @@ namespace athome {
          * Values are from: https://www.jechange.fr/energie/duale/guides/thermostat-temperature-4101
          * @return estimation of temperature on a scale from 1 (worst) to 10 (best)
          */
-        ISensor::ISensorScale ATemperatureSensor::getEstimate() {
-            int32_t temp = getLastSample();
-            if (temp < 16000000) {
-                return ISensor::ISensorScale::ONE;
+        const ISensor::ISensorValue &ATemperatureSensor::getSample() {
+            _temp = getSensorSample();
+            if (_temp < 16000000) {
+                _value.estimate = ISensor::ISensorScale::ONE;
             }
-            else if (temp >= 16000000 && temp <= 18000000) {
-                return ISensor::ISensorScale::FOUR;
+            else if (_temp >= 16000000 && _temp <= 18000000) {
+                _value.estimate = ISensor::ISensorScale::FOUR;
             }
             else {
-                return ISensor::ISensorScale::TEN;
+                _value.estimate = ISensor::ISensorScale::TEN;
             }
+            return _value;
+        }
+
+        void ATemperatureSensor::setThresholds(const ISensorThresholds &thresholds) {
+            (void)thresholds;
         }
     }
 }

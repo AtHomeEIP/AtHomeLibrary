@@ -4,6 +4,7 @@
 # include "AtHomeConfig.h"
 # if !defined(DISABLE_SENSOR)
 #  include <stdint.h>
+#  include "AtHomeUnits.hpp"
 
 namespace athome {
     namespace sensor {
@@ -32,11 +33,21 @@ namespace athome {
                     NINE,
                     TEN
                 };
+                struct ISensorValue {
+                    ISensorScale                estimate;
+                    utility::units::si::SIUnit  unit;
+                    void                        *sampleRawPointer;
+                };
+                struct ISensorThresholds {
+                    utility::units::si::SIUnit  unit;
+                    uint32_t                    min;
+                    uint32_t                    max;
+                };
                 //virtual ~ISensor() = 0;
                 /**
                  * Returns a pointer on sensor sample raw memory, as an array of bytes
                  */
-                virtual uint8_t *getSample() = 0;
+                virtual const ISensorValue  &getSample() = 0;
                 /**
                  * Returns the estimation of safety from the current sensor value
                  *
@@ -57,7 +68,7 @@ namespace athome {
                  * }
                  * \endcode
                  */
-                virtual ISensorScale getEstimate() = 0;
+                 virtual void               setThresholds(const ISensorThresholds &) = 0;
         };
     }
 }
