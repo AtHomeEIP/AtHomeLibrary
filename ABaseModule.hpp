@@ -2,12 +2,8 @@
 # define ABASEMODULE_HPP
 
 # include "AtHomeConfig.h"
-
-# define _TASK_INLINE // Macro used by TaskScheduler library
-
-# include <stdint.h>
 # include <Arduino.h>
-# include <TaskScheduler.h>
+# include <stdint.h>
 # include "IDisplay.hpp"
 # include "IPower.hpp"
 # include "ISensor.hpp"

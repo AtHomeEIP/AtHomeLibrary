@@ -1,7 +1,11 @@
 #ifndef ATHOMEMODULE_HPP
 # define ATHOMEMODULE_HPP
 
+# define _TASK_INLINE // Macro used by TaskScheduler library
+# define _TASK_SLEEP_ON_IDLE_RUN
+
 # include "AtHomeConfig.h"
+# include <TaskScheduler.h>
 # include <stdint.h>
 # include <alloca.h>
 # include "ARGBLed.hpp"
