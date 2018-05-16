@@ -17,7 +17,9 @@ namespace athome {
                         reinterpret_cast<void *>(&_temp),
                         PSTR("Temperature")
                 }),
-                _temp(0) {}
+                _temp(0),
+                _min(16000000),
+                _max(21000000) {}
 
         ATemperatureSensor::~ATemperatureSensor() {}
 

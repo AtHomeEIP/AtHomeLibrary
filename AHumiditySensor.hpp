@@ -14,14 +14,20 @@ namespace athome {
             AHumiditySensor &operator=(const AHumiditySensor &) = delete;
             ~AHumiditySensor();
             /**
-             * Returns a pointer on the sample of the sensor. This pointer needs to point on a float variable.
+             * Returns a reference on the sample of the sensor
              */
-            virtual uint8_t *getSample() = 0;
+            const ISensorValue &getSample();
             /**
-             * Returns the last value sampled from the sensor (do not actually resample it).
+             * Returns the last value sampled from the sensor expected to be in micro %RH
              */
-            virtual int32_t getLastSample() const = 0;
-            ISensorScale    getEstimate();
+            virtual int32_t getSensorSample() const = 0;
+            void setThresholds(const ISensorThresholds &);
+
+        private:
+            ISensorValue    _value;
+            int32_t         _humidity;
+            int32_t         _min;
+            int32_t         _max;
         };
     }
 }

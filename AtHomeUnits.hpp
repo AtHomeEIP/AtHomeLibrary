@@ -40,6 +40,7 @@ namespace athome {
                 KATAL,
                 // Non-SI units
                 PART_PER_MILLION,
+                RELATIVE_HUMIDITY,
                 // Struct of values with different units
                 AGGREGATE
             };
@@ -72,8 +73,8 @@ namespace athome {
             };
 
             struct Unit {
-                UNIT unit : 4;
-                PREFIX prefix : 4;
+                UNIT unit;
+                PREFIX prefix;
             };
         }
     }
