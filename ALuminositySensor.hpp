@@ -15,14 +15,20 @@ namespace athome {
             ~ALuminositySensor();
 
             /**
-             * Return a pointer on a uint16_t storing the number of lux as an integer.
+             * Return a reference on ISensorValue storing the number of lux as an integer.
              */
-            virtual uint8_t         *getSample() = 0;
+            const ISensorValue  &getSample();
             /**
              * Return the number of lux as an integer.
              */
-            virtual uint16_t        getLastSample() const = 0;
-            virtual ISensorScale    getEstimate();
+            virtual uint16_t    getSensorSample() = 0;
+            void                setThresholds(const ISensorThresholds &);
+
+        private:
+            ISensorValue    _value;
+            uint16_t        _lux;
+            uint16_t        _min;
+            uint16_t        _max;
         };
     }
 }
