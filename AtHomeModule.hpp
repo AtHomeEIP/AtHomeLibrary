@@ -273,6 +273,7 @@ namespace athome {
                 void                setVendor(const moduleVendor &vendor) {
                     if (vendor != nullptr) {
                         memcpy(_vendor, &vendor, sizeof(moduleVendor));
+                        onBackupOnStorage();
                     }
                 }
 
@@ -282,6 +283,7 @@ namespace athome {
                 void                setSerial(const moduleSerial &serial) {
                     if (serial != nullptr) {
                         memcpy(_serial, &serial, sizeof(moduleSerial));
+                        onBackupOnStorage();
                     }
                 }
 
