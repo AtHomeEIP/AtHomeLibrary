@@ -10,7 +10,7 @@ namespace athome {
         AHumiditySensor::AHumiditySensor():_value({
                 ISensor::ISensorScale::ZERO,
                 {
-                        utility::units::UNIT::,
+                        utility::units::UNIT::RELATIVE_HUMIDITY,
                         utility::units::PREFIX::MICRO
                 },
                 reinterpret_cast<void *>(&_humidity),

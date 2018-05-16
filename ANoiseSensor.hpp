@@ -14,9 +14,15 @@ namespace athome {
             ANoiseSensor &operator=(const ANoiseSensor &) = delete;
             ~ANoiseSensor();
 
-            virtual uint8_t *getSample() = 0;
-            virtual int32_t getLastSample() const = 0;
-            ISensorScale    getEstimate();
+            const ISensorValue &getSample();
+            virtual int32_t getSensorSample() const = 0;
+            void setThresholds(const ISensorThresholds &);
+
+        private:
+            ISensorValue    _value;
+            int32_t         _noise;
+            int32_t         _min;
+            int32_t         _max;
         };
     }
 }
