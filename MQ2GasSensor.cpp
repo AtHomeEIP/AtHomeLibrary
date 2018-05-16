@@ -13,6 +13,15 @@
 namespace athome {
     namespace sensor {
         MQ2GasSensor::MQ2GasSensor(int pin) : _pin(pin),
+                                              _value({
+                                                        ISensor::ISensorScale::ZERO,
+                                                        {
+                                                            utility::units::UNIT::PART_PER_MILLION,
+                                                            utility::units::PREFIX::BASE_UNIT
+                                                        },
+                                                        reinterpret_cast<void *>(&_values),
+                                                        PSTR("Air Quality")
+                                                    }),
                                               _sampleValue(false),
                                               _LPGCurve{2.3, 0.21, static_cast<float>(-0.47)},
                                               _COCurve{2.3, 0.72, static_cast<float>(-0.34)},
@@ -156,18 +165,21 @@ namespace athome {
             return static_cast<int>(utility::math::pow<float>(10, ((utility::math::log<float>(rs_ro_ratio) - pcurve[1]) / pcurve[2]) + pcurve[0]));
         }
 
-        uint8_t *MQ2GasSensor::getSample() {
+        const ISensor::ISensorValue &MQ2GasSensor::getSample() {
             _values.lpg = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_LPG);
             _values.co = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_CO);
             _values.smoke = MQGetGasPercentage(MQRead(_pin)/_R0,GAS_SMOKE);
-            return reinterpret_cast<uint8_t *>(&_values);
+            if (_values.lpg >= 10 && _values.co >= 10 && _values.smoke >= 9) {
+                _value.estimate = ISensor::ISensorScale::TEN;
+            }
+            else {
+                _value.estimate = ISensor::ISensorScale::ONE;
+            }
+            return _value;
         }
 
-        ISensor::ISensorScale MQ2GasSensor::getEstimate() {
-            //getSample();
-            if (_values.lpg >= 10 && _values.co >= 10 && _values.smoke >= 9)
-                return ISensor::ISensorScale::TEN;
-            return ISensor::ISensorScale::ONE;
+        void MQ2GasSensor::setThresholds(const ISensor::ISensorThresholds &thresholds) {
+            (void)thresholds;
         }
     }
 }

@@ -64,13 +64,14 @@ namespace athome{
             void                setThresholds(const ISensorThresholds &);
 
         private:
-            int _pin;
-            Values _values;
-            bool _sampleValue;
-            const float _LPGCurve[3];
-            const float _COCurve[3];
-            const float _SmokeCurve[3];
-            const float _R0;
+            int             _pin;
+            ISensorValue    _value;
+            Values          _values;
+            bool            _sampleValue;
+            const float     _LPGCurve[3];
+            const float     _COCurve[3];
+            const float     _SmokeCurve[3];
+            const float     _R0;
             float MQResistanceCalculation(int raw_adc);
             float MQCalibration(int mqpin);
             float MQRead(int mq_pin);
