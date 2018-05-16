@@ -38,13 +38,15 @@ namespace athome{
                 int smoke;
                 virtual size_t printTo(Print &p) const {
                     // TOOD: To replace with a binary serialization when uploadData will not use json anymore
-                    p.print(F("{\\\"lpg\\\":\\\""));
-                    p.print(lpg);
-                    p.print(F("\\\",\\\"co\\\":\\\""));
-                    p.print(co);
-                    p.print(F("\\\",\\\"smoke\\\":\\\""));
-                    p.print(smoke);
-                    p.print(F("\\\"}"));
+                    size_t len = 0;
+                    len += p.print(F("{\\\"lpg\\\":\\\""));
+                    len += p.print(lpg);
+                    len += p.print(F("\\\",\\\"co\\\":\\\""));
+                    len += p.print(co);
+                    len += p.print(F("\\\",\\\"smoke\\\":\\\""));
+                    len += p.print(smoke);
+                    len += p.print(F("\\\"}"));
+                    return len;
                 }
             };
 
@@ -52,14 +54,14 @@ namespace athome{
             MQ2GasSensor(const MQ2GasSensor &) = delete;
             MQ2GasSensor &operator=(const MQ2GasSensor &) = delete;
             ~MQ2GasSensor();
-            int   MQGetPercentage(float rs_ro_ratio, float *pcurve);
-            void        setPin(int pin);
-            int         getPin() const;
-            int         getLPG() const;
-            int         getSmoke() const;
-            int         getCO() const;
-            uint8_t     *getSample();
-            ISensorScale getEstimate();
+            int                 MQGetPercentage(float rs_ro_ratio, float *pcurve);
+            void                setPin(int pin);
+            int                 getPin() const;
+            int                 getLPG() const;
+            int                 getSmoke() const;
+            int                 getCO() const;
+            const ISensorValue  &getSample();
+            void                setThresholds(const ISensorThresholds &);
 
         private:
             int _pin;

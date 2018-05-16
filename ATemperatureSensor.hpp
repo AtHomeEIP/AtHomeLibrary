@@ -26,6 +26,8 @@ namespace athome {
         private:
             ISensorValue    _value;
             int32_t         _temp;
+            int32_t         _min;
+            int32_t         _max;
         };
     }
 }

@@ -2,6 +2,9 @@
 #if !defined(DISABLE_SENSOR) && !defined(DISABLE_TEMPERATURE_SENSOR)
 # include "ATemperatureSensor.hpp"
 
+# define MIN_EMPTY_ROOM_TEMPERATURE 12000000
+# define MAX_ROOM_TEMPERATURE       28000000
+
 namespace athome {
     namespace sensor {
         ATemperatureSensor::ATemperatureSensor():
@@ -26,20 +29,34 @@ namespace athome {
          */
         const ISensor::ISensorValue &ATemperatureSensor::getSample() {
             _temp = getSensorSample();
-            if (_temp < 16000000) {
+            if (_temp < MIN_EMPTY_ROOM_TEMPERATURE) {
                 _value.estimate = ISensor::ISensorScale::ONE;
             }
-            else if (_temp >= 16000000 && _temp <= 18000000) {
+            else if (_temp >= MIN_EMPTY_ROOM_TEMPERATURE && _temp < _min) {
+                _value.estimate = ISensor::ISensorScale::FOUR;
+            }
+            else if (_temp >= _min && _temp <= _max) {
+                _value.estimate = ISensor::ISensorScale::TEN;
+            }
+            else if (_temp > _max && _temp < MAX_ROOM_TEMPERATURE) {
                 _value.estimate = ISensor::ISensorScale::FOUR;
             }
             else {
-                _value.estimate = ISensor::ISensorScale::TEN;
+                _value.estimate = ISensor::ISensorScale::ONE;
             }
             return _value;
         }
 
         void ATemperatureSensor::setThresholds(const ISensorThresholds &thresholds) {
-            (void)thresholds;
+            if (thresholds.unit.unit != utility::units::UNIT::DEGREE_CELSIUS) {
+                return;
+            }
+            _min = thresholds.min;
+            _max = thresholds.max;
+            if (thresholds.unit.prefix == utility::units::PREFIX::BASE_UNIT) {
+                _min *= 1000000;
+                _max *= 1000000;
+            }
         }
     }
 }
