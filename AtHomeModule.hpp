@@ -29,7 +29,7 @@ namespace athome {
                 /**
                  * `timestamp` type is used to represent sensor readings date
                  */
-                typedef unsigned long   timestamp;
+                typedef unsigned long   t_timestamp;
 
                 /**
                  * AtHomeModule and derived classes are singletons, duplication is not allowed
@@ -310,7 +310,7 @@ namespace athome {
                 struct AtHomeSensorMeasure {
                     sensor::ISensor::ISensorScale   estimate;
                     utility::units::Unit            unit;
-                    timestamp                       timestamp;
+                    t_timestamp                     timestamp;
                     T                               sample;
                     PGM_P                           label;
                 };
