@@ -34,7 +34,7 @@ namespace athome {
             if (_humidity < 30000000 || _humidity > 65000000) {
                 _value.estimate = ISensor::ISensorScale::ONE;
             }
-            else if (_humidity >= _min && humidity <= _max) {
+            else if (_humidity >= _min && _humidity <= _max) {
                 _value.estimate = ISensor::ISensorScale::TEN;
             }
             else {
