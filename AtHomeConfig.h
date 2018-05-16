@@ -17,7 +17,7 @@
 //# define DISABLE_ESP_AT_MODULE
 
 // Macros to uncomment to disable families of sensors
-//# define DISABLE_AIR_QUALITY_SENSOR
+# define DISABLE_AIR_QUALITY_SENSOR
 //# define DISABLE_TEMPERATURE_SENSOR
 # define DISABLE_HUMIDITY_SENSOR
 # define DISABLE_NOISE_SENSOR

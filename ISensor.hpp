@@ -38,7 +38,7 @@ namespace athome {
                     ISensorScale            estimate;
                     utility::units::Unit    unit;
                     void                    *sampleRawPointer;
-                    PGM_P                   *label;
+                    PGM_P                   label;
                 };
                 struct ISensorThresholds {
                     utility::units::Unit    unit;
