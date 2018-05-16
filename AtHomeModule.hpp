@@ -372,18 +372,18 @@ namespace athome {
                     broadcast(_serial);
                     broadcast(F("\",\"Data\":["));
                     for (size_t i = 0; i < _nbMeasures; i++) {
-                        broadcast(F("{\"Value\": "));
+                        broadcast(F("{\"Value\":"));
                         broadcast(_measures[i].sample);
                         broadcast(F(",\"Timestamp\":\""));
                         broadcast(_measures[i].timestamp);
-                        broadcast(F("\",Estimate:"));
+                        broadcast(F("\",\"Estimate\":"));
                         broadcast(_measures[i].estimate);
-                        broadcast(F(",Unit:"));
+                        broadcast(F(",\"Unit\":"));
                         broadcast(_measures[i].unit.unit);
-                        broadcast(F(",Prefix:"));
+                        broadcast(F(",\"Prefix\":"));
                         broadcast(_measures[i].unit.prefix);
                         if (_measures[i].label != nullptr) {
-                            broadcast(F(",Label:\""));
+                            broadcast(F(",\"Label\":\""));
                             broadcast(FH(_measures[i].label));
                             broadcast(F("\""));
                         }
