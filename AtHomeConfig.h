@@ -25,7 +25,7 @@
 //# define DISABLE_ANALOG_SENSOR
 
 // Macros to uncomment to disable sensors
-# define DISABLE_DUMMY_SENSOR
+//# define DISABLE_DUMMY_SENSOR
 //# define DISABLE_LDR_LUMINOSITY_SENSOR
 //# define DISABLE_SOUND_SENSOR
 //# define DISABLE_MQ2_SENSOR

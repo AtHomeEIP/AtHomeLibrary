@@ -17,12 +17,8 @@ namespace athome {
             DummySensor &operator=(const DummySensor &) = delete;
             ~DummySensor() {}
 
-            virtual uint8_t *getSample() {
+            virtual U getSensorSample() {
                 memset(&_data, rand() % limit, sizeof(U));
-                return reinterpret_cast<uint8_t *>(&_data);
-            }
-
-            virtual U       getLastSample() const {
                 return _data;
             }
 
