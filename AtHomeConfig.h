@@ -22,7 +22,7 @@
 //# define DISABLE_HUMIDITY_SENSOR
 //# define DISABLE_NOISE_SENSOR
 //# define DISABLE_LUMINOSITY_SENSOR
-# define DISABLE_ANALOG_SENSOR
+//# define DISABLE_ANALOG_SENSOR
 
 // Macros to uncomment to disable sensors
 # define DISABLE_DUMMY_SENSOR

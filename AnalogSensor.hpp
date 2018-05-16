@@ -50,19 +50,17 @@ namespace athome {
 				 * }
 				 * \endcode
 				 */
-				virtual uint8_t *getSample();
-				/**
-				 * Return athome::sensor::ISensor::ISensorScale::ZERO if object is an instance of AnalogSensor class
-				 */
-                virtual ISensorScale getEstimate();
+				const ISensorValue &getSample();
+				void setThresholds(const ISensorThresholds &);
                 /**
                  * Return the value of the pin used to sample the sensor.
                  */
                 uint8_t getAnaloguePin();
 			protected:
-				uint8_t		_analog_pin;
+				uint8_t			_analog_pin;
 			private:
-				uint16_t	_last_sample;
+				ISensorValue	_value;
+				uint16_t		_sample;
 		};
 	}
 }

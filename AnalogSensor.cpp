@@ -9,24 +9,35 @@ namespace athome {
     namespace sensor {
         AnalogSensor::AnalogSensor(uint8_t pin):
             _analog_pin(pin),
-            _last_sample(0)
+            _value({
+                    ISensor::ISensorScale::ZERO,
+                    {
+                        utility::units::UNIT::UNKNOWN,
+                        utility::units::PREFIX::BASE_UNIT
+                    },
+                    reinterpret_cast<void *>(&_sample),
+                    PSTR("Analogue sensor")
+            }),
+            _sample(0)
         {}
 
         AnalogSensor::~AnalogSensor() {}
 
-        uint8_t *AnalogSensor::getSample() {
+        const ISensor::ISensorValue &AnalogSensor::getSample() {
 # ifdef ARDUINO
-            _last_sample = analogRead(_analog_pin);
+            _sample = analogRead(_analog_pin);
 # else
 #  error not implemented yet
 # endif /* ARDUINO */
-            return reinterpret_cast<uint8_t *>(&_last_sample);
+            return _value;
         }
-
-        ISensor::ISensorScale AnalogSensor::getEstimate() { return ISensorScale::ZERO; }
 
         uint8_t AnalogSensor::getAnaloguePin() {
             return _analog_pin;
+        }
+
+        void AnalogSensor::setThresholds(const ISensor::ISensorThresholds &thresholds) {
+            (void)thresholds;
         }
     }
 }
