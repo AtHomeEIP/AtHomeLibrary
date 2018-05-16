@@ -20,7 +20,7 @@ namespace athome {
 
         ANoiseSensor::~ANoiseSensor() {}
 
-        const ISensorValue& ANoiseSensor::getSample(){
+        const ISensor::ISensorValue& ANoiseSensor::getSample(){
             return _value;
         }
 
