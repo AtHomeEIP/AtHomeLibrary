@@ -26,7 +26,7 @@ namespace athome {
          * Values are from french norm NF EN 12464-1 https://fr.wikipedia.org/wiki/Lux_%28unit%C3%A9%29
          * @return estimation of the luminosity on a scale from 1 (worst) to 10 (best)
          */
-        const ISensorValue& ALuminositySensor::getSample() {
+        const ISensor::ISensorValue& ALuminositySensor::getSample() {
             _lux = getSensorSample();
             _value.estimate = (_lux < _min || _lux > _max) ? ISensor::ISensorScale::ONE : ISensor::ISensorScale::TEN;
             return _value;
