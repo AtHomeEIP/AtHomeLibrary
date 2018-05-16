@@ -39,13 +39,13 @@ namespace athome{
                 virtual size_t printTo(Print &p) const {
                     // TOOD: To replace with a binary serialization when uploadData will not use json anymore
                     size_t len = 0;
-                    len += p.print(F("{\\\"lpg\\\":\\\""));
+                    len += p.print(F("{\"lpg\":"));
                     len += p.print(lpg);
-                    len += p.print(F("\\\",\\\"co\\\":\\\""));
+                    len += p.print(F(",\"co\":"));
                     len += p.print(co);
-                    len += p.print(F("\\\",\\\"smoke\\\":\\\""));
+                    len += p.print(F(",\"smoke\":"));
                     len += p.print(smoke);
-                    len += p.print(F("\\\"}"));
+                    len += p.print(F("}"));
                     return len;
                 }
             };
