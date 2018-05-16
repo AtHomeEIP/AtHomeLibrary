@@ -5,6 +5,7 @@
 # if !defined(DISABLE_SENSOR)
 #  include <stdint.h>
 #  include "AtHomeUnits.hpp"
+#  include "AtHomeFlashCommon.h"
 
 namespace athome {
     namespace sensor {
@@ -34,14 +35,15 @@ namespace athome {
                     TEN
                 };
                 struct ISensorValue {
-                    ISensorScale                estimate;
-                    utility::units::si::SIUnit  unit;
-                    void                        *sampleRawPointer;
+                    ISensorScale            estimate;
+                    utility::units::Unit    unit;
+                    void                    *sampleRawPointer;
+                    PGM_P                   *label;
                 };
                 struct ISensorThresholds {
-                    utility::units::si::SIUnit  unit;
-                    uint32_t                    min;
-                    uint32_t                    max;
+                    utility::units::Unit    unit;
+                    uint32_t                min;
+                    uint32_t                max;
                 };
                 //virtual ~ISensor() = 0;
                 /**

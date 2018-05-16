@@ -8,6 +8,7 @@
 # include "ABaseModule.hpp"
 # include "AWiFiCommunicator.hpp"
 # include "AtHomeCommunicationProtocol.hpp"
+# include "AtHomeFlashCommon.h"
 
 namespace athome {
     namespace module {
@@ -308,9 +309,10 @@ namespace athome {
             protected:
                 struct AtHomeSensorMeasure {
                     sensor::ISensor::ISensorScale   estimate;
-                    utility::units::si::SIUnit      unit;
+                    utility::units::Unit            unit;
                     timestamp                       timestamp;
                     T                               sample;
+                    PGM_P                           label;
                 };
 
                 AtHomeModule():
@@ -380,6 +382,11 @@ namespace athome {
                         broadcast(_measures[i].unit.unit);
                         broadcast(F(",Prefix:"));
                         broadcast(_measures[i].unit.prefix);
+                        if (_measures[i].label != nullptr) {
+                            broadcast(F(",Label:\""));
+                            broadcast(FH(_measures[i].label));
+                            broadcast(F("\""));
+                        }
                         broadcast(F("}"));
                         if (i < (_nbMeasures - 1)) {
                             broadcast(F(","));
@@ -475,6 +482,7 @@ namespace athome {
                         _measures[_nbMeasures].estimate = value.estimate;
                         // TODO: need a time interface
                         _measures[_nbMeasures].timestamp = millis();
+                        _measures[_nbMeasures].label = value.label;
                         if (value.sampleRawPointer != nullptr) {
                             memcpy(&(_measures[_nbMeasures].sample), value.sampleRawPointer, sizeof(T));
                         }

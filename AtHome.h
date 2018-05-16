@@ -53,8 +53,6 @@ using athome::sensor::SoundSensor;
 #   endif /* DISABLE_SOUND_SENSOR */
 #  endif /* DISABLE_NOISE_SENSOR */
 #  ifndef DISABLE_AIR_QUALITY_SENSOR
-#   include "AAirQualitySensor.hpp"
-using athome::sensor::AAirQualitySensor;
 #   if defined(ARDUINO_AVR_UNO) && !defined(DISABLE_GROVE_AIR_QUALITY_SENSOR)
 #    include "GroveAirQualitySensor.hpp"
 using athome::sensor::GroveAirQualitySensor;

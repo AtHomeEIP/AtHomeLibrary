@@ -7,20 +7,30 @@
 #  ifndef PROGMEM
 #   define PROGMEM
 #  endif /* PROGMEM */
-#  ifndef F
-#   define F(str) str
-#  endif /* F */
-#  define FH(str) str
+#  ifdef ARDUINO
+#   include <avr/pgmspace.h>
+#   include <WString.h>
+#   ifdef __cplusplus
+#    define FH(str)   reinterpret_cast<const __FlashStringHelper *>(str)
+#   else
+#    define FH(str)  ((const __FlashStringHelper *)(str))
+#   endif /* __cplusplus */
+#  else
+#   define FH(str) str
+#   define PGM_P const char *
+#  endif /* ARDUINO */
 # else
 #  include <avr/pgmspace.h>
 #  define STRCMP    strcmp_P
 #  define SNPRINTF  snprintf_P
 #  define SSCANF    sscanf_P
-#  include <WString.h>
-#  ifdef __cplusplus
-#   define FH(str)   reinterpret_cast<const __FlashStringHelper *>(str)
-#  else
-#   define FH(str)  ((const __FlashStringHelper *)(str))
-#  endif /* __cplusplus */
+#  ifdef ARDUINO
+#   include <WString.h>
+#   ifdef __cplusplus
+#    define FH(str)   reinterpret_cast<const __FlashStringHelper *>(str)
+#   else
+#    define FH(str)  ((const __FlashStringHelper *)(str))
+#   endif /* __cplusplus */
+#  endif /* ARDUINO */
 # endif /* __AVR__ */
 #endif /* ATHOMEFLASHCOMMON_H */

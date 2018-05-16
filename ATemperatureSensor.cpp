@@ -4,11 +4,17 @@
 
 namespace athome {
     namespace sensor {
-        ATemperatureSensor::ATemperatureSensor():_value{0},_temp(0) {
-            _value.sampleRawPointer = reinterpret_cast<void *>(&_temp);
-            _value.unit.unit = utility::units::si::UNIT::DEGREE_CELSIUS;
-            _value.unit.prefix = utility::units::si::PREFIX::MICRO;
-        }
+        ATemperatureSensor::ATemperatureSensor():
+                _value({
+                        ISensor::ISensorScale::ZERO,
+                        {
+                            utility::units::UNIT::DEGREE_CELSIUS,
+                            utility::units::PREFIX::MICRO
+                        },
+                        reinterpret_cast<void *>(&_temp),
+                        PSTR("Temperature")
+                }),
+                _temp(0) {}
 
         ATemperatureSensor::~ATemperatureSensor() {}
 
