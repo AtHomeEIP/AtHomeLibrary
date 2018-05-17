@@ -19,16 +19,37 @@ Usual locations of Arduino directory:
 - Linux: ~/Arduino (ie, in your home folder)
 - OS X: ~/Arduino (ie, in your home folder)
 
-Libraries required:
+Required libraries:
 - Partial Arduino Core implementing interfaces Print, Printable and Stream -> Used for generic interfaces and avoid duplicates between Arduino and non-Arduino projects
-- ArduinoJson library, despite it's name it's fully portable: https://github.com/bblanchon/ArduinoJson
-- Grove LightSensor library: https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor
-- Grove AirQuality library: https://github.com/SeeedDocument/Grove_Air_Quality_Sensor_v1.3/raw/master/
-- Grove ChainableLED library: https://github.com/pjpmarques/ChainableLED
-- Adafruit NeoPixel library: https://github.com/adafruit/Adafruit_NeoPixel
 - TaskScheduler library: https://github.com/arkhipenko/TaskScheduler
-- Adafruit Sensor library: https://github.com/adafruit/Adafruit_Sensor
-- Adafruit TSL2561 library: https://github.com/adafruit/Adafruit_TSL2561
+
+Optional libraries:
+- ArduinoJson library, despite it's name it's fully portable: https://github.com/bblanchon/ArduinoJson (if using network based AtHome modules)
+- Grove LightSensor library: https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor (if using Grove Digital Light Sensor)
+- Grove AirQuality library: https://github.com/SeeedDocument/Grove_Air_Quality_Sensor_v1.3/raw/master/ (if using Grove Air Quality Sensor v1.3)
+- Grove ChainableLED library: https://github.com/pjpmarques/ChainableLED (if using Grove Chainable LEDs)
+- Adafruit NeoPixel library: https://github.com/adafruit/Adafruit_NeoPixel (if using NeoPixel)
+
+Recommended microcontroler platform:
+- MCU compatible with Arduino core (either 8/16/32bits)
+- C++11 compiler support
+- Internal persistent storage (FRAM is better, EEPROM other way)
+- Internal RTC
+- At least 32KB of program memory (Warning: not counting bootloader size, some chips such as Microchip PIC32MX or Espressif ESP8265/8266/32 will require much more program memory)
+- At least 1KB of RAM
+
+Requirements can be reduced depending on components used and by tweaking the framework configuration. See AtHomeConfig.h to disable unused features.
+
+Minimum microcontroler requirements:
+- MCU compatible with Arduino core (either 8/16/32bits)
+- C++11 compiler support
+- At least 4KB of program memory (not counting bootloader size if any)
+- At least 512B of RAM
+
+Please, note that the minimum requirements above can be obtained with a finely tuned configuration of the framework for some projects,
+but it's likely to use more resources for common usages and we cannot guarantee it will always fit in these requirements. If you're unsure,
+try to buy a microcontroler fitting the recommended requirements or at least try to compile and simulate the firmware to check if it works on
+your small device before effectively buying one and flashing the firmware.
 
 ## Compatible environments:
 

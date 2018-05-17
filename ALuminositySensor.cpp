@@ -33,7 +33,11 @@ namespace athome {
         }
 
         void ALuminositySensor::setThresholds(const ISensor::ISensorThresholds &thresholds) {
-
+            if (thresholds.unit.unit != utility::units::UNIT::LUX) {
+                return;
+            }
+            _min = thresholds.min;
+            _max = thresholds.max;
         }
     }
 }

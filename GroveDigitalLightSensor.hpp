@@ -12,20 +12,11 @@ namespace athome {
     namespace sensor {
         class GroveDigitalLightSensor : public athome::sensor::ALuminositySensor {
         public:
+            GroveDigitalLightSensor();
             GroveDigitalLightSensor(const GroveDigitalLightSensor &) = delete;
             GroveDigitalLightSensor &operator=(const GroveDigitalLightSensor &) = delete;
-
-            static GroveDigitalLightSensor  *getInstance();
-            uint8_t                         *getSample();
-            uint16_t                        getLastSample() const;
-        protected:
-            GroveDigitalLightSensor();
-        private:
             ~GroveDigitalLightSensor();
-        private:
-            uint16_t                        _sample;
-        private:
-            static GroveDigitalLightSensor  *_instance;
+            uint16_t                        getSensorSample();
         };
     }
 }
