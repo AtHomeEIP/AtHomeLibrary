@@ -19,10 +19,10 @@ namespace athome {
 		        struct PowerInfo {
 		            uint32_t    voltage;
 		            uint32_t    current;
-		            uint16_t    remainingCapacity;
+		            uint8_t     remainingCapacity;
 		        };
 		        //virtual ~IPower() = 0;
-				virtual const PowerInfo &getPowerInfo() = 0;
+				virtual const PowerInfo *getPowerInfo() = 0;
 				virtual void            sleep(SLEEP_MODE) = 0;
 		};
 	}
