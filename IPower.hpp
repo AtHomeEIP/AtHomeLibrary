@@ -23,7 +23,7 @@ namespace athome {
 		        };
 		        //virtual ~IPower() = 0;
 				virtual const PowerInfo *getPowerInfo() = 0;
-				virtual void            sleep(SLEEP_MODE) = 0;
+				virtual void            sleep(SLEEP_MODE, uint32_t) = 0;
 		};
 	}
 }
