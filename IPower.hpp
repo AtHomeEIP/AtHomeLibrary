@@ -9,9 +9,21 @@ namespace athome {
 	namespace power {
 		class IPower {
 			public:
+		        enum SLEEP_MODE {
+		            ACTIVE = 0,
+                    LIGHT_SLEEP,
+                    SLEEP,
+                    DEEP_SLEEP
+		        };
+
+		        struct PowerInfo {
+		            uint32_t    voltage;
+		            uint32_t    current;
+		            uint16_t    remainingCapacity;
+		        };
 		        //virtual ~IPower() = 0;
-				virtual uint32_t getVoltage() = 0; //! Hard-coded voltage in mV or calculated depending of the type of power supply
-				virtual uint32_t getCurrent() = 0; //! Hard-coded current in uA or able to source depending of the type of power supply
+				virtual const PowerInfo &getPowerInfo() = 0;
+				virtual void            sleep(SLEEP_MODE) = 0;
 		};
 	}
 }
