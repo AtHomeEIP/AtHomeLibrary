@@ -40,7 +40,7 @@ using LDRLuminositySensor3V3 = athome::sensor::LDRLuminositySensor<3300000, 10, 
 #   if (defined(__AVR_ATmega328__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega32U4__) ||\
        defined(__AVR_ATmega2560__)) && !defined(DISABLE_GROVE_DIGITAL_LIGHT_SENSOR)
 #    include "GroveDigitalLightSensor.hpp"
-        using athome::sensor::GroveDigitalLightSensor;
+using athome::sensor::GroveDigitalLightSensor;
 #   endif /* defined(ARDUINO) && (defined(__ATmega328__) || defined(__ATmega32U4__) || defined(__ATmega2560__)) &&
              !defined(DISABLE_GROVE_DIGITAL_LIGHT_SENSOR) */
 #  endif /* DISABLE_LUMINOSITY_SENSOR */

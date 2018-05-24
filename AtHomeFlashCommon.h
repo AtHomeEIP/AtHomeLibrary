@@ -8,7 +8,6 @@
 #   define PROGMEM
 #  endif /* PROGMEM */
 #  ifdef ARDUINO
-#   include <avr/pgmspace.h>
 #   include <WString.h>
 #   ifdef __cplusplus
 #    define FH(str)   reinterpret_cast<const __FlashStringHelper *>(str)

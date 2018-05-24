@@ -46,6 +46,9 @@
 //# define DISABLE_AVR_EEPROM
 //# define DISABLE_MSP430_FRAM
 
+// Macros to uncomment to disable power management controllers
+//# define DISABLE_AVR_POWER_MANAGEMENT
+
 // Macros to uncomment to disable utilities
 # define DISABLE_LIST
 # define DISABLE_ITERABLE
