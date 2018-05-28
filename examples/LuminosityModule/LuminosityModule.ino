@@ -10,9 +10,6 @@ GroveChainableLED::Pins grovePins = {7, 8};
 GroveChainableLED led(&grovePins);
 LightModule *module = LightModule::getInstance();
 
-//const char vendor[] = "AtHome\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-//const char serial[] = "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO";
-
 void setup() {
     // put your setup code here, to run once:
     Serial.begin(115200);
@@ -26,8 +23,7 @@ void setup() {
 #ifdef __AVR__
     module->setStorage(&storage);
 #endif
-    //module->setVendor(vendor); // Set the vendor of the module -> Always an array of 32 bytes
-    //module->setSerial(serial); // Set the serial of the module -> Always an array of 32 bytes
+    //module->setSerial(42);
     module->setup();
 }
 

@@ -23,13 +23,9 @@ namespace athome {
         class AtHomeModule : public ABaseModule {
             public:
                 /**
-                 * `moduleVendor` type represents a type holding the vendor name of a module ("AtHome" when they are built by AtHome team)
-                 */
-                typedef char            moduleVendor[33];
-                /**
                  * `moduleSerial` type represents a unique value used to identify a module from other
                  */
-                typedef char            moduleSerial[33];
+                typedef uint32_t    moduleSerial;
                 /**
                  * `timestamp` type is used to represent sensor readings date
                  */
@@ -257,34 +253,18 @@ namespace athome {
                     _onRestorePlugin = plugin;
                 }
 # endif /* DISABLE_PERSISTENT_STORAGE */
-                /**
-                 * Return a reference to the vendor ID of the module ("AtHome" for AtHome modules).
-                 */
-                const moduleVendor &getVendor() const { return _vendor; }
 
                 /**
                  * Return the unique serial of the module, used to identify it.
                  */
-                const moduleSerial &getSerial() const { return _serial; }
-
-                /**
-                 * Set the vendor ID of the module.
-                 */
-                void                setVendor(const moduleVendor &vendor) {
-                    if (vendor != nullptr) {
-                        memcpy(_vendor, &vendor, sizeof(moduleVendor));
-                        onBackupOnStorage();
-                    }
-                }
+                const moduleSerial getSerial() const { return _serial; }
 
                 /**
                  * Set the unique serial used to identify the module.
                  */
-                void                setSerial(const moduleSerial &serial) {
-                    if (serial != nullptr) {
-                        memcpy(_serial, &serial, sizeof(moduleSerial));
-                        onBackupOnStorage();
-                    }
+                void                setSerial(moduleSerial serial) {
+                    _serial = serial;
+                    onBackupOnStorage();
                 }
 
             private:
@@ -324,20 +304,19 @@ namespace athome {
                 AtHomeModule():
                     ABaseModule(),
 # ifndef DISABLE_SENSOR
-                    _sensorInterval(TASK_SECOND),
+                    _sensorInterval(DEFAULT_SENSOR_INTERVAL * TASK_MILLISECOND),
                     _nbMeasures(0),
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_COMMUNICATION
-                    _communicationInterval(TASK_MILLISECOND * 10),
-                    _uploadDataInterval(TASK_SECOND * 15),
+                    _communicationInterval(DEFAULT_COMMUNICATION_INTERVAL * TASK_MILLISECOND),
+                    _uploadDataInterval(DEFAULT_UPLOAD_DATA_INTERVAL * TASK_MILLISECOND),
                     _communicationPlugin(nullptr),
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE
                     _onBackupPlugin(nullptr),
                     _onRestorePlugin(nullptr),
 # endif /* DISABLE_PERSISTENT_STORAGE */
-                    _vendor{0},
-                    _serial{0}
+                    _serial(0)
                 {
 # ifndef DISABLE_SENSOR
                     memset(_measures, 0, sizeof(_measures));
@@ -374,9 +353,9 @@ namespace athome {
                     // Todo: implement a more resource efficient and generic version
                     broadcastln(FH(communication::commands::uploadData));
                     broadcastln(FH(communication::commands::part_separator));
-                    broadcast(F("{\"Serial\":\""));
+                    broadcast(F("{\"Serial\":"));
                     broadcast(_serial);
-                    broadcast(F("\",\"Data\":["));
+                    broadcast(F(",\"Data\":["));
                     for (size_t i = 0; i < _nbMeasures; i++) {
                         broadcast(F("{\"Value\":"));
                         broadcast(_measures[i].sample);
@@ -417,12 +396,6 @@ namespace athome {
                             if (!STRCMP(commandName.c_str(), communication::commands::setProfile)) {
                                 _setProfile(*_streams[i]);
                             }
-                            else if (!STRCMP(commandName.c_str(), communication::commands::enumerate)) {
-                                _enumerate(*_streams[i]);
-                            }
-                            /* else if (!STRCMP(commandName.c_str(), communication::commands::syncTime)) {
-                                _syncTime(*_streams[i]);
-                            } */
                             else if (_communicationPlugin != nullptr) {
                                 _communicationPlugin(commandName, *_streams[i]);
                             }
@@ -453,10 +426,9 @@ namespace athome {
                  */
                 void        onBackupOnStorage() {
                     if (_storage != nullptr) {
-                        _storage->write(0, reinterpret_cast<const void *>(_vendor), sizeof(moduleVendor));
-                        _storage->write(sizeof(moduleVendor), reinterpret_cast<const void *>(_serial), sizeof(moduleSerial));
+                        _storage->write(0, reinterpret_cast<const void *>(_serial), sizeof(moduleSerial));
                         if (_onBackupPlugin != nullptr) {
-                            _onBackupPlugin(sizeof(moduleVendor) + sizeof(moduleSerial), *_storage);
+                            _onBackupPlugin(sizeof(moduleSerial), *_storage);
                         }
                     }
                 }
@@ -466,10 +438,9 @@ namespace athome {
                  */
                 void        onRestoreFromStorage() {
                     if (_storage != nullptr) {
-                        _storage->read(0, reinterpret_cast<void *>(_vendor), sizeof(moduleVendor));
-                        _storage->read(sizeof(moduleVendor), reinterpret_cast<void *>(_serial), sizeof(moduleSerial));
+                        _storage->read(0, reinterpret_cast<void *>(_serial), sizeof(moduleSerial));
                         if (_onRestorePlugin != nullptr) {
-                            _onRestorePlugin(sizeof(moduleVendor) + sizeof(moduleSerial), *_storage);
+                            _onRestorePlugin(sizeof(moduleSerial), *_storage);
                         }
                     }
                 }
@@ -516,64 +487,17 @@ namespace athome {
 # endif /* DISABLE_SENSOR */
             private:
 # ifndef DISABLE_COMMUNICATION
-                void        _enumerate(Stream &stream) {
-                    while (stream.read() != communication::commands::end_of_command);
-                    stream.print(FH(communication::commands::enumerate));
-                    stream.print(FH(communication::commands::end_of_line));
-                    stream.print(FH(communication::commands::part_separator));
-                    stream.print(FH(communication::commands::end_of_line));
-                    stream.print(F("{\"serial\":\""));
-                    stream.print(_serial);
-                    stream.print(F("\",\"vendor\":\""));
-                    stream.print(_vendor);
-                    stream.print(F("\"}"));
-                    stream.print(FH(communication::commands::end_of_line));
-                    stream.print(communication::commands::end_of_command);
-                }
 
                 void        _setProfile(Stream &stream) {
-                    /* Version opti if you have enough RAM to store a copy of all data:
-                    size_t size = sizeof(moduleVendor) + sizeof(moduleSerial) + sizeof(moduleType);
-                    char *buffer = reinterpret_cast<char *>(alloca(size));
-                    if (stream.readBytesUntil(communication::commands::end_of_command, buffer, size) != size) {
-                        return;
-                    }
-                    memcpy(_vendor, buffer, sizeof(moduleVendor));
-                    buffer += sizeof(moduleVendor);
-                    memcpy(_serial, buffer, sizeof(moduleSerial));
-                    buffer += sizeof(moduleSerial);
-                    memcpy(&_type, sizeof(moduleType)); */
                     uint8_t data;
-                    uint8_t *ptr = reinterpret_cast<uint8_t *>(_vendor);
-                    for (size_t i = 0; i < sizeof(moduleVendor); i++) {
-                        while ((data = stream.read()) < 0);
-                        if (data == communication::commands::end_of_command) {
-                            return;
-                        }
-                        ptr[i] = data;
-                    }
-                    ptr = reinterpret_cast<uint8_t *>(_serial);
+                    uint8_t *ptr = reinterpret_cast<uint8_t *>(&_serial);
                     for (size_t i = 0; i < sizeof(moduleSerial); i++) {
                         while ((data = stream.read()) < 0);
-                        if (data == communication::commands::end_of_command) {
-                            return;
-                        }
                         ptr[i] = data;
                     }
                     while (stream.read() != communication::commands::end_of_command);
                 }
 
-                //void        _syncTime(Stream &stream) {
-                    /* String refTime = stream.readStringUntil(communication::commands::end_of_command);
-                    _refTimestamp = refTime.toInt(); */
-                    /* uint8_t *ptr = reinterpret_cast<uint8_t *>(&_refTimestamp);
-                    uint8_t data;
-                    for (size_t i = 0; i < sizeof(timestamp); i++) {
-                        while ((data = stream.read()) < 0);
-                        ptr[i] = data;
-                    }
-                    while (stream.read() != communication::commands::end_of_command);
-                } */
 # endif /* DISABLE_COMMUNICATION */
             private:
 # ifndef DISABLE_SENSOR
@@ -589,7 +513,6 @@ namespace athome {
                 AtHomeStoragePlugin        _onBackupPlugin;
                 AtHomeStoragePlugin        _onRestorePlugin;
 # endif /* DISABLE_PERSISTENT_STORAGE */
-                moduleVendor                _vendor;
                 moduleSerial                _serial;
                 Scheduler                   _scheduler;
 # ifndef DISABLE_SENSOR

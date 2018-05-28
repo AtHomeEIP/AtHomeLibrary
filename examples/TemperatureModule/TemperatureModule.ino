@@ -10,9 +10,9 @@ MonochromaticLED led(2, true);
 MSP430FRAM *storage = MSP430FRAM::getInstance();
 #elif defined(__AVR__)
 ArduinoEEPROM eeprom;
-IStorage *storage = &eeprom;
+athome::storage::IStorage *storage = &eeprom;
 #else
-IStorage *storage = nullptr;
+athome::storage::IStorage *storage = nullptr;
 #endif /* __MSP430__ */
 
 void setup() {

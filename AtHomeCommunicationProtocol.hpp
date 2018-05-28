@@ -15,9 +15,7 @@ namespace athome {
             extern const PROGMEM char end_of_line[];
             extern const PROGMEM char part_separator[];
 
-            extern const PROGMEM char enumerate[];
             extern const PROGMEM char uploadData[];
-            extern const PROGMEM char syncTime[];
 #  if !defined(DISABLE_NETWORK)
 #   if !defined(DISABLE_WIFI)
             extern const PROGMEM char setWiFi[];

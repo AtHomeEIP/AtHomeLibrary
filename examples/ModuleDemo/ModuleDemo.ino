@@ -23,8 +23,6 @@ DummySensor<ATemperatureSensor, int32_t, 50000000> dummyTemperatureSensor; // Ge
 #ifdef __AVR__
 ArduinoEEPROM eeprom;
 #endif
-const char vendor[] = "AtHome\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-const char serial[] = "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO";
 
 void setup() {
     // put your setup code here, to run once:
@@ -39,8 +37,7 @@ void setup() {
     module->setStorage(&eeprom); // Set the storage used to store permanent data such as the type, serial and vendor of the module
 #endif
     module->setType(MyModule::TEMPERATURE); // Set the type of the module
-    module->setVendor(vendor); // Set the vendor of the module -> Always an array of 32 bytes
-    module->setSerial(serial); // Set the serial of the module -> Always an array of 32 bytes
+    module->setSerial(42); // Set the serial of the module -> Always an array of 32 bytes
     module->setSensorExecutionInterval(SENSOR_INTERVAL); // Samples the sensor every 60 seconds
     module->setUploadDataExecutionInterval(UPLOAD_INTERVAL); // Send the data after at most 15 time the sensor was sampled, as we can't buffer more anyway
     module->setCommunicationExecutionInterval(1); // Listen for input data every 1 millisecond

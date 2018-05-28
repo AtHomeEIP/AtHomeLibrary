@@ -12,9 +12,7 @@ namespace athome {
             const char end_of_line[] = "\r\n";
             const char part_separator[] = "================================================================================";
 
-            const char enumerate[] = "Enumerate";
             const char uploadData[] = "UploadData";
-            const char syncTime[] = "SyncTime";
 #  if !defined(DISABLE_NETWORK)
 #   if !defined(DISABLE_WIFI)
             const char setWiFi[] = "SetWiFi";

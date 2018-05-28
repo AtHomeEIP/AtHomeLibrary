@@ -9,9 +9,6 @@ Stream *streams[] = {&Serial, nullptr};
 MQ2GasSensor sensor(8);
 GasModule *module = GasModule::getInstance();
 
-const char vendor[] = "AtHome\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0";
-const char serial[] = "XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXO";
-
 void setup() {
     // put your setup code here, to run once:
     Serial.begin(115200);
@@ -23,8 +20,7 @@ void setup() {
     module->setCommunicationExecutionInterval(1);
     module->setSensorExecutionInterval(100);
     module->setUploadDataExecutionInterval(1001);
-    //module->setVendor(vendor); // Set the vendor of the module -> Always an array of 32 bytes
-    //module->setSerial(serial); // Set the serial of the module -> Always an array of 32 bytes
+    //module->setSerial(42);
     module->setup();
 }
 

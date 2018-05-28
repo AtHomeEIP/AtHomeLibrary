@@ -1,6 +1,11 @@
 #ifndef ATHOMECONFIG_H
 # define ATHOMECONFIG_H
 
+// Macros to define default interval values in ms
+# define DEFAULT_SENSOR_INTERVAL        1000
+# define DEFAULT_UPLOAD_DATA_INTERVAL   1000
+# define DEFAULT_COMMUNICATION_INTERVAL 1
+
 // Macros to uncomment to disable full part of modules
 //# define DISABLE_SENSOR
 //# define DISABLE_DISPLAY
