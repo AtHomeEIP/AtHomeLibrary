@@ -400,9 +400,8 @@ namespace athome {
                                 _communicationPlugin(commandName, *_streams[i]);
                             }
                             else {
-                                while (_streams[i]->read() != communication::commands::end_of_command);
+                                _streams[i]->flush();
                             }
-                            _streams[i]->flush();
                             //while (_streams[i]->read() != -1); // Remove the rest of the input
                         }
                     }
