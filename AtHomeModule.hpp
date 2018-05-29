@@ -262,7 +262,7 @@ namespace athome {
                 /**
                  * Set the unique serial used to identify the module.
                  */
-                void                setSerial(moduleSerial serial) {
+                void setSerial(moduleSerial serial) {
                     _serial = serial;
                     onBackupOnStorage();
                 }
@@ -425,7 +425,7 @@ namespace athome {
                  */
                 void        onBackupOnStorage() {
                     if (_storage != nullptr) {
-                        _storage->write(0, reinterpret_cast<const void *>(_serial), sizeof(moduleSerial));
+                        _storage->write(0, reinterpret_cast<const void *>(&_serial), sizeof(moduleSerial));
                         if (_onBackupPlugin != nullptr) {
                             _onBackupPlugin(sizeof(moduleSerial), *_storage);
                         }
@@ -437,7 +437,7 @@ namespace athome {
                  */
                 void        onRestoreFromStorage() {
                     if (_storage != nullptr) {
-                        _storage->read(0, reinterpret_cast<void *>(_serial), sizeof(moduleSerial));
+                        _storage->read(0, reinterpret_cast<void *>(&_serial), sizeof(moduleSerial));
                         if (_onRestorePlugin != nullptr) {
                             _onRestorePlugin(sizeof(moduleSerial), *_storage);
                         }
@@ -495,6 +495,7 @@ namespace athome {
                         ptr[i] = data;
                     }
                     while (stream.read() != communication::commands::end_of_command);
+                    onBackupOnStorage();
                 }
 
 # endif /* DISABLE_COMMUNICATION */
