@@ -13,6 +13,7 @@
 # include "AWiFiCommunicator.hpp"
 # include "AtHomeCommunicationProtocol.hpp"
 # include "AtHomeFlashCommon.h"
+# include "ITime.hpp"
 
 namespace athome {
     namespace module {
@@ -29,7 +30,7 @@ namespace athome {
                 /**
                  * `timestamp` type is used to represent sensor readings date
                  */
-                typedef unsigned long   t_timestamp;
+                typedef time::ITime::JSONDateTime   t_timestamp;
 
                 /**
                  * AtHomeModule and derived classes are singletons, duplication is not allowed
@@ -294,7 +295,7 @@ namespace athome {
 # endif /* DISABLE_COMMUNICATION */
             protected:
                 struct AtHomeSensorMeasure {
-                    sensor::ISensor::ISensorScale   estimate;
+                    uint8_t                         estimate;
                     utility::units::Unit            unit;
                     t_timestamp                     timestamp;
                     T                               sample;
@@ -457,7 +458,7 @@ namespace athome {
                         _measures[_nbMeasures].unit = value.unit;
                         _measures[_nbMeasures].estimate = value.estimate;
                         // TODO: need a time interface
-                        _measures[_nbMeasures].timestamp = millis();
+                        //_measures[_nbMeasures].timestamp = millis();
                         _measures[_nbMeasures].label = value.label;
                         if (value.sampleRawPointer != nullptr) {
                             memcpy(&(_measures[_nbMeasures].sample), value.sampleRawPointer, sizeof(T));

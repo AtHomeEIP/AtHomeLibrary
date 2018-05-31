@@ -1,6 +1,8 @@
 #ifndef ATHOMEUNITS_HPP
 # define ATHOMEUNITS_HPP
 
+# include <stdint.h>
+
 namespace athome {
     namespace utility {
         namespace units {
@@ -73,8 +75,8 @@ namespace athome {
             };
 
             struct Unit {
-                UNIT unit;
-                PREFIX prefix;
+                uint16_t unit : 8;
+                uint16_t prefix : 8;
             };
         }
     }
