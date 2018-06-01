@@ -4,7 +4,14 @@
 
 namespace athome {
     namespace time {
-        FakeRTC::FakeRTC() {}
+        FakeRTC::FakeRTC():_lastTime(millis()) {
+            _date.second = 0;
+            _date.minute = 0;
+            _date.hour = 0;
+            _date.day = 0;
+            _date.month = 0;
+            _date.second = 0;
+        }
 
         FakeRTC::~FakeRTC() {}
 

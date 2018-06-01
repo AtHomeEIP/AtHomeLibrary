@@ -28,8 +28,8 @@ namespace athome {
             void addDays(uint8_t);
 
         private:
-            ISO8601DateTime _date;
             uint32_t        _lastTime;
+            ISO8601DateTime _date;
         };
     }
 }

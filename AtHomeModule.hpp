@@ -369,7 +369,7 @@ namespace athome {
 # ifndef DISABLE_TIME
                         if (_clock != nullptr) {
                             broadcast(F(",\"Timestamp\":\""));
-                            broadcast(_measures[i].timestamp);
+                            broadcast(_measures[i].timestamp.second);
                             broadcast(F("\""));
                         }
 # endif /* DISABLE_TIME */
