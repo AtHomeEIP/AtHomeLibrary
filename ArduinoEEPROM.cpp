@@ -20,7 +20,7 @@ namespace athome {
         }
 
         void ArduinoEEPROM::write(size_t offset, const void *src, size_t len) {
-            uint8_t *ptr = reinterpret_cast<const uint8_t *>(src);
+            const uint8_t *ptr = reinterpret_cast<const uint8_t *>(src);
             size_t end = offset + len;
             for (size_t i = offset; i < end; i++) {
                 EEPROM.update(i, *ptr);

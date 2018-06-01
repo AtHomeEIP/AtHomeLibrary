@@ -498,7 +498,7 @@ namespace athome {
                     if (_display == nullptr || _sensor == nullptr) {
                         return;
                     }
-                    _display->setDisplayedEstimate(_measures[_nbMeasures].estimate);
+                    _display->setDisplayedEstimate(static_cast<sensor::ISensor::ISensorScale>(_measures[_nbMeasures].estimate));
                     _display->update();
                 }
 #  endif /* DISABLE_DISPLAY */
