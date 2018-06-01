@@ -85,7 +85,7 @@ namespace athome {
                 }
             };
 
-            virtual const ISO8601DateTime &getDateTime() const;
+            virtual const ISO8601DateTime &getDateTime();
             virtual void setCurrentDateTime (const DateTime &);
         };
     }

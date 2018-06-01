@@ -12,6 +12,8 @@
 using athome::module::AtHomeModule;
 
 # ifndef DISABLE_SENSOR
+#  include "ISensor.hpp"
+using athome::sensor::ISensor;
 #  ifndef DISABLE_HUMIDITY_SENSOR
 #   include "AHumiditySensor.hpp"
 using athome::sensor::AHumiditySensor;
@@ -72,6 +74,8 @@ using athome::sensor::AnalogSensor;
 #  endif /* DISABLE_ANALOG_SENSOR */
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_DISPLAY
+#  include "IDisplay.hpp"
+using athome::display::IDisplay;
 #  ifndef DISABLE_MONOCHROMATIC_LED
 #   include "MonochromaticLED.hpp"
 using athome::display::MonochromaticLED;
@@ -112,6 +116,8 @@ using athome::communication::wifi::ESP8266WiFiCommunicator;
 #  endif /* DISABLE_NETWORK */
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE
+#  include "IStorage.hpp"
+using athome::storage::IStorage;
 #  if defined(__MSP430__) && !defined(DISABLE_MSP430_FRAM)
 #   include "MSP430FRAM.hpp"
 using athome::storage::MSP430FRAM;
@@ -121,5 +127,13 @@ using athome::storage::MSP430FRAM;
 using athome::storage::ArduinoEEPROM;
 #  endif /* __AVR__ && !DISABLE_AVR_EEPROM */
 # endif /* DISABLE_PERSISTENT_STORAGE */
+# ifndef DISABLE_TIME
+#  include "ITime.hpp"
+using athome::time::ITime;
+#  ifndef DISABLE_DS1307
+#   include "DS1307.hpp"
+using athome::time::DS1307;
+#  endif /* DISABLE_DS1307 */
+# endif /* DISABLE_TIME */
 
 #endif /* ATHOME_H */
