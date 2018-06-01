@@ -13,6 +13,7 @@
 //# define DISABLE_COMMUNICATION
 //# define DISABLE_POWER_MANAGEMENT
 //# define DISABLE_HEARTBEAT
+//# define DISABLE_TIME
 
 // Macros to uncomment to disable network communications. DISABLE_NETWORK disable all types of networks
 //# define DISABLE_NETWORK

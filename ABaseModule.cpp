@@ -10,33 +10,40 @@ namespace athome {
 # else
                                  display::IDisplay *display
 # endif /* ... */
-#endif /* DISABLE_DISPLAY */
+#endif /* !DISABLE_DISPLAY */
 #ifndef DISABLE_COMMUNICATION
 # if !defined(DISABLE_POWER_MANAGEMENT) || !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
                                  Stream **communicators,
 # else
                                  Stream **communicators
 # endif /* ... */
-#endif /* DISABLE_COMMUNICATION */
+#endif /* !DISABLE_COMMUNICATION */
 #ifndef DISABLE_POWER_MANAGEMENT
 # if !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
                                  power::IPower *power,
 # else
                                  power::IPower *power
 # endif /* ... */
-#endif /* DISABLE_POWER_MANAGEMENT */
+#endif /* !DISABLE_POWER_MANAGEMENT */
 #ifndef DISABLE_SENSOR
 # if !defined(DISABLE_PERSISTENT_STORAGE)
                                  sensor::ISensor *sensor,
 # else
                                  sensor::ISensor *sensor
 # endif /* ... */
-#endif /* DISABLE_SENSOR */
+#endif /* !DISABLE_SENSOR */
 #ifndef DISABLE_PERSISTENT_STORAGE
+# if !defined(DISABLE_TIME)
+                                 storage::IStorage *storage,
+# else
                                  storage::IStorage *storage
-#endif /* DISABLE_PERSISTENT_STORAGE */
+# endif /* !defined(DISABLE_TIME) */
+#endif /* !DISABLE_PERSISTENT_STORAGE */
+# ifndef DISABLE_TIME
+                                 time::ITime *clock
+# endif /* !DISABLE_TIME */
 #if !defined(DISABLE_DISPLAY) || !defined(DISABLE_COMMUNICATION) || !defined(DISABLE_POWER_MANAGEMENT) ||\
-    !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
+    !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE) || !defined(DISABLE_TIME)
                                 ):
 #else
                                 )
@@ -64,15 +71,22 @@ namespace athome {
 # endif /* ... */
 #endif /* DISABLE_POWER_MANAGEMENT */
 #ifndef DISABLE_SENSOR
-# if !defined(DISABLE_PERSISTENT_STORAGE)
+# if !defined(DISABLE_PERSISTENT_STORAGE) || !defined(DISABLE_TIME)
                                  _sensor(sensor),
 # else
                                  _sensor(sensor)
 # endif /* ... */
 #endif /* DISABLE_SENSOR */
 #ifndef DISABLE_PERSISTENT_STORAGE
+# if !defined(DISABLE_TIME)
+                                 _storage(storage),
+# else
                                  _storage(storage)
+# endif /* !defined(DISABLE_TIME) */
 #endif /* DISABLE_PERSISTENT_STORAGE */
+#ifndef DISABLE_TIME
+                                 _clock(clock)
+#endif /* DISABLE_TIME */
         {
         }
 
@@ -127,6 +141,16 @@ namespace athome {
             _storage = storage;
         }
 #endif /* DISABLE_PERSISTENT_STORAGE */
+
+#ifndef DISABLE_TIME
+        time::ITime *ABaseModule::getClock() {
+            return _clock;
+        }
+
+        void ABaseModule::setClock(athome::time::ITime *clock) {
+            _clock = clock;
+        }
+#endif /* DISABLE_TIME */
     }
 }
 

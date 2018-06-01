@@ -27,11 +27,12 @@ namespace athome {
                  * `moduleSerial` type represents a unique value used to identify a module from other
                  */
                 typedef uint32_t    moduleSerial;
+# ifndef DISABLE_TIME
                 /**
                  * `timestamp` type is used to represent sensor readings date
                  */
-                typedef time::ITime::JSONDateTime   t_timestamp;
-
+                typedef time::ITime::ISO8601DateTime   t_timestamp;
+# endif /* DISABLE_TIME */
                 /**
                  * AtHomeModule and derived classes are singletons, duplication is not allowed
                  */
@@ -294,13 +295,17 @@ namespace athome {
 #  endif /* DISABLE_SENSOR */
 # endif /* DISABLE_COMMUNICATION */
             protected:
+# ifndef DISABLE_SENSOR
                 struct AtHomeSensorMeasure {
                     uint8_t                         estimate;
                     utility::units::Unit            unit;
+# ifndef DISABLE_TIME
                     t_timestamp                     timestamp;
+# endif /* DISABLE_TIME */
                     T                               sample;
                     PGM_P                           label;
                 };
+# endif /* DISABLE_SENSOR */
 
                 AtHomeModule():
                     ABaseModule(),
@@ -357,12 +362,18 @@ namespace athome {
                     broadcast(F("{\"Serial\":"));
                     broadcast(_serial);
                     broadcast(F(",\"Data\":["));
+# ifndef DISABLE_SENSOR
                     for (size_t i = 0; i < _nbMeasures; i++) {
                         broadcast(F("{\"Value\":"));
                         broadcast(_measures[i].sample);
-                        broadcast(F(",\"Timestamp\":\""));
-                        broadcast(_measures[i].timestamp);
-                        broadcast(F("\",\"Estimate\":"));
+# ifndef DISABLE_TIME
+                        if (_clock != nullptr) {
+                            broadcast(F(",\"Timestamp\":\""));
+                            broadcast(_measures[i].timestamp);
+                            broadcast(F("\""));
+                        }
+# endif /* DISABLE_TIME */
+                        broadcast(F(",\"Estimate\":"));
                         broadcast(_measures[i].estimate);
                         broadcast(F(",\"Unit\":"));
                         broadcast(_measures[i].unit.unit);
@@ -378,9 +389,12 @@ namespace athome {
                             broadcast(F(","));
                         }
                     }
+# endif /* DISABLE_SENSOR */
                     broadcastln(F("]}"));
                     broadcast(FH(communication::commands::end_of_command));
+# ifndef DISABLE_SENSOR
                     _nbMeasures = 0;
+# endif /* DISABLE_SENSOR */
                 }
 #  endif /* DISABLE_SENSOR */
                 /**
@@ -458,7 +472,11 @@ namespace athome {
                         _measures[_nbMeasures].unit = value.unit;
                         _measures[_nbMeasures].estimate = value.estimate;
                         // TODO: need a time interface
-                        //_measures[_nbMeasures].timestamp = millis();
+# ifndef DISABLE_TIME
+                        if (_clock != nullptr) {
+                            _measures[_nbMeasures].timestamp = _clock->getDateTime();
+                        }
+# endif /* DISABLE_TIME */
                         _measures[_nbMeasures].label = value.label;
                         if (value.sampleRawPointer != nullptr) {
                             memcpy(&(_measures[_nbMeasures].sample), value.sampleRawPointer, sizeof(T));

@@ -8,6 +8,7 @@
 # include "IPower.hpp"
 # include "ISensor.hpp"
 # include "IStorage.hpp"
+# include "ITime.hpp"
 
 namespace athome {
     namespace module {
@@ -50,8 +51,15 @@ namespace athome {
 #  endif /* ... */
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_PERSISTENT_STORAGE
+#  if !defined(DISABLE_TIME)
+                            storage::IStorage * = nullptr,
+#  else
                             storage::IStorage * = nullptr
+#  endif /* DISABLE_TIME */
 # endif /* DISABLE_PERSISTENT_STORAGE */
+# ifndef DISABLE_TIME
+                            time::ITime * = nullptr
+# endif /* DISABLE_TIME */
                            );
                 ABaseModule(ABaseModule &) = delete; // Singleton class
             public:
@@ -196,6 +204,18 @@ namespace athome {
                  */
                 void setStorage(storage::IStorage *);
 # endif /* DISABLE_PERSISTENT_STORAGE */
+# ifndef DISABLE_TIME
+                /**
+                 * Get a pointer on the clock used by the module to represent current time.
+                 *
+                 * @return pointer on interface for a clock used by the module
+                 */
+                time::ITime *getClock();
+                /**
+                 * Set the pointer on the interface of the clock used by the module to get current representation of time
+                 */
+                void setClock(time::ITime *);
+# endif /* DISABLE_TIME */
             protected:
 # ifndef DISABLE_DISPLAY
                 display::IDisplay   *_display;
@@ -212,6 +232,9 @@ namespace athome {
 # ifndef DISABLE_PERSISTENT_STORAGE
                 storage::IStorage   *_storage;
 # endif /* DISABLE_PERSISTENT_STORAGE */
+# ifndef DISABLE_TIME
+                time::ITime         *_clock;
+# endif /* DISABLE_TIME */
         };
     }
 }
