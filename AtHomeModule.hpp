@@ -411,11 +411,17 @@ namespace athome {
                             if (!STRCMP(commandName.c_str(), communication::commands::setProfile)) {
                                 _setProfile(*_streams[i]);
                             }
+#  ifndef DISABLE_TIME
+                            else if (!STRCMP(commandName.c_str(), communication::commands::setDateTime)) {
+                                _setDateTime(*_streams[i]);
+                            }
+#  endif /* DISABLE_TIME */
                             else if (_communicationPlugin != nullptr) {
                                 _communicationPlugin(commandName, *_streams[i]);
                             }
                             else {
-                                _streams[i]->flush();
+                                //_streams[i]->flush(); // Would also remove output buffers
+                                while (_streams[i]->read() != -1);
                             }
                             //while (_streams[i]->read() != -1); // Remove the rest of the input
                         }
@@ -505,7 +511,6 @@ namespace athome {
 # endif /* DISABLE_SENSOR */
             private:
 # ifndef DISABLE_COMMUNICATION
-
                 void        _setProfile(Stream &stream) {
                     uint8_t data;
                     uint8_t *ptr = reinterpret_cast<uint8_t *>(&_serial);
@@ -516,7 +521,27 @@ namespace athome {
                     while (stream.read() != communication::commands::end_of_command);
                     onBackupOnStorage();
                 }
-
+# ifndef DISABLE_TIME
+                void        _setDateTime(Stream &stream) {
+                    if (_clock == nullptr) {
+                        while (stream.read() != -1);
+                        return;
+                    }
+                    time::ITime::DateTime time;
+                    while (stream.peek() == -1);
+                    time.second = stream.read();
+                    time.minute = stream.read();
+                    time.hour = stream.read();
+                    time.day = stream.read();
+                    time.month = stream.read();
+                    time.year = 0;
+                    time::absolute_year = stream.read();
+                    time::absolute_year <<= 8;
+                    time::absolute_year |= stream.read();
+                    _clock->setCurrentDateTime(time);
+                    while (stream.read() != communication::commands::end_of_command);
+                }
+# endif /* DISABLE_TIME */
 # endif /* DISABLE_COMMUNICATION */
             private:
 # ifndef DISABLE_SENSOR

@@ -33,6 +33,10 @@ namespace athome {
             extern const PROGMEM char port_key[];
 #  endif /* !defined(DISABLE_NETWORK) */
 
+# if !defined(DISABLE_TIME)
+            extern const PROGMEM char setDateTime[];
+# endif /* !defined(DISABLE_TIME) */
+
 /*
  * Thinking communication wisely
  * - Shall we have only two communication interface? Sync + AtHome? Two ICommunicators with dedicated methods?

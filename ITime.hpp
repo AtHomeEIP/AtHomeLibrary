@@ -6,6 +6,8 @@
 
 namespace athome {
     namespace time {
+        extern uint16_t absolute_year;
+
         class ITime {
         public:
             struct DateTime {
@@ -24,7 +26,7 @@ namespace athome {
                     len += p.print(F(",\"Month\":"));
                     len += p.print(month);
                     len += p.print(F(",\"Year\":"));
-                    len += p.print(2018 + year);
+                    len += p.print(absolute_year + year);
                     len += p.print(F(",\"Hour\":"));
                     len += p.print(hour);
                     len += p.print(F(",\"Minute\":"));
@@ -38,7 +40,7 @@ namespace athome {
 
             struct ISO8601DateTime : public DateTime, public Printable {
                 virtual size_t printTo(Print &p) const {
-                    size_t len = p.print(2018 + year);
+                    size_t len = p.print(absolute_year + year);
                     len += p.print(F("-"));
                     if (month < 10) {
                         len += p.print(F("0"));
