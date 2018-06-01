@@ -1,3 +1,4 @@
+#include "AtHomeConfig.h"
 #ifndef DISABLE_TIME
 
 # include <stdint.h>

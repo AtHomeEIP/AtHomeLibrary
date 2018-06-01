@@ -1,5 +1,6 @@
 #ifndef ITIME_HPP
 # define ITIME_HPP
+# include "AtHomeConfig.h"
 # ifndef DISABLE_TIME
 #  include <stdint.h>
 #  include <Printable.h>
@@ -35,6 +36,16 @@ namespace athome {
                     len += p.print(second);
                     len += p.print(F("}"));
                     return len;
+                }
+
+                JSONDateTime &operator=(const DateTime &date) {
+                    second = date.second;
+                    minute = date.minute;
+                    hour = date.hour;
+                    day = date.day;
+                    month = date.month;
+                    year = date.year;
+                    return *this;
                 }
             };
 
@@ -82,6 +93,16 @@ namespace athome {
                         len += p.print(second);
                     }
                     return len;
+                }
+
+                ISO8601DateTime &operator=(const DateTime &date) {
+                    second = date.second;
+                    minute = date.minute;
+                    hour = date.hour;
+                    day = date.day;
+                    month = date.month;
+                    year = date.year;
+                    return *this;
                 }
             };
 

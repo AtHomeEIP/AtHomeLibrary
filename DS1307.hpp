@@ -1,6 +1,7 @@
 #ifndef DS1307_HPP
 # define DS1307_HPP
-# if !defined(DISABLE_TIME) || !defined(DISABLE_DS1307)
+# include "AtHomeConfig.h"
+# if !defined(DISABLE_TIME) && !defined(DISABLE_DS1307)
 // Values found from Adafruit RTClib (https://github.com/adafruit/RTClib/blob/master/RTClib.h):
 #  define DS1307_ADDRESS    0x68
 #  define DS1307_CONTROL    0x07
@@ -37,5 +38,5 @@ namespace athome {
     }
 }
 
-# endif /* !defined(DISABLE_TIME) || !defined(DISABLE_DS1307) */
+# endif /* !defined(DISABLE_TIME) && !defined(DISABLE_DS1307) */
 #endif /* DS1307_HPP */

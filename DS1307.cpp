@@ -1,4 +1,5 @@
-#if !defined(DISABLE_TIME) || !defined(DISABLE_DS1307)
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_TIME) && !defined(DISABLE_DS1307)
 # include "DS1307.hpp"
 
 namespace athome {
@@ -68,4 +69,4 @@ namespace athome {
     }
 }
 
-#endif /* !defined(DISABLE_TIME) || !defined(DISABLE_DS1307) */
+#endif /* !defined(DISABLE_TIME) && !defined(DISABLE_DS1307) */

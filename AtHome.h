@@ -134,6 +134,10 @@ using athome::time::ITime;
 #   include "DS1307.hpp"
 using athome::time::DS1307;
 #  endif /* DISABLE_DS1307 */
+#  ifndef DISABLE_FAKE_RTC
+#   include "FakeRTC.hpp"
+using athome::time::FakeRTC;
+#  endif /* DISABLE_FAKE_RTC */
 # endif /* DISABLE_TIME */
 
 #endif /* ATHOME_H */

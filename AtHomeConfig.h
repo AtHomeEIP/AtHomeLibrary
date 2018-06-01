@@ -55,6 +55,10 @@
 // Macros to uncomment to disable power management controllers
 //# define DISABLE_AVR_POWER_MANAGEMENT
 
+// Macrps to uncomment to disable time controllers
+//# define DISABLE_DS1307
+//# define DISABLE_FAKE_RTC
+
 // Macros to uncomment to disable utilities
 # define DISABLE_LIST
 # define DISABLE_ITERABLE
