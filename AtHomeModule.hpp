@@ -541,8 +541,7 @@ namespace athome {
                     time.month = stream.read();
                     time.year = 0;
                     time::absolute_year = stream.read();
-                    time::absolute_year <<= 8;
-                    time::absolute_year |= stream.read();
+                    time::absolute_year |= (stream.read() << 8);
                     _clock->setCurrentDateTime(time);
                     while (stream.read() != communication::commands::end_of_command);
                 }
