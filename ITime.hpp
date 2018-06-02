@@ -9,8 +9,7 @@ namespace athome {
     namespace time {
         extern uint16_t absolute_year;
 
-        class ITime {
-        public:
+        struct ITime {
             class DateTime {
             public:
                 uint32_t second : 6;
@@ -31,8 +30,7 @@ namespace athome {
                 }
             };
 
-            class JSONDateTime : public DateTime, public Printable {
-            public:
+            struct JSONDateTime : public DateTime, public Printable {
                 virtual size_t printTo(Print &p) const {
                     size_t len = p.print(F("{\"Day\":"));
                     len += p.print(day);
@@ -61,10 +59,9 @@ namespace athome {
                 }
             };
 
-            class ISO8601DateTime : public DateTime, public Printable {
-            public:
+            struct ISO8601DateTime : public DateTime, public Printable {
                 virtual size_t printTo(Print &p) const {
-                    /*size_t len = p.print(absolute_year + year);
+                    size_t len = p.print(absolute_year + year);
                     len += p.print(F("-"));
                     if (month < 10) {
                         len += p.print(F("0"));
@@ -105,7 +102,7 @@ namespace athome {
                     if (second) {
                         len += p.print(second);
                     }
-                    return len;*/
+                    return len;
                 }
 
                 ISO8601DateTime &operator=(const DateTime &date) {

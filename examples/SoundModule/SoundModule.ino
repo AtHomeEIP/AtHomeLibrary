@@ -1,6 +1,6 @@
 #include <AtHome.h>
 
-using SoundModule = AtHomeModule<bool, 15>;
+using SoundModule = AtHomeModule<bool, 1>;
 
 #ifdef __AVR__
 ArduinoEEPROM storage;
@@ -9,19 +9,19 @@ Stream *streams[] = {&Serial, nullptr};
 NeoPixel led(6);
 SoundSensor soundSensor(8);
 SoundModule *module = SoundModule::getInstance();
+FakeRTC rtc;
 
 void setup() {
     // put your setup code here, to run once:
-    Serial.begin(115200);
+    Serial.begin(9600);
     module->setStreams(streams);
     module->setSensor(&soundSensor);
     module->setDisplay(&led);
-    module->setCommunicationExecutionInterval(10);
-    module->setSensorExecutionInterval(100);
-    module->setUploadDataExecutionInterval(1500);
 #ifdef __AVR__
     module->setStorage(&storage);
 #endif
+    //module->setSerial(0); // Uncomment to reinitialize the id of the module
+    module->setClock(&rtc);
     module->setup();
 }
 

@@ -158,8 +158,9 @@ buildExamples:Arduino:
     - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/ModuleDemo/
     - arduino --verify --board arduino:avr:uno $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/LuminosityModule/
     - arduino --verify --board arduino:avr:leonardo $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/LuminosityModule/
-    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/LuminosityModule/
-    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/LuminosityModule/
+    # TODO: Allow compilation again for ARM based boards for Luminosity Modules (currently prevented by header protections)
+    # - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/LuminosityModule/
+    # - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/LuminosityModule/
     - arduino --verify --board arduino:avr:uno $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/SoundModule/
     - arduino --verify --board arduino:avr:leonardo $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/SoundModule/
     - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/SoundModule/

@@ -23,11 +23,12 @@ DummySensor<ATemperatureSensor, int32_t, 50000000> dummyTemperatureSensor; // Ge
 #ifdef __AVR__
 ArduinoEEPROM eeprom;
 #endif
+FakeRTC rtc;
 
 void setup() {
     // put your setup code here, to run once:
     espSerial.begin(115200); // Actually, I don't think the atmega328 is able to do software serial at 115200 bauds, but that's the default baudrate of the esp and you need to be able to communicate with it to change it
-    Serial.begin(115200); // Basic initialization of the hardware serial interface for communication with the host
+    Serial.begin(9600); // Basic initialization of the hardware serial interface for communication with the host
     esp8266.setStreamToChipset(&espSerial); // Define the stream used to communicate with the esp => esp32 supports also using SPI and I2C with the AT firmware, not only UART
     module->setWiFiCommunicator(esp8266); // Set the AWiFiCommunicator instance used to communicate through a WiFi adapter
     module->setStreams(streams); // Set the streams used by the module to communicate. It can be as much as you want
@@ -36,8 +37,8 @@ void setup() {
 #ifdef __AVR__
     module->setStorage(&eeprom); // Set the storage used to store permanent data such as the type, serial and vendor of the module
 #endif
-    module->setType(MyModule::TEMPERATURE); // Set the type of the module
     module->setSerial(42); // Set the serial of the module -> Always an array of 32 bytes
+    module->setClock(&rtc); // Set the clock used to get the current time -> emulated using the millis() function
     module->setSensorExecutionInterval(SENSOR_INTERVAL); // Samples the sensor every 60 seconds
     module->setUploadDataExecutionInterval(UPLOAD_INTERVAL); // Send the data after at most 15 time the sensor was sampled, as we can't buffer more anyway
     module->setCommunicationExecutionInterval(1); // Listen for input data every 1 millisecond

@@ -1,6 +1,6 @@
 #include <AtHome.h>
 
-using LuminosityModule = AtHomeModule<int16_t, 11>;
+using LuminosityModule = AtHomeModule<int16_t, 1>;
 
 Stream *streams[] = {&Serial, nullptr};
 LDRLuminositySensor3V3 ldrSensor(A6);
@@ -14,18 +14,17 @@ IStorage *storage = &eeprom;
 #else
 IStorage *storage = nullptr;
 #endif /* __MSP430__ */
+FakeRTC rtc;
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(2, OUTPUT);
   Serial.begin(9600);
   module->setStreams(streams);
   module->setSensor(&ldrSensor);
   module->setDisplay(&led);
   module->setStorage(storage);
-  module->setCommunicationExecutionInterval(1);
-  module->setSensorExecutionInterval(100);
-  module->setUploadDataExecutionInterval(1001);
+  //module->setSerial(0); // Uncomment to reinitialize the id of the module
+  module->setClock(&rtc);
   module->setup();
 }
 

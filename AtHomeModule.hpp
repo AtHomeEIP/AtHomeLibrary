@@ -357,22 +357,27 @@ namespace athome {
                 void        uploadData() {
                     // Forward version of uploadData
                     // Todo: implement a more resource efficient and generic version
+#   ifndef DISABLE_TIME
+                    time::ITime::ISO8601DateTime timestamp;
+#   endif /* DISABLE_TIME */
                     broadcastln(FH(communication::commands::uploadData));
                     broadcastln(FH(communication::commands::part_separator));
                     broadcast(F("{\"Serial\":"));
                     broadcast(_serial);
                     broadcast(F(",\"Data\":["));
-# ifndef DISABLE_SENSOR
+#   ifndef DISABLE_SENSOR
                     for (size_t i = 0; i < _nbMeasures; i++) {
                         broadcast(F("{\"Value\":"));
                         broadcast(_measures[i].sample);
-# ifndef DISABLE_TIME
+#   ifndef DISABLE_TIME
                         if (_clock != nullptr) {
                             broadcast(F(",\"Timestamp\":\""));
-                            broadcast(_measures[i].timestamp.second);
+                            timestamp = _measures[i].timestamp;
+                            broadcast(timestamp);
+                            //broadcast(_measures[i].timestamp); // WTF: Why it doesn't work but above yes?!
                             broadcast(F("\""));
                         }
-# endif /* DISABLE_TIME */
+#   endif /* DISABLE_TIME */
                         broadcast(F(",\"Estimate\":"));
                         broadcast(_measures[i].estimate);
                         broadcast(F(",\"Unit\":"));
@@ -389,12 +394,12 @@ namespace athome {
                             broadcast(F(","));
                         }
                     }
-# endif /* DISABLE_SENSOR */
+#   endif /* DISABLE_SENSOR */
                     broadcastln(F("]}"));
                     broadcast(FH(communication::commands::end_of_command));
-# ifndef DISABLE_SENSOR
+#   ifndef DISABLE_SENSOR
                     _nbMeasures = 0;
-# endif /* DISABLE_SENSOR */
+#   endif /* DISABLE_SENSOR */
                 }
 #  endif /* DISABLE_SENSOR */
                 /**

@@ -1,7 +1,6 @@
-// #define AVR_UNO
 #include <AtHome.h>
 
-using AirQualityModule = AtHomeModule<uint8_t, 11>;
+using AirQualityModule = AtHomeModule<uint8_t, 1>;
 
 #ifdef __AVR__
 ArduinoEEPROM storage;
@@ -9,20 +8,20 @@ ArduinoEEPROM storage;
 Stream *streams[] = {&Serial, nullptr};
 GroveAirQualitySensor airSensor(A0);
 AirQualityModule *module = AirQualityModule::getInstance();
+FakeRTC rtc;
 //NeoPixel led(3);
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(115200);
+  Serial.begin(9600);
   module->setSensor(&airSensor);
   module->setStreams(streams);
   //module->setDisplay(&led);
+  module->setClock(&rtc);
   #ifdef __AVR__
   module->setStorage(&storage);
   #endif
-  module->setCommunicationExecutionInterval(10);
-  module->setSensorExecutionInterval(100);
-  module->setUploadDataExecutionInterval(1500);
+  //module->setSerial(0); // Uncomment to reinitialize the id of the module
   module->setup();
 }
 

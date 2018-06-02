@@ -1,6 +1,6 @@
 #include <AtHome.h>
 
-using TemperatureModule = AtHomeModule<int32_t, 11>;
+using TemperatureModule = AtHomeModule<int32_t, 1>;
 
 Stream *streams[] = {&Serial, nullptr};
 TMP36GZTemperatureSensor3V3 tempSensor(A6);
@@ -10,22 +10,21 @@ MonochromaticLED led(2, true);
 MSP430FRAM *storage = MSP430FRAM::getInstance();
 #elif defined(__AVR__)
 ArduinoEEPROM eeprom;
-athome::storage::IStorage *storage = &eeprom;
+IStorage *storage = &eeprom;
 #else
-athome::storage::IStorage *storage = nullptr;
+IStorage *storage = nullptr;
 #endif /* __MSP430__ */
+FakeRTC rtc;
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(2, OUTPUT);
   Serial.begin(9600);
   module->setStreams(streams);
   module->setSensor(&tempSensor);
   module->setDisplay(&led);
   module->setStorage(storage);
-  module->setCommunicationExecutionInterval(1);
-  module->setSensorExecutionInterval(100);
-  module->setUploadDataExecutionInterval(1001);
+  module->setClock(&rtc);
+  //module->setSerial(0); // Uncomment to reinitialize the id of the module
   module->setup();
 }
 

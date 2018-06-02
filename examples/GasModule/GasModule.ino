@@ -1,6 +1,6 @@
 #include <AtHome.h>
 
-using GasModule = AtHomeModule<MQ2GasSensor::Values, 10>;
+using GasModule = AtHomeModule<MQ2GasSensor::Values, 1>;
 
 #ifdef __AVR__
 ArduinoEEPROM storage;
@@ -8,6 +8,7 @@ ArduinoEEPROM storage;
 Stream *streams[] = {&Serial, nullptr};
 MQ2GasSensor sensor(8);
 GasModule *module = GasModule::getInstance();
+FakeRTC rtc;
 
 void setup() {
     // put your setup code here, to run once:
@@ -17,10 +18,8 @@ void setup() {
 #ifdef __AVR__
     module->setStorage(&storage);
 #endif
-    module->setCommunicationExecutionInterval(1);
-    module->setSensorExecutionInterval(100);
-    module->setUploadDataExecutionInterval(1001);
-    //module->setSerial(42);
+    //module->setSerial(0); // Uncomment to reinitialize the id of the module
+    module->setClock(&rtc);
     module->setup();
 }
 
