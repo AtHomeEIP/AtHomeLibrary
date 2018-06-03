@@ -170,7 +170,7 @@ namespace athome {
                  *
                  * Calling this function passing no parameter or nullptr will restore the default callback of this class.
                  */
-                void setSensorExecutionCallback(customCallback f = nullptr) {
+                virtual void setSensorExecutionCallback(customCallback f = nullptr) {
                     _sensorTask.setCallback((f == nullptr) ? &AtHomeModule::_onSampleSensor : f);
                 }
 # endif /* DISABLE_SENSOR */
@@ -210,7 +210,7 @@ namespace athome {
                  *
                  * Calling this function passing no parameter or nullptr will restore the default callback of this class.
                  */
-                void setUploadDataExecutionCallback(customCallback f = nullptr) {
+                virtual void setUploadDataExecutionCallback(customCallback f = nullptr) {
                     _uploadDataTask.setCallback((f == nullptr) ? &AtHomeModule::_uploadData : f);
                 }
 #  endif /* DISABLE_SENSOR */
@@ -229,14 +229,14 @@ namespace athome {
                  *
                  * Calling this function passing no parameter or nullptr will restore the default callback of this class.
                  */
-                void setCommunicationExecutionCallback(customCallback f = nullptr) {
+                virtual void setCommunicationExecutionCallback(customCallback f = nullptr) {
                     _communicationTask.setCallback((f == nullptr) ? &AtHomeModule::_onCommunicate : f);
                 }
 
                 /**
                  * Set a callback called after default command interpreter executed and wasn't able to execute received input, passing the command string and a reference to the stream to the callback.
                  */
-                void setCommandPlugin(AtHomeCommandPlugin plugin) {
+                virtual void setCommandPlugin(AtHomeCommandPlugin plugin) {
                     _communicationPlugin = plugin;
                 }
 # endif /* DISABLE_COMMUNICATION */
@@ -244,14 +244,14 @@ namespace athome {
                 /**
                  * Set a callback called after module backup was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used.
                  */
-                void setOnBackupPlugin(AtHomeStoragePlugin plugin) {
+                virtual void setOnBackupPlugin(AtHomeStoragePlugin plugin) {
                     _onBackupPlugin = plugin;
                 }
 
                 /**
                  * Set a callback called after module data loading was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used.
                  */
-                void setOnRestorePlugin(AtHomeStoragePlugin plugin) {
+                virtual void setOnRestorePlugin(AtHomeStoragePlugin plugin) {
                     _onRestorePlugin = plugin;
                 }
 # endif /* DISABLE_PERSISTENT_STORAGE */

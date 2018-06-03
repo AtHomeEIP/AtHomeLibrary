@@ -5,7 +5,7 @@
 # if !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI)
 #  include <stdio.h>
 #  include <ArduinoJson.h>
-#  include "AtHomeModule.hpp"
+#  include "AtHomeNetworkModule.hpp"
 #  include "AtHomeFlashCommon.h"
 
 namespace athome {
@@ -35,7 +35,7 @@ namespace athome {
          * \endcode
          */
         template <typename T, size_t n>
-        class AtHomeWiFiModule : public AtHomeModule<T, n> {
+        class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
         friend class AtHomeModule<T, n>;
         public:
             AtHomeWiFiModule(const AtHomeWiFiModule &) = delete;
@@ -57,7 +57,7 @@ namespace athome {
 
         protected:
             AtHomeWiFiModule():
-                AtHomeModule<T, n>(),
+                AtHomeNetworkModule<T, n>(),
                 _wifi(nullptr) {
                 AtHomeModule<T, n>::setCommandPlugin(&AtHomeWiFiModule::executeWiFiCommands);
                 AtHomeModule<T, n>::setOnBackupPlugin(&AtHomeWiFiModule::_saveWiFiParameters);
@@ -66,7 +66,6 @@ namespace athome {
 
         private:
             void setWiFiCommand(Stream &communicator) {
-                bool backup = false;
                 {
                     char buffer[101];
                     size_t len = 0;
@@ -88,40 +87,7 @@ namespace athome {
                         }
                     }
                 }
-                if (backup) {
-                    this->onBackupOnStorage(); // Backup wifi parameters in storage
-                }
-            }
-
-            void setEndPointCommand(Stream &communicator) {
-                bool backup = false;
-                {
-                    char buffer[42];
-                    size_t len = 0;
-                    if ((len = communicator.readBytesUntil(communication::commands::end_of_command, buffer, 42))) {
-                        buffer[len] = '\0';
-                        StaticJsonBuffer<42> json;
-                        JsonObject &root = json.parseObject(buffer);
-                        const char *ip = root[FH(communication::commands::ip_key)];
-                        communication::ip::port p = root[FH(communication::commands::port_key)];
-                        if (ip != nullptr) {
-                            communication::ip::s_host host;
-                            SSCANF(ip, communication::ip::ip_format,
-                                   &(host.ipv4[0]),
-                                   &(host.ipv4[1]),
-                                   &(host.ipv4[2]),
-                                   &(host.ipv4[3]));
-                            host.hport = p;
-                            _wifi->disconnectFromHost();
-                            _wifi->setHost(host);
-                            _wifi->connectToHost();
-                            backup = true;
-                        }
-                    }
-                }
-                if (backup) {
-                    this->onBackupOnStorage(); // Backup wifi parameters in storage
-                }
+                this->onBackupOnStorage(); // Backup wifi parameters in storage
             }
 
             void saveWiFiParameters(size_t offset, storage::IStorage &storage) {
