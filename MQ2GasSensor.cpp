@@ -12,6 +12,14 @@
 
 namespace athome {
     namespace sensor {
+        namespace MQ2GasSensorStrings {
+            const PROGMEM char label[] = "Air Quality";
+            const PROGMEM char jsonLPG[] = "{\"lpg\":";
+            const PROGMEM char jsonCO[] = ",\"co\":";
+            const PROGMEM char jsonSMOKE[] = ",\"smoke\":";
+            const PROGMEM char jsonEnd[] = "}";
+        }
+
         MQ2GasSensor::MQ2GasSensor(int pin) : _pin(pin),
                                               _value({
                                                         ISensor::ISensorScale::ZERO,
@@ -20,7 +28,7 @@ namespace athome {
                                                             utility::units::PREFIX::BASE_UNIT
                                                         },
                                                         reinterpret_cast<void *>(&_values),
-                                                        PSTR("Air Quality")
+                                                        MQ2GasSensorStrings::label
                                                     }),
                                               _sampleValue(false),
                                               _LPGCurve{2.3, 0.21, static_cast<float>(-0.47)},
