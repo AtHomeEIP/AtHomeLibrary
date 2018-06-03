@@ -4,6 +4,7 @@
 # ifndef DISABLE_TIME
 #  include <stdint.h>
 #  include <Printable.h>
+#  include "AtHomeCommunicationProtocol.hpp"
 
 namespace athome {
     namespace time {
@@ -30,7 +31,7 @@ namespace athome {
                 }
             };
 
-            struct JSONDateTime : public DateTime, public Printable {
+            /*struct JSONDateTime : public DateTime, public Printable {
                 virtual size_t printTo(Print &p) const {
                     size_t len = p.print(F("{\"Day\":"));
                     len += p.print(day);
@@ -57,47 +58,47 @@ namespace athome {
                     year = date.year;
                     return *this;
                 }
-            };
+            };*/
 
             struct ISO8601DateTime : public DateTime, public Printable {
                 virtual size_t printTo(Print &p) const {
                     size_t len = p.print(absolute_year + year);
-                    len += p.print(F("-"));
+                    len += p.print(FH(communication::json::iso8601::itemSeparator));
                     if (month < 10) {
-                        len += p.print(F("0"));
+                        len += p.print(FH(communication::json::iso8601::paddingDigit));
                     }
                     len += p.print(month);
-                    len += p.print(F("-"));
+                    len += p.print(FH(communication::json::iso8601::itemSeparator));
                     if (day < 10) {
-                        len += p.print(F("0"));
+                        len += p.print(FH(communication::json::iso8601::paddingDigit));
                     }
                     len += p.print(day);
-                    len += p.print(F("T"));
+                    len += p.print(FH(communication::json::iso8601::timeSeparator));
                     if (!hour) {
-                        len += p.print(F("0"));
+                        len += p.print(FH(communication::json::iso8601::paddingDigit));
                     }
                     if (hour < 10) {
-                        len += p.print(F("0"));
+                        len += p.print(FH(communication::json::iso8601::paddingDigit));
                     }
                     if (hour) {
                         len += p.print(hour);
                     }
-                    len += p.print(F(":"));
+                    len += p.print(FH(communication::json::jsonKeySeparator));
                     if (!minute) {
-                        len += p.print(F("0"));
+                        len += p.print(FH(communication::json::iso8601::paddingDigit));
                     }
                     if (minute < 10) {
-                        len += p.print(F("0"));
+                        len += p.print(FH(communication::json::iso8601::paddingDigit));
                     }
                     if (len) {
                         len += p.print(minute);
                     }
-                    len += p.print(F(":"));
+                    len += p.print(FH(communication::json::jsonKeySeparator));
                     if (!second) {
-                        len += p.print(F("0"));
+                        len += p.print(FH(communication::json::iso8601::paddingDigit));
                     }
                     if (second < 10) {
-                        len += p.print(F("0"));
+                        len += p.print(FH(communication::json::iso8601::paddingDigit));
                     }
                     if (second) {
                         len += p.print(second);

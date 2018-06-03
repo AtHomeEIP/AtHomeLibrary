@@ -8,6 +8,7 @@
 # include "AtHomeConfig.h"
 # if !defined(DISABLE_SENSOR) && !defined(DISABLE_AIR_QUALITY_SENSOR) && !defined(DISABLE_MQ2_SENSOR)
 #  include "ISensor.hpp"
+#  include "AtHomeCommunicationProtocol.hpp"
 
 
 #  define RL_value (5)            //define the load resistance on the board, in kilo ohms
@@ -35,7 +36,6 @@ namespace athome{
             extern const PROGMEM char jsonLPG[];
             extern const PROGMEM char jsonCO[];
             extern const PROGMEM char jsonSMOKE[];
-            extern const PROGMEM char jsonEnd[];
         }
 
         class MQ2GasSensor : public ISensor {
@@ -47,13 +47,13 @@ namespace athome{
                 virtual size_t printTo(Print &p) const {
                     // TOOD: To replace with a binary serialization when uploadData will not use json anymore
                     size_t len = 0;
-                    len += p.print(MQ2GasSensorStrings::jsonLPG);
+                    len += p.print(FH(MQ2GasSensorStrings::jsonLPG));
                     len += p.print(lpg);
-                    len += p.print(MQ2GasSensorStrings::jsonCO);
+                    len += p.print(FH(MQ2GasSensorStrings::jsonCO));
                     len += p.print(co);
-                    len += p.print(MQ2GasSensorStrings::jsonSMOKE);
+                    len += p.print(FH(MQ2GasSensorStrings::jsonSMOKE));
                     len += p.print(smoke);
-                    len += p.print(MQ2GasSensorStrings::jsonEnd);
+                    len += p.print(FH(communication::json::jsonDictEnd));
                     return len;
                 }
             };

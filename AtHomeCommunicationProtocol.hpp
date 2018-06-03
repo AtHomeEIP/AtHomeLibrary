@@ -83,6 +83,40 @@ namespace athome {
  * - SendingCommand objects are a helper class used to send a command. Predefined command could have specialized classes implementing their action
  * */
         }
+
+        namespace json {
+            extern const PROGMEM char jsonDictBegin[];
+            extern const PROGMEM char jsonDictEnd[];
+            extern const PROGMEM char jsonListBegin[];
+            extern const PROGMEM char jsonListEnd[];
+            extern const PROGMEM char jsonItemSeparator[];
+            extern const PROGMEM char jsonKeySeparator[];
+            extern const PROGMEM char jsonStringQuote[];
+            extern const PROGMEM char jsonStringDoubleQuotes[];
+            extern const PROGMEM char jsonStringNestedQuote[];
+            extern const PROGMEM char jsonStringNestedDoubleQuotes[];
+            extern const PROGMEM char jsonListDictStart[];
+            extern const PROGMEM char jsonListDictEnd[];
+            extern const PROGMEM char jsonDictListStart[];
+            extern const PROGMEM char jsonDictListEnd[];
+
+            namespace uploadData {
+                extern const PROGMEM char uploadDataStart[];
+                extern const PROGMEM char uploadDataListStart[];
+                extern const PROGMEM char uploadDataValueStart[];
+                extern const PROGMEM char uploadDataTimestamp[];
+                extern const PROGMEM char uploadDataEstimate[];
+                extern const PROGMEM char uploadDataUnit[];
+                extern const PROGMEM char uploadDataPrefix[];
+                extern const PROGMEM char uploadDataLabel[];
+            }
+
+            namespace iso8601 {
+                extern const PROGMEM char paddingDigit[];
+                extern const PROGMEM char timeSeparator[];
+                extern const PROGMEM char itemSeparator[];
+            }
+        }
     }
 }
 

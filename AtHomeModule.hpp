@@ -364,40 +364,40 @@ namespace athome {
 #   endif /* DISABLE_TIME */
                     broadcastln(FH(communication::commands::uploadData));
                     broadcastln(FH(communication::commands::part_separator));
-                    broadcast(F("{\"Serial\":"));
+                    broadcast(FH(communication::json::uploadData::uploadDataStart));
                     broadcast(_serial);
-                    broadcast(F(",\"Data\":["));
+                    broadcast(FH(communication::json::uploadData::uploadDataListStart));
 #   ifndef DISABLE_SENSOR
                     for (size_t i = 0; i < _nbMeasures; i++) {
-                        broadcast(F("{\"Value\":"));
+                        broadcast(FH(communication::json::uploadData::uploadDataValueStart));
                         broadcast(_measures[i].sample);
 #   ifndef DISABLE_TIME
                         if (_clock != nullptr) {
-                            broadcast(F(",\"Timestamp\":\""));
+                            broadcast(FH(communication::json::uploadData::uploadDataTimestamp));
                             timestamp = _measures[i].timestamp;
                             broadcast(timestamp);
                             //broadcast(_measures[i].timestamp); // WTF: Why it doesn't work but above yes?!
-                            broadcast(F("\""));
+                            broadcast(FH(communication::json::jsonStringDoubleQuotes));
                         }
 #   endif /* DISABLE_TIME */
-                        broadcast(F(",\"Estimate\":"));
+                        broadcast(FH(communication::json::uploadData::uploadDataEstimate));
                         broadcast(_measures[i].estimate);
-                        broadcast(F(",\"Unit\":"));
+                        broadcast(FH(communication::json::uploadData::uploadDataUnit));
                         broadcast(_measures[i].unit.unit);
-                        broadcast(F(",\"Prefix\":"));
+                        broadcast(FH(communication::json::uploadData::uploadDataPrefix));
                         broadcast(_measures[i].unit.prefix);
                         if (_measures[i].label != nullptr) {
-                            broadcast(F(",\"Label\":\""));
+                            broadcast(FH(communication::json::uploadData::uploadDataLabel));
                             broadcast(FH(_measures[i].label));
-                            broadcast(F("\""));
+                            broadcast(FH(communication::json::jsonStringDoubleQuotes));
                         }
-                        broadcast(F("}"));
+                        broadcast(FH(communication::json::jsonDictEnd));
                         if (i < (_nbMeasures - 1)) {
-                            broadcast(F(","));
+                            broadcast(FH(communication::json::jsonItemSeparator));
                         }
                     }
 #   endif /* DISABLE_SENSOR */
-                    broadcastln(F("]}"));
+                    broadcastln(FH(communication::json::jsonListDictEnd));
                     broadcast(FH(communication::commands::end_of_command));
 #   ifndef DISABLE_SENSOR
                     _nbMeasures = 0;

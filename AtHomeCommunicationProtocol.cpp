@@ -34,6 +34,40 @@ namespace athome {
             const PROGMEM char setDateTime[] = "SetDateTime";
 # endif /* !defined(DISABLE_TIME) */
         }
+
+        namespace json {
+            const PROGMEM char jsonDictBegin[] = "{";
+            const PROGMEM char jsonDictEnd[] = "}";
+            const PROGMEM char jsonListBegin[] = "[";
+            const PROGMEM char jsonListEnd[] = "]";
+            const PROGMEM char jsonItemSeparator[] = ",";
+            const PROGMEM char jsonKeySeparator[] = ":";
+            const PROGMEM char jsonStringQuote[] = "'";
+            const PROGMEM char jsonStringDoubleQuotes[] = "\"";
+            const PROGMEM char jsonStringNestedQuote[] = "\\\'";
+            const PROGMEM char jsonStringNestedDoubleQuotes[] = "\\\"";
+            const PROGMEM char jsonListDictStart[] = "[{";
+            const PROGMEM char jsonListDictEnd[] = "]}";
+            const PROGMEM char jsonDictListStart[] = "{[";
+            const PROGMEM char jsonDictListEnd[] = "}]";
+
+            namespace uploadData {
+                const PROGMEM char uploadDataStart[] = "{\"Serial\":";
+                const PROGMEM char uploadDataListStart[] = ",\"Data\":[";
+                const PROGMEM char uploadDataValueStart[] = "{\"Value\":";
+                const PROGMEM char uploadDataTimestamp[] = ",\"Timestamp\":\"";
+                const PROGMEM char uploadDataEstimate[] = ",\"Estimate\":";
+                const PROGMEM char uploadDataUnit[] = ",\"Unit\":";
+                const PROGMEM char uploadDataPrefix[] = ",\"Prefix\":";
+                const PROGMEM char uploadDataLabel[] = ",\"Label\":\"";
+            }
+
+            namespace iso8601 {
+                const PROGMEM char paddingDigit[] = "0";
+                const PROGMEM char timeSeparator[] = "T";
+                const PROGMEM char itemSeparator[] = "-";
+            }
+        }
     }
 }
 #endif /* !defined(DISABLE_COMMUNICATION) */

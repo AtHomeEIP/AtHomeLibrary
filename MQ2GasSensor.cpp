@@ -17,7 +17,6 @@ namespace athome {
             const PROGMEM char jsonLPG[] = "{\"lpg\":";
             const PROGMEM char jsonCO[] = ",\"co\":";
             const PROGMEM char jsonSMOKE[] = ",\"smoke\":";
-            const PROGMEM char jsonEnd[] = "}";
         }
 
         MQ2GasSensor::MQ2GasSensor(int pin) : _pin(pin),
