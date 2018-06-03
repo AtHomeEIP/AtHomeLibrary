@@ -47,7 +47,7 @@ namespace athome {
 #  if !defined(DISABLE_PERSISTENT_STORAGE)
                             sensor::ISensor * = nullptr,
 #  else
-                            sensor::ISensor * = nullptr
+                            sensor::ISensor * = nullptr,
 #  endif /* ... */
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_PERSISTENT_STORAGE

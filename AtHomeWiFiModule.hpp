@@ -60,8 +60,10 @@ namespace athome {
                 AtHomeNetworkModule<T, n>(),
                 _wifi(nullptr) {
                 AtHomeNetworkModule<T, n>::setCommandPlugin(&AtHomeWiFiModule::executeWiFiCommands);
+#  ifndef DISABLE_PERSISTENT_STORAGE
                 AtHomeNetworkModule<T, n>::setOnBackupPlugin(&AtHomeWiFiModule::_saveWiFiParameters);
                 AtHomeNetworkModule<T, n>::setOnRestorePlugin(&AtHomeWiFiModule::_restoreWiFiParameters);
+#  endif /* DISABLE_PERSISTENT_STORAGE */
             }
 
         private:
@@ -94,9 +96,11 @@ namespace athome {
                     _wifi->setAccessPoint(ap);
                     _wifi->connect();
                 }
+#  ifndef DISABLE_PERSISTENT_STORAGE
                 this->onBackupOnStorage();
+#  endif /* DISABLE_PERSISTENT_STORAGE */
             }
-
+#  ifndef DISABLE_PERSISTENT_STORAGE
             void saveWiFiParameters(size_t offset, storage::IStorage &storage) {
                 if (_wifi == nullptr) {
                     return;
@@ -119,7 +123,7 @@ namespace athome {
                 offset += sizeof(communication::wifi::wifi_password);
                 _wifi->setAccessPoint(ap);
             }
-
+#  endif /* DISABLE_PERSISTENT_STORAGE */
         private:
             static void executeWiFiCommands(const String &command, Stream &stream) {
                 AtHomeWiFiModule *instance = reinterpret_cast<AtHomeWiFiModule *>(AtHomeModule<T, n>::getInstance());
@@ -130,7 +134,7 @@ namespace athome {
                     instance->setWiFiCommand(stream);
                 }
             }
-
+#  ifndef DISABLE_PERSISTENT_STORAGE
             static void _saveWiFiParameters(size_t offset, storage::IStorage &storage) {
                 AtHomeWiFiModule *instance = reinterpret_cast<AtHomeWiFiModule *>(AtHomeModule<T, n>::getInstance());
                 if (instance != nullptr) {
@@ -144,7 +148,7 @@ namespace athome {
                     instance->restoreWiFiParameters(offset, storage);
                 }
             }
-
+#  endif /* DISABLE_PERSISTENT_STORAGE */
         private:
             communication::wifi::AWiFiCommunicator   *_wifi;
         };

@@ -19,7 +19,7 @@ namespace athome {
             virtual void setCommandPlugin(typename AtHomeModule<T, n>::AtHomeCommandPlugin plugin) {
                 _networkCommandCallback = plugin;
             }
-
+#  ifndef DISABLE_PERSISTENT_STORAGE
             virtual void setOnBackupPlugin(typename AtHomeModule<T, n>::AtHomeStoragePlugin plugin) {
                 _networkOnBackupCallback = plugin;
             }
@@ -27,13 +27,15 @@ namespace athome {
             virtual void setOnRestorePlugin(typename AtHomeModule<T, n>::AtHomeStoragePlugin plugin) {
                 _networkOnRestoreCallback = plugin;
             }
-
+#  endif /* DISABLE_PERSISTENT_STORAGE */
             void setNetworkCommunicator(communication::ANetworkCommunicator &communicator) {
                 if (_communicator != nullptr) {
                     _communicator->disconnectFromHost();
                 }
                 _communicator = &communicator;
+#  ifndef DISABLE_PERSISTENT_STORAGE
                 this->onRestoreFromStorage();
+#  endif /* DISABLE_PERSISTENT_STORAGE */
             }
 
             void setHost(const communication::ip::tcp_host &host) {
@@ -41,21 +43,27 @@ namespace athome {
                     _communicator->disconnectFromHost();
                 }
                 _communicator->setHost(host);
+#  ifndef DISABLE_PERSISTENT_STORAGE
                 this->onBackupOnStorage();
+#  endif /* DISABLE_PERSISTENT_STORAGE */
             }
 
         protected:
             AtHomeNetworkModule():
                     _networkCommandCallback(nullptr),
+#  ifndef DISABLE_PERSISTENT_STORAGE
                     _networkOnBackupCallback(nullptr),
                     _networkOnRestoreCallback(nullptr),
+#  endif /* DISABLE_PERSISTENT_STORAGE */
                     _communicator(nullptr),
                     AtHomeModule<T, n>() {
                 AtHomeModule<T, n>::setCommandPlugin(&AtHomeNetworkModule::_onCommandReceivedNetwork);
+#  ifndef DISABLE_PERSISTENT_STORAGE
                 AtHomeModule<T, n>::setOnBackupPlugin(&AtHomeNetworkModule::_onNetworkBackup);
                 AtHomeModule<T, n>::setOnRestorePlugin(&AtHomeNetworkModule::_onNetworkRestore);
+#  endif /* DISABLE_PERSISTENT_STORAGE */
             }
-
+#  ifndef DISABLE_PERSISTENT_STORAGE
             void onNetworkBackup(size_t offset, storage::IStorage &storage) {
                 if (_communicator == nullptr) {
                     if (_networkOnBackupCallback != nullptr) {
@@ -90,6 +98,7 @@ namespace athome {
                     _networkOnRestoreCallback(offset, storage);
                 }
             }
+#  endif /* DISABLE_PERSISTENT_STORAGE */
 
         private:
             void setEndPointCommand(Stream &communicator) {
@@ -114,7 +123,9 @@ namespace athome {
                 while (communicator.read() != communication::commands::end_of_command);
                 if (_communicator != nullptr) {
                     _communicator->setHost(host);
+#  ifndef DISABLE_PERSISTENT_STORAGE
                     this->onBackupOnStorage();
+#  endif /* DISABLE_PERSISTENT_STORAGE */
                 }
             }
 
@@ -134,7 +145,7 @@ namespace athome {
                     while (stream.read() != communication::commands::end_of_command);
                 }
             }
-
+#  ifndef DISABLE_PERSISTENT_STORAGE
             static void _onNetworkBackup(size_t offset, storage::IStorage &storage) {
                 AtHomeNetworkModule *instance = reinterpret_cast<AtHomeNetworkModule *>(AtHomeModule<T, n>::getInstance());
                 if (instance != nullptr) {
@@ -148,12 +159,13 @@ namespace athome {
                     instance->onNetworkRestore(offset, storage);
                 }
             }
-
+#  endif /* DISABLE_PERSISTENT_STORAGE */
         private:
             typename AtHomeModule<T, n>::AtHomeCommandPlugin _networkCommandCallback;
+#  ifndef DISABLE_PERSISTENT_STORAGE
             typename AtHomeModule<T, n>::AtHomeStoragePlugin _networkOnBackupCallback;
             typename AtHomeModule<T, n>::AtHomeStoragePlugin _networkOnRestoreCallback;
-
+#  endif /* DISABLE_PERSISTENT_STORAGE */
         protected:
             communication::ANetworkCommunicator             *_communicator;
         };

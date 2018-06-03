@@ -266,7 +266,9 @@ namespace athome {
                  */
                 void setSerial(moduleSerial serial) {
                     _serial = serial;
+# ifndef DISABLE_PERSISTENT_STORAGE
                     onBackupOnStorage();
+# endif /* DISABLE_PERSISTENT_STORAGE */
                 }
 
             private:
@@ -524,7 +526,9 @@ namespace athome {
                         ptr[i] = data;
                     }
                     while (stream.read() != communication::commands::end_of_command);
+#  ifndef DISABLE_PERSISTENT_STORAGE
                     onBackupOnStorage();
+#  endif /* DISABLE_PERSISTENT_STORAGE */
                 }
 # ifndef DISABLE_TIME
                 void        _setDateTime(Stream &stream) {

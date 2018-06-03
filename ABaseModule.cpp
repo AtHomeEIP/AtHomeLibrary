@@ -29,7 +29,7 @@ namespace athome {
 # if !defined(DISABLE_PERSISTENT_STORAGE)
                                  sensor::ISensor *sensor,
 # else
-                                 sensor::ISensor *sensor
+                                 sensor::ISensor *sensor,
 # endif /* ... */
 #endif /* !DISABLE_SENSOR */
 #ifndef DISABLE_PERSISTENT_STORAGE
