@@ -4,7 +4,6 @@
 # include "AtHomeConfig.h"
 # if !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && !defined(DISABLE_WIFI)
 #  include <stdio.h>
-#  include <ArduinoJson.h>
 #  include "AtHomeNetworkModule.hpp"
 #  include "AtHomeFlashCommon.h"
 
@@ -52,42 +51,50 @@ namespace athome {
                     _wifi->disconnect();
                 }
                 _wifi = &wifi;
-                this->onRestoreFromStorage(); // Restore wifi parameters from storage
+                AtHomeNetworkModule<T, n>::setNetworkCommunicator(wifi);
+                //this->onRestoreFromStorage(); // Restore wifi parameters from storage
             }
 
         protected:
             AtHomeWiFiModule():
                 AtHomeNetworkModule<T, n>(),
                 _wifi(nullptr) {
-                AtHomeModule<T, n>::setCommandPlugin(&AtHomeWiFiModule::executeWiFiCommands);
-                AtHomeModule<T, n>::setOnBackupPlugin(&AtHomeWiFiModule::_saveWiFiParameters);
-                AtHomeModule<T, n>::setOnRestorePlugin(&AtHomeWiFiModule::_restoreWiFiParameters);
+                AtHomeNetworkModule<T, n>::setCommandPlugin(&AtHomeWiFiModule::executeWiFiCommands);
+                AtHomeNetworkModule<T, n>::setOnBackupPlugin(&AtHomeWiFiModule::_saveWiFiParameters);
+                AtHomeNetworkModule<T, n>::setOnRestorePlugin(&AtHomeWiFiModule::_restoreWiFiParameters);
             }
 
         private:
             void setWiFiCommand(Stream &communicator) {
-                {
-                    char buffer[101];
-                    size_t len = 0;
-                    if ((len = communicator.readBytesUntil(communication::commands::end_of_command, buffer, 100))) {
-                        buffer[len] = '\0';
-                        StaticJsonBuffer<100> json;
-                        JsonObject &root = json.parseObject(buffer);
-                        const char *ssid = root[FH(communication::commands::ssid_key)];
-                        const char *password = root[FH(communication::commands::password_key)];
-                        if (ssid != nullptr && password != nullptr) {
-                            communication::wifi::WiFi_ap ap;
-                            strncpy(ap.ssid, ssid, 32);
-                            strncpy(ap.password, password, 32);
-                            ap.ssid[32] = '\0';
-                            ap.password[32] = '\0';
-                            _wifi->disconnect();
-                            _wifi->setAccessPoint(ap);
-                            _wifi->connect();
-                        }
+                communication::wifi::WiFi_ap ap;
+                int data;
+                for (uint8_t i = 0; i < 33; i++) {
+                    data = communicator.read();
+                    if (data == -1 || data == communication::commands::end_of_command) {
+                        return;
+                    }
+                    ap.ssid[i] = data;
+                    if (data == '\0') {
+                        break;
                     }
                 }
-                this->onBackupOnStorage(); // Backup wifi parameters in storage
+                for (uint8_t i = 0; i < 33; i++) {
+                    data = communicator.read();
+                    if (data == -1 || data == communication::commands::end_of_command) {
+                        return;
+                    }
+                    ap.password[i] = data;
+                    if (data == '\0') {
+                        break;
+                    }
+                }
+                while (communicator.read() != communication::commands::end_of_command);
+                if (_wifi != nullptr) {
+                    _wifi->disconnect();
+                    _wifi->setAccessPoint(ap);
+                    _wifi->connect();
+                }
+                this->onBackupOnStorage();
             }
 
             void saveWiFiParameters(size_t offset, storage::IStorage &storage) {
@@ -95,14 +102,10 @@ namespace athome {
                     return;
                 }
                 const communication::wifi::WiFi_ap &ap = _wifi->getAccessPoint();
-                const communication::ip::tcp_host &host = _wifi->getHost();
                 storage.write(offset, reinterpret_cast<const void *>(ap.ssid), sizeof(communication::wifi::wifi_ssid));
                 offset += sizeof(communication::wifi::wifi_ssid);
                 storage.write(offset, reinterpret_cast<const void *>(ap.password), sizeof(communication::wifi::wifi_password));
                 offset += sizeof(communication::wifi::wifi_password);
-                storage.write(offset, reinterpret_cast<const void *>(host.ipv4), sizeof(communication::ip::ipv4_address));
-                offset += sizeof(communication::ip::ipv4_address);
-                storage.write(offset, reinterpret_cast<const void *>(&(host.hport)), sizeof(communication::ip::port));
             }
 
             void restoreWiFiParameters(size_t offset, storage::IStorage &storage) {
@@ -110,41 +113,33 @@ namespace athome {
                     return;
                 }
                 communication::wifi::WiFi_ap ap;
-                communication::ip::tcp_host host;
                 storage.read(offset, reinterpret_cast<void *>(ap.ssid), sizeof(communication::wifi::wifi_ssid));
                 offset += sizeof(communication::wifi::wifi_ssid);
                 storage.read(offset, reinterpret_cast<void *>(ap.password), sizeof(communication::wifi::wifi_password));
                 offset += sizeof(communication::wifi::wifi_password);
-                storage.read(offset, reinterpret_cast<void *>(host.ipv4), sizeof(communication::ip::ipv4_address));
-                offset += sizeof(communication::ip::ipv4_address);
-                storage.read(offset, reinterpret_cast<void *>(&(host.hport)), sizeof(communication::ip::port));
                 _wifi->setAccessPoint(ap);
-                _wifi->setHost(host);
             }
 
         private:
             static void executeWiFiCommands(const String &command, Stream &stream) {
-                AtHomeWiFiModule *instance = AtHomeModule<T, n>::template getInstance<AtHomeWiFiModule<T, n> >();
-                if (instance == nullptr || instance->_wifi == nullptr) {
+                AtHomeWiFiModule *instance = reinterpret_cast<AtHomeWiFiModule *>(AtHomeModule<T, n>::getInstance());
+                if (instance == nullptr) {
                     return;
                 }
                 if (!STRCMP(command.c_str(), communication::commands::setWiFi)) {
                     instance->setWiFiCommand(stream);
                 }
-                else if (!STRCMP(command.c_str(), communication::commands::setEndPoint)) {
-                    instance->setEndPointCommand(stream);
-                }
             }
 
             static void _saveWiFiParameters(size_t offset, storage::IStorage &storage) {
-                AtHomeWiFiModule *instance = AtHomeModule<T, n>::template getInstance<AtHomeWiFiModule<T, n> >();
+                AtHomeWiFiModule *instance = reinterpret_cast<AtHomeWiFiModule *>(AtHomeModule<T, n>::getInstance());
                 if (instance != nullptr) {
                     instance->saveWiFiParameters(offset, storage);
                 }
             }
 
             static void _restoreWiFiParameters(size_t offset, storage::IStorage &storage) {
-                AtHomeWiFiModule *instance = AtHomeModule<T, n>::template getInstance<AtHomeWiFiModule<T, n> >();
+                AtHomeWiFiModule *instance = reinterpret_cast<AtHomeWiFiModule *>(AtHomeModule<T, n>::getInstance());
                 if (instance != nullptr) {
                     instance->restoreWiFiParameters(offset, storage);
                 }
