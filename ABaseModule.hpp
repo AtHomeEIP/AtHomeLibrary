@@ -23,31 +23,32 @@ namespace athome {
                 ABaseModule(
 # ifndef DISABLE_DISPLAY
 #  if !defined(DISABLE_COMMUNICATION) || !defined(DISABLE_POWER_MANAGEMENT) ||\
-      !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
+      !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE) || !defined(DISABLE_TIME)
                             display::IDisplay * = nullptr,
 #  else
                             display::IDisplay * = nullptr
 #  endif /* ... */
 # endif /* DISABLE_DISPLAY */
 # ifndef DISABLE_COMMUNICATION
-#  if !defined(DISABLE_POWER_MANAGEMENT) || !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
+#  if !defined(DISABLE_POWER_MANAGEMENT) || !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE) ||\
+      !defined(DISABLE_TIME)
                             Stream ** = nullptr,
 #  else
                             Stream ** = nullptr
 #  endif /* ... */
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_POWER_MANAGEMENT
-#  if !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
+#  if !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE) || !defined(DISABLE_TIME)
                             power::IPower * = nullptr,
 #  else
                             power::IPower * = nullptr
 #  endif /* ... */
 # endif /* DISABLE_POWER_MANAGEMENT */
 # ifndef DISABLE_SENSOR
-#  if !defined(DISABLE_PERSISTENT_STORAGE)
+#  if !defined(DISABLE_PERSISTENT_STORAGE) || !defined(DISABLE_TIME)
                             sensor::ISensor * = nullptr,
 #  else
-                            sensor::ISensor * = nullptr,
+                            sensor::ISensor * = nullptr
 #  endif /* ... */
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_PERSISTENT_STORAGE

@@ -5,14 +5,15 @@ namespace athome {
         ABaseModule::ABaseModule(
 #ifndef DISABLE_DISPLAY
 # if !defined(DISABLE_COMMUNICATION) || !defined(DISABLE_POWER_MANAGEMENT) || !defined(DISABLE_SENSOR) ||\
-     !defined(DISABLE_PERSISTENT_STORAGE)
+     !defined(DISABLE_PERSISTENT_STORAGE) || !defined(DISABLE_TIME)
                                  display::IDisplay *display,
 # else
                                  display::IDisplay *display
 # endif /* ... */
 #endif /* !DISABLE_DISPLAY */
 #ifndef DISABLE_COMMUNICATION
-# if !defined(DISABLE_POWER_MANAGEMENT) || !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
+# if !defined(DISABLE_POWER_MANAGEMENT) || !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE) ||\
+     !defined(DISABLE_TIME)
                                  Stream **communicators,
 # else
                                  Stream **communicators
@@ -26,10 +27,10 @@ namespace athome {
 # endif /* ... */
 #endif /* !DISABLE_POWER_MANAGEMENT */
 #ifndef DISABLE_SENSOR
-# if !defined(DISABLE_PERSISTENT_STORAGE)
+# if !defined(DISABLE_PERSISTENT_STORAGE) || !defined(DISABLE_TIME)
                                  sensor::ISensor *sensor,
 # else
-                                 sensor::ISensor *sensor,
+                                 sensor::ISensor *sensor
 # endif /* ... */
 #endif /* !DISABLE_SENSOR */
 #ifndef DISABLE_PERSISTENT_STORAGE
@@ -51,7 +52,7 @@ namespace athome {
 !defined(DISABLE_SENSOR) && !defined(DISABLE_PERSISTENT_STORAGE) */
 #ifndef DISABLE_DISPLAY
 # if !defined(DISABLE_COMMUNICATION) || !defined(DISABLE_POWER_MANAGEMENT) ||\
-     !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
+     !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE) || !defined(DISABLE_TIME)
                                  _display(display),
 # else
                                  _display(display)
@@ -59,7 +60,7 @@ namespace athome {
 #endif /* DISABLE_DISPLAY */
 #ifndef DISABLE_COMMUNICATION
 # if !defined(DISABLE_POWER_MANAGEMENT) ||\
-     !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE)
+     !defined(DISABLE_SENSOR) || !defined(DISABLE_PERSISTENT_STORAGE) || !defined(DISABLE_TIME)
                                  _streams(communicators),
 # else
                                  _streams(communicators)
