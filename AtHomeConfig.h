@@ -21,6 +21,7 @@
 
 // Macros to uncomment to disable evolved AtHomeModules
 //# define DISABLE_ESP_AT_MODULE
+//# define DISABLE_NATIVE_ESP_COM
 
 // Macros to uncomment to disable families of sensors
 //# define DISABLE_AIR_QUALITY_SENSOR

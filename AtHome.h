@@ -109,6 +109,10 @@ using athome::display::GroveChainableLED;
 #    if !defined(__MSP430__) && !defined(DISABLE_ESP_AT_MODULE)
 #     include "AtHomeWiFiModule.hpp"
 #     include "ESP8266WiFiCommunicator.hpp"
+#     if defined(ESP8266) && defined(ARDUINO)
+#      include "NativeArduinoESPWiFiCommunicator.hpp"
+using athome::communication::wifi::NativeArduinoESPWiFiCommunicator;
+#     endif /* ESP8266 */
 using athome::module::AtHomeWiFiModule;
 using athome::communication::wifi::ESP8266WiFiCommunicator;
 #    endif /* !defined(__MSP430__) && !defined(DISABLE_ESP_AT_MODULE) */
