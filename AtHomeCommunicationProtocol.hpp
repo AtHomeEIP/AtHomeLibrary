@@ -8,6 +8,7 @@
 namespace athome {
     namespace communication {
         namespace commands {
+#  if !defined(DISABLE_WIFI)
             extern const char spacer;
             extern const char end_of_command;
             extern const char end_of_communication;
@@ -15,27 +16,30 @@ namespace athome {
             extern const PROGMEM char end_of_line[];
             extern const PROGMEM char part_separator[];
 
+#   if !defined(DISABLE_SENSOR)
+            extern const PROGMEM char setSensorThresholds[];
+#   endif /* !defined(DISABLE_SENSOR) */
             extern const PROGMEM char uploadData[];
-#  if !defined(DISABLE_NETWORK)
-#   if !defined(DISABLE_WIFI)
+#   if !defined(DISABLE_NETWORK)
+#    if !defined(DISABLE_WIFI)
             extern const PROGMEM char setWiFi[];
-#   endif /* !defined(DISABLE_WIFI) */
+#    endif /* !defined(DISABLE_WIFI) */
             extern const PROGMEM char setEndPoint[];
-#  endif /* !defined(DISABLE_NETWORK) */
+#   endif /* !defined(DISABLE_NETWORK) */
             extern const PROGMEM char setProfile[];
 
-#  if !defined(DISABLE_NETWORK)
-#   if !defined(DISABLE_WIFI)
+#   if !defined(DISABLE_NETWORK)
+#    if !defined(DISABLE_WIFI)
             extern const PROGMEM char ssid_key[];
             extern const PROGMEM char password_key[];
-#   endif /* !defined(DISABLE_WIFI) */
+#    endif /* !defined(DISABLE_WIFI) */
             extern const PROGMEM char ip_key[];
             extern const PROGMEM char port_key[];
-#  endif /* !defined(DISABLE_NETWORK) */
+#   endif /* !defined(DISABLE_NETWORK) */
 
-# if !defined(DISABLE_TIME)
+#  if !defined(DISABLE_TIME)
             extern const PROGMEM char setDateTime[];
-# endif /* !defined(DISABLE_TIME) */
+#  endif /* !defined(DISABLE_TIME) */
 
 /*
  * Thinking communication wisely
@@ -117,6 +121,7 @@ namespace athome {
                 extern const PROGMEM char itemSeparator[];
             }
         }
+#  endif /* DISABLE_WIFI */
     }
 }
 

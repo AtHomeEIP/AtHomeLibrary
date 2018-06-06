@@ -5,6 +5,7 @@
 namespace athome {
     namespace communication {
         namespace commands {
+# if !defined(DISABLE_COMMUNICATION)
             const char spacer = '\t';
             const char end_of_command = '\x03'; // It's the end of text character, ie Ctrl^D
             const char end_of_communication = '\x04'; // It's the end of transmission character, ie Ctrl^C
@@ -12,27 +13,29 @@ namespace athome {
             const PROGMEM char end_of_line[] = "\r\n";
             const PROGMEM char part_separator[] = "================================================================================";
 
-            const PROGMEM char enumerate[] = "Enumerate";
+#  if !defined(DISABLE_SENSOR)
+            const PROGMEM char setSensorThresholds[] = "SetThresholds";
+#  endif /* !defined(DISABLE_SENSOR) */
             const PROGMEM char uploadData[] = "UploadData";
-# if !defined(DISABLE_NETWORK)
-#  if !defined(DISABLE_WIFI)
+#  if !defined(DISABLE_NETWORK)
+#   if !defined(DISABLE_WIFI)
             const PROGMEM char setWiFi[] = "SetWiFi";
-#  endif /* !defined(DISABLE_WIFI) */
+#   endif /* !defined(DISABLE_WIFI) */
             const PROGMEM char setEndPoint[] = "SetEndPoint";
-# endif /* !defined(DISABLE_NETWORK) */
+#  endif /* !defined(DISABLE_NETWORK) */
             const PROGMEM char setProfile[] = "SetProfile";
 
-# if !defined(DISABLE_NETWORK)
-#  if !defined(DISABLE_WIFI)
+#  if !defined(DISABLE_NETWORK)
+#   if !defined(DISABLE_WIFI)
             const PROGMEM char ssid_key[] = "ssid";
             const PROGMEM char password_key[] = "password";
-#  endif /* !defined(DISABLE_WIFI) */
+#   endif /* !defined(DISABLE_WIFI) */
             const PROGMEM char ip_key[] = "ip";
             const PROGMEM char port_key[] = "port";
-# endif /* !defined(DISABLE_NETWORK) */
-# if !defined(DISABLE_TIME)
+#  endif /* !defined(DISABLE_NETWORK) */
+#  if !defined(DISABLE_TIME)
             const PROGMEM char setDateTime[] = "SetDateTime";
-# endif /* !defined(DISABLE_TIME) */
+#  endif /* !defined(DISABLE_TIME) */
         }
 
         namespace json {
@@ -68,6 +71,7 @@ namespace athome {
                 const PROGMEM char itemSeparator[] = "-";
             }
         }
+# endif /* DISABLE_WIFI */
     }
 }
 #endif /* !defined(DISABLE_COMMUNICATION) */

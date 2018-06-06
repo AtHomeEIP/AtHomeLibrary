@@ -423,6 +423,11 @@ namespace athome {
                                 _setDateTime(*_streams[i]);
                             }
 #  endif /* DISABLE_TIME */
+#  ifndef DISABLE_SENSOR
+                            else if (!STRCMP(commandName.c_str(), communication::commands::setSensorThresholds)) {
+                                _setSensorThresholds(*_streams[i]);
+                            }
+#  endif /* DISABLE_SENSOR */
                             else if (_communicationPlugin != nullptr) {
                                 _communicationPlugin(commandName, *_streams[i]);
                             }
@@ -530,10 +535,10 @@ namespace athome {
                     onBackupOnStorage();
 #  endif /* DISABLE_PERSISTENT_STORAGE */
                 }
-# ifndef DISABLE_TIME
+#  ifndef DISABLE_TIME
                 void        _setDateTime(Stream &stream) {
                     if (_clock == nullptr) {
-                        while (stream.read() != -1);
+                        while (stream.read() != communication::commands::end_of_command);
                         return;
                     }
                     time::ITime::DateTime time;
@@ -549,7 +554,27 @@ namespace athome {
                     _clock->setCurrentDateTime(time);
                     while (stream.read() != communication::commands::end_of_command);
                 }
-# endif /* DISABLE_TIME */
+#  endif /* DISABLE_TIME */
+#  ifndef DISABLE_SENSOR
+                void        _setSensorThresholds(Stream &stream) {
+                    if (_sensor == nullptr) {
+                        while (stream.read() != communication::commands::end_of_command);
+                        return;
+                    }
+                    sensor::ISensor::ISensorThresholds thresholds;
+                    while (stream.peek() == -1);
+                    thresholds.unit.unit = stream.read();
+                    thresholds.unit.prefix = stream.read();
+                    for (uint8_t i = 0; i < 4; i++) {
+                        thresholds.min |= (stream.read() << (8 * i));
+                    }
+                    for (uint8_t i = 0; i < 4; i++) {
+                        thresholds.max |= (stream.read() << (8 * i));
+                    }
+                    _sensor->setThresholds(thresholds);
+                    while (stream.read() != communication::commands::end_of_command);
+                }
+#  endif /* DISABLE_SENSOR */
 # endif /* DISABLE_COMMUNICATION */
             private:
 # ifndef DISABLE_SENSOR
