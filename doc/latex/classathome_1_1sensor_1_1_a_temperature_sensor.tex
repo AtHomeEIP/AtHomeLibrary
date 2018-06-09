@@ -3,7 +3,7 @@
 Inheritance diagram for athome\+:\+:sensor\+:\+:A\+Temperature\+Sensor\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{classathome_1_1sensor_1_1_a_temperature_sensor}
+\includegraphics[height=2.204725cm]{classathome_1_1sensor_1_1_a_temperature_sensor}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -15,21 +15,48 @@ Inheritance diagram for athome\+:\+:sensor\+:\+:A\+Temperature\+Sensor\+:\begin{
 \mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a0eb5857e7a283d824b183eb55239e9fe}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a0eb5857e7a283d824b183eb55239e9fe}} 
 \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor}{A\+Temperature\+Sensor}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor}{A\+Temperature\+Sensor}} \&)=delete
 \item 
-virtual uint8\+\_\+t $\ast$ \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a397794217f3163950add6d28f69a6202}{get\+Sample}} ()=0
+virtual const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+Value}} \& \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_afea6a461b8dff9ee736aa508aa4f6a3c}{get\+Sample}} ()
 \item 
-virtual float \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a1063bddc4a031d80f68a83317b64fbb2}{get\+Last\+Sample}} () const =0
+virtual int32\+\_\+t \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a4e5b2c79ab69f6903f7b322da45b0af4}{get\+Sensor\+Sample}} ()=0
 \item 
-\mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+Scale}} \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a3997ff080f6a9e444c52a63f1b40d73c}{get\+Estimate}} ()
+virtual void \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a1c323184ac116784e877151895dfd080}{set\+Thresholds}} (const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a3997ff080f6a9e444c52a63f1b40d73c}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a3997ff080f6a9e444c52a63f1b40d73c}} 
-\index{athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}!get\+Estimate@{get\+Estimate}}
-\index{get\+Estimate@{get\+Estimate}!athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}}
-\subsubsection{\texorpdfstring{get\+Estimate()}{getEstimate()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+::\+I\+Sensor\+Scale}} athome\+::sensor\+::\+A\+Temperature\+Sensor\+::get\+Estimate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_afea6a461b8dff9ee736aa508aa4f6a3c}\label{classathome_1_1sensor_1_1_a_temperature_sensor_afea6a461b8dff9ee736aa508aa4f6a3c}} 
+\index{athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}!get\+Sample@{get\+Sample}}
+\index{get\+Sample@{get\+Sample}!athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+::\+I\+Sensor\+Value}} \& athome\+::sensor\+::\+A\+Temperature\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns a pointer on the sample of the sensor. This pointer needs to point on a float variable.
+
+Return an estimation of the quality of the temperature
+
+Values are from\+: \href{https://www.jechange.fr/energie/duale/guides/thermostat-temperature-4101}{\tt https\+://www.\+jechange.\+fr/energie/duale/guides/thermostat-\/temperature-\/4101} \begin{DoxyReturn}{Returns}
+estimation of temperature on a scale from 1 (worst) to 10 (best) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_ae109cd3741ea9c88dc7e4f2eaf1485d5}{athome\+::sensor\+::\+I\+Sensor}}.
+
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a4e5b2c79ab69f6903f7b322da45b0af4}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a4e5b2c79ab69f6903f7b322da45b0af4}} 
+\index{athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}!get\+Sensor\+Sample@{get\+Sensor\+Sample}}
+\index{get\+Sensor\+Sample@{get\+Sensor\+Sample}!athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Sensor\+Sample()}{getSensorSample()}}
+{\footnotesize\ttfamily virtual int32\+\_\+t athome\+::sensor\+::\+A\+Temperature\+Sensor\+::get\+Sensor\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the last value sampled from the sensor (do not actually resample it). 
+
+Implemented in \mbox{\hyperlink{classathome_1_1sensor_1_1_thermistor_abc45d8d277fb186b5d303f9e53bf73d4}{athome\+::sensor\+::\+Thermistor$<$ R1, R2, R3, P\+R\+E\+C, V\+R\+E\+F, R\+R\+E\+F $>$}}, and \mbox{\hyperlink{classathome_1_1sensor_1_1_t_m_p36_g_z_temperature_sensor_ae0e101ee54c5c64842d2cab9fb9292f4}{athome\+::sensor\+::\+T\+M\+P36\+G\+Z\+Temperature\+Sensor$<$ R\+E\+F, R\+E\+S $>$}}.
+
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a1c323184ac116784e877151895dfd080}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a1c323184ac116784e877151895dfd080}} 
+\index{athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}!set\+Thresholds@{set\+Thresholds}}
+\index{set\+Thresholds@{set\+Thresholds}!athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}}
+\subsubsection{\texorpdfstring{set\+Thresholds()}{setThresholds()}}
+{\footnotesize\ttfamily void athome\+::sensor\+::\+A\+Temperature\+Sensor\+::set\+Thresholds (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 Returns the estimation of safety from the current sensor value
 
@@ -52,27 +79,11 @@ Example\+:
 \end{DoxyCode}
  
 
-Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a95785b54ffe3a8f7e48c81b5732e3b9f}{athome\+::sensor\+::\+I\+Sensor}}.
-
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a1063bddc4a031d80f68a83317b64fbb2}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a1063bddc4a031d80f68a83317b64fbb2}} 
-\index{athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}!get\+Last\+Sample@{get\+Last\+Sample}}
-\index{get\+Last\+Sample@{get\+Last\+Sample}!athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}}
-\subsubsection{\texorpdfstring{get\+Last\+Sample()}{getLastSample()}}
-{\footnotesize\ttfamily virtual float athome\+::sensor\+::\+A\+Temperature\+Sensor\+::get\+Last\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
-
-Returns the last value sampled from the sensor (do not actually resample it). \mbox{\Hypertarget{classathome_1_1sensor_1_1_a_temperature_sensor_a397794217f3163950add6d28f69a6202}\label{classathome_1_1sensor_1_1_a_temperature_sensor_a397794217f3163950add6d28f69a6202}} 
-\index{athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}!get\+Sample@{get\+Sample}}
-\index{get\+Sample@{get\+Sample}!athome\+::sensor\+::\+A\+Temperature\+Sensor@{athome\+::sensor\+::\+A\+Temperature\+Sensor}}
-\subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
-{\footnotesize\ttfamily virtual uint8\+\_\+t$\ast$ athome\+::sensor\+::\+A\+Temperature\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
-
-Returns a pointer on the sample of the sensor. This pointer needs to point on a float variable. 
-
-Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a2513fd8acc5d8251439330ca0e78cf04}{athome\+::sensor\+::\+I\+Sensor}}.
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_af86df8538fecfcfc670b4adfbbde6abb}{athome\+::sensor\+::\+I\+Sensor}}.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-A\+Temperature\+Sensor.\+hpp\item 
-A\+Temperature\+Sensor.\+cpp\end{DoxyCompactItemize}
+src/A\+Temperature\+Sensor.\+hpp\item 
+src/sensor/temperature/A\+Temperature\+Sensor.\+cpp\end{DoxyCompactItemize}

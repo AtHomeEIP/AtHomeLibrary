@@ -20,7 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo_tiny.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AtHome Framework
    </div>
@@ -82,7 +82,9 @@ Inheritance diagram for athome::communication::wifi::AWiFiCommunicator:</div>
  <div class="center">
   <img src="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.png" usemap="#athome::communication::wifi::AWiFiCommunicator_map" alt=""/>
   <map id="athome::communication::wifi::AWiFiCommunicator_map" name="athome::communication::wifi::AWiFiCommunicator_map">
-<area href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html" alt="athome::communication::wifi::ESP8266WiFiCommunicator" shape="rect" coords="0,112,329,136"/>
+<area href="classathome_1_1communication_1_1_a_network_communicator.html" alt="athome::communication::ANetworkCommunicator" shape="rect" coords="196,56,578,80"/>
+<area href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html" alt="athome::communication::wifi::ESP8266WiFiCommunicator" shape="rect" coords="0,168,382,192"/>
+<area href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html" alt="athome::communication::wifi::NativeArduinoESPWiFiCommunicator" shape="rect" coords="392,168,774,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -96,44 +98,54 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afc2748d9230575335d3cfd7936ff26ee"><td class="memItemLeft" align="right" valign="top"><a id="afc2748d9230575335d3cfd7936ff26ee"></a>
 <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">AWiFiCommunicator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">AWiFiCommunicator</a> &amp;)=delete</td></tr>
 <tr class="separator:afc2748d9230575335d3cfd7936ff26ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab71f3c62a890abdefe549d69b40b12ba"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ab71f3c62a890abdefe549d69b40b12ba">available</a> ()=0</td></tr>
-<tr class="separator:ab71f3c62a890abdefe549d69b40b12ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac18a51bba1651031d4ea2ac2d2a19606"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ac18a51bba1651031d4ea2ac2d2a19606">read</a> ()=0</td></tr>
-<tr class="separator:ac18a51bba1651031d4ea2ac2d2a19606"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5c39b1ea49f77026371c8e8ff2dba63"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ad5c39b1ea49f77026371c8e8ff2dba63">peek</a> ()=0</td></tr>
-<tr class="separator:ad5c39b1ea49f77026371c8e8ff2dba63"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7544a06e5b6d65108cb2c0c5702c5f29"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a7544a06e5b6d65108cb2c0c5702c5f29">write</a> (uint8_t)=0</td></tr>
-<tr class="separator:a7544a06e5b6d65108cb2c0c5702c5f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa974255c8bdbae19d3d4bd0f1a50318f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#aa974255c8bdbae19d3d4bd0f1a50318f">flush</a> ()=0</td></tr>
-<tr class="separator:aa974255c8bdbae19d3d4bd0f1a50318f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a309927109fbc19aa0fb2afb71d50bbf9"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a309927109fbc19aa0fb2afb71d50bbf9">connect</a> ()=0</td></tr>
 <tr class="separator:a309927109fbc19aa0fb2afb71d50bbf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6131240ac0daa0f9fb4d46871feea4c2"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a6131240ac0daa0f9fb4d46871feea4c2">disconnect</a> ()=0</td></tr>
 <tr class="separator:a6131240ac0daa0f9fb4d46871feea4c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac81395d55c9a6824136d7b63fdb096f0"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ac81395d55c9a6824136d7b63fdb096f0">connectToHost</a> ()=0</td></tr>
-<tr class="separator:ac81395d55c9a6824136d7b63fdb096f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebcf385c3e0382eda7c99760f100901c"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#aebcf385c3e0382eda7c99760f100901c">disconnectFromHost</a> ()=0</td></tr>
-<tr class="separator:aebcf385c3e0382eda7c99760f100901c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a578087d01c814481d89ea702a6d7ed01"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a578087d01c814481d89ea702a6d7ed01">isConnected</a> () const =0</td></tr>
 <tr class="separator:a578087d01c814481d89ea702a6d7ed01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abef86486512e4a39d61df3b27effcc87"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structathome_1_1communication_1_1wifi_1_1s__wifi__access__point.html">WiFi_ap</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#abef86486512e4a39d61df3b27effcc87">getAccessPoint</a> () const</td></tr>
 <tr class="separator:abef86486512e4a39d61df3b27effcc87"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afcc41f462a12c8348148c915dcafd1a0"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structathome_1_1communication_1_1wifi_1_1s__wifi__client.html">WiFi_client</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#afcc41f462a12c8348148c915dcafd1a0">getConnectionAddresses</a> () const</td></tr>
 <tr class="separator:afcc41f462a12c8348148c915dcafd1a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a50dcf049687aa26a992b161f540b40f3"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structathome_1_1communication_1_1ip_1_1s__host.html">ip::tcp_host</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a50dcf049687aa26a992b161f540b40f3">getHost</a> () const</td></tr>
-<tr class="separator:a50dcf049687aa26a992b161f540b40f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adebc335ea6408a90919f396f06260b13"><td class="memItemLeft" align="right" valign="top">wifi_mode&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#adebc335ea6408a90919f396f06260b13">getWiFiMode</a> () const</td></tr>
 <tr class="separator:adebc335ea6408a90919f396f06260b13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2b802d934022436e029fc31b3e84d321"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a2b802d934022436e029fc31b3e84d321">setAccessPoint</a> (const <a class="el" href="structathome_1_1communication_1_1wifi_1_1s__wifi__access__point.html">WiFi_ap</a> &amp;)</td></tr>
 <tr class="separator:a2b802d934022436e029fc31b3e84d321"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31fb91672f298718d99bb9776dfe46c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a31fb91672f298718d99bb9776dfe46c9">setConnectionAddresses</a> (const <a class="el" href="structathome_1_1communication_1_1wifi_1_1s__wifi__client.html">WiFi_client</a> &amp;)</td></tr>
 <tr class="separator:a31fb91672f298718d99bb9776dfe46c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9d7165657cb8be4995f637a57b8f9e1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ab9d7165657cb8be4995f637a57b8f9e1">setHost</a> (const <a class="el" href="structathome_1_1communication_1_1ip_1_1s__host.html">ip::tcp_host</a> &amp;)</td></tr>
-<tr class="separator:ab9d7165657cb8be4995f637a57b8f9e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28538cf510da8b59056b2533a6e53bcc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a28538cf510da8b59056b2533a6e53bcc">setWiFiMode</a> (wifi_mode)</td></tr>
 <tr class="separator:a28538cf510da8b59056b2533a6e53bcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42f2ad88713db57bd9e9670f090924de"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a42f2ad88713db57bd9e9670f090924de">setStreamToChipset</a> (Stream *)</td></tr>
 <tr class="separator:a42f2ad88713db57bd9e9670f090924de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classathome_1_1communication_1_1_a_network_communicator')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html">athome::communication::ANetworkCommunicator</a></td></tr>
+<tr class="memitem:a0c5ca4008e3de2e987d5cafaf9914960 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top"><a id="a0c5ca4008e3de2e987d5cafaf9914960"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ANetworkCommunicator</b> (<a class="el" href="structathome_1_1communication_1_1ip_1_1s__host.html">ip::tcp_host</a> *=nullptr)</td></tr>
+<tr class="separator:a0c5ca4008e3de2e987d5cafaf9914960 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3650944e94e130a11bd0167eb55e40c1 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top"><a id="a3650944e94e130a11bd0167eb55e40c1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ANetworkCommunicator</b> (const <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html">ANetworkCommunicator</a> &amp;)=delete</td></tr>
+<tr class="separator:a3650944e94e130a11bd0167eb55e40c1 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d8984345e39d51da706a02c8d751e6b inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top"><a id="a3d8984345e39d51da706a02c8d751e6b"></a>
+<a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html">ANetworkCommunicator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html">ANetworkCommunicator</a> &amp;)=delete</td></tr>
+<tr class="separator:a3d8984345e39d51da706a02c8d751e6b inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bf367d03c98e8523fda71dd43ffa2fb inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a2bf367d03c98e8523fda71dd43ffa2fb">available</a> ()=0</td></tr>
+<tr class="separator:a2bf367d03c98e8523fda71dd43ffa2fb inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88d3c4366daf48865ab48b22eb62d610 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a88d3c4366daf48865ab48b22eb62d610">read</a> ()=0</td></tr>
+<tr class="separator:a88d3c4366daf48865ab48b22eb62d610 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad06ecdc94aa77b1bab934b85bed2ac7d inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#ad06ecdc94aa77b1bab934b85bed2ac7d">peek</a> ()=0</td></tr>
+<tr class="separator:ad06ecdc94aa77b1bab934b85bed2ac7d inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87adf68359a4ec5b0a38bea529ebf732 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a87adf68359a4ec5b0a38bea529ebf732">write</a> (uint8_t)=0</td></tr>
+<tr class="separator:a87adf68359a4ec5b0a38bea529ebf732 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3b278ad11e6c00ac7d3e2fee3f01b1 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a5e3b278ad11e6c00ac7d3e2fee3f01b1">flush</a> ()=0</td></tr>
+<tr class="separator:a5e3b278ad11e6c00ac7d3e2fee3f01b1 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a370176dae8f38225446e83a132dbcff7 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a370176dae8f38225446e83a132dbcff7">connectToHost</a> ()=0</td></tr>
+<tr class="separator:a370176dae8f38225446e83a132dbcff7 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a025b7fbe9b3c4452fcf1925d766324eb inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a025b7fbe9b3c4452fcf1925d766324eb">disconnectFromHost</a> ()=0</td></tr>
+<tr class="separator:a025b7fbe9b3c4452fcf1925d766324eb inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b52a87191bef07e73ec1bbba0713080 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structathome_1_1communication_1_1ip_1_1s__host.html">ip::tcp_host</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a6b52a87191bef07e73ec1bbba0713080">getHost</a> () const</td></tr>
+<tr class="separator:a6b52a87191bef07e73ec1bbba0713080 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c19d9918fc1d85d1768bfd0ae0bd4d4 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a2c19d9918fc1d85d1768bfd0ae0bd4d4">setHost</a> (const <a class="el" href="structathome_1_1communication_1_1ip_1_1s__host.html">ip::tcp_host</a> &amp;)</td></tr>
+<tr class="separator:a2c19d9918fc1d85d1768bfd0ae0bd4d4 inherit pub_methods_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -149,14 +161,15 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>_stream</b></td><
 <tr class="memitem:af249e6e9eff32fed22de39a5b7c62b49"><td class="memItemLeft" align="right" valign="top"><a id="af249e6e9eff32fed22de39a5b7c62b49"></a>
 <a class="el" href="structathome_1_1communication_1_1wifi_1_1s__wifi__client.html">WiFi_client</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_me</b></td></tr>
 <tr class="separator:af249e6e9eff32fed22de39a5b7c62b49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e0596efaae3b3283f4b28ce7860f359"><td class="memItemLeft" align="right" valign="top"><a id="a4e0596efaae3b3283f4b28ce7860f359"></a>
+<tr class="inherit_header pro_attribs_classathome_1_1communication_1_1_a_network_communicator"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classathome_1_1communication_1_1_a_network_communicator')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html">athome::communication::ANetworkCommunicator</a></td></tr>
+<tr class="memitem:ad7b22eedcb47003e1b79e8ec480da119 inherit pro_attribs_classathome_1_1communication_1_1_a_network_communicator"><td class="memItemLeft" align="right" valign="top"><a id="ad7b22eedcb47003e1b79e8ec480da119"></a>
 <a class="el" href="structathome_1_1communication_1_1ip_1_1s__host.html">ip::tcp_host</a>&#160;</td><td class="memItemRight" valign="bottom"><b>_host</b></td></tr>
-<tr class="separator:a4e0596efaae3b3283f4b28ce7860f359"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:ad7b22eedcb47003e1b79e8ec480da119 inherit pro_attribs_classathome_1_1communication_1_1_a_network_communicator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract class derived from Stream, declaring some new WiFi common interface methods, and implementing some utility methods for these <code>Stream</code>s</p>
 <p>Here's a simple example of implementing a UART to WiFi chipset pre-configured to connect a WiFi network and transparently bridge the serial connection always connected to Serial Stream:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;AWiFiCommunicator.hpp&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">athome::communication::wifi::AWiFiCommunicator</a>;</div><div class="line"></div><div class="line"><span class="keyword">class </span>MyUARTBridge : <span class="keyword">public</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a0098148fe8d0eeee99b7f8f72a72a900">AWiFiCommunicator</a> {</div><div class="line">  <span class="keyword">public</span>:</div><div class="line">    MyUARTBridge():<a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a0098148fe8d0eeee99b7f8f72a72a900">AWiFiCommunicator</a>() {</div><div class="line">      _stream = &amp;Serial;</div><div class="line">    }</div><div class="line">    ~MyUARTBridge() {}</div><div class="line"></div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ab71f3c62a890abdefe549d69b40b12ba">available</a>() { <span class="keywordflow">return</span> _stream-&gt;available(); }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ac18a51bba1651031d4ea2ac2d2a19606">read</a>() { <span class="keywordflow">return</span> _stream-&gt;return(); }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ad5c39b1ea49f77026371c8e8ff2dba63">peek</a>() { <span class="keywordflow">return</span> _stream-&gt;peek(); }</div><div class="line">    <span class="keywordtype">size_t</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a7544a06e5b6d65108cb2c0c5702c5f29">write</a>(uint8_t data) { <span class="keywordflow">return</span> _stream-&gt;write(data); }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a309927109fbc19aa0fb2afb71d50bbf9">connect</a>() { <span class="keywordflow">return</span> 0; }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a6131240ac0daa0f9fb4d46871feea4c2">disconnect</a>() { <span class="keywordflow">return</span> 0; }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ac81395d55c9a6824136d7b63fdb096f0">connectToHost</a>() { <span class="keywordflow">return</span> 0; }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#aebcf385c3e0382eda7c99760f100901c">disconnectFromHost</a>() { <span class="keywordflow">return</span> 0; }</div><div class="line">    <span class="keywordtype">bool</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a578087d01c814481d89ea702a6d7ed01">isConnected</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;AWiFiCommunicator.hpp&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">athome::communication::wifi::AWiFiCommunicator</a>;</div><div class="line"></div><div class="line"><span class="keyword">class </span>MyUARTBridge : <span class="keyword">public</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a0098148fe8d0eeee99b7f8f72a72a900">AWiFiCommunicator</a> {</div><div class="line">  <span class="keyword">public</span>:</div><div class="line">    MyUARTBridge():<a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a0098148fe8d0eeee99b7f8f72a72a900">AWiFiCommunicator</a>() {</div><div class="line">      _stream = &amp;Serial;</div><div class="line">    }</div><div class="line">    ~MyUARTBridge() {}</div><div class="line"></div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1_a_network_communicator.html#a2bf367d03c98e8523fda71dd43ffa2fb">available</a>() { <span class="keywordflow">return</span> _stream-&gt;available(); }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1_a_network_communicator.html#a88d3c4366daf48865ab48b22eb62d610">read</a>() { <span class="keywordflow">return</span> _stream-&gt;return(); }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1_a_network_communicator.html#ad06ecdc94aa77b1bab934b85bed2ac7d">peek</a>() { <span class="keywordflow">return</span> _stream-&gt;peek(); }</div><div class="line">    <span class="keywordtype">size_t</span> <a class="code" href="classathome_1_1communication_1_1_a_network_communicator.html#a87adf68359a4ec5b0a38bea529ebf732">write</a>(uint8_t data) { <span class="keywordflow">return</span> _stream-&gt;write(data); }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a309927109fbc19aa0fb2afb71d50bbf9">connect</a>() { <span class="keywordflow">return</span> 0; }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a6131240ac0daa0f9fb4d46871feea4c2">disconnect</a>() { <span class="keywordflow">return</span> 0; }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1_a_network_communicator.html#a370176dae8f38225446e83a132dbcff7">connectToHost</a>() { <span class="keywordflow">return</span> 0; }</div><div class="line">    <span class="keywordtype">int</span> <a class="code" href="classathome_1_1communication_1_1_a_network_communicator.html#a025b7fbe9b3c4452fcf1925d766324eb">disconnectFromHost</a>() { <span class="keywordflow">return</span> 0; }</div><div class="line">    <span class="keywordtype">bool</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a578087d01c814481d89ea702a6d7ed01">isConnected</a>() { <span class="keywordflow">return</span> <span class="keyword">true</span>; }</div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a0098148fe8d0eeee99b7f8f72a72a900"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0098148fe8d0eeee99b7f8f72a72a900">&#9670;&nbsp;</a></span>AWiFiCommunicator()</h2>
 
@@ -199,34 +212,6 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>_stream</b></td><
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab71f3c62a890abdefe549d69b40b12ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab71f3c62a890abdefe549d69b40b12ba">&#9670;&nbsp;</a></span>available()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual int athome::communication::wifi::AWiFiCommunicator::available </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Virtual method inherited from Stream interface. <a href="https://www.arduino.cc/reference/en/language/functions/communication/stream/streamavailable/">See documentation on Arduino reference.</a> </p>
-
-<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#af9b1e28910959893748763faaa5373a0">athome::communication::wifi::ESP8266WiFiCommunicator</a>.</p>
-
-</div>
-</div>
 <a id="a309927109fbc19aa0fb2afb71d50bbf9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a309927109fbc19aa0fb2afb71d50bbf9">&#9670;&nbsp;</a></span>connect()</h2>
 
@@ -253,37 +238,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>_stream</b></td><
 <p>A return value of 0 is expected to indicate the connection was successful, otherwise all other values are available for error codes.</p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;AtHome.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="structathome_1_1communication_1_1wifi_1_1s__wifi__access__point.html">athome::communication::wifi::WiFi_ap</a>; <span class="comment">// Use this to not have to write the full namespace names further</span></div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">athome::communication::wifi::AWiFiCommunicator</a>;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_connecting_wifi_to_network_called_foobar(<a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a0098148fe8d0eeee99b7f8f72a72a900">AWiFiCommunicator</a> &amp;wifi) {</div><div class="line">  WiFi_ap network; <span class="comment">// Declare a WiFi_ap structure</span></div><div class="line">  strncpy(network.ssid, <span class="stringliteral">&quot;foobar&quot;</span>, <span class="keyword">sizeof</span>(network.ssid)); <span class="comment">// Copy &quot;foobar&quot; in the ssid field of the structure, as the SSID of a WiFi network is the name shown to humans</span></div><div class="line">  strncpy(network.password, <span class="stringliteral">&quot;12345678&quot;</span>, <span class="keyword">sizeof</span>(network.password)); <span class="comment">// Copy &quot;12345678&quot; in the password field, to set the password used by the WiFi network</span></div><div class="line">  wifi.setAccessPoint(network); <span class="comment">// Set the WiFi network parameters we created</span></div><div class="line">  <span class="keywordflow">if</span> (!wifi.connect()) { <span class="comment">// Connect to this network</span></div><div class="line">    Serial.println(<span class="stringliteral">&quot;Successfully connected to WiFi network&quot;</span>);</div><div class="line">  } <span class="keywordflow">else</span> {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Connection to WiFi network failed&quot;</span>);</div><div class="line">  }</div><div class="line">}</div></div><!-- fragment --> 
-<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a58cc439be2f368b346bbbe1601a9b675">athome::communication::wifi::ESP8266WiFiCommunicator</a>.</p>
-
-</div>
-</div>
-<a id="ac81395d55c9a6824136d7b63fdb096f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac81395d55c9a6824136d7b63fdb096f0">&#9670;&nbsp;</a></span>connectToHost()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual int athome::communication::wifi::AWiFiCommunicator::connectToHost </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Virtual method used to connect adapter to a socket on a host.</p>
-<p>A return value of 0 is expected to indicate success, otherwise all other values are available for error codes.</p>
-<p>Example:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;AtHome.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="structathome_1_1communication_1_1ip_1_1s__host.html">athome::communication::ip::tcp_host</a>; <span class="comment">// Use this to not have to write the full namespace names further</span></div><div class="line"><span class="keyword">using</span> <a class="code" href="structathome_1_1communication_1_1wifi_1_1s__wifi__client.html">athome::communication::wifi::WiFi_client</a>;</div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">athome::communication::wifi::AWiFiCommunicator</a>;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_connecting_to_http_port_on_router(<a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a0098148fe8d0eeee99b7f8f72a72a900">AWiFiCommunicator</a> &amp;wifi) {</div><div class="line">  <span class="keyword">const</span> WiFi_client &amp;my_ip = wifi.getConnectionAddresses(); <span class="comment">// Get our actual MAC and IP (IPv4 or IPv6) addresses</span></div><div class="line">  tcp_host router = {{my_ip.ipv4[0], my_ip.ipv4[1], my_ip.ipv4[2], 1}, 80}; <span class="comment">// Use our current IPv4 address to deduce the one of the router, which often is the same as ours but ending with the value 1</span></div><div class="line">  wifi.setHost(router); <span class="comment">// Set the new host to connect on, our structure tcp_host is a couple IP + port</span></div><div class="line">  <span class="keywordflow">if</span> (!wifi.connectToHost()) { <span class="comment">// Connect to the socket on the host</span></div><div class="line">    Serial.println(<span class="stringliteral">&quot;Successfully connected to host&quot;</span>);</div><div class="line">  } <span class="keywordflow">else</span> {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Failed to connect to host&quot;</span>);</div><div class="line">  }</div><div class="line">}</div></div><!-- fragment --> 
-<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a159a93b350df135daa967665c9e53e2f">athome::communication::wifi::ESP8266WiFiCommunicator</a>.</p>
+<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a58cc439be2f368b346bbbe1601a9b675">athome::communication::wifi::ESP8266WiFiCommunicator</a>, and <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#abc07f2d953fa91f86b8919858e10bbd7">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>.</p>
 
 </div>
 </div>
@@ -313,65 +268,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>_stream</b></td><
 <p>A return value of 0 is expected to indicate success, otherwise all other values are available for error codes.</p>
 <p>Usage is as simple as this:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;AWiFiCommunicator.hpp&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">athome::communication::wifi::AWiFiCommunicator</a>;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_disconnecting_wifi_adapters(AWiFiCommuncator &amp;wifi) {</div><div class="line">  <span class="keywordflow">if</span> (!wifi.disconnect()) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Successfully disconnected from WiFi network&quot;</span>);</div><div class="line">  } <span class="keywordflow">else</span> {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Failed to disconnect from WiFi network&quot;</span>); <span class="comment">// Is that really possible? In case we&#39;re stuck, it&#39;s a problem where the &quot;have you tried turning it off and on again?&quot; rocks ;)</span></div><div class="line">}</div></div><!-- fragment --> 
-<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a7e53e10b858aebc5e7c6c0ea6007f84a">athome::communication::wifi::ESP8266WiFiCommunicator</a>.</p>
-
-</div>
-</div>
-<a id="aebcf385c3e0382eda7c99760f100901c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebcf385c3e0382eda7c99760f100901c">&#9670;&nbsp;</a></span>disconnectFromHost()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual int athome::communication::wifi::AWiFiCommunicator::disconnectFromHost </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Virtual method to disconnect from the current host, closing the socket.</p>
-<p>A return value of 0 is expected to indicate success, otherwise all other values are available for error codes.</p>
-<p>Example:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;AWiFiCommunicator.hpp&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">athome::communication::wifi::AWiFiCommunicator</a>;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_disconnecting_an_adapter_from_host(<a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a0098148fe8d0eeee99b7f8f72a72a900">AWiFiCommunicator</a> &amp;wifi) {</div><div class="line">  <span class="keywordflow">if</span> (!wifi.disconnectFromHost()) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Successfully disconnected from host&quot;</span>);</div><div class="line">  } <span class="keywordflow">else</span> {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Failed to disconnect from host&quot;</span>); <span class="comment">// If that happens, see the same scenario on disconnect method to have the solution ;)</span></div><div class="line">  }</div><div class="line">}</div></div><!-- fragment --> 
-<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a0f8adbe1b1d219148c4f340980056356">athome::communication::wifi::ESP8266WiFiCommunicator</a>.</p>
-
-</div>
-</div>
-<a id="aa974255c8bdbae19d3d4bd0f1a50318f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa974255c8bdbae19d3d4bd0f1a50318f">&#9670;&nbsp;</a></span>flush()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void athome::communication::wifi::AWiFiCommunicator::flush </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Virtual method inherited from Stream interface. <a href="https://www.arduino.cc/reference/en/language/functions/communication/stream/streamflush/">See documentation on Arduino reference.</a> </p>
-
-<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#af95ca7f47285b13fc895e0d9323ee320">athome::communication::wifi::ESP8266WiFiCommunicator</a>.</p>
+<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a7e53e10b858aebc5e7c6c0ea6007f84a">athome::communication::wifi::ESP8266WiFiCommunicator</a>, and <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#a3787e850d48d149ee1392ebfb2920bb3">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>.</p>
 
 </div>
 </div>
@@ -413,26 +310,6 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>_stream</b></td><
 <p>See athome::communication::wifi::WiFi_client for more information on the content of this structure.</p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;AtHome.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="structathome_1_1communication_1_1wifi_1_1s__wifi__client.html">athome::communication::wifi::WiFi_client</a>;</div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">athome::communication::wifi::AWiFiCommunicator</a>;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_printing_current_ip_and_mac_addresses(<span class="keyword">const</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a0098148fe8d0eeee99b7f8f72a72a900">AWiFiCommunicator</a> &amp;wifi) {</div><div class="line">  <span class="keyword">const</span> WiFi_client &amp;addresses = wifi.getConnectionAddresses();</div><div class="line">  <span class="keywordtype">char</span> my_ipv4[16];</div><div class="line">  <span class="keywordtype">char</span> my_mac[18];</div><div class="line">  snprintf(my_ipv4, 16, <span class="stringliteral">&quot;%hhu.%hhu.%hhu.%hhu&quot;</span>, addresses.ipv4[0], addresses.ipv4[1], addresses.ipv4[2], addresses.ipv4[3]);</div><div class="line">  <span class="comment">// Note: For MAC address conversion, if you&#39;re compiler is broken and doesn&#39;t promote char&#39;s to int, see this StackOverflow for fix:</span></div><div class="line">  <span class="comment">// https://stackoverflow.com/questions/12344814/how-to-print-unsigned-char-as-2-digit-hex-value-in-c</span></div><div class="line">  snprintf(my_mac, 18, <span class="stringliteral">&quot;%02x-%02x-%02x-%02x-%02x-%02x&quot;</span>,</div><div class="line">           addresses.mac[0], addresses.mac[1], addresses.mac[2], addresses.mac[3], addresses.mac[4], addresses.mac[5]);</div><div class="line">  Serial.print(<span class="stringliteral">&quot;IPv4: &quot;</span>);</div><div class="line">  Serial.println(my_ipv4);</div><div class="line">  Serial.print(<span class="stringliteral">&quot;MAC: &quot;</span>);</div><div class="line">  Serial.println(my_mac);</div><div class="line">}</div></div><!-- fragment --> 
-</div>
-</div>
-<a id="a50dcf049687aa26a992b161f540b40f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50dcf049687aa26a992b161f540b40f3">&#9670;&nbsp;</a></span>getHost()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="structathome_1_1communication_1_1ip_1_1s__host.html">ip::tcp_host</a> &amp; athome::communication::wifi::AWiFiCommunicator::getHost </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Method returning a reference on the current (or last if the module is currently disconnected) connection to a host of this instance of <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">AWiFiCommunicator</a>.</p>
-<p>See athome::communication::ip::tcp_host for more information on the content of this structure.</p>
-<p>Example:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;stdio.h&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;AtHome.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="structathome_1_1communication_1_1ip_1_1s__host.html">athome::communication::ip::tcp_host</a>;</div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">athome::communication::wifi::AWiFiCommunicator</a>;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_printing_current_connection_to_a_host(<span class="keyword">const</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a0098148fe8d0eeee99b7f8f72a72a900">AWiFiCommunicator</a> &amp;wifi) {</div><div class="line">  <span class="keyword">const</span> tcp_host &amp;my_host = wifi.getHost();</div><div class="line">  <span class="keywordtype">char</span> host_ipv4[16];</div><div class="line">  snprintf(host_ipv4, 16, <span class="stringliteral">&quot;%hhu.%hhu.%hhu.%hhu&quot;</span>, my_host.ipv4[0], my_host.ipv4[1], my_host.ipv4[2], my_host.ipv4[3]);</div><div class="line">  Serial.print(<span class="stringliteral">&quot;Host IPv4: &quot;</span>);</div><div class="line">  Serial.println(host_ipv4);</div><div class="line">  Serial.print(<span class="stringliteral">&quot;Host port: &quot;</span>);</div><div class="line">  Serial.println(my_host.hport);</div><div class="line">}</div></div><!-- fragment --> 
 </div>
 </div>
 <a id="adebc335ea6408a90919f396f06260b13"></a>
@@ -481,63 +358,7 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>_stream</b></td><
 <p>Return true if the adapter is connected, otherwise return false;</p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;AWiFiCommunicator.hpp&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html">athome::communication::wifi::AWiFiCommunicator</a>;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_printing_if_adapter_is_connected_to_network_or_not(<span class="keyword">const</span> <a class="code" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a0098148fe8d0eeee99b7f8f72a72a900">AWiFiCommunicator</a> &amp;wifi) {</div><div class="line">  Serial.println((wifi.isConnected) ? <span class="stringliteral">&quot;Adapter is connected to WiFi network&quot;</span> : <span class="stringliteral">&quot;Adapter isn&#39;t connected to WiFi network&quot;</span>);</div><div class="line">}</div></div><!-- fragment --> 
-<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#aefadac9b1a67d52853495dfabecad5fd">athome::communication::wifi::ESP8266WiFiCommunicator</a>.</p>
-
-</div>
-</div>
-<a id="ad5c39b1ea49f77026371c8e8ff2dba63"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad5c39b1ea49f77026371c8e8ff2dba63">&#9670;&nbsp;</a></span>peek()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual int athome::communication::wifi::AWiFiCommunicator::peek </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Virtual method inherited from Stream interface. <a href="https://www.arduino.cc/reference/en/language/functions/communication/stream/streampeek/">See documentation on Arduino reference.</a> </p>
-
-<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#affeb5491ad5c97fa53a683926f8184d2">athome::communication::wifi::ESP8266WiFiCommunicator</a>.</p>
-
-</div>
-</div>
-<a id="ac18a51bba1651031d4ea2ac2d2a19606"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac18a51bba1651031d4ea2ac2d2a19606">&#9670;&nbsp;</a></span>read()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual int athome::communication::wifi::AWiFiCommunicator::read </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Virtual method inherited from Stream interface. <a href="https://www.arduino.cc/reference/en/language/functions/communication/stream/streamread/">See documentation on Arduino reference.</a> </p>
-
-<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a1cadc570e912c164279ef0ebc5b178a5">athome::communication::wifi::ESP8266WiFiCommunicator</a>.</p>
+<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#aefadac9b1a67d52853495dfabecad5fd">athome::communication::wifi::ESP8266WiFiCommunicator</a>, and <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#a1ad428f03137d93a142ec5ae72f19e14">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>.</p>
 
 </div>
 </div>
@@ -586,28 +407,6 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>_stream</b></td><
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;AtHome.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="structathome_1_1communication_1_1wifi_1_1s__wifi__client.html">athome::communication::wifi::WiFi_client</a>;</div><div class="line"></div><div class="line">ESP8266WiFiCommunicator wifi(2, 3); <span class="comment">// ESP8266WiFiCommunicator need to know on which pins of the board are connected the CH_PD and RST pins of the ESP8266</span></div><div class="line">WiFi_client addresses = {{0x5C, 0xCF, 0x7F, 0x00, 0x00, 0x00}, {127, 0, 0, 1}}; <span class="comment">// Users of this method should know why setting this IP address will be pretty useless</span></div><div class="line"></div><div class="line"><span class="keywordtype">void</span> setup() {</div><div class="line">  <span class="comment">// We&#39;re opening the Stream used to communicate with the adapter</span></div><div class="line">  Serial.begin(115200);</div><div class="line">  <span class="comment">// We set the Stream used to communicate with the adapter</span></div><div class="line">  wifi.setStreamToChipset(&amp;Serial);</div><div class="line">  ESP8266WiFiCommunicator.setConnectionAddresses();</div><div class="line">  ESP8266WiFiCommunicator.connect(); <span class="comment">// You need to call it, even if you were previously already connected to a WiFi network as calling the setConnectionAddresses method will disconnect you from any current network</span></div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> loop() {</div><div class="line">}</div></div><!-- fragment --> 
 </div>
 </div>
-<a id="ab9d7165657cb8be4995f637a57b8f9e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9d7165657cb8be4995f637a57b8f9e1">&#9670;&nbsp;</a></span>setHost()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void athome::communication::wifi::AWiFiCommunicator::setHost </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structathome_1_1communication_1_1ip_1_1s__host.html">ip::tcp_host</a> &amp;&#160;</td>
-          <td class="paramname"><em>host</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Method used to set on which host and port the adapter should connect by passing a reference on a athome::communication::ip::tcp_host as parameter.</p>
-<p>You should note that calling this method will close any existing connection to a previous host and that connection to the new host is not automatic, thus, the user must call the method <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ac81395d55c9a6824136d7b63fdb096f0">athome::communication::wifi::AWiFiCommunicator::connectToHost</a> when he wants to connect to the host.</p>
-<p>See athome::communication::ip::tcp_host for more information on the content of this structure.</p>
-<p>Example:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;AtHome.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="structathome_1_1communication_1_1ip_1_1s__host.html">athome::communication::ip::tcp_host</a>;</div><div class="line"><span class="keyword">using</span> <a class="code" href="structathome_1_1communication_1_1wifi_1_1s__wifi__client.html">athome::communication::wifi::WiFi_client</a>;</div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1module_1_1_a_base_module.html">athome::module::ABaseModule</a>;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_connecting_an_adapter_to_web_server_on_router(ABaseModule &amp;wifi) {</div><div class="line">  <span class="keywordflow">if</span> (!wifi.isConnected()) {</div><div class="line">    <span class="keywordflow">return</span>; <span class="comment">// It&#39;s useless to try to connect on a server while not being connected to any network</span></div><div class="line">  }</div><div class="line">  <span class="keyword">const</span> WiFi_client &amp;my_addresses = wifi.getConnectionAddresses();</div><div class="line">  <span class="keyword">const</span> tcp_host host = {{my_addresses.ipv4[0], my_addresses.ipv4[1], my_addresses.ipv4[2], 1}, 80};</div><div class="line">  wifi.setHost(host); <span class="comment">// Will close any previous opened connection to an host</span></div><div class="line">  wifi.connectToHost(); <span class="comment">// You need to call it after setting the new host when you want to connect it, connection is not automatic</span></div><div class="line">}</div></div><!-- fragment --> 
-</div>
-</div>
 <a id="a42f2ad88713db57bd9e9670f090924de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a42f2ad88713db57bd9e9670f090924de">&#9670;&nbsp;</a></span>setStreamToChipset()</h2>
 
@@ -652,38 +451,9 @@ Stream *&#160;</td><td class="memItemRight" valign="bottom"><b>_stream</b></td><
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;string.h&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;AtHome.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="structathome_1_1communication_1_1wifi_1_1s__wifi__access__point.html">athome::communication::wifi::WiFi_ap</a>;</div><div class="line"><span class="keyword">using</span> athome::communication::wifi::wifi_mode;</div><div class="line"></div><div class="line">ESP8266WiFiCommunicator wifi(2, 3); <span class="comment">// ESP8266WiFiCommunicator need to know on which pins of the board are connected the CH_PD and RST pins of the ESP8266</span></div><div class="line">WiFi_ap ap;</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> setup() {</div><div class="line">  <span class="comment">// We&#39;re opening the Stream used to communicate with the adapter</span></div><div class="line">  Serial.begin(115200);</div><div class="line">  <span class="comment">// We set the Stream used to communicate with the adapter</span></div><div class="line">  wifi.setStreamToChipset(&amp;Serial);</div><div class="line">  <span class="comment">// We set the parameters to define the network we want to connect to:</span></div><div class="line">  strncpy(ap.ssid, <span class="stringliteral">&quot;foobar&quot;</span>, <span class="keyword">sizeof</span>(ap.ssid));</div><div class="line">  strncpy(ap.password, <span class="stringliteral">&quot;12345678&quot;</span>, <span class="keyword">sizeof</span>(ap.password));</div><div class="line">  wifi.setAccessPoint(ap);</div><div class="line">  wifi.setWiFiMode(wifi_mode::STATION);</div><div class="line">  <span class="comment">// Connect to the network:</span></div><div class="line">  wifi.connect();</div><div class="line">}</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> loop() {</div><div class="line">}</div></div><!-- fragment --> 
 </div>
 </div>
-<a id="a7544a06e5b6d65108cb2c0c5702c5f29"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7544a06e5b6d65108cb2c0c5702c5f29">&#9670;&nbsp;</a></span>write()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual size_t athome::communication::wifi::AWiFiCommunicator::write </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Virtual method inherited from Stream interface. <a href="https://www.arduino.cc/en/Serial/Write">See documentation on Arduino reference.</a> </p>
-
-<p>Implemented in <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#afd3c1c4ce7d68717a7bb2cf1b9dc962f">athome::communication::wifi::ESP8266WiFiCommunicator</a>.</p>
-
-</div>
-</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_a_wi_fi_communicator_8hpp_source.html">AWiFiCommunicator.hpp</a></li>
-<li>AWiFiCommunicator.cpp</li>
+<li>src/<a class="el" href="_a_wi_fi_communicator_8hpp_source.html">AWiFiCommunicator.hpp</a></li>
+<li>src/communication/network/wifi/AWiFiCommunicator.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

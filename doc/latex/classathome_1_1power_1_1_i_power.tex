@@ -1,16 +1,37 @@
 \hypertarget{classathome_1_1power_1_1_i_power}{}\section{athome\+:\+:power\+:\+:I\+Power Class Reference}
 \label{classathome_1_1power_1_1_i_power}\index{athome\+::power\+::\+I\+Power@{athome\+::power\+::\+I\+Power}}
+Inheritance diagram for athome\+:\+:power\+:\+:I\+Power\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classathome_1_1power_1_1_i_power}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structathome_1_1power_1_1_i_power_1_1_power_info}{Power\+Info}}
+\end{DoxyCompactItemize}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1power_1_1_i_power_a0d23b118e64d97d708f2c6d153310107}\label{classathome_1_1power_1_1_i_power_a0d23b118e64d97d708f2c6d153310107}} 
+enum {\bfseries S\+L\+E\+E\+P\+\_\+\+M\+O\+DE} \{ {\bfseries A\+C\+T\+I\+VE} = 0, 
+{\bfseries L\+I\+G\+H\+T\+\_\+\+S\+L\+E\+EP}, 
+{\bfseries S\+L\+E\+EP}, 
+{\bfseries D\+E\+E\+P\+\_\+\+S\+L\+E\+EP}
+ \}
+\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classathome_1_1power_1_1_i_power_aa6a5bf366a19b1627ad8da054c9171ad}\label{classathome_1_1power_1_1_i_power_aa6a5bf366a19b1627ad8da054c9171ad}} 
-virtual uint32\+\_\+t {\bfseries get\+Voltage} ()=0
+\mbox{\Hypertarget{classathome_1_1power_1_1_i_power_a2b5a55274b0ad8619d9283a80063a4df}\label{classathome_1_1power_1_1_i_power_a2b5a55274b0ad8619d9283a80063a4df}} 
+virtual const \mbox{\hyperlink{structathome_1_1power_1_1_i_power_1_1_power_info}{Power\+Info}} $\ast$ {\bfseries get\+Power\+Info} ()=0
 \item 
-\mbox{\Hypertarget{classathome_1_1power_1_1_i_power_a325282edf30fe83eef09a2845478b3c9}\label{classathome_1_1power_1_1_i_power_a325282edf30fe83eef09a2845478b3c9}} 
-virtual uint32\+\_\+t \mbox{\hyperlink{classathome_1_1power_1_1_i_power_a325282edf30fe83eef09a2845478b3c9}{get\+Current}} ()=0
-\begin{DoxyCompactList}\small\item\em Hard-\/coded voltage in mV or calculated depending of the type of power supply. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\Hypertarget{classathome_1_1power_1_1_i_power_ab6ff871c84bf451acbf11fa524193e2c}\label{classathome_1_1power_1_1_i_power_ab6ff871c84bf451acbf11fa524193e2c}} 
+virtual void {\bfseries sleep} (S\+L\+E\+E\+P\+\_\+\+M\+O\+DE, uint32\+\_\+t)=0
+\end{DoxyCompactItemize}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-I\+Power.\+hpp\end{DoxyCompactItemize}
+src/I\+Power.\+hpp\end{DoxyCompactItemize}

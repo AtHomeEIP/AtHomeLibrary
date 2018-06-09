@@ -20,7 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo_tiny.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AtHome Framework
    </div>
@@ -83,8 +83,9 @@ Inheritance diagram for athome::module::ABaseModule:</div>
  <div class="center">
   <img src="classathome_1_1module_1_1_a_base_module.png" usemap="#athome::module::ABaseModule_map" alt=""/>
   <map id="athome::module::ABaseModule_map" name="athome::module::ABaseModule_map">
-<area href="classathome_1_1module_1_1_at_home_module.html" alt="athome::module::AtHomeModule&lt; T, n &gt;" shape="rect" coords="0,56,262,80"/>
-<area href="classathome_1_1module_1_1_at_home_wi_fi_module.html" alt="athome::module::AtHomeWiFiModule&lt; T, n &gt;" shape="rect" coords="0,112,262,136"/>
+<area href="classathome_1_1module_1_1_at_home_module.html" alt="athome::module::AtHomeModule&lt; T, n &gt;" shape="rect" coords="0,56,283,80"/>
+<area href="classathome_1_1module_1_1_at_home_network_module.html" alt="athome::module::AtHomeNetworkModule&lt; T, n &gt;" shape="rect" coords="0,112,283,136"/>
+<area href="classathome_1_1module_1_1_at_home_wi_fi_module.html" alt="athome::module::AtHomeWiFiModule&lt; T, n &gt;" shape="rect" coords="0,168,283,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -113,12 +114,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:accc6c7f840dab1b1e67fe910c833f0b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91e714579636e6f4a3628a23a8ba61e7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_a_base_module.html#a91e714579636e6f4a3628a23a8ba61e7">setStorage</a> (<a class="el" href="classathome_1_1storage_1_1_i_storage.html">storage::IStorage</a> *)</td></tr>
 <tr class="separator:a91e714579636e6f4a3628a23a8ba61e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6204e0dd2cb6fa166f96c62224e7d10d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structathome_1_1time_1_1_i_time.html">time::ITime</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_a_base_module.html#a6204e0dd2cb6fa166f96c62224e7d10d">getClock</a> ()</td></tr>
+<tr class="separator:a6204e0dd2cb6fa166f96c62224e7d10d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98621be03deb721373010be2a16dc585"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_a_base_module.html#a98621be03deb721373010be2a16dc585">setClock</a> (<a class="el" href="structathome_1_1time_1_1_i_time.html">time::ITime</a> *)</td></tr>
+<tr class="separator:a98621be03deb721373010be2a16dc585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a7332012b2348fc3a945f9ec9db5d79ca"><td class="memItemLeft" align="right" valign="top"><a id="a7332012b2348fc3a945f9ec9db5d79ca"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>ABaseModule</b> (<a class="el" href="classathome_1_1display_1_1_i_display.html">display::IDisplay</a> *=nullptr, Stream **=nullptr, <a class="el" href="classathome_1_1power_1_1_i_power.html">power::IPower</a> *=nullptr, <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *=nullptr, <a class="el" href="classathome_1_1storage_1_1_i_storage.html">storage::IStorage</a> *=nullptr)</td></tr>
-<tr class="separator:a7332012b2348fc3a945f9ec9db5d79ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d61fc38c73893ac32a5932fbbb998d1"><td class="memItemLeft" align="right" valign="top"><a id="a4d61fc38c73893ac32a5932fbbb998d1"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>ABaseModule</b> (<a class="el" href="classathome_1_1display_1_1_i_display.html">display::IDisplay</a> *=nullptr, Stream **=nullptr, <a class="el" href="classathome_1_1power_1_1_i_power.html">power::IPower</a> *=nullptr, <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html">sensor::ISensor</a> *=nullptr, <a class="el" href="classathome_1_1storage_1_1_i_storage.html">storage::IStorage</a> *=nullptr, <a class="el" href="structathome_1_1time_1_1_i_time.html">time::ITime</a> *=nullptr)</td></tr>
+<tr class="separator:a4d61fc38c73893ac32a5932fbbb998d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2c52cb3313abb5ceb3c7bdb854e9850"><td class="memItemLeft" align="right" valign="top"><a id="ae2c52cb3313abb5ceb3c7bdb854e9850"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ABaseModule</b> (<a class="el" href="classathome_1_1module_1_1_a_base_module.html">ABaseModule</a> &amp;)=delete</td></tr>
 <tr class="separator:ae2c52cb3313abb5ceb3c7bdb854e9850"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,10 +145,32 @@ Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td
 <tr class="memitem:aa62dad921ff7db37a8501aa827f73e4f"><td class="memItemLeft" align="right" valign="top"><a id="aa62dad921ff7db37a8501aa827f73e4f"></a>
 <a class="el" href="classathome_1_1storage_1_1_i_storage.html">storage::IStorage</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_storage</b></td></tr>
 <tr class="separator:aa62dad921ff7db37a8501aa827f73e4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5862f9f3fc958e285eb86eb41ffe7e1"><td class="memItemLeft" align="right" valign="top"><a id="ab5862f9f3fc958e285eb86eb41ffe7e1"></a>
+<a class="el" href="structathome_1_1time_1_1_i_time.html">time::ITime</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>_clock</b></td></tr>
+<tr class="separator:ab5862f9f3fc958e285eb86eb41ffe7e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract base class for all Module classes, mainly handling low level logic and accessers to Module components </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6204e0dd2cb6fa166f96c62224e7d10d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6204e0dd2cb6fa166f96c62224e7d10d">&#9670;&nbsp;</a></span>getClock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structathome_1_1time_1_1_i_time.html">time::ITime</a> * athome::module::ABaseModule::getClock </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get a pointer on the clock used by the module to represent current time.</p>
+<dl class="section return"><dt>Returns</dt><dd>pointer on interface for a clock used by the module </dd></dl>
+
+</div>
+</div>
 <a id="ada20b6ad1e6f750d2886f1e7b10cca70"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ada20b6ad1e6f750d2886f1e7b10cca70">&#9670;&nbsp;</a></span>getDisplay()</h2>
 
@@ -241,6 +268,25 @@ Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td
 <p>Return an array of pointers on <code>Stream</code> derived objects terminated by a <code>nullptr</code>.</p>
 <p>For example, the array can be like this: <code>{&amp;Serial, &amp;Serial1, &amp;<a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html">athome::communication::wifi::ESP8266WiFiCommunicator</a>, nullptr}</code></p>
 <p>If there's no <code>Stream</code>s used by the module, this method returns <code>nullptr</code> </p>
+
+</div>
+</div>
+<a id="a98621be03deb721373010be2a16dc585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98621be03deb721373010be2a16dc585">&#9670;&nbsp;</a></span>setClock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void athome::module::ABaseModule::setClock </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structathome_1_1time_1_1_i_time.html">time::ITime</a> *&#160;</td>
+          <td class="paramname"><em>clock</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set the pointer on the interface of the clock used by the module to get current representation of time </p>
 
 </div>
 </div>
@@ -352,8 +398,8 @@ Stream **&#160;</td><td class="memItemRight" valign="bottom"><b>_streams</b></td
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_a_base_module_8hpp_source.html">ABaseModule.hpp</a></li>
-<li>ABaseModule.cpp</li>
+<li>src/<a class="el" href="_a_base_module_8hpp_source.html">ABaseModule.hpp</a></li>
+<li>src/module/ABaseModule.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

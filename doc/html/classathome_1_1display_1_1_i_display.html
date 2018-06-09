@@ -20,7 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo_tiny.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AtHome Framework
    </div>
@@ -81,11 +81,12 @@ Inheritance diagram for athome::display::IDisplay:</div>
  <div class="center">
   <img src="classathome_1_1display_1_1_i_display.png" usemap="#athome::display::IDisplay_map" alt=""/>
   <map id="athome::display::IDisplay_map" name="athome::display::IDisplay_map">
-<area href="classathome_1_1display_1_1_a_r_g_b_led.html" alt="athome::display::ARGBLed" shape="rect" coords="382,56,627,80"/>
+<area href="classathome_1_1display_1_1_a_r_g_b_led.html" alt="athome::display::ARGBLed" shape="rect" coords="255,56,500,80"/>
+<area href="classathome_1_1display_1_1_monochromatic_l_e_d.html" alt="athome::display::MonochromaticLED" shape="rect" coords="510,56,755,80"/>
+<area href="classathome_1_1display_1_1_p_w_m_l_e_d.html" alt="athome::display::PWMLED" shape="rect" coords="765,56,1010,80"/>
 <area href="classathome_1_1display_1_1_common_anode_r_g_b_led.html" alt="athome::display::CommonAnodeRGBLed" shape="rect" coords="0,112,245,136"/>
 <area href="classathome_1_1display_1_1_common_cathode_r_g_b_led.html" alt="athome::display::CommonCathodeRGBLed" shape="rect" coords="255,112,500,136"/>
 <area href="classathome_1_1display_1_1_grove_chainable_l_e_d.html" alt="athome::display::GroveChainableLED" shape="rect" coords="510,112,755,136"/>
-<area href="classathome_1_1display_1_1_neo_pixel.html" alt="athome::display::NeoPixel" shape="rect" coords="765,112,1010,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -95,6 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0d3add1ce61c96657827fb56d250d9c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ba7bd5d46f88578f1c846f4f5f3c5d1"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1display_1_1_i_display.html#a4ba7bd5d46f88578f1c846f4f5f3c5d1">update</a> ()=0</td></tr>
 <tr class="separator:a4ba7bd5d46f88578f1c846f4f5f3c5d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c9678f929e4bc04742d458b0c2399ef"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1display_1_1_i_display.html#a3c9678f929e4bc04742d458b0c2399ef">setDisplayedEstimate</a> (<a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">sensor::ISensor::ISensorScale</a>)=0</td></tr>
+<tr class="separator:a3c9678f929e4bc04742d458b0c2399ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface used to control any kind of display.</p>
@@ -126,7 +129,46 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Remove display content </p>
 
-<p>Implemented in <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a9753e3a23ea5cb6b0a41079bc6128766">athome::display::ARGBLed</a>.</p>
+<p>Implemented in <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a9753e3a23ea5cb6b0a41079bc6128766">athome::display::ARGBLed</a>, <a class="el" href="classathome_1_1display_1_1_monochromatic_l_e_d.html#a81a1470c33e639e916f014e5adbe8707">athome::display::MonochromaticLED</a>, and <a class="el" href="classathome_1_1display_1_1_p_w_m_l_e_d.html#ad13265bec1900a48d3d89aac9a532783">athome::display::PWMLED</a>.</p>
+
+</div>
+</div>
+<a id="a3c9678f929e4bc04742d458b0c2399ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c9678f929e4bc04742d458b0c2399ef">&#9670;&nbsp;</a></span>setDisplayedEstimate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void athome::display::IDisplay::setDisplayedEstimate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">sensor::ISensor::ISensorScale</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the value displayed on the screen, whatever the type of display is.</p>
+<p>ISensorScale is an enumeration representing the correctness on a scale from 1 to 10 (1 is worst, 10 is best).</p>
+<p>This scale can be represented by various ways for many different displays. For example:</p>
+<ul>
+<li>An LED could stay off from 6 and on below 6</li>
+<li>A dimmable LED could set it's percentage of brightness corresponding to the value (for example 1 = 100%, 5 = 50%, 10 = 0%)</li>
+<li>A 7 segments display could display the digit itself and stay off at 10</li>
+<li>An LCD screen could write a sentence, the digit, draw a gauge, ...etc</li>
+<li>A speaker or buzzer could do noise of different intensities below 6</li>
+<li>...etc </li>
+</ul>
+
+<p>Implemented in <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a1e6a934912f71a5ea06df1d28cf5ace9">athome::display::ARGBLed</a>, <a class="el" href="classathome_1_1display_1_1_monochromatic_l_e_d.html#a67a39b7d73305a98fc25705dcc5f3cd0">athome::display::MonochromaticLED</a>, and <a class="el" href="classathome_1_1display_1_1_p_w_m_l_e_d.html#a8cde32d9aa5b28dfbc79e2677bfce921">athome::display::PWMLED</a>.</p>
 
 </div>
 </div>
@@ -154,12 +196,12 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Update display content </p>
 
-<p>Implemented in <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a725ceca0c01735daa9c95148baf075ab">athome::display::ARGBLed</a>, <a class="el" href="classathome_1_1display_1_1_grove_chainable_l_e_d.html#a05a4a1381396b7fc11a24993865d8226">athome::display::GroveChainableLED</a>, <a class="el" href="classathome_1_1display_1_1_neo_pixel.html#a272bca4da78dff7dc02bcd023665e013">athome::display::NeoPixel</a>, <a class="el" href="classathome_1_1display_1_1_common_anode_r_g_b_led.html#ab7daf7dcc6ac1e3fcab202cae484b237">athome::display::CommonAnodeRGBLed</a>, and <a class="el" href="classathome_1_1display_1_1_common_cathode_r_g_b_led.html#ab78ab6aef619d8e0941dd11d4cfbb545">athome::display::CommonCathodeRGBLed</a>.</p>
+<p>Implemented in <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a725ceca0c01735daa9c95148baf075ab">athome::display::ARGBLed</a>, <a class="el" href="classathome_1_1display_1_1_grove_chainable_l_e_d.html#a05a4a1381396b7fc11a24993865d8226">athome::display::GroveChainableLED</a>, <a class="el" href="classathome_1_1display_1_1_monochromatic_l_e_d.html#aef6a651fdbb24ebb1d0887c1b3e5133d">athome::display::MonochromaticLED</a>, <a class="el" href="classathome_1_1display_1_1_p_w_m_l_e_d.html#a49a059d9bbd5bf08c0e057f0c957e736">athome::display::PWMLED</a>, <a class="el" href="classathome_1_1display_1_1_common_anode_r_g_b_led.html#ab7daf7dcc6ac1e3fcab202cae484b237">athome::display::CommonAnodeRGBLed</a>, and <a class="el" href="classathome_1_1display_1_1_common_cathode_r_g_b_led.html#ab78ab6aef619d8e0941dd11d4cfbb545">athome::display::CommonCathodeRGBLed</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="_i_display_8hpp_source.html">IDisplay.hpp</a></li>
+<li>src/<a class="el" href="_i_display_8hpp_source.html">IDisplay.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

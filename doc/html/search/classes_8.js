@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queue',['Queue',['../classathome_1_1utility_1_1_queue.html',1,'athome::utility']]]
+  ['ldrluminositysensor',['LDRLuminositySensor',['../classathome_1_1sensor_1_1_l_d_r_luminosity_sensor.html',1,'athome::sensor']]]
 ];

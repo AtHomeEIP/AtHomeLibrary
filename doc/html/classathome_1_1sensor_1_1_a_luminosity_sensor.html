@@ -20,7 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo_tiny.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AtHome Framework
    </div>
@@ -79,7 +79,8 @@ Inheritance diagram for athome::sensor::ALuminositySensor:</div>
  <div class="center">
   <img src="classathome_1_1sensor_1_1_a_luminosity_sensor.png" usemap="#athome::sensor::ALuminositySensor_map" alt=""/>
   <map id="athome::sensor::ALuminositySensor_map" name="athome::sensor::ALuminositySensor_map">
-<area href="classathome_1_1sensor_1_1_i_sensor.html" alt="athome::sensor::ISensor" shape="rect" coords="0,0,210,24"/>
+<area href="classathome_1_1sensor_1_1_i_sensor.html" alt="athome::sensor::ISensor" shape="rect" coords="0,0,344,24"/>
+<area href="classathome_1_1sensor_1_1_l_d_r_luminosity_sensor.html" alt="athome::sensor::LDRLuminositySensor&lt; REF, RES, RDIV &gt;" shape="rect" coords="0,112,344,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -91,12 +92,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9a91cdf883f0f06be50a74ec2e73d710"><td class="memItemLeft" align="right" valign="top"><a id="a9a91cdf883f0f06be50a74ec2e73d710"></a>
 <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html">ALuminositySensor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html">ALuminositySensor</a> &amp;)=delete</td></tr>
 <tr class="separator:a9a91cdf883f0f06be50a74ec2e73d710"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a299491729362d34f474094dfd10eb310"><td class="memItemLeft" align="right" valign="top">virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#a299491729362d34f474094dfd10eb310">getSample</a> ()=0</td></tr>
-<tr class="separator:a299491729362d34f474094dfd10eb310"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cc3cee76cd76486c6e6b51ac484cb2a"><td class="memItemLeft" align="right" valign="top">virtual uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#a1cc3cee76cd76486c6e6b51ac484cb2a">getLastSample</a> () const =0</td></tr>
-<tr class="separator:a1cc3cee76cd76486c6e6b51ac484cb2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6c0e60c108b0494f0132b033ce3dd82"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#aa6c0e60c108b0494f0132b033ce3dd82">getEstimate</a> ()</td></tr>
-<tr class="separator:aa6c0e60c108b0494f0132b033ce3dd82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e0e7bcfe13cd8d8edf6a09f6e230ef8"><td class="memItemLeft" align="right" valign="top">const ISensorValue &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#a6e0e7bcfe13cd8d8edf6a09f6e230ef8">getSample</a> ()</td></tr>
+<tr class="separator:a6e0e7bcfe13cd8d8edf6a09f6e230ef8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae756f7d7647c2cf695305c8f11aec8d3"><td class="memItemLeft" align="right" valign="top">virtual uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#ae756f7d7647c2cf695305c8f11aec8d3">getSensorSample</a> ()=0</td></tr>
+<tr class="separator:ae756f7d7647c2cf695305c8f11aec8d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa26ed7176ba600f6900bd249edce71ab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#aa26ed7176ba600f6900bd249edce71ab">setThresholds</a> (const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds.html">ISensorThresholds</a> &amp;)</td></tr>
+<tr class="separator:aa26ed7176ba600f6900bd249edce71ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -120,8 +121,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aa70bc27a4c17c86caf96cca776541ddf inherit pub_types_classathome_1_1sensor_1_1_i_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa6c0e60c108b0494f0132b033ce3dd82"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6c0e60c108b0494f0132b033ce3dd82">&#9670;&nbsp;</a></span>getEstimate()</h2>
+<a id="a6e0e7bcfe13cd8d8edf6a09f6e230ef8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e0e7bcfe13cd8d8edf6a09f6e230ef8">&#9670;&nbsp;</a></span>getSample()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,8 +131,67 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensor::ISensorScale</a> athome::sensor::ALuminositySensor::getEstimate </td>
+          <td class="memname">const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value.html">ISensor::ISensorValue</a> &amp; athome::sensor::ALuminositySensor::getSample </td>
           <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Return a reference on ISensorValue storing the number of lux as an integer.</p>
+<p>Return an estimation of the luminosity quality in the room</p>
+<p>Values are from french norm NF EN 12464-1 <a href="https://fr.wikipedia.org/wiki/Lux_%28unit%C3%A9%29">https://fr.wikipedia.org/wiki/Lux_%28unit%C3%A9%29</a> </p><dl class="section return"><dt>Returns</dt><dd>estimation of the luminosity on a scale from 1 (worst) to 10 (best) </dd></dl>
+
+<p>Implements <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#ae109cd3741ea9c88dc7e4f2eaf1485d5">athome::sensor::ISensor</a>.</p>
+
+</div>
+</div>
+<a id="ae756f7d7647c2cf695305c8f11aec8d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae756f7d7647c2cf695305c8f11aec8d3">&#9670;&nbsp;</a></span>getSensorSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint16_t athome::sensor::ALuminositySensor::getSensorSample </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Return the number of lux as an integer. </p>
+
+<p>Implemented in <a class="el" href="classathome_1_1sensor_1_1_l_d_r_luminosity_sensor.html#a6e4f25000704564ce30a7e3531f23c43">athome::sensor::LDRLuminositySensor&lt; REF, RES, RDIV &gt;</a>.</p>
+
+</div>
+</div>
+<a id="aa26ed7176ba600f6900bd249edce71ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa26ed7176ba600f6900bd249edce71ab">&#9670;&nbsp;</a></span>setThresholds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void athome::sensor::ALuminositySensor::setThresholds </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds.html">ISensorThresholds</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -145,67 +205,13 @@ Additional Inherited Members</h2></td></tr>
 <p>Returns the estimation of safety from the current sensor value</p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_telling_if_a_sensor_value_is_good_or_not(ISensor &amp;my_sensor) {</div><div class="line">  <a class="code" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a> sensor_estimate = my_sensor.getEstimate();</div><div class="line">  <span class="keywordflow">if</span> (sensor_estimate == ISensor::ZERO) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;The sensor returned an invalid value&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sensor_estimate &gt; ISensor::ZERO &amp;&amp; sensor_estimate &lt; 6) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Boouh, it&#39;s not good :(&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Yaaaay!&quot;</span>);</div><div class="line">  }</div><div class="line">}</div></div><!-- fragment --> 
-<p>Implements <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#a95785b54ffe3a8f7e48c81b5732e3b9f">athome::sensor::ISensor</a>.</p>
-
-</div>
-</div>
-<a id="a1cc3cee76cd76486c6e6b51ac484cb2a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1cc3cee76cd76486c6e6b51ac484cb2a">&#9670;&nbsp;</a></span>getLastSample()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual uint16_t athome::sensor::ALuminositySensor::getLastSample </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Return the number of lux as an integer. </p>
-
-</div>
-</div>
-<a id="a299491729362d34f474094dfd10eb310"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a299491729362d34f474094dfd10eb310">&#9670;&nbsp;</a></span>getSample()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual uint8_t* athome::sensor::ALuminositySensor::getSample </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Return a pointer on a uint16_t storing the number of lux as an integer. </p>
-
-<p>Implements <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#a2513fd8acc5d8251439330ca0e78cf04">athome::sensor::ISensor</a>.</p>
+<p>Implements <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#af86df8538fecfcfc670b4adfbbde6abb">athome::sensor::ISensor</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_a_luminosity_sensor_8hpp_source.html">ALuminositySensor.hpp</a></li>
-<li>ALuminositySensor.cpp</li>
+<li>src/<a class="el" href="_a_luminosity_sensor_8hpp_source.html">ALuminositySensor.hpp</a></li>
+<li>src/sensor/luminosity/ALuminositySensor.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

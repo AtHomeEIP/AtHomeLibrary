@@ -20,7 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo_tiny.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AtHome Framework
    </div>
@@ -79,7 +79,9 @@ Inheritance diagram for athome::sensor::ATemperatureSensor:</div>
  <div class="center">
   <img src="classathome_1_1sensor_1_1_a_temperature_sensor.png" usemap="#athome::sensor::ATemperatureSensor_map" alt=""/>
   <map id="athome::sensor::ATemperatureSensor_map" name="athome::sensor::ATemperatureSensor_map">
-<area href="classathome_1_1sensor_1_1_i_sensor.html" alt="athome::sensor::ISensor" shape="rect" coords="0,0,222,24"/>
+<area href="classathome_1_1sensor_1_1_i_sensor.html" alt="athome::sensor::ISensor" shape="rect" coords="191,0,564,24"/>
+<area href="classathome_1_1sensor_1_1_thermistor.html" alt="athome::sensor::Thermistor&lt; R1, R2, R3, PREC, VREF, RREF &gt;" shape="rect" coords="0,112,373,136"/>
+<area href="classathome_1_1sensor_1_1_t_m_p36_g_z_temperature_sensor.html" alt="athome::sensor::TMP36GZTemperatureSensor&lt; REF, RES &gt;" shape="rect" coords="383,112,756,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -91,12 +93,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0eb5857e7a283d824b183eb55239e9fe"><td class="memItemLeft" align="right" valign="top"><a id="a0eb5857e7a283d824b183eb55239e9fe"></a>
 <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html">ATemperatureSensor</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html">ATemperatureSensor</a> &amp;)=delete</td></tr>
 <tr class="separator:a0eb5857e7a283d824b183eb55239e9fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a397794217f3163950add6d28f69a6202"><td class="memItemLeft" align="right" valign="top">virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a397794217f3163950add6d28f69a6202">getSample</a> ()=0</td></tr>
-<tr class="separator:a397794217f3163950add6d28f69a6202"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1063bddc4a031d80f68a83317b64fbb2"><td class="memItemLeft" align="right" valign="top">virtual float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a1063bddc4a031d80f68a83317b64fbb2">getLastSample</a> () const =0</td></tr>
-<tr class="separator:a1063bddc4a031d80f68a83317b64fbb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3997ff080f6a9e444c52a63f1b40d73c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a3997ff080f6a9e444c52a63f1b40d73c">getEstimate</a> ()</td></tr>
-<tr class="separator:a3997ff080f6a9e444c52a63f1b40d73c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afea6a461b8dff9ee736aa508aa4f6a3c"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value.html">ISensorValue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#afea6a461b8dff9ee736aa508aa4f6a3c">getSample</a> ()</td></tr>
+<tr class="separator:afea6a461b8dff9ee736aa508aa4f6a3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e5b2c79ab69f6903f7b322da45b0af4"><td class="memItemLeft" align="right" valign="top">virtual int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a4e5b2c79ab69f6903f7b322da45b0af4">getSensorSample</a> ()=0</td></tr>
+<tr class="separator:a4e5b2c79ab69f6903f7b322da45b0af4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c323184ac116784e877151895dfd080"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a1c323184ac116784e877151895dfd080">setThresholds</a> (const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds.html">ISensorThresholds</a> &amp;)</td></tr>
+<tr class="separator:a1c323184ac116784e877151895dfd080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -120,8 +122,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aa70bc27a4c17c86caf96cca776541ddf inherit pub_types_classathome_1_1sensor_1_1_i_sensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3997ff080f6a9e444c52a63f1b40d73c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3997ff080f6a9e444c52a63f1b40d73c">&#9670;&nbsp;</a></span>getEstimate()</h2>
+<a id="afea6a461b8dff9ee736aa508aa4f6a3c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afea6a461b8dff9ee736aa508aa4f6a3c">&#9670;&nbsp;</a></span>getSample()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,8 +132,67 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensor::ISensorScale</a> athome::sensor::ATemperatureSensor::getEstimate </td>
+          <td class="memname">const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value.html">ISensor::ISensorValue</a> &amp; athome::sensor::ATemperatureSensor::getSample </td>
           <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns a pointer on the sample of the sensor. This pointer needs to point on a float variable.</p>
+<p>Return an estimation of the quality of the temperature</p>
+<p>Values are from: <a href="https://www.jechange.fr/energie/duale/guides/thermostat-temperature-4101">https://www.jechange.fr/energie/duale/guides/thermostat-temperature-4101</a> </p><dl class="section return"><dt>Returns</dt><dd>estimation of temperature on a scale from 1 (worst) to 10 (best) </dd></dl>
+
+<p>Implements <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#ae109cd3741ea9c88dc7e4f2eaf1485d5">athome::sensor::ISensor</a>.</p>
+
+</div>
+</div>
+<a id="a4e5b2c79ab69f6903f7b322da45b0af4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e5b2c79ab69f6903f7b322da45b0af4">&#9670;&nbsp;</a></span>getSensorSample()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int32_t athome::sensor::ATemperatureSensor::getSensorSample </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the last value sampled from the sensor (do not actually resample it). </p>
+
+<p>Implemented in <a class="el" href="classathome_1_1sensor_1_1_thermistor.html#abc45d8d277fb186b5d303f9e53bf73d4">athome::sensor::Thermistor&lt; R1, R2, R3, PREC, VREF, RREF &gt;</a>, and <a class="el" href="classathome_1_1sensor_1_1_t_m_p36_g_z_temperature_sensor.html#ae0e101ee54c5c64842d2cab9fb9292f4">athome::sensor::TMP36GZTemperatureSensor&lt; REF, RES &gt;</a>.</p>
+
+</div>
+</div>
+<a id="a1c323184ac116784e877151895dfd080"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c323184ac116784e877151895dfd080">&#9670;&nbsp;</a></span>setThresholds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void athome::sensor::ATemperatureSensor::setThresholds </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds.html">ISensorThresholds</a> &amp;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
@@ -145,67 +206,13 @@ Additional Inherited Members</h2></td></tr>
 <p>Returns the estimation of safety from the current sensor value</p>
 <p>Example:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_telling_if_a_sensor_value_is_good_or_not(ISensor &amp;my_sensor) {</div><div class="line">  <a class="code" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a> sensor_estimate = my_sensor.getEstimate();</div><div class="line">  <span class="keywordflow">if</span> (sensor_estimate == ISensor::ZERO) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;The sensor returned an invalid value&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sensor_estimate &gt; ISensor::ZERO &amp;&amp; sensor_estimate &lt; 6) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Boouh, it&#39;s not good :(&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Yaaaay!&quot;</span>);</div><div class="line">  }</div><div class="line">}</div></div><!-- fragment --> 
-<p>Implements <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#a95785b54ffe3a8f7e48c81b5732e3b9f">athome::sensor::ISensor</a>.</p>
-
-</div>
-</div>
-<a id="a1063bddc4a031d80f68a83317b64fbb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1063bddc4a031d80f68a83317b64fbb2">&#9670;&nbsp;</a></span>getLastSample()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual float athome::sensor::ATemperatureSensor::getLastSample </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns the last value sampled from the sensor (do not actually resample it). </p>
-
-</div>
-</div>
-<a id="a397794217f3163950add6d28f69a6202"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a397794217f3163950add6d28f69a6202">&#9670;&nbsp;</a></span>getSample()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual uint8_t* athome::sensor::ATemperatureSensor::getSample </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns a pointer on the sample of the sensor. This pointer needs to point on a float variable. </p>
-
-<p>Implements <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#a2513fd8acc5d8251439330ca0e78cf04">athome::sensor::ISensor</a>.</p>
+<p>Implements <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#af86df8538fecfcfc670b4adfbbde6abb">athome::sensor::ISensor</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="_a_temperature_sensor_8hpp_source.html">ATemperatureSensor.hpp</a></li>
-<li>ATemperatureSensor.cpp</li>
+<li>src/<a class="el" href="_a_temperature_sensor_8hpp_source.html">ATemperatureSensor.hpp</a></li>
+<li>src/sensor/temperature/ATemperatureSensor.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

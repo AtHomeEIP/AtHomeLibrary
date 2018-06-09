@@ -20,7 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo_tiny.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AtHome Framework
    </div>
@@ -67,25 +67,49 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classathome_1_1power_1_1_i_power-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">athome::power::IPower Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Inheritance diagram for athome::power::IPower:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classathome_1_1power_1_1_i_power.png" usemap="#athome::power::IPower_map" alt=""/>
+  <map id="athome::power::IPower_map" name="athome::power::IPower_map">
+<area href="classathome_1_1power_1_1_a_v_r_power_management.html" alt="athome::power::AVRPowerManagement" shape="rect" coords="0,56,233,80"/>
+</map>
+ </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structathome_1_1power_1_1_i_power_1_1_power_info.html">PowerInfo</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a0d23b118e64d97d708f2c6d153310107"><td class="memItemLeft" align="right" valign="top"><a id="a0d23b118e64d97d708f2c6d153310107"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>SLEEP_MODE</b> { <b>ACTIVE</b> = 0, 
+<b>LIGHT_SLEEP</b>, 
+<b>SLEEP</b>, 
+<b>DEEP_SLEEP</b>
+ }</td></tr>
+<tr class="separator:a0d23b118e64d97d708f2c6d153310107"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa6a5bf366a19b1627ad8da054c9171ad"><td class="memItemLeft" align="right" valign="top"><a id="aa6a5bf366a19b1627ad8da054c9171ad"></a>
-virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>getVoltage</b> ()=0</td></tr>
-<tr class="separator:aa6a5bf366a19b1627ad8da054c9171ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a325282edf30fe83eef09a2845478b3c9"><td class="memItemLeft" align="right" valign="top"><a id="a325282edf30fe83eef09a2845478b3c9"></a>
-virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1power_1_1_i_power.html#a325282edf30fe83eef09a2845478b3c9">getCurrent</a> ()=0</td></tr>
-<tr class="memdesc:a325282edf30fe83eef09a2845478b3c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hard-coded voltage in mV or calculated depending of the type of power supply. <br /></td></tr>
-<tr class="separator:a325282edf30fe83eef09a2845478b3c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b5a55274b0ad8619d9283a80063a4df"><td class="memItemLeft" align="right" valign="top"><a id="a2b5a55274b0ad8619d9283a80063a4df"></a>
+virtual const <a class="el" href="structathome_1_1power_1_1_i_power_1_1_power_info.html">PowerInfo</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getPowerInfo</b> ()=0</td></tr>
+<tr class="separator:a2b5a55274b0ad8619d9283a80063a4df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6ff871c84bf451acbf11fa524193e2c"><td class="memItemLeft" align="right" valign="top"><a id="ab6ff871c84bf451acbf11fa524193e2c"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>sleep</b> (SLEEP_MODE, uint32_t)=0</td></tr>
+<tr class="separator:ab6ff871c84bf451acbf11fa524193e2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="_i_power_8hpp_source.html">IPower.hpp</a></li>
+<li>src/<a class="el" href="_i_power_8hpp_source.html">IPower.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -7,7 +7,7 @@
 Inheritance diagram for athome\+:\+:module\+:\+:A\+Base\+Module\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=3.000000cm]{classathome_1_1module_1_1_a_base_module}
+\includegraphics[height=4.000000cm]{classathome_1_1module_1_1_a_base_module}
 \end{center}
 \end{figure}
 \subsection*{Public Member Functions}
@@ -35,12 +35,16 @@ void \mbox{\hyperlink{classathome_1_1module_1_1_a_base_module_a071b5d07dc3497908
 \mbox{\hyperlink{classathome_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} $\ast$ \mbox{\hyperlink{classathome_1_1module_1_1_a_base_module_accc6c7f840dab1b1e67fe910c833f0b7}{get\+Storage}} ()
 \item 
 void \mbox{\hyperlink{classathome_1_1module_1_1_a_base_module_a91e714579636e6f4a3628a23a8ba61e7}{set\+Storage}} (\mbox{\hyperlink{classathome_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} $\ast$)
+\item 
+\mbox{\hyperlink{structathome_1_1time_1_1_i_time}{time\+::\+I\+Time}} $\ast$ \mbox{\hyperlink{classathome_1_1module_1_1_a_base_module_a6204e0dd2cb6fa166f96c62224e7d10d}{get\+Clock}} ()
+\item 
+void \mbox{\hyperlink{classathome_1_1module_1_1_a_base_module_a98621be03deb721373010be2a16dc585}{set\+Clock}} (\mbox{\hyperlink{structathome_1_1time_1_1_i_time}{time\+::\+I\+Time}} $\ast$)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classathome_1_1module_1_1_a_base_module_a7332012b2348fc3a945f9ec9db5d79ca}\label{classathome_1_1module_1_1_a_base_module_a7332012b2348fc3a945f9ec9db5d79ca}} 
-{\bfseries A\+Base\+Module} (\mbox{\hyperlink{classathome_1_1display_1_1_i_display}{display\+::\+I\+Display}} $\ast$=nullptr, Stream $\ast$$\ast$=nullptr, \mbox{\hyperlink{classathome_1_1power_1_1_i_power}{power\+::\+I\+Power}} $\ast$=nullptr, \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor}{sensor\+::\+I\+Sensor}} $\ast$=nullptr, \mbox{\hyperlink{classathome_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} $\ast$=nullptr)
+\mbox{\Hypertarget{classathome_1_1module_1_1_a_base_module_a4d61fc38c73893ac32a5932fbbb998d1}\label{classathome_1_1module_1_1_a_base_module_a4d61fc38c73893ac32a5932fbbb998d1}} 
+{\bfseries A\+Base\+Module} (\mbox{\hyperlink{classathome_1_1display_1_1_i_display}{display\+::\+I\+Display}} $\ast$=nullptr, Stream $\ast$$\ast$=nullptr, \mbox{\hyperlink{classathome_1_1power_1_1_i_power}{power\+::\+I\+Power}} $\ast$=nullptr, \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor}{sensor\+::\+I\+Sensor}} $\ast$=nullptr, \mbox{\hyperlink{classathome_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} $\ast$=nullptr, \mbox{\hyperlink{structathome_1_1time_1_1_i_time}{time\+::\+I\+Time}} $\ast$=nullptr)
 \item 
 \mbox{\Hypertarget{classathome_1_1module_1_1_a_base_module_ae2c52cb3313abb5ceb3c7bdb854e9850}\label{classathome_1_1module_1_1_a_base_module_ae2c52cb3313abb5ceb3c7bdb854e9850}} 
 {\bfseries A\+Base\+Module} (\mbox{\hyperlink{classathome_1_1module_1_1_a_base_module}{A\+Base\+Module}} \&)=delete
@@ -62,6 +66,9 @@ Stream $\ast$$\ast$ {\bfseries \+\_\+streams}
 \item 
 \mbox{\Hypertarget{classathome_1_1module_1_1_a_base_module_aa62dad921ff7db37a8501aa827f73e4f}\label{classathome_1_1module_1_1_a_base_module_aa62dad921ff7db37a8501aa827f73e4f}} 
 \mbox{\hyperlink{classathome_1_1storage_1_1_i_storage}{storage\+::\+I\+Storage}} $\ast$ {\bfseries \+\_\+storage}
+\item 
+\mbox{\Hypertarget{classathome_1_1module_1_1_a_base_module_ab5862f9f3fc958e285eb86eb41ffe7e1}\label{classathome_1_1module_1_1_a_base_module_ab5862f9f3fc958e285eb86eb41ffe7e1}} 
+\mbox{\hyperlink{structathome_1_1time_1_1_i_time}{time\+::\+I\+Time}} $\ast$ {\bfseries \+\_\+clock}
 \end{DoxyCompactItemize}
 
 
@@ -69,6 +76,17 @@ Stream $\ast$$\ast$ {\bfseries \+\_\+streams}
 Abstract base class for all Module classes, mainly handling low level logic and accessers to Module components 
 
 \subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1module_1_1_a_base_module_a6204e0dd2cb6fa166f96c62224e7d10d}\label{classathome_1_1module_1_1_a_base_module_a6204e0dd2cb6fa166f96c62224e7d10d}} 
+\index{athome\+::module\+::\+A\+Base\+Module@{athome\+::module\+::\+A\+Base\+Module}!get\+Clock@{get\+Clock}}
+\index{get\+Clock@{get\+Clock}!athome\+::module\+::\+A\+Base\+Module@{athome\+::module\+::\+A\+Base\+Module}}
+\subsubsection{\texorpdfstring{get\+Clock()}{getClock()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structathome_1_1time_1_1_i_time}{time\+::\+I\+Time}} $\ast$ athome\+::module\+::\+A\+Base\+Module\+::get\+Clock (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get a pointer on the clock used by the module to represent current time.
+
+\begin{DoxyReturn}{Returns}
+pointer on interface for a clock used by the module 
+\end{DoxyReturn}
 \mbox{\Hypertarget{classathome_1_1module_1_1_a_base_module_ada20b6ad1e6f750d2886f1e7b10cca70}\label{classathome_1_1module_1_1_a_base_module_ada20b6ad1e6f750d2886f1e7b10cca70}} 
 \index{athome\+::module\+::\+A\+Base\+Module@{athome\+::module\+::\+A\+Base\+Module}!get\+Display@{get\+Display}}
 \index{get\+Display@{get\+Display}!athome\+::module\+::\+A\+Base\+Module@{athome\+::module\+::\+A\+Base\+Module}}
@@ -119,7 +137,13 @@ Return an array of pointers on {\ttfamily Stream} derived objects terminated by 
 
 For example, the array can be like this\+: {\ttfamily \{\&Serial, \&Serial1, \&\mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, nullptr\}}
 
-If there\textquotesingle{}s no {\ttfamily Stream}s used by the module, this method returns {\ttfamily nullptr} \mbox{\Hypertarget{classathome_1_1module_1_1_a_base_module_a451a1fb99905c7d21f3a818ee39acc69}\label{classathome_1_1module_1_1_a_base_module_a451a1fb99905c7d21f3a818ee39acc69}} 
+If there\textquotesingle{}s no {\ttfamily Stream}s used by the module, this method returns {\ttfamily nullptr} \mbox{\Hypertarget{classathome_1_1module_1_1_a_base_module_a98621be03deb721373010be2a16dc585}\label{classathome_1_1module_1_1_a_base_module_a98621be03deb721373010be2a16dc585}} 
+\index{athome\+::module\+::\+A\+Base\+Module@{athome\+::module\+::\+A\+Base\+Module}!set\+Clock@{set\+Clock}}
+\index{set\+Clock@{set\+Clock}!athome\+::module\+::\+A\+Base\+Module@{athome\+::module\+::\+A\+Base\+Module}}
+\subsubsection{\texorpdfstring{set\+Clock()}{setClock()}}
+{\footnotesize\ttfamily void athome\+::module\+::\+A\+Base\+Module\+::set\+Clock (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structathome_1_1time_1_1_i_time}{time\+::\+I\+Time}} $\ast$}]{clock }\end{DoxyParamCaption})}
+
+Set the pointer on the interface of the clock used by the module to get current representation of time \mbox{\Hypertarget{classathome_1_1module_1_1_a_base_module_a451a1fb99905c7d21f3a818ee39acc69}\label{classathome_1_1module_1_1_a_base_module_a451a1fb99905c7d21f3a818ee39acc69}} 
 \index{athome\+::module\+::\+A\+Base\+Module@{athome\+::module\+::\+A\+Base\+Module}!set\+Display@{set\+Display}}
 \index{set\+Display@{set\+Display}!athome\+::module\+::\+A\+Base\+Module@{athome\+::module\+::\+A\+Base\+Module}}
 \subsubsection{\texorpdfstring{set\+Display()}{setDisplay()}}
@@ -239,5 +263,5 @@ AtHomeModule<uint16\_t, 15> *module = AtHomeModule::<uint16\_t, 15>::getInstance
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-A\+Base\+Module.\+hpp\item 
-A\+Base\+Module.\+cpp\end{DoxyCompactItemize}
+src/A\+Base\+Module.\+hpp\item 
+src/module/A\+Base\+Module.\+cpp\end{DoxyCompactItemize}

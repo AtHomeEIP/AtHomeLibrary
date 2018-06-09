@@ -1,0 +1,61 @@
+\hypertarget{classathome_1_1sensor_1_1_thermistor}{}\section{athome\+:\+:sensor\+:\+:Thermistor$<$ R1, R2, R3, P\+R\+EC, V\+R\+EF, R\+R\+EF $>$ Class Template Reference}
+\label{classathome_1_1sensor_1_1_thermistor}\index{athome\+::sensor\+::\+Thermistor$<$ R1, R2, R3, P\+R\+E\+C, V\+R\+E\+F, R\+R\+E\+F $>$@{athome\+::sensor\+::\+Thermistor$<$ R1, R2, R3, P\+R\+E\+C, V\+R\+E\+F, R\+R\+E\+F $>$}}
+
+
+{\ttfamily \#include $<$Thermistor.\+hpp$>$}
+
+Inheritance diagram for athome\+:\+:sensor\+:\+:Thermistor$<$ R1, R2, R3, P\+R\+EC, V\+R\+EF, R\+R\+EF $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classathome_1_1sensor_1_1_thermistor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_thermistor_a44767c962e57aa33ef6fd10ea3b00cf9}\label{classathome_1_1sensor_1_1_thermistor_a44767c962e57aa33ef6fd10ea3b00cf9}} 
+{\bfseries Thermistor} (int pin)
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_thermistor_a3cbfb96cd205f2ddb6fa813b4dedbafe}\label{classathome_1_1sensor_1_1_thermistor_a3cbfb96cd205f2ddb6fa813b4dedbafe}} 
+{\bfseries Thermistor} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_thermistor}{Thermistor}} \&)=delete
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_thermistor_a7820ca124e20e1a1665a8b5c2cdce71f}\label{classathome_1_1sensor_1_1_thermistor_a7820ca124e20e1a1665a8b5c2cdce71f}} 
+\mbox{\hyperlink{classathome_1_1sensor_1_1_thermistor}{Thermistor}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_thermistor}{Thermistor}} \&)=delete
+\item 
+virtual int32\+\_\+t \mbox{\hyperlink{classathome_1_1sensor_1_1_thermistor_abc45d8d277fb186b5d303f9e53bf73d4}{get\+Sensor\+Sample}} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$uint32\+\_\+t R1, uint32\+\_\+t R2, uint32\+\_\+t R3, size\+\_\+t P\+R\+EC = 1024, uint8\+\_\+t V\+R\+EF = 5, uint32\+\_\+t R\+R\+EF = 10000$>$\newline
+class athome\+::sensor\+::\+Thermistor$<$ R1, R2, R3, P\+R\+E\+C, V\+R\+E\+F, R\+R\+E\+F $>$}
+
+Based on Steinhart-\/\+Hart equation\+:
+
+
+\begin{DoxyItemize}
+\item T1 = 5 degree celsius
+\item T2 = 25 degree celsius
+\item T3 = 50 degree celsius
+\end{DoxyItemize}
+
+T\+O\+DO\+: Need to update it to use the static version of log function once implemented 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_thermistor_abc45d8d277fb186b5d303f9e53bf73d4}\label{classathome_1_1sensor_1_1_thermistor_abc45d8d277fb186b5d303f9e53bf73d4}} 
+\index{athome\+::sensor\+::\+Thermistor@{athome\+::sensor\+::\+Thermistor}!get\+Sensor\+Sample@{get\+Sensor\+Sample}}
+\index{get\+Sensor\+Sample@{get\+Sensor\+Sample}!athome\+::sensor\+::\+Thermistor@{athome\+::sensor\+::\+Thermistor}}
+\subsubsection{\texorpdfstring{get\+Sensor\+Sample()}{getSensorSample()}}
+{\footnotesize\ttfamily template$<$uint32\+\_\+t R1, uint32\+\_\+t R2, uint32\+\_\+t R3, size\+\_\+t P\+R\+EC = 1024, uint8\+\_\+t V\+R\+EF = 5, uint32\+\_\+t R\+R\+EF = 10000$>$ \\
+virtual int32\+\_\+t \mbox{\hyperlink{classathome_1_1sensor_1_1_thermistor}{athome\+::sensor\+::\+Thermistor}}$<$ R1, R2, R3, P\+R\+EC, V\+R\+EF, R\+R\+EF $>$\+::get\+Sensor\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the last value sampled from the sensor (do not actually resample it). 
+
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a4e5b2c79ab69f6903f7b322da45b0af4}{athome\+::sensor\+::\+A\+Temperature\+Sensor}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/Thermistor.\+hpp\end{DoxyCompactItemize}

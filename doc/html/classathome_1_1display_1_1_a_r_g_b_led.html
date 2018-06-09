@@ -20,7 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo_tiny.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AtHome Framework
    </div>
@@ -82,11 +82,10 @@ Inheritance diagram for athome::display::ARGBLed:</div>
  <div class="center">
   <img src="classathome_1_1display_1_1_a_r_g_b_led.png" usemap="#athome::display::ARGBLed_map" alt=""/>
   <map id="athome::display::ARGBLed_map" name="athome::display::ARGBLed_map">
-<area href="classathome_1_1display_1_1_i_display.html" alt="athome::display::IDisplay" shape="rect" coords="382,0,627,24"/>
+<area href="classathome_1_1display_1_1_i_display.html" alt="athome::display::IDisplay" shape="rect" coords="255,0,500,24"/>
 <area href="classathome_1_1display_1_1_common_anode_r_g_b_led.html" alt="athome::display::CommonAnodeRGBLed" shape="rect" coords="0,112,245,136"/>
 <area href="classathome_1_1display_1_1_common_cathode_r_g_b_led.html" alt="athome::display::CommonCathodeRGBLed" shape="rect" coords="255,112,500,136"/>
 <area href="classathome_1_1display_1_1_grove_chainable_l_e_d.html" alt="athome::display::GroveChainableLED" shape="rect" coords="510,112,755,136"/>
-<area href="classathome_1_1display_1_1_neo_pixel.html" alt="athome::display::NeoPixel" shape="rect" coords="765,112,1010,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -111,6 +110,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2c3022a5aad43595fefc4b52d916467a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ca4858c1ee10cc2f7c1dcc11a6d050e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a7ca4858c1ee10cc2f7c1dcc11a6d050e">setColor</a> (const <a class="el" href="structathome_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a> &amp;color)</td></tr>
 <tr class="separator:a7ca4858c1ee10cc2f7c1dcc11a6d050e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e6a934912f71a5ea06df1d28cf5ace9"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a1e6a934912f71a5ea06df1d28cf5ace9">setDisplayedEstimate</a> (<a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">sensor::ISensor::ISensorScale</a> value)</td></tr>
+<tr class="separator:a1e6a934912f71a5ea06df1d28cf5ace9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a411b35199d593b813bad7d9056678198"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a411b35199d593b813bad7d9056678198">setColorsScale</a> (const <a class="el" href="structathome_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a> scale[])</td></tr>
+<tr class="separator:a411b35199d593b813bad7d9056678198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69e31887e1a37a86073d5f82bd578f1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a69e31887e1a37a86073d5f82bd578f1f">setIndividualColorScale</a> (const <a class="el" href="structathome_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a> &amp;color, <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">sensor::ISensor::ISensorScale</a> value)</td></tr>
+<tr class="separator:a69e31887e1a37a86073d5f82bd578f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract class used to control RGB LEDs (Common cathode/anode, Grove Chainable LEDs, NeoPixels, ...etc)</p>
@@ -200,6 +205,109 @@ Public Member Functions</h2></td></tr>
 <div class="fragment"><div class="line"><span class="keyword">const</span> Color red = {255, 0, 0};</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_changing_a_led_color_to_red(ARGBLed &amp;led) {</div><div class="line">  led.setColor(red); <span class="comment">// Set the new color in the LED object</span></div><div class="line">  led.update(); <span class="comment">// You need to call this method if you want the new color to be displayed on the LED</span></div><div class="line">}</div></div><!-- fragment --> 
 </div>
 </div>
+<a id="a411b35199d593b813bad7d9056678198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a411b35199d593b813bad7d9056678198">&#9670;&nbsp;</a></span>setColorsScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void athome::display::ARGBLed::setColorsScale </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structathome_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a>&#160;</td>
+          <td class="paramname"><em>scale</em>[]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Change the scale of colors associated to each values of ISensorScale by passing an array containing all colors as a parameter </p>
+
+</div>
+</div>
+<a id="a1e6a934912f71a5ea06df1d28cf5ace9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e6a934912f71a5ea06df1d28cf5ace9">&#9670;&nbsp;</a></span>setDisplayedEstimate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void athome::display::ARGBLed::setDisplayedEstimate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">sensor::ISensor::ISensorScale</a>&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the value displayed on the screen, whatever the type of display is.</p>
+<p>ISensorScale is an enumeration representing the correctness on a scale from 1 to 10 (1 is worst, 10 is best).</p>
+<p>This scale can be represented by various ways for many different displays. For example:</p>
+<ul>
+<li>An LED could stay off from 6 and on below 6</li>
+<li>A dimmable LED could set it's percentage of brightness corresponding to the value (for example 1 = 100%, 5 = 50%, 10 = 0%)</li>
+<li>A 7 segments display could display the digit itself and stay off at 10</li>
+<li>An LCD screen could write a sentence, the digit, draw a gauge, ...etc</li>
+<li>A speaker or buzzer could do noise of different intensities below 6</li>
+<li>...etc </li>
+</ul>
+
+<p>Implements <a class="el" href="classathome_1_1display_1_1_i_display.html#a3c9678f929e4bc04742d458b0c2399ef">athome::display::IDisplay</a>.</p>
+
+</div>
+</div>
+<a id="a69e31887e1a37a86073d5f82bd578f1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69e31887e1a37a86073d5f82bd578f1f">&#9670;&nbsp;</a></span>setIndividualColorScale()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void athome::display::ARGBLed::setIndividualColorScale </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structathome_1_1display_1_1_a_r_g_b_led_1_1_color.html">Color</a> &amp;&#160;</td>
+          <td class="paramname"><em>color</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">sensor::ISensor::ISensorScale</a>&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Change the color associated to a certain value of the scale ISensorScale </p>
+
+</div>
+</div>
 <a id="a725ceca0c01735daa9c95148baf075ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a725ceca0c01735daa9c95148baf075ab">&#9670;&nbsp;</a></span>update()</h2>
 
@@ -226,12 +334,12 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classathome_1_1display_1_1_i_display.html#a4ba7bd5d46f88578f1c846f4f5f3c5d1">athome::display::IDisplay</a>.</p>
 
-<p>Implemented in <a class="el" href="classathome_1_1display_1_1_grove_chainable_l_e_d.html#a05a4a1381396b7fc11a24993865d8226">athome::display::GroveChainableLED</a>, <a class="el" href="classathome_1_1display_1_1_neo_pixel.html#a272bca4da78dff7dc02bcd023665e013">athome::display::NeoPixel</a>, <a class="el" href="classathome_1_1display_1_1_common_anode_r_g_b_led.html#ab7daf7dcc6ac1e3fcab202cae484b237">athome::display::CommonAnodeRGBLed</a>, and <a class="el" href="classathome_1_1display_1_1_common_cathode_r_g_b_led.html#ab78ab6aef619d8e0941dd11d4cfbb545">athome::display::CommonCathodeRGBLed</a>.</p>
+<p>Implemented in <a class="el" href="classathome_1_1display_1_1_grove_chainable_l_e_d.html#a05a4a1381396b7fc11a24993865d8226">athome::display::GroveChainableLED</a>, <a class="el" href="classathome_1_1display_1_1_common_anode_r_g_b_led.html#ab7daf7dcc6ac1e3fcab202cae484b237">athome::display::CommonAnodeRGBLed</a>, and <a class="el" href="classathome_1_1display_1_1_common_cathode_r_g_b_led.html#ab78ab6aef619d8e0941dd11d4cfbb545">athome::display::CommonCathodeRGBLed</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="_a_r_g_b_led_8hpp_source.html">ARGBLed.hpp</a></li>
+<li>src/<a class="el" href="_a_r_g_b_led_8hpp_source.html">ARGBLed.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

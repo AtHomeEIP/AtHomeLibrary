@@ -20,7 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo_tiny.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AtHome Framework
    </div>
@@ -72,8 +72,9 @@ $(function() {
 : <a class="el" href="classathome_1_1module_1_1_at_home_module.html#ad78045943a579874ec16e14cf976eada">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>available()
-: <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ab71f3c62a890abdefe549d69b40b12ba">athome::communication::wifi::AWiFiCommunicator</a>
+: <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a2bf367d03c98e8523fda71dd43ffa2fb">athome::communication::ANetworkCommunicator</a>
 , <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#af9b1e28910959893748763faaa5373a0">athome::communication::wifi::ESP8266WiFiCommunicator</a>
+, <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#a6cd3fe64efeb1085c7e6dc71a740a24b">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>
 , <a class="el" href="classathome_1_1utility_1_1_buffer.html#a2c441e74e8e325e8eb6cfb7ffb04b157">athome::utility::Buffer&lt; T, size &gt;</a>
 </li>
 <li>AWiFiCommunicator()
@@ -96,14 +97,18 @@ $(function() {
 <li>clear()
 : <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a9753e3a23ea5cb6b0a41079bc6128766">athome::display::ARGBLed</a>
 , <a class="el" href="classathome_1_1display_1_1_i_display.html#a0d3add1ce61c96657827fb56d250d9c6">athome::display::IDisplay</a>
+, <a class="el" href="classathome_1_1display_1_1_monochromatic_l_e_d.html#a81a1470c33e639e916f014e5adbe8707">athome::display::MonochromaticLED</a>
+, <a class="el" href="classathome_1_1display_1_1_p_w_m_l_e_d.html#ad13265bec1900a48d3d89aac9a532783">athome::display::PWMLED</a>
 </li>
 <li>connect()
 : <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a309927109fbc19aa0fb2afb71d50bbf9">athome::communication::wifi::AWiFiCommunicator</a>
 , <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a58cc439be2f368b346bbbe1601a9b675">athome::communication::wifi::ESP8266WiFiCommunicator</a>
+, <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#abc07f2d953fa91f86b8919858e10bbd7">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>
 </li>
 <li>connectToHost()
-: <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ac81395d55c9a6824136d7b63fdb096f0">athome::communication::wifi::AWiFiCommunicator</a>
+: <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a370176dae8f38225446e83a132dbcff7">athome::communication::ANetworkCommunicator</a>
 , <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a159a93b350df135daa967665c9e53e2f">athome::communication::wifi::ESP8266WiFiCommunicator</a>
+, <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#ab3f6a0e1b9d3be98a876f95dde97976b">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>
 </li>
 </ul>
 
@@ -112,18 +117,21 @@ $(function() {
 <li>disconnect()
 : <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a6131240ac0daa0f9fb4d46871feea4c2">athome::communication::wifi::AWiFiCommunicator</a>
 , <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a7e53e10b858aebc5e7c6c0ea6007f84a">athome::communication::wifi::ESP8266WiFiCommunicator</a>
+, <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#a3787e850d48d149ee1392ebfb2920bb3">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>
 </li>
 <li>disconnectFromHost()
-: <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#aebcf385c3e0382eda7c99760f100901c">athome::communication::wifi::AWiFiCommunicator</a>
+: <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a025b7fbe9b3c4452fcf1925d766324eb">athome::communication::ANetworkCommunicator</a>
 , <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a0f8adbe1b1d219148c4f340980056356">athome::communication::wifi::ESP8266WiFiCommunicator</a>
+, <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#a8fa44a5078cb7d61f01b306e1d0d1bfe">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>
 </li>
 </ul>
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
 <li>flush()
-: <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#aa974255c8bdbae19d3d4bd0f1a50318f">athome::communication::wifi::AWiFiCommunicator</a>
+: <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a5e3b278ad11e6c00ac7d3e2fee3f01b1">athome::communication::ANetworkCommunicator</a>
 , <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#af95ca7f47285b13fc895e0d9323ee320">athome::communication::wifi::ESP8266WiFiCommunicator</a>
+, <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#a5b02865d3bf418d1b4dff8a1198c8dac">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>
 , <a class="el" href="classathome_1_1utility_1_1_buffer.html#a9fd6b0ad08ed7af5702b43c3b6a617e1">athome::utility::Buffer&lt; T, size &gt;</a>
 </li>
 <li>flushStreams()
@@ -139,6 +147,12 @@ $(function() {
 <li>getAnaloguePin()
 : <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#ac4eab6ad6117e8e6689f9e1d9fb05015">athome::sensor::AnalogSensor</a>
 </li>
+<li>getClock()
+: <a class="el" href="classathome_1_1module_1_1_a_base_module.html#a6204e0dd2cb6fa166f96c62224e7d10d">athome::module::ABaseModule</a>
+</li>
+<li>getCO()
+: <a class="el" href="classathome_1_1sensor_1_1_m_q2_gas_sensor.html#a36cce0ec962d8b5269e39ee4c368be67">athome::sensor::MQ2GasSensor</a>
+</li>
 <li>getColor()
 : <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a2c3022a5aad43595fefc4b52d916467a">athome::display::ARGBLed</a>
 </li>
@@ -148,41 +162,30 @@ $(function() {
 <li>getConnectionAddresses()
 : <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#afcc41f462a12c8348148c915dcafd1a0">athome::communication::wifi::AWiFiCommunicator</a>
 </li>
-<li>getCurrent()
-: <a class="el" href="classathome_1_1power_1_1_i_power.html#a325282edf30fe83eef09a2845478b3c9">athome::power::IPower</a>
-</li>
 <li>getDisplay()
 : <a class="el" href="classathome_1_1module_1_1_a_base_module.html#ada20b6ad1e6f750d2886f1e7b10cca70">athome::module::ABaseModule</a>
 </li>
-<li>getEstimate()
-: <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a1da82433989c79066ce32d5606f4f675">athome::sensor::AHumiditySensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#aa6c0e60c108b0494f0132b033ce3dd82">athome::sensor::ALuminositySensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#a728e2f65638f488cd1829c5f318531db">athome::sensor::AnalogSensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a3997ff080f6a9e444c52a63f1b40d73c">athome::sensor::ATemperatureSensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html#a3eeec77eb0bbf3932cdfa9d33a708e57">athome::sensor::GroveAirQualitySensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#a95785b54ffe3a8f7e48c81b5732e3b9f">athome::sensor::ISensor</a>
-</li>
 <li>getHost()
-: <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a50dcf049687aa26a992b161f540b40f3">athome::communication::wifi::AWiFiCommunicator</a>
+: <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a6b52a87191bef07e73ec1bbba0713080">athome::communication::ANetworkCommunicator</a>
 </li>
 <li>getInstance()
 : <a class="el" href="classathome_1_1module_1_1_at_home_module.html#acc6e7fc0d86f11648fd81729484e546f">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
-<li>getLastSample()
-: <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a35c3e521f1ded20e8c3ba104524c57a0">athome::sensor::AHumiditySensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#a1cc3cee76cd76486c6e6b51ac484cb2a">athome::sensor::ALuminositySensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a1063bddc4a031d80f68a83317b64fbb2">athome::sensor::ATemperatureSensor</a>
+<li>getLPG()
+: <a class="el" href="classathome_1_1sensor_1_1_m_q2_gas_sensor.html#a65401612b298d829987c2b75ead8f246">athome::sensor::MQ2GasSensor</a>
 </li>
 <li>getPowerSource()
 : <a class="el" href="classathome_1_1module_1_1_a_base_module.html#a3152f721f953e32a1f965856936d188e">athome::module::ABaseModule</a>
 </li>
 <li>getSample()
-: <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a2eb6de3ce2a4aeae0d9e556389d2b329">athome::sensor::AHumiditySensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#a299491729362d34f474094dfd10eb310">athome::sensor::ALuminositySensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#ac45070688a9433256a5f847467c251fa">athome::sensor::AnalogSensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a397794217f3163950add6d28f69a6202">athome::sensor::ATemperatureSensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html#aee12d8cf6439b752c868f75cae298182">athome::sensor::GroveAirQualitySensor</a>
-, <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#a2513fd8acc5d8251439330ca0e78cf04">athome::sensor::ISensor</a>
+: <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a7af4527c70b539bec58cecfaae0aa80e">athome::sensor::AHumiditySensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#a6e0e7bcfe13cd8d8edf6a09f6e230ef8">athome::sensor::ALuminositySensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#a7ad00f985a9d1abeb64f973b5d16558c">athome::sensor::AnalogSensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_a_noise_sensor.html#ab567b050b41bd0b72fcc9b94b9f6fc6e">athome::sensor::ANoiseSensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#afea6a461b8dff9ee736aa508aa4f6a3c">athome::sensor::ATemperatureSensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#ae109cd3741ea9c88dc7e4f2eaf1485d5">athome::sensor::ISensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_m_q2_gas_sensor.html#adbe1195490ce67fbed7c717abe2b5b13">athome::sensor::MQ2GasSensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_sound_sensor.html#a8ac5f417eee873247aff8a7e96e12817">athome::sensor::SoundSensor</a>
 </li>
 <li>getScheduler()
 : <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a954f37f05e5738f270a35fef58782ba6">athome::module::AtHomeModule&lt; T, n &gt;</a>
@@ -193,8 +196,19 @@ $(function() {
 <li>getSensorExecutionInterval()
 : <a class="el" href="classathome_1_1module_1_1_at_home_module.html#ae0d4458da2bafd104386671d300fb562">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
+<li>getSensorSample()
+: <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a1eb32658be5cfc700523e74387e86053">athome::sensor::AHumiditySensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#ae756f7d7647c2cf695305c8f11aec8d3">athome::sensor::ALuminositySensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a4e5b2c79ab69f6903f7b322da45b0af4">athome::sensor::ATemperatureSensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_l_d_r_luminosity_sensor.html#a6e4f25000704564ce30a7e3531f23c43">athome::sensor::LDRLuminositySensor&lt; REF, RES, RDIV &gt;</a>
+, <a class="el" href="classathome_1_1sensor_1_1_thermistor.html#abc45d8d277fb186b5d303f9e53bf73d4">athome::sensor::Thermistor&lt; R1, R2, R3, PREC, VREF, RREF &gt;</a>
+, <a class="el" href="classathome_1_1sensor_1_1_t_m_p36_g_z_temperature_sensor.html#ae0e101ee54c5c64842d2cab9fb9292f4">athome::sensor::TMP36GZTemperatureSensor&lt; REF, RES &gt;</a>
+</li>
 <li>getSerial()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a783ba85ff4b0c77e67073342cfdae82c">athome::module::AtHomeModule&lt; T, n &gt;</a>
+: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a1267bc33e38b25ba52bceddc60ea7df1">athome::module::AtHomeModule&lt; T, n &gt;</a>
+</li>
+<li>getSmoke()
+: <a class="el" href="classathome_1_1sensor_1_1_m_q2_gas_sensor.html#aa6e3ad7d0382f04cf15388fd36722579">athome::sensor::MQ2GasSensor</a>
 </li>
 <li>getStorage()
 : <a class="el" href="classathome_1_1module_1_1_a_base_module.html#accc6c7f840dab1b1e67fe910c833f0b7">athome::module::ABaseModule</a>
@@ -202,14 +216,8 @@ $(function() {
 <li>getStreams()
 : <a class="el" href="classathome_1_1module_1_1_a_base_module.html#adc612512d2acb7bc3f3d533bcc1aa41b">athome::module::ABaseModule</a>
 </li>
-<li>getType()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a1d79645c2471440383fa935b48264d89">athome::module::AtHomeModule&lt; T, n &gt;</a>
-</li>
 <li>getUploadDataExecutionInterval()
 : <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a6186e04da0e46cf463d24947538380bb">athome::module::AtHomeModule&lt; T, n &gt;</a>
-</li>
-<li>getVendor()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#ad96c0feb4eacedf3e3fa9383a53cd7f7">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>getWiFiMode()
 : <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#adebc335ea6408a90919f396f06260b13">athome::communication::wifi::AWiFiCommunicator</a>
@@ -221,6 +229,14 @@ $(function() {
 <li>isConnected()
 : <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a578087d01c814481d89ea702a6d7ed01">athome::communication::wifi::AWiFiCommunicator</a>
 , <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#aefadac9b1a67d52853495dfabecad5fd">athome::communication::wifi::ESP8266WiFiCommunicator</a>
+, <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#a1ad428f03137d93a142ec5ae72f19e14">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>
+</li>
+</ul>
+
+
+<h3><a id="index_m"></a>- m -</h3><ul>
+<li>MQGetPercentage()
+: <a class="el" href="classathome_1_1sensor_1_1_m_q2_gas_sensor.html#a6bf60231a95fe2ba2f5bc9c1bad714c5">athome::sensor::MQ2GasSensor</a>
 </li>
 </ul>
 
@@ -249,8 +265,9 @@ $(function() {
 
 <h3><a id="index_p"></a>- p -</h3><ul>
 <li>peek()
-: <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ad5c39b1ea49f77026371c8e8ff2dba63">athome::communication::wifi::AWiFiCommunicator</a>
+: <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#ad06ecdc94aa77b1bab934b85bed2ac7d">athome::communication::ANetworkCommunicator</a>
 , <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#affeb5491ad5c97fa53a683926f8184d2">athome::communication::wifi::ESP8266WiFiCommunicator</a>
+, <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#adaa14eb4aa1b147531742c9377aa8db0">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>
 , <a class="el" href="classathome_1_1utility_1_1_buffer.html#a7cd2a38b3f2abc3083f686c49873656a">athome::utility::Buffer&lt; T, size &gt;</a>
 </li>
 </ul>
@@ -258,10 +275,12 @@ $(function() {
 
 <h3><a id="index_r"></a>- r -</h3><ul>
 <li>read()
-: <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ac18a51bba1651031d4ea2ac2d2a19606">athome::communication::wifi::AWiFiCommunicator</a>
+: <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a88d3c4366daf48865ab48b22eb62d610">athome::communication::ANetworkCommunicator</a>
 , <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a1cadc570e912c164279ef0ebc5b178a5">athome::communication::wifi::ESP8266WiFiCommunicator</a>
+, <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#a07da3b2bf99edad18fb95b6879dbf0f7">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>
 , <a class="el" href="classathome_1_1storage_1_1_arduino_e_e_p_r_o_m.html#a853674189981dd3395ea76911d2eb1a0">athome::storage::ArduinoEEPROM</a>
 , <a class="el" href="classathome_1_1storage_1_1_i_storage.html#af623393cdf559addf167463ce4e7005e">athome::storage::IStorage</a>
+, <a class="el" href="classathome_1_1storage_1_1_m_s_p430_f_r_a_m.html#a3a00a26565491d08d26f505930453fb7">athome::storage::MSP430FRAM</a>
 , <a class="el" href="classathome_1_1utility_1_1_buffer.html#afc64f625641e7057b2a12dbf059cbd0c">athome::utility::Buffer&lt; T, size &gt;</a>
 </li>
 <li>run()
@@ -274,14 +293,20 @@ $(function() {
 <li>setAccessPoint()
 : <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a2b802d934022436e029fc31b3e84d321">athome::communication::wifi::AWiFiCommunicator</a>
 </li>
+<li>setClock()
+: <a class="el" href="classathome_1_1module_1_1_a_base_module.html#a98621be03deb721373010be2a16dc585">athome::module::ABaseModule</a>
+</li>
 <li>setColor()
 : <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a7ca4858c1ee10cc2f7c1dcc11a6d050e">athome::display::ARGBLed</a>
 </li>
+<li>setColorsScale()
+: <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a411b35199d593b813bad7d9056678198">athome::display::ARGBLed</a>
+</li>
 <li>setCommandPlugin()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#aa5d7be373ec60debac614544ae91a648">athome::module::AtHomeModule&lt; T, n &gt;</a>
+: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a137cdd3cfb9bad5e8e65eddac89ddd41">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>setCommunicationExecutionCallback()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a8c3585c35b11fe5b70438678b54f3970">athome::module::AtHomeModule&lt; T, n &gt;</a>
+: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a2a89b7e4cd63739b2c48ffbe3bbaf9be">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>setCommunicationExecutionInterval()
 : <a class="el" href="classathome_1_1module_1_1_at_home_module.html#ad28a042bd9f793d9dbd944ec4f76156b">athome::module::AtHomeModule&lt; T, n &gt;</a>
@@ -292,14 +317,23 @@ $(function() {
 <li>setDisplay()
 : <a class="el" href="classathome_1_1module_1_1_a_base_module.html#a451a1fb99905c7d21f3a818ee39acc69">athome::module::ABaseModule</a>
 </li>
+<li>setDisplayedEstimate()
+: <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a1e6a934912f71a5ea06df1d28cf5ace9">athome::display::ARGBLed</a>
+, <a class="el" href="classathome_1_1display_1_1_i_display.html#a3c9678f929e4bc04742d458b0c2399ef">athome::display::IDisplay</a>
+, <a class="el" href="classathome_1_1display_1_1_monochromatic_l_e_d.html#a67a39b7d73305a98fc25705dcc5f3cd0">athome::display::MonochromaticLED</a>
+, <a class="el" href="classathome_1_1display_1_1_p_w_m_l_e_d.html#a8cde32d9aa5b28dfbc79e2677bfce921">athome::display::PWMLED</a>
+</li>
 <li>setHost()
-: <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ab9d7165657cb8be4995f637a57b8f9e1">athome::communication::wifi::AWiFiCommunicator</a>
+: <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a2c19d9918fc1d85d1768bfd0ae0bd4d4">athome::communication::ANetworkCommunicator</a>
+</li>
+<li>setIndividualColorScale()
+: <a class="el" href="classathome_1_1display_1_1_a_r_g_b_led.html#a69e31887e1a37a86073d5f82bd578f1f">athome::display::ARGBLed</a>
 </li>
 <li>setOnBackupPlugin()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#af7e6ed7d4dc72c0cef209704fab0e3af">athome::module::AtHomeModule&lt; T, n &gt;</a>
+: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#aeb8a36ce4009ad6a578f41cd654877fa">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>setOnRestorePlugin()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#ae359941a4f2e571a052a30916a306e48">athome::module::AtHomeModule&lt; T, n &gt;</a>
+: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a7ae30173c9c2871cd374d5d6786f43f6">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>setPowerSource()
 : <a class="el" href="classathome_1_1module_1_1_a_base_module.html#a0c217f9a8d052efc5490bc9145fdf7f9">athome::module::ABaseModule</a>
@@ -308,13 +342,13 @@ $(function() {
 : <a class="el" href="classathome_1_1module_1_1_a_base_module.html#a071b5d07dc3497908520a5b0dc9404ef">athome::module::ABaseModule</a>
 </li>
 <li>setSensorExecutionCallback()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a29464ea78833e571a589c0cf0d17321b">athome::module::AtHomeModule&lt; T, n &gt;</a>
+: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#af1466a92bf4e3d0dc45adff11d8ee5fd">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>setSensorExecutionInterval()
 : <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a9a3b04d8f83ecbe0e8e368b697449326">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>setSerial()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a1acd0195c09c974ec52d5c74a9b7ede8">athome::module::AtHomeModule&lt; T, n &gt;</a>
+: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a053f38453530fd881376ed1596a14e09">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>setStorage()
 : <a class="el" href="classathome_1_1module_1_1_a_base_module.html#a91e714579636e6f4a3628a23a8ba61e7">athome::module::ABaseModule</a>
@@ -325,20 +359,24 @@ $(function() {
 <li>setStreamToChipset()
 : <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a42f2ad88713db57bd9e9670f090924de">athome::communication::wifi::AWiFiCommunicator</a>
 </li>
-<li>setType()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a2f9255b84d9661f7825aca39936f61f1">athome::module::AtHomeModule&lt; T, n &gt;</a>
+<li>setThresholds()
+: <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a1a19bfee3db6b0940f1329b42d7ed0d0">athome::sensor::AHumiditySensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#aa26ed7176ba600f6900bd249edce71ab">athome::sensor::ALuminositySensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#addcdb79aa03b7b6e386bc9c59faced10">athome::sensor::AnalogSensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_a_noise_sensor.html#a8429e91e9f8b2e1634a405780f456beb">athome::sensor::ANoiseSensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a1c323184ac116784e877151895dfd080">athome::sensor::ATemperatureSensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#af86df8538fecfcfc670b4adfbbde6abb">athome::sensor::ISensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_m_q2_gas_sensor.html#a69de9f45b9babd2d111b4ce020d7c83e">athome::sensor::MQ2GasSensor</a>
+, <a class="el" href="classathome_1_1sensor_1_1_sound_sensor.html#adaf42abe0443f486361656efe9587ba7">athome::sensor::SoundSensor</a>
 </li>
 <li>setup()
 : <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a5354c736954a788c51e7cf25f6ccf89d">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>setUploadDataExecutionCallback()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a24130398678c98c500e211b676fa5079">athome::module::AtHomeModule&lt; T, n &gt;</a>
+: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#ae27ce52a7171a2cf3a78c5d8f70c2d1d">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>setUploadDataExecutionInterval()
 : <a class="el" href="classathome_1_1module_1_1_at_home_module.html#aa02b94ab5009d59d337144db364053a6">athome::module::AtHomeModule&lt; T, n &gt;</a>
-</li>
-<li>setVendor()
-: <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a9fdaf9bb63d3229bf3135d5e0d21b74c">athome::module::AtHomeModule&lt; T, n &gt;</a>
 </li>
 <li>setWiFiCommunicator()
 : <a class="el" href="classathome_1_1module_1_1_at_home_wi_fi_module.html#a610d2e99c11fdd4b6afbfe65ee2e56d5">athome::module::AtHomeWiFiModule&lt; T, n &gt;</a>
@@ -359,7 +397,8 @@ $(function() {
 , <a class="el" href="classathome_1_1display_1_1_common_cathode_r_g_b_led.html#ab78ab6aef619d8e0941dd11d4cfbb545">athome::display::CommonCathodeRGBLed</a>
 , <a class="el" href="classathome_1_1display_1_1_grove_chainable_l_e_d.html#a05a4a1381396b7fc11a24993865d8226">athome::display::GroveChainableLED</a>
 , <a class="el" href="classathome_1_1display_1_1_i_display.html#a4ba7bd5d46f88578f1c846f4f5f3c5d1">athome::display::IDisplay</a>
-, <a class="el" href="classathome_1_1display_1_1_neo_pixel.html#a272bca4da78dff7dc02bcd023665e013">athome::display::NeoPixel</a>
+, <a class="el" href="classathome_1_1display_1_1_monochromatic_l_e_d.html#aef6a651fdbb24ebb1d0887c1b3e5133d">athome::display::MonochromaticLED</a>
+, <a class="el" href="classathome_1_1display_1_1_p_w_m_l_e_d.html#a49a059d9bbd5bf08c0e057f0c957e736">athome::display::PWMLED</a>
 </li>
 <li>uploadData()
 : <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a4fd5a07603ff4cb512d201352aa2be0a">athome::module::AtHomeModule&lt; T, n &gt;</a>
@@ -369,10 +408,12 @@ $(function() {
 
 <h3><a id="index_w"></a>- w -</h3><ul>
 <li>write()
-: <a class="el" href="classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a7544a06e5b6d65108cb2c0c5702c5f29">athome::communication::wifi::AWiFiCommunicator</a>
+: <a class="el" href="classathome_1_1communication_1_1_a_network_communicator.html#a87adf68359a4ec5b0a38bea529ebf732">athome::communication::ANetworkCommunicator</a>
 , <a class="el" href="classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#afd3c1c4ce7d68717a7bb2cf1b9dc962f">athome::communication::wifi::ESP8266WiFiCommunicator</a>
+, <a class="el" href="classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#a99fab41ad5275649efafa0a776a0348f">athome::communication::wifi::NativeArduinoESPWiFiCommunicator</a>
 , <a class="el" href="classathome_1_1storage_1_1_arduino_e_e_p_r_o_m.html#a20027ab8a5b20c1fad3e3e42daafe53d">athome::storage::ArduinoEEPROM</a>
 , <a class="el" href="classathome_1_1storage_1_1_i_storage.html#a1017bb6ad438313b98197893954e52f1">athome::storage::IStorage</a>
+, <a class="el" href="classathome_1_1storage_1_1_m_s_p430_f_r_a_m.html#ae6b7a6d178233f9e54394360b34c3bca">athome::storage::MSP430FRAM</a>
 , <a class="el" href="classathome_1_1utility_1_1_buffer.html#a49f31b68580136d5600491bd11b1e55f">athome::utility::Buffer&lt; T, size &gt;</a>
 </li>
 </ul>

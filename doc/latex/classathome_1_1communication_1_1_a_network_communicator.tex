@@ -1,0 +1,236 @@
+\hypertarget{classathome_1_1communication_1_1_a_network_communicator}{}\section{athome\+:\+:communication\+:\+:A\+Network\+Communicator Class Reference}
+\label{classathome_1_1communication_1_1_a_network_communicator}\index{athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}}
+Inheritance diagram for athome\+:\+:communication\+:\+:A\+Network\+Communicator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.871795cm]{classathome_1_1communication_1_1_a_network_communicator}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a0c5ca4008e3de2e987d5cafaf9914960}\label{classathome_1_1communication_1_1_a_network_communicator_a0c5ca4008e3de2e987d5cafaf9914960}} 
+{\bfseries A\+Network\+Communicator} (\mbox{\hyperlink{structathome_1_1communication_1_1ip_1_1s__host}{ip\+::tcp\+\_\+host}} $\ast$=nullptr)
+\item 
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a3650944e94e130a11bd0167eb55e40c1}\label{classathome_1_1communication_1_1_a_network_communicator_a3650944e94e130a11bd0167eb55e40c1}} 
+{\bfseries A\+Network\+Communicator} (const \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator}{A\+Network\+Communicator}} \&)=delete
+\item 
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a3d8984345e39d51da706a02c8d751e6b}\label{classathome_1_1communication_1_1_a_network_communicator_a3d8984345e39d51da706a02c8d751e6b}} 
+\mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator}{A\+Network\+Communicator}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator}{A\+Network\+Communicator}} \&)=delete
+\item 
+virtual int \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_a2bf367d03c98e8523fda71dd43ffa2fb}{available}} ()=0
+\item 
+virtual int \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_a88d3c4366daf48865ab48b22eb62d610}{read}} ()=0
+\item 
+virtual int \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_ad06ecdc94aa77b1bab934b85bed2ac7d}{peek}} ()=0
+\item 
+virtual size\+\_\+t \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_a87adf68359a4ec5b0a38bea529ebf732}{write}} (uint8\+\_\+t)=0
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_a5e3b278ad11e6c00ac7d3e2fee3f01b1}{flush}} ()=0
+\item 
+virtual int \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_a370176dae8f38225446e83a132dbcff7}{connect\+To\+Host}} ()=0
+\item 
+virtual int \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_a025b7fbe9b3c4452fcf1925d766324eb}{disconnect\+From\+Host}} ()=0
+\item 
+const \mbox{\hyperlink{structathome_1_1communication_1_1ip_1_1s__host}{ip\+::tcp\+\_\+host}} \& \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_a6b52a87191bef07e73ec1bbba0713080}{get\+Host}} () const
+\item 
+void \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_a2c19d9918fc1d85d1768bfd0ae0bd4d4}{set\+Host}} (const \mbox{\hyperlink{structathome_1_1communication_1_1ip_1_1s__host}{ip\+::tcp\+\_\+host}} \&)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_ad7b22eedcb47003e1b79e8ec480da119}\label{classathome_1_1communication_1_1_a_network_communicator_ad7b22eedcb47003e1b79e8ec480da119}} 
+\mbox{\hyperlink{structathome_1_1communication_1_1ip_1_1s__host}{ip\+::tcp\+\_\+host}} {\bfseries \+\_\+host}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a2bf367d03c98e8523fda71dd43ffa2fb}\label{classathome_1_1communication_1_1_a_network_communicator_a2bf367d03c98e8523fda71dd43ffa2fb}} 
+\index{athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}!available@{available}}
+\index{available@{available}!athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}}
+\subsubsection{\texorpdfstring{available()}{available()}}
+{\footnotesize\ttfamily virtual int athome\+::communication\+::\+A\+Network\+Communicator\+::available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Virtual method inherited from Stream interface. \href{https://www.arduino.cc/reference/en/language/functions/communication/stream/streamavailable/}{\tt See documentation on Arduino reference.} 
+
+Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_af9b1e28910959893748763faaa5373a0}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_a6cd3fe64efeb1085c7e6dc71a740a24b}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}.
+
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a370176dae8f38225446e83a132dbcff7}\label{classathome_1_1communication_1_1_a_network_communicator_a370176dae8f38225446e83a132dbcff7}} 
+\index{athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}!connect\+To\+Host@{connect\+To\+Host}}
+\index{connect\+To\+Host@{connect\+To\+Host}!athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}}
+\subsubsection{\texorpdfstring{connect\+To\+Host()}{connectToHost()}}
+{\footnotesize\ttfamily virtual int athome\+::communication\+::\+A\+Network\+Communicator\+::connect\+To\+Host (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Virtual method used to connect adapter to a socket on a host.
+
+A return value of 0 is expected to indicate success, otherwise all other values are available for error codes.
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <AtHome.h>}
+
+\textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1ip_1_1s__host}{athome::communication::ip::tcp\_host}}; \textcolor{comment}{// Use this to not have to
+       write the full namespace names further}
+\textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1wifi_1_1s__wifi__client}{athome::communication::wifi::WiFi\_client}};
+\textcolor{keyword}{using} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{athome::communication::wifi::AWiFiCommunicator}};
+
+\textcolor{keywordtype}{void} my\_function\_connecting\_to\_http\_port\_on\_router(AWiFiCommunicator &wifi) \{
+  \textcolor{keyword}{const} WiFi\_client &my\_ip = wifi.getConnectionAddresses(); \textcolor{comment}{// Get our actual MAC and IP (IPv4 or IPv6)
+       addresses}
+  tcp\_host router = \{\{my\_ip.ipv4[0], my\_ip.ipv4[1], my\_ip.ipv4[2], 1\}, 80\}; \textcolor{comment}{// Use our current IPv4 address
+       to deduce the one of the router, which often is the same as ours but ending with the value 1}
+  wifi.setHost(router); \textcolor{comment}{// Set the new host to connect on, our structure tcp\_host is a couple IP + port}
+  \textcolor{keywordflow}{if} (!wifi.connectToHost()) \{ \textcolor{comment}{// Connect to the socket on the host}
+    Serial.println(\textcolor{stringliteral}{"Successfully connected to host"});
+  \} \textcolor{keywordflow}{else} \{
+    Serial.println(\textcolor{stringliteral}{"Failed to connect to host"});
+  \}
+\}
+\end{DoxyCode}
+ 
+
+Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a159a93b350df135daa967665c9e53e2f}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_ab3f6a0e1b9d3be98a876f95dde97976b}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}.
+
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a025b7fbe9b3c4452fcf1925d766324eb}\label{classathome_1_1communication_1_1_a_network_communicator_a025b7fbe9b3c4452fcf1925d766324eb}} 
+\index{athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}!disconnect\+From\+Host@{disconnect\+From\+Host}}
+\index{disconnect\+From\+Host@{disconnect\+From\+Host}!athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}}
+\subsubsection{\texorpdfstring{disconnect\+From\+Host()}{disconnectFromHost()}}
+{\footnotesize\ttfamily virtual int athome\+::communication\+::\+A\+Network\+Communicator\+::disconnect\+From\+Host (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Virtual method to disconnect from the current host, closing the socket.
+
+A return value of 0 is expected to indicate success, otherwise all other values are available for error codes.
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <AWiFiCommunicator.hpp>}
+
+\textcolor{keyword}{using} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{athome::communication::wifi::AWiFiCommunicator}};
+
+\textcolor{keywordtype}{void} my\_function\_disconnecting\_an\_adapter\_from\_host(AWiFiCommunicator &wifi) \{
+  \textcolor{keywordflow}{if} (!wifi.disconnectFromHost()) \{
+    Serial.println(\textcolor{stringliteral}{"Successfully disconnected from host"});
+  \} \textcolor{keywordflow}{else} \{
+    Serial.println(\textcolor{stringliteral}{"Failed to disconnect from host"}); \textcolor{comment}{// If that happens, see the same scenario on
+       disconnect method to have the solution ;)}
+  \}
+\}
+\end{DoxyCode}
+ 
+
+Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a0f8adbe1b1d219148c4f340980056356}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_a8fa44a5078cb7d61f01b306e1d0d1bfe}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}.
+
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a5e3b278ad11e6c00ac7d3e2fee3f01b1}\label{classathome_1_1communication_1_1_a_network_communicator_a5e3b278ad11e6c00ac7d3e2fee3f01b1}} 
+\index{athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}!flush@{flush}}
+\index{flush@{flush}!athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}}
+\subsubsection{\texorpdfstring{flush()}{flush()}}
+{\footnotesize\ttfamily virtual void athome\+::communication\+::\+A\+Network\+Communicator\+::flush (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Virtual method inherited from Stream interface. \href{https://www.arduino.cc/reference/en/language/functions/communication/stream/streamflush/}{\tt See documentation on Arduino reference.} 
+
+Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_af95ca7f47285b13fc895e0d9323ee320}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_a5b02865d3bf418d1b4dff8a1198c8dac}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}.
+
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a6b52a87191bef07e73ec1bbba0713080}\label{classathome_1_1communication_1_1_a_network_communicator_a6b52a87191bef07e73ec1bbba0713080}} 
+\index{athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}!get\+Host@{get\+Host}}
+\index{get\+Host@{get\+Host}!athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}}
+\subsubsection{\texorpdfstring{get\+Host()}{getHost()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structathome_1_1communication_1_1ip_1_1s__host}{ip\+::tcp\+\_\+host}} \& athome\+::communication\+::\+A\+Network\+Communicator\+::get\+Host (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Method returning a reference on the current (or last if the module is currently disconnected) connection to a host of this instance of A\+Wi\+Fi\+Communicator.
+
+See athome\+::communication\+::ip\+::tcp\+\_\+host for more information on the content of this structure.
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <stdio.h>}
+\textcolor{preprocessor}{#include <AtHome.h>}
+
+\textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1ip_1_1s__host}{athome::communication::ip::tcp\_host}};
+\textcolor{keyword}{using} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{athome::communication::wifi::AWiFiCommunicator}};
+
+\textcolor{keywordtype}{void} my\_function\_printing\_current\_connection\_to\_a\_host(\textcolor{keyword}{const} AWiFiCommunicator &wifi) \{
+  \textcolor{keyword}{const} tcp\_host &my\_host = wifi.getHost();
+  \textcolor{keywordtype}{char} host\_ipv4[16];
+  snprintf(host\_ipv4, 16, \textcolor{stringliteral}{"%hhu.%hhu.%hhu.%hhu"}, my\_host.ipv4[0], my\_host.ipv4[1], my\_host.ipv4[2], my\_host
+      .ipv4[3]);
+  Serial.print(\textcolor{stringliteral}{"Host IPv4: "});
+  Serial.println(host\_ipv4);
+  Serial.print(\textcolor{stringliteral}{"Host port: "});
+  Serial.println(my\_host.hport);
+\}
+\end{DoxyCode}
+ \mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_ad06ecdc94aa77b1bab934b85bed2ac7d}\label{classathome_1_1communication_1_1_a_network_communicator_ad06ecdc94aa77b1bab934b85bed2ac7d}} 
+\index{athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}!peek@{peek}}
+\index{peek@{peek}!athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}}
+\subsubsection{\texorpdfstring{peek()}{peek()}}
+{\footnotesize\ttfamily virtual int athome\+::communication\+::\+A\+Network\+Communicator\+::peek (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Virtual method inherited from Stream interface. \href{https://www.arduino.cc/reference/en/language/functions/communication/stream/streampeek/}{\tt See documentation on Arduino reference.} 
+
+Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_affeb5491ad5c97fa53a683926f8184d2}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_adaa14eb4aa1b147531742c9377aa8db0}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}.
+
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a88d3c4366daf48865ab48b22eb62d610}\label{classathome_1_1communication_1_1_a_network_communicator_a88d3c4366daf48865ab48b22eb62d610}} 
+\index{athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}!read@{read}}
+\index{read@{read}!athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily virtual int athome\+::communication\+::\+A\+Network\+Communicator\+::read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Virtual method inherited from Stream interface. \href{https://www.arduino.cc/reference/en/language/functions/communication/stream/streamread/}{\tt See documentation on Arduino reference.} 
+
+Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a1cadc570e912c164279ef0ebc5b178a5}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_a07da3b2bf99edad18fb95b6879dbf0f7}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}.
+
+\mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a2c19d9918fc1d85d1768bfd0ae0bd4d4}\label{classathome_1_1communication_1_1_a_network_communicator_a2c19d9918fc1d85d1768bfd0ae0bd4d4}} 
+\index{athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}!set\+Host@{set\+Host}}
+\index{set\+Host@{set\+Host}!athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}}
+\subsubsection{\texorpdfstring{set\+Host()}{setHost()}}
+{\footnotesize\ttfamily void athome\+::communication\+::\+A\+Network\+Communicator\+::set\+Host (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structathome_1_1communication_1_1ip_1_1s__host}{ip\+::tcp\+\_\+host}} \&}]{host }\end{DoxyParamCaption})}
+
+Method used to set on which host and port the adapter should connect by passing a reference on a athome\+::communication\+::ip\+::tcp\+\_\+host as parameter.
+
+You should note that calling this method will close any existing connection to a previous host and that connection to the new host is not automatic, thus, the user must call the method \mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_a370176dae8f38225446e83a132dbcff7}{athome\+::communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator\+::connect\+To\+Host}} when he wants to connect to the host.
+
+See athome\+::communication\+::ip\+::tcp\+\_\+host for more information on the content of this structure.
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#include <AtHome.h>}
+
+\textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1ip_1_1s__host}{athome::communication::ip::tcp\_host}};
+\textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1wifi_1_1s__wifi__client}{athome::communication::wifi::WiFi\_client}};
+\textcolor{keyword}{using} \mbox{\hyperlink{classathome_1_1module_1_1_a_base_module}{athome::module::ABaseModule}};
+
+\textcolor{keywordtype}{void} my\_function\_connecting\_an\_adapter\_to\_web\_server\_on\_router(ABaseModule &wifi) \{
+  \textcolor{keywordflow}{if} (!wifi.isConnected()) \{
+    \textcolor{keywordflow}{return}; \textcolor{comment}{// It's useless to try to connect on a server while not being connected to any network}
+  \}
+  \textcolor{keyword}{const} WiFi\_client &my\_addresses = wifi.getConnectionAddresses();
+  \textcolor{keyword}{const} tcp\_host host = \{\{my\_addresses.ipv4[0], my\_addresses.ipv4[1], my\_addresses.ipv4[2], 1\}, 80\};
+  wifi.setHost(host); \textcolor{comment}{// Will close any previous opened connection to an host}
+  wifi.connectToHost(); \textcolor{comment}{// You need to call it after setting the new host when you want to connect it,
+       connection is not automatic}
+\}
+\end{DoxyCode}
+ \mbox{\Hypertarget{classathome_1_1communication_1_1_a_network_communicator_a87adf68359a4ec5b0a38bea529ebf732}\label{classathome_1_1communication_1_1_a_network_communicator_a87adf68359a4ec5b0a38bea529ebf732}} 
+\index{athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}!write@{write}}
+\index{write@{write}!athome\+::communication\+::\+A\+Network\+Communicator@{athome\+::communication\+::\+A\+Network\+Communicator}}
+\subsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily virtual size\+\_\+t athome\+::communication\+::\+A\+Network\+Communicator\+::write (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Virtual method inherited from Stream interface. \href{https://www.arduino.cc/en/Serial/Write}{\tt See documentation on Arduino reference.} 
+
+Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_afd3c1c4ce7d68717a7bb2cf1b9dc962f}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_a99fab41ad5275649efafa0a776a0348f}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/A\+Network\+Communicator.\+hpp\item 
+src/communication/network/A\+Network\+Communicator.\+cpp\end{DoxyCompactItemize}

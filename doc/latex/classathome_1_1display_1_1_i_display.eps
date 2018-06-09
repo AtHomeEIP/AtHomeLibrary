@@ -175,10 +175,11 @@ boxfont setfont
 1 boundaspect scale
 (athome::display::IDisplay) cw
 (athome::display::ARGBLed) cw
+(athome::display::MonochromaticLED) cw
+(athome::display::PWMLED) cw
 (athome::display::CommonAnodeRGBLed) cw
 (athome::display::CommonCathodeRGBLed) cw
 (athome::display::GroveChainableLED) cw
-(athome::display::NeoPixel) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
 /yspacing boxheight disty add def
@@ -190,28 +191,33 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (athome::display::IDisplay) 1.500000 2.000000 box
- (athome::display::ARGBLed) 1.500000 1.000000 box
+ (athome::display::IDisplay) 2.000000 2.000000 box
+ (athome::display::ARGBLed) 1.000000 1.000000 box
+ (athome::display::MonochromaticLED) 2.000000 1.000000 box
+ (athome::display::PWMLED) 3.000000 1.000000 box
  (athome::display::CommonAnodeRGBLed) 0.000000 0.000000 box
  (athome::display::CommonCathodeRGBLed) 1.000000 0.000000 box
  (athome::display::GroveChainableLED) 2.000000 0.000000 box
- (athome::display::NeoPixel) 3.000000 0.000000 box
 
 % ----- relations -----
 
 solid
-1 1.500000 1.250000 out
+1 2.000000 1.250000 out
 solid
-0 1.500000 1.750000 in
+1.000000 3.000000 2.000000 conn
 solid
-1 1.500000 0.250000 out
+0 1.000000 1.750000 in
 solid
-0.000000 3.000000 1.000000 conn
+1 1.000000 0.250000 out
+solid
+0.000000 2.000000 1.000000 conn
+solid
+0 2.000000 1.750000 in
+solid
+0 3.000000 1.750000 in
 solid
 0 0.000000 0.750000 in
 solid
 0 1.000000 0.750000 in
 solid
 0 2.000000 0.750000 in
-solid
-0 3.000000 0.750000 in

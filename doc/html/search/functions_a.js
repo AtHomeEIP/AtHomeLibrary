@@ -1,29 +1,5 @@
 var searchData=
 [
-  ['setaccesspoint',['setAccessPoint',['../classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a2b802d934022436e029fc31b3e84d321',1,'athome::communication::wifi::AWiFiCommunicator']]],
-  ['setcolor',['setColor',['../classathome_1_1display_1_1_a_r_g_b_led.html#a7ca4858c1ee10cc2f7c1dcc11a6d050e',1,'athome::display::ARGBLed']]],
-  ['setcommandplugin',['setCommandPlugin',['../classathome_1_1module_1_1_at_home_module.html#aa5d7be373ec60debac614544ae91a648',1,'athome::module::AtHomeModule']]],
-  ['setcommunicationexecutioncallback',['setCommunicationExecutionCallback',['../classathome_1_1module_1_1_at_home_module.html#a8c3585c35b11fe5b70438678b54f3970',1,'athome::module::AtHomeModule']]],
-  ['setcommunicationexecutioninterval',['setCommunicationExecutionInterval',['../classathome_1_1module_1_1_at_home_module.html#ad28a042bd9f793d9dbd944ec4f76156b',1,'athome::module::AtHomeModule']]],
-  ['setconnectionaddresses',['setConnectionAddresses',['../classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a31fb91672f298718d99bb9776dfe46c9',1,'athome::communication::wifi::AWiFiCommunicator']]],
-  ['setdisplay',['setDisplay',['../classathome_1_1module_1_1_a_base_module.html#a451a1fb99905c7d21f3a818ee39acc69',1,'athome::module::ABaseModule']]],
-  ['sethost',['setHost',['../classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#ab9d7165657cb8be4995f637a57b8f9e1',1,'athome::communication::wifi::AWiFiCommunicator']]],
-  ['setonbackupplugin',['setOnBackupPlugin',['../classathome_1_1module_1_1_at_home_module.html#af7e6ed7d4dc72c0cef209704fab0e3af',1,'athome::module::AtHomeModule']]],
-  ['setonrestoreplugin',['setOnRestorePlugin',['../classathome_1_1module_1_1_at_home_module.html#ae359941a4f2e571a052a30916a306e48',1,'athome::module::AtHomeModule']]],
-  ['setpowersource',['setPowerSource',['../classathome_1_1module_1_1_a_base_module.html#a0c217f9a8d052efc5490bc9145fdf7f9',1,'athome::module::ABaseModule']]],
-  ['setsensor',['setSensor',['../classathome_1_1module_1_1_a_base_module.html#a071b5d07dc3497908520a5b0dc9404ef',1,'athome::module::ABaseModule']]],
-  ['setsensorexecutioncallback',['setSensorExecutionCallback',['../classathome_1_1module_1_1_at_home_module.html#a29464ea78833e571a589c0cf0d17321b',1,'athome::module::AtHomeModule']]],
-  ['setsensorexecutioninterval',['setSensorExecutionInterval',['../classathome_1_1module_1_1_at_home_module.html#a9a3b04d8f83ecbe0e8e368b697449326',1,'athome::module::AtHomeModule']]],
-  ['setserial',['setSerial',['../classathome_1_1module_1_1_at_home_module.html#a1acd0195c09c974ec52d5c74a9b7ede8',1,'athome::module::AtHomeModule']]],
-  ['setstorage',['setStorage',['../classathome_1_1module_1_1_a_base_module.html#a91e714579636e6f4a3628a23a8ba61e7',1,'athome::module::ABaseModule']]],
-  ['setstreams',['setStreams',['../classathome_1_1module_1_1_a_base_module.html#af1af8e6110a8d0baee15efb2275ae5ae',1,'athome::module::ABaseModule']]],
-  ['setstreamtochipset',['setStreamToChipset',['../classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a42f2ad88713db57bd9e9670f090924de',1,'athome::communication::wifi::AWiFiCommunicator']]],
-  ['settype',['setType',['../classathome_1_1module_1_1_at_home_module.html#a2f9255b84d9661f7825aca39936f61f1',1,'athome::module::AtHomeModule']]],
-  ['setup',['setup',['../classathome_1_1module_1_1_at_home_module.html#a5354c736954a788c51e7cf25f6ccf89d',1,'athome::module::AtHomeModule']]],
-  ['setuploaddataexecutioncallback',['setUploadDataExecutionCallback',['../classathome_1_1module_1_1_at_home_module.html#a24130398678c98c500e211b676fa5079',1,'athome::module::AtHomeModule']]],
-  ['setuploaddataexecutioninterval',['setUploadDataExecutionInterval',['../classathome_1_1module_1_1_at_home_module.html#aa02b94ab5009d59d337144db364053a6',1,'athome::module::AtHomeModule']]],
-  ['setvendor',['setVendor',['../classathome_1_1module_1_1_at_home_module.html#a9fdaf9bb63d3229bf3135d5e0d21b74c',1,'athome::module::AtHomeModule']]],
-  ['setwificommunicator',['setWiFiCommunicator',['../classathome_1_1module_1_1_at_home_wi_fi_module.html#a610d2e99c11fdd4b6afbfe65ee2e56d5',1,'athome::module::AtHomeWiFiModule']]],
-  ['setwifimode',['setWiFiMode',['../classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator.html#a28538cf510da8b59056b2533a6e53bcc',1,'athome::communication::wifi::AWiFiCommunicator']]],
-  ['stop',['stop',['../classathome_1_1module_1_1_at_home_module.html#a5589c1eb7edd2ab45d0a3de7bb475bbe',1,'athome::module::AtHomeModule']]]
+  ['read',['read',['../classathome_1_1communication_1_1_a_network_communicator.html#a88d3c4366daf48865ab48b22eb62d610',1,'athome::communication::ANetworkCommunicator::read()'],['../classathome_1_1storage_1_1_arduino_e_e_p_r_o_m.html#a853674189981dd3395ea76911d2eb1a0',1,'athome::storage::ArduinoEEPROM::read()'],['../classathome_1_1utility_1_1_buffer.html#afc64f625641e7057b2a12dbf059cbd0c',1,'athome::utility::Buffer::read()'],['../classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator.html#a1cadc570e912c164279ef0ebc5b178a5',1,'athome::communication::wifi::ESP8266WiFiCommunicator::read()'],['../classathome_1_1storage_1_1_i_storage.html#af623393cdf559addf167463ce4e7005e',1,'athome::storage::IStorage::read()'],['../classathome_1_1storage_1_1_m_s_p430_f_r_a_m.html#a3a00a26565491d08d26f505930453fb7',1,'athome::storage::MSP430FRAM::read()'],['../classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator.html#a07da3b2bf99edad18fb95b6879dbf0f7',1,'athome::communication::wifi::NativeArduinoESPWiFiCommunicator::read()']]],
+  ['run',['run',['../classathome_1_1module_1_1_at_home_module.html#ac39915bf4a255e3610515bc18af3029d',1,'athome::module::AtHomeModule']]]
 ];

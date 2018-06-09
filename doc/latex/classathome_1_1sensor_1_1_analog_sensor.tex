@@ -21,9 +21,9 @@ Inheritance diagram for athome\+:\+:sensor\+:\+:Analog\+Sensor\+:\begin{figure}[
 \mbox{\Hypertarget{classathome_1_1sensor_1_1_analog_sensor_a3e2cb67bd8eb58798d28eaf152f33b1a}\label{classathome_1_1sensor_1_1_analog_sensor_a3e2cb67bd8eb58798d28eaf152f33b1a}} 
 \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor}{Analog\+Sensor}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor}{Analog\+Sensor}} \&)=delete
 \item 
-virtual uint8\+\_\+t $\ast$ \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_ac45070688a9433256a5f847467c251fa}{get\+Sample}} ()
+const I\+Sensor\+Value \& \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_a7ad00f985a9d1abeb64f973b5d16558c}{get\+Sample}} ()
 \item 
-virtual \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+Scale}} \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_a728e2f65638f488cd1829c5f318531db}{get\+Estimate}} ()
+void \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_addcdb79aa03b7b6e386bc9c59faced10}{set\+Thresholds}} (const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&)
 \item 
 uint8\+\_\+t \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_ac4eab6ad6117e8e6689f9e1d9fb05015}{get\+Analogue\+Pin}} ()
 \end{DoxyCompactItemize}
@@ -59,21 +59,11 @@ Create an instance of \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor}{
 \subsubsection{\texorpdfstring{get\+Analogue\+Pin()}{getAnaloguePin()}}
 {\footnotesize\ttfamily uint8\+\_\+t athome\+::sensor\+::\+Analog\+Sensor\+::get\+Analogue\+Pin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-Return the value of the pin used to sample the sensor. \mbox{\Hypertarget{classathome_1_1sensor_1_1_analog_sensor_a728e2f65638f488cd1829c5f318531db}\label{classathome_1_1sensor_1_1_analog_sensor_a728e2f65638f488cd1829c5f318531db}} 
-\index{athome\+::sensor\+::\+Analog\+Sensor@{athome\+::sensor\+::\+Analog\+Sensor}!get\+Estimate@{get\+Estimate}}
-\index{get\+Estimate@{get\+Estimate}!athome\+::sensor\+::\+Analog\+Sensor@{athome\+::sensor\+::\+Analog\+Sensor}}
-\subsubsection{\texorpdfstring{get\+Estimate()}{getEstimate()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+::\+I\+Sensor\+Scale}} athome\+::sensor\+::\+Analog\+Sensor\+::get\+Estimate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-Return athome\+::sensor\+::\+I\+Sensor\+::\+I\+Sensor\+Scale\+::\+Z\+E\+RO if object is an instance of \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor}{Analog\+Sensor}} class 
-
-Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a95785b54ffe3a8f7e48c81b5732e3b9f}{athome\+::sensor\+::\+I\+Sensor}}.
-
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_analog_sensor_ac45070688a9433256a5f847467c251fa}\label{classathome_1_1sensor_1_1_analog_sensor_ac45070688a9433256a5f847467c251fa}} 
+Return the value of the pin used to sample the sensor. \mbox{\Hypertarget{classathome_1_1sensor_1_1_analog_sensor_a7ad00f985a9d1abeb64f973b5d16558c}\label{classathome_1_1sensor_1_1_analog_sensor_a7ad00f985a9d1abeb64f973b5d16558c}} 
 \index{athome\+::sensor\+::\+Analog\+Sensor@{athome\+::sensor\+::\+Analog\+Sensor}!get\+Sample@{get\+Sample}}
 \index{get\+Sample@{get\+Sample}!athome\+::sensor\+::\+Analog\+Sensor@{athome\+::sensor\+::\+Analog\+Sensor}}
 \subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
-{\footnotesize\ttfamily uint8\+\_\+t $\ast$ athome\+::sensor\+::\+Analog\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+::\+I\+Sensor\+Value}} \& athome\+::sensor\+::\+Analog\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 Return a pointer on a {\ttfamily uint16\+\_\+t} variable, so the memory area returned by the pointer is 2 bytes long or equivalent to an array of 2 {\ttfamily uint8\+\_\+t}.
 
@@ -103,11 +93,40 @@ Examples of use\+:
 \end{DoxyCode}
  
 
-Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a2513fd8acc5d8251439330ca0e78cf04}{athome\+::sensor\+::\+I\+Sensor}}.
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_ae109cd3741ea9c88dc7e4f2eaf1485d5}{athome\+::sensor\+::\+I\+Sensor}}.
+
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_analog_sensor_addcdb79aa03b7b6e386bc9c59faced10}\label{classathome_1_1sensor_1_1_analog_sensor_addcdb79aa03b7b6e386bc9c59faced10}} 
+\index{athome\+::sensor\+::\+Analog\+Sensor@{athome\+::sensor\+::\+Analog\+Sensor}!set\+Thresholds@{set\+Thresholds}}
+\index{set\+Thresholds@{set\+Thresholds}!athome\+::sensor\+::\+Analog\+Sensor@{athome\+::sensor\+::\+Analog\+Sensor}}
+\subsubsection{\texorpdfstring{set\+Thresholds()}{setThresholds()}}
+{\footnotesize\ttfamily void athome\+::sensor\+::\+Analog\+Sensor\+::set\+Thresholds (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns the estimation of safety from the current sensor value
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor &my\_sensor) \{
+  \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate();
+  \textcolor{keywordflow}{if} (sensor\_estimate == ISensor::ZERO) \{
+    Serial.println(\textcolor{stringliteral}{"The sensor returned an invalid value"});
+  \}
+  \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (sensor\_estimate > ISensor::ZERO && sensor\_estimate < 6) \{
+    Serial.println(\textcolor{stringliteral}{"Boouh, it's not good :("});
+  \}
+  \textcolor{keywordflow}{else} \{
+    Serial.println(\textcolor{stringliteral}{"Yaaaay!"});
+  \}
+\}
+\end{DoxyCode}
+ 
+
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_af86df8538fecfcfc670b4adfbbde6abb}{athome\+::sensor\+::\+I\+Sensor}}.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-Analog\+Sensor.\+hpp\item 
-Analog\+Sensor.\+cpp\end{DoxyCompactItemize}
+src/Analog\+Sensor.\+hpp\item 
+src/sensor/Analog\+Sensor.\+cpp\end{DoxyCompactItemize}

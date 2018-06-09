@@ -1,0 +1,137 @@
+\hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor}{}\section{athome\+:\+:sensor\+:\+:M\+Q2\+Gas\+Sensor Class Reference}
+\label{classathome_1_1sensor_1_1_m_q2_gas_sensor}\index{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}}
+Inheritance diagram for athome\+:\+:sensor\+:\+:M\+Q2\+Gas\+Sensor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classathome_1_1sensor_1_1_m_q2_gas_sensor}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structathome_1_1sensor_1_1_m_q2_gas_sensor_1_1_values}{Values}}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_aa311f792931e425c6d9d77bded775dfa}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_aa311f792931e425c6d9d77bded775dfa}} 
+{\bfseries M\+Q2\+Gas\+Sensor} (int pin)
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_a93bc43d684f3d225bf5baab8048752b8}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_a93bc43d684f3d225bf5baab8048752b8}} 
+{\bfseries M\+Q2\+Gas\+Sensor} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor}{M\+Q2\+Gas\+Sensor}} \&)=delete
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_ab57873a8ee1bdf20619d6efa090bdd40}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_ab57873a8ee1bdf20619d6efa090bdd40}} 
+\mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor}{M\+Q2\+Gas\+Sensor}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor}{M\+Q2\+Gas\+Sensor}} \&)=delete
+\item 
+int \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_a6bf60231a95fe2ba2f5bc9c1bad714c5}{M\+Q\+Get\+Percentage}} (float rs\+\_\+ro\+\_\+ratio, float $\ast$pcurve)
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_a872737bb858eb7e6310fb5675d0b3b72}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_a872737bb858eb7e6310fb5675d0b3b72}} 
+void {\bfseries set\+Pin} (int pin)
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_a70221cb17fc88bb3784e00da53d67975}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_a70221cb17fc88bb3784e00da53d67975}} 
+int {\bfseries get\+Pin} () const
+\item 
+int \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_a65401612b298d829987c2b75ead8f246}{get\+L\+PG}} () const
+\item 
+int \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_aa6e3ad7d0382f04cf15388fd36722579}{get\+Smoke}} () const
+\item 
+int \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_a36cce0ec962d8b5269e39ee4c368be67}{get\+CO}} () const
+\item 
+const I\+Sensor\+Value \& \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_adbe1195490ce67fbed7c717abe2b5b13}{get\+Sample}} ()
+\item 
+void \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_a69de9f45b9babd2d111b4ce020d7c83e}{set\+Thresholds}} (const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_a36cce0ec962d8b5269e39ee4c368be67}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_a36cce0ec962d8b5269e39ee4c368be67}} 
+\index{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}!get\+CO@{get\+CO}}
+\index{get\+CO@{get\+CO}!athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}}
+\subsubsection{\texorpdfstring{get\+C\+O()}{getCO()}}
+{\footnotesize\ttfamily int athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor\+::get\+CO (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Only Possible when get\+Value is called /!\textbackslash{}
+
+\begin{DoxyReturn}{Returns}
+value of CO contain in a struct (struct.\+co) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_a65401612b298d829987c2b75ead8f246}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_a65401612b298d829987c2b75ead8f246}} 
+\index{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}!get\+L\+PG@{get\+L\+PG}}
+\index{get\+L\+PG@{get\+L\+PG}!athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}}
+\subsubsection{\texorpdfstring{get\+L\+P\+G()}{getLPG()}}
+{\footnotesize\ttfamily int athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor\+::get\+L\+PG (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Only Possible when get\+Value is called /!\textbackslash{}
+
+\begin{DoxyReturn}{Returns}
+value of L\+PG contain in a struct (struct.\+lpg) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_adbe1195490ce67fbed7c717abe2b5b13}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_adbe1195490ce67fbed7c717abe2b5b13}} 
+\index{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}!get\+Sample@{get\+Sample}}
+\index{get\+Sample@{get\+Sample}!athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+::\+I\+Sensor\+Value}} \& athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns a pointer on sensor sample raw memory, as an array of bytes 
+
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_ae109cd3741ea9c88dc7e4f2eaf1485d5}{athome\+::sensor\+::\+I\+Sensor}}.
+
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_aa6e3ad7d0382f04cf15388fd36722579}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_aa6e3ad7d0382f04cf15388fd36722579}} 
+\index{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}!get\+Smoke@{get\+Smoke}}
+\index{get\+Smoke@{get\+Smoke}!athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Smoke()}{getSmoke()}}
+{\footnotesize\ttfamily int athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor\+::get\+Smoke (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+Only Possible when get\+Value is called /!\textbackslash{}
+
+\begin{DoxyReturn}{Returns}
+value of S\+M\+O\+KE contain in a struct (struct.\+smoke) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_a6bf60231a95fe2ba2f5bc9c1bad714c5}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_a6bf60231a95fe2ba2f5bc9c1bad714c5}} 
+\index{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}!M\+Q\+Get\+Percentage@{M\+Q\+Get\+Percentage}}
+\index{M\+Q\+Get\+Percentage@{M\+Q\+Get\+Percentage}!athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}}
+\subsubsection{\texorpdfstring{M\+Q\+Get\+Percentage()}{MQGetPercentage()}}
+{\footnotesize\ttfamily int athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor\+::\+M\+Q\+Get\+Percentage (\begin{DoxyParamCaption}\item[{float}]{rs\+\_\+ro\+\_\+ratio,  }\item[{float $\ast$}]{pcurve }\end{DoxyParamCaption})}
+
+Input\+: rs\+\_\+ro\+\_\+ratio\+: Rs divided by Ro pcurve
+
+pointer to the curve of the target gas
+
+Output\+: ppm of the target gas
+
+Remarks\+: By using the slope and a point of the line. The x(logarithmic value of ppm) of the line could be derived if y(rs\+\_\+ro\+\_\+ratio) is provided. As it is a logarithmic coordinate, power of 10 is used to convert the result to non-\/logarithmic value. \mbox{\Hypertarget{classathome_1_1sensor_1_1_m_q2_gas_sensor_a69de9f45b9babd2d111b4ce020d7c83e}\label{classathome_1_1sensor_1_1_m_q2_gas_sensor_a69de9f45b9babd2d111b4ce020d7c83e}} 
+\index{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}!set\+Thresholds@{set\+Thresholds}}
+\index{set\+Thresholds@{set\+Thresholds}!athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor@{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}}
+\subsubsection{\texorpdfstring{set\+Thresholds()}{setThresholds()}}
+{\footnotesize\ttfamily void athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor\+::set\+Thresholds (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns the estimation of safety from the current sensor value
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor &my\_sensor) \{
+  \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate();
+  \textcolor{keywordflow}{if} (sensor\_estimate == ISensor::ZERO) \{
+    Serial.println(\textcolor{stringliteral}{"The sensor returned an invalid value"});
+  \}
+  \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (sensor\_estimate > ISensor::ZERO && sensor\_estimate < 6) \{
+    Serial.println(\textcolor{stringliteral}{"Boouh, it's not good :("});
+  \}
+  \textcolor{keywordflow}{else} \{
+    Serial.println(\textcolor{stringliteral}{"Yaaaay!"});
+  \}
+\}
+\end{DoxyCode}
+ 
+
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_af86df8538fecfcfc670b4adfbbde6abb}{athome\+::sensor\+::\+I\+Sensor}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/M\+Q2\+Gas\+Sensor.\+hpp\item 
+src/sensor/air\+\_\+quality/M\+Q2\+Gas\+Sensor.\+cpp\end{DoxyCompactItemize}

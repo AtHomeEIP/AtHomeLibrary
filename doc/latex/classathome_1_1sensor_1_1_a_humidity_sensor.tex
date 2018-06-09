@@ -15,21 +15,44 @@ Inheritance diagram for athome\+:\+:sensor\+:\+:A\+Humidity\+Sensor\+:\begin{fig
 \mbox{\Hypertarget{classathome_1_1sensor_1_1_a_humidity_sensor_a530ebce44ecb090d32ab5450776f3c07}\label{classathome_1_1sensor_1_1_a_humidity_sensor_a530ebce44ecb090d32ab5450776f3c07}} 
 \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor}{A\+Humidity\+Sensor}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor}{A\+Humidity\+Sensor}} \&)=delete
 \item 
-virtual uint8\+\_\+t $\ast$ \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor_a2eb6de3ce2a4aeae0d9e556389d2b329}{get\+Sample}} ()=0
+const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+Value}} \& \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor_a7af4527c70b539bec58cecfaae0aa80e}{get\+Sample}} ()
 \item 
-virtual float \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor_a35c3e521f1ded20e8c3ba104524c57a0}{get\+Last\+Sample}} () const =0
+virtual int32\+\_\+t \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor_a1eb32658be5cfc700523e74387e86053}{get\+Sensor\+Sample}} () const =0
 \item 
-\mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+Scale}} \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor_a1da82433989c79066ce32d5606f4f675}{get\+Estimate}} ()
+void \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor_a1a19bfee3db6b0940f1329b42d7ed0d0}{set\+Thresholds}} (const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&)
 \end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_humidity_sensor_a1da82433989c79066ce32d5606f4f675}\label{classathome_1_1sensor_1_1_a_humidity_sensor_a1da82433989c79066ce32d5606f4f675}} 
-\index{athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}!get\+Estimate@{get\+Estimate}}
-\index{get\+Estimate@{get\+Estimate}!athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}}
-\subsubsection{\texorpdfstring{get\+Estimate()}{getEstimate()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+::\+I\+Sensor\+Scale}} athome\+::sensor\+::\+A\+Humidity\+Sensor\+::get\+Estimate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_humidity_sensor_a7af4527c70b539bec58cecfaae0aa80e}\label{classathome_1_1sensor_1_1_a_humidity_sensor_a7af4527c70b539bec58cecfaae0aa80e}} 
+\index{athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}!get\+Sample@{get\+Sample}}
+\index{get\+Sample@{get\+Sample}!athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+::\+I\+Sensor\+Value}} \& athome\+::sensor\+::\+A\+Humidity\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns a reference on the sample of the sensor
+
+Return an estimation of the humidity inside the room
+
+Values are from \href{https://www.jechange.fr/energie/duale/guides/thermostat-temperature-4101}{\tt https\+://www.\+jechange.\+fr/energie/duale/guides/thermostat-\/temperature-\/4101} \begin{DoxyReturn}{Returns}
+estimation of humidity quality on a scale from 1 (worst) to 10 (best) 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_ae109cd3741ea9c88dc7e4f2eaf1485d5}{athome\+::sensor\+::\+I\+Sensor}}.
+
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_humidity_sensor_a1eb32658be5cfc700523e74387e86053}\label{classathome_1_1sensor_1_1_a_humidity_sensor_a1eb32658be5cfc700523e74387e86053}} 
+\index{athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}!get\+Sensor\+Sample@{get\+Sensor\+Sample}}
+\index{get\+Sensor\+Sample@{get\+Sensor\+Sample}!athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Sensor\+Sample()}{getSensorSample()}}
+{\footnotesize\ttfamily virtual int32\+\_\+t athome\+::sensor\+::\+A\+Humidity\+Sensor\+::get\+Sensor\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns the last value sampled from the sensor expected to be in micro RH \mbox{\Hypertarget{classathome_1_1sensor_1_1_a_humidity_sensor_a1a19bfee3db6b0940f1329b42d7ed0d0}\label{classathome_1_1sensor_1_1_a_humidity_sensor_a1a19bfee3db6b0940f1329b42d7ed0d0}} 
+\index{athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}!set\+Thresholds@{set\+Thresholds}}
+\index{set\+Thresholds@{set\+Thresholds}!athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}}
+\subsubsection{\texorpdfstring{set\+Thresholds()}{setThresholds()}}
+{\footnotesize\ttfamily void athome\+::sensor\+::\+A\+Humidity\+Sensor\+::set\+Thresholds (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
 
 Returns the estimation of safety from the current sensor value
 
@@ -52,27 +75,11 @@ Example\+:
 \end{DoxyCode}
  
 
-Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a95785b54ffe3a8f7e48c81b5732e3b9f}{athome\+::sensor\+::\+I\+Sensor}}.
-
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_humidity_sensor_a35c3e521f1ded20e8c3ba104524c57a0}\label{classathome_1_1sensor_1_1_a_humidity_sensor_a35c3e521f1ded20e8c3ba104524c57a0}} 
-\index{athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}!get\+Last\+Sample@{get\+Last\+Sample}}
-\index{get\+Last\+Sample@{get\+Last\+Sample}!athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}}
-\subsubsection{\texorpdfstring{get\+Last\+Sample()}{getLastSample()}}
-{\footnotesize\ttfamily virtual float athome\+::sensor\+::\+A\+Humidity\+Sensor\+::get\+Last\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
-
-Returns the last value sampled from the sensor (do not actually resample it). \mbox{\Hypertarget{classathome_1_1sensor_1_1_a_humidity_sensor_a2eb6de3ce2a4aeae0d9e556389d2b329}\label{classathome_1_1sensor_1_1_a_humidity_sensor_a2eb6de3ce2a4aeae0d9e556389d2b329}} 
-\index{athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}!get\+Sample@{get\+Sample}}
-\index{get\+Sample@{get\+Sample}!athome\+::sensor\+::\+A\+Humidity\+Sensor@{athome\+::sensor\+::\+A\+Humidity\+Sensor}}
-\subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
-{\footnotesize\ttfamily virtual uint8\+\_\+t$\ast$ athome\+::sensor\+::\+A\+Humidity\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
-
-Returns a pointer on the sample of the sensor. This pointer needs to point on a float variable. 
-
-Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a2513fd8acc5d8251439330ca0e78cf04}{athome\+::sensor\+::\+I\+Sensor}}.
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_af86df8538fecfcfc670b4adfbbde6abb}{athome\+::sensor\+::\+I\+Sensor}}.
 
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-A\+Humidity\+Sensor.\+hpp\item 
-A\+Humidity\+Sensor.\+cpp\end{DoxyCompactItemize}
+src/A\+Humidity\+Sensor.\+hpp\item 
+src/sensor/humidity/A\+Humidity\+Sensor.\+cpp\end{DoxyCompactItemize}

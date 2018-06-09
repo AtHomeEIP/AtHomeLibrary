@@ -7,9 +7,16 @@
 Inheritance diagram for athome\+:\+:sensor\+:\+:I\+Sensor\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=0.925620cm]{classathome_1_1sensor_1_1_i_sensor}
+\includegraphics[height=0.629921cm]{classathome_1_1sensor_1_1_i_sensor}
 \end{center}
 \end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}}
+\item 
+struct \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+Value}}
+\end{DoxyCompactItemize}
 \subsection*{Public Types}
 \begin{DoxyCompactItemize}
 \item 
@@ -32,9 +39,9 @@ enum \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cc
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-virtual uint8\+\_\+t $\ast$ \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a2513fd8acc5d8251439330ca0e78cf04}{get\+Sample}} ()=0
+virtual const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+Value}} \& \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_ae109cd3741ea9c88dc7e4f2eaf1485d5}{get\+Sample}} ()=0
 \item 
-virtual \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+Scale}} \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_a95785b54ffe3a8f7e48c81b5732e3b9f}{get\+Estimate}} ()=0
+virtual void \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_af86df8538fecfcfc670b4adfbbde6abb}{set\+Thresholds}} (const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&)=0
 \end{DoxyCompactItemize}
 
 
@@ -53,11 +60,21 @@ Configuration and treatment of sensor raw data is to be handled by derived class
 Enumeration used to represent the estimation of safety of a sensor value on a scale from 1 to 10. Value 0 means invalid 
 
 \subsection{Member Function Documentation}
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_i_sensor_a95785b54ffe3a8f7e48c81b5732e3b9f}\label{classathome_1_1sensor_1_1_i_sensor_a95785b54ffe3a8f7e48c81b5732e3b9f}} 
-\index{athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}!get\+Estimate@{get\+Estimate}}
-\index{get\+Estimate@{get\+Estimate}!athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}}
-\subsubsection{\texorpdfstring{get\+Estimate()}{getEstimate()}}
-{\footnotesize\ttfamily virtual \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{I\+Sensor\+Scale}} athome\+::sensor\+::\+I\+Sensor\+::get\+Estimate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_i_sensor_ae109cd3741ea9c88dc7e4f2eaf1485d5}\label{classathome_1_1sensor_1_1_i_sensor_ae109cd3741ea9c88dc7e4f2eaf1485d5}} 
+\index{athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}!get\+Sample@{get\+Sample}}
+\index{get\+Sample@{get\+Sample}!athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
+{\footnotesize\ttfamily virtual const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+Value}}\& athome\+::sensor\+::\+I\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Returns a pointer on sensor sample raw memory, as an array of bytes 
+
+Implemented in \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_adbe1195490ce67fbed7c717abe2b5b13}{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_a7ad00f985a9d1abeb64f973b5d16558c}{athome\+::sensor\+::\+Analog\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_sound_sensor_a8ac5f417eee873247aff8a7e96e12817}{athome\+::sensor\+::\+Sound\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor_a6e0e7bcfe13cd8d8edf6a09f6e230ef8}{athome\+::sensor\+::\+A\+Luminosity\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor_a7af4527c70b539bec58cecfaae0aa80e}{athome\+::sensor\+::\+A\+Humidity\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_afea6a461b8dff9ee736aa508aa4f6a3c}{athome\+::sensor\+::\+A\+Temperature\+Sensor}}, and \mbox{\hyperlink{classathome_1_1sensor_1_1_a_noise_sensor_ab567b050b41bd0b72fcc9b94b9f6fc6e}{athome\+::sensor\+::\+A\+Noise\+Sensor}}.
+
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_i_sensor_af86df8538fecfcfc670b4adfbbde6abb}\label{classathome_1_1sensor_1_1_i_sensor_af86df8538fecfcfc670b4adfbbde6abb}} 
+\index{athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}!set\+Thresholds@{set\+Thresholds}}
+\index{set\+Thresholds@{set\+Thresholds}!athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}}
+\subsubsection{\texorpdfstring{set\+Thresholds()}{setThresholds()}}
+{\footnotesize\ttfamily virtual void athome\+::sensor\+::\+I\+Sensor\+::set\+Thresholds (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
 
 Returns the estimation of safety from the current sensor value
 
@@ -80,20 +97,10 @@ Example\+:
 \end{DoxyCode}
  
 
-Implemented in \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_a728e2f65638f488cd1829c5f318531db}{athome\+::sensor\+::\+Analog\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor_aa6c0e60c108b0494f0132b033ce3dd82}{athome\+::sensor\+::\+A\+Luminosity\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_grove_air_quality_sensor_a3eeec77eb0bbf3932cdfa9d33a708e57}{athome\+::sensor\+::\+Grove\+Air\+Quality\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor_a1da82433989c79066ce32d5606f4f675}{athome\+::sensor\+::\+A\+Humidity\+Sensor}}, and \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a3997ff080f6a9e444c52a63f1b40d73c}{athome\+::sensor\+::\+A\+Temperature\+Sensor}}.
-
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_i_sensor_a2513fd8acc5d8251439330ca0e78cf04}\label{classathome_1_1sensor_1_1_i_sensor_a2513fd8acc5d8251439330ca0e78cf04}} 
-\index{athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}!get\+Sample@{get\+Sample}}
-\index{get\+Sample@{get\+Sample}!athome\+::sensor\+::\+I\+Sensor@{athome\+::sensor\+::\+I\+Sensor}}
-\subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
-{\footnotesize\ttfamily virtual uint8\+\_\+t$\ast$ athome\+::sensor\+::\+I\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
-
-Returns a pointer on sensor sample raw memory, as an array of bytes 
-
-Implemented in \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_ac45070688a9433256a5f847467c251fa}{athome\+::sensor\+::\+Analog\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_grove_air_quality_sensor_aee12d8cf6439b752c868f75cae298182}{athome\+::sensor\+::\+Grove\+Air\+Quality\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor_a299491729362d34f474094dfd10eb310}{athome\+::sensor\+::\+A\+Luminosity\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor_a2eb6de3ce2a4aeae0d9e556389d2b329}{athome\+::sensor\+::\+A\+Humidity\+Sensor}}, and \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a397794217f3163950add6d28f69a6202}{athome\+::sensor\+::\+A\+Temperature\+Sensor}}.
+Implemented in \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_a69de9f45b9babd2d111b4ce020d7c83e}{athome\+::sensor\+::\+M\+Q2\+Gas\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_addcdb79aa03b7b6e386bc9c59faced10}{athome\+::sensor\+::\+Analog\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_sound_sensor_adaf42abe0443f486361656efe9587ba7}{athome\+::sensor\+::\+Sound\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor_aa26ed7176ba600f6900bd249edce71ab}{athome\+::sensor\+::\+A\+Luminosity\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_a_humidity_sensor_a1a19bfee3db6b0940f1329b42d7ed0d0}{athome\+::sensor\+::\+A\+Humidity\+Sensor}}, \mbox{\hyperlink{classathome_1_1sensor_1_1_a_temperature_sensor_a1c323184ac116784e877151895dfd080}{athome\+::sensor\+::\+A\+Temperature\+Sensor}}, and \mbox{\hyperlink{classathome_1_1sensor_1_1_a_noise_sensor_a8429e91e9f8b2e1634a405780f456beb}{athome\+::sensor\+::\+A\+Noise\+Sensor}}.
 
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-I\+Sensor.\+hpp\end{DoxyCompactItemize}
+src/I\+Sensor.\+hpp\end{DoxyCompactItemize}

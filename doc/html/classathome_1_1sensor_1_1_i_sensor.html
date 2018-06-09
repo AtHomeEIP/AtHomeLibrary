@@ -20,7 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="logo.PNG"/></td>
+  <td id="projectlogo"><img alt="Logo" src="logo_tiny.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">AtHome Framework
    </div>
@@ -67,6 +67,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classathome_1_1sensor_1_1_i_sensor-members.html">List of all members</a>  </div>
@@ -82,14 +83,26 @@ Inheritance diagram for athome::sensor::ISensor:</div>
  <div class="center">
   <img src="classathome_1_1sensor_1_1_i_sensor.png" usemap="#athome::sensor::ISensor_map" alt=""/>
   <map id="athome::sensor::ISensor_map" name="athome::sensor::ISensor_map">
-<area href="classathome_1_1sensor_1_1_a_humidity_sensor.html" alt="athome::sensor::AHumiditySensor" shape="rect" coords="0,56,234,80"/>
-<area href="classathome_1_1sensor_1_1_a_luminosity_sensor.html" alt="athome::sensor::ALuminositySensor" shape="rect" coords="244,56,478,80"/>
-<area href="classathome_1_1sensor_1_1_analog_sensor.html" alt="athome::sensor::AnalogSensor" shape="rect" coords="488,56,722,80"/>
-<area href="classathome_1_1sensor_1_1_a_temperature_sensor.html" alt="athome::sensor::ATemperatureSensor" shape="rect" coords="732,56,966,80"/>
-<area href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html" alt="athome::sensor::GroveAirQualitySensor" shape="rect" coords="976,56,1210,80"/>
+<area href="classathome_1_1sensor_1_1_a_humidity_sensor.html" alt="athome::sensor::AHumiditySensor" shape="rect" coords="0,56,373,80"/>
+<area href="classathome_1_1sensor_1_1_a_luminosity_sensor.html" alt="athome::sensor::ALuminositySensor" shape="rect" coords="383,56,756,80"/>
+<area href="classathome_1_1sensor_1_1_analog_sensor.html" alt="athome::sensor::AnalogSensor" shape="rect" coords="766,56,1139,80"/>
+<area href="classathome_1_1sensor_1_1_a_noise_sensor.html" alt="athome::sensor::ANoiseSensor" shape="rect" coords="1149,56,1522,80"/>
+<area href="classathome_1_1sensor_1_1_a_temperature_sensor.html" alt="athome::sensor::ATemperatureSensor" shape="rect" coords="1532,56,1905,80"/>
+<area href="classathome_1_1sensor_1_1_m_q2_gas_sensor.html" alt="athome::sensor::MQ2GasSensor" shape="rect" coords="1915,56,2288,80"/>
+<area href="classathome_1_1sensor_1_1_sound_sensor.html" alt="athome::sensor::SoundSensor" shape="rect" coords="2298,56,2671,80"/>
+<area href="classathome_1_1sensor_1_1_l_d_r_luminosity_sensor.html" alt="athome::sensor::LDRLuminositySensor&lt; REF, RES, RDIV &gt;" shape="rect" coords="383,112,756,136"/>
+<area href="classathome_1_1sensor_1_1_thermistor.html" alt="athome::sensor::Thermistor&lt; R1, R2, R3, PREC, VREF, RREF &gt;" shape="rect" coords="1340,112,1713,136"/>
+<area href="classathome_1_1sensor_1_1_t_m_p36_g_z_temperature_sensor.html" alt="athome::sensor::TMP36GZTemperatureSensor&lt; REF, RES &gt;" shape="rect" coords="1723,112,2096,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds.html">ISensorThresholds</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value.html">ISensorValue</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:aa70bc27a4c17c86caf96cca776541ddf"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a> { <br />
@@ -112,10 +125,10 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2513fd8acc5d8251439330ca0e78cf04"><td class="memItemLeft" align="right" valign="top">virtual uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#a2513fd8acc5d8251439330ca0e78cf04">getSample</a> ()=0</td></tr>
-<tr class="separator:a2513fd8acc5d8251439330ca0e78cf04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95785b54ffe3a8f7e48c81b5732e3b9f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#a95785b54ffe3a8f7e48c81b5732e3b9f">getEstimate</a> ()=0</td></tr>
-<tr class="separator:a95785b54ffe3a8f7e48c81b5732e3b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae109cd3741ea9c88dc7e4f2eaf1485d5"><td class="memItemLeft" align="right" valign="top">virtual const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value.html">ISensorValue</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#ae109cd3741ea9c88dc7e4f2eaf1485d5">getSample</a> ()=0</td></tr>
+<tr class="separator:ae109cd3741ea9c88dc7e4f2eaf1485d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af86df8538fecfcfc670b4adfbbde6abb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#af86df8538fecfcfc670b4adfbbde6abb">setThresholds</a> (const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds.html">ISensorThresholds</a> &amp;)=0</td></tr>
+<tr class="separator:af86df8538fecfcfc670b4adfbbde6abb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interface used to grab data from a sensor in a Module class.</p>
@@ -137,8 +150,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a95785b54ffe3a8f7e48c81b5732e3b9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95785b54ffe3a8f7e48c81b5732e3b9f">&#9670;&nbsp;</a></span>getEstimate()</h2>
+<a id="ae109cd3741ea9c88dc7e4f2eaf1485d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae109cd3741ea9c88dc7e4f2eaf1485d5">&#9670;&nbsp;</a></span>getSample()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,36 +160,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a> athome::sensor::ISensor::getEstimate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns the estimation of safety from the current sensor value</p>
-<p>Example:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_telling_if_a_sensor_value_is_good_or_not(ISensor &amp;my_sensor) {</div><div class="line">  <a class="code" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a> sensor_estimate = my_sensor.getEstimate();</div><div class="line">  <span class="keywordflow">if</span> (sensor_estimate == ISensor::ZERO) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;The sensor returned an invalid value&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sensor_estimate &gt; ISensor::ZERO &amp;&amp; sensor_estimate &lt; 6) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Boouh, it&#39;s not good :(&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Yaaaay!&quot;</span>);</div><div class="line">  }</div><div class="line">}</div></div><!-- fragment --> 
-<p>Implemented in <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#a728e2f65638f488cd1829c5f318531db">athome::sensor::AnalogSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#aa6c0e60c108b0494f0132b033ce3dd82">athome::sensor::ALuminositySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html#a3eeec77eb0bbf3932cdfa9d33a708e57">athome::sensor::GroveAirQualitySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a1da82433989c79066ce32d5606f4f675">athome::sensor::AHumiditySensor</a>, and <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a3997ff080f6a9e444c52a63f1b40d73c">athome::sensor::ATemperatureSensor</a>.</p>
-
-</div>
-</div>
-<a id="a2513fd8acc5d8251439330ca0e78cf04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2513fd8acc5d8251439330ca0e78cf04">&#9670;&nbsp;</a></span>getSample()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual uint8_t* athome::sensor::ISensor::getSample </td>
+          <td class="memname">virtual const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value.html">ISensorValue</a>&amp; athome::sensor::ISensor::getSample </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -190,12 +174,42 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Returns a pointer on sensor sample raw memory, as an array of bytes </p>
 
-<p>Implemented in <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#ac45070688a9433256a5f847467c251fa">athome::sensor::AnalogSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_grove_air_quality_sensor.html#aee12d8cf6439b752c868f75cae298182">athome::sensor::GroveAirQualitySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#a299491729362d34f474094dfd10eb310">athome::sensor::ALuminositySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a2eb6de3ce2a4aeae0d9e556389d2b329">athome::sensor::AHumiditySensor</a>, and <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a397794217f3163950add6d28f69a6202">athome::sensor::ATemperatureSensor</a>.</p>
+<p>Implemented in <a class="el" href="classathome_1_1sensor_1_1_m_q2_gas_sensor.html#adbe1195490ce67fbed7c717abe2b5b13">athome::sensor::MQ2GasSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#a7ad00f985a9d1abeb64f973b5d16558c">athome::sensor::AnalogSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_sound_sensor.html#a8ac5f417eee873247aff8a7e96e12817">athome::sensor::SoundSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#a6e0e7bcfe13cd8d8edf6a09f6e230ef8">athome::sensor::ALuminositySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a7af4527c70b539bec58cecfaae0aa80e">athome::sensor::AHumiditySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#afea6a461b8dff9ee736aa508aa4f6a3c">athome::sensor::ATemperatureSensor</a>, and <a class="el" href="classathome_1_1sensor_1_1_a_noise_sensor.html#ab567b050b41bd0b72fcc9b94b9f6fc6e">athome::sensor::ANoiseSensor</a>.</p>
+
+</div>
+</div>
+<a id="af86df8538fecfcfc670b4adfbbde6abb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af86df8538fecfcfc670b4adfbbde6abb">&#9670;&nbsp;</a></span>setThresholds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void athome::sensor::ISensor::setThresholds </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds.html">ISensorThresholds</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Returns the estimation of safety from the current sensor value</p>
+<p>Example:</p>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_telling_if_a_sensor_value_is_good_or_not(ISensor &amp;my_sensor) {</div><div class="line">  <a class="code" href="classathome_1_1sensor_1_1_i_sensor.html#aa70bc27a4c17c86caf96cca776541ddf">ISensorScale</a> sensor_estimate = my_sensor.getEstimate();</div><div class="line">  <span class="keywordflow">if</span> (sensor_estimate == ISensor::ZERO) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;The sensor returned an invalid value&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (sensor_estimate &gt; ISensor::ZERO &amp;&amp; sensor_estimate &lt; 6) {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Boouh, it&#39;s not good :(&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keywordflow">else</span> {</div><div class="line">    Serial.println(<span class="stringliteral">&quot;Yaaaay!&quot;</span>);</div><div class="line">  }</div><div class="line">}</div></div><!-- fragment --> 
+<p>Implemented in <a class="el" href="classathome_1_1sensor_1_1_m_q2_gas_sensor.html#a69de9f45b9babd2d111b4ce020d7c83e">athome::sensor::MQ2GasSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_analog_sensor.html#addcdb79aa03b7b6e386bc9c59faced10">athome::sensor::AnalogSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_sound_sensor.html#adaf42abe0443f486361656efe9587ba7">athome::sensor::SoundSensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_luminosity_sensor.html#aa26ed7176ba600f6900bd249edce71ab">athome::sensor::ALuminositySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_humidity_sensor.html#a1a19bfee3db6b0940f1329b42d7ed0d0">athome::sensor::AHumiditySensor</a>, <a class="el" href="classathome_1_1sensor_1_1_a_temperature_sensor.html#a1c323184ac116784e877151895dfd080">athome::sensor::ATemperatureSensor</a>, and <a class="el" href="classathome_1_1sensor_1_1_a_noise_sensor.html#a8429e91e9f8b2e1634a405780f456beb">athome::sensor::ANoiseSensor</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li><a class="el" href="_i_sensor_8hpp_source.html">ISensor.hpp</a></li>
+<li>src/<a class="el" href="_i_sensor_8hpp_source.html">ISensor.hpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -7,7 +7,7 @@
 Inheritance diagram for athome\+:\+:display\+:\+:A\+R\+G\+B\+Led\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=1.660079cm]{classathome_1_1display_1_1_a_r_g_b_led}
+\includegraphics[height=2.213439cm]{classathome_1_1display_1_1_a_r_g_b_led}
 \end{center}
 \end{figure}
 \subsection*{Classes}
@@ -31,6 +31,12 @@ virtual void \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a725ceca0c0
 const \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \& \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a2c3022a5aad43595fefc4b52d916467a}{get\+Color}} () const
 \item 
 void \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a7ca4858c1ee10cc2f7c1dcc11a6d050e}{set\+Color}} (const \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \&color)
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a1e6a934912f71a5ea06df1d28cf5ace9}{set\+Displayed\+Estimate}} (\mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{sensor\+::\+I\+Sensor\+::\+I\+Sensor\+Scale}} value)
+\item 
+void \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a411b35199d593b813bad7d9056678198}{set\+Colors\+Scale}} (const \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} scale\mbox{[}$\,$\mbox{]})
+\item 
+void \mbox{\hyperlink{classathome_1_1display_1_1_a_r_g_b_led_a69e31887e1a37a86073d5f82bd578f1f}{set\+Individual\+Color\+Scale}} (const \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \&color, \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{sensor\+::\+I\+Sensor\+::\+I\+Sensor\+Scale}} value)
 \end{DoxyCompactItemize}
 
 
@@ -107,7 +113,43 @@ Example\+:
   led.update(); \textcolor{comment}{// You need to call this method if you want the new color to be displayed on the LED}
 \}
 \end{DoxyCode}
- \mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_a725ceca0c01735daa9c95148baf075ab}\label{classathome_1_1display_1_1_a_r_g_b_led_a725ceca0c01735daa9c95148baf075ab}} 
+ \mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_a411b35199d593b813bad7d9056678198}\label{classathome_1_1display_1_1_a_r_g_b_led_a411b35199d593b813bad7d9056678198}} 
+\index{athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}!set\+Colors\+Scale@{set\+Colors\+Scale}}
+\index{set\+Colors\+Scale@{set\+Colors\+Scale}!athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}}
+\subsubsection{\texorpdfstring{set\+Colors\+Scale()}{setColorsScale()}}
+{\footnotesize\ttfamily void athome\+::display\+::\+A\+R\+G\+B\+Led\+::set\+Colors\+Scale (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}}}]{scale\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Change the scale of colors associated to each values of I\+Sensor\+Scale by passing an array containing all colors as a parameter \mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_a1e6a934912f71a5ea06df1d28cf5ace9}\label{classathome_1_1display_1_1_a_r_g_b_led_a1e6a934912f71a5ea06df1d28cf5ace9}} 
+\index{athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}!set\+Displayed\+Estimate@{set\+Displayed\+Estimate}}
+\index{set\+Displayed\+Estimate@{set\+Displayed\+Estimate}!athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}}
+\subsubsection{\texorpdfstring{set\+Displayed\+Estimate()}{setDisplayedEstimate()}}
+{\footnotesize\ttfamily virtual void athome\+::display\+::\+A\+R\+G\+B\+Led\+::set\+Displayed\+Estimate (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{sensor\+::\+I\+Sensor\+::\+I\+Sensor\+Scale}}}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Set the value displayed on the screen, whatever the type of display is.
+
+I\+Sensor\+Scale is an enumeration representing the correctness on a scale from 1 to 10 (1 is worst, 10 is best).
+
+This scale can be represented by various ways for many different displays. For example\+:
+
+
+\begin{DoxyItemize}
+\item An L\+ED could stay off from 6 and on below 6
+\item A dimmable L\+ED could set it\textquotesingle{}s percentage of brightness corresponding to the value (for example 1 = 100\%, 5 = 50\%, 10 = 0\%)
+\item A 7 segments display could display the digit itself and stay off at 10
+\item An L\+CD screen could write a sentence, the digit, draw a gauge, ...etc
+\item A speaker or buzzer could do noise of different intensities below 6
+\item ...etc 
+\end{DoxyItemize}
+
+Implements \mbox{\hyperlink{classathome_1_1display_1_1_i_display_a3c9678f929e4bc04742d458b0c2399ef}{athome\+::display\+::\+I\+Display}}.
+
+\mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_a69e31887e1a37a86073d5f82bd578f1f}\label{classathome_1_1display_1_1_a_r_g_b_led_a69e31887e1a37a86073d5f82bd578f1f}} 
+\index{athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}!set\+Individual\+Color\+Scale@{set\+Individual\+Color\+Scale}}
+\index{set\+Individual\+Color\+Scale@{set\+Individual\+Color\+Scale}!athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}}
+\subsubsection{\texorpdfstring{set\+Individual\+Color\+Scale()}{setIndividualColorScale()}}
+{\footnotesize\ttfamily void athome\+::display\+::\+A\+R\+G\+B\+Led\+::set\+Individual\+Color\+Scale (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structathome_1_1display_1_1_a_r_g_b_led_1_1_color}{Color}} \&}]{color,  }\item[{\mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{sensor\+::\+I\+Sensor\+::\+I\+Sensor\+Scale}}}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Change the color associated to a certain value of the scale I\+Sensor\+Scale \mbox{\Hypertarget{classathome_1_1display_1_1_a_r_g_b_led_a725ceca0c01735daa9c95148baf075ab}\label{classathome_1_1display_1_1_a_r_g_b_led_a725ceca0c01735daa9c95148baf075ab}} 
 \index{athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}!update@{update}}
 \index{update@{update}!athome\+::display\+::\+A\+R\+G\+B\+Led@{athome\+::display\+::\+A\+R\+G\+B\+Led}}
 \subsubsection{\texorpdfstring{update()}{update()}}
@@ -119,10 +161,10 @@ Implements \mbox{\hyperlink{classathome_1_1display_1_1_i_display_a4ba7bd5d46f885
 
 
 
-Implemented in \mbox{\hyperlink{classathome_1_1display_1_1_grove_chainable_l_e_d_a05a4a1381396b7fc11a24993865d8226}{athome\+::display\+::\+Grove\+Chainable\+L\+ED}}, \mbox{\hyperlink{classathome_1_1display_1_1_neo_pixel_a272bca4da78dff7dc02bcd023665e013}{athome\+::display\+::\+Neo\+Pixel}}, \mbox{\hyperlink{classathome_1_1display_1_1_common_anode_r_g_b_led_ab7daf7dcc6ac1e3fcab202cae484b237}{athome\+::display\+::\+Common\+Anode\+R\+G\+B\+Led}}, and \mbox{\hyperlink{classathome_1_1display_1_1_common_cathode_r_g_b_led_ab78ab6aef619d8e0941dd11d4cfbb545}{athome\+::display\+::\+Common\+Cathode\+R\+G\+B\+Led}}.
+Implemented in \mbox{\hyperlink{classathome_1_1display_1_1_grove_chainable_l_e_d_a05a4a1381396b7fc11a24993865d8226}{athome\+::display\+::\+Grove\+Chainable\+L\+ED}}, \mbox{\hyperlink{classathome_1_1display_1_1_common_anode_r_g_b_led_ab7daf7dcc6ac1e3fcab202cae484b237}{athome\+::display\+::\+Common\+Anode\+R\+G\+B\+Led}}, and \mbox{\hyperlink{classathome_1_1display_1_1_common_cathode_r_g_b_led_ab78ab6aef619d8e0941dd11d4cfbb545}{athome\+::display\+::\+Common\+Cathode\+R\+G\+B\+Led}}.
 
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-A\+R\+G\+B\+Led.\+hpp\end{DoxyCompactItemize}
+src/A\+R\+G\+B\+Led.\+hpp\end{DoxyCompactItemize}

@@ -1,0 +1,78 @@
+\hypertarget{classathome_1_1sensor_1_1_sound_sensor}{}\section{athome\+:\+:sensor\+:\+:Sound\+Sensor Class Reference}
+\label{classathome_1_1sensor_1_1_sound_sensor}\index{athome\+::sensor\+::\+Sound\+Sensor@{athome\+::sensor\+::\+Sound\+Sensor}}
+Inheritance diagram for athome\+:\+:sensor\+:\+:Sound\+Sensor\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classathome_1_1sensor_1_1_sound_sensor}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_sound_sensor_affd617ff59a1354519c01b812b805568}\label{classathome_1_1sensor_1_1_sound_sensor_affd617ff59a1354519c01b812b805568}} 
+{\bfseries Sound\+Sensor} (int pin)
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_sound_sensor_a581afa638adb939d606dbfbe1d419628}\label{classathome_1_1sensor_1_1_sound_sensor_a581afa638adb939d606dbfbe1d419628}} 
+{\bfseries Sound\+Sensor} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_sound_sensor}{Sound\+Sensor}} \&)=delete
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_sound_sensor_ab974a1520aaf9497611445dfc523ad32}\label{classathome_1_1sensor_1_1_sound_sensor_ab974a1520aaf9497611445dfc523ad32}} 
+\mbox{\hyperlink{classathome_1_1sensor_1_1_sound_sensor}{Sound\+Sensor}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_sound_sensor}{Sound\+Sensor}} \&)=delete
+\item 
+const I\+Sensor\+Value \& \mbox{\hyperlink{classathome_1_1sensor_1_1_sound_sensor_a8ac5f417eee873247aff8a7e96e12817}{get\+Sample}} ()
+\item 
+void \mbox{\hyperlink{classathome_1_1sensor_1_1_sound_sensor_adaf42abe0443f486361656efe9587ba7}{set\+Thresholds}} (const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&thresholds)
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_sound_sensor_a225996767d89ef25e039ccddfab16bfc}\label{classathome_1_1sensor_1_1_sound_sensor_a225996767d89ef25e039ccddfab16bfc}} 
+void {\bfseries set\+Pin} (int pin)
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_sound_sensor_ae4c3496911502614bef9a00195653800}\label{classathome_1_1sensor_1_1_sound_sensor_ae4c3496911502614bef9a00195653800}} 
+int {\bfseries get\+Pin} () const
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_sound_sensor_a8ac5f417eee873247aff8a7e96e12817}\label{classathome_1_1sensor_1_1_sound_sensor_a8ac5f417eee873247aff8a7e96e12817}} 
+\index{athome\+::sensor\+::\+Sound\+Sensor@{athome\+::sensor\+::\+Sound\+Sensor}!get\+Sample@{get\+Sample}}
+\index{get\+Sample@{get\+Sample}!athome\+::sensor\+::\+Sound\+Sensor@{athome\+::sensor\+::\+Sound\+Sensor}}
+\subsubsection{\texorpdfstring{get\+Sample()}{getSample()}}
+{\footnotesize\ttfamily const I\+Sensor\+Value\& athome\+::sensor\+::\+Sound\+Sensor\+::get\+Sample (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns a pointer on sensor sample raw memory, as an array of bytes 
+
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_ae109cd3741ea9c88dc7e4f2eaf1485d5}{athome\+::sensor\+::\+I\+Sensor}}.
+
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_sound_sensor_adaf42abe0443f486361656efe9587ba7}\label{classathome_1_1sensor_1_1_sound_sensor_adaf42abe0443f486361656efe9587ba7}} 
+\index{athome\+::sensor\+::\+Sound\+Sensor@{athome\+::sensor\+::\+Sound\+Sensor}!set\+Thresholds@{set\+Thresholds}}
+\index{set\+Thresholds@{set\+Thresholds}!athome\+::sensor\+::\+Sound\+Sensor@{athome\+::sensor\+::\+Sound\+Sensor}}
+\subsubsection{\texorpdfstring{set\+Thresholds()}{setThresholds()}}
+{\footnotesize\ttfamily void athome\+::sensor\+::\+Sound\+Sensor\+::set\+Thresholds (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+Returns the estimation of safety from the current sensor value
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor &my\_sensor) \{
+  \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate();
+  \textcolor{keywordflow}{if} (sensor\_estimate == ISensor::ZERO) \{
+    Serial.println(\textcolor{stringliteral}{"The sensor returned an invalid value"});
+  \}
+  \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (sensor\_estimate > ISensor::ZERO && sensor\_estimate < 6) \{
+    Serial.println(\textcolor{stringliteral}{"Boouh, it's not good :("});
+  \}
+  \textcolor{keywordflow}{else} \{
+    Serial.println(\textcolor{stringliteral}{"Yaaaay!"});
+  \}
+\}
+\end{DoxyCode}
+ 
+
+Implements \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_af86df8538fecfcfc670b4adfbbde6abb}{athome\+::sensor\+::\+I\+Sensor}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/Sound\+Sensor.\+hpp\end{DoxyCompactItemize}

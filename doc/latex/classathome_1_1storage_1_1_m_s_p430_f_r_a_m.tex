@@ -1,0 +1,99 @@
+\hypertarget{classathome_1_1storage_1_1_m_s_p430_f_r_a_m}{}\section{athome\+:\+:storage\+:\+:M\+S\+P430\+F\+R\+AM Class Reference}
+\label{classathome_1_1storage_1_1_m_s_p430_f_r_a_m}\index{athome\+::storage\+::\+M\+S\+P430\+F\+R\+AM@{athome\+::storage\+::\+M\+S\+P430\+F\+R\+AM}}
+
+
+{\ttfamily \#include $<$M\+S\+P430\+F\+R\+A\+M.\+hpp$>$}
+
+Inheritance diagram for athome\+:\+:storage\+:\+:M\+S\+P430\+F\+R\+AM\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classathome_1_1storage_1_1_m_s_p430_f_r_a_m}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_a4537357b5eb4195cff71461bb8f97300}\label{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_a4537357b5eb4195cff71461bb8f97300}} 
+{\bfseries M\+S\+P430\+F\+R\+AM} (const \mbox{\hyperlink{classathome_1_1storage_1_1_m_s_p430_f_r_a_m}{M\+S\+P430\+F\+R\+AM}} \&)=delete
+\item 
+\mbox{\Hypertarget{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_aa6bceeda133dc8e69af41ec1c86811c5}\label{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_aa6bceeda133dc8e69af41ec1c86811c5}} 
+\mbox{\hyperlink{classathome_1_1storage_1_1_m_s_p430_f_r_a_m}{M\+S\+P430\+F\+R\+AM}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1storage_1_1_m_s_p430_f_r_a_m}{M\+S\+P430\+F\+R\+AM}} \&)=delete
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_a3a00a26565491d08d26f505930453fb7}{read}} (size\+\_\+t, void $\ast$, size\+\_\+t)
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_ae6b7a6d178233f9e54394360b34c3bca}{write}} (size\+\_\+t, const void $\ast$, size\+\_\+t)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_aafeeb8882c31af72dfa4054e27263fa6}\label{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_aafeeb8882c31af72dfa4054e27263fa6}} 
+static \mbox{\hyperlink{classathome_1_1storage_1_1_m_s_p430_f_r_a_m}{M\+S\+P430\+F\+R\+AM}} $\ast$ {\bfseries get\+Instance} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Singleton enabling to store persistent data in the F\+R\+AM of TI Launchpads.
+
+The size of the persistent storage is defined by the macro A\+T\+H\+O\+M\+E\+\_\+\+F\+R\+A\+M\+\_\+\+S\+T\+O\+R\+A\+G\+E\+\_\+\+S\+I\+ZE and has a default value of 255 bytes.
+
+This can be overriden by the user by defining this macro at the compilation, such as passing the {\ttfamily -\/\+D\+A\+T\+H\+O\+M\+E\+\_\+\+F\+R\+A\+M\+\_\+\+S\+T\+O\+R\+A\+G\+E\+\_\+\+S\+I\+ZE=} option with G\+CC 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_a3a00a26565491d08d26f505930453fb7}\label{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_a3a00a26565491d08d26f505930453fb7}} 
+\index{athome\+::storage\+::\+M\+S\+P430\+F\+R\+AM@{athome\+::storage\+::\+M\+S\+P430\+F\+R\+AM}!read@{read}}
+\index{read@{read}!athome\+::storage\+::\+M\+S\+P430\+F\+R\+AM@{athome\+::storage\+::\+M\+S\+P430\+F\+R\+AM}}
+\subsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily void athome\+::storage\+::\+M\+S\+P430\+F\+R\+A\+M\+::read (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{,  }\item[{void $\ast$}]{,  }\item[{size\+\_\+t}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Copy n bytes (3rd parameter) in dest (2nd parameter) from offset x (1st parameter)
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_reading\_something(IStorage &storage) \{
+  \textcolor{keywordtype}{char} my\_string[33];
+  \textcolor{keywordtype}{int} my\_number;
+
+  storage.read(0, my\_string, \textcolor{keyword}{sizeof}(my\_string)); \textcolor{comment}{// Reading a string (array of 33 char) at offset 0 of
+       storage instance into my\_string}
+  storage.read(\textcolor{keyword}{sizeof}(my\_string), &my\_number, \textcolor{keyword}{sizeof}(my\_number)); \textcolor{comment}{// Reading an integer at offset 33 (after
+       content put into my\_string) from storage instance into my\_number}
+\}
+\end{DoxyCode}
+ 
+
+Implements \mbox{\hyperlink{classathome_1_1storage_1_1_i_storage_af623393cdf559addf167463ce4e7005e}{athome\+::storage\+::\+I\+Storage}}.
+
+\mbox{\Hypertarget{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_ae6b7a6d178233f9e54394360b34c3bca}\label{classathome_1_1storage_1_1_m_s_p430_f_r_a_m_ae6b7a6d178233f9e54394360b34c3bca}} 
+\index{athome\+::storage\+::\+M\+S\+P430\+F\+R\+AM@{athome\+::storage\+::\+M\+S\+P430\+F\+R\+AM}!write@{write}}
+\index{write@{write}!athome\+::storage\+::\+M\+S\+P430\+F\+R\+AM@{athome\+::storage\+::\+M\+S\+P430\+F\+R\+AM}}
+\subsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily void athome\+::storage\+::\+M\+S\+P430\+F\+R\+A\+M\+::write (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{,  }\item[{const void $\ast$}]{,  }\item[{size\+\_\+t}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Write n bytes (3rd parameter) in offset x (1st parameter) from src (2nd parameter)
+
+Example\+:
+
+
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} my\_function\_writing\_something(IStorage &storage) \{
+  \textcolor{keywordtype}{char} my\_string[] = \textcolor{stringliteral}{"Hello, World!"};
+  \textcolor{keywordtype}{int} my\_number = 42;
+
+  storage.write(0, my\_string, \textcolor{keyword}{sizeof}(my\_string)); \textcolor{comment}{// Writing the string (array of 14 char) my\_string at
+       offset 0 of storage instance}
+  storage.write(\textcolor{keyword}{sizeof}(my\_string), &my\_number, \textcolor{keyword}{sizeof}(my\_number)); \textcolor{comment}{// Writing my\_number at offset 14 (after
+       my\_string) of storage instance}
+\}
+\end{DoxyCode}
+ 
+
+Implements \mbox{\hyperlink{classathome_1_1storage_1_1_i_storage_a1017bb6ad438313b98197893954e52f1}{athome\+::storage\+::\+I\+Storage}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/M\+S\+P430\+F\+R\+A\+M.\+hpp\item 
+src/storage/M\+S\+P430\+F\+R\+A\+M.\+cpp\end{DoxyCompactItemize}
