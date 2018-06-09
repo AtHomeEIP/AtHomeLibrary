@@ -25,7 +25,7 @@ Required libraries:
 
 Optional libraries:
 - Grove LightSensor library: https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor (if using Grove Digital Light Sensor)
-- Grove ChainableLED library: https://github.com/pjpmarques/ChainableLED (if using Grove Chainable LEDs)
+- Grove ChainableLED library: https://github.com/Seeed-Studio/Grove_Chainable_RGB_LED (if using Grove Chainable LEDs)
 - Adafruit NeoPixel library: https://github.com/adafruit/Adafruit_NeoPixel (if using NeoPixel)
 
 Recommended microcontroler platform:

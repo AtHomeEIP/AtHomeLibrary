@@ -55,7 +55,6 @@ namespace athome {
 			if (_led != nullptr)
 				delete _led;
 			_led = (pins != nullptr) ? new ChainableLED(pins->clock, pins->data, 1) : new ChainableLED(7, 8, 1);
-			_led->init();
 			update();
 		}
 	}
