@@ -20,6 +20,14 @@ namespace athome {
                 uint32_t month : 4;
                 uint32_t year : 6;
 
+                DateTime():
+                    second(0),
+                    minute(0),
+                    hour(0),
+                    day(1),
+                    month(1),
+                    year(0) {}
+
                 DateTime &operator=(const DateTime &date) {
                     second = date.second;
                     minute = date.minute;
