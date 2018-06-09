@@ -21,7 +21,13 @@ namespace athome {
 
         const ITime::ISO8601DateTime &FakeRTC::getDateTime() {
             uint32_t now = millis();
-            uint32_t elapsed = now - _lastTime;
+            uint32_t elapsed;
+            if (now > _lastTime) {
+                elapsed = now - _lastTime;
+            }
+            else {
+                elapsed = (4294967295 - _lastTime) + now; // Handle overflow of millis
+            }
             _lastTime = now;
             elapsed /= 1000; // Convert in seconds
             if (!elapsed) {
