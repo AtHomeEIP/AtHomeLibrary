@@ -214,7 +214,7 @@ deploy:
   stage: deploy
   script:
     - mkdir AtHome
-    - cp -r *.cpp *.h *.hpp library.* examples AtHome
+    - cp -r src examples LICENSE *.md library.* Doxyfile AtHome
     - echo "Need to implement release on a server"
   artifacts:
     paths:
