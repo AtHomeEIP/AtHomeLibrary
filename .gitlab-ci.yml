@@ -19,7 +19,7 @@ buildTests:Arduino:
     - mv arduino-${ARDUINO_VERSION} ${SHARE_PATH}/arduino
     - ln -s ${SHARE_PATH}/arduino/arduino ${BIN_PATH}/
     - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
-    - git clone https://github.com/pjpmarques/ChainableLED.git
+    - git clone https://github.com/Seeed-Studio/Grove_Chainable_RGB_LED.git
     - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
     - git clone https://github.com/bblanchon/ArduinoJson.git
     - git clone https://github.com/mmurdoch/arduinounit.git
@@ -28,7 +28,7 @@ buildTests:Arduino:
     - git clone https://github.com/adafruit/Adafruit_TSL2561.git
     - git clone -b testing https://github.com/arkhipenko/TaskScheduler.git
     - ln -s $PWD/Grove_Digital_Light_Sensor ${SHARE_PATH}/arduino/libraries/Grove_Digital_Light_Sensor
-    - ln -s $PWD/ChainableLED ${SHARE_PATH}/arduino/libraries/ChainableLED
+    - ln -s $PWD/Grove_Chainable_RGB_LED ${SHARE_PATH}/arduino/libraries/Grove_Chainable_RGB_LED
     - ln -s $PWD/Grove_Air_quality_Sensor ${SHARE_PATH}/arduino/libraries/Grove_Air_quality_Sensor
     - ln -s $PWD/ArduinoJson ${SHARE_PATH}/arduino/libraries/ArduinoJson
     - ln -s $PWD/arduinounit ${SHARE_PATH}/arduino/libraries/ArduinoUnit
@@ -72,7 +72,7 @@ buildTests:Energia:
     - tar xf energia-${ENERGIA_VERSION}-linux64.tar.xz
     - mv energia-${ENERGIA_VERSION} ${SHARE_PATH}/energia
     - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
-    - git clone https://github.com/pjpmarques/ChainableLED.git
+    - git clone https://github.com/Seeed-Studio/Grove_Chainable_RGB_LED.git
     - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
     - git clone https://github.com/bblanchon/ArduinoJson.git
     - git clone https://github.com/mmurdoch/arduinounit.git
@@ -81,7 +81,7 @@ buildTests:Energia:
     - git clone https://github.com/adafruit/Adafruit_TSL2561.git
     - git clone -b testing https://github.com/arkhipenko/TaskScheduler.git
     - ln -s $PWD/Grove_Digital_Light_Sensor ${SHARE_PATH}/energia/libraries/Grove_Digital_Light_Sensor
-    - ln -s $PWD/ChainableLED ${SHARE_PATH}/energia/libraries/ChainableLED
+    - ln -s $PWD/Grove_Chainable_RGB_LED ${SHARE_PATH}/arduino/libraries/Grove_Chainable_RGB_LED
     - ln -s $PWD/Grove_Air_quality_Sensor ${SHARE_PATH}/energia/libraries/Grove_Air_quality_Sensor
     - ln -s $PWD/ArduinoJson ${SHARE_PATH}/energia/libraries/ArduinoJson
     - ln -s $PWD/arduinounit ${SHARE_PATH}/energia/libraries/ArduinoUnit
