@@ -9,6 +9,24 @@ namespace athome {
     namespace sensor {
         class ALuminositySensor : public ISensor {
         public:
+            enum Room_Type {
+                NO,
+                CORRIDORS,
+                STAIRS,
+                WAREHOUSES,
+                SHOPS,
+                SHOPS_CHECKOUTS,
+                PUBLIC_AREAS_AND_ENTRANCES,
+                COUNTERS,
+                RESTAURANTS_HOSTELS_RECEPTIONS,
+                KITCHENS,
+                CLASSROOMS,
+                CONFERENCE_ROOMS,
+                INDUSTRIAL_DRAWING_ROOMS,
+                OFFICE,
+                ARCHIVES
+            };
+
             ALuminositySensor();
             ALuminositySensor(const ALuminositySensor &) = delete;
             ALuminositySensor &operator=(const ALuminositySensor &) = delete;
@@ -23,6 +41,10 @@ namespace athome {
              */
             virtual uint16_t    getSensorSample() = 0;
             void                setThresholds(const ISensorThresholds &);
+            /**
+             * Set thresholds based on the room type
+             */
+            void                setRoom(Room_Type);
 
         private:
             ISensorValue    _value;

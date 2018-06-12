@@ -1,9 +1,30 @@
 #include "AtHomeConfig.h"
 #if !defined(DISABLE_SENSOR) && !defined(DISABLE_LUMINOSITY_SENSOR)
+# include "AtHomeFlashCommon.h"
 # include "ALuminositySensor.hpp"
 
 namespace athome {
     namespace sensor {
+        namespace {
+            static const PROGMEM uint16_t minimalLuxValues[ALuminositySensor::Room_Type::ARCHIVES + 1] = {
+                    0,
+                    100,
+                    150,
+                    100,
+                    300,
+                    500,
+                    100,
+                    300,
+                    300,
+                    500,
+                    500,
+                    500,
+                    750,
+                    500,
+                    200
+            };
+        }
+
         ALuminositySensor::ALuminositySensor():_value({
                                                               ISensor::ISensorScale::ZERO,
                                                               {
@@ -38,6 +59,10 @@ namespace athome {
             }
             _min = thresholds.min;
             _max = thresholds.max;
+        }
+
+        void ALuminositySensor::setRoom(ALuminositySensor::Room_Type room) {
+            _min = pgm_read_word(&minimalLuxValues[room]);
         }
     }
 }
