@@ -2,6 +2,8 @@
 
 This repository holds the source code of the AtHome Development Kit (Framework + examples + PCBs and schematics).
 
+Development documentation is available at https://woodbox.gitlab.io/Framework
+
 ## What is AtHome?
 
 AtHome is a set of smart devices enabling to monitor a house's environment and the possible effects on human health.

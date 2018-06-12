@@ -2,6 +2,8 @@
 
 This repository holds the source code of the AtHome Development Kit (Framework + examples + PCBs and schematics).
 
+Development documentation is available at https://woodbox.gitlab.io/Framework
+
 ## What is AtHome?
 
 AtHome is a set of smart devices enabling to monitor a house's environment and the possible effects on human health.
@@ -24,10 +26,8 @@ Required libraries:
 - TaskScheduler library: https://github.com/arkhipenko/TaskScheduler
 
 Optional libraries:
-- ArduinoJson library, despite it's name it's fully portable: https://github.com/bblanchon/ArduinoJson (if using network based AtHome modules)
 - Grove LightSensor library: https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor (if using Grove Digital Light Sensor)
-- Grove AirQuality library: https://github.com/SeeedDocument/Grove_Air_Quality_Sensor_v1.3/raw/master/ (if using Grove Air Quality Sensor v1.3)
-- Grove ChainableLED library: https://github.com/pjpmarques/ChainableLED (if using Grove Chainable LEDs)
+- Grove ChainableLED library: https://github.com/Seeed-Studio/Grove_Chainable_RGB_LED (if using Grove Chainable LEDs)
 - Adafruit NeoPixel library: https://github.com/adafruit/Adafruit_NeoPixel (if using NeoPixel)
 
 Recommended microcontroler platform:
@@ -36,20 +36,9 @@ Recommended microcontroler platform:
 - Internal persistent storage (FRAM is better, EEPROM other way)
 - Internal RTC
 - At least 32KB of program memory (Warning: not counting bootloader size, some chips such as Microchip PIC32MX or Espressif ESP8265/8266/32 will require much more program memory)
-- At least 1KB of RAM
+- At least 2KB of RAM
 
 Requirements can be reduced depending on components used and by tweaking the framework configuration. See AtHomeConfig.h to disable unused features.
-
-Minimum microcontroler requirements:
-- MCU compatible with Arduino core (either 8/16/32bits)
-- C++11 compiler support
-- At least 4KB of program memory (not counting bootloader size if any)
-- At least 512B of RAM
-
-Please, note that the minimum requirements above can be obtained with a finely tuned configuration of the framework for some projects,
-but it's likely to use more resources for common usages and we cannot guarantee it will always fit in these requirements. If you're unsure,
-try to buy a microcontroler fitting the recommended requirements or at least try to compile and simulate the firmware to check if it works on
-your small device before effectively buying one and flashing the firmware.
 
 ## Compatible environments:
 
@@ -65,7 +54,7 @@ Here is the status of compatibility of components available in this development 
 
 | Component / Platform     | AVR            | ARM                      | MSP430                                                                         | MSP432         | PIC32          | PIC18 | ESP8266 | ESP32 |
 |--------------------------|----------------|--------------------------|--------------------------------------------------------------------------------|----------------|----------------|-------|---------|-------|
-| AtHome Core              | Y              | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | Y       | ?     |
+| AtHome Core              | Y              | Y (not tested)           | Y                                                                              | Y              | Y (not tested) | ?     | Y       | ?     |
 | AtHome WiFi Module       | Y              | Y (not tested)           | N                                                                              | Y              | Y              | ?     | ?       | ?     |
 | ESP8266 AT Firmware      | Y (not tested) | Y (not tested)           | N                                                                              | Y              | Y (not tested) | ?     | N/A     | ?     |
 | Grove Chainable LED      | Y              | Y (not tested)           | Y (not tested, need a small patch but I'm unable to check as I don't have one) | Y (not tested) | Y (not tested) | ?     | ?       | ?     |
@@ -73,7 +62,7 @@ Here is the status of compatibility of components available in this development 
 | ArduinoEEPROM            | Y              | N                        | N                                                                              | N              | N              | ?     | ?       | ?     |
 | Common cathode RGB LED   | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y              | Y (not tested) | ?     | Y       | ?     |
 | Common anode RGB LED     | Y (not tested) | Y (not tested)           | Y (not tested)                                                                 | Y (not tested) | Y (not tested) | ?     | Y       | ?     |
-| Grove Air Quality sensor | Y (not all)    | N                        | N                                                                              | N              | ?              | ?     | ?       | ?     |
+| Grove Air Quality sensor | N              | N                        | N                                                                              | N              | ?              | ?     | ?       | ?     |
 | Grove Light Sensor       | Y              | Y                        | N                                                                              | N              | ?              | ?     | ?       | ?     |
 | MQ2 Gas sensor           | Y              | Y                        | Y                                                                              | Y              | ?              | ?     | ?       | ?     |
 | NeoPixel                 | Y              | Y (not all, not tested)  | N                                                                              | N              | N              | ?     | ?       | ?     |
@@ -84,6 +73,9 @@ Here is the status of compatibility of components available in this development 
 | Thermistor               | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
 | MSP430FRAM               | N              | N                        | Y                                                                              | N              | N              | N     | N       | N     |
 | Blynk (NI)               | N/A            | N/A                      | N/A                                                                            | N/A            | N/A            | N/A   | N/A     | N/A   |
+| Photoresistor (Not ready)| Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
+| FakeRTC                  | Y              | Y                        | Y                                                                              | Y              | Y              | N     | ?       | ?     |
+| DS1307 (Not ready)       | Y              | ?                        | ?                                                                              | ?              | ?              | ?     | ?       | ?     |
 
 ## Low Power Mode
 
@@ -95,7 +87,7 @@ For battery powered modules, here is the list of low power operation mode on sev
 | Mbed                       | N/A | Y   | N/A     | N/A    | N/A   | N/A   | N/A     | N/A   |
 | Bare-Metal                 | N   | N   | N       | N      | N     | N     | N       | N     |
 
-## Secured communication
+## Secured communication [WIP]
 
 Status of secured communication between modules and their server (the AtHome when the set is built by the AtHome team):
 
