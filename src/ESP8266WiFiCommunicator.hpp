@@ -29,8 +29,8 @@ namespace athome {
                 virtual int peek();
                 virtual size_t write(uint8_t);
                 virtual void flush();
-                void open();
-                void close();
+                void enable();
+                void disable();
                 virtual int connect();
                 virtual int disconnect();
                 virtual int connectToHost();
@@ -67,8 +67,8 @@ namespace athome {
                 bool                                                                                _connected_to_host;
                 bool                                                                                _receiving_data;
                 size_t                                                                              _receiving_len;
-                utility::Buffer<int, ESP8266_BUFFER_SIZE>                                           _input_buffer;
-                utility::Buffer<int, ESP8266_BUFFER_SIZE>                                           _output_buffer;
+                utility::Buffer<char, ESP8266_BUFFER_SIZE>                                          _input_buffer;
+                utility::Buffer<char, ESP8266_BUFFER_SIZE>                                          _output_buffer;
             };
         }
     }

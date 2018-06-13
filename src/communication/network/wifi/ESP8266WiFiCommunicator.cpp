@@ -11,40 +11,50 @@ namespace athome {
     namespace communication {
         namespace wifi {
             namespace {
-                const char at_nl =                      '\n';
-                const PROGMEM char at_eol[] =           "\r\n";
-                const PROGMEM char at_at[] =            "AT";
-                const PROGMEM char at_rst[] =           "RST";
-                const PROGMEM char at_gmr[] =           "GMR";
-                const PROGMEM char at_gslp[] =          "GLSP";
-                const PROGMEM char at_ate[] =           "ATE";
-                const PROGMEM char at_cwmode[] =        "CWMODE";
-                const PROGMEM char at_cwjap[] =         "CWJAP";
-                const PROGMEM char at_cwlap[] =         "CWLAP";
-                const PROGMEM char at_cwqap[] =         "CWQAP";
-                const PROGMEM char at_cwsap[] =         "CWSAP";
-                const PROGMEM char at_cwlif[] =         "CWLIF";
-                const PROGMEM char at_cwdhcp[] =        "CWDHCP";
-                const PROGMEM char at_cipstamac[] =     "CIPSTAMAC";
-                const PROGMEM char at_cipapmac[] =      "CIPAPMAC";
-                const PROGMEM char at_cipsta[] =        "CIPSTA";
-                const PROGMEM char at_ciap[] =          "CIPAP";
-                const PROGMEM char at_cipstatus[] =     "CIPSTATUS";
-                const PROGMEM char at_cipstart[] =      "CIPSTART";
-                const PROGMEM char at_cipsend[] =       "CIPSEND";
-                const PROGMEM char at_cipclose[] =      "CIPCLOSE";
-                const PROGMEM char at_cifsr[] =         "CIFSR";
-                const PROGMEM char at_cipmux[] =        "CIPMUX";
-                const PROGMEM char at_cipserver[] =     "CIPSERVER";
-                const PROGMEM char at_cipmode[] =       "CIPMODE";
-                const PROGMEM char at_cipsto[] =        "CIPSTO";
-                const PROGMEM char at_ciupdate[] =      "CIUPDATE";
-                const PROGMEM char at_ipd[] =           "+IPD";
-                const PROGMEM char at_ok[] =            "OK";
-                const PROGMEM char at_error[] =         "ERROR";
-                const PROGMEM char at_ready[] =         "ready";
-                const PROGMEM char at_listen[] =        ">";
-                const PROGMEM char channel_format[] =   "%hhu";
+                const char at_nl =                                          '\n';
+                const PROGMEM char at_eol[] =                               "\r\n";
+                const PROGMEM char at_at[] =                                "AT";
+                const PROGMEM char at_rst[] =                               "RST";
+                const PROGMEM char at_gmr[] =                               "GMR";
+                const PROGMEM char at_gslp[] =                              "GLSP";
+                const PROGMEM char at_ate[] =                               "ATE";
+                const PROGMEM char at_cwmode[] =                            "CWMODE";
+                const PROGMEM char at_cwjap[] =                             "CWJAP";
+                const PROGMEM char at_cwlap[] =                             "CWLAP";
+                const PROGMEM char at_cwqap[] =                             "CWQAP";
+                const PROGMEM char at_cwsap[] =                             "CWSAP";
+                const PROGMEM char at_cwlif[] =                             "CWLIF";
+                const PROGMEM char at_cwdhcp[] =                            "CWDHCP";
+                const PROGMEM char at_cipstamac[] =                         "CIPSTAMAC";
+                const PROGMEM char at_cipapmac[] =                          "CIPAPMAC";
+                const PROGMEM char at_cipsta[] =                            "CIPSTA";
+                const PROGMEM char at_ciap[] =                              "CIPAP";
+                const PROGMEM char at_cipstatus[] =                         "CIPSTATUS";
+                const PROGMEM char at_cipstart[] =                          "CIPSTART";
+                const PROGMEM char at_cipsend[] =                           "CIPSEND";
+                const PROGMEM char at_cipclose[] =                          "CIPCLOSE";
+                const PROGMEM char at_cifsr[] =                             "CIFSR";
+                const PROGMEM char at_cipmux[] =                            "CIPMUX";
+                const PROGMEM char at_cipserver[] =                         "CIPSERVER";
+                const PROGMEM char at_cipmode[] =                           "CIPMODE";
+                const PROGMEM char at_cipsto[] =                            "CIPSTO";
+                const PROGMEM char at_ciupdate[] =                          "CIUPDATE";
+                const PROGMEM char at_ipd[] =                               "+IPD";
+                const PROGMEM char at_ok[] =                                "OK";
+                const PROGMEM char at_error[] =                             "ERROR";
+                const PROGMEM char at_ready[] =                             "ready";
+                const PROGMEM char at_listen[] =                            ">";
+                const PROGMEM char channel_format[] =                       "%hhu";
+                const PROGMEM char symbol_plus[] =                          "+";
+                const PROGMEM char symbol_plus_x3[] =                       "+++";
+                const PROGMEM char equal_1[] =                              "=1";
+                const PROGMEM char equal_2[] =                              "=2";
+                const PROGMEM char equal_double_quotes[] =                  "=\"";
+                const PROGMEM char double_quotes[] =                        "\"";
+                const PROGMEM char double_quotes_comma[] =                  "\",";
+                const PROGMEM char double_quotes_comma_double_quotes[] =    "\",\"";
+                const PROGMEM char comma_3[] =                              ",3";
+                const PROGMEM char equal_tcp[] =                            "=\"TCP\",\"";
             }
 
             ESP8266WiFiCommunicator::ESP8266WiFiCommunicator(int enable_pin, int reset_pin):
@@ -67,6 +77,51 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::read() {
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
+                if (!_receiving_data) {
+                    if (_stream->available() < 1) {
+                        return -1;
+                    }
+                    char buffer[5];
+                    if (_stream->read() != '+') {
+                        int data;
+                        do {
+                            data = _stream->read();
+                        }
+                        while (data != '+' && data != -1);
+                        if (data == -1) {
+                            return -1;
+                        }
+                        buffer[0] = '+';
+                    }
+                    else {
+                        buffer[0] = '+';
+                    }
+                    int length = _stream->readBytes(buffer + 1, 3);
+                    buffer[length + 1] = '\0';
+                    if (STRCMP_P(buffer, at_ipd)) {
+                        return -1; // Invalid + command
+                    }
+                    if (_stream->read() == -1) {
+                        return -1; // Eat the ',' character that should be here
+                    }
+                    while (_stream->read() != ':');
+                    _receiving_data = true;
+                }
+                if (_receiving_data) {
+                    char data;
+                    size_t space_left = ESP8266_BUFFER_SIZE - _input_buffer.available();
+                    for (size_t i = 0; i < space_left; i++) {
+                        data = _stream->read();
+                        if (data == -1) {
+                            _receiving_data = false;
+                            return 0;
+                        }
+                    }
+                }
                 return _input_buffer.read();
             }
 
@@ -95,11 +150,11 @@ namespace athome {
                 _flush_output();
             }
 
-            void ESP8266WiFiCommunicator::open() {
+            void ESP8266WiFiCommunicator::enable() {
                 _switch_on_esp();
             }
 
-            void ESP8266WiFiCommunicator::close() {
+            void ESP8266WiFiCommunicator::disable() {
                 if (_connected) {
                     disconnect();
                 }
@@ -118,7 +173,10 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::disconnect() {
-                return _reset_esp();
+                if (isConnected()) {
+                    return _reset_esp();
+                }
+                return 0;
                 // TODO: To complete
             }
 
@@ -146,7 +204,7 @@ namespace athome {
                     return -3;
                 }
                 delay(50);
-                _stream->print(F("+++"));
+                _stream->print(FH(symbol_plus_x3));
                 delay(50);
                 return 0;
             }
@@ -209,7 +267,10 @@ namespace athome {
                     return -1;
                 }
                 if (!_enabled) {
-                    return -2;
+                    enable(); // Try to enable the esp
+                    if (!_enabled) {
+                        return -2;
+                    }
                 }
                 return 0;
             }
@@ -237,8 +298,8 @@ namespace athome {
                 if (check) {
                     return check;
                 }
-                _stream->print(at_at);
-                _stream->print(at_eol);
+                _stream->print(FH(at_at));
+                _stream->print(FH(at_eol));
                 return _esp_answer_check();
             }
 
@@ -247,11 +308,11 @@ namespace athome {
                 if (check) {
                     return check;
                 }
-                _stream->print(at_at);
-                _stream->print(F("+"));
-                _stream->print(at_cwmode);
-                _stream->print(F("=1"));
-                _stream->print(at_eol);
+                _stream->print(FH(at_at));
+                _stream->print(FH(symbol_plus));
+                _stream->print(FH(at_cwmode));
+                _stream->print(FH(equal_1));
+                _stream->print(FH(at_eol));
                 return _esp_answer_check();
             }
 
@@ -260,11 +321,11 @@ namespace athome {
                 if (check) {
                     return check;
                 }
-                _stream->print(at_at);
-                _stream->print(F("+"));
-                _stream->print(at_cwmode);
-                _stream->print(F("=2"));
-                _stream->print(at_eol);
+                _stream->print(FH(at_at));
+                _stream->print(FH(symbol_plus));
+                _stream->print(FH(at_cwmode));
+                _stream->print(FH(equal_2));
+                _stream->print(FH(at_eol));
                 return _esp_answer_check();
             }
 
@@ -276,15 +337,15 @@ namespace athome {
                 else if (_set_esp_station_mode()) {
                     return -3;
                 }
-                _stream->print(at_at);
-                _stream->print(F("+"));
-                _stream->print(at_cwjap);
-                _stream->print(F("=\""));
+                _stream->print(FH(at_at));
+                _stream->print(FH(symbol_plus));
+                _stream->print(FH(at_cwjap));
+                _stream->print(FH(equal_double_quotes));
                 _stream->print(_ap.ssid);
-                _stream->print(F("\",\""));
+                _stream->print(FH(double_quotes_comma_double_quotes));
                 _stream->print(_ap.password);
-                _stream->print(F("\""));
-                _stream->print(at_eol);
+                _stream->print(FH(double_quotes));
+                _stream->print(FH(at_eol));
                 return _esp_answer_check();
             }
 
@@ -298,17 +359,17 @@ namespace athome {
                 }
                 char channel[3];
                 SNPRINTF(channel, 2, channel_format, _ap.channel);
-                _stream->print(at_at);
-                _stream->print(F("+"));
-                _stream->print(at_cwsap);
-                _stream->print(F("=\""));
+                _stream->print(FH(at_at));
+                _stream->print(FH(symbol_plus));
+                _stream->print(FH(at_cwsap));
+                _stream->print(FH(equal_double_quotes));
                 _stream->print(_ap.ssid);
-                _stream->print(F("\",\""));
+                _stream->print(FH(double_quotes_comma_double_quotes));
                 _stream->print(_ap.password);
-                _stream->print(F("\","));
+                _stream->print(FH(double_quotes_comma));
                 _stream->print(channel);
-                _stream->print(F(",3"));
-                _stream->print(at_eol);
+                _stream->print(FH(comma_3));
+                _stream->print(FH(at_eol));
                 return _esp_answer_check();
             }
 
@@ -317,18 +378,18 @@ namespace athome {
                 if (check) {
                     return check;
                 }
-                digitalWrite(_reset_pin, HIGH);
+                /*digitalWrite(_reset_pin, HIGH);
                 delay(1);
                 digitalWrite(_reset_pin, LOW);
                 _stream->flush();
-                flush();
-                /*_stream->print(at_at);
-                _stream->print(F("+"));
-                _stream->print(at_rst);
-                _stream->print(at_eol);
+                flush();*/
+                _stream->print(FH(at_at));
+                _stream->print(FH(symbol_plus));
+                _stream->print(FH(at_rst));
+                _stream->print(FH(at_eol));
                 if (_esp_answer_check()) {
                     return -3;
-                }*/
+                }
                 _enabled = false;
                 _connected = false;
                 _connected_to_host = false;
@@ -360,14 +421,14 @@ namespace athome {
                 }
                 char strIp[16];
                 SNPRINTF(strIp, 15, ip::ip_format, _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
-                _stream->print(at_at);
-                _stream->print(F("+"));
-                _stream->print(at_cipstart);
-                _stream->print(F("=\"TCP\",\""));
+                _stream->print(FH(at_at));
+                _stream->print(FH(symbol_plus));
+                _stream->print(FH(at_cipstart));
+                _stream->print(FH(equal_tcp));
                 _stream->print(strIp);
-                _stream->print(F("\","));
+                _stream->print(FH(double_quotes_comma));
                 _stream->print(_host.hport);
-                _stream->print(at_eol);
+                _stream->print(FH(at_eol));
                 if (_esp_answer_check()) {
                     return -4;
                 }
@@ -383,11 +444,11 @@ namespace athome {
                 if (!_connected_to_host) {
                     return -3;
                 }
-                _stream->print(at_at);
-                _stream->print(F("+"));
-                _stream->print(at_cipmode);
-                _stream->print(F("=1"));
-                _stream->print(at_eol);
+                _stream->print(FH(at_at));
+                _stream->print(FH(symbol_plus));
+                _stream->print(FH(at_cipmode));
+                _stream->print(FH(equal_1));
+                _stream->print(FH(at_eol));
                 return _esp_answer_check();
             }
 
@@ -399,18 +460,13 @@ namespace athome {
                 if (!_connected_to_host) {
                     return -3;
                 }
-                _stream->print(at_at);
-                _stream->print(F("+"));
-                _stream->print(at_cipsend);
-                _stream->print(at_eol);
-                while (1) {
-                    String line = _stream->readStringUntil(at_nl);
-                    line.replace('\r', '\n');
-                    if (!STRCMP(line.c_str(), at_listen)) {
-                        return 0;
-                    }
-                    delay(1);
-                }
+                _stream->print(FH(at_at));
+                _stream->print(FH(symbol_plus));
+                _stream->print(FH(at_cipsend));
+                _stream->print(FH(at_eol));
+                while (_stream->read() != '>');
+                while (_stream->read() != -1); //TODO: It's a hack. Why doesn't it recognize the end of line here?!
+                //while (_stream->read() != at_nl);
                 return 0;
             }
         }

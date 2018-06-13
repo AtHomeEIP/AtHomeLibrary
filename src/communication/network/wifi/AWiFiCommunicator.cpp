@@ -27,17 +27,14 @@ namespace athome {
             }
 
             void AWiFiCommunicator::setAccessPoint(const WiFi_ap &ap) {
-                disconnect();
                 memcpy(&_ap, &ap, sizeof(WiFi_ap));
             }
 
             void AWiFiCommunicator::setConnectionAddresses(const WiFi_client &client) {
-                disconnect();
                 memcpy(&_me, &client, sizeof(WiFi_client));
             }
 
             void AWiFiCommunicator::setWiFiMode(wifi_mode mode) {
-                disconnect();
                 _mode = mode;
             }
 
