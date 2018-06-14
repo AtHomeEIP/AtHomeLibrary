@@ -9,7 +9,7 @@
  */
 int freeRam () {
   extern int __heap_start, *__brkval;
-  int v = (uint8_t *)(SP);
+  uint8_t *v = (uint8_t *)(SP);
   return (int) &v - ((__brkval == 0) ? (int) &__heap_start : (int) __brkval);
 }
 
@@ -19,10 +19,12 @@ AtHomeWiFiModule<uint16_t, 1> *me = AtHomeModule<uint16_t, 1>::getInstance<AtHom
 ESP8266WiFiCommunicator wifi_com(2, 3);
 MonochromaticLED led(13);
 TMP36GZTemperatureSensor5V sensor(A0);
+#ifdef __AVR__
 SoftwareSerial softSerial(10, 11);
 Stream *streams[] = {&Serial, &softSerial, nullptr};
-#ifdef __AVR__
 ArduinoEEPROM storage;
+#else
+Stream *streams[] = {&Serial, &Serial1, nullptr};
 #endif
 FakeRTC rtc;
 
@@ -32,7 +34,11 @@ const PROGMEM char password[] = "HelloWorld";
 void setup() {
     // put your setup code here, to run once:
     Serial.begin(9600);
+#ifdef __AVR__
     softSerial.begin(9600);
+#else
+    Serial1.begin(9600);
+#endif
     delay(1);
     Serial.println(F("Setup..."));
     wifi_com.setStreamToChipset(&Serial);
