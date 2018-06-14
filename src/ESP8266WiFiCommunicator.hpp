@@ -40,7 +40,7 @@ namespace athome {
                 virtual ~ESP8266WiFiCommunicator(); */
             private:
                 void _interpret();
-                void _read();
+                int  _read();
                 void _write();
                 void _flush_input();
                 void _flush_output();

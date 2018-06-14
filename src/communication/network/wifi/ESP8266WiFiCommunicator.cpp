@@ -73,60 +73,28 @@ namespace athome {
             //ESP8266WiFiCommunicator::~ESP8266WiFiCommunicator() {}
 
             int ESP8266WiFiCommunicator::available() {
+                _read();
                 return _input_buffer.available();
             }
 
             int ESP8266WiFiCommunicator::read() {
-                int check = _command_check();
-                if (check) {
-                    return check;
+                _read();
+                if (_input_buffer.available() > 0) {
+                    return _input_buffer.read();
                 }
-                if (!_receiving_data) {
-                    if (_stream->available() < 1) {
-                        return -1;
-                    }
-                    char buffer[5];
-                    if (_stream->read() != '+') {
-                        int data;
-                        do {
-                            data = _stream->read();
-                        }
-                        while (data != '+' && data != -1);
-                        if (data == -1) {
-                            return -1;
-                        }
-                        buffer[0] = '+';
-                    }
-                    else {
-                        buffer[0] = '+';
-                    }
-                    int length = _stream->readBytes(buffer + 1, 3);
-                    buffer[length + 1] = '\0';
-                    if (STRCMP_P(buffer, at_ipd)) {
-                        return -1; // Invalid + command
-                    }
-                    if (_stream->read() == -1) {
-                        return -1; // Eat the ',' character that should be here
-                    }
-                    while (_stream->read() != ':');
-                    _receiving_data = true;
+                else {
+                    return -1;
                 }
-                if (_receiving_data) {
-                    char data;
-                    size_t space_left = ESP8266_BUFFER_SIZE - _input_buffer.available();
-                    for (size_t i = 0; i < space_left; i++) {
-                        data = _stream->read();
-                        if (data == -1) {
-                            _receiving_data = false;
-                            return 0;
-                        }
-                    }
-                }
-                return _input_buffer.read();
             }
 
             int ESP8266WiFiCommunicator::peek() {
-                return _input_buffer.peek();
+                _read();
+                if (_input_buffer.available() > 0) {
+                    return _input_buffer.peek();
+                }
+                else {
+                    return -1;
+                }
             }
 
             size_t ESP8266WiFiCommunicator::write(uint8_t byte) {
@@ -137,6 +105,7 @@ namespace athome {
                 if (!_connected_to_host) {
                     return -3;
                 }
+                _read();
                 _output_buffer.write(byte);
                 if (_output_buffer.available() == ESP8266_BUFFER_SIZE) {
                     _write();
@@ -223,8 +192,73 @@ namespace athome {
                 // TODO: To implement
             }
 
-            void ESP8266WiFiCommunicator::_read() {
-                // TODO: To implement
+            int ESP8266WiFiCommunicator::_read() {
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
+                if (_connected_to_host) {
+                    if (!_receiving_data) {
+                        if (_stream->available() < 1) {
+                            return -1;
+                        }
+                        char buffer[5];
+                        if (_stream->read() != '+') {
+                            int data;
+                            do {
+                                data = _stream->read();
+                            } while (data != '+' && data != -1);
+                            if (data == -1) {
+                                return -1;
+                            }
+                            buffer[0] = '+';
+                        } else {
+                            buffer[0] = '+';
+                        }
+                        int length = _stream->readBytes(buffer + 1, 3);
+                        if (length >= 0) {
+                            buffer[length + 1] = '\0';
+                            if (STRCMP(buffer, at_ipd)) {
+                                return -1; // Invalid + command
+                            }
+                            if (_stream->read() == -1) {
+                                return -1; // Eat the ',' character that should be here
+                            }
+                            while (_stream->read() != ':');
+                            _receiving_data = true;
+                        }
+                    }
+                    if (_receiving_data) {
+                        char data;
+                        size_t space_left = ESP8266_BUFFER_SIZE - _input_buffer.available();
+                        for (size_t i = 0; i < space_left; i++) {
+                            data = _stream->read();
+                            if (data == -1) {
+                                _receiving_data = false;
+                                return i;
+                            } else if (data == '+' && i < (space_left - 4)) { // Extract incoming other '+IPD' commands
+                                char buffer[4];
+                                int length;
+                                length = _stream->readBytes(buffer, 3);
+                                if (length >= 0) {
+                                    if (!STRCMP(buffer, at_ipd)) {
+                                        while (_stream->read() != ':');
+                                    } else {
+                                        _input_buffer.write(data);
+                                        i++;
+                                        for (uint8_t j = 0; j < 3; j++) {
+                                            _input_buffer.write(buffer[j]);
+                                            i++;
+                                        }
+                                    }
+                                }
+                            } else {
+                                _input_buffer.write(data);
+                            }
+                        }
+                        return space_left;
+                    }
+                }
             }
 
             void ESP8266WiFiCommunicator::_write() {
