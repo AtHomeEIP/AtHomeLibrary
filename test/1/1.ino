@@ -15,13 +15,15 @@ int freeRam () {
 
 #endif
 
-AtHomeWiFiModule<uint16_t, 15> *me = AtHomeModule<uint16_t, 15>::getInstance<AtHomeWiFiModule<uint16_t, 15> >();
+AtHomeWiFiModule<uint16_t, 1> *me = AtHomeModule<uint16_t, 1>::getInstance<AtHomeWiFiModule<uint16_t, 1> >();
 ESP8266WiFiCommunicator wifi_com(2, 3);
 MonochromaticLED led(13);
 TMP36GZTemperatureSensor5V sensor(A0);
 SoftwareSerial softSerial(10, 11);
 Stream *streams[] = {&Serial, &softSerial, nullptr};
+#ifdef __AVR__
 ArduinoEEPROM storage;
+#endif
 FakeRTC rtc;
 
 const PROGMEM char ssid[] = "ESP01Test";
@@ -29,12 +31,10 @@ const PROGMEM char password[] = "HelloWorld";
 
 void setup() {
     // put your setup code here, to run once:
-    delay(10000);
     Serial.begin(9600);
     softSerial.begin(9600);
     delay(1);
     Serial.println(F("Setup..."));
-    Serial.flush();
     wifi_com.setStreamToChipset(&Serial);
     wifi_com.setWiFiMode(athome::communication::wifi::wifi_mode::STATION);
     athome::communication::wifi::WiFi_ap ap;
@@ -44,12 +44,12 @@ void setup() {
     ap.channel = 5;
     ap.band = athome::communication::wifi::wifi_frequency_band::TWO_POINT_FOUR_GHZ;
     wifi_com.setAccessPoint(ap);
-    wifi_com.open();
-    wifi_com.connect();
     me->setSensor(&sensor);
     me->setDisplay(&led);
     me->setStreams(streams);
+#ifdef __AVR__
     me->setStorage(&storage);
+#endif
     me->setClock(&rtc);
     me->setWiFiCommunicator(wifi_com);
     me->setSerial(0);
