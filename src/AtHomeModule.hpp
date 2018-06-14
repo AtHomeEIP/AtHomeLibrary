@@ -398,7 +398,7 @@ namespace athome {
                     }
 #   endif /* DISABLE_SENSOR */
                     broadcastln(FH(communication::json::jsonListDictEnd));
-                    broadcast(FH(communication::commands::end_of_command));
+                    broadcast(communication::commands::end_of_command);
 #   ifndef DISABLE_SENSOR
                     _nbMeasures = 0;
 #   endif /* DISABLE_SENSOR */
