@@ -1,6 +1,6 @@
 #ifndef ATHOMEFLASHCOMMON_H
 # define ATHOMEFLASHCOMMON_H
-# ifndef __AVR__
+# if !defined(__AVR__) && (defined(ESP8266) && !defined(ARDUINO))
 #  define STRCMP    strcmp
 #  define SNPRINTF  snprintf
 #  define SSCANF    sscanf
@@ -19,7 +19,9 @@
 #   define PGM_P const char *
 #  endif /* ARDUINO */
 # else
-#  include <avr/pgmspace.h>
+#  ifdef __AVR__
+#   include <avr/pgmspace.h>
+#  endif
 #  define STRCMP    strcmp_P
 #  define SNPRINTF  snprintf_P
 #  define SSCANF    sscanf_P

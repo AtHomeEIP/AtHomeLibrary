@@ -39,7 +39,10 @@ namespace athome {
                 if (!_client.connected()) {
                     connectToHost();
                 }
-                return _client.print(c);
+                if (_client.connected() && _client.write(c) > 0) {
+                    return 1;
+                }
+                return 0;
             }
 
             void NativeArduinoESPWiFiCommunicator::flush() {
