@@ -1,4 +1,6 @@
+#ifdef __AVR__
 #include <SoftwareSerial.h>
+#endif
 #include <string.h>
 #include <AtHome.h>
 
