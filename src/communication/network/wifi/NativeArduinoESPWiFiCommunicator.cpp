@@ -48,11 +48,12 @@ namespace athome {
 
             int NativeArduinoESPWiFiCommunicator::connectToHost() {
                 IPAddress address(_host.ipv4);
-                _client.connect(address, _host.hport);
+                return !_client.connect(address, _host.hport);
             }
 
             int NativeArduinoESPWiFiCommunicator::disconnectFromHost() {
                 _client.stop();
+                return 0;
             }
 
             int NativeArduinoESPWiFiCommunicator::connect() {
@@ -71,13 +72,15 @@ namespace athome {
                     for (uint8_t i = 0; i < 4; i++) {
                         _me.ipv4[i] = my_ip[i];
                     }
-                    WiFi.macAddress(_me.mac);
+                    //WiFi.macAddress(_me.mac);
+                    return 0;
                 }
+                return -1;
             }
 
             int NativeArduinoESPWiFiCommunicator::disconnect() {
                 disconnectFromHost();
-                WiFi.disconnect(true);
+                return WiFi.disconnect(true);
             }
 
             bool NativeArduinoESPWiFiCommunicator::isConnected() const {
