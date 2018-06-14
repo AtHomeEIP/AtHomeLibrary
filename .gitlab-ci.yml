@@ -21,7 +21,6 @@ buildTests:Arduino:
     - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
     - git clone https://github.com/Seeed-Studio/Grove_Chainable_RGB_LED.git
     - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
-    - git clone https://github.com/bblanchon/ArduinoJson.git
     - git clone https://github.com/mmurdoch/arduinounit.git
     - git clone https://github.com/adafruit/Adafruit_Sensor.git
     - git clone https://github.com/rweather/arduinolibs.git
@@ -74,14 +73,13 @@ buildTests:Energia:
     - git clone https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor.git
     - git clone https://github.com/Seeed-Studio/Grove_Chainable_RGB_LED.git
     - git clone https://github.com/Seeed-Studio/Grove_Air_quality_Sensor.git
-    - git clone https://github.com/bblanchon/ArduinoJson.git
     - git clone https://github.com/mmurdoch/arduinounit.git
     - git clone https://github.com/adafruit/Adafruit_Sensor.git
     - git clone https://github.com/rweather/arduinolibs.git
     - git clone https://github.com/adafruit/Adafruit_TSL2561.git
     - git clone -b testing https://github.com/arkhipenko/TaskScheduler.git
     - ln -s $PWD/Grove_Digital_Light_Sensor ${SHARE_PATH}/energia/libraries/Grove_Digital_Light_Sensor
-    - ln -s $PWD/Grove_Chainable_RGB_LED ${SHARE_PATH}/arduino/libraries/Grove_Chainable_RGB_LED
+    - ln -s $PWD/Grove_Chainable_RGB_LED ${SHARE_PATH}/energia/libraries/Grove_Chainable_RGB_LED
     - ln -s $PWD/Grove_Air_quality_Sensor ${SHARE_PATH}/energia/libraries/Grove_Air_quality_Sensor
     - ln -s $PWD/ArduinoJson ${SHARE_PATH}/energia/libraries/ArduinoJson
     - ln -s $PWD/arduinounit ${SHARE_PATH}/energia/libraries/ArduinoUnit
