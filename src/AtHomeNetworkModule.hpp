@@ -107,15 +107,15 @@ namespace athome {
         private:
             void setEndPointCommand(Stream &communicator) {
                 communication::ip::tcp_host host;
-                int version = communicator.read();
+                int version = _extractStreamByte(communicator);
                 if (version == 4) {
                     for (uint8_t i = 0; i < 4; i++) {
-                        host.ipv4[i] = communicator.read();
+                        host.ipv4[i] = _extractStreamByte(communicator);
                     }
                 }
                 else if (version == 6) {
                     for (uint8_t i = 0; i < 16; i++) {
-                        host.ipv6[i] = communicator.read();
+                        host.ipv6[i] = _extractStreamByte(communicator);
                     }
                 }
                 else {

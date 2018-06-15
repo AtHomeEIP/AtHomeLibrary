@@ -523,12 +523,16 @@ namespace athome {
 # endif /* DISABLE_SENSOR */
             private:
 # ifndef DISABLE_COMMUNICATION
+                inline int  _extractStreamByte(Stream &stream) {
+                    int data;
+                    while ((data = stream.read()) == -1);
+                    return data;
+                }
+
                 void        _setProfile(Stream &stream) {
-                    uint8_t data;
                     uint8_t *ptr = reinterpret_cast<uint8_t *>(&_serial);
                     for (size_t i = 0; i < sizeof(moduleSerial); i++) {
-                        while ((data = stream.read()) < 0);
-                        ptr[i] = data;
+                        ptr[i] = _extractStreamByte(stream);
                     }
                     while (stream.read() != communication::commands::end_of_command);
 #  ifndef DISABLE_PERSISTENT_STORAGE
@@ -542,15 +546,14 @@ namespace athome {
                         return;
                     }
                     time::ITime::DateTime time;
-                    while (stream.peek() == -1);
-                    time.second = stream.read();
-                    time.minute = stream.read();
-                    time.hour = stream.read();
-                    time.day = stream.read();
-                    time.month = stream.read();
+                    time.second = _extractStreamByte(stream);
+                    time.minute = _extractStreamByte(stream);
+                    time.hour = _extractStreamByte(stream);
+                    time.day = _extractStreamByte(stream);
+                    time.month = _extractStreamByte(stream);
                     time.year = 0;
-                    time::absolute_year = stream.read();
-                    time::absolute_year |= (stream.read() << 8);
+                    time::absolute_year = _extractStreamByte(stream);
+                    time::absolute_year |= (_extractStreamByte(stream) << 8);
                     _clock->setCurrentDateTime(time);
                     while (stream.read() != communication::commands::end_of_command);
                 }
@@ -562,14 +565,13 @@ namespace athome {
                         return;
                     }
                     sensor::ISensor::ISensorThresholds thresholds;
-                    while (stream.peek() == -1);
-                    thresholds.unit.unit = stream.read();
-                    thresholds.unit.prefix = stream.read();
+                    thresholds.unit.unit = _extractStreamByte(stream);
+                    thresholds.unit.prefix = _extractStreamByte(stream);
                     for (uint8_t i = 0; i < 4; i++) {
-                        thresholds.min |= (stream.read() << (8 * i));
+                        thresholds.min |= (_extractStreamByte(stream) << (8 * i));
                     }
                     for (uint8_t i = 0; i < 4; i++) {
-                        thresholds.max |= (stream.read() << (8 * i));
+                        thresholds.max |= (_extractStreamByte(stream) << (8 * i));
                     }
                     _sensor->setThresholds(thresholds);
                     while (stream.read() != communication::commands::end_of_command);

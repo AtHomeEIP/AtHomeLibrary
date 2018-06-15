@@ -72,7 +72,7 @@ namespace athome {
                 communication::wifi::WiFi_ap ap;
                 int data;
                 for (uint8_t i = 0; i < 33; i++) {
-                    data = communicator.read();
+                    data = _extractStreamByte(communicator);
                     if (data == -1 || data == communication::commands::end_of_command) {
                         return;
                     }
@@ -82,7 +82,7 @@ namespace athome {
                     }
                 }
                 for (uint8_t i = 0; i < 33; i++) {
-                    data = communicator.read();
+                    data = _extractStreamByte(communicator);
                     if (data == -1 || data == communication::commands::end_of_command) {
                         return;
                     }
