@@ -32,7 +32,7 @@ namespace athome {
                 void setStreamToChipset(Stream *) = delete;
 
             private:
-                WiFiClient _client;
+                WiFiClient    _client;
             };
         }
     }

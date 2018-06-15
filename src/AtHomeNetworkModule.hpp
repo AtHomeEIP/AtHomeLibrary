@@ -47,7 +47,9 @@ namespace athome {
 #  ifndef DISABLE_PERSISTENT_STORAGE
                 this->onBackupOnStorage();
 #  endif /* DISABLE_PERSISTENT_STORAGE */
-                _communicator->connectToHost();
+                if (!_communicator->connectToHost()) {
+                    _updateStreams();
+                }
             }
 
         protected:
@@ -128,6 +130,26 @@ namespace athome {
 #  ifndef DISABLE_PERSISTENT_STORAGE
                     this->onBackupOnStorage();
 #  endif /* DISABLE_PERSISTENT_STORAGE */
+                    if (!_communicator->connectToHost()) {
+                        _updateStreams();
+                    }
+                }
+            }
+
+            void _updateStreams() {
+                if (ABaseModule::_streams == nullptr) {
+                    ABaseModule::_streams = new Stream*[2];
+                    ABaseModule::_streams[0] = _communicator;
+                    ABaseModule::_streams[1] = nullptr;
+                }
+                else {
+                    size_t i;
+                    for (i = 0; ABaseModule::_streams[i] != nullptr; i++) {
+                        if (ABaseModule::_streams[i] == _communicator) {
+                            return;
+                        }
+                    }
+                    ABaseModule::_streams[i] = _communicator; // Will expect to have at least 2 trailing nullptr to have allocated space
                 }
             }
 
