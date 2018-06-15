@@ -21,10 +21,14 @@
 # else
 #  ifdef __AVR__
 #   include <avr/pgmspace.h>
+#   define STRCMP    strcmp_P
+#   define SNPRINTF  snprintf_P
+#   define SSCANF    sscanf_P
+#  else
+#   define STRCMP   strcmp
+#   define SNPRINTF snprintf
+#   define SSCANF   sscanf
 #  endif
-#  define STRCMP    strcmp_P
-#  define SNPRINTF  snprintf_P
-#  define SSCANF    sscanf_P
 #  ifdef ARDUINO
 #   include <WString.h>
 #   ifdef __cplusplus
