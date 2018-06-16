@@ -7,6 +7,7 @@ namespace athome {
     namespace communication {
         namespace wifi {
             AWiFiCommunicator::AWiFiCommunicator(const WiFi_ap *ap, const WiFi_client *client, const wifi_mode mode, Stream *stream):
+                    _accessPointConfigured(false),
                     _mode(mode),
                     _stream(stream)
             {
@@ -28,6 +29,7 @@ namespace athome {
 
             void AWiFiCommunicator::setAccessPoint(const WiFi_ap &ap) {
                 memcpy(&_ap, &ap, sizeof(WiFi_ap));
+                _accessPointConfigured = true;
             }
 
             void AWiFiCommunicator::setConnectionAddresses(const WiFi_client &client) {
@@ -40,6 +42,10 @@ namespace athome {
 
             void AWiFiCommunicator::setStreamToChipset(Stream *stream) {
                 _stream = stream;
+            }
+
+            bool AWiFiCommunicator::isAccessPointConfigured() {
+                return _accessPointConfigured;
             }
         }
     }

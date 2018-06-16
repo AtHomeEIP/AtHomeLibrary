@@ -98,6 +98,9 @@ namespace athome {
             }
 
             size_t ESP8266WiFiCommunicator::write(uint8_t byte) {
+                if (!isHostConfigured()) {
+                    return -4;
+                }
                 int check = _command_check();
                 if (check) {
                     return check;
@@ -132,6 +135,9 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::connect() {
+                if (!isAccessPointConfigured()) {
+                    return -1;
+                }
                 if (_mode == ACCESS_POINT) {
                     return _create_ap();
                 }
@@ -142,6 +148,9 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::disconnect() {
+                if (!isAccessPointConfigured()) {
+                    return -3;
+                }
                 if (isConnected()) {
                     return _reset_esp();
                 }
@@ -151,6 +160,9 @@ namespace athome {
 
             int ESP8266WiFiCommunicator::connectToHost() {
                 // TODO: To implement
+                if (!isHostConfigured()) {
+                    return -4;
+                }
                 if (_connect_to_tcp_socket()) {
                     return -1;
                 }
@@ -165,6 +177,9 @@ namespace athome {
 
             int ESP8266WiFiCommunicator::disconnectFromHost() {
                 // TODO: To implement
+                if (!isHostConfigured()) {
+                    return -4;
+                }
                 int check = _command_check();
                 if (check) {
                     return check;
@@ -193,6 +208,9 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_read() {
+                if (!isHostConfigured()) {
+                    return -4;
+                }
                 int check = _command_check();
                 if (check) {
                     return check;
@@ -262,6 +280,9 @@ namespace athome {
             }
 
             void ESP8266WiFiCommunicator::_write() {
+                if (!isHostConfigured()) {
+                    return;
+                }
                 if (_command_check() || !_connected_to_host) {
                     return;
                 }
@@ -310,9 +331,7 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_esp_answer_check() {
-                while (!_stream->available()) {
-                    delay(1);
-                }
+                while (!_stream->available());
                 char buffer[8];
                 while (_stream->available()) {
                     int len = _stream->readBytesUntil(at_nl, buffer, 7);
@@ -320,8 +339,10 @@ namespace athome {
                         break;
                     }
                     buffer[len] = '\0';
-                    if (len > 1 && buffer[len - 1] == at_nl && buffer[len - 2] == '\r') {
-                        buffer[len - 2] = '\0';
+                    for (size_t i = 0; buffer[i] != '\0'; i++) {
+                        if (buffer[i] == '\r' || buffer[i] == at_nl) {
+                            buffer[i] = '\0';
+                        }
                     }
                     if (!STRCMP(buffer, at_ok)) {
                         return 0;
@@ -329,15 +350,13 @@ namespace athome {
                     if (!STRCMP(buffer, at_error)) {
                         return -1;
                     }
-                    delay(1);
                 }
                 return -2;
             }
 
             int ESP8266WiFiCommunicator::_test_esp() {
-                int check = _command_check();
-                if (check) {
-                    return check;
+                if (_stream == nullptr) {
+                    return -1;
                 }
                 _stream->print(FH(at_at));
                 _stream->print(FH(at_eol));
@@ -371,6 +390,9 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_connect_ap() {
+                if (!isAccessPointConfigured()) {
+                    return -4;
+                }
                 int check = _command_check();
                 if (check) {
                     return check;
@@ -391,6 +413,9 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_create_ap() {
+                if (!isAccessPointConfigured()) {
+                    return -4;
+                }
                 int check = _command_check();
                 if (check) {
                     return check;
@@ -448,12 +473,14 @@ namespace athome {
                     int len = _stream->readBytesUntil(at_nl, buffer, 9);
                     if (len > 0) {
                         buffer[len] = '\0';
-                        if (len > 2 && buffer[len - 1] == at_nl && buffer[len - 2] == '\r') {
-                            buffer[len - 2] = '\0';
-                            if (!STRCMP(buffer, at_ready)) {
-                                _enabled = true;
-                                return 0;
+                        for (size_t i = 0; buffer[i] != '\0'; i++) {
+                            if (buffer[i] == '\r' || buffer[i] == at_nl) {
+                                buffer[i] = '\0';
                             }
+                        }
+                        if (!STRCMP(buffer, at_ready)) {
+                            _enabled = true;
+                            return 0;
                         }
                     }
                     else {
@@ -470,6 +497,9 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_connect_to_tcp_socket() {
+                if (!isHostConfigured()) {
+                    return -5;
+                }
                 int check = _command_check();
                 if (check) {
                     return check;
@@ -478,7 +508,7 @@ namespace athome {
                     return -3;
                 }
                 char strIp[16];
-                SNPRINTF(strIp, 15, ip::ip_format, _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
+                SNPRINTF(strIp, 16, ip::ip_format, _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
                 _stream->print(FH(at_at));
                 _stream->print(FH(symbol_plus));
                 _stream->print(FH(at_cipstart));
@@ -495,6 +525,9 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_enable_transparent_mode() {
+                if (!isHostConfigured()) {
+                    return -4;
+                }
                 int check = _command_check();
                 if (check) {
                     return check;
@@ -511,6 +544,9 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_go_to_send_mode() {
+                if (!isHostConfigured()) {
+                    return -4;
+                }
                 int check = _command_check();
                 if (check) {
                     return check;

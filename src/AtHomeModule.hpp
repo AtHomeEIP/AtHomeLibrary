@@ -497,6 +497,9 @@ namespace athome {
                 void        onRestoreFromStorage() {
                     if (_storage != nullptr) {
                         _storage->read(0, reinterpret_cast<void *>(&_serial), sizeof(moduleSerial));
+                        if (!_serial) {
+                            return; // The module is uninitialized
+                        }
                         if (_onRestorePlugin != nullptr) {
                             _onRestorePlugin(sizeof(moduleSerial), *_storage);
                         }

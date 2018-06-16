@@ -365,6 +365,9 @@ namespace athome {
 				     * \endcode
 				     */
 				    void setStreamToChipset(Stream *);
+				    bool isAccessPointConfigured();
+				private:
+					bool				_accessPointConfigured;
 			    protected:
 				    wifi_mode	        _mode;
 				    Stream		        *_stream;

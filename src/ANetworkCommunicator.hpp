@@ -137,6 +137,9 @@ namespace athome {
              * \endcode
              */
             void setHost(const ip::tcp_host &);
+            bool isHostConfigured();
+        private:
+            bool                _hostConfigured;
         protected:
             ip::tcp_host	    _host;
         };
