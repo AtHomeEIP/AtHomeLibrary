@@ -414,29 +414,32 @@ namespace athome {
                     for (size_t i = 0; _streams[i] != nullptr; i++) {
                         if (_streams[i]->available()) {
                             char buffer[19];
-                            char buffer2[1];
+                            char buffer2;
                             int len = 0;
-                            for (size_t j = 0; j < 18; j++) {
-                                if (_streams[i]->readBytes(buffer2, 1) < 0) {
+                            for (len = 0; len < 18; len++) {
+                                if (_streams[i]->readBytes(&buffer2, 1) < 0) {
                                     break;
                                 }
-                                if (buffer2[0] == communication::commands::end_of_command || (j == 17 && buffer2[0] != '\n')) {
+                                else if (buffer2 == communication::commands::end_of_command || (len == 17 && buffer2 != '\n')) {
                                     i--;
                                     len = 0;
                                     break; // Means we found a end of command, so what was read until now was from a previous command
                                 }
-                                buffer[j] = buffer2[0];
-                                len++;
-                                if (buffer2[0] == '\n') {
+                                else if (buffer2 == communication::commands::end_of_communication) {
+                                    len = 0;
+                                    break;
+                                }
+                                buffer[len] = buffer2;
+                                if (buffer2 == '\n') {
                                     break;
                                 }
                             }
-                            if (len < 0) {
+                            if (len < 1) {
                                 continue; // Means the reading is invalid, so we pass to next stream
                             }
                             buffer[len] = '\0';
                             if (len > 1 && buffer[len - 1] == '\r') {
-                                buffer[len - 2] = '\0';
+                                buffer[len - 1] = '\0';
                             }
                             if (!STRCMP(buffer, communication::commands::setProfile)) {
                                 _setProfile(*_streams[i]);
@@ -575,8 +578,7 @@ namespace athome {
                     time.day = buffer[3];
                     time.month = buffer[4];
                     time.year = 0;
-                    time::absolute_year = buffer[5];
-                    time::absolute_year |= (buffer[6] << 8);
+                    memcpy(&time::absolute_year, buffer + 5, 2);
                     _clock->setCurrentDateTime(time);
                 }
 #  endif /* DISABLE_TIME */

@@ -107,8 +107,8 @@ namespace athome {
         private:
             void setEndPointCommand(Stream &communicator) {
                 communication::ip::tcp_host host;
-                char version[1];
-                if (communicator.readBytes(version, 1) < 1) {
+                char version;
+                if (communicator.readBytes(&version, 1) < 1) {
                     return;
                 }
                 if (version == 4 && communicator.readBytes(reinterpret_cast<char *>(&host.ipv4), sizeof(host.ipv4)) < 1) {

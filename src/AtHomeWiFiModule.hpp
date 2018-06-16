@@ -70,12 +70,12 @@ namespace athome {
         private:
             void setWiFiCommand(Stream &communicator) {
                 communication::wifi::WiFi_ap ap;
-                char buffer[1];
+                char buffer;
                 if (communicator.readBytesUntil('\0', ap.ssid, sizeof(ap.ssid)) < 1 ||
                         communicator.readBytesUntil('\0', ap.password, sizeof(ap.password)) < 1) {
                     return;
                 }
-                communicator.readBytesUntil(communication::commands::end_of_command, buffer, 1);
+                communicator.readBytesUntil(communication::commands::end_of_command, &buffer, 1);
                 if (_wifi != nullptr) {
                     _wifi->disconnect();
                     _wifi->setAccessPoint(ap);
