@@ -61,7 +61,7 @@ namespace athome {
                  * These functions must have a prototype compatible to this one:
                  * \fn void name(const String &, Stream &)
                  */
-                typedef void (*AtHomeCommandPlugin)(const String &, Stream &);
+                typedef void (*AtHomeCommandPlugin)(const char *, Stream &);
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE
                 /**
@@ -413,23 +413,46 @@ namespace athome {
                     }
                     for (size_t i = 0; _streams[i] != nullptr; i++) {
                         if (_streams[i]->available()) {
-                            String commandName = _streams[i]->readStringUntil('\n');
-                            commandName.replace('\r', '\0');
-                            if (!STRCMP(commandName.c_str(), communication::commands::setProfile)) {
+                            char buffer[19];
+                            char buffer2[1];
+                            int len = 0;
+                            for (size_t j = 0; j < 18; j++) {
+                                if (_streams[i]->readBytes(buffer2, 1) < 0) {
+                                    break;
+                                }
+                                if (buffer2[0] == communication::commands::end_of_command) {
+                                    i--;
+                                    len = 0;
+                                    break; // Means we found a end of command, so what was read until now was from a previous command
+                                }
+                                buffer[j] = buffer2[0];
+                                len++;
+                                if (buffer2[0] == '\n') {
+                                    break;
+                                }
+                            }
+                            if (len < 0) {
+                                continue; // Means the reading is invalid, so we pass to next stream
+                            }
+                            buffer[len] = '\0';
+                            if (len > 1 && buffer[len - 1] == '\r') {
+                                buffer[len - 2] = '\0';
+                            }
+                            if (!STRCMP(buffer, communication::commands::setProfile)) {
                                 _setProfile(*_streams[i]);
                             }
 #  ifndef DISABLE_TIME
-                            else if (!STRCMP(commandName.c_str(), communication::commands::setDateTime)) {
+                            else if (!STRCMP(buffer, communication::commands::setDateTime)) {
                                 _setDateTime(*_streams[i]);
                             }
 #  endif /* DISABLE_TIME */
 #  ifndef DISABLE_SENSOR
-                            else if (!STRCMP(commandName.c_str(), communication::commands::setSensorThresholds)) {
+                            else if (!STRCMP(buffer, communication::commands::setSensorThresholds)) {
                                 _setSensorThresholds(*_streams[i]);
                             }
 #  endif /* DISABLE_SENSOR */
                             else if (_communicationPlugin != nullptr) {
-                                _communicationPlugin(commandName, *_streams[i]);
+                                _communicationPlugin(buffer, *_streams[i]);
                             }
                             else {
                                 //_streams[i]->flush(); // Would also remove output buffers
@@ -516,28 +539,23 @@ namespace athome {
                     if (_display == nullptr || _sensor == nullptr) {
                         return;
                     }
-                    _display->setDisplayedEstimate(static_cast<sensor::ISensor::ISensorScale>(_measures[_nbMeasures].estimate));
+                    _display->setDisplayedEstimate(
+                            static_cast<sensor::ISensor::ISensorScale>(_measures[_nbMeasures].estimate));
                     _display->update();
                 }
 #  endif /* DISABLE_DISPLAY */
 # endif /* DISABLE_SENSOR */
             private:
 # ifndef DISABLE_COMMUNICATION
-                inline int  _extractStreamByte(Stream &stream) {
-                    int data;
-                    while ((data = stream.read()) == -1);
-                    return data;
-                }
-
                 void        _setProfile(Stream &stream) {
-                    uint8_t *ptr = reinterpret_cast<uint8_t *>(&_serial);
-                    for (size_t i = 0; i < sizeof(moduleSerial); i++) {
-                        ptr[i] = _extractStreamByte(stream);
+                    moduleSerial serial;
+                    if (stream.readBytesUntil(communication::commands::end_of_command,
+                                              reinterpret_cast<char *>(&serial), sizeof(moduleSerial)) < 1) {
+                        return;
                     }
-                    while (stream.read() != communication::commands::end_of_command);
-#  ifndef DISABLE_PERSISTENT_STORAGE
-                    onBackupOnStorage();
-#  endif /* DISABLE_PERSISTENT_STORAGE */
+                    setSerial(serial);
+                    stream.readBytesUntil(communication::commands::end_of_command, reinterpret_cast<char *>(&serial),
+                                          1);
                 }
 #  ifndef DISABLE_TIME
                 void        _setDateTime(Stream &stream) {
@@ -545,17 +563,21 @@ namespace athome {
                         while (stream.read() != communication::commands::end_of_command);
                         return;
                     }
+                    char buffer[8];
+                    int len = stream.readBytesUntil(communication::commands::end_of_command, buffer, 8);
+                    if (len < 1) {
+                        return;
+                    }
                     time::ITime::DateTime time;
-                    time.second = _extractStreamByte(stream);
-                    time.minute = _extractStreamByte(stream);
-                    time.hour = _extractStreamByte(stream);
-                    time.day = _extractStreamByte(stream);
-                    time.month = _extractStreamByte(stream);
+                    time.second = buffer[0];
+                    time.minute = buffer[1];
+                    time.hour = buffer[2];
+                    time.day = buffer[3];
+                    time.month = buffer[4];
                     time.year = 0;
-                    time::absolute_year = _extractStreamByte(stream);
-                    time::absolute_year |= (_extractStreamByte(stream) << 8);
+                    time::absolute_year = buffer[5];
+                    time::absolute_year |= (buffer[6] << 8);
                     _clock->setCurrentDateTime(time);
-                    while (stream.read() != communication::commands::end_of_command);
                 }
 #  endif /* DISABLE_TIME */
 #  ifndef DISABLE_SENSOR
@@ -565,16 +587,19 @@ namespace athome {
                         return;
                     }
                     sensor::ISensor::ISensorThresholds thresholds;
-                    thresholds.unit.unit = _extractStreamByte(stream);
-                    thresholds.unit.prefix = _extractStreamByte(stream);
-                    for (uint8_t i = 0; i < 4; i++) {
-                        thresholds.min |= (_extractStreamByte(stream) << (8 * i));
-                    }
-                    for (uint8_t i = 0; i < 4; i++) {
-                        thresholds.max |= (_extractStreamByte(stream) << (8 * i));
+                    {
+                        char buffer[2];
+                        if (stream.readBytes(buffer, 2) < 1 ||
+                            stream.readBytes(reinterpret_cast<char *>(&thresholds.min), sizeof(thresholds.min)) < 1 ||
+                            stream.readBytes(reinterpret_cast<char *>(&thresholds.max), sizeof(thresholds.max)) < 1) {
+                            return;
+                        }
+                        thresholds.unit.unit = buffer[0];
+                        thresholds.unit.prefix = buffer[1];
                     }
                     _sensor->setThresholds(thresholds);
-                    while (stream.read() != communication::commands::end_of_command);
+                    uint8_t tmp;
+                    stream.readBytes(reinterpret_cast<char *>(&tmp), 1);
                 }
 #  endif /* DISABLE_SENSOR */
 # endif /* DISABLE_COMMUNICATION */

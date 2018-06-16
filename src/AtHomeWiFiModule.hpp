@@ -70,28 +70,12 @@ namespace athome {
         private:
             void setWiFiCommand(Stream &communicator) {
                 communication::wifi::WiFi_ap ap;
-                int data;
-                for (uint8_t i = 0; i < 33; i++) {
-                    data = _extractStreamByte(communicator);
-                    if (data == -1 || data == communication::commands::end_of_command) {
-                        return;
-                    }
-                    ap.ssid[i] = data;
-                    if (data == '\0') {
-                        break;
-                    }
+                char buffer[1];
+                if (communicator.readBytesUntil('\0', ap.ssid, sizeof(ap.ssid)) < 1 ||
+                        communicator.readBytesUntil('\0', ap.password, sizeof(ap.password)) < 1) {
+                    return;
                 }
-                for (uint8_t i = 0; i < 33; i++) {
-                    data = _extractStreamByte(communicator);
-                    if (data == -1 || data == communication::commands::end_of_command) {
-                        return;
-                    }
-                    ap.password[i] = data;
-                    if (data == '\0') {
-                        break;
-                    }
-                }
-                while (communicator.read() != communication::commands::end_of_command);
+                communicator.readBytesUntil(communication::commands::end_of_command, buffer, 1);
                 if (_wifi != nullptr) {
                     _wifi->disconnect();
                     _wifi->setAccessPoint(ap);
@@ -126,12 +110,12 @@ namespace athome {
             }
 #  endif /* DISABLE_PERSISTENT_STORAGE */
         private:
-            static void executeWiFiCommands(const String &command, Stream &stream) {
+            static void executeWiFiCommands(const char *command, Stream &stream) {
                 AtHomeWiFiModule *instance = reinterpret_cast<AtHomeWiFiModule *>(AtHomeModule<T, n>::getInstance());
                 if (instance == nullptr) {
                     return;
                 }
-                if (!STRCMP(command.c_str(), communication::commands::setWiFi)) {
+                if (!STRCMP(command, communication::commands::setWiFi)) {
                     instance->setWiFiCommand(stream);
                 }
             }

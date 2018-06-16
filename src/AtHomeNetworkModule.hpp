@@ -107,23 +107,20 @@ namespace athome {
         private:
             void setEndPointCommand(Stream &communicator) {
                 communication::ip::tcp_host host;
-                int version = _extractStreamByte(communicator);
-                if (version == 4) {
-                    for (uint8_t i = 0; i < 4; i++) {
-                        host.ipv4[i] = _extractStreamByte(communicator);
-                    }
-                }
-                else if (version == 6) {
-                    for (uint8_t i = 0; i < 16; i++) {
-                        host.ipv6[i] = _extractStreamByte(communicator);
-                    }
-                }
-                else {
-                    while (communicator.read() != communication::commands::end_of_command);
+                char version[1];
+                if (communicator.readBytes(version, 1) < 1) {
                     return;
                 }
-                host.hport = communicator.read();
-                host.hport |= (communicator.read() << 8);
+                if (version == 4 && communicator.readBytes(reinterpret_cast<char *>(&host.ipv4), sizeof(host.ipv4)) < 1) {
+                    return;
+                }
+                else if (version == 6 && communicator.readBytes(reinterpret_cast<char *>(&host.ipv6), sizeof(host.ipv6)) < 1) {
+                    return;
+                }
+                while (communicator.read() != communication::commands::end_of_command);
+                if (communicator.readBytes(reinterpret_cast<char *>(&host.hport), sizeof(host.hport)) < 1) {
+                    return;
+                }
                 while (communicator.read() != communication::commands::end_of_command);
                 if (_communicator != nullptr) {
                     _communicator->setHost(host);
@@ -154,12 +151,12 @@ namespace athome {
             }
 
         private:
-            static void _onCommandReceivedNetwork(const String &command, Stream &stream) {
+            static void _onCommandReceivedNetwork(const char *command, Stream &stream) {
                 AtHomeNetworkModule *instance = reinterpret_cast<AtHomeNetworkModule *>(AtHomeModule<T, n>::getInstance());
                 if (instance == nullptr) {
                     return;
                 }
-                if (!STRCMP(command.c_str(), communication::commands::setEndPoint)) {
+                if (!STRCMP(command, communication::commands::setEndPoint)) {
                     instance->setEndPointCommand(stream);
                 }
                 else if (instance->_networkCommandCallback != nullptr) {

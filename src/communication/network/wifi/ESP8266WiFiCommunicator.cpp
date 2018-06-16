@@ -311,15 +311,22 @@ namespace athome {
 
             int ESP8266WiFiCommunicator::_esp_answer_check() {
                 while (!_stream->available()) {
-                    delay(10);
+                    delay(1);
                 }
+                char buffer[8];
                 while (_stream->available()) {
-                    String str = _stream->readStringUntil(at_nl);
-                    str.replace('\r', '\0');
-                    if (!STRCMP(str.c_str(), at_ok)) {
+                    int len = _stream->readBytesUntil(at_nl, buffer, 7);
+                    if (len < 1) {
+                        break;
+                    }
+                    buffer[len] = '\0';
+                    if (len > 1 && buffer[len - 1] == at_nl && buffer[len - 2] == '\r') {
+                        buffer[len - 2] = '\0';
+                    }
+                    if (!STRCMP(buffer, at_ok)) {
                         return 0;
                     }
-                    if (!STRCMP(str.c_str(), at_error)) {
+                    if (!STRCMP(buffer, at_error)) {
                         return -1;
                     }
                     delay(1);
@@ -435,12 +442,29 @@ namespace athome {
                 if (_stream == nullptr) {
                     return -1;
                 }
+                char buffer[10];
+                _stream->setTimeout(15000);
                 while (1) {
-                    String line = _stream->readStringUntil(at_nl);
-                    line.replace('\r', '\0');
-                    if (!STRCMP(line.c_str(), at_ready)) {
-                        _enabled = true;
-                        return 0;
+                    int len = _stream->readBytesUntil(at_nl, buffer, 9);
+                    if (len > 0) {
+                        buffer[len] = '\0';
+                        if (len > 2 && buffer[len - 1] == at_nl && buffer[len - 2] == '\r') {
+                            buffer[len - 2] = '\0';
+                            if (!STRCMP(buffer, at_ready)) {
+                                _enabled = true;
+                                return 0;
+                            }
+                        }
+                    }
+                    else {
+                        if (!_test_esp()) {
+                            _enabled = true;
+                            return 0;
+                        }
+                        else {
+                            _enabled = false;
+                            return -1;
+                        }
                     }
                 }
             }
