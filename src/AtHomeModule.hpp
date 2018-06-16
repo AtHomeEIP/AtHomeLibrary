@@ -420,7 +420,7 @@ namespace athome {
                                 if (_streams[i]->readBytes(buffer2, 1) < 0) {
                                     break;
                                 }
-                                if (buffer2[0] == communication::commands::end_of_command) {
+                                if (buffer2[0] == communication::commands::end_of_command || (j == 17 && buffer2[0] != '\n')) {
                                     i--;
                                     len = 0;
                                     break; // Means we found a end of command, so what was read until now was from a previous command
