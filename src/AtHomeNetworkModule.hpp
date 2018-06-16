@@ -111,17 +111,18 @@ namespace athome {
                 if (communicator.readBytes(&version, 1) < 1) {
                     return;
                 }
-                if (version == 4 && communicator.readBytes(reinterpret_cast<char *>(&host.ipv4), sizeof(host.ipv4)) < 1) {
+                if (version == 4) {
+                    communicator.readBytes(reinterpret_cast<char *>(host.ipv4), sizeof(host.ipv4));
+                }
+                else if (version == 6) {
+                    communicator.readBytes(reinterpret_cast<char *>(host.ipv6), sizeof(host.ipv6));
+                }
+                else {
                     return;
                 }
-                else if (version == 6 && communicator.readBytes(reinterpret_cast<char *>(&host.ipv6), sizeof(host.ipv6)) < 1) {
-                    return;
-                }
-                while (communicator.read() != communication::commands::end_of_command);
                 if (communicator.readBytes(reinterpret_cast<char *>(&host.hport), sizeof(host.hport)) < 1) {
                     return;
                 }
-                while (communicator.read() != communication::commands::end_of_command);
                 if (_communicator != nullptr) {
                     _communicator->setHost(host);
 #  ifndef DISABLE_PERSISTENT_STORAGE

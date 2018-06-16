@@ -71,10 +71,10 @@ namespace athome {
             void setWiFiCommand(Stream &communicator) {
                 communication::wifi::WiFi_ap ap;
                 char buffer;
-                if (communicator.readBytesUntil('\0', ap.ssid, sizeof(ap.ssid)) < 1 ||
-                        communicator.readBytesUntil('\0', ap.password, sizeof(ap.password)) < 1) {
-                    return;
-                }
+                int len = communicator.readBytesUntil('\0', ap.ssid, sizeof(ap.ssid) - 1);
+                ap.ssid[len] = '\0';
+                len = communicator.readBytesUntil('\0', ap.password, sizeof(ap.password));
+                ap.password[len] = '\0';
                 communicator.readBytesUntil(communication::commands::end_of_command, &buffer, 1);
                 if (_wifi != nullptr) {
                     _wifi->disconnect();
