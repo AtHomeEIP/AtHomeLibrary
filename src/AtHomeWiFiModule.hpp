@@ -51,7 +51,9 @@ namespace athome {
                     _wifi->disconnect();
                 }
                 _wifi = &wifi;
-                _wifi->connect();
+                if (AtHomeModule<T, n>::getSerial()) {
+                    _wifi->connect();
+                }
                 AtHomeNetworkModule<T, n>::setNetworkCommunicator(wifi);
                 //this->onRestoreFromStorage(); // Restore wifi parameters from storage
             }

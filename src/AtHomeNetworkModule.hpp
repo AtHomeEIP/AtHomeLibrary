@@ -36,7 +36,9 @@ namespace athome {
 #  ifndef DISABLE_PERSISTENT_STORAGE
                 this->onRestoreFromStorage();
 #  endif /* DISABLE_PERSISTENT_STORAGE */
-                _communicator->connectToHost();
+                if (AtHomeModule<T, n>::getSerial()) {
+                    _communicator->connectToHost();
+                }
             }
 
             void setHost(const communication::ip::tcp_host &host) {

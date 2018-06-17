@@ -200,7 +200,7 @@ namespace athome {
             int ESP8266WiFiCommunicator::_read() {
                 int check = _command_check_peer();
                 if (check) {
-                    return;
+                    return check;
                 }
                 if (_connected_to_host) {
                     if (!_receiving_data) {

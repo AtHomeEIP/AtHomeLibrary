@@ -87,11 +87,12 @@ namespace athome {
                     auto result = WiFi.waitForConnectResult();
                     while (result == WL_IDLE_STATUS) {
                         result = WiFi.waitForConnectResult();
+                        yield();
                     }
+                    WiFi.setAutoReconnect(true);
                     if (result != WL_CONNECTED) {
                         return -1;
                     }
-                    WiFi.setAutoReconnect(true);
                     IPAddress my_ip = WiFi.localIP();
                     for (uint8_t i = 0; i < 4; i++) {
                         _me.ipv4[i] = my_ip[i];
