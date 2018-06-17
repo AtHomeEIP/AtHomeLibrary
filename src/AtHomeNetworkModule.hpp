@@ -125,15 +125,7 @@ namespace athome {
                 if (communicator.readBytes(reinterpret_cast<char *>(&host.hport), sizeof(host.hport)) < 1) {
                     return;
                 }
-                if (_communicator != nullptr) {
-                    _communicator->setHost(host);
-#  ifndef DISABLE_PERSISTENT_STORAGE
-                    this->onBackupOnStorage();
-#  endif /* DISABLE_PERSISTENT_STORAGE */
-                    if (!_communicator->connectToHost()) {
-                        _updateStreams();
-                    }
-                }
+                setHost(host);
             }
 
             void _updateStreams() {
