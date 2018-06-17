@@ -98,15 +98,9 @@ namespace athome {
             }
 
             size_t ESP8266WiFiCommunicator::write(uint8_t byte) {
-                if (!isHostConfigured()) {
-                    return -4;
-                }
-                int check = _command_check();
+                int check = _command_check_peer();
                 if (check) {
                     return check;
-                }
-                if (!_connected_to_host) {
-                    return -3;
                 }
                 _read();
                 _output_buffer.write(byte);
@@ -203,17 +197,10 @@ namespace athome {
                 return false;
             }
 
-            void ESP8266WiFiCommunicator::_interpret() {
-                // TODO: To implement
-            }
-
             int ESP8266WiFiCommunicator::_read() {
-                if (!isHostConfigured()) {
-                    return -4;
-                }
-                int check = _command_check();
+                int check = _command_check_peer();
                 if (check) {
-                    return check;
+                    return;
                 }
                 if (_connected_to_host) {
                     if (!_receiving_data) {
@@ -280,10 +267,8 @@ namespace athome {
             }
 
             void ESP8266WiFiCommunicator::_write() {
-                if (!isHostConfigured()) {
-                    return;
-                }
-                if (_command_check() || !_connected_to_host) {
+                int check = _command_check_peer();
+                if (check) {
                     return;
                 }
                 while (_output_buffer.available()) {
@@ -497,15 +482,21 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_connect_to_tcp_socket() {
-                if (!isHostConfigured()) {
+                if (!isHostConfigured() || !isAccessPointConfigured()) {
                     return -5;
+                }
+                if (!_host.hport) {
+                    return -3;
                 }
                 int check = _command_check();
                 if (check) {
                     return check;
                 }
-                if (!_host.hport) {
-                    return -3;
+                if (!isConnected()) {
+                    check = connect();
+                    if (check) {
+                        return check;
+                    }
                 }
                 char strIp[16];
                 SNPRINTF(strIp, 16, ip::ip_format, _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
@@ -525,15 +516,9 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_enable_transparent_mode() {
-                if (!isHostConfigured()) {
-                    return -4;
-                }
-                int check = _command_check();
+                int check = _command_check_peer();
                 if (check) {
                     return check;
-                }
-                if (!_connected_to_host) {
-                    return -3;
                 }
                 _stream->print(FH(at_at));
                 _stream->print(FH(symbol_plus));
@@ -544,15 +529,9 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_go_to_send_mode() {
-                if (!isHostConfigured()) {
-                    return -4;
-                }
-                int check = _command_check();
+                int check = _command_check_peer();
                 if (check) {
                     return check;
-                }
-                if (!_connected_to_host) {
-                    return -3;
                 }
                 _stream->print(FH(at_at));
                 _stream->print(FH(symbol_plus));
@@ -561,6 +540,33 @@ namespace athome {
                 while (_stream->read() != '>');
                 while (_stream->read() != -1); //TODO: It's a hack. Why doesn't it recognize the end of line here?!
                 //while (_stream->read() != at_nl);
+                return 0;
+            }
+
+            int ESP8266WiFiCommunicator::_command_check_peer() {
+                if (!isHostConfigured()) {
+                    return -4;
+                }
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
+                if (isAccessPointConfigured() && !isConnected()) {
+                    check = connect();
+                    if (check) {
+                        return check;
+                    }
+                    if (!isConnected()) {
+                        return -1;
+                    }
+                    check = connectToHost();
+                    if (check) {
+                        return check;
+                    }
+                    if (!_connected_to_host) {
+                        return -3;
+                    }
+                }
                 return 0;
             }
         }

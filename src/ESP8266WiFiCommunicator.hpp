@@ -39,7 +39,6 @@ namespace athome {
             /* private:
                 virtual ~ESP8266WiFiCommunicator(); */
             private:
-                void _interpret();
                 int  _read();
                 void _write();
                 void _flush_input();
@@ -59,6 +58,7 @@ namespace athome {
                 int _connect_to_tcp_socket();
                 int _enable_transparent_mode();
                 int _go_to_send_mode();
+                int _command_check_peer();
             private:
                 int                                                                                 _enable_pin;
                 int                                                                                 _reset_pin;
