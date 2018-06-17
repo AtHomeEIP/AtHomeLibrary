@@ -11,8 +11,7 @@ namespace athome {
         extern uint16_t absolute_year;
 
         struct ITime {
-            class DateTime {
-            public:
+            struct DateTime {
                 uint32_t second : 6;
                 uint32_t minute : 6;
                 uint32_t hour : 5;
@@ -69,6 +68,8 @@ namespace athome {
             };*/
 
             struct ISO8601DateTime : public DateTime, public Printable {
+                ISO8601DateTime():DateTime(),Printable() {}
+
                 virtual size_t printTo(Print &p) const {
                     size_t len = p.print(absolute_year + year);
                     len += p.print(FH(communication::json::iso8601::itemSeparator));

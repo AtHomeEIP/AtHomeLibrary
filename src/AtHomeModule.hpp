@@ -324,12 +324,7 @@ namespace athome {
                     _onBackupPlugin(nullptr),
                     _onRestorePlugin(nullptr),
 # endif /* DISABLE_PERSISTENT_STORAGE */
-                    _serial(0)
-                {
-# ifndef DISABLE_SENSOR
-                    memset(_measures, 0, sizeof(_measures));
-# endif /* DISABLE_SENSOR */
-                }
+                    _serial(0) {}
 # ifndef DISABLE_COMMUNICATION
                 /**
                  * Broadcast the data passed as parameter over all module streams.
