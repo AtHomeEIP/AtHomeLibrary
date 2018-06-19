@@ -337,7 +337,7 @@ namespace athome {
                         return -1;
                     }
                 }
-                return -2;
+                return 0;
             }
 
             int ESP8266WiFiCommunicator::_test_esp() {
@@ -395,7 +395,14 @@ namespace athome {
                 _stream->print(_ap.password);
                 _stream->print(FH(double_quotes));
                 _stream->print(FH(at_eol));
-                return _esp_answer_check();
+                if (!_esp_answer_check()) {
+                    _connected = true;
+                    return 0;
+                }
+                else {
+                    _connected = false;
+                    return -5;
+                }
             }
 
             int ESP8266WiFiCommunicator::_create_ap() {
@@ -569,6 +576,17 @@ namespace athome {
                     }
                 }
                 return 0;
+            }
+
+            int ESP8266WiFiCommunicator::_set_echo(bool state) {
+                int check = _command_check();
+                if (check) {
+                    return check;
+                }
+                _stream->print(FH(at_ate));
+                _stream->print(state);
+                _stream->print(FH(at_eol));
+                return _esp_answer_check();
             }
         }
     }

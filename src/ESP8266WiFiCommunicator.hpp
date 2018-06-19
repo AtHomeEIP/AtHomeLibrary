@@ -59,6 +59,7 @@ namespace athome {
                 int _enable_transparent_mode();
                 int _go_to_send_mode();
                 int _command_check_peer();
+                int _set_echo(bool);
             private:
                 int                                                                                 _enable_pin;
                 int                                                                                 _reset_pin;
