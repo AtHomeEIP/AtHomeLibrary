@@ -102,7 +102,7 @@ namespace athome {
                 if (check) {
                     return check;
                 }
-                _read();
+                //_read();
                 _output_buffer.write(byte);
                 if (_output_buffer.available() == ESP8266_BUFFER_SIZE) {
                     _write();
@@ -157,15 +157,9 @@ namespace athome {
                 if (!isHostConfigured()) {
                     return -4;
                 }
-                if (_connect_to_tcp_socket()) {
-                    return -1;
-                }
-                if (_enable_transparent_mode()) {
-                    return -2;
-                }
-                if (_go_to_send_mode()) {
-                    return -3;
-                }
+                while (_connect_to_tcp_socket());
+                while (_enable_transparent_mode());
+                while (_go_to_send_mode());
                 return 0;
             }
 
@@ -198,6 +192,7 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::_read() {
+                return -1;
                 int check = _command_check_peer();
                 if (check) {
                     return check;
@@ -293,7 +288,7 @@ namespace athome {
                     return;
                 }
                 digitalWrite(_enable_pin, LOW);
-                _wait_for_esp_ready();
+                while (_wait_for_esp_ready());
             }
 
             void ESP8266WiFiCommunicator::_switch_off_esp() {
@@ -337,7 +332,7 @@ namespace athome {
                         return -1;
                     }
                 }
-                return 0;
+                return -2;
             }
 
             int ESP8266WiFiCommunicator::_test_esp() {
@@ -383,9 +378,7 @@ namespace athome {
                 if (check) {
                     return check;
                 }
-                else if (_set_esp_station_mode()) {
-                    return -3;
-                }
+                while (_set_esp_station_mode());
                 _stream->print(FH(at_at));
                 _stream->print(FH(symbol_plus));
                 _stream->print(FH(at_cwjap));
@@ -413,9 +406,7 @@ namespace athome {
                 if (check) {
                     return check;
                 }
-                else if (_set_esp_ap_mode()) {
-                    return -3;
-                }
+                while (_set_esp_ap_mode());
                 char channel[3];
                 SNPRINTF(channel, 2, channel_format, _ap.channel);
                 _stream->print(FH(at_at));
@@ -461,7 +452,6 @@ namespace athome {
                     return -1;
                 }
                 char buffer[10];
-                _stream->setTimeout(15000);
                 while (1) {
                     int len = _stream->readBytesUntil(at_nl, buffer, 9);
                     if (len > 0) {
@@ -501,10 +491,7 @@ namespace athome {
                     return check;
                 }
                 if (!isConnected()) {
-                    check = connect();
-                    if (check) {
-                        return check;
-                    }
+                    while (connect());
                 }
                 char strIp[16];
                 SNPRINTF(strIp, 16, ip::ip_format, _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
@@ -545,10 +532,7 @@ namespace athome {
                 _stream->print(FH(symbol_plus));
                 _stream->print(FH(at_cipsend));
                 _stream->print(FH(at_eol));
-                while (_stream->read() != '>');
-                while (_stream->read() != -1); //TODO: It's a hack. Why doesn't it recognize the end of line here?!
-                //while (_stream->read() != at_nl);
-                return 0;
+                return (_esp_answer_check() == -1) ? -1 : 0;
             }
 
             int ESP8266WiFiCommunicator::_command_check_peer() {
