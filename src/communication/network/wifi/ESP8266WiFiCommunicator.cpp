@@ -73,14 +73,17 @@ namespace athome {
             //ESP8266WiFiCommunicator::~ESP8266WiFiCommunicator() {}
 
             int ESP8266WiFiCommunicator::available() {
-                _read();
-                return _input_buffer.available();
+                if (_connected_to_host) {
+                    return _stream->available();
+                }
+                else {
+                    return 0;
+                }
             }
 
             int ESP8266WiFiCommunicator::read() {
-                _read();
-                if (_input_buffer.available() > 0) {
-                    return _input_buffer.read();
+                if (_connected_to_host) {
+                    return _stream->read();
                 }
                 else {
                     return -1;
@@ -88,9 +91,8 @@ namespace athome {
             }
 
             int ESP8266WiFiCommunicator::peek() {
-                _read();
-                if (_input_buffer.available() > 0) {
-                    return _input_buffer.peek();
+                if (_connected_to_host) {
+                    return _stream->peek();
                 }
                 else {
                     return -1;
@@ -98,22 +100,10 @@ namespace athome {
             }
 
             size_t ESP8266WiFiCommunicator::write(uint8_t byte) {
-                int check = _command_check_peer();
-                if (check) {
-                    return check;
+                if (!_connected_to_host) {
+                    return 0;
                 }
-                //_read();
-                _output_buffer.write(byte);
-                if (_output_buffer.available() == ESP8266_BUFFER_SIZE) {
-                    _write();
-                    _flush_output();
-                }
-                return 0;
-            }
-
-            void ESP8266WiFiCommunicator::flush() {
-                _flush_input();
-                _flush_output();
+                return _stream->write(byte);
             }
 
             void ESP8266WiFiCommunicator::enable() {
@@ -125,7 +115,6 @@ namespace athome {
                     disconnect();
                 }
                 _switch_off_esp();
-                flush();
             }
 
             int ESP8266WiFiCommunicator::connect() {
@@ -189,97 +178,6 @@ namespace athome {
                     return _connected_to_host;
                 }
                 return false;
-            }
-
-            int ESP8266WiFiCommunicator::_read() {
-                return -1;
-                int check = _command_check_peer();
-                if (check) {
-                    return check;
-                }
-                if (_connected_to_host) {
-                    if (!_receiving_data) {
-                        if (_stream->available() < 1) {
-                            return -1;
-                        }
-                        char buffer[5];
-                        if (_stream->read() != '+') {
-                            int data;
-                            do {
-                                data = _stream->read();
-                            } while (data != '+' && data != -1);
-                            if (data == -1) {
-                                return -1;
-                            }
-                            buffer[0] = '+';
-                        } else {
-                            buffer[0] = '+';
-                        }
-                        int length = _stream->readBytes(buffer + 1, 3);
-                        if (length >= 0) {
-                            buffer[length + 1] = '\0';
-                            if (STRCMP(buffer, at_ipd)) {
-                                return -1; // Invalid + command
-                            }
-                            if (_stream->read() == -1) {
-                                return -1; // Eat the ',' character that should be here
-                            }
-                            while (_stream->read() != ':');
-                            _receiving_data = true;
-                        }
-                    }
-                    if (_receiving_data) {
-                        char data;
-                        size_t space_left = ESP8266_BUFFER_SIZE - _input_buffer.available();
-                        for (size_t i = 0; i < space_left; i++) {
-                            data = _stream->read();
-                            if (data == -1) {
-                                _receiving_data = false;
-                                return i;
-                            } else if (data == '+' && i < (space_left - 4)) { // Extract incoming other '+IPD' commands
-                                char buffer[4];
-                                int length;
-                                length = _stream->readBytes(buffer, 3);
-                                if (length >= 0) {
-                                    if (!STRCMP(buffer, at_ipd)) {
-                                        while (_stream->read() != ':');
-                                    } else {
-                                        _input_buffer.write(data);
-                                        i++;
-                                        for (uint8_t j = 0; j < 3; j++) {
-                                            _input_buffer.write(buffer[j]);
-                                            i++;
-                                        }
-                                    }
-                                }
-                            } else {
-                                _input_buffer.write(data);
-                            }
-                        }
-                        return space_left;
-                    }
-                }
-            }
-
-            void ESP8266WiFiCommunicator::_write() {
-                int check = _command_check_peer();
-                if (check) {
-                    return;
-                }
-                while (_output_buffer.available()) {
-                    _stream->write(_output_buffer.read());
-                }
-                delay(25);
-            }
-
-            void ESP8266WiFiCommunicator::_flush_input() {
-                // TODO: To implement
-                _input_buffer.flush();
-            }
-
-            void ESP8266WiFiCommunicator::_flush_output() {
-                // TODO: To implement : need to send buffer data over a socket and flush it after
-                _output_buffer.flush();
             }
 
             void ESP8266WiFiCommunicator::_switch_on_esp() {
@@ -571,6 +469,12 @@ namespace athome {
                 _stream->print(state);
                 _stream->print(FH(at_eol));
                 return _esp_answer_check();
+            }
+
+            void ESP8266WiFiCommunicator::flush() {
+                if (_stream != nullptr) {
+                    _stream->flush();
+                }
             }
         }
     }

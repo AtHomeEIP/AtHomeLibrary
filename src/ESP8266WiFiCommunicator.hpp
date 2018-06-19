@@ -6,11 +6,6 @@
      !defined(DISABLE_ESP_AT_MODULE)
 # include <stdint.h>
 # include "AWiFiCommunicator.hpp"
-# include "Buffer.hpp"
-
-# ifndef ESP8266_BUFFER_SIZE
-#  define ESP8266_BUFFER_SIZE 64
-# endif
 
 # ifndef ESP8266_COMMAND_BUFFER_SIZE
 #  define ESP8266_COMMAND_BUFFER_SIZE 4
@@ -68,8 +63,6 @@ namespace athome {
                 bool                                                                                _connected_to_host;
                 bool                                                                                _receiving_data;
                 size_t                                                                              _receiving_len;
-                utility::Buffer<char, ESP8266_BUFFER_SIZE>                                          _input_buffer;
-                utility::Buffer<char, ESP8266_BUFFER_SIZE>                                          _output_buffer;
             };
         }
     }
