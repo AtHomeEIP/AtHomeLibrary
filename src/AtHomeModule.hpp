@@ -526,10 +526,10 @@ namespace athome {
                         else {
                             memset(&(_measures[_nbMeasures].sample), 0, sizeof(T));
                         }
-                        _nbMeasures++;
 #  ifndef DISABLE_DISPLAY
                         onUpdateDisplay();
 #  endif /* DISABLE_DISPLAY */
+                        _nbMeasures++;
                     }
                 }
 #  ifndef DISABLE_DISPLAY
