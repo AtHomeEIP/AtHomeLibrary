@@ -317,9 +317,9 @@ namespace athome {
 
             int ESP8266WiFiCommunicator::_esp_answer_check() {
                 while (!_stream->available());
-                char buffer[8];
-                while (_stream->available()) {
-                    int len = _stream->readBytesUntil(at_nl, buffer, 7);
+                char buffer[16];
+                while (1) {
+                    int len = _stream->readBytesUntil(at_nl, buffer, 15);
                     if (len < 1) {
                         break;
                     }
