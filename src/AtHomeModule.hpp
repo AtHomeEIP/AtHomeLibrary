@@ -299,12 +299,12 @@ namespace athome {
             protected:
 # ifndef DISABLE_SENSOR
                 struct AtHomeSensorMeasure {
-                    uint8_t                         estimate;
-                    utility::units::Unit            unit;
+                    T                               sample;
 # ifndef DISABLE_TIME
                     t_timestamp                     timestamp;
 # endif /* DISABLE_TIME */
-                    T                               sample;
+                    uint8_t                         estimate;
+                    utility::units::Unit            unit;
                     PGM_P                           label;
                 };
 # endif /* DISABLE_SENSOR */
