@@ -4,18 +4,15 @@
 # include "AtHomeConfig.h"
 # if !defined(DISABLE_COMMUNICATION)
 #  include "AtHomeFlashCommon.h"
+#  define ATHOME_NEW_LINE               '\n'   // Line feed
+#  define ATHOME_SPACER                 '\t'   // Tabulation
+#  define ATHOME_END_OF_COMMAND         '\x03' // End of Text / Ctrl^C
+#  define ATHOME_END_OF_COMMUNICATION   '\x04' // End of Transmission / Ctrl^D
 
 namespace athome {
     namespace communication {
         namespace commands {
 #  if !defined(DISABLE_WIFI)
-            extern const char spacer;
-            extern const char end_of_command;
-            extern const char end_of_communication;
-
-            extern const PROGMEM char end_of_line[];
-            extern const PROGMEM char part_separator[];
-
 #   if !defined(DISABLE_SENSOR)
             extern const PROGMEM char setSensorThresholds[];
 #   endif /* !defined(DISABLE_SENSOR) */

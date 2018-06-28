@@ -157,9 +157,6 @@ namespace athome {
                 else if (instance->_networkCommandCallback != nullptr) {
                     instance->_networkCommandCallback(command, stream);
                 }
-                else {
-                    while (stream.read() != communication::commands::end_of_command);
-                }
             }
 #  ifndef DISABLE_PERSISTENT_STORAGE
             static void _onNetworkBackup(size_t offset, storage::IStorage &storage) {

@@ -345,7 +345,7 @@ namespace athome {
                 template <typename U>
                 void        broadcastln(const U &data) {
                     broadcast(data);
-                    broadcast(FH(communication::commands::end_of_line));
+                    broadcast(FH(ATHOME_NEW_LINE));
                 }
 #  ifndef DISABLE_SENSOR
                 /**
@@ -358,7 +358,6 @@ namespace athome {
                     time::ITime::ISO8601DateTime timestamp;
 #   endif /* DISABLE_TIME */
                     broadcastln(FH(communication::commands::uploadData));
-                    broadcastln(FH(communication::commands::part_separator));
                     broadcast(FH(communication::json::uploadData::uploadDataStart));
                     broadcast(_serial);
                     broadcast(FH(communication::json::uploadData::uploadDataListStart));
@@ -393,7 +392,7 @@ namespace athome {
                     }
 #   endif /* DISABLE_SENSOR */
                     broadcastln(FH(communication::json::jsonListDictEnd));
-                    broadcast(communication::commands::end_of_command);
+                    broadcast(ATHOME_END_OF_COMMAND);
 #   ifndef DISABLE_SENSOR
                     _nbMeasures = 0;
 #   endif /* DISABLE_SENSOR */
@@ -408,34 +407,32 @@ namespace athome {
                     }
                     for (size_t i = 0; _streams[i] != nullptr; i++) {
                         if (_streams[i]->available()) {
-                            char buffer[19];
+                            char buffer[18];
                             char buffer2;
                             int len = 0;
                             for (len = 0; len < 18; len++) {
-                                if (_streams[i]->readBytes(&buffer2, 1) < 0) {
+                                if (_streams[i]->readBytes(&buffer2, 1) < 0 || buffer2 == ATHOME_NEW_LINE) {
                                     break;
                                 }
-                                else if (buffer2 == communication::commands::end_of_command || (len == 17 && buffer2 != '\n')) {
+                                else if (buffer2 == ATHOME_END_OF_COMMAND ||
+                                         (len == 17 && buffer2 !=  ATHOME_NEW_LINE)) {
                                     i--;
                                     len = 0;
                                     break; // Means we found a end of command, so what was read until now was from a previous command
                                 }
-                                else if (buffer2 == communication::commands::end_of_communication) {
+                                else if (buffer2 == ATHOME_END_OF_COMMUNICATION) {
                                     len = 0;
                                     break;
                                 }
-                                buffer[len] = buffer2;
-                                if (buffer2 == '\n') {
-                                    break;
+                                else if (buffer2 >= 'a' && buffer2 <= 'z') {
+                                    buffer2 -= 32; // Convert in upper case
                                 }
+                                buffer[len] = buffer2;
                             }
                             if (len < 1) {
                                 continue; // Means the reading is invalid, so we pass to next stream
                             }
                             buffer[len] = '\0';
-                            if (len > 1 && buffer[len - 1] == '\r') {
-                                buffer[len - 1] = '\0';
-                            }
                             if (!STRCMP(buffer, communication::commands::setProfile)) {
                                 _setProfile(*_streams[i]);
                             }
@@ -550,22 +547,22 @@ namespace athome {
 # ifndef DISABLE_COMMUNICATION
                 void        _setProfile(Stream &stream) {
                     moduleSerial serial;
-                    if (stream.readBytesUntil(communication::commands::end_of_command,
+                    if (stream.readBytesUntil(ATHOME_END_OF_COMMAND,
                                               reinterpret_cast<char *>(&serial), sizeof(moduleSerial)) < 1) {
                         return;
                     }
                     setSerial(serial);
-                    stream.readBytesUntil(communication::commands::end_of_command, reinterpret_cast<char *>(&serial),
+                    stream.readBytesUntil(ATHOME_END_OF_COMMAND, reinterpret_cast<char *>(&serial),
                                           1);
                 }
 #  ifndef DISABLE_TIME
                 void        _setDateTime(Stream &stream) {
                     if (_clock == nullptr) {
-                        while (stream.read() != communication::commands::end_of_command);
+                        while (stream.read() != ATHOME_END_OF_COMMAND);
                         return;
                     }
                     char buffer[8];
-                    int len = stream.readBytesUntil(communication::commands::end_of_command, buffer, 8);
+                    int len = stream.readBytesUntil(ATHOME_END_OF_COMMAND, buffer, 8);
                     if (len < 1) {
                         return;
                     }
@@ -583,7 +580,7 @@ namespace athome {
 #  ifndef DISABLE_SENSOR
                 void        _setSensorThresholds(Stream &stream) {
                     if (_sensor == nullptr) {
-                        while (stream.read() != communication::commands::end_of_command);
+                        while (stream.read() != ATHOME_END_OF_COMMAND);
                         return;
                     }
                     sensor::ISensor::ISensorThresholds thresholds;

@@ -77,7 +77,7 @@ namespace athome {
                 ap.ssid[len] = '\0';
                 len = communicator.readBytesUntil('\0', ap.password, sizeof(ap.password));
                 ap.password[len] = '\0';
-                communicator.readBytesUntil(communication::commands::end_of_command, &buffer, 1);
+                communicator.readBytesUntil(ATHOME_END_OF_COMMAND, &buffer, 1);
                 if (_wifi != nullptr) {
                     _wifi->disconnect();
                     _wifi->setAccessPoint(ap);

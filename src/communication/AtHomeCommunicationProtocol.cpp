@@ -6,24 +6,17 @@ namespace athome {
     namespace communication {
         namespace commands {
 # if !defined(DISABLE_COMMUNICATION)
-            const char spacer = '\t';
-            const char end_of_command = '\x03'; // It's the end of text character, ie Ctrl^D
-            const char end_of_communication = '\x04'; // It's the end of transmission character, ie Ctrl^C
-
-            const PROGMEM char end_of_line[] = "\r\n";
-            const PROGMEM char part_separator[] = "================================================================================";
-
 #  if !defined(DISABLE_SENSOR)
-            const PROGMEM char setSensorThresholds[] = "SetThresholds";
+            const PROGMEM char setSensorThresholds[] = "SET_THRESHOLDS";
 #  endif /* !defined(DISABLE_SENSOR) */
-            const PROGMEM char uploadData[] = "UploadData";
+            const PROGMEM char uploadData[] = "UPLOAD_DATA";
 #  if !defined(DISABLE_NETWORK)
 #   if !defined(DISABLE_WIFI)
-            const PROGMEM char setWiFi[] = "SetWiFi";
+            const PROGMEM char setWiFi[] = "SET_WIFI";
 #   endif /* !defined(DISABLE_WIFI) */
-            const PROGMEM char setEndPoint[] = "SetEndPoint";
+            const PROGMEM char setEndPoint[] = "SET_END_POINT";
 #  endif /* !defined(DISABLE_NETWORK) */
-            const PROGMEM char setProfile[] = "SetProfile";
+            const PROGMEM char setProfile[] = "SET_PROFILE";
 
 #  if !defined(DISABLE_NETWORK)
 #   if !defined(DISABLE_WIFI)
@@ -34,7 +27,7 @@ namespace athome {
             const PROGMEM char port_key[] = "port";
 #  endif /* !defined(DISABLE_NETWORK) */
 #  if !defined(DISABLE_TIME)
-            const PROGMEM char setDateTime[] = "SetDateTime";
+            const PROGMEM char setDateTime[] = "SET_DATE_TIME";
 #  endif /* !defined(DISABLE_TIME) */
         }
 
