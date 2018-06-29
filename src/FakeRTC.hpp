@@ -18,7 +18,7 @@ namespace athome {
             FakeRTC &operator=(const FakeRTC &) = delete;
             ~FakeRTC();
 
-            virtual const ISO8601DateTime &getDateTime();
+            virtual const DateTime &getDateTime();
             virtual void setCurrentDateTime(const DateTime &);
 
         private:
@@ -29,7 +29,7 @@ namespace athome {
 
         private:
             uint32_t        _lastTime;
-            ISO8601DateTime _date;
+            DateTime        _date;
         };
     }
 }

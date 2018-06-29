@@ -21,7 +21,7 @@ namespace athome {
             DS1307 &operator=(const DS1307 &) = delete;
             ~DS1307();
 
-            virtual const ITime::ISO8601DateTime &getDateTime();
+            virtual const ITime::DateTime &getDateTime();
             virtual void setCurrentDateTime(const DateTime &);
 
         protected:
@@ -33,7 +33,7 @@ namespace athome {
         private:
             TwoWire &_wire;
             bool _initialized;
-            ISO8601DateTime _date;
+            DateTime _date;
         };
     }
 }

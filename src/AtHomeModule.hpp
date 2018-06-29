@@ -26,12 +26,12 @@ namespace athome {
                 /**
                  * `moduleSerial` type represents a unique value used to identify a module from other
                  */
-                typedef uint32_t    moduleSerial;
+                typedef uint32_t                moduleSerial;
 # ifndef DISABLE_TIME
                 /**
                  * `timestamp` type is used to represent sensor readings date
                  */
-                typedef time::ITime::ISO8601DateTime   t_timestamp;
+                typedef time::ITime::DateTime   t_timestamp;
 # endif /* DISABLE_TIME */
                 /**
                  * AtHomeModule and derived classes are singletons, duplication is not allowed
@@ -347,51 +347,28 @@ namespace athome {
                     broadcast(data);
                     broadcast(FH(ATHOME_NEW_LINE));
                 }
+
+                void        raw_broadcast(const uint8_t *data, size_t len) {
+                    if (_streams == nullptr) {
+                        return;
+                    }
+                    for (size_t i = 0; _streams[i] != nullptr; i++) {
+                        _streams[i]->write(data, len);
+                    }
+                }
 #  ifndef DISABLE_SENSOR
                 /**
                  * Sends stored sensor readings over module streams.
                  */
                 void        uploadData() {
                     // Forward version of uploadData
-                    // Todo: implement a more resource efficient and generic version
-#   ifndef DISABLE_TIME
-                    time::ITime::ISO8601DateTime timestamp;
-#   endif /* DISABLE_TIME */
                     broadcastln(FH(communication::commands::uploadData));
-                    broadcast(FH(communication::json::uploadData::uploadDataStart));
-                    broadcast(_serial);
-                    broadcast(FH(communication::json::uploadData::uploadDataListStart));
+                    raw_broadcast(reinterpret_cast<uint8_t *>(&_serial), sizeof(_serial));
 #   ifndef DISABLE_SENSOR
                     for (size_t i = 0; i < _nbMeasures; i++) {
-                        broadcast(FH(communication::json::uploadData::uploadDataValueStart));
-                        broadcast(_measures[i].sample);
-#   ifndef DISABLE_TIME
-                        if (_clock != nullptr) {
-                            broadcast(FH(communication::json::uploadData::uploadDataTimestamp));
-                            timestamp = _measures[i].timestamp;
-                            broadcast(timestamp);
-                            //broadcast(_measures[i].timestamp); // WTF: Why it doesn't work but above yes?!
-                            broadcast(FH(communication::json::jsonStringDoubleQuotes));
-                        }
-#   endif /* DISABLE_TIME */
-                        broadcast(FH(communication::json::uploadData::uploadDataEstimate));
-                        broadcast(_measures[i].estimate);
-                        broadcast(FH(communication::json::uploadData::uploadDataUnit));
-                        broadcast(_measures[i].unit.unit);
-                        broadcast(FH(communication::json::uploadData::uploadDataPrefix));
-                        broadcast(_measures[i].unit.prefix);
-                        if (_measures[i].label != nullptr) {
-                            broadcast(FH(communication::json::uploadData::uploadDataLabel));
-                            broadcast(FH(_measures[i].label));
-                            broadcast(FH(communication::json::jsonStringDoubleQuotes));
-                        }
-                        broadcast(FH(communication::json::jsonDictEnd));
-                        if (i < (_nbMeasures - 1)) {
-                            broadcast(FH(communication::json::jsonItemSeparator));
-                        }
+                        raw_broadcast(reinterpret_cast<uint8_t *>(&(_measures[i])), sizeof(AtHomeSensorMeasure));
                     }
 #   endif /* DISABLE_SENSOR */
-                    broadcastln(FH(communication::json::jsonListDictEnd));
                     broadcast(ATHOME_END_OF_COMMAND);
 #   ifndef DISABLE_SENSOR
                     _nbMeasures = 0;

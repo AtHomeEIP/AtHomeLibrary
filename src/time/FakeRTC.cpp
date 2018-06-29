@@ -12,7 +12,7 @@ namespace athome {
             _date = date;
         }
 
-        const ITime::ISO8601DateTime &FakeRTC::getDateTime() {
+        const ITime::DateTime &FakeRTC::getDateTime() {
             uint32_t now = millis();
             uint32_t elapsed;
             if (now > _lastTime) {

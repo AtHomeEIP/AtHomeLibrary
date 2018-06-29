@@ -40,22 +40,10 @@ namespace athome{
 
         class MQ2GasSensor : public ISensor {
         public:
-            struct Values : public Printable {
+            struct Values {
                 int lpg;
                 int co;
                 int smoke;
-                virtual size_t printTo(Print &p) const {
-                    // TOOD: To replace with a binary serialization when uploadData will not use json anymore
-                    size_t len = 0;
-                    len += p.print(FH(MQ2GasSensorStrings::jsonLPG));
-                    len += p.print(lpg);
-                    len += p.print(FH(MQ2GasSensorStrings::jsonCO));
-                    len += p.print(co);
-                    len += p.print(FH(MQ2GasSensorStrings::jsonSMOKE));
-                    len += p.print(smoke);
-                    len += p.print(FH(communication::json::jsonDictEnd));
-                    return len;
-                }
             };
 
             explicit MQ2GasSensor(int pin);

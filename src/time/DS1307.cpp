@@ -10,7 +10,7 @@ namespace athome {
 
         DS1307::~DS1307() {}
 
-        const ITime::ISO8601DateTime &DS1307::getDateTime() {
+        const ITime::DateTime &DS1307::getDateTime() {
             if (!_initialized) {
                 return _date;
             }
