@@ -5,8 +5,6 @@
 # if !defined(DISABLE_LIST) && !defined(DISABLE_QUEUE)
 #  include "AList.hpp"
 
-// Todo: Recursive algorithms aren't great on embedded platforms :(
-
 namespace athome {
     namespace utility {
         /**
@@ -19,15 +17,17 @@ namespace athome {
             Queue(T &data):AList<T>(&data) {}
             Queue(const Queue &) = delete;
             Queue &operator=(const Queue &) = delete;
-            Queue &append(T &data) {
-                if (this->_next == nullptr) {
-                    Queue<T> *next = new Queue<T>(data);
-                    append(*next);
-                    return *next;
+            Queue &put(T &data) {
+                Queue<T> *next = new Queue<T>(data);
+                insert(*next);
+                return *next;
+            }
+            Queue &push_back(T &data) {
+                Queue *item = this;
+                while (item->_next != nullptr) {
+                    item = reinterpret_cast<Queue *>(item->_next);
                 }
-                else {
-                    return this->_next->append(data);
-                }
+                return item->put(data);
             }
         };
     }

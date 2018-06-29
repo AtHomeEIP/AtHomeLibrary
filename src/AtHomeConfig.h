@@ -61,9 +61,9 @@
 //# define DISABLE_FAKE_RTC
 
 // Macros to uncomment to disable utilities
-# define DISABLE_LIST
-# define DISABLE_ITERABLE
+//# define DISABLE_LIST
+//# define DISABLE_ITERABLE
 //# define DISABLE_BUFFER
-# define DISABLE_QUEUE
+//# define DISABLE_QUEUE
 
 #endif /* ATHOMECONFIG_H */
