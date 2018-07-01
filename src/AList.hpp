@@ -29,7 +29,7 @@ namespace athome {
                 _next = &next;
             }
         protected:
-            AList(AList *next = nullptr, T *data = nullptr): AIterable<T>(data), _next(next) {}
+            AList(T &data, AList *next = nullptr): AIterable<T>(data), _next(next) {}
 
         protected:
             AList<T>    *_next;

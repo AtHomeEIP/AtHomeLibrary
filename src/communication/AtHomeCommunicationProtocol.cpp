@@ -5,7 +5,6 @@
 namespace athome {
     namespace communication {
         namespace commands {
-# if !defined(DISABLE_COMMUNICATION)
 #  if !defined(DISABLE_SENSOR)
             const PROGMEM char setSensorThresholds[] = "SET_THRESHOLDS";
 #  endif /* !defined(DISABLE_SENSOR) */
@@ -30,7 +29,6 @@ namespace athome {
             const PROGMEM char setDateTime[] = "SET_DATE_TIME";
 #  endif /* !defined(DISABLE_TIME) */
         }
-# endif /* DISABLE_WIFI */
     }
 }
 #endif /* !defined(DISABLE_COMMUNICATION) */

@@ -14,6 +14,7 @@
 # include "AtHomeCommunicationProtocol.hpp"
 # include "AtHomeFlashCommon.h"
 # include "ITime.hpp"
+# include "Queue.hpp"
 
 namespace athome {
     namespace module {
@@ -52,6 +53,7 @@ namespace athome {
                  */
                 typedef void (*customCallback)();
 
+                typedef void (*t_callback)(void *, ...);
 # ifndef DISABLE_COMMUNICATION
                 /**
                  * AtHomeCommandCommandPlugin callback is used to extend command interpreter and called when an unknown command is the received.
@@ -62,6 +64,15 @@ namespace athome {
                  * \fn void name(const String &, Stream &)
                  */
                 typedef void (*AtHomeCommandPlugin)(const char *, Stream &);
+
+                struct Command {
+                    PGM_P               name;
+                    AtHomeCommandPlugin callback;
+                };
+
+                typedef Command**   CommandTable;
+
+                using CommandPluginList = utility::Queue<CommandTable>;
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE
                 /**
@@ -72,7 +83,9 @@ namespace athome {
                  * These functions must have a prototype compatible to this one:
                  * \fn void name(size_t, athome::storage::IStorage &)
                  */
-                typedef void (*AtHomeStoragePlugin)(size_t, storage::IStorage &);
+                typedef size_t (*AtHomeStoragePlugin)(size_t, storage::IStorage &);
+
+                using StoragePluginList = utility::Queue<AtHomeStoragePlugin>;
 # endif /* DISABLE_PERSISTENT_STORAGE */
 
                 /**
@@ -236,8 +249,13 @@ namespace athome {
                 /**
                  * Set a callback called after default command interpreter executed and wasn't able to execute received input, passing the command string and a reference to the stream to the callback.
                  */
-                virtual void setCommandPlugin(AtHomeCommandPlugin plugin) {
-                    _communicationPlugin = plugin;
+                virtual void setCommandPlugin(CommandTable table) {
+                    if (_communicationPlugin == nullptr) {
+                        _communicationPlugin = new CommandPluginList(table);
+                    }
+                    else {
+                        _communicationPlugin->push_back(table);
+                    }
                 }
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE
@@ -245,14 +263,24 @@ namespace athome {
                  * Set a callback called after module backup was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used.
                  */
                 virtual void setOnBackupPlugin(AtHomeStoragePlugin plugin) {
-                    _onBackupPlugin = plugin;
+                    if (_onBackupPlugin == nullptr) {
+                        _onBackupPlugin = new StoragePluginList(plugin);
+                    }
+                    else {
+                        _onBackupPlugin->push_back(plugin);
+                    }
                 }
 
                 /**
                  * Set a callback called after module data loading was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used.
                  */
                 virtual void setOnRestorePlugin(AtHomeStoragePlugin plugin) {
-                    _onRestorePlugin = plugin;
+                    if (_onRestorePlugin == nullptr) {
+                        _onRestorePlugin = new StoragePluginList(plugin);
+                    }
+                    else {
+                        _onRestorePlugin->push_back(plugin);
+                    }
                 }
 # endif /* DISABLE_PERSISTENT_STORAGE */
 
@@ -361,7 +389,6 @@ namespace athome {
                  * Sends stored sensor readings over module streams.
                  */
                 void        uploadData() {
-                    // Forward version of uploadData
                     broadcastln(FH(communication::commands::uploadData));
                     raw_broadcast(reinterpret_cast<uint8_t *>(&_serial), sizeof(_serial));
 #   ifndef DISABLE_SENSOR
@@ -424,7 +451,17 @@ namespace athome {
                             }
 #  endif /* DISABLE_SENSOR */
                             else if (_communicationPlugin != nullptr) {
-                                _communicationPlugin(buffer, *_streams[i]);
+                                CommandPluginList *list = _communicationPlugin;
+                                while (list != nullptr) {
+                                    CommandTable &table = list->get();
+                                    for (size_t j = 0; table[j] != nullptr; j++) {
+                                        if (!STRCMP(buffer, table[j]->name)) {
+                                            table[j]->callback(buffer, *_streams[i]);
+                                            return;
+                                        }
+                                    }
+                                    list = list->next();
+                                }
                             }
                             else {
                                 //_streams[i]->flush(); // Would also remove output buffers
@@ -454,8 +491,14 @@ namespace athome {
                 void        onBackupOnStorage() {
                     if (_storage != nullptr) {
                         _storage->write(0, reinterpret_cast<const void *>(&_serial), sizeof(moduleSerial));
-                        if (_onBackupPlugin != nullptr) {
-                            _onBackupPlugin(sizeof(moduleSerial), *_storage);
+                        size_t offset = sizeof(moduleSerial);
+                        StoragePluginList *list = _onBackupPlugin;
+                        while (list != nullptr) {
+                            AtHomeStoragePlugin plugin = list->get();
+                            if (plugin != nullptr) {
+                                offset += plugin(offset, *_storage);
+                            }
+                            list = list->next();
                         }
                     }
                 }
@@ -469,8 +512,14 @@ namespace athome {
                         if (!_serial) {
                             return; // The module is uninitialized
                         }
-                        if (_onRestorePlugin != nullptr) {
-                            _onRestorePlugin(sizeof(moduleSerial), *_storage);
+                        size_t offset = sizeof(moduleSerial);
+                        StoragePluginList *list = _onRestorePlugin;
+                        while (list != nullptr) {
+                            AtHomeStoragePlugin plugin = list->get();
+                            if (plugin != nullptr) {
+                                offset += plugin(offset, *_storage);
+                            }
+                            list = list->next();
                         }
                     }
                 }
@@ -585,11 +634,11 @@ namespace athome {
 # ifndef DISABLE_COMMUNICATION
                 unsigned long               _communicationInterval;
                 unsigned long               _uploadDataInterval;
-                AtHomeCommandPlugin        _communicationPlugin;
+                CommandPluginList           *_communicationPlugin;
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE
-                AtHomeStoragePlugin        _onBackupPlugin;
-                AtHomeStoragePlugin        _onRestorePlugin;
+                StoragePluginList           *_onBackupPlugin;
+                StoragePluginList           *_onRestorePlugin;
 # endif /* DISABLE_PERSISTENT_STORAGE */
                 moduleSerial                _serial;
                 Scheduler                   _scheduler;

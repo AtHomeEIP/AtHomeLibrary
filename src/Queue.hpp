@@ -14,7 +14,7 @@ namespace athome {
         class Queue : public AList<T> {
         public:
             Queue():AList<T>() {}
-            Queue(T &data):AList<T>(&data) {}
+            Queue(T &data):AList<T>(data) {}
             Queue(const Queue &) = delete;
             Queue &operator=(const Queue &) = delete;
             Queue &put(T &data) {
