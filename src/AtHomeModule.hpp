@@ -19,6 +19,50 @@
 namespace athome {
     namespace module {
         /**
+         * customCallback type is used to pass a callback to call during various events.
+         *
+         * Functions used as callback must have a compatible prototype to this:
+         * \fn void name()
+         */
+        typedef void (*customCallback)();
+
+        typedef void (*t_callback)(void *, ...);
+# ifndef DISABLE_COMMUNICATION
+        /**
+         * AtHomeCommandCommandPlugin callback is used to extend command interpreter and called when an unknown command is the received.
+         *
+         * Functions used as callback receive a reference on a String holding the actual command name and a reference on the Stream from which it has been received.
+         *
+         * These functions must have a prototype compatible to this one:
+         * \fn void name(const String &, Stream &)
+         */
+        typedef void (*AtHomeCommandPlugin)(const char *, Stream &);
+
+        struct Command {
+            PGM_P               name;
+            AtHomeCommandPlugin callback;
+        };
+
+        typedef const Command*  CommandTable[];
+        typedef const Command** C_CommandTable;
+
+        using CommandPluginList = utility::ConstQueue<C_CommandTable>;
+# endif /* DISABLE_COMMUNICATION */
+# ifndef DISABLE_PERSISTENT_STORAGE
+        /**
+         * AtHomeStoragePlugin callback is used to save or restore additional data from actual storage.
+         *
+         * Functions used as callback will receive the current offset usable after the module read or saved data in the storage, and a reference to this storage interface.
+         *
+         * These functions must have a prototype compatible to this one:
+         * \fn void name(size_t, athome::storage::IStorage &)
+         */
+        typedef size_t (*AtHomeStoragePlugin)(size_t, storage::IStorage &);
+
+        using StoragePluginList = utility::Queue<AtHomeStoragePlugin>;
+# endif /* DISABLE_PERSISTENT_STORAGE */
+
+        /**
          * Template class implementing base AtHome Modules, taking the type representing a reading from the intended sensor to use and the number of readings to save in a buffer.
          */
         template <typename T, size_t n>
@@ -43,50 +87,6 @@ namespace athome {
                  */
                 AtHomeModule &operator=(const AtHomeModule &) = delete;
                 ~AtHomeModule() {}
-
-            public:
-                /**
-                 * customCallback type is used to pass a callback to call during various events.
-                 *
-                 * Functions used as callback must have a compatible prototype to this:
-                 * \fn void name()
-                 */
-                typedef void (*customCallback)();
-
-                typedef void (*t_callback)(void *, ...);
-# ifndef DISABLE_COMMUNICATION
-                /**
-                 * AtHomeCommandCommandPlugin callback is used to extend command interpreter and called when an unknown command is the received.
-                 *
-                 * Functions used as callback receive a reference on a String holding the actual command name and a reference on the Stream from which it has been received.
-                 *
-                 * These functions must have a prototype compatible to this one:
-                 * \fn void name(const String &, Stream &)
-                 */
-                typedef void (*AtHomeCommandPlugin)(const char *, Stream &);
-
-                struct Command {
-                    PGM_P               name;
-                    AtHomeCommandPlugin callback;
-                };
-
-                typedef Command**   CommandTable;
-
-                using CommandPluginList = utility::Queue<CommandTable>;
-# endif /* DISABLE_COMMUNICATION */
-# ifndef DISABLE_PERSISTENT_STORAGE
-                /**
-                 * AtHomeStoragePlugin callback is used to save or restore additional data from actual storage.
-                 *
-                 * Functions used as callback will receive the current offset usable after the module read or saved data in the storage, and a reference to this storage interface.
-                 *
-                 * These functions must have a prototype compatible to this one:
-                 * \fn void name(size_t, athome::storage::IStorage &)
-                 */
-                typedef size_t (*AtHomeStoragePlugin)(size_t, storage::IStorage &);
-
-                using StoragePluginList = utility::Queue<AtHomeStoragePlugin>;
-# endif /* DISABLE_PERSISTENT_STORAGE */
 
                 /**
                  * Template function used to get the address of the current AtHomeModule or derived class or instanciates it if there's still no instances existing.
@@ -183,7 +183,7 @@ namespace athome {
                  *
                  * Calling this function passing no parameter or nullptr will restore the default callback of this class.
                  */
-                virtual void setSensorExecutionCallback(customCallback f = nullptr) {
+                void setSensorExecutionCallback(customCallback f = nullptr) {
                     _sensorTask.setCallback((f == nullptr) ? &AtHomeModule::_onSampleSensor : f);
                 }
 # endif /* DISABLE_SENSOR */
@@ -223,7 +223,7 @@ namespace athome {
                  *
                  * Calling this function passing no parameter or nullptr will restore the default callback of this class.
                  */
-                virtual void setUploadDataExecutionCallback(customCallback f = nullptr) {
+                void setUploadDataExecutionCallback(customCallback f = nullptr) {
                     _uploadDataTask.setCallback((f == nullptr) ? &AtHomeModule::_uploadData : f);
                 }
 #  endif /* DISABLE_SENSOR */
@@ -242,14 +242,14 @@ namespace athome {
                  *
                  * Calling this function passing no parameter or nullptr will restore the default callback of this class.
                  */
-                virtual void setCommunicationExecutionCallback(customCallback f = nullptr) {
+                void setCommunicationExecutionCallback(customCallback f = nullptr) {
                     _communicationTask.setCallback((f == nullptr) ? &AtHomeModule::_onCommunicate : f);
                 }
 
                 /**
                  * Set a callback called after default command interpreter executed and wasn't able to execute received input, passing the command string and a reference to the stream to the callback.
                  */
-                virtual void setCommandPlugin(CommandTable table) {
+                void setCommandPlugin(CommandTable table) {
                     if (_communicationPlugin == nullptr) {
                         _communicationPlugin = new CommandPluginList(table);
                     }
@@ -262,7 +262,7 @@ namespace athome {
                 /**
                  * Set a callback called after module backup was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used.
                  */
-                virtual void setOnBackupPlugin(AtHomeStoragePlugin plugin) {
+                void setOnBackupPlugin(AtHomeStoragePlugin plugin) {
                     if (_onBackupPlugin == nullptr) {
                         _onBackupPlugin = new StoragePluginList(plugin);
                     }
@@ -274,7 +274,7 @@ namespace athome {
                 /**
                  * Set a callback called after module data loading was executed on storage, passing the actual offset usable (after module owns data) and a reference to the storage interface used.
                  */
-                virtual void setOnRestorePlugin(AtHomeStoragePlugin plugin) {
+                void setOnRestorePlugin(AtHomeStoragePlugin plugin) {
                     if (_onRestorePlugin == nullptr) {
                         _onRestorePlugin = new StoragePluginList(plugin);
                     }
@@ -437,33 +437,29 @@ namespace athome {
                                 continue; // Means the reading is invalid, so we pass to next stream
                             }
                             buffer[len] = '\0';
-                            if (!STRCMP(buffer, communication::commands::setProfile)) {
-                                _setProfile(*_streams[i]);
+                            bool found = false;
+                            for (size_t i = 0; _commands[i] != nullptr; i++) {
+                                if (!STRCMP(buffer, _commands[i]->name)) {
+                                    _commands[i]->callback(buffer, *_streams[i]);
+                                    found = true;
+                                    break;
+                                }
                             }
-#  ifndef DISABLE_TIME
-                            else if (!STRCMP(buffer, communication::commands::setDateTime)) {
-                                _setDateTime(*_streams[i]);
-                            }
-#  endif /* DISABLE_TIME */
-#  ifndef DISABLE_SENSOR
-                            else if (!STRCMP(buffer, communication::commands::setSensorThresholds)) {
-                                _setSensorThresholds(*_streams[i]);
-                            }
-#  endif /* DISABLE_SENSOR */
-                            else if (_communicationPlugin != nullptr) {
+                            if (!found && _communicationPlugin != nullptr) {
                                 CommandPluginList *list = _communicationPlugin;
-                                while (list != nullptr) {
-                                    CommandTable &table = list->get();
+                                while (list != nullptr && !found) {
+                                    C_CommandTable const &table = list->get();
                                     for (size_t j = 0; table[j] != nullptr; j++) {
                                         if (!STRCMP(buffer, table[j]->name)) {
                                             table[j]->callback(buffer, *_streams[i]);
-                                            return;
+                                            found = true;
+                                            break;
                                         }
                                     }
                                     list = list->next();
                                 }
                             }
-                            else {
+                            if (!found) {
                                 //_streams[i]->flush(); // Would also remove output buffers
                                 while (_streams[i]->read() != -1);
                             }
@@ -581,6 +577,14 @@ namespace athome {
                     stream.readBytesUntil(ATHOME_END_OF_COMMAND, reinterpret_cast<char *>(&serial),
                                           1);
                 }
+
+                static void _setProfileCallback(const char *command, Stream &stream) {
+                    (void)command;
+                    AtHomeModule *instance = getInstance();
+                    if (instance != nullptr) {
+                        instance->_setProfile(stream);
+                    }
+                }
 #  ifndef DISABLE_TIME
                 void        _setDateTime(Stream &stream) {
                     if (_clock == nullptr) {
@@ -601,6 +605,14 @@ namespace athome {
                     time.year = 0;
                     memcpy(&time::absolute_year, buffer + 5, 2);
                     _clock->setCurrentDateTime(time);
+                }
+
+                static void _setDateTimeCallback(const char *command, Stream &stream) {
+                    (void)command;
+                    AtHomeModule *instance = getInstance();
+                    if (instance != nullptr) {
+                        instance->_setDateTime(stream);
+                    }
                 }
 #  endif /* DISABLE_TIME */
 #  ifndef DISABLE_SENSOR
@@ -624,41 +636,74 @@ namespace athome {
                     uint8_t tmp;
                     stream.readBytes(reinterpret_cast<char *>(&tmp), 1);
                 }
+
+                static void _setSensorThresholdsCallback(const char *command, Stream &stream) {
+                    (void)command;
+                    AtHomeModule *instance = getInstance();
+                    if (instance != nullptr) {
+                        instance->_setSensorThresholds(stream);
+                    }
+                }
 #  endif /* DISABLE_SENSOR */
 # endif /* DISABLE_COMMUNICATION */
             private:
 # ifndef DISABLE_SENSOR
-                unsigned long               _sensorInterval;
-                size_t                      _nbMeasures;
+                unsigned long           _sensorInterval;
+                size_t                  _nbMeasures;
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_COMMUNICATION
-                unsigned long               _communicationInterval;
-                unsigned long               _uploadDataInterval;
-                CommandPluginList           *_communicationPlugin;
+                unsigned long           _communicationInterval;
+                unsigned long           _uploadDataInterval;
+                CommandPluginList       *_communicationPlugin;
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE
-                StoragePluginList           *_onBackupPlugin;
-                StoragePluginList           *_onRestorePlugin;
+                StoragePluginList       *_onBackupPlugin;
+                StoragePluginList       *_onRestorePlugin;
 # endif /* DISABLE_PERSISTENT_STORAGE */
-                moduleSerial                _serial;
-                Scheduler                   _scheduler;
+                moduleSerial            _serial;
+                Scheduler               _scheduler;
 # ifndef DISABLE_SENSOR
-                AtHomeSensorMeasure         _measures[n];
+                AtHomeSensorMeasure     _measures[n];
 # endif /* DISABLE_SENSOR */
 # if !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION)
-                Task                        _uploadDataTask;
+                Task                    _uploadDataTask;
 # endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION) */
 # ifndef DISABLE_SENSOR
-                Task                        _sensorTask;
+                Task                    _sensorTask;
 # endif /* DISABLE_SENSOR */
 # ifndef DISABLE_COMMUNICATION
-                Task                        _communicationTask;
+                Task                    _communicationTask;
 # endif /* DISABLE_COMMUNICATION */
-                static void                 *_instance;
+                static void             *_instance;
+
+            private:
+                static const Command        _commandSetProfile;
+                static const Command        _commandSetDateTime;
+                static const Command        _commandSetSensorThresholds;
+                static const CommandTable   _commands;
         };
 
         template <typename T, size_t n>
         void *AtHomeModule<T, n>::_instance = nullptr;
+
+        template <typename T, size_t n>
+        const Command AtHomeModule<T, n>::_commandSetProfile = { communication::commands::uploadData,
+                                                                 AtHomeModule<T, n>::_setProfileCallback };
+
+        template <typename T, size_t n>
+        const Command AtHomeModule<T, n>::_commandSetDateTime = { communication::commands::setDateTime,
+                                                                  AtHomeModule<T, n>::_setDateTimeCallback };
+
+        template <typename T, size_t n>
+        const Command AtHomeModule<T, n>::_commandSetSensorThresholds = { communication::commands::setSensorThresholds,
+                                                                          AtHomeModule<T, n>::_setSensorThresholdsCallback };
+
+        template <typename T, size_t n>
+        const CommandTable AtHomeModule<T, n>::_commands = { &AtHomeModule<T, n>::_commandSetProfile,
+                                                             &AtHomeModule<T, n>::_commandSetDateTime,
+                                                             &AtHomeModule<T, n>::_commandSetSensorThresholds,
+                                                             nullptr
+        };
     }
 }
 #endif /* ATHOMEMODULE_HPP */
