@@ -5,6 +5,7 @@
 #  include <stdio.h>
 #  include "AtHomeModule.hpp"
 #  include "AtHomeFlashCommon.h"
+#  include "ANetworkCommunicator.hpp"
 
 namespace athome {
     namespace module {
@@ -16,18 +17,6 @@ namespace athome {
             AtHomeNetworkModule &operator=(const AtHomeNetworkModule &) = delete;
             ~AtHomeNetworkModule() {}
 
-            virtual void setCommandPlugin(typename AtHomeModule<T, n>::AtHomeCommandPlugin plugin) {
-                _networkCommandCallback = plugin;
-            }
-#  ifndef DISABLE_PERSISTENT_STORAGE
-            virtual void setOnBackupPlugin(typename AtHomeModule<T, n>::AtHomeStoragePlugin plugin) {
-                _networkOnBackupCallback = plugin;
-            }
-
-            virtual void setOnRestorePlugin(typename AtHomeModule<T, n>::AtHomeStoragePlugin plugin) {
-                _networkOnRestoreCallback = plugin;
-            }
-#  endif /* DISABLE_PERSISTENT_STORAGE */
             void setNetworkCommunicator(communication::ANetworkCommunicator &communicator) {
                 if (_communicator != nullptr) {
                     _communicator->disconnectFromHost();
@@ -56,58 +45,46 @@ namespace athome {
 
         protected:
             AtHomeNetworkModule():
-                    _networkCommandCallback(nullptr),
-#  ifndef DISABLE_PERSISTENT_STORAGE
-                    _networkOnBackupCallback(nullptr),
-                    _networkOnRestoreCallback(nullptr),
-#  endif /* DISABLE_PERSISTENT_STORAGE */
                     _communicator(nullptr),
                     AtHomeModule<T, n>() {
-                AtHomeModule<T, n>::setCommandPlugin(&AtHomeNetworkModule::_onCommandReceivedNetwork);
+                AtHomeModule<T, n>::setCommandPlugin(_networkCommands);
+                //AtHomeModule<T, n>::setCommandPlugin(&AtHomeNetworkModule::_onCommandReceivedNetwork);
 #  ifndef DISABLE_PERSISTENT_STORAGE
-                AtHomeModule<T, n>::setOnBackupPlugin(&AtHomeNetworkModule::_onNetworkBackup);
-                AtHomeModule<T, n>::setOnRestorePlugin(&AtHomeNetworkModule::_onNetworkRestore);
+                AtHomeModule<T, n>::setOnBackupPlugin(_onNetworkBackup);
+                AtHomeModule<T, n>::setOnRestorePlugin(_onNetworkRestore);
 #  endif /* DISABLE_PERSISTENT_STORAGE */
             }
 #  ifndef DISABLE_PERSISTENT_STORAGE
-            void onNetworkBackup(size_t offset, storage::IStorage &storage) {
+            size_t onNetworkBackup(size_t offset, storage::IStorage &storage) {
                 if (_communicator == nullptr) {
-                    if (_networkOnBackupCallback != nullptr) {
-                        _networkOnBackupCallback(offset, storage);
-                    }
                     return;
                 }
                 communication::ip::tcp_host host = _communicator->getHost();
+                size_t delta = 0;
                 storage.write(offset, reinterpret_cast<const void *>(host.ipv6), sizeof(host.ipv6));
-                offset += sizeof(host.ipv6);
-                storage.write(offset, reinterpret_cast<const void *>(&(host.hport)), sizeof(host.hport));
-                offset += sizeof(host.hport);
-                if (_networkOnBackupCallback != nullptr) {
-                    _networkOnBackupCallback(offset, storage);
-                }
+                delta += sizeof(host.ipv6);
+                storage.write(offset + delta, reinterpret_cast<const void *>(&(host.hport)), sizeof(host.hport));
+                delta += sizeof(host.hport);
+                return delta;
             }
 
-            void onNetworkRestore(size_t offset, storage::IStorage &storage) {
+            size_t onNetworkRestore(size_t offset, storage::IStorage &storage) {
                 if (_communicator == nullptr) {
-                    if (_networkOnRestoreCallback != nullptr) {
-                        _networkOnRestoreCallback(offset, storage);
-                    }
                     return;
                 }
                 communication::ip::tcp_host host;
+                size_t delta = 0;
                 storage.read(offset, reinterpret_cast<void *>(host.ipv6), sizeof(host.ipv6));
-                offset += sizeof(host.ipv6);
-                storage.read(offset, reinterpret_cast<void *>(&(host.hport)), sizeof(host.hport));
-                offset += sizeof(host.hport);
+                delta += sizeof(host.ipv6);
+                storage.read(offset + delta, reinterpret_cast<void *>(&(host.hport)), sizeof(host.hport));
+                delta += sizeof(host.hport);
                 _communicator->setHost(host);
-                if (_networkOnRestoreCallback != nullptr) {
-                    _networkOnRestoreCallback(offset, storage);
-                }
+                return delta;
             }
 #  endif /* DISABLE_PERSISTENT_STORAGE */
 
         private:
-            void setEndPointCommand(Stream &communicator) {
+            void setEndPoint(Stream &communicator) {
                 communication::ip::tcp_host host;
                 char version;
                 if (communicator.readBytes(&version, 1) < 1) {
@@ -128,6 +105,13 @@ namespace athome {
                 setHost(host);
             }
 
+            static void _setEndPoint(const char *command, Stream &stream) {
+                AtHomeNetworkModule *instance = reinterpret_cast<AtHomeNetworkModule *>(AtHomeModule<T, n>::getInstance());
+                if (instance != nullptr) {
+                    return instance->setEndPoint(stream);
+                }
+            }
+
             void _updateStreams() {
                 if (ABaseModule::_streams == nullptr) {
                     ABaseModule::_streams = new Stream*[2];
@@ -146,42 +130,38 @@ namespace athome {
             }
 
         private:
-            static void _onCommandReceivedNetwork(const char *command, Stream &stream) {
-                AtHomeNetworkModule *instance = reinterpret_cast<AtHomeNetworkModule *>(AtHomeModule<T, n>::getInstance());
-                if (instance == nullptr) {
-                    return;
-                }
-                if (!STRCMP(command, communication::commands::setEndPoint)) {
-                    instance->setEndPointCommand(stream);
-                }
-                else if (instance->_networkCommandCallback != nullptr) {
-                    instance->_networkCommandCallback(command, stream);
-                }
-            }
 #  ifndef DISABLE_PERSISTENT_STORAGE
-            static void _onNetworkBackup(size_t offset, storage::IStorage &storage) {
+            static size_t _onNetworkBackup(size_t offset, storage::IStorage &storage) {
                 AtHomeNetworkModule *instance = reinterpret_cast<AtHomeNetworkModule *>(AtHomeModule<T, n>::getInstance());
                 if (instance != nullptr) {
-                    instance->onNetworkBackup(offset, storage);
+                    return instance->onNetworkBackup(offset, storage);
                 }
+                return 0;
             }
 
-            static void _onNetworkRestore(size_t offset, storage::IStorage &storage) {
+            static size_t _onNetworkRestore(size_t offset, storage::IStorage &storage) {
                 AtHomeNetworkModule *instance = reinterpret_cast<AtHomeNetworkModule *>(AtHomeModule<T, n>::getInstance());
                 if (instance != nullptr) {
-                    instance->onNetworkRestore(offset, storage);
+                    return instance->onNetworkRestore(offset, storage);
                 }
+                return 0;
             }
-#  endif /* DISABLE_PERSISTENT_STORAGE */
-        private:
-            typename AtHomeModule<T, n>::AtHomeCommandPlugin _networkCommandCallback;
-#  ifndef DISABLE_PERSISTENT_STORAGE
-            typename AtHomeModule<T, n>::AtHomeStoragePlugin _networkOnBackupCallback;
-            typename AtHomeModule<T, n>::AtHomeStoragePlugin _networkOnRestoreCallback;
 #  endif /* DISABLE_PERSISTENT_STORAGE */
         protected:
             communication::ANetworkCommunicator             *_communicator;
+
+        private:
+            static const Command                            _setEndPointCommand;
+            static const CommandTable                       _networkCommands;
         };
+
+        template <typename T, size_t n>
+        const Command AtHomeNetworkModule<T, n>::_setEndPointCommand = { communication::commands::setEndPoint,
+                                                                         AtHomeNetworkModule<T, n>::_setEndPoint };
+
+        template <typename T, size_t n>
+        const CommandTable AtHomeNetworkModule<T, n>::_networkCommands = { &AtHomeNetworkModule<T, n>::_setEndPointCommand,
+                                                                           nullptr };
     }
 }
 

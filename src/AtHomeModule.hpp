@@ -59,7 +59,7 @@ namespace athome {
          */
         typedef size_t (*AtHomeStoragePlugin)(size_t, storage::IStorage &);
 
-        using StoragePluginList = utility::Queue<AtHomeStoragePlugin>;
+        using StoragePluginList = utility::Queue<const AtHomeStoragePlugin>;
 # endif /* DISABLE_PERSISTENT_STORAGE */
 
         /**
@@ -677,33 +677,41 @@ namespace athome {
                 static void             *_instance;
 
             private:
+# ifndef DISABLE_COMMUNICATION
                 static const Command        _commandSetProfile;
+#  ifndef DISABLE_TIME
                 static const Command        _commandSetDateTime;
+#  endif /* DISABLE_TIME */
+#  ifndef DISABLE_SENSOR
                 static const Command        _commandSetSensorThresholds;
+#  endif /* DISABLE_SENSOR */
                 static const CommandTable   _commands;
+# endif /* DISABLE_COMMUNICATION */
         };
 
         template <typename T, size_t n>
         void *AtHomeModule<T, n>::_instance = nullptr;
-
+# ifndef DISABLE_COMMUNICATION
         template <typename T, size_t n>
         const Command AtHomeModule<T, n>::_commandSetProfile = { communication::commands::uploadData,
                                                                  AtHomeModule<T, n>::_setProfileCallback };
-
+#  ifndef DISABLE_TIME
         template <typename T, size_t n>
         const Command AtHomeModule<T, n>::_commandSetDateTime = { communication::commands::setDateTime,
                                                                   AtHomeModule<T, n>::_setDateTimeCallback };
-
+#  endif /* DISABLE_TIME */
+#  ifndef DISABLE_SENSOR
         template <typename T, size_t n>
         const Command AtHomeModule<T, n>::_commandSetSensorThresholds = { communication::commands::setSensorThresholds,
                                                                           AtHomeModule<T, n>::_setSensorThresholdsCallback };
-
+#  endif /* DISABLE_SENSOR */
         template <typename T, size_t n>
         const CommandTable AtHomeModule<T, n>::_commands = { &AtHomeModule<T, n>::_commandSetProfile,
                                                              &AtHomeModule<T, n>::_commandSetDateTime,
                                                              &AtHomeModule<T, n>::_commandSetSensorThresholds,
                                                              nullptr
         };
+# endif /* DISABLE_COMMUNICATION */
     }
 }
 #endif /* ATHOMEMODULE_HPP */

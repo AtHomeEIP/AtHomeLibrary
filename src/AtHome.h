@@ -104,6 +104,7 @@ using athome::display::GroveChainableLED;
 # ifndef DISABLE_COMMUNICATION
 #  ifndef DISABLE_NETWORK
 #   include "NetworkIPTypes.hpp"
+#   include "AtHomeNetworkModule.hpp"
 #   ifndef DISABLE_WIFI
 #    include "WiFiTypes.hpp"
 #    if !defined(__MSP430__) && !defined(DISABLE_ESP_AT_MODULE)
@@ -117,6 +118,7 @@ using athome::communication::wifi::ESP8266WiFiCommunicator;
 using athome::communication::wifi::NativeArduinoESPWiFiCommunicator;
 #    endif /* ESP8266 */
 #   endif /* DISABLE_WIFI */
+using athome::module::AtHomeNetworkModule;
 #  endif /* DISABLE_NETWORK */
 # endif /* DISABLE_COMMUNICATION */
 # ifndef DISABLE_PERSISTENT_STORAGE

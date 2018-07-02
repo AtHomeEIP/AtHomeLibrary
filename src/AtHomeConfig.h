@@ -16,8 +16,8 @@
 //# define DISABLE_TIME
 
 // Macros to uncomment to disable network communications. DISABLE_NETWORK disable all types of networks
-# define DISABLE_NETWORK
-//# define DISABLE_WIFI
+//# define DISABLE_NETWORK
+# define DISABLE_WIFI
 
 // Macros to uncomment to disable evolved AtHomeModules
 //# define DISABLE_ESP_AT_MODULE
