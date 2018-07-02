@@ -706,10 +706,15 @@ namespace athome {
                                                                           AtHomeModule<T, n>::_setSensorThresholdsCallback };
 #  endif /* DISABLE_SENSOR */
         template <typename T, size_t n>
-        const CommandTable AtHomeModule<T, n>::_commands = { &AtHomeModule<T, n>::_commandSetProfile,
-                                                             &AtHomeModule<T, n>::_commandSetDateTime,
-                                                             &AtHomeModule<T, n>::_commandSetSensorThresholds,
-                                                             nullptr
+        const CommandTable AtHomeModule<T, n>::_commands = {
+                &AtHomeModule<T, n>::_commandSetProfile,
+#  ifndef DISABLE_TIME
+                &AtHomeModule<T, n>::_commandSetDateTime,
+#  endif /* DISABLE_TIME */
+#  ifndef DISABLE_SENSOR
+                &AtHomeModule<T, n>::_commandSetSensorThresholds,
+#  endif /* DISABLE_SENSOR */
+                nullptr
         };
 # endif /* DISABLE_COMMUNICATION */
     }
