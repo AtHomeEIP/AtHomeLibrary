@@ -62,15 +62,15 @@ namespace athome {
             AtHomeWiFiModule():
                 AtHomeNetworkModule<T, n>(),
                 _wifi(nullptr) {
-                AtHomeNetworkModule<T, n>::setCommandPlugin(&AtHomeWiFiModule::executeWiFiCommands);
+                AtHomeModule<T, n>::setCommandPlugin(_wifiCommands);
 #  ifndef DISABLE_PERSISTENT_STORAGE
-                AtHomeNetworkModule<T, n>::setOnBackupPlugin(&AtHomeWiFiModule::_saveWiFiParameters);
-                AtHomeNetworkModule<T, n>::setOnRestorePlugin(&AtHomeWiFiModule::_restoreWiFiParameters);
+                AtHomeModule<T, n>::setOnBackupPlugin(AtHomeWiFiModule::_saveWiFiParameters);
+                AtHomeModule<T, n>::setOnRestorePlugin(AtHomeWiFiModule::_restoreWiFiParameters);
 #  endif /* DISABLE_PERSISTENT_STORAGE */
             }
 
         private:
-            void setWiFiCommand(Stream &communicator) {
+            void setWiFi(Stream &communicator) {
                 communication::wifi::WiFi_ap ap;
                 char buffer;
                 int len = communicator.readBytesUntil('\0', ap.ssid, sizeof(ap.ssid) - 1);
@@ -87,58 +87,72 @@ namespace athome {
                 this->onBackupOnStorage();
 #  endif /* DISABLE_PERSISTENT_STORAGE */
             }
-#  ifndef DISABLE_PERSISTENT_STORAGE
-            void saveWiFiParameters(size_t offset, storage::IStorage &storage) {
-                if (_wifi == nullptr) {
-                    return;
+            static void _setWiFi(const char *command, Stream &stream) {
+                (void)command;
+                AtHomeWiFiModule *instance = reinterpret_cast<AtHomeWiFiModule *>(AtHomeModule<T, n>::getInstance());
+                if (instance != nullptr) {
+                    instance->setWiFi(stream);
                 }
+            }
+#  ifndef DISABLE_PERSISTENT_STORAGE
+            size_t saveWiFiParameters(size_t offset, storage::IStorage &storage) {
+                if (_wifi == nullptr) {
+                    return 0;
+                }
+                size_t delta = 0;
                 const communication::wifi::WiFi_ap &ap = _wifi->getAccessPoint();
                 storage.write(offset, reinterpret_cast<const void *>(ap.ssid), sizeof(communication::wifi::wifi_ssid));
-                offset += sizeof(communication::wifi::wifi_ssid);
-                storage.write(offset, reinterpret_cast<const void *>(ap.password), sizeof(communication::wifi::wifi_password));
-                offset += sizeof(communication::wifi::wifi_password);
+                delta += sizeof(communication::wifi::wifi_ssid);
+                storage.write(offset + delta, reinterpret_cast<const void *>(ap.password), sizeof(communication::wifi::wifi_password));
+                delta += sizeof(communication::wifi::wifi_password);
+                return delta;
             }
 
-            void restoreWiFiParameters(size_t offset, storage::IStorage &storage) {
+            size_t restoreWiFiParameters(size_t offset, storage::IStorage &storage) {
                 if (_wifi == nullptr) {
-                    return;
+                    return 0;
                 }
+                size_t delta = 0;
                 communication::wifi::WiFi_ap ap;
                 storage.read(offset, reinterpret_cast<void *>(ap.ssid), sizeof(communication::wifi::wifi_ssid));
-                offset += sizeof(communication::wifi::wifi_ssid);
-                storage.read(offset, reinterpret_cast<void *>(ap.password), sizeof(communication::wifi::wifi_password));
-                offset += sizeof(communication::wifi::wifi_password);
+                delta += sizeof(communication::wifi::wifi_ssid);
+                storage.read(offset + delta, reinterpret_cast<void *>(ap.password), sizeof(communication::wifi::wifi_password));
+                delta += sizeof(communication::wifi::wifi_password);
                 _wifi->setAccessPoint(ap);
+                return delta;
             }
 #  endif /* DISABLE_PERSISTENT_STORAGE */
         private:
-            static void executeWiFiCommands(const char *command, Stream &stream) {
-                AtHomeWiFiModule *instance = reinterpret_cast<AtHomeWiFiModule *>(AtHomeModule<T, n>::getInstance());
-                if (instance == nullptr) {
-                    return;
-                }
-                if (!STRCMP(command, communication::commands::setWiFi)) {
-                    instance->setWiFiCommand(stream);
-                }
-            }
 #  ifndef DISABLE_PERSISTENT_STORAGE
-            static void _saveWiFiParameters(size_t offset, storage::IStorage &storage) {
+            static size_t _saveWiFiParameters(size_t offset, storage::IStorage &storage) {
                 AtHomeWiFiModule *instance = reinterpret_cast<AtHomeWiFiModule *>(AtHomeModule<T, n>::getInstance());
                 if (instance != nullptr) {
-                    instance->saveWiFiParameters(offset, storage);
+                    return instance->saveWiFiParameters(offset, storage);
                 }
+                return 0;
             }
 
-            static void _restoreWiFiParameters(size_t offset, storage::IStorage &storage) {
+            static size_t _restoreWiFiParameters(size_t offset, storage::IStorage &storage) {
                 AtHomeWiFiModule *instance = reinterpret_cast<AtHomeWiFiModule *>(AtHomeModule<T, n>::getInstance());
                 if (instance != nullptr) {
-                    instance->restoreWiFiParameters(offset, storage);
+                    return instance->restoreWiFiParameters(offset, storage);
                 }
+                return 0;
             }
 #  endif /* DISABLE_PERSISTENT_STORAGE */
         private:
-            communication::wifi::AWiFiCommunicator   *_wifi;
+            communication::wifi::AWiFiCommunicator  *_wifi;
+        private:
+            static const Command                    _setWiFiCommand;
+            static CommandTable                     _wifiCommands;
         };
+
+        template <typename T, size_t n>
+        const Command AtHomeWiFiModule<T, n>::_setWiFiCommand = { communication::commands::setWiFi,
+                                                                  AtHomeWiFiModule<T, n>::_setWiFi };
+
+        template <typename T, size_t n>
+        CommandTable AtHomeWiFiModule<T, n>::_wifiCommands = { &AtHomeWiFiModule::_setWiFiCommand, nullptr };
     }
 }
 

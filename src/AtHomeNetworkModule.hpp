@@ -45,10 +45,9 @@ namespace athome {
 
         protected:
             AtHomeNetworkModule():
-                    _communicator(nullptr),
-                    AtHomeModule<T, n>() {
+                    AtHomeModule<T, n>(),
+                    _communicator(nullptr) {
                 AtHomeModule<T, n>::setCommandPlugin(_networkCommands);
-                //AtHomeModule<T, n>::setCommandPlugin(&AtHomeNetworkModule::_onCommandReceivedNetwork);
 #  ifndef DISABLE_PERSISTENT_STORAGE
                 AtHomeModule<T, n>::setOnBackupPlugin(_onNetworkBackup);
                 AtHomeModule<T, n>::setOnRestorePlugin(_onNetworkRestore);
@@ -57,7 +56,7 @@ namespace athome {
 #  ifndef DISABLE_PERSISTENT_STORAGE
             size_t onNetworkBackup(size_t offset, storage::IStorage &storage) {
                 if (_communicator == nullptr) {
-                    return;
+                    return 0;
                 }
                 communication::ip::tcp_host host = _communicator->getHost();
                 size_t delta = 0;
@@ -70,7 +69,7 @@ namespace athome {
 
             size_t onNetworkRestore(size_t offset, storage::IStorage &storage) {
                 if (_communicator == nullptr) {
-                    return;
+                    return 0;
                 }
                 communication::ip::tcp_host host;
                 size_t delta = 0;
@@ -152,7 +151,7 @@ namespace athome {
 
         private:
             static const Command                            _setEndPointCommand;
-            static const CommandTable                       _networkCommands;
+            static CommandTable                             _networkCommands;
         };
 
         template <typename T, size_t n>
@@ -160,7 +159,7 @@ namespace athome {
                                                                          AtHomeNetworkModule<T, n>::_setEndPoint };
 
         template <typename T, size_t n>
-        const CommandTable AtHomeNetworkModule<T, n>::_networkCommands = { &AtHomeNetworkModule<T, n>::_setEndPointCommand,
+        CommandTable AtHomeNetworkModule<T, n>::_networkCommands = { &AtHomeNetworkModule<T, n>::_setEndPointCommand,
                                                                            nullptr };
     }
 }

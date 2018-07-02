@@ -678,14 +678,14 @@ namespace athome {
 
             private:
 # ifndef DISABLE_COMMUNICATION
-                static const Command        _commandSetProfile;
+                static const Command    _commandSetProfile;
 #  ifndef DISABLE_TIME
-                static const Command        _commandSetDateTime;
+                static const Command    _commandSetDateTime;
 #  endif /* DISABLE_TIME */
 #  ifndef DISABLE_SENSOR
-                static const Command        _commandSetSensorThresholds;
+                static const Command    _commandSetSensorThresholds;
 #  endif /* DISABLE_SENSOR */
-                static const CommandTable   _commands;
+                static CommandTable     _commands;
 # endif /* DISABLE_COMMUNICATION */
         };
 
@@ -706,7 +706,7 @@ namespace athome {
                                                                           AtHomeModule<T, n>::_setSensorThresholdsCallback };
 #  endif /* DISABLE_SENSOR */
         template <typename T, size_t n>
-        const CommandTable AtHomeModule<T, n>::_commands = {
+        CommandTable AtHomeModule<T, n>::_commands = {
                 &AtHomeModule<T, n>::_commandSetProfile,
 #  ifndef DISABLE_TIME
                 &AtHomeModule<T, n>::_commandSetDateTime,
