@@ -396,18 +396,39 @@ namespace athome {
                     raw_broadcast_empty();
                 }
 
+                inline bool is_non_zero(const uint8_t *data, size_t len) {
+                    for (size_t i = 0; i < len; i++) {
+                        if (data[i] & 0xFF) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
+                inline void broadcast_varuint(uint64_t data) {
+                    if (!is_non_zero(reinterpret_cast<uint8_t *>(&data), sizeof(uint64_t))) {
+                        broadcast('\0');
+                        return;
+                    }
+                    while (is_non_zero(reinterpret_cast<uint8_t *>(&data), sizeof(uint64_t))) {
+                        uint8_t buffer = 0;
+                        buffer |= (data & 0b01111111);
+                        data >>= 7;
+                        if (is_non_zero(reinterpret_cast<uint8_t *>(&data), sizeof(uint64_t))) {
+                            buffer |= 0b10000000;
+                        }
+                        raw_broadcast(&buffer, 1);
+                    }
+                }
 #  ifndef DISABLE_SENSOR
                 /**
                  * Sends stored sensor readings over module streams.
                  */
                 void        uploadData() {
                     broadcastln(FH(communication::commands::uploadData));
-                    //varuint_broadcast(_serial);
-                    raw_broadcast(reinterpret_cast<uint8_t *>(&_serial), sizeof(_serial));
-                    //varuint_broadcast(_nbMeasures);
-                    raw_broadcast(reinterpret_cast<uint8_t *>(&time::absolute_year),
-                                  sizeof(time::absolute_year));
-                    raw_broadcast(reinterpret_cast<uint8_t *>(&_nbMeasures), sizeof(_nbMeasures));
+                    broadcast_varuint(_serial);
+                    broadcast_varuint(time::absolute_year);
+                    broadcast_varuint(_nbMeasures);
 #   ifndef DISABLE_SENSOR
                     for (size_t i = 0; i < _nbMeasures; i++) {
                         if (!i) {
