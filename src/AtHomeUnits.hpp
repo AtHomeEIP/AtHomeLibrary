@@ -75,8 +75,8 @@ namespace athome {
             };
 
             struct Unit {
-                uint16_t unit : 8;
-                uint16_t prefix : 8;
+                uint8_t unit;
+                uint8_t prefix;
             };
         }
     }
