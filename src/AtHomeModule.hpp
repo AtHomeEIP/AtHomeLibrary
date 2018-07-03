@@ -8,6 +8,7 @@
 # include <TaskScheduler.h>
 # include <stdint.h>
 # include <alloca.h>
+# include <string.h>
 # include "ARGBLed.hpp"
 # include "ABaseModule.hpp"
 # include "AWiFiCommunicator.hpp"
@@ -327,13 +328,13 @@ namespace athome {
             protected:
 # ifndef DISABLE_SENSOR
                 struct AtHomeSensorMeasure {
+                    PGM_P                           label;
                     T                               sample;
+                    utility::units::Unit            unit;
+                    uint8_t                         estimate;
 # ifndef DISABLE_TIME
                     t_timestamp                     timestamp;
 # endif /* DISABLE_TIME */
-                    uint8_t                         estimate;
-                    utility::units::Unit            unit;
-                    PGM_P                           label;
                 };
 # endif /* DISABLE_SENSOR */
 
@@ -358,7 +359,7 @@ namespace athome {
                  * Broadcast the data passed as parameter over all module streams.
                  */
                 template <typename U>
-                void        broadcast(const U &data) {
+                inline void broadcast(const U &data) {
                     if (_streams == nullptr) {
                         return;
                     }
@@ -371,12 +372,12 @@ namespace athome {
                  * Broadcast the data passed as parameter over all module streams, followed by line return string "\r\n".
                  */
                 template <typename U>
-                void        broadcastln(const U &data) {
+                inline void broadcastln(const U &data) {
                     broadcast(data);
                     broadcast(FH(ATHOME_NEW_LINE));
                 }
 
-                void        raw_broadcast(const uint8_t *data, size_t len) {
+                inline void raw_broadcast(const uint8_t *data, size_t len) {
                     if (_streams == nullptr) {
                         return;
                     }
@@ -384,16 +385,78 @@ namespace athome {
                         _streams[i]->write(data, len);
                     }
                 }
+
+                inline void raw_broadcast_empty() {
+                    broadcast('\0');
+                }
+
+                template <typename U>
+                inline void broadcast_string(const U &data) {
+                    broadcast(data);
+                    raw_broadcast_empty();
+                }
+
 #  ifndef DISABLE_SENSOR
                 /**
                  * Sends stored sensor readings over module streams.
                  */
                 void        uploadData() {
                     broadcastln(FH(communication::commands::uploadData));
+                    //varuint_broadcast(_serial);
                     raw_broadcast(reinterpret_cast<uint8_t *>(&_serial), sizeof(_serial));
+                    //varuint_broadcast(_nbMeasures);
+                    raw_broadcast(reinterpret_cast<uint8_t *>(&time::absolute_year),
+                                  sizeof(time::absolute_year));
+                    raw_broadcast(reinterpret_cast<uint8_t *>(&_nbMeasures), sizeof(_nbMeasures));
 #   ifndef DISABLE_SENSOR
                     for (size_t i = 0; i < _nbMeasures; i++) {
-                        raw_broadcast(reinterpret_cast<uint8_t *>(&(_measures[i])), sizeof(AtHomeSensorMeasure));
+                        if (!i) {
+                            broadcast_string(FH(_measures[i].label));
+                            raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.unit), 1);
+                            raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.prefix), 1);
+                            raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].estimate), 1);
+                            broadcast_string(_measures[i].sample);
+                            raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].timestamp), 1);
+                        }
+                        else {
+                            if (_measures[i].label == _measures[i - 1].label) {
+                                raw_broadcast_empty();
+                            }
+                            else {
+                                broadcast_string(FH(_measures[i].label));
+                            }
+                            if (_measures[i].unit.unit == _measures[i - 1].unit.unit) {
+                                raw_broadcast_empty();
+                            }
+                            else {
+                                raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.unit), 1);
+                            }
+                            if (_measures[i].unit.prefix == _measures[i - 1].unit.prefix) {
+                                raw_broadcast_empty();
+                            }
+                            else {
+                                raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.prefix), 1);
+                            }
+                            if (_measures[i].estimate == _measures[i - 1].estimate) {
+                                raw_broadcast_empty();
+                            }
+                            else {
+                                raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].estimate), 1);
+                            }
+                            if (!memcmp(&_measures[i].sample, &_measures[i - 1].sample, sizeof(T))) {
+                                raw_broadcast_empty();
+                            }
+                            else {
+                                broadcast_string(_measures[i].sample);
+                            }
+                            if (!memcmp(&_measures[i].timestamp, &_measures[i - 1].timestamp, sizeof(t_timestamp))) {
+                                raw_broadcast_empty();
+                            }
+                            else {
+                                raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].timestamp), 1);
+                            }
+                        }
+                        //raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i]), sizeof(AtHomeSensorMeasure));
                     }
 #   endif /* DISABLE_SENSOR */
                     broadcast(ATHOME_END_OF_COMMAND);
