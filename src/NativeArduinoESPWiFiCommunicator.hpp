@@ -42,6 +42,6 @@ class NativeArduinoESPWiFiCommunicator : public AWiFiCommunicator {
 }  // namespace athome
 
 #endif /* !defined(DISABLE_COMMUNICATION) && !defined(DISABLE_NETWORK) && \
-          !defined(DISABLE_WIFI) && !defined(DISABLE_NATIVE_ESP_COM) &&                                      \
+          !defined(DISABLE_WIFI) && !defined(DISABLE_NATIVE_ESP_COM) &&   \
           defined(ESP8266) && defined(ARDUINO) */
 #endif /* NATIVEARDUINOESPWIFICOMMUNICATOR_HPP */

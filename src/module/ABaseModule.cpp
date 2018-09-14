@@ -52,7 +52,7 @@ ABaseModule::ABaseModule(
 #else
 )
 #endif /* !defined(DISABLE_DISPLAY) && !defined(DISABLE_COMMUNICATION) && \
-!defined(DISABLE_POWER_MANAGEMENT) && !defined(DISABLE_SENSOR) &&                                              \
+!defined(DISABLE_POWER_MANAGEMENT) && !defined(DISABLE_SENSOR) &&         \
 !defined(DISABLE_PERSISTENT_STORAGE) */
 #ifndef DISABLE_DISPLAY
 #if !defined(DISABLE_COMMUNICATION) || !defined(DISABLE_POWER_MANAGEMENT) || \
