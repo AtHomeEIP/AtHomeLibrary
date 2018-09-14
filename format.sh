@@ -5,8 +5,7 @@ function format {
 }
 
 cd src
-format *.h *.hpp time/* storage/* sensor/* sensor/temperature/* \
-       sensor/sound/* sensor/luminosity/* sensor/humidity/* \
-       sensor/air_quality/* power/* module/* display/* communication/* \
-       communication/network/* communication/network/wifi/*
-
+format $(find . -name "*.c")
+format $(find . -name "*.cpp")
+format $(find . -name "*.h")
+format $(find . -name "*.hpp")
