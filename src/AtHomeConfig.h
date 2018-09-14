@@ -1,10 +1,10 @@
 #ifndef ATHOMECONFIG_H
-# define ATHOMECONFIG_H
+#define ATHOMECONFIG_H
 
 // Macros to define default interval values in ms
-# define DEFAULT_SENSOR_INTERVAL        1000
-# define DEFAULT_UPLOAD_DATA_INTERVAL   1000
-# define DEFAULT_COMMUNICATION_INTERVAL 1
+#define DEFAULT_SENSOR_INTERVAL 1000
+#define DEFAULT_UPLOAD_DATA_INTERVAL 1000
+#define DEFAULT_COMMUNICATION_INTERVAL 1
 
 // Macros to uncomment to disable full part of modules
 //# define DISABLE_SENSOR
@@ -15,7 +15,8 @@
 //# define DISABLE_HEARTBEAT
 //# define DISABLE_TIME
 
-// Macros to uncomment to disable network communications. DISABLE_NETWORK disable all types of networks
+// Macros to uncomment to disable network communications. DISABLE_NETWORK
+// disable all types of networks
 //# define DISABLE_NETWORK
 //# define DISABLE_WIFI
 
@@ -36,7 +37,7 @@
 //# define DISABLE_LDR_LUMINOSITY_SENSOR
 //# define DISABLE_SOUND_SENSOR
 //# define DISABLE_MQ2_SENSOR
-# define DISABLE_GROVE_AIR_QUALITY_SENSOR
+#define DISABLE_GROVE_AIR_QUALITY_SENSOR
 //# define DISABLE_GROVE_DIGITAL_LIGHT_SENSOR
 //# define DISABLE_THERMISTOR_SENSOR
 //# define DISABLE_TMP36GZ_TEMPERATURE_SENSOR
