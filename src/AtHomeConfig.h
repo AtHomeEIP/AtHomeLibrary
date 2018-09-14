@@ -7,64 +7,66 @@
 #define DEFAULT_COMMUNICATION_INTERVAL 1
 
 // Macros to uncomment to disable full part of modules
-//# define DISABLE_SENSOR
-//# define DISABLE_DISPLAY
-//# define DISABLE_PERSISTENT_STORAGE
-//# define DISABLE_COMMUNICATION
-//# define DISABLE_POWER_MANAGEMENT
-//# define DISABLE_HEARTBEAT
-//# define DISABLE_TIME
+//#define DISABLE_SENSOR
+//#define DISABLE_DISPLAY
+//#define DISABLE_PERSISTENT_STORAGE
+//#define DISABLE_COMMUNICATION
+//#define DISABLE_POWER_MANAGEMENT
+//#define DISABLE_HEARTBEAT
+//#define DISABLE_TIME
+//#define DISABLE_PASSWORD
+//#define DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
 
 // Macros to uncomment to disable network communications. DISABLE_NETWORK
 // disable all types of networks
-//# define DISABLE_NETWORK
-//# define DISABLE_WIFI
+//#define DISABLE_NETWORK
+//#define DISABLE_WIFI
 
 // Macros to uncomment to disable evolved AtHomeModules
-//# define DISABLE_ESP_AT_MODULE
-//# define DISABLE_NATIVE_ESP_COM
+//#define DISABLE_ESP_AT_MODULE
+//#define DISABLE_NATIVE_ESP_COM
 
 // Macros to uncomment to disable families of sensors
-//# define DISABLE_AIR_QUALITY_SENSOR
-//# define DISABLE_TEMPERATURE_SENSOR
-//# define DISABLE_HUMIDITY_SENSOR
-//# define DISABLE_NOISE_SENSOR
-//# define DISABLE_LUMINOSITY_SENSOR
-//# define DISABLE_ANALOG_SENSOR
+//#define DISABLE_AIR_QUALITY_SENSOR
+//#define DISABLE_TEMPERATURE_SENSOR
+//#define DISABLE_HUMIDITY_SENSOR
+//#define DISABLE_NOISE_SENSOR
+//#define DISABLE_LUMINOSITY_SENSOR
+//#define DISABLE_ANALOG_SENSOR
 
 // Macros to uncomment to disable sensors
-//# define DISABLE_DUMMY_SENSOR
-//# define DISABLE_LDR_LUMINOSITY_SENSOR
-//# define DISABLE_SOUND_SENSOR
-//# define DISABLE_MQ2_SENSOR
+//#define DISABLE_DUMMY_SENSOR
+//#define DISABLE_LDR_LUMINOSITY_SENSOR
+//#define DISABLE_SOUND_SENSOR
+//#define DISABLE_MQ2_SENSOR
 #define DISABLE_GROVE_AIR_QUALITY_SENSOR
-//# define DISABLE_GROVE_DIGITAL_LIGHT_SENSOR
-//# define DISABLE_THERMISTOR_SENSOR
-//# define DISABLE_TMP36GZ_TEMPERATURE_SENSOR
+//#define DISABLE_GROVE_DIGITAL_LIGHT_SENSOR
+//#define DISABLE_THERMISTOR_SENSOR
+//#define DISABLE_TMP36GZ_TEMPERATURE_SENSOR
 
 // Macros to uncomment to disable displays
-//# define DISABLE_GROVE_CHAINABLE_LED
-//# define DISABLE_COMMON_CATHODE_RGB_LED
-//# define DISABLE_COMMON_ANODE_RGB_LED
-//# define DISABLE_NEOPIXEL
-//# define DISABLE_MONOCHROMATIC_LED
-//# define DISABLE_PWM_LED
+//#define DISABLE_GROVE_CHAINABLE_LED
+//#define DISABLE_COMMON_CATHODE_RGB_LED
+//#define DISABLE_COMMON_ANODE_RGB_LED
+//#define DISABLE_NEOPIXEL
+//#define DISABLE_MONOCHROMATIC_LED
+//#define DISABLE_PWM_LED
 
 // Macros to uncomment to disable persisent storages
-//# define DISABLE_AVR_EEPROM
-//# define DISABLE_MSP430_FRAM
+//#define DISABLE_AVR_EEPROM
+//#define DISABLE_MSP430_FRAM
 
 // Macros to uncomment to disable power management controllers
-//# define DISABLE_AVR_POWER_MANAGEMENT
+//#define DISABLE_AVR_POWER_MANAGEMENT
 
 // Macrps to uncomment to disable time controllers
-//# define DISABLE_DS1307
-//# define DISABLE_FAKE_RTC
+//#define DISABLE_DS1307
+//#define DISABLE_FAKE_RTC
 
 // Macros to uncomment to disable utilities
-//# define DISABLE_LIST
-//# define DISABLE_ITERABLE
-//# define DISABLE_BUFFER
-//# define DISABLE_QUEUE
+//#define DISABLE_LIST
+//#define DISABLE_ITERABLE
+//#define DISABLE_BUFFER
+//#define DISABLE_QUEUE
 
 #endif /* ATHOMECONFIG_H */

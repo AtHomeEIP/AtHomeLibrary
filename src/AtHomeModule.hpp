@@ -81,6 +81,25 @@ class AtHomeModule : public ABaseModule {
    * from other
    */
   typedef uint32_t moduleSerial;
+#ifndef DISABLE_PASSWORD
+  /**
+   * `modulePassword` type represents a password value used to protect the
+   * configuration of the module
+   */
+  typedef char modulePassword[17];
+#endif /* DISABLE_PASSWORD */
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+  /**
+   * `moduleEncryptionKey` type represents a key for a cipher protecting an
+   * unsecure stream
+   */
+  typedef uint8_t moduleEncryptionKey[32];
+  /**
+   * `moduleEncryptionIV` type represents an IV used for a cipher protecting an
+   * unsecure stream
+   */
+  typedef uint8_t moduleEncryptionIV[12];
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
 #ifndef DISABLE_TIME
   /**
    * `timestamp` type is used to represent sensor readings date
@@ -329,6 +348,40 @@ class AtHomeModule : public ABaseModule {
     onBackupOnStorage();
 #endif /* DISABLE_PERSISTENT_STORAGE */
   }
+
+#ifndef DISABLE_PASSWORD
+  /**
+   * Set the password used to protect the module
+   */
+  void setPassword(modulePassword password) {
+    strncpy(_password, password, sizeof(_password));
+#ifndef DISABLE_PERSISTENT_STORAGE
+    onBackupOnStorage();
+#endif /* DISABLE_PERSISTENT_STORAGE */
+  }
+#endif /* DISABLE_PASSWORD */
+
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+  /**
+   * Set the encryption key used to protect unsecure streams
+   */
+  void setEncryptionKey(moduleEncryptionKey key) {
+    memcpy(_encryptionKey, key, sizeof(_encryptionKey));
+#ifndef DISABLE_PERSISTENT_STORAGE
+    onBackupOnStorage();
+#endif /* DISABLE_PERSISTENT_STORAGE */
+  }
+
+  /**
+   * Set the initialization vector used by a cipher to protect unsecure streams
+   */
+  void setEncryptionIV(moduleEncryptionIV iv) {
+    memcpy(_encryptionIV, iv, sizeof(_encryptionIV));
+#ifndef DISABLE_PERSISTENT_STORAGE
+    onBackupOnStorage();
+#endif /* DISABLE_PERSISTENT_STORAGE */
+  }
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
 
  private:
 #ifndef DISABLE_SENSOR
@@ -684,16 +737,65 @@ class AtHomeModule : public ABaseModule {
 #endif /* DISABLE_SENSOR */
  private:
 #ifndef DISABLE_COMMUNICATION
-  void _setProfile(Stream &stream) {
+  int _setProfileSerial(Stream &stream) {
     moduleSerial serial;
-    if (stream.readBytesUntil(ATHOME_END_OF_COMMAND,
-                              reinterpret_cast<char *>(&serial),
-                              sizeof(moduleSerial)) < 1) {
-      return;
+    if (stream.readBytesUntil('\0', reinterpret_cast<char *>(&serial),
+                              sizeof(serial)) < 1) {
+      return -1;
     }
     setSerial(serial);
-    stream.readBytesUntil(ATHOME_END_OF_COMMAND,
-                          reinterpret_cast<char *>(&serial), 1);
+    return 0;
+  }
+
+  int _setProfilePassword(Stream &stream) {
+    modulePassword password;
+    size_t len;
+    if ((len = stream.readBytesUntil('\0', password, sizeof(password) - 1)) <
+        1) {
+      return -1;
+    }
+    password[len] = '\0';
+    setPassword(password);
+    return 0;
+  }
+
+  int _setProfileEncryptionKey(Stream &stream) {
+    moduleEncryptionKey key;
+    if (stream.readBytes(key, sizeof(key)) < 1) {
+      return -1;
+    }
+    setEncryptionKey(key);
+    return 0;
+  }
+
+  int _setProfileEncryptionIV(Stream &stream) {
+    moduleEncryptionIV iv;
+    if (stream.readBytes(iv, sizeof(iv)) < 1) {
+      return -1;
+    }
+    setEncryptionIV(iv);
+    return 0;
+  }
+
+  void _setProfile(Stream &stream) {
+#if !defined(DISABLE_PASSWORD) || \
+    !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
+    if (_setProfileSerial(stream) ||
+#else
+    if (_setProfile(stream)
+#endif /* !defined(DISABLE_PASSWORD) || \
+          !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
+#ifndef DISABLE_PASSWORD
+        _setProfilePassword(stream) ||
+#endif /* DISABLE_PASSWORD */
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+        _setProfileEncryptionKey(stream) || _setProfileEncryptionIV(stream)
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
+    ) {
+      return;
+    }
+    uint8_t buffer[2];
+    stream.readBytesUntil(ATHOME_END_OF_COMMAND, buffer, 1);
   }
 
   static void _setProfileCallback(const char *command, Stream &stream) {
@@ -788,6 +890,13 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_SENSOR
   AtHomeSensorMeasure _measures[n];
 #endif /* DISABLE_SENSOR */
+#ifndef DISABLE_PASSWORD
+  modulePassword _password;
+#endif /* DISABLE_PASSWORD */
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+  moduleEncryptionKey _encryptionKey;
+  moduleEncryptionIV _encryptionIV;
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
 #if !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION)
   Task _uploadDataTask;
 #endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION) */
