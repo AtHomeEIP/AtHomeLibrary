@@ -570,6 +570,17 @@ class AtHomeModule : public ABaseModule {
 #endif /* DISABLE_SENSOR */
   }
 #endif /* DISABLE_SENSOR */
+#ifndef DISABLE_PASSWORD
+  bool authenticate(Stream &stream) {
+    modulePassword password;
+    size_t len;
+    if ((len = stream.readBytesUntil('\0', password, sizeof(password))) < 1) {
+      return false;
+    }
+    password[len] = '\0';
+    return !strncmp(_password, password, sizeof(_password));
+  }
+#endif /* DISABLE_PASSWORD */
   /**
    * Called (or trigger if called) when a module listens for received commands.
    */
@@ -833,7 +844,11 @@ class AtHomeModule : public ABaseModule {
   }
 #ifndef DISABLE_TIME
   void _setDateTime(Stream &stream) {
+#ifndef DISABLE_PASSWORD
+    if (_clock == nullptr || !authenticate(stream)) {
+#else
     if (_clock == nullptr) {
+#endif /* DISABLE_PASSWORD */
       while (stream.read() != ATHOME_END_OF_COMMAND)
         ;
       return;
@@ -864,7 +879,11 @@ class AtHomeModule : public ABaseModule {
 #endif /* DISABLE_TIME */
 #ifndef DISABLE_SENSOR
   void _setSensorThresholds(Stream &stream) {
+#ifndef DISABLE_PASSWORD
+    if (_sensor == nullptr || !authenticate(stream)) {
+#else
     if (_sensor == nullptr) {
+#endif /* DISABLE_PASSWORD */
       while (stream.read() != ATHOME_END_OF_COMMAND)
         ;
       return;
