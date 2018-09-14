@@ -655,8 +655,21 @@ class AtHomeModule : public ABaseModule {
   void onBackupOnStorage() {
     if (_storage != nullptr) {
       _storage->write(0, reinterpret_cast<const void *>(&_serial),
-                      sizeof(moduleSerial));
-      size_t offset = sizeof(moduleSerial);
+                      sizeof(_serial));
+      size_t offset = sizeof(_serial);
+#ifndef DISABLE_PASSWORD
+      _storage->write(offset, reinterpret_cast<const void *>(_password),
+                      sizeof(_password));
+      offset += sizeof(_password);
+#endif /* DISABLE_PASSWORD */
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+      _storage->write(offset, reinterpret_cast<const void *>(_encryptionKey),
+                      sizeof(_encryptionKey));
+      offset += sizeof(_encryptionKey);
+      _storage->write(offset, reinterpret_cast<const void *>(_encryptionIV),
+                      sizeof(_encryptionIV));
+      offset += sizeof(_encryptionIV);
+#endif /* DISABLE_TIME */
       StoragePluginList *list = _onBackupPlugin;
       while (list != nullptr) {
         AtHomeStoragePlugin plugin = list->get();
@@ -673,12 +686,24 @@ class AtHomeModule : public ABaseModule {
    */
   void onRestoreFromStorage() {
     if (_storage != nullptr) {
-      _storage->read(0, reinterpret_cast<void *>(&_serial),
-                     sizeof(moduleSerial));
+      _storage->read(0, reinterpret_cast<void *>(&_serial), sizeof(_serial));
       if (!_serial) {
         return;  // The module is uninitialized
       }
-      size_t offset = sizeof(moduleSerial);
+      size_t offset = sizeof(_serial);
+#ifndef DISABLE_PASSWORD
+      _storage->read(offset, reinterpret_cast<void *>(_password),
+                     sizeof(_password));
+      offset += sizeof(_password);
+#endif /* DISABLE_PASSWORD */
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+      _storage->read(offset, reinterpret_cast<void *>(_encryptionKey),
+                     sizeof(_encryptionKey));
+      offset += sizeof(_encryptionKey);
+      _storage->read(offset, reinterpret_cast<void *>(_encryptionIV),
+                     sizeof(_encryptionIV));
+      offset += sizeof(_encryptionIV);
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
       StoragePluginList *list = _onRestorePlugin;
       while (list != nullptr) {
         AtHomeStoragePlugin plugin = list->get();
@@ -746,7 +771,7 @@ class AtHomeModule : public ABaseModule {
     setSerial(serial);
     return 0;
   }
-
+#ifndef DISABLE_PASSWORD
   int _setProfilePassword(Stream &stream) {
     modulePassword password;
     size_t len;
@@ -758,7 +783,8 @@ class AtHomeModule : public ABaseModule {
     setPassword(password);
     return 0;
   }
-
+#endif /* DISABLE_PASSWORD */
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
   int _setProfileEncryptionKey(Stream &stream) {
     moduleEncryptionKey key;
     if (stream.readBytes(key, sizeof(key)) < 1) {
@@ -776,7 +802,7 @@ class AtHomeModule : public ABaseModule {
     setEncryptionIV(iv);
     return 0;
   }
-
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   void _setProfile(Stream &stream) {
 #if !defined(DISABLE_PASSWORD) || \
     !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
