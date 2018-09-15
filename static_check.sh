@@ -1,4 +1,5 @@
 #!/bin/bash
 
 cppcheck -I $PWD --enable=all --check-config --force \
-         --suppress=missingIncludeSystem $(find . -name "*.cpp") *.hpp *.h
+         --suppress=missingIncludeSystem $(find src/ -name "*.cpp") \
+         src/*.hpp src/*.h
