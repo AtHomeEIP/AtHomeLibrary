@@ -81,14 +81,15 @@ class AtHomeModule : public ABaseModule {
    * from other
    */
   typedef uint32_t moduleSerial;
-#ifndef DISABLE_PASSWORD
+#if !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION)
   /**
    * `modulePassword` type represents a password value used to protect the
    * configuration of the module
    */
   typedef char modulePassword[17];
-#endif /* DISABLE_PASSWORD */
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+#endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
+#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
+    !defined(DISABLE_COMMUNICATION)
   /**
    * `moduleEncryptionKey` type represents a key for a cipher protecting an
    * unsecure stream
@@ -99,7 +100,8 @@ class AtHomeModule : public ABaseModule {
    * unsecure stream
    */
   typedef uint8_t moduleEncryptionIV[12];
-#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
+#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
+          !defined(DISABLE_COMMUNICATION) */
 #ifndef DISABLE_TIME
   /**
    * `timestamp` type is used to represent sensor readings date
@@ -349,39 +351,21 @@ class AtHomeModule : public ABaseModule {
 #endif /* DISABLE_PERSISTENT_STORAGE */
   }
 
-#ifndef DISABLE_PASSWORD
+#if !defined(DISABLE_COMMUNICATION) && \
+    !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
   /**
-   * Set the password used to protect the module
+   * Set the array of unsecure streams used to communicate, terminated by
+   * nullptr
    */
-  void setPassword(modulePassword password) {
-    strncpy(_password, password, sizeof(_password));
-#ifndef DISABLE_PERSISTENT_STORAGE
-    onBackupOnStorage();
-#endif /* DISABLE_PERSISTENT_STORAGE */
-  }
-#endif /* DISABLE_PASSWORD */
-
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-  /**
-   * Set the encryption key used to protect unsecure streams
-   */
-  void setEncryptionKey(moduleEncryptionKey key) {
-    memcpy(_encryptionKey, key, sizeof(_encryptionKey));
-#ifndef DISABLE_PERSISTENT_STORAGE
-    onBackupOnStorage();
-#endif /* DISABLE_PERSISTENT_STORAGE */
-  }
+  void setUnsecureStreams(Stream **streams) { _unsecureStreams = streams; }
 
   /**
-   * Set the initialization vector used by a cipher to protect unsecure streams
+   * Return the array of unsecure streams used to communicate, terminated by
+   * nullptr
    */
-  void setEncryptionIV(moduleEncryptionIV iv) {
-    memcpy(_encryptionIV, iv, sizeof(_encryptionIV));
-#ifndef DISABLE_PERSISTENT_STORAGE
-    onBackupOnStorage();
-#endif /* DISABLE_PERSISTENT_STORAGE */
-  }
-#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
+  Stream **getUnsecureStreams() { return _unsecureStreams; }
+#endif /* !defined(DISABLE_COMMUNICATION) && \
+          !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
 
  private:
 #ifndef DISABLE_SENSOR
@@ -432,6 +416,11 @@ class AtHomeModule : public ABaseModule {
                                TASK_MILLISECOND),
         _uploadDataInterval(DEFAULT_UPLOAD_DATA_INTERVAL * TASK_MILLISECOND),
         _communicationPlugin(nullptr),
+#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
+    !defined(DISABLE_COMMUNICATION)
+        _unsecureStreams(nullptr),
+#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
+          !defined(DISABLE_COMMUNICATION) */
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
         _onBackupPlugin(nullptr),
@@ -440,6 +429,40 @@ class AtHomeModule : public ABaseModule {
         _serial(0) {
   }
 #ifndef DISABLE_COMMUNICATION
+#ifndef DISABLE_PASSWORD
+  /**
+   * Set the password used to protect the module
+   */
+  void setPassword(modulePassword password) {
+    strncpy(_password, password, sizeof(_password));
+#ifndef DISABLE_PERSISTENT_STORAGE
+    onBackupOnStorage();
+#endif /* DISABLE_PERSISTENT_STORAGE */
+  }
+#endif /* DISABLE_PASSWORD */
+
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+  /**
+   * Set the encryption key used to protect unsecure streams
+   */
+  void setEncryptionKey(moduleEncryptionKey key) {
+    memcpy(_encryptionKey, key, sizeof(_encryptionKey));
+#ifndef DISABLE_PERSISTENT_STORAGE
+    onBackupOnStorage();
+#endif /* DISABLE_PERSISTENT_STORAGE */
+  }
+
+  /**
+   * Set the initialization vector used by a cipher to protect unsecure streams
+   */
+  void setEncryptionIV(moduleEncryptionIV iv) {
+    memcpy(_encryptionIV, iv, sizeof(_encryptionIV));
+#ifndef DISABLE_PERSISTENT_STORAGE
+    onBackupOnStorage();
+#endif /* DISABLE_PERSISTENT_STORAGE */
+  }
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
+
   /**
    * Broadcast the data passed as parameter over all module streams.
    */
@@ -570,7 +593,7 @@ class AtHomeModule : public ABaseModule {
 #endif /* DISABLE_SENSOR */
   }
 #endif /* DISABLE_SENSOR */
-#ifndef DISABLE_PASSWORD
+#if !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION)
   bool authenticate(Stream &stream) {
     modulePassword password;
     size_t len;
@@ -580,7 +603,7 @@ class AtHomeModule : public ABaseModule {
     password[len] = '\0';
     return !strncmp(_password, password, sizeof(_password));
   }
-#endif /* DISABLE_PASSWORD */
+#endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
   /**
    * Called (or trigger if called) when a module listens for received commands.
    */
@@ -668,19 +691,21 @@ class AtHomeModule : public ABaseModule {
       _storage->write(0, reinterpret_cast<const void *>(&_serial),
                       sizeof(_serial));
       size_t offset = sizeof(_serial);
-#ifndef DISABLE_PASSWORD
+#if !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION)
       _storage->write(offset, reinterpret_cast<const void *>(_password),
                       sizeof(_password));
       offset += sizeof(_password);
-#endif /* DISABLE_PASSWORD */
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+#endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
+#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
+    !defined(DISABLE_COMMUNICATION)
       _storage->write(offset, reinterpret_cast<const void *>(_encryptionKey),
                       sizeof(_encryptionKey));
       offset += sizeof(_encryptionKey);
       _storage->write(offset, reinterpret_cast<const void *>(_encryptionIV),
                       sizeof(_encryptionIV));
       offset += sizeof(_encryptionIV);
-#endif /* DISABLE_TIME */
+#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
+          !defined(DISABLE_COMMUNICATION) */
       StoragePluginList *list = _onBackupPlugin;
       while (list != nullptr) {
         AtHomeStoragePlugin plugin = list->get();
@@ -702,19 +727,21 @@ class AtHomeModule : public ABaseModule {
         return;  // The module is uninitialized
       }
       size_t offset = sizeof(_serial);
-#ifndef DISABLE_PASSWORD
+#if !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION)
       _storage->read(offset, reinterpret_cast<void *>(_password),
                      sizeof(_password));
       offset += sizeof(_password);
-#endif /* DISABLE_PASSWORD */
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+#endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
+#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
+    !defined(DISABLE_COMMUNICATION)
       _storage->read(offset, reinterpret_cast<void *>(_encryptionKey),
                      sizeof(_encryptionKey));
       offset += sizeof(_encryptionKey);
       _storage->read(offset, reinterpret_cast<void *>(_encryptionIV),
                      sizeof(_encryptionIV));
       offset += sizeof(_encryptionIV);
-#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
+#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
+          !defined(DISABLE_COMMUNICATION) */
       StoragePluginList *list = _onRestorePlugin;
       while (list != nullptr) {
         AtHomeStoragePlugin plugin = list->get();
@@ -925,6 +952,9 @@ class AtHomeModule : public ABaseModule {
   unsigned long _communicationInterval;
   unsigned long _uploadDataInterval;
   CommandPluginList *_communicationPlugin;
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+  Stream **_unsecureStreams;
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
   StoragePluginList *_onBackupPlugin;
@@ -935,13 +965,15 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_SENSOR
   AtHomeSensorMeasure _measures[n];
 #endif /* DISABLE_SENSOR */
-#ifndef DISABLE_PASSWORD
+#if !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION)
   modulePassword _password;
-#endif /* DISABLE_PASSWORD */
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+#endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
+#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
+    !defined(DISABLE_COMMUNICATION)
   moduleEncryptionKey _encryptionKey;
   moduleEncryptionIV _encryptionIV;
-#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
+#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
+          !defined(DISABLE_COMMUNICATION) */
 #if !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION)
   Task _uploadDataTask;
 #endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION) */
