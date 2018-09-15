@@ -2,7 +2,8 @@
 #define PAIR_HPP
 
 namespace athome {
-namespace util {
+namespace utility {
+namespace container {
 template <typename T, typename U>
 class Pair {
  public:
@@ -24,7 +25,8 @@ class Pair {
   T first;
   U second;
 };
-}  // namespace util
+}  // namespace container
+}  // namespace utility
 }  // namespace athome
 
 #endif /* PAIR_HPP */
