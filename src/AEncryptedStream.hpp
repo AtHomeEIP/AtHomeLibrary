@@ -2,6 +2,7 @@
 #define AENCRYPTEDSTREAM_HPP
 #include <Stream.h>
 #include <stdint.h>
+#include "Pair.hpp"
 
 namespace athome {
 namespace arduino {
@@ -13,15 +14,12 @@ class AEncryptedStream : public Stream {
   /**
    * Header of a block of an encrypted stream containing the following fields:
    *
-   * - application: a boolean flag indicating if the data is intended for the
-   * application or stream level
    * - length: number of bytes in the block (doesn't need any padding)
    * - reserved: reserved bits for later fields to add to the struct
    */
   struct BlockHeader {
-    uint8_t application : 1;
     uint8_t length : 4;
-    uint8_t reserved : 3;
+    uint8_t reserved : 4;
   };
   /**
    * Structure representing an encrypted block:
@@ -36,51 +34,53 @@ class AEncryptedStream : public Stream {
 
  public:
   /**
-   * Structure storing the key used by the cipher:
+   * Pair storing the key used by the cipher:
    *
-   * - key: a reference to the memory where the key is stored
-   * - keyLength: the size in bytes of the key
+   * - first: a reference to the memory where the key is stored
+   * - second: the size in bytes of the key
    */
-  struct Key {
-    const uint8_t &key;
-    size_t keyLength;
-  };
+  using Key = utility::container::Pair<const uint8_t &, size_t>;
   /**
-   * Structure storing the IV used by the cipher:
+   * Pair storing the IV used by the cipher:
    *
-   * - iv: a reference to the memory where the iv is stored
-   * - ivLength: the size in bytes of the iv
+   * - first: a reference to the memory where the iv is stored
+   * - second: the size in bytes of the iv
    */
-  struct IV {
-    const uint8_t &iv;
-    size_t ivLength;
-  };
+  using IV = utility::container::Pair<const uint8_t &, size_t>;
+
+ protected:
+  /**
+   * Pair used to initialize a cipher:
+   * - fist: a reference to a key
+   * - second: a pointer to an optional IV (nullptr if not present)
+   */
+  using CipherMaterials = utility::container::Pair<const Key &, const IV *>;
 
  public:
   /**
    * Constructor of the encrypted stream, mandatory taking a reference to a
    * stream to protect
    */
-  EncryptedStream(Stream &);
-  EncryptedStream(const EncryptedStream &) = delete;
-  EncryptedStream &operator=(const EncryptedStream &) = delete;
+  AEncryptedStream(Stream &);
+  AEncryptedStream(const AEncryptedStream &) = delete;
+  AEncryptedStream &operator=(const AEncryptedStream &) = delete;
 
   /**
    * Return a reference on the base protected Arduino Stream by this class
    */
-  Stream &getProtectedStream();
+  Stream &getBaseStream() { return _base; }
   /**
    * Return a reference on the base protected Arduino Stream by this class
    */
-  const Stream &getProtectedStream() const;
+  const Stream &getBaseStream() const { return _base; }
   /**
    * Set a reference on the base protected Arduino Stream by this class
    */
-  void setProtectedStream(Stream &);
+  void setBaseStream(Stream &);
   /**
    * Return a pointer on the key set in the cipher if set, else return nullptr
    */
-  const Key *getKey() const;
+  const Key *getKey() const { return _key; }
   /**
    * Set the key used by the cipher by passing a reference on it
    */
@@ -88,7 +88,7 @@ class AEncryptedStream : public Stream {
   /**
    * Return a pointer on the IV used by the cipher if set, else return nullptr
    */
-  const IV *getIV() const;
+  const IV *getIV() const { return _iv; }
   /**
    * Set the IV used by the cipher by passing a reference on it
    */
@@ -103,13 +103,9 @@ class AEncryptedStream : public Stream {
 
  protected:
   /**
-   * Set the key in the implementation of the cipher
+   * Set the key and IV in the implementation of the cipher
    */
-  virtual void setCipherKey(const Key &) = 0;
-  /**
-   * Set the IV in the implementation of the cipher
-   */
-  virtual void setCipherIV(const IV &) = 0;
+  virtual bool initializeCipher(const CipherMaterials &) = 0;
   /**
    * Encrypt the block passed by reference
    */
@@ -120,13 +116,18 @@ class AEncryptedStream : public Stream {
   virtual void decrypt(Block &) = 0;
 
  private:
+  void reset();
+  void updateReadBlock();
+
+ private:
   Stream &_base;
-  Key *_key;
-  IV *_iv;
-  Block _decryptedBlock;
-  Block _incomingBlock;
-  size_t _decryptedBlockPos;
-  size_t _incomingBlockPos;
+  const Key *_key;
+  const IV *_iv;
+  size_t _readBlockPos;
+  bool _initialized;
+  bool _readBlockDecrypted;
+  Block _writeBlock;
+  Block _readBlock;
 };
 }  // namespace arduino
 }  // namespace athome
