@@ -14,6 +14,7 @@
 #include "AtHomeCommunicationProtocol.hpp"
 #include "AtHomeConfig.h"
 #include "AtHomeFlashCommon.h"
+#include "ChaChaEncryptedStream.hpp"
 #include "ITime.hpp"
 #include "Queue.hpp"
 
@@ -357,7 +358,24 @@ class AtHomeModule : public ABaseModule {
    * Set the array of unsecure streams used to communicate, terminated by
    * nullptr
    */
-  void setUnsecureStreams(Stream **streams) { _unsecureStreams = streams; }
+  void setUnsecureStreams(Stream **streams) {
+    _deleteUnsecureStreams();
+    if (streams != nullptr) {
+      size_t i;
+      for (i = 0; streams[i] != nullptr; i++)
+        ;
+      Stream **securedStreams = new Stream *[i];
+      for (i = 0; streams[i] != nullptr; i++) {
+        arduino::ChaChaEncryptedStream *encryptedStream =
+            new arduino::ChaChaEncryptedStream(*streams[i]);
+        securedStreams[i] = encryptedStream;
+        encryptedStream->setKey(_encryptionKey);
+        encryptedStream->setIV(_encryptionIV);
+      }
+      securedStreams[i] = nullptr;
+      _unsecureStreams = securedStreams;
+    }
+  }
 
   /**
    * Return the array of unsecure streams used to communicate, terminated by
@@ -419,6 +437,8 @@ class AtHomeModule : public ABaseModule {
 #if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
     !defined(DISABLE_COMMUNICATION)
         _unsecureStreams(nullptr),
+        _encryptionKey{_encryptionRawKey, sizeof(_encryptionRawKey)},
+        _encryptionIV{_encryptionRawIV, sizeof(_encryptionRawIV)},
 #endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
           !defined(DISABLE_COMMUNICATION) */
 #endif /* DISABLE_COMMUNICATION */
@@ -446,7 +466,7 @@ class AtHomeModule : public ABaseModule {
    * Set the encryption key used to protect unsecure streams
    */
   void setEncryptionKey(moduleEncryptionKey key) {
-    memcpy(_encryptionKey, key, sizeof(_encryptionKey));
+    memcpy(_encryptionRawKey, key, sizeof(_encryptionRawKey));
 #ifndef DISABLE_PERSISTENT_STORAGE
     onBackupOnStorage();
 #endif /* DISABLE_PERSISTENT_STORAGE */
@@ -456,7 +476,7 @@ class AtHomeModule : public ABaseModule {
    * Set the initialization vector used by a cipher to protect unsecure streams
    */
   void setEncryptionIV(moduleEncryptionIV iv) {
-    memcpy(_encryptionIV, iv, sizeof(_encryptionIV));
+    memcpy(_encryptionRawIV, iv, sizeof(_encryptionRawIV));
 #ifndef DISABLE_PERSISTENT_STORAGE
     onBackupOnStorage();
 #endif /* DISABLE_PERSISTENT_STORAGE */
@@ -473,6 +493,12 @@ class AtHomeModule : public ABaseModule {
     }
     for (size_t i = 0; _streams[i] != nullptr; i++) {
       _streams[i]->print(data);
+    }
+    if (_unsecureStreams == nullptr) {
+      return;
+    }
+    for (size_t i = 0; _unsecureStreams[i] != nullptr; i++) {
+      _unsecureStreams[i]->print(data);
     }
   }
 
@@ -492,6 +518,12 @@ class AtHomeModule : public ABaseModule {
     }
     for (size_t i = 0; _streams[i] != nullptr; i++) {
       _streams[i]->write(data, len);
+    }
+    if (_unsecureStreams == nullptr) {
+      return;
+    }
+    for (size_t i = 0; _unsecureStreams[i] != nullptr; i++) {
+      _unsecureStreams[i]->write(data, len);
     }
   }
 
@@ -698,12 +730,12 @@ class AtHomeModule : public ABaseModule {
 #endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
 #if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
     !defined(DISABLE_COMMUNICATION)
-      _storage->write(offset, reinterpret_cast<const void *>(_encryptionKey),
-                      sizeof(_encryptionKey));
-      offset += sizeof(_encryptionKey);
-      _storage->write(offset, reinterpret_cast<const void *>(_encryptionIV),
-                      sizeof(_encryptionIV));
-      offset += sizeof(_encryptionIV);
+      _storage->write(offset, reinterpret_cast<const void *>(_encryptionRawKey),
+                      sizeof(_encryptionRawKey));
+      offset += sizeof(_encryptionRawKey);
+      _storage->write(offset, reinterpret_cast<const void *>(_encryptionRawIV),
+                      sizeof(_encryptionRawIV));
+      offset += sizeof(_encryptionRawIV);
 #endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
           !defined(DISABLE_COMMUNICATION) */
       StoragePluginList *list = _onBackupPlugin;
@@ -734,12 +766,12 @@ class AtHomeModule : public ABaseModule {
 #endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
 #if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
     !defined(DISABLE_COMMUNICATION)
-      _storage->read(offset, reinterpret_cast<void *>(_encryptionKey),
-                     sizeof(_encryptionKey));
-      offset += sizeof(_encryptionKey);
-      _storage->read(offset, reinterpret_cast<void *>(_encryptionIV),
-                     sizeof(_encryptionIV));
-      offset += sizeof(_encryptionIV);
+      _storage->read(offset, reinterpret_cast<void *>(_encryptionRawKey),
+                     sizeof(_encryptionRawKey));
+      offset += sizeof(_encryptionRawKey);
+      _storage->read(offset, reinterpret_cast<void *>(_encryptionRawIV),
+                     sizeof(_encryptionRawIV));
+      offset += sizeof(_encryptionRawIV);
 #endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
           !defined(DISABLE_COMMUNICATION) */
       StoragePluginList *list = _onRestorePlugin;
@@ -839,6 +871,17 @@ class AtHomeModule : public ABaseModule {
     }
     setEncryptionIV(iv);
     return 0;
+  }
+
+  void _deleteUnsecureStreams() {
+    if (_unsecureStreams == nullptr) {
+      return;
+    }
+    for (size_t i = 0; _unsecureStreams[i] != nullptr; i++) {
+      delete _unsecureStreams[i];
+    }
+    delete _unsecureStreams;
+    _unsecureStreams = nullptr;
   }
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   void _setProfile(Stream &stream) {
@@ -954,6 +997,8 @@ class AtHomeModule : public ABaseModule {
   CommandPluginList *_communicationPlugin;
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
   Stream **_unsecureStreams;
+  arduino::AEncryptedStream::Key _encryptionKey;
+  arduino::AEncryptedStream::IV _encryptionIV;
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
@@ -970,8 +1015,8 @@ class AtHomeModule : public ABaseModule {
 #endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
 #if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
     !defined(DISABLE_COMMUNICATION)
-  moduleEncryptionKey _encryptionKey;
-  moduleEncryptionIV _encryptionIV;
+  moduleEncryptionKey _encryptionRawKey;
+  moduleEncryptionIV _encryptionRawIV;
 #endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
           !defined(DISABLE_COMMUNICATION) */
 #if !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION)
