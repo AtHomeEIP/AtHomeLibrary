@@ -57,7 +57,7 @@
 //#define DISABLE_MSP430_FRAM
 
 // Macros to uncomment to disable power management controllers
-//#define DISABLE_AVR_POWER_MANAGEMENT
+#define DISABLE_AVR_POWER_MANAGEMENT
 
 // Macrps to uncomment to disable time controllers
 //#define DISABLE_DS1307
