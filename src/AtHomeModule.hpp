@@ -494,12 +494,14 @@ class AtHomeModule : public ABaseModule {
     for (size_t i = 0; _streams[i] != nullptr; i++) {
       _streams[i]->print(data);
     }
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
     if (_unsecureStreams == nullptr) {
       return;
     }
     for (size_t i = 0; _unsecureStreams[i] != nullptr; i++) {
       _unsecureStreams[i]->print(data);
     }
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   }
 
   /**
@@ -519,12 +521,14 @@ class AtHomeModule : public ABaseModule {
     for (size_t i = 0; _streams[i] != nullptr; i++) {
       _streams[i]->write(data, len);
     }
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
     if (_unsecureStreams == nullptr) {
       return;
     }
     for (size_t i = 0; _unsecureStreams[i] != nullptr; i++) {
       _unsecureStreams[i]->write(data, len);
     }
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   }
 
   inline void raw_broadcast_empty() { broadcast('\0'); }
@@ -889,7 +893,7 @@ class AtHomeModule : public ABaseModule {
     !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
     if (_setProfileSerial(stream) ||
 #else
-    if (_setProfile(stream)
+    if (_setProfileSerial(stream)
 #endif /* !defined(DISABLE_PASSWORD) || \
           !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
 #ifndef DISABLE_PASSWORD

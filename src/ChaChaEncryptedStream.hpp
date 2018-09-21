@@ -3,7 +3,7 @@
 #include "AtHomeConfig.h"
 #if !defined(DISABLE_COMMUNICATION) && \
     !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
-#include <Chacha.h>
+#include <ChaCha.h>
 #include <Crypto.h>
 #include <stdint.h>
 #include "AEncryptedStream.hpp"

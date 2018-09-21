@@ -14,8 +14,8 @@
 //#define DISABLE_POWER_MANAGEMENT
 //#define DISABLE_HEARTBEAT
 //#define DISABLE_TIME
-//#define DISABLE_PASSWORD
-//#define DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+#define DISABLE_PASSWORD
+#define DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
 
 // Macros to uncomment to disable network communications. DISABLE_NETWORK
 // disable all types of networks
