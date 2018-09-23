@@ -564,9 +564,7 @@ class AtHomeModule : public ABaseModule {
     broadcast_varuint(_serial);
     broadcast_varuint(time::absolute_year);
     broadcast_varuint(_nbMeasures);
-#ifndef DISABLE_SENSOR
     for (size_t i = 0; i < _nbMeasures; i++) {
-      if (!i) {
         broadcast_string(FH(_measures[i].label));
         raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.unit), 1);
         raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.prefix),
@@ -574,51 +572,9 @@ class AtHomeModule : public ABaseModule {
         raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].estimate), 1);
         broadcast_string(_measures[i].sample);
         raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].timestamp), 1);
-      } else {
-        if (_measures[i].label == _measures[i - 1].label) {
-          raw_broadcast_empty();
-        } else {
-          broadcast_string(FH(_measures[i].label));
-        }
-        if (_measures[i].unit.unit == _measures[i - 1].unit.unit) {
-          raw_broadcast_empty();
-        } else {
-          raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.unit),
-                        1);
-        }
-        if (_measures[i].unit.prefix == _measures[i - 1].unit.prefix) {
-          raw_broadcast_empty();
-        } else {
-          raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.prefix),
-                        1);
-        }
-        if (_measures[i].estimate == _measures[i - 1].estimate) {
-          raw_broadcast_empty();
-        } else {
-          raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].estimate), 1);
-        }
-        if (!memcmp(&_measures[i].sample, &_measures[i - 1].sample,
-                    sizeof(T))) {
-          raw_broadcast_empty();
-        } else {
-          broadcast_string(_measures[i].sample);
-        }
-        if (!memcmp(&_measures[i].timestamp, &_measures[i - 1].timestamp,
-                    sizeof(t_timestamp))) {
-          raw_broadcast_empty();
-        } else {
-          raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].timestamp),
-                        1);
-        }
-      }
-      // raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i]),
-      // sizeof(AtHomeSensorMeasure));
     }
-#endif /* DISABLE_SENSOR */
     broadcast(ATHOME_END_OF_COMMAND);
-#ifndef DISABLE_SENSOR
     _nbMeasures = 0;
-#endif /* DISABLE_SENSOR */
   }
 #endif /* DISABLE_SENSOR */
 #if !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION)
