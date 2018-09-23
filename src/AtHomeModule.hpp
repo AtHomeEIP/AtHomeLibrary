@@ -493,18 +493,16 @@ class AtHomeModule : public ABaseModule {
    */
   template <typename U>
   inline void broadcast(const U &data) {
-    if (_streams == nullptr) {
-      return;
-    }
-    for (size_t i = 0; _streams[i] != nullptr; i++) {
-      _streams[i]->print(data);
+    if (_streams != nullptr) {
+      for (size_t i = 0; _streams[i] != nullptr; i++) {
+        _streams[i]->print(data);
+      }
     }
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-    if (_encryptedStreams == nullptr) {
-      return;
-    }
-    for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
-      _encryptedStreams[i]->print(data);
+    if (_encryptedStreams != nullptr) {
+      for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
+        _encryptedStreams[i]->print(data);
+      }
     }
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   }
@@ -520,18 +518,16 @@ class AtHomeModule : public ABaseModule {
   }
 
   inline void raw_broadcast(const uint8_t *data, size_t len) {
-    if (_streams == nullptr) {
-      return;
-    }
-    for (size_t i = 0; _streams[i] != nullptr; i++) {
-      _streams[i]->write(data, len);
+    if (_streams != nullptr) {
+      for (size_t i = 0; _streams[i] != nullptr; i++) {
+        _streams[i]->write(data, len);
+      }
     }
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-    if (_encryptedStreams == nullptr) {
-      return;
-    }
-    for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
-      _encryptedStreams[i]->write(data, len);
+    if (_encryptedStreams != nullptr) {
+      for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
+        _encryptedStreams[i]->write(data, len);
+      }
     }
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   }
@@ -568,6 +564,29 @@ class AtHomeModule : public ABaseModule {
       raw_broadcast(&buffer, 1);
     }
   }
+
+  inline void flush_streams() {
+    if (_streams == nullptr) {
+      return;
+    }
+    for (size_t i = 0; _streams[i] != nullptr; i++) {
+      _streams[i]->flush();
+    }
+  }
+
+  inline void flush_encryptedStreams() {
+    if (_encryptedStreams == nullptr) {
+      return;
+    }
+    for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
+      _encryptedStreams[i]->flush();
+    }
+  }
+
+  inline void broadcast_flush() {
+    flush_streams();
+    flush_encryptedStreams();
+  }
 #ifndef DISABLE_SENSOR
   /**
    * Sends stored sensor readings over module streams.
@@ -588,6 +607,7 @@ class AtHomeModule : public ABaseModule {
     }
     broadcast(ATHOME_END_OF_COMMAND);
     _nbMeasures = 0;
+    flush_encryptedStreams();
   }
 #endif /* DISABLE_SENSOR */
 #if !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION)
