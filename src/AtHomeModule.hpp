@@ -132,12 +132,11 @@ class AtHomeModule : public ABaseModule {
    */
   template <typename U = AtHomeModule>
   static U *getInstance() {
+    static U instance;
     if (_instance == nullptr) {
-      U *ptr = new U();
-      _instance = reinterpret_cast<void *>(ptr);
-      return ptr;
+      _instance = reinterpret_cast<void *>(&instance);
     }
-    return reinterpret_cast<U *>(_instance);
+    return &instance;
   }
 
   /**
@@ -358,30 +357,13 @@ class AtHomeModule : public ABaseModule {
    * Set the array of unsecure streams used to communicate, terminated by
    * nullptr
    */
-  void setUnsecureStreams(Stream **streams) {
-    _deleteUnsecureStreams();
-    if (streams != nullptr) {
-      size_t i;
-      for (i = 0; streams[i] != nullptr; i++)
-        ;
-      Stream **securedStreams = new Stream *[i];
-      for (i = 0; streams[i] != nullptr; i++) {
-        arduino::ChaChaEncryptedStream *encryptedStream =
-            new arduino::ChaChaEncryptedStream(*streams[i]);
-        securedStreams[i] = encryptedStream;
-        encryptedStream->setKey(_encryptionKey);
-        encryptedStream->setIV(_encryptionIV);
-      }
-      securedStreams[i] = nullptr;
-      _unsecureStreams = securedStreams;
-    }
-  }
+  void setEncryptedStreams(Stream **streams) { _encryptedStreams = streams; }
 
   /**
    * Return the array of unsecure streams used to communicate, terminated by
    * nullptr
    */
-  Stream **getUnsecureStreams() { return _unsecureStreams; }
+  Stream **getEncryptedStreams() { return _encryptedStreams; }
 #endif /* !defined(DISABLE_COMMUNICATION) && \
           !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
 
@@ -436,7 +418,7 @@ class AtHomeModule : public ABaseModule {
         _communicationPlugin(nullptr),
 #if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
     !defined(DISABLE_COMMUNICATION)
-        _unsecureStreams(nullptr),
+        _encryptedStreams(nullptr),
         _encryptionKey{_encryptionRawKey, sizeof(_encryptionRawKey)},
         _encryptionIV{_encryptionRawIV, sizeof(_encryptionRawIV)},
 #endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
@@ -494,11 +476,11 @@ class AtHomeModule : public ABaseModule {
     for (size_t i = 0; _streams[i] != nullptr; i++) {
       _streams[i]->print(data);
     }
-    if (_unsecureStreams == nullptr) {
+    if (_encryptedStreams == nullptr) {
       return;
     }
-    for (size_t i = 0; _unsecureStreams[i] != nullptr; i++) {
-      _unsecureStreams[i]->print(data);
+    for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
+      _encryptedStreams[i]->print(data);
     }
   }
 
@@ -519,11 +501,11 @@ class AtHomeModule : public ABaseModule {
     for (size_t i = 0; _streams[i] != nullptr; i++) {
       _streams[i]->write(data, len);
     }
-    if (_unsecureStreams == nullptr) {
+    if (_encryptedStreams == nullptr) {
       return;
     }
-    for (size_t i = 0; _unsecureStreams[i] != nullptr; i++) {
-      _unsecureStreams[i]->write(data, len);
+    for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
+      _encryptedStreams[i]->write(data, len);
     }
   }
 
@@ -873,16 +855,6 @@ class AtHomeModule : public ABaseModule {
     return 0;
   }
 
-  void _deleteUnsecureStreams() {
-    if (_unsecureStreams == nullptr) {
-      return;
-    }
-    for (size_t i = 0; _unsecureStreams[i] != nullptr; i++) {
-      delete _unsecureStreams[i];
-    }
-    delete _unsecureStreams;
-    _unsecureStreams = nullptr;
-  }
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   void _setProfile(Stream &stream) {
 #if !defined(DISABLE_PASSWORD) || \
@@ -996,7 +968,7 @@ class AtHomeModule : public ABaseModule {
   unsigned long _uploadDataInterval;
   CommandPluginList *_communicationPlugin;
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-  Stream **_unsecureStreams;
+  Stream **_encryptedStreams;
   arduino::AEncryptedStream::Key _encryptionKey;
   arduino::AEncryptedStream::IV _encryptionIV;
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */

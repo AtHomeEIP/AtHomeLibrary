@@ -10,11 +10,11 @@ namespace athome {
 namespace storage {
 #if defined(__TI_COMPILER_VERSION__)
 #pragma PERSISTENT(FRAM_storage)
-uint8_t FRAM_storage[ATHOME_FRAM_STORAGE_SIZE] = {1};
+static uint8_t FRAM_storage[ATHOME_FRAM_STORAGE_SIZE] = {1};
 #elif defined(__IAR_SYSTEMS_ICC__)
 __persistent uint8_t FRAM_storage[ATHOME_FRAM_STORAGE_SIZE] = {1};
 #else
-uint8_t __attribute__((persistent))
+static uint8_t __attribute__((persistent))
 FRAM_storage[ATHOME_FRAM_STORAGE_SIZE] = {1};
 #endif
 
@@ -34,7 +34,6 @@ void MSP430FRAM::write(size_t offset, const void *src, size_t size) {
   }
 }
 
-MSP430FRAM *MSP430FRAM::_instance = nullptr;
 }  // namespace storage
 }  // namespace athome
 

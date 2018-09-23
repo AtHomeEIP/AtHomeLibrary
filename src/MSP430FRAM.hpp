@@ -37,12 +37,9 @@ class MSP430FRAM : public IStorage {
  public:
   MSP430FRAM(const MSP430FRAM &) = delete;
   MSP430FRAM &operator=(const MSP430FRAM &) = delete;
-  ~MSP430FRAM();
 
-  static MSP430FRAM *getInstance() {
-    if (_instance == nullptr) {
-      _instance = new MSP430FRAM();
-    }
+  static MSP430FRAM &getInstance() {
+    static MSP430FRAM instance;
     return _instance;
   }
   virtual void read(size_t, void *, size_t);
@@ -50,9 +47,7 @@ class MSP430FRAM : public IStorage {
 
  private:
   MSP430FRAM();
-
- private:
-  static MSP430FRAM *_instance;
+  ~MSP430FRAM();
 };
 }  // namespace storage
 }  // namespace athome
