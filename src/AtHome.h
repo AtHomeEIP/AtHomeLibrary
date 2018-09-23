@@ -127,6 +127,12 @@ using athome::communication::wifi::NativeArduinoESPWiFiCommunicator;
 #endif /* DISABLE_WIFI */
 using athome::module::AtHomeNetworkModule;
 #endif /* DISABLE_NETWORK */
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+#include "AEncryptedStream.hpp"
+using athome::arduino::AEncryptedStream;
+#include "ChaChaEncryptedStream.hpp"
+using athome::arduino::ChaChaEncryptedStream;
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
 #include "IStorage.hpp"

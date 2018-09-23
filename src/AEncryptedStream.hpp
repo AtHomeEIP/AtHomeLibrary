@@ -96,6 +96,16 @@ class AEncryptedStream : public Stream {
 
  public:
   virtual size_t write(uint8_t);
+  virtual size_t write(const uint8_t *b, size_t len) {
+    size_t n = 0;
+    while (len--) {
+      if (!write(b)) {
+        return n;
+      }
+      n++;
+    }
+    return n;
+  }
   virtual int read();
   virtual int peek();
   virtual int available();
