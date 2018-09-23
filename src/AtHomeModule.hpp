@@ -307,6 +307,25 @@ class AtHomeModule : public ABaseModule {
       _communicationPlugin->push_back(table);
     }
   }
+
+#ifndef DISABLE_PASSWORD
+  /**
+   * Set the password used to protect the module
+   */
+  void setPassword(const modulePassword &password) {
+    strncpy(_password, password, sizeof(_password));
+#ifndef DISABLE_PERSISTENT_STORAGE
+    onBackupOnStorage();
+#endif /* DISABLE_PERSISTENT_STORAGE */
+  }
+
+  /**
+   * Return the current password used by the module
+   */
+  const modulePassword &getPassword() const {
+    return _password;
+  }
+#endif /* DISABLE_PASSWORD */
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
   /**
@@ -373,6 +392,34 @@ class AtHomeModule : public ABaseModule {
    */
   arduino::AEncryptedStream **getEncryptedStreams() {
     return _encryptedStreams;
+  }
+
+  /**
+   * Set the encryption key used to protect unsecure streams
+   */
+  void setEncryptionKey(const moduleEncryptionKey &key) {
+    memcpy(_encryptionRawKey, key, sizeof(_encryptionRawKey));
+#ifndef DISABLE_PERSISTENT_STORAGE
+    onBackupOnStorage();
+#endif /* DISABLE_PERSISTENT_STORAGE */
+  }
+
+  const moduleEncryptionKey &getEncryptionKey() const {
+    return _encryptionRawKey;
+  }
+
+  /**
+   * Set the initialization vector used by a cipher to protect unsecure streams
+   */
+  void setEncryptionIV(const moduleEncryptionIV &iv) {
+    memcpy(_encryptionRawIV, iv, sizeof(_encryptionRawIV));
+#ifndef DISABLE_PERSISTENT_STORAGE
+    onBackupOnStorage();
+#endif /* DISABLE_PERSISTENT_STORAGE */
+  }
+
+  const moduleEncryptionIV &getEncryptionIV() const {
+    return _encryptionRawIV;
   }
 #endif /* !defined(DISABLE_COMMUNICATION) && \
           !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
@@ -441,40 +488,6 @@ class AtHomeModule : public ABaseModule {
         _serial(0) {
   }
 #ifndef DISABLE_COMMUNICATION
-#ifndef DISABLE_PASSWORD
-  /**
-   * Set the password used to protect the module
-   */
-  void setPassword(modulePassword password) {
-    strncpy(_password, password, sizeof(_password));
-#ifndef DISABLE_PERSISTENT_STORAGE
-    onBackupOnStorage();
-#endif /* DISABLE_PERSISTENT_STORAGE */
-  }
-#endif /* DISABLE_PASSWORD */
-
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-  /**
-   * Set the encryption key used to protect unsecure streams
-   */
-  void setEncryptionKey(moduleEncryptionKey key) {
-    memcpy(_encryptionRawKey, key, sizeof(_encryptionRawKey));
-#ifndef DISABLE_PERSISTENT_STORAGE
-    onBackupOnStorage();
-#endif /* DISABLE_PERSISTENT_STORAGE */
-  }
-
-  /**
-   * Set the initialization vector used by a cipher to protect unsecure streams
-   */
-  void setEncryptionIV(moduleEncryptionIV iv) {
-    memcpy(_encryptionRawIV, iv, sizeof(_encryptionRawIV));
-#ifndef DISABLE_PERSISTENT_STORAGE
-    onBackupOnStorage();
-#endif /* DISABLE_PERSISTENT_STORAGE */
-  }
-#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
-
   /**
    * Broadcast the data passed as parameter over all module streams.
    */
@@ -809,7 +822,7 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
   int _setProfileEncryptionKey(Stream &stream) {
     moduleEncryptionKey key;
-    if (stream.readBytes(key, sizeof(key)) < 1) {
+    if (stream.readBytes(reinterpret_cast<char *>(key), sizeof(key)) < 1) {
       return -1;
     }
     setEncryptionKey(key);
@@ -818,7 +831,7 @@ class AtHomeModule : public ABaseModule {
 
   int _setProfileEncryptionIV(Stream &stream) {
     moduleEncryptionIV iv;
-    if (stream.readBytes(iv, sizeof(iv)) < 1) {
+    if (stream.readBytes(reinterpret_cast<char *>(iv), sizeof(iv)) < 1) {
       return -1;
     }
     setEncryptionIV(iv);
@@ -846,7 +859,7 @@ class AtHomeModule : public ABaseModule {
     ) {
       return;
     }
-    uint8_t buffer[2];
+    char buffer[2];
     stream.readBytesUntil(ATHOME_END_OF_COMMAND, buffer, 1);
   }
 

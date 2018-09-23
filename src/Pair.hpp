@@ -9,7 +9,7 @@ class Pair {
  public:
   Pair() {}
 
-  Pair(const T &a, const U &b) : first(a), second(b) {}
+  Pair(T a, U b) : first(a), second(b) {}
 
   Pair(const Pair &other) : first(other.first), second(other.second) {}
 

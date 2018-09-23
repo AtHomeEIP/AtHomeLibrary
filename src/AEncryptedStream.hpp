@@ -39,14 +39,14 @@ class AEncryptedStream : public Stream {
    * - first: a reference to the memory where the key is stored
    * - second: the size in bytes of the key
    */
-  using Key = utility::container::Pair<const uint8_t &, size_t>;
+  using Key = utility::container::Pair<const uint8_t *, size_t>;
   /**
    * Pair storing the IV used by the cipher:
    *
    * - first: a reference to the memory where the iv is stored
    * - second: the size in bytes of the iv
    */
-  using IV = utility::container::Pair<const uint8_t &, size_t>;
+  using IV = utility::container::Pair<const uint8_t *, size_t>;
 
  protected:
   /**
@@ -99,8 +99,8 @@ class AEncryptedStream : public Stream {
   virtual size_t write(const uint8_t *b, size_t len) {
     size_t n = 0;
     while (len--) {
-      if (!write(b)) {
-        return n;
+      if (!write(*b++)) {
+        break;
       }
       n++;
     }

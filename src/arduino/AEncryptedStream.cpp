@@ -96,7 +96,7 @@ void AEncryptedStream::flush() {
 void AEncryptedStream::updateReadBlock() {
   if (!_readBlockDecrypted) {
     size_t len = _base.readBytes(
-        reinterpret_cast<uint8_t *>(&_readBlock) + _readBlockPos,
+        reinterpret_cast<char *>(&_readBlock) + _readBlockPos,
         sizeof(_readBlock) - _readBlockPos);
     if (len >= sizeof(_readBlock)) {
       decrypt(_readBlock);

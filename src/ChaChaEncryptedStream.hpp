@@ -17,7 +17,6 @@ class ChaChaEncryptedStream : public AEncryptedStream {
   explicit ChaChaEncryptedStream(Stream &);
   ChaChaEncryptedStream(const ChaChaEncryptedStream &) = delete;
   ChaChaEncryptedStream &operator=(const ChaChaEncryptedStream &) = delete;
-  virtual ~ChaChaEncryptedStream() {}
 
   const counter &getCounter() const { return _counter; }
   void setCounter(const counter &cnt) {
