@@ -1,0 +1,61 @@
+\hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr}{}\section{athome\+:\+:utility\+:\+:memory\+:\+:A\+Smart\+Ptr$<$ T $>$ Class Template Reference}
+\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr}\index{athome\+::utility\+::memory\+::\+A\+Smart\+Ptr$<$ T $>$@{athome\+::utility\+::memory\+::\+A\+Smart\+Ptr$<$ T $>$}}
+Inheritance diagram for athome\+:\+:utility\+:\+:memory\+:\+:A\+Smart\+Ptr$<$ T $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.258065cm]{classathome_1_1utility_1_1memory_1_1_a_smart_ptr}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a2595bd5880b1c6f9ea3142bac5f95c95}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a2595bd5880b1c6f9ea3142bac5f95c95}} 
+{\bfseries A\+Smart\+Ptr} (const \mbox{\hyperlink{classathome_1_1utility_1_1memory_1_1_a_smart_ptr}{A\+Smart\+Ptr}} \&other)
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_afd50b8519b5cbc5ab81d297eb22bb9a6}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_afd50b8519b5cbc5ab81d297eb22bb9a6}} 
+void {\bfseries reset} (T $\ast$ptr=nullptr)
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a126824442126af88311cebd26527b397}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a126824442126af88311cebd26527b397}} 
+void {\bfseries swap} (\mbox{\hyperlink{classathome_1_1utility_1_1memory_1_1_a_smart_ptr}{A\+Smart\+Ptr}} \&other)
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_ad2b8a8e046075a4a5c86789361e01479}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_ad2b8a8e046075a4a5c86789361e01479}} 
+T $\ast$ {\bfseries get} () const
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_aa4f3f30afafaae9b8c327f7bd2794815}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_aa4f3f30afafaae9b8c327f7bd2794815}} 
+T \& {\bfseries operator$\ast$} () const
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a79c967c5e556a0ff1d4e91f7f477ea04}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a79c967c5e556a0ff1d4e91f7f477ea04}} 
+T $\ast$ {\bfseries operator-\/$>$} () const
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a56b18039cfc71ad6448f012fdc15c9de}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a56b18039cfc71ad6448f012fdc15c9de}} 
+{\bfseries operator bool} () const
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_aa95305dd5cda4b536c46a8b245594884}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_aa95305dd5cda4b536c46a8b245594884}} 
+virtual void {\bfseries set} (T $\ast$ptr)=0
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_abfa9b7d5df2d4d0f7c71666cf9734531}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_abfa9b7d5df2d4d0f7c71666cf9734531}} 
+virtual void {\bfseries unset} ()=0
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a318500c88506c71d21c2a6e3f42271cc}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a318500c88506c71d21c2a6e3f42271cc}} 
+void {\bfseries copy} (const \mbox{\hyperlink{classathome_1_1utility_1_1memory_1_1_a_smart_ptr}{A\+Smart\+Ptr}} \&other)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a9ae23b0d50c8b856f7d8dbcf67d8e9bd}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a9ae23b0d50c8b856f7d8dbcf67d8e9bd}} 
+T $\ast$ {\bfseries m\+\_\+value}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a9dafb7972f91a3efb0c60fb975ed7fa1}\label{classathome_1_1utility_1_1memory_1_1_a_smart_ptr_a9dafb7972f91a3efb0c60fb975ed7fa1}} 
+void {\bfseries swap} (\mbox{\hyperlink{classathome_1_1utility_1_1memory_1_1_a_smart_ptr}{A\+Smart\+Ptr}} \&a, \mbox{\hyperlink{classathome_1_1utility_1_1memory_1_1_a_smart_ptr}{A\+Smart\+Ptr}} \&b)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/A\+Smart\+Ptr.\+hpp\end{DoxyCompactItemize}

@@ -67,6 +67,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>This repository holds the source code of the AtHome Development Kit (Framework + examples + PCBs and schematics).</p>
+<p>Development documentation is available at <a href="https://woodbox.gitlab.io/Framework">https://woodbox.gitlab.io/Framework</a></p>
 <h2>What is AtHome?</h2>
 <p>AtHome is a set of smart devices enabling to monitor a house's environment and the possible effects on human health. A smartphone application communicating with sensing devices put into the house, enable the user to get advices, tips and solutions to potential problems, and to communicate with other members of AtHome community, to be able to live better at home.</p>
 <h2>Installation and requirements to use this kit:</h2>
@@ -82,10 +83,8 @@ $(function() {
 <li>TaskScheduler library: <a href="https://github.com/arkhipenko/TaskScheduler">https://github.com/arkhipenko/TaskScheduler</a></li>
 </ul>
 <p>Optional libraries:</p><ul>
-<li>ArduinoJson library, despite it's name it's fully portable: <a href="https://github.com/bblanchon/ArduinoJson">https://github.com/bblanchon/ArduinoJson</a> (if using network based AtHome modules)</li>
 <li>Grove LightSensor library: <a href="https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor">https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor</a> (if using Grove Digital Light Sensor)</li>
-<li>Grove AirQuality library: <a href="https://github.com/SeeedDocument/Grove_Air_Quality_Sensor_v1.3/raw/master/">https://github.com/SeeedDocument/Grove_Air_Quality_Sensor_v1.3/raw/master/</a> (if using Grove Air Quality Sensor v1.3)</li>
-<li>Grove ChainableLED library: <a href="https://github.com/pjpmarques/ChainableLED">https://github.com/pjpmarques/ChainableLED</a> (if using Grove Chainable LEDs)</li>
+<li>Grove ChainableLED library: <a href="https://github.com/Seeed-Studio/Grove_Chainable_RGB_LED">https://github.com/Seeed-Studio/Grove_Chainable_RGB_LED</a> (if using Grove Chainable LEDs)</li>
 <li>Adafruit NeoPixel library: <a href="https://github.com/adafruit/Adafruit_NeoPixel">https://github.com/adafruit/Adafruit_NeoPixel</a> (if using NeoPixel)</li>
 </ul>
 <p>Recommended microcontroler platform:</p><ul>
@@ -94,16 +93,9 @@ $(function() {
 <li>Internal persistent storage (FRAM is better, EEPROM other way)</li>
 <li>Internal RTC</li>
 <li>At least 32KB of program memory (Warning: not counting bootloader size, some chips such as Microchip PIC32MX or Espressif ESP8265/8266/32 will require much more program memory)</li>
-<li>At least 1KB of RAM</li>
+<li>At least 2KB of RAM</li>
 </ul>
 <p>Requirements can be reduced depending on components used and by tweaking the framework configuration. See <a class="el" href="_at_home_config_8h_source.html">AtHomeConfig.h</a> to disable unused features.</p>
-<p>Minimum microcontroler requirements:</p><ul>
-<li>MCU compatible with Arduino core (either 8/16/32bits)</li>
-<li>C++11 compiler support</li>
-<li>At least 4KB of program memory (not counting bootloader size if any)</li>
-<li>At least 512B of RAM</li>
-</ul>
-<p>Please, note that the minimum requirements above can be obtained with a finely tuned configuration of the framework for some projects, but it's likely to use more resources for common usages and we cannot guarantee it will always fit in these requirements. If you're unsure, try to buy a microcontroler fitting the recommended requirements or at least try to compile and simulate the firmware to check if it works on your small device before effectively buying one and flashing the firmware.</p>
 <h2>Compatible environments:</h2>
 <p>Here is the satatus of compatibility of this development kit with several commonly used environments:</p>
 <table class="markdownTable">
@@ -118,7 +110,7 @@ $(function() {
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Component / Platform  </th><th class="markdownTableHeadNone">AVR  </th><th class="markdownTableHeadNone">ARM  </th><th class="markdownTableHeadNone">MSP430  </th><th class="markdownTableHeadNone">MSP432  </th><th class="markdownTableHeadNone">PIC32  </th><th class="markdownTableHeadNone">PIC18  </th><th class="markdownTableHeadNone">ESP8266  </th><th class="markdownTableHeadNone">ESP32   </th></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">AtHome Core  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">?   </td></tr>
+<td class="markdownTableBodyNone">AtHome Core  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">?   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
 <td class="markdownTableBodyNone">AtHome WiFi Module  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
@@ -134,7 +126,7 @@ $(function() {
 <tr class="markdownTableBody" class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Common anode RGB LED  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">Y (not tested)  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">?   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Grove Air Quality sensor  </td><td class="markdownTableBodyNone">Y (not all)  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<td class="markdownTableBodyNone">Grove Air Quality sensor  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Grove Light Sensor  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
@@ -155,6 +147,12 @@ $(function() {
 <td class="markdownTableBodyNone">MSP430FRAM  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Blynk (NI)  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A  </td><td class="markdownTableBodyNone">N/A   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Photoresistor (Not ready)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">FakeRTC  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DS1307 (Not ready)  </td><td class="markdownTableBodyNone">Y  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?  </td><td class="markdownTableBodyNone">?   </td></tr>
 </table>
 <h2>Low Power Mode</h2>
 <p>For battery powered modules, here is the list of low power operation mode on several architectures and environment:</p>
@@ -168,7 +166,7 @@ $(function() {
 <tr class="markdownTableBody" class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Bare-Metal  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N  </td><td class="markdownTableBodyNone">N   </td></tr>
 </table>
-<h2>Secured communication</h2>
+<h2>Secured communication [WIP]</h2>
 <p>Status of secured communication between modules and their server (the AtHome when the set is built by the AtHome team):</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">

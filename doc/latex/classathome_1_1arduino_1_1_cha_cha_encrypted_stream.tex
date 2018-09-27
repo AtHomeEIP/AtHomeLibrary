@@ -1,0 +1,81 @@
+\hypertarget{classathome_1_1arduino_1_1_cha_cha_encrypted_stream}{}\section{athome\+:\+:arduino\+:\+:Cha\+Cha\+Encrypted\+Stream Class Reference}
+\label{classathome_1_1arduino_1_1_cha_cha_encrypted_stream}\index{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream@{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream}}
+Inheritance diagram for athome\+:\+:arduino\+:\+:Cha\+Cha\+Encrypted\+Stream\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classathome_1_1arduino_1_1_cha_cha_encrypted_stream}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a3db50f0956a60c6fc628e2a7873c5b0e}\label{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a3db50f0956a60c6fc628e2a7873c5b0e}} 
+typedef uint8\+\_\+t {\bfseries counter}\mbox{[}8\mbox{]}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a1660816544b83e097d6bd917036e2cfb}\label{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a1660816544b83e097d6bd917036e2cfb}} 
+{\bfseries Cha\+Cha\+Encrypted\+Stream} (Stream \&)
+\item 
+\mbox{\Hypertarget{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_ac5cec464c3443f42e769987286254876}\label{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_ac5cec464c3443f42e769987286254876}} 
+{\bfseries Cha\+Cha\+Encrypted\+Stream} (const \mbox{\hyperlink{classathome_1_1arduino_1_1_cha_cha_encrypted_stream}{Cha\+Cha\+Encrypted\+Stream}} \&)=delete
+\item 
+\mbox{\Hypertarget{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a8024bdb4d917438e458be8a96c4fce8c}\label{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a8024bdb4d917438e458be8a96c4fce8c}} 
+\mbox{\hyperlink{classathome_1_1arduino_1_1_cha_cha_encrypted_stream}{Cha\+Cha\+Encrypted\+Stream}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1arduino_1_1_cha_cha_encrypted_stream}{Cha\+Cha\+Encrypted\+Stream}} \&)=delete
+\item 
+\mbox{\Hypertarget{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a919035578857f47afc97729308aa8b77}\label{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a919035578857f47afc97729308aa8b77}} 
+const counter \& {\bfseries get\+Counter} () const
+\item 
+\mbox{\Hypertarget{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a85fc5796dc8697fae3153ac3c3ae59e8}\label{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a85fc5796dc8697fae3153ac3c3ae59e8}} 
+void {\bfseries set\+Counter} (const counter \&cnt)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_adc55767997450f10d99a6e907a9c95ff}{initialize\+Cipher}} (const \mbox{\hyperlink{classathome_1_1arduino_1_1_a_encrypted_stream_a67d68ce9b0daa19296b38c9bb3a5aee7}{Cipher\+Materials}} \&)
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a34c2613f9f8100c1064f6b6b97a5b0f9}{encrypt}} (\mbox{\hyperlink{structathome_1_1arduino_1_1_a_encrypted_stream_1_1_block}{Block}} \&block)
+\item 
+virtual void \mbox{\hyperlink{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_ae0cd8d9dd46060a08789f0c1b221a400}{decrypt}} (\mbox{\hyperlink{structathome_1_1arduino_1_1_a_encrypted_stream_1_1_block}{Block}} \&block)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_ae0cd8d9dd46060a08789f0c1b221a400}\label{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_ae0cd8d9dd46060a08789f0c1b221a400}} 
+\index{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream@{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream}!decrypt@{decrypt}}
+\index{decrypt@{decrypt}!athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream@{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream}}
+\subsubsection{\texorpdfstring{decrypt()}{decrypt()}}
+{\footnotesize\ttfamily virtual void athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream\+::decrypt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structathome_1_1arduino_1_1_a_encrypted_stream_1_1_block}{Block}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Decrypt the block passed by reference 
+
+Implements \mbox{\hyperlink{classathome_1_1arduino_1_1_a_encrypted_stream_a256c8946f3907cea6cd2dc73e971acd2}{athome\+::arduino\+::\+A\+Encrypted\+Stream}}.
+
+\mbox{\Hypertarget{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a34c2613f9f8100c1064f6b6b97a5b0f9}\label{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_a34c2613f9f8100c1064f6b6b97a5b0f9}} 
+\index{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream@{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream}!encrypt@{encrypt}}
+\index{encrypt@{encrypt}!athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream@{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream}}
+\subsubsection{\texorpdfstring{encrypt()}{encrypt()}}
+{\footnotesize\ttfamily virtual void athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream\+::encrypt (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structathome_1_1arduino_1_1_a_encrypted_stream_1_1_block}{Block}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Encrypt the block passed by reference 
+
+Implements \mbox{\hyperlink{classathome_1_1arduino_1_1_a_encrypted_stream_a823ec054953b2f239a4bdbbc691ed984}{athome\+::arduino\+::\+A\+Encrypted\+Stream}}.
+
+\mbox{\Hypertarget{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_adc55767997450f10d99a6e907a9c95ff}\label{classathome_1_1arduino_1_1_cha_cha_encrypted_stream_adc55767997450f10d99a6e907a9c95ff}} 
+\index{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream@{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream}!initialize\+Cipher@{initialize\+Cipher}}
+\index{initialize\+Cipher@{initialize\+Cipher}!athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream@{athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream}}
+\subsubsection{\texorpdfstring{initialize\+Cipher()}{initializeCipher()}}
+{\footnotesize\ttfamily bool athome\+::arduino\+::\+Cha\+Cha\+Encrypted\+Stream\+::initialize\+Cipher (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classathome_1_1arduino_1_1_a_encrypted_stream_a67d68ce9b0daa19296b38c9bb3a5aee7}{Cipher\+Materials}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+Set the key and IV in the implementation of the cipher 
+
+Implements \mbox{\hyperlink{classathome_1_1arduino_1_1_a_encrypted_stream_a7b167d800f8ccb734228ed8e5b09d553}{athome\+::arduino\+::\+A\+Encrypted\+Stream}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Cha\+Cha\+Encrypted\+Stream.\+hpp\item 
+src/arduino/Cha\+Cha\+Encrypted\+Stream.\+cpp\end{DoxyCompactItemize}

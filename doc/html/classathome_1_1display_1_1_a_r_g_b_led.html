@@ -120,7 +120,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Abstract class used to control RGB LEDs (Common cathode/anode, Grove Chainable LEDs, NeoPixels, ...etc)</p>
 <p>Example of use:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_changing_led_color(ARGBLed &amp;led) {</div><div class="line">  Color red = {255, 0, 0}; <span class="comment">// Create a Color structure with red fully on, green off and blue off</span></div><div class="line">  led.setColor(red); <span class="comment">// Set the new color by calling setColor method</span></div><div class="line">  led.update(); <span class="comment">// Display the new color on the LED</span></div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_changing_led_color(ARGBLed &amp;led) {</div><div class="line">  Color red = {255, 0, 0}; <span class="comment">// Create a Color structure with red fully on,</span></div><div class="line">green off and blue off led.setColor(red); <span class="comment">// Set the new color by calling</span></div><div class="line"><a class="code" href="classathome_1_1display_1_1_a_r_g_b_led.html#a7ca4858c1ee10cc2f7c1dcc11a6d050e">setColor</a> method led.update(); <span class="comment">// Display the new color on the LED</span></div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a9753e3a23ea5cb6b0a41079bc6128766"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9753e3a23ea5cb6b0a41079bc6128766">&#9670;&nbsp;</a></span>clear()</h2>
 
@@ -202,7 +202,7 @@ Public Member Functions</h2></td></tr>
 <p>Set the new color to display on the LED.</p>
 <p>Note: You need to call the "update" method after this one, as it doesn't update automatically the new color on the LED.</p>
 <p>Example:</p>
-<div class="fragment"><div class="line"><span class="keyword">const</span> Color red = {255, 0, 0};</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_changing_a_led_color_to_red(ARGBLed &amp;led) {</div><div class="line">  led.setColor(red); <span class="comment">// Set the new color in the LED object</span></div><div class="line">  led.update(); <span class="comment">// You need to call this method if you want the new color to be displayed on the LED</span></div><div class="line">}</div></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="keyword">const</span> Color red = {255, 0, 0};</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_changing_a_led_color_to_red(ARGBLed &amp;led) {</div><div class="line">  led.setColor(red); <span class="comment">// Set the new color in the LED object</span></div><div class="line">  led.update(); <span class="comment">// You need to call this method if you want the new color</span></div><div class="line">to be displayed on the LED</div><div class="line">}</div></div><!-- fragment --> 
 </div>
 </div>
 <a id="a411b35199d593b813bad7d9056678198"></a>

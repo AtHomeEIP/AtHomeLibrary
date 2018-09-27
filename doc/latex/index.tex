@@ -1,5 +1,7 @@
 This repository holds the source code of the At\+Home Development Kit (Framework + examples + P\+C\+Bs and schematics).
 
+Development documentation is available at \href{https://woodbox.gitlab.io/Framework}{\tt https\+://woodbox.\+gitlab.\+io/\+Framework}
+
 \subsection*{What is At\+Home?}
 
 At\+Home is a set of smart devices enabling to monitor a house\textquotesingle{}s environment and the possible effects on human health. A smartphone application communicating with sensing devices put into the house, enable the user to get advices, tips and solutions to potential problems, and to communicate with other members of At\+Home community, to be able to live better at home.
@@ -25,10 +27,8 @@ Required libraries\+:
 
 Optional libraries\+:
 \begin{DoxyItemize}
-\item Arduino\+Json library, despite it\textquotesingle{}s name it\textquotesingle{}s fully portable\+: \href{https://github.com/bblanchon/ArduinoJson}{\tt https\+://github.\+com/bblanchon/\+Arduino\+Json} (if using network based At\+Home modules)
 \item Grove Light\+Sensor library\+: \href{https://github.com/Seeed-Studio/Grove_Digital_Light_Sensor}{\tt https\+://github.\+com/\+Seeed-\/\+Studio/\+Grove\+\_\+\+Digital\+\_\+\+Light\+\_\+\+Sensor} (if using Grove Digital Light Sensor)
-\item Grove Air\+Quality library\+: \href{https://github.com/SeeedDocument/Grove_Air_Quality_Sensor_v1.3/raw/master/}{\tt https\+://github.\+com/\+Seeed\+Document/\+Grove\+\_\+\+Air\+\_\+\+Quality\+\_\+\+Sensor\+\_\+v1.\+3/raw/master/} (if using Grove Air Quality Sensor v1.\+3)
-\item Grove Chainable\+L\+ED library\+: \href{https://github.com/pjpmarques/ChainableLED}{\tt https\+://github.\+com/pjpmarques/\+Chainable\+L\+ED} (if using Grove Chainable L\+E\+Ds)
+\item Grove Chainable\+L\+ED library\+: \href{https://github.com/Seeed-Studio/Grove_Chainable_RGB_LED}{\tt https\+://github.\+com/\+Seeed-\/\+Studio/\+Grove\+\_\+\+Chainable\+\_\+\+R\+G\+B\+\_\+\+L\+ED} (if using Grove Chainable L\+E\+Ds)
 \item Adafruit Neo\+Pixel library\+: \href{https://github.com/adafruit/Adafruit_NeoPixel}{\tt https\+://github.\+com/adafruit/\+Adafruit\+\_\+\+Neo\+Pixel} (if using Neo\+Pixel)
 \end{DoxyItemize}
 
@@ -39,20 +39,10 @@ Recommended microcontroler platform\+:
 \item Internal persistent storage (F\+R\+AM is better, E\+E\+P\+R\+OM other way)
 \item Internal R\+TC
 \item At least 32\+KB of program memory (Warning\+: not counting bootloader size, some chips such as Microchip P\+I\+C32\+MX or Espressif E\+S\+P8265/8266/32 will require much more program memory)
-\item At least 1\+KB of R\+AM
+\item At least 2\+KB of R\+AM
 \end{DoxyItemize}
 
 Requirements can be reduced depending on components used and by tweaking the framework configuration. See \mbox{\hyperlink{_at_home_config_8h_source}{At\+Home\+Config.\+h}} to disable unused features.
-
-Minimum microcontroler requirements\+:
-\begin{DoxyItemize}
-\item M\+CU compatible with Arduino core (either 8/16/32bits)
-\item C++11 compiler support
-\item At least 4\+KB of program memory (not counting bootloader size if any)
-\item At least 512B of R\+AM
-\end{DoxyItemize}
-
-Please, note that the minimum requirements above can be obtained with a finely tuned configuration of the framework for some projects, but it\textquotesingle{}s likely to use more resources for common usages and we cannot guarantee it will always fit in these requirements. If you\textquotesingle{}re unsure, try to buy a microcontroler fitting the recommended requirements or at least try to compile and simulate the firmware to check if it works on your small device before effectively buying one and flashing the firmware.
 
 \subsection*{Compatible environments\+:}
 
@@ -86,7 +76,7 @@ Here is the status of compatibility of components available in this development 
 \hline
 \rowcolor{\tableheadbgcolor}\textbf{ Component / Platform  }&\textbf{ A\+VR  }&\textbf{ A\+RM  }&\textbf{ M\+S\+P430  }&\textbf{ M\+S\+P432  }&\textbf{ P\+I\+C32  }&\textbf{ P\+I\+C18  }&\textbf{ E\+S\+P8266  }&\textbf{ E\+S\+P32   }\\\cline{1-9}
 \endhead
-At\+Home Core  &Y  &Y (not tested)  &Y (not tested)  &Y  &Y (not tested)  &?  &Y  &?   \\\cline{1-9}
+At\+Home Core  &Y  &Y (not tested)  &Y  &Y  &Y (not tested)  &?  &Y  &?   \\\cline{1-9}
 At\+Home Wi\+Fi Module  &Y  &Y (not tested)  &N  &Y  &Y  &?  &?  &?   \\\cline{1-9}
 E\+S\+P8266 AT Firmware  &Y (not tested)  &Y (not tested)  &N  &Y  &Y (not tested)  &?  &N/A  &?   \\\cline{1-9}
 Grove Chainable L\+ED  &Y  &Y (not tested)  &Y (not tested, need a small patch but I\textquotesingle{}m unable to check as I don\textquotesingle{}t have one)  &Y (not tested)  &Y (not tested)  &?  &?  &?   \\\cline{1-9}
@@ -94,7 +84,7 @@ Analog\+Sensor  &Y (not tested)  &Y (not tested)  &Y (not tested)  &Y  &Y (not t
 Arduino\+E\+E\+P\+R\+OM  &Y  &N  &N  &N  &N  &?  &?  &?   \\\cline{1-9}
 Common cathode R\+GB L\+ED  &Y (not tested)  &Y (not tested)  &Y (not tested)  &Y  &Y (not tested)  &?  &Y  &?   \\\cline{1-9}
 Common anode R\+GB L\+ED  &Y (not tested)  &Y (not tested)  &Y (not tested)  &Y (not tested)  &Y (not tested)  &?  &Y  &?   \\\cline{1-9}
-Grove Air Quality sensor  &Y (not all)  &N  &N  &N  &?  &?  &?  &?   \\\cline{1-9}
+Grove Air Quality sensor  &N  &N  &N  &N  &?  &?  &?  &?   \\\cline{1-9}
 Grove Light Sensor  &Y  &Y  &N  &N  &?  &?  &?  &?   \\\cline{1-9}
 M\+Q2 Gas sensor  &Y  &Y  &Y  &Y  &?  &?  &?  &?   \\\cline{1-9}
 Neo\+Pixel  &Y  &Y (not all, not tested)  &N  &N  &N  &?  &?  &?   \\\cline{1-9}
@@ -105,6 +95,9 @@ P\+WM L\+ED  &Y  &Y  &Y  &Y  &Y  &?  &?  &?   \\\cline{1-9}
 Thermistor  &Y  &Y  &Y  &Y  &Y  &?  &?  &?   \\\cline{1-9}
 M\+S\+P430\+F\+R\+AM  &N  &N  &Y  &N  &N  &N  &N  &N   \\\cline{1-9}
 Blynk (NI)  &N/A  &N/A  &N/A  &N/A  &N/A  &N/A  &N/A  &N/A   \\\cline{1-9}
+Photoresistor (Not ready)  &Y  &Y  &Y  &Y  &Y  &?  &?  &?   \\\cline{1-9}
+Fake\+R\+TC  &Y  &Y  &Y  &Y  &Y  &N  &?  &?   \\\cline{1-9}
+D\+S1307 (Not ready)  &Y  &?  &?  &?  &?  &?  &?  &?   \\\cline{1-9}
 \end{longtabu}
 
 
@@ -128,7 +121,7 @@ Bare-\/\+Metal  &N  &N  &N  &N  &N  &N  &N  &N   \\\cline{1-9}
 \end{longtabu}
 
 
-\subsection*{Secured communication}
+\subsection*{Secured communication \mbox{[}W\+IP\mbox{]}}
 
 Status of secured communication between modules and their server (the At\+Home when the set is built by the At\+Home team)\+:
 

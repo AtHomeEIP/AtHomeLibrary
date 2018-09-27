@@ -6,6 +6,31 @@ Inheritance diagram for athome\+:\+:sensor\+:\+:A\+Luminosity\+Sensor\+:\begin{f
 \includegraphics[height=3.000000cm]{classathome_1_1sensor_1_1_a_luminosity_sensor}
 \end{center}
 \end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_luminosity_sensor_ac37c468d472b025ba2212940fd615186}\label{classathome_1_1sensor_1_1_a_luminosity_sensor_ac37c468d472b025ba2212940fd615186}} 
+enum {\bfseries Room\+\_\+\+Type} \{ \newline
+{\bfseries NO}, 
+{\bfseries C\+O\+R\+R\+I\+D\+O\+RS}, 
+{\bfseries S\+T\+A\+I\+RS}, 
+{\bfseries W\+A\+R\+E\+H\+O\+U\+S\+ES}, 
+\newline
+{\bfseries S\+H\+O\+PS}, 
+{\bfseries S\+H\+O\+P\+S\+\_\+\+C\+H\+E\+C\+K\+O\+U\+TS}, 
+{\bfseries P\+U\+B\+L\+I\+C\+\_\+\+A\+R\+E\+A\+S\+\_\+\+A\+N\+D\+\_\+\+E\+N\+T\+R\+A\+N\+C\+ES}, 
+{\bfseries C\+O\+U\+N\+T\+E\+RS}, 
+\newline
+{\bfseries R\+E\+S\+T\+A\+U\+R\+A\+N\+T\+S\+\_\+\+H\+O\+S\+T\+E\+L\+S\+\_\+\+R\+E\+C\+E\+P\+T\+I\+O\+NS}, 
+{\bfseries K\+I\+T\+C\+H\+E\+NS}, 
+{\bfseries C\+L\+A\+S\+S\+R\+O\+O\+MS}, 
+{\bfseries C\+O\+N\+F\+E\+R\+E\+N\+C\+E\+\_\+\+R\+O\+O\+MS}, 
+\newline
+{\bfseries I\+N\+D\+U\+S\+T\+R\+I\+A\+L\+\_\+\+D\+R\+A\+W\+I\+N\+G\+\_\+\+R\+O\+O\+MS}, 
+{\bfseries O\+F\+F\+I\+CE}, 
+{\bfseries A\+R\+C\+H\+I\+V\+ES}
+ \}
+\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -15,13 +40,14 @@ Inheritance diagram for athome\+:\+:sensor\+:\+:A\+Luminosity\+Sensor\+:\begin{f
 \mbox{\Hypertarget{classathome_1_1sensor_1_1_a_luminosity_sensor_a9a91cdf883f0f06be50a74ec2e73d710}\label{classathome_1_1sensor_1_1_a_luminosity_sensor_a9a91cdf883f0f06be50a74ec2e73d710}} 
 \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor}{A\+Luminosity\+Sensor}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor}{A\+Luminosity\+Sensor}} \&)=delete
 \item 
-const I\+Sensor\+Value \& \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor_a6e0e7bcfe13cd8d8edf6a09f6e230ef8}{get\+Sample}} ()
+const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+Value}} \& \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor_a6e0e7bcfe13cd8d8edf6a09f6e230ef8}{get\+Sample}} ()
 \item 
 virtual uint16\+\_\+t \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor_ae756f7d7647c2cf695305c8f11aec8d3}{get\+Sensor\+Sample}} ()=0
 \item 
 void \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor_aa26ed7176ba600f6900bd249edce71ab}{set\+Thresholds}} (const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&)
+\item 
+void \mbox{\hyperlink{classathome_1_1sensor_1_1_a_luminosity_sensor_a297af24d24717c4167840c933b0bbb9a}{set\+Room}} (Room\+\_\+\+Type)
 \end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
 
 
 \subsection{Member Function Documentation}
@@ -52,7 +78,13 @@ Return the number of lux as an integer.
 
 Implemented in \mbox{\hyperlink{classathome_1_1sensor_1_1_l_d_r_luminosity_sensor_a6e4f25000704564ce30a7e3531f23c43}{athome\+::sensor\+::\+L\+D\+R\+Luminosity\+Sensor$<$ R\+E\+F, R\+E\+S, R\+D\+I\+V $>$}}.
 
-\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_luminosity_sensor_aa26ed7176ba600f6900bd249edce71ab}\label{classathome_1_1sensor_1_1_a_luminosity_sensor_aa26ed7176ba600f6900bd249edce71ab}} 
+\mbox{\Hypertarget{classathome_1_1sensor_1_1_a_luminosity_sensor_a297af24d24717c4167840c933b0bbb9a}\label{classathome_1_1sensor_1_1_a_luminosity_sensor_a297af24d24717c4167840c933b0bbb9a}} 
+\index{athome\+::sensor\+::\+A\+Luminosity\+Sensor@{athome\+::sensor\+::\+A\+Luminosity\+Sensor}!set\+Room@{set\+Room}}
+\index{set\+Room@{set\+Room}!athome\+::sensor\+::\+A\+Luminosity\+Sensor@{athome\+::sensor\+::\+A\+Luminosity\+Sensor}}
+\subsubsection{\texorpdfstring{set\+Room()}{setRoom()}}
+{\footnotesize\ttfamily void athome\+::sensor\+::\+A\+Luminosity\+Sensor\+::set\+Room (\begin{DoxyParamCaption}\item[{A\+Luminosity\+Sensor\+::\+Room\+\_\+\+Type}]{room }\end{DoxyParamCaption})}
+
+Set thresholds based on the room type \mbox{\Hypertarget{classathome_1_1sensor_1_1_a_luminosity_sensor_aa26ed7176ba600f6900bd249edce71ab}\label{classathome_1_1sensor_1_1_a_luminosity_sensor_aa26ed7176ba600f6900bd249edce71ab}} 
 \index{athome\+::sensor\+::\+A\+Luminosity\+Sensor@{athome\+::sensor\+::\+A\+Luminosity\+Sensor}!set\+Thresholds@{set\+Thresholds}}
 \index{set\+Thresholds@{set\+Thresholds}!athome\+::sensor\+::\+A\+Luminosity\+Sensor@{athome\+::sensor\+::\+A\+Luminosity\+Sensor}}
 \subsubsection{\texorpdfstring{set\+Thresholds()}{setThresholds()}}
@@ -64,10 +96,10 @@ Example\+:
 
 
 \begin{DoxyCode}
-\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor &my\_sensor) \{
-  \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate();
-  \textcolor{keywordflow}{if} (sensor\_estimate == ISensor::ZERO) \{
-    Serial.println(\textcolor{stringliteral}{"The sensor returned an invalid value"});
+\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor
+&my\_sensor) \{ \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate(); \textcolor{keywordflow}{if}
+(sensor\_estimate == ISensor::ZERO) \{ Serial.println(\textcolor{stringliteral}{"The sensor returned an}
+\textcolor{stringliteral}{invalid value"});
   \}
   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (sensor\_estimate > ISensor::ZERO && sensor\_estimate < 6) \{
     Serial.println(\textcolor{stringliteral}{"Boouh, it's not good :("});

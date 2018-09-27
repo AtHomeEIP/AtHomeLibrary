@@ -42,27 +42,28 @@ Example of use\+:
 
 String my\_string1(\textcolor{stringliteral}{"Hello, World!"});
 String my\_string2(\textcolor{stringliteral}{"foobar"});
-String my\_string3(\textcolor{stringliteral}{"Philipe ! Je sais ou tu te caches !"}); \textcolor{comment}{// Sorry for non-french readers :)}
+String my\_string3(\textcolor{stringliteral}{"Philipe ! Je sais ou tu te caches !"}); \textcolor{comment}{// Sorry for}
+non-french readers :)
 
 \textcolor{keywordtype}{void} my\_function\_using\_a\_buffer() \{
-  Buffer<const String &, 2> my\_buffer; \textcolor{comment}{// Create a buffer able to store 2 references on constant String
-       objects}
-  my\_buffer.write(my\_string1); \textcolor{comment}{// Add a reference on constant my\_string1 to the buffer}
-  my\_buffer.write(my\_string2); \textcolor{comment}{// Add a reference on constant my\_string2 to the buffer}
+  Buffer<const String &, 2> my\_buffer; \textcolor{comment}{// Create a buffer able to store 2}
+references on constant String objects my\_buffer.write(my\_string1); \textcolor{comment}{// Add a}
+reference on constant my\_string1 to the buffer my\_buffer.write(my\_string2);
+\textcolor{comment}{// Add a reference on constant my\_string2 to the buffer}
   my\_buffer.write(my\_string3); \textcolor{comment}{// Won't work! The buffer is full}
   Serial.println(my\_buffer.available()); \textcolor{comment}{// Will print 2}
-  \textcolor{keyword}{const} String &re\_string1 = my\_buffer.read(); \textcolor{comment}{// Return a reference on constant String my\_string1 and free
-       a space in the buffer}
+  \textcolor{keyword}{const} String &re\_string1 = my\_buffer.read(); \textcolor{comment}{// Return a reference on}
+constant String my\_string1 and free a space in the buffer
   Serial.println(my\_buffer.available()); \textcolor{comment}{// Will print 1}
-  \textcolor{keyword}{const} String &re\_string2 = my\_buffer.peek(); \textcolor{comment}{// Return a reference on constant String my\_string2, don't
-       modify the buffer}
-  Serial.println(my\_buffer.available()); \textcolor{comment}{// Will print 1}
-  my\_buffer.write(my\_string3); \textcolor{comment}{// Add a reference on constant my\_string3 to the buffer, storing now
-       references on my\_string2 and my\_string3}
-  Serial.println(my\_buffer.available()); \textcolor{comment}{// Will print 2}
-  my\_buffer.flush(); \textcolor{comment}{// Clear the buffer}
-  Serial.println(my\_buffer.available()); \textcolor{comment}{// Will print 0}
-\}
+  \textcolor{keyword}{const} String &re\_string2 = my\_buffer.peek(); \textcolor{comment}{// Return a reference on}
+constant String my\_string2, don\textcolor{stringliteral}{'t modify the buffer}
+\textcolor{stringliteral}{  Serial.println(my\_buffer.available()); // Will print 1}
+\textcolor{stringliteral}{  my\_buffer.write(my\_string3); // Add a reference on constant my\_string3 to}
+\textcolor{stringliteral}{the buffer, storing now references on my\_string2 and my\_string3}
+\textcolor{stringliteral}{  Serial.println(my\_buffer.available()); // Will print 2}
+\textcolor{stringliteral}{  my\_buffer.flush(); // Clear the buffer}
+\textcolor{stringliteral}{  Serial.println(my\_buffer.available()); // Will print 0}
+\textcolor{stringliteral}{\}}
 \end{DoxyCode}
  
 
@@ -71,7 +72,7 @@ String my\_string3(\textcolor{stringliteral}{"Philipe ! Je sais ou tu te caches 
 \index{athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}!available@{available}}
 \index{available@{available}!athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}}
 \subsubsection{\texorpdfstring{available()}{available()}}
-{\footnotesize\ttfamily template$<$typename T, size\+\_\+t size$>$ \\
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t size$>$ \\
 int \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome\+::utility\+::\+Buffer}}$<$ T, size $>$\+::available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 This method return the number of elements stored in the buffer.
@@ -80,7 +81,7 @@ See class detailed documentation for example of usage. \mbox{\Hypertarget{classa
 \index{athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}!flush@{flush}}
 \index{flush@{flush}!athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}}
 \subsubsection{\texorpdfstring{flush()}{flush()}}
-{\footnotesize\ttfamily template$<$typename T, size\+\_\+t size$>$ \\
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t size$>$ \\
 void \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome\+::utility\+::\+Buffer}}$<$ T, size $>$\+::flush (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 This method remove all elements from the buffer.
@@ -89,7 +90,7 @@ See class detailed documentation for example of usage. \mbox{\Hypertarget{classa
 \index{athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}!peek@{peek}}
 \index{peek@{peek}!athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}}
 \subsubsection{\texorpdfstring{peek()}{peek()}}
-{\footnotesize\ttfamily template$<$typename T, size\+\_\+t size$>$ \\
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t size$>$ \\
 T \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome\+::utility\+::\+Buffer}}$<$ T, size $>$\+::peek (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 This method return the oldest stored element in the buffer and doesn\textquotesingle{}t remove it from the buffer.
@@ -98,7 +99,7 @@ See class detailed documentation for example of usage. \mbox{\Hypertarget{classa
 \index{athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}!read@{read}}
 \index{read@{read}!athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}}
 \subsubsection{\texorpdfstring{read()}{read()}}
-{\footnotesize\ttfamily template$<$typename T, size\+\_\+t size$>$ \\
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t size$>$ \\
 T \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome\+::utility\+::\+Buffer}}$<$ T, size $>$\+::read (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 This method return the oldest stored element in the buffer and remove it from the buffer.
@@ -107,7 +108,7 @@ See class detailed documentation for example of usage. \mbox{\Hypertarget{classa
 \index{athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}!write@{write}}
 \index{write@{write}!athome\+::utility\+::\+Buffer@{athome\+::utility\+::\+Buffer}}
 \subsubsection{\texorpdfstring{write()}{write()}}
-{\footnotesize\ttfamily template$<$typename T, size\+\_\+t size$>$ \\
+{\footnotesize\ttfamily template$<$typename T , size\+\_\+t size$>$ \\
 void \mbox{\hyperlink{classathome_1_1utility_1_1_buffer}{athome\+::utility\+::\+Buffer}}$<$ T, size $>$\+::write (\begin{DoxyParamCaption}\item[{T}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 This method store the data passed as parameter into the buffer.
