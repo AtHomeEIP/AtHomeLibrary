@@ -10,6 +10,7 @@
 namespace {
     using athome::display::ARGBLed;
     using athome::display::IDisplay;
+    using athome::sensor::ISensor;
 
     ARGBLed::Color *blue = new ARGBLed::Color{0, 0, 255};
 
@@ -17,6 +18,18 @@ namespace {
     CommonAnodeRGBLed anodeLed(3, 4, 5);
     GroveChainableLED groveLed(nullptr);
     NeoPixel *neopixelLed = nullptr;
+
+    ARGBLed::Color totallyNewScale[] = {{0, 0, 0},
+                      {255, 0, 155},
+                      {230, 0, 180},
+                      {205, 0, 205},
+                      {180, 0, 230},
+                      {155, 0, 255},
+                      {0, 5, 0},
+                      {0, 10, 0},
+                      {0, 15, 0},
+                      {0, 50, 0},
+                      {0, 200, 0}};
 }
 void setTestNeoPixel(NeoPixel *led) {
     neopixelLed = led;
@@ -58,6 +71,16 @@ class TestIDisplay : public TestOnce {
             display->update();
             return true;
         }
+        static bool setDisplayEstimate(IDisplay *display,
+                                       void *given,
+                                       const void *expected,
+                                       Comparator cmp) {
+            ISensor::ISensorScale *scale = reinterpret_cast<ISensor::ISensorScale *>(given);
+            (void)expected;
+            (void)cmp;
+            display->setDisplayedEstimate(*scale);
+            return true;
+        }
     private:
         IDisplay *_display;
         IDisplayTest _test;
@@ -69,9 +92,9 @@ class TestARGBLed : public TestIDisplay {
     public:
         TestARGBLed(ARGBLed *led, IDisplayTest test,
                     const char *name = nullptr,
-                    ARGBLed::Color *color = nullptr,
-                    const ARGBLed::Color *expected = nullptr):
-            TestIDisplay(led, test, name, color, expected, compareColor)
+                    void *given = nullptr,
+                    const void *expected = nullptr):
+            TestIDisplay(led, test, name, given, expected, compareColor)
         {}
     public:
         static bool startAsBlack(IDisplay *led, void *color,
@@ -103,6 +126,21 @@ class TestARGBLed : public TestIDisplay {
             if (!updateDisplay(led, nullptr, nullptr, nullptr) ||
                 cmp(&led->getColor(), expected)) {
                 return false;
+            }
+            return true;
+        }
+        static bool setColorsScale(IDisplay *display, void *given,
+                                   const void *expected, Comparator cmp) {
+            ARGBLed *led = reinterpret_cast<ARGBLed *>(display);
+            ARGBLed::Color *colors = reinterpret_cast<ARGBLed::Color *>(given);
+            (void)expected;
+            led->setColorsScale(colors);
+            for (size_t i = ISensor::ONE; i <= ISensor::TEN; i++) {
+                if (!setDisplayEstimate(led, &i, nullptr, nullptr) ||
+                    !updateDisplay(led, nullptr, nullptr, nullptr) ||
+                    cmp(&colors[i], &led->getColor())) {
+                        return false;
+                    }
             }
             return true;
         }
@@ -161,4 +199,21 @@ TestARGBLed clearShouldSetItBlack##led(\
 TEST_CLEARING_LED_SHOULD_SET_IT_BLACK(CommonCathodeRGBLed, &cathodeLed);
 TEST_CLEARING_LED_SHOULD_SET_IT_BLACK(CommonAnodeRGBLed, &anodeLed);
 TEST_CLEARING_LED_SHOULD_SET_IT_BLACK(GroveChainableLED, &groveLed);
+
+#define MSG_SHOULD_SET_COLOR_SCALE(led, scale) (\
+    "[500] Given a led "#led" and a scale of color "#scale\
+    " When setting it and setting every possible estimate values"\
+    " Then the colors should always match the scale"\
+)
+#define TEST_SHOULD_SET_COLOR_SCALE(led, scale, instance)\
+TestARGBLed estimatesShouldMatchScale##led(\
+    instance,\
+    TestARGBLed::setColorsScale,\
+    MSG_SHOULD_SET_COLOR_SCALE(led, scale),\
+    scale\
+)
+
+TEST_SHOULD_SET_COLOR_SCALE(CommonCathodeRGBLed, totallyNewScale, &cathodeLed);
+TEST_SHOULD_SET_COLOR_SCALE(CommonAnodeRGBLed, totallyNewScale, &anodeLed);
+TEST_SHOULD_SET_COLOR_SCALE(GroveChainableLED, totallyNewScale, &groveLed);
 #endif /* TEST_IDISPLAY_HPP */
