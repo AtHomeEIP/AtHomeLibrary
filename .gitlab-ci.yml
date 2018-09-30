@@ -210,8 +210,8 @@ unitTest:
     - export PATH=$PATH:$PWD/extras/simulator/mega2560_linux_x64
     - chmod +x $PWD/extras/simulator/mega2560_linux_x64/
   script:
-    - mega2560 $PWD/test/output/unit/unit.ino.hex &
-    - cat /dev/pts/0 > $PWD/test/output/unit/out.log &
+    - mega2560 $PWD/test/output/IDisplay_tests/IDisplay_tests.ino.hex &
+    - cat /dev/pts/0 > $PWD/test/output/IDisplay_tests/IDisplay_tests.log &
     - sleep 10
     - killall mega2560
   artifacts:
