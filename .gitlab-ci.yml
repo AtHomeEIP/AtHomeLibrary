@@ -208,7 +208,7 @@ unitTest:
     - apt-get update && apt-get install -y libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 python3-pip psmisc
     - export LD_LIBRARY_PATH=$PWD/extras/simulator/mega2560_linux_x64
     - export PATH=$PATH:$PWD/extras/simulator/mega2560_linux_x64
-    - chmod +x $PWD/extras/simulator/mega2560_linux_x64/
+    - chmod +x $PWD/extras/simulator/mega2560_linux_x64/mega2560
   script:
     - mega2560 $PWD/test/output/IDisplay_tests/IDisplay_tests.ino.hex &
     - cat /dev/pts/0 > $PWD/test/output/IDisplay_tests/IDisplay_tests.log &
