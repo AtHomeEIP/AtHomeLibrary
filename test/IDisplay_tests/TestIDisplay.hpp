@@ -1,3 +1,5 @@
+#ifndef TEST_IDISPLAY_HPP
+#define TEST_IDISPLAY_HPP
 #line 2 "TestARGBLed.hpp"
 #include <Arduino.h>
 #include <AtHome.h>
@@ -159,3 +161,4 @@ TestARGBLed clearShouldSetItBlack##led(\
 TEST_CLEARING_LED_SHOULD_SET_IT_BLACK(CommonCathodeRGBLed, &cathodeLed);
 TEST_CLEARING_LED_SHOULD_SET_IT_BLACK(CommonAnodeRGBLed, &anodeLed);
 TEST_CLEARING_LED_SHOULD_SET_IT_BLACK(GroveChainableLED, &groveLed);
+#endif /* TEST_IDISPLAY_HPP */

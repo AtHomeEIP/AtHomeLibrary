@@ -46,14 +46,14 @@ buildTests:Arduino:
     - mkdir -p $PWD/test/output/arm/due # test official arm cortex m3 board
     # - mkdir -p $PWD/test/output/pic32/fubarino_mini # test pic32mx250 based board
   script:
-    - arduino --verify --board arduino:avr:uno $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/1/
-    - arduino --verify --board arduino:avr:leonardo $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/1/
-    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/1/
-    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/1/
-    - arduino --verify --board arduino:avr:uno $PWD/test/2/2.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/2/
-    - arduino --verify --board arduino:avr:leonardo $PWD/test/2/2.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/2/
-    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/2/2.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/2/
-    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/2/2.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/2/
+    - arduino --verify --board arduino:avr:uno $PWD/test/simple_a/simple_a.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/simple_a/
+    - arduino --verify --board arduino:avr:leonardo $PWD/test/simple_a/simple_a.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/simple_a/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/simple_a/simple_a.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/simple_a/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/simple_a/simple_a.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/simple_a/
+    - arduino --verify --board arduino:avr:uno $PWD/test/simple_b/simple_b.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/simple_b/
+    - arduino --verify --board arduino:avr:leonardo $PWD/test/simple_b/simple_b.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/simple_b/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/simple_b/simple_b.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/simple_b/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/simple_b/simple_b.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/simple_b/
     # - arduino --verify --board chipKIT:pic32:fubarino_mini $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/pic32/fubarino_mini/
   artifacts:
     paths:
@@ -192,8 +192,8 @@ test:
     - chmod +x $PWD/extras/scripts/middleware/*
     - chmod +x $PWD/extras/simulator/linux_x64/simulator
   script:
-    - athome_test $PWD/test/output/avr/uno/1/1.ino.hex
-    - athome_test $PWD/test/output/avr/uno/2/2.ino.hex
+    - athome_test $PWD/test/output/avr/uno/simple_a/simple_a.ino.hex
+    - athome_test $PWD/test/output/avr/uno/simple_b/simple_b.ino.hex
     # - ./simavr/simavr/run_avr -m atmega328p -f 16000000 $PWD/test/output/avr/uno/1.ino.hex
   artifacts:
     paths:
@@ -240,7 +240,7 @@ unitTest:
     - mkdir -p $PWD/test/output/unit
   script:
     - arduino --verify --board arduino:avr:mega $PWD/test/unit/unit.ino --preserve-temp-files --pref build.path=$PWD/test/output/unit
-    - mega2560 $PWD/test/output/unit/unit.ino.mega.hex &
+    - mega2560 $PWD/test/output/unit/unit.ino.hex &
     - cat /dev/pts/0 > $PWD/test/output/unit/out.log &
     - sleep 10
     - killall mega2560
