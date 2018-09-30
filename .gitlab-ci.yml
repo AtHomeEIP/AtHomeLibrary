@@ -211,8 +211,8 @@ unitTest:
     - chmod +x $PWD/extras/simulator/mega2560_linux_x64/mega2560
   script:
     - mega2560 $PWD/test/output/IDisplay_tests/IDisplay_tests.ino.hex &
+    - sleep 3
     - cat /dev/pts/0 > $PWD/test/output/IDisplay_tests/IDisplay_tests.log &
-    - sleep 10
     - killall mega2560
   artifacts:
     paths:
