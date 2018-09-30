@@ -44,14 +44,28 @@ extern const PROGMEM char label[];
 extern const PROGMEM char jsonLPG[];
 extern const PROGMEM char jsonCO[];
 extern const PROGMEM char jsonSMOKE[];
+extern const PROGMEM char jsonDictEnd[];
 }  // namespace MQ2GasSensorStrings
 
 class MQ2GasSensor : public ISensor {
  public:
-  struct Values {
+  struct Values : public Printable {
     int lpg;
     int co;
     int smoke;
+
+    virtual size_t printTo(Print &p) const {
+      // TOOD: To replace with a binary serialization when uploadData will not use json anymore
+      size_t len = 0;
+      len += p.print(FH(MQ2GasSensorStrings::jsonLPG));
+      len += p.print(lpg);
+      len += p.print(FH(MQ2GasSensorStrings::jsonCO));
+      len += p.print(co);
+      len += p.print(FH(MQ2GasSensorStrings::jsonSMOKE));
+      len += p.print(smoke);
+      len += p.print(FH(MQ2GasSensorStrings::jsonDictEnd));
+      return len;
+    }
   };
 
   explicit MQ2GasSensor(int pin);
