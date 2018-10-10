@@ -45,16 +45,18 @@ buildTests:Arduino:
     - mkdir -p $PWD/test/output/arm/zero # test official arm cortex m0+ board
     - mkdir -p $PWD/test/output/arm/due # test official arm cortex m3 board
     # - mkdir -p $PWD/test/output/pic32/fubarino_mini # test pic32mx250 based board
+    - mkdir -p $PWD/test/output/IDisplay_tests
   script:
-    - arduino --verify --board arduino:avr:uno $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/1/
-    - arduino --verify --board arduino:avr:leonardo $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/1/
-    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/1/
-    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/1/1.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/1/
-    - arduino --verify --board arduino:avr:uno $PWD/test/2/2.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/2/
-    - arduino --verify --board arduino:avr:leonardo $PWD/test/2/2.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/2/
-    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/2/2.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/2/
-    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/2/2.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/2/
+    - arduino --verify --board arduino:avr:uno $PWD/test/simple_a/simple_a.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/simple_a/
+    - arduino --verify --board arduino:avr:leonardo $PWD/test/simple_a/simple_a.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/simple_a/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/simple_a/simple_a.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/simple_a/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/simple_a/simple_a.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/simple_a/
+    - arduino --verify --board arduino:avr:uno $PWD/test/simple_b/simple_b.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/uno/simple_b/
+    - arduino --verify --board arduino:avr:leonardo $PWD/test/simple_b/simple_b.ino --preserve-temp-files --pref build.path=$PWD/test/output/avr/leonardo/simple_b/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/simple_b/simple_b.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/simple_b/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/simple_b/simple_b.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/simple_b/
     # - arduino --verify --board chipKIT:pic32:fubarino_mini $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/pic32/fubarino_mini/
+    - arduino --verify --board arduino:avr:mega:cpu=atmega2560 $PWD/test/IDisplay_tests/IDisplay_tests.ino --preserve-temp-files --pref build.path=$PWD/test/output/IDisplay_tests
   artifacts:
     paths:
       - "test/output"
@@ -192,8 +194,8 @@ test:
     - chmod +x $PWD/extras/scripts/middleware/*
     - chmod +x $PWD/extras/simulator/linux_x64/simulator
   script:
-    - athome_test $PWD/test/output/avr/uno/1/1.ino.hex
-    - athome_test $PWD/test/output/avr/uno/2/2.ino.hex
+    - athome_test $PWD/test/output/avr/uno/simple_a/simple_a.ino.hex
+    - athome_test $PWD/test/output/avr/uno/simple_b/simple_b.ino.hex
     # - ./simavr/simavr/run_avr -m atmega328p -f 16000000 $PWD/test/output/avr/uno/1.ino.hex
   artifacts:
     paths:
@@ -202,11 +204,19 @@ test:
 unitTest:
   stage: test
   allow_failure: yes
+  before_script:
+    - apt-get update && apt-get install -y libelf-dev gcc-avr avr-libc freeglut3-dev elfutils libelf1 libglib2.0-dev gdb-avr python3 python3-pip psmisc
+    - export LD_LIBRARY_PATH=$PWD/extras/simulator/mega2560_linux_x64
+    - export PATH=$PATH:$PWD/extras/simulator/mega2560_linux_x64
+    - chmod +x $PWD/extras/simulator/mega2560_linux_x64/mega2560
   script:
-    - echo "Hello, World! I'm still not implemented"
+    - mega2560 $PWD/test/output/IDisplay_tests/IDisplay_tests.ino.hex &
+    - sleep 3
+    - cat /dev/pts/0 > $PWD/test/output/IDisplay_tests/IDisplay_tests.log &
+    - killall mega2560
   artifacts:
     paths:
-      - "*.log"
+      - "test/output"
 
 deploy:
   stage: deploy
