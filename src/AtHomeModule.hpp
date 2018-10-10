@@ -28,7 +28,6 @@ namespace module {
  */
 typedef void (*customCallback)();
 
-typedef void (*t_callback)(void *, ...);
 #ifndef DISABLE_COMMUNICATION
 /**
  * AtHomeCommandCommandPlugin callback is used to extend command interpreter and
@@ -565,15 +564,6 @@ class AtHomeModule : public ABaseModule {
     }
   }
 
-  inline void flush_streams() {
-    if (_streams == nullptr) {
-      return;
-    }
-    for (size_t i = 0; _streams[i] != nullptr; i++) {
-      _streams[i]->flush();
-    }
-  }
-
   inline void flush_encryptedStreams() {
     if (_encryptedStreams == nullptr) {
       return;
@@ -584,7 +574,7 @@ class AtHomeModule : public ABaseModule {
   }
 
   inline void broadcast_flush() {
-    flush_streams();
+    flushStreams();
     flush_encryptedStreams();
   }
 #ifndef DISABLE_SENSOR

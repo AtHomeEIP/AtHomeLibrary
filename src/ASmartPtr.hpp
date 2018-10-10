@@ -12,6 +12,8 @@ class ASmartPtr {
 
   ASmartPtr(const ASmartPtr &other) {}
 
+  ASmartPtr &operator=(const ASmartPtr &other) = delete;
+
   virtual ~ASmartPtr() {}
 
   void reset(T *ptr = nullptr) {
@@ -53,9 +55,6 @@ class ASmartPtr {
     }
     set(other.get());
   }
-
- private:
-  ASmartPtr &operator=(const ASmartPtr &other) {}
 
  protected:
   T *m_value;

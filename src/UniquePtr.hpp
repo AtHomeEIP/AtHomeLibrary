@@ -21,7 +21,9 @@ class UniquePtr : ASmartPtr<T> {
   UniquePtr(UniquePtr &other) { takePtr(other); }
 
   UniquePtr &operator=(UniquePtr &other) {
-    takePtr(other);
+    if (&other != this) {
+      takePtr(other);
+    }
     return *this;
   }
 

@@ -61,7 +61,7 @@ class AEncryptedStream : public Stream {
    * Constructor of the encrypted stream, mandatory taking a reference to a
    * stream to protect
    */
-  AEncryptedStream(Stream &);
+  explicit AEncryptedStream(Stream &);
   AEncryptedStream(const AEncryptedStream &) = delete;
   AEncryptedStream &operator=(const AEncryptedStream &) = delete;
 

@@ -13,6 +13,8 @@ class ASharedPtr : public ASmartPtr<T> {
 
   ASharedPtr(const ASharedPtr &other) : ASmartPtr<T>(other) {}
 
+  ASharedPtr &operator=(const ASharedPtr &other) = delete;
+
   virtual ~ASharedPtr() {}
 
   long use_count() const { return m_pointers[ASmartPtr<T>::m_value]; }
@@ -25,9 +27,6 @@ class ASharedPtr : public ASmartPtr<T> {
   virtual void unset() = 0;
 
  private:
-  ASharedPtr &operator=(const ASharedPtr &other) {}
-
- protected:
   static std::map<void *, size_t> m_pointers;
 };
 

@@ -19,7 +19,9 @@ class WeakPtr : public ASharedPtr<T> {
   WeakPtr(const WeakPtr &other) : ASharedPtr<T>(other) { copy(other); }
 
   WeakPtr &operator=(const SharedPtr &other) {
-    copy(other);
+    if (&other != this) {
+      copy(other);
+    }
     return *this;
   }
 

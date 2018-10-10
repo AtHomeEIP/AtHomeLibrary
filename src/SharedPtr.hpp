@@ -19,7 +19,9 @@ class SharedPtr : public ASharedPtr<T> {
   SharedPtr(const SharedPtr &other) : ASharedPtr<T>(other) { copy(other); }
 
   SharedPtr &operator=(const SharedPtr &other) {
-    copy(other);
+    if (&other != this) {
+      copy(other);
+    }
     return *this;
   }
 

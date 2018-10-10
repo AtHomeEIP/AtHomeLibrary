@@ -14,8 +14,10 @@ class Pair {
   Pair(const Pair &other) : first(other.first), second(other.second) {}
 
   Pair &operator=(const Pair &other) {
-    first = other.first;
-    second = other.second;
+    if (&other != this) {
+      first = other.first;
+      second = other.second;
+    }
     return *this;
   }
 
