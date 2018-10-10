@@ -101,9 +101,9 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:aafeeb8882c31af72dfa4054e27263fa6"><td class="memItemLeft" align="right" valign="top"><a id="aafeeb8882c31af72dfa4054e27263fa6"></a>
-static <a class="el" href="classathome_1_1storage_1_1_m_s_p430_f_r_a_m.html">MSP430FRAM</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
-<tr class="separator:aafeeb8882c31af72dfa4054e27263fa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ff985af129a1193de59141d1fed2052"><td class="memItemLeft" align="right" valign="top"><a id="a8ff985af129a1193de59141d1fed2052"></a>
+static <a class="el" href="classathome_1_1storage_1_1_m_s_p430_f_r_a_m.html">MSP430FRAM</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getInstance</b> ()</td></tr>
+<tr class="separator:a8ff985af129a1193de59141d1fed2052"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Singleton enabling to store persistent data in the FRAM of TI Launchpads.</p>
@@ -151,7 +151,7 @@ static <a class="el" href="classathome_1_1storage_1_1_m_s_p430_f_r_a_m.html">MSP
 </div><div class="memdoc">
 <p>Copy n bytes (3rd parameter) in dest (2nd parameter) from offset x (1st parameter)</p>
 <p>Example:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_reading_something(IStorage &amp;storage) {</div><div class="line">  <span class="keywordtype">char</span> my_string[33];</div><div class="line">  <span class="keywordtype">int</span> my_number;</div><div class="line"></div><div class="line">  storage.read(0, my_string, <span class="keyword">sizeof</span>(my_string)); <span class="comment">// Reading a string (array of 33 char) at offset 0 of storage instance into my_string</span></div><div class="line">  storage.read(<span class="keyword">sizeof</span>(my_string), &amp;my_number, <span class="keyword">sizeof</span>(my_number)); <span class="comment">// Reading an integer at offset 33 (after content put into my_string) from storage instance into my_number</span></div><div class="line">}</div></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_reading_something(IStorage &amp;storage) {</div><div class="line">  <span class="keywordtype">char</span> my_string[33];</div><div class="line">  <span class="keywordtype">int</span> my_number;</div><div class="line"></div><div class="line">  storage.read(0, my_string, <span class="keyword">sizeof</span>(my_string)); <span class="comment">// Reading a string (array</span></div><div class="line">of 33 char) at offset 0 of storage instance into my_string</div><div class="line">  storage.read(<span class="keyword">sizeof</span>(my_string), &amp;my_number, <span class="keyword">sizeof</span>(my_number)); <span class="comment">//</span></div><div class="line">Reading an integer at offset 33 (after content put into my_string) from</div><div class="line">storage instance into my_number</div><div class="line">}</div></div><!-- fragment --> 
 <p>Implements <a class="el" href="classathome_1_1storage_1_1_i_storage.html#af623393cdf559addf167463ce4e7005e">athome::storage::IStorage</a>.</p>
 
 </div>
@@ -197,7 +197,7 @@ static <a class="el" href="classathome_1_1storage_1_1_m_s_p430_f_r_a_m.html">MSP
 </div><div class="memdoc">
 <p>Write n bytes (3rd parameter) in offset x (1st parameter) from src (2nd parameter)</p>
 <p>Example:</p>
-<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_writing_something(IStorage &amp;storage) {</div><div class="line">  <span class="keywordtype">char</span> my_string[] = <span class="stringliteral">&quot;Hello, World!&quot;</span>;</div><div class="line">  <span class="keywordtype">int</span> my_number = 42;</div><div class="line"></div><div class="line">  storage.write(0, my_string, <span class="keyword">sizeof</span>(my_string)); <span class="comment">// Writing the string (array of 14 char) my_string at offset 0 of storage instance</span></div><div class="line">  storage.write(<span class="keyword">sizeof</span>(my_string), &amp;my_number, <span class="keyword">sizeof</span>(my_number)); <span class="comment">// Writing my_number at offset 14 (after my_string) of storage instance</span></div><div class="line">}</div></div><!-- fragment --> 
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> my_function_writing_something(IStorage &amp;storage) {</div><div class="line">  <span class="keywordtype">char</span> my_string[] = <span class="stringliteral">&quot;Hello, World!&quot;</span>;</div><div class="line">  <span class="keywordtype">int</span> my_number = 42;</div><div class="line"></div><div class="line">  storage.write(0, my_string, <span class="keyword">sizeof</span>(my_string)); <span class="comment">// Writing the string</span></div><div class="line">(array of 14 char) my_string at offset 0 of storage instance</div><div class="line">  storage.write(<span class="keyword">sizeof</span>(my_string), &amp;my_number, <span class="keyword">sizeof</span>(my_number)); <span class="comment">//</span></div><div class="line">Writing my_number at offset 14 (after my_string) of storage instance</div><div class="line">}</div></div><!-- fragment --> 
 <p>Implements <a class="el" href="classathome_1_1storage_1_1_i_storage.html#a1017bb6ad438313b98197893954e52f1">athome::storage::IStorage</a>.</p>
 
 </div>

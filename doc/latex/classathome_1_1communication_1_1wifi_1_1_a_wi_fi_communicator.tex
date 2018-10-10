@@ -40,6 +40,9 @@ void \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communica
 void \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a28538cf510da8b59056b2533a6e53bcc}{set\+Wi\+Fi\+Mode}} (wifi\+\_\+mode)
 \item 
 void \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a42f2ad88713db57bd9e9670f090924de}{set\+Stream\+To\+Chipset}} (Stream $\ast$)
+\item 
+\mbox{\Hypertarget{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a9743bf55f6145e641e3cf35a072c14e1}\label{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a9743bf55f6145e641e3cf35a072c14e1}} 
+bool {\bfseries is\+Access\+Point\+Configured} ()
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
@@ -116,27 +119,26 @@ Example\+:
 \textcolor{preprocessor}{#include <string.h>}
 \textcolor{preprocessor}{#include <AtHome.h>}
 
-\textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1wifi_1_1s__wifi__access__point}{athome::communication::wifi::WiFi\_ap}}; \textcolor{comment}{// Use this to not have to
-       write the full namespace names further}
-\textcolor{keyword}{using} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{athome::communication::wifi::AWiFiCommunicator}};
+\textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1wifi_1_1s__wifi__access__point}{athome::communication::wifi::WiFi\_ap}}; \textcolor{comment}{// Use this to not have to}
+\mbox{\hyperlink{classathome_1_1communication_1_1_a_network_communicator_a87adf68359a4ec5b0a38bea529ebf732}{write}} the full \textcolor{keyword}{namespace }names further using
+\mbox{\hyperlink{namespaceathome}{athome}}::communication::wifi::AWiFiCommunicator;
 
-\textcolor{keywordtype}{void} my\_function\_connecting\_wifi\_to\_network\_called\_foobar(\mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a0098148fe8d0eeee99b7f8f72a72a900}{AWiFiCommunicator}} &wifi) \{
-  WiFi\_ap network; \textcolor{comment}{// Declare a WiFi\_ap structure}
-  strncpy(network.ssid, \textcolor{stringliteral}{"foobar"}, \textcolor{keyword}{sizeof}(network.ssid)); \textcolor{comment}{// Copy "foobar" in the ssid field of the
-       structure, as the SSID of a WiFi network is the name shown to humans}
-  strncpy(network.password, \textcolor{stringliteral}{"12345678"}, \textcolor{keyword}{sizeof}(network.password)); \textcolor{comment}{// Copy "12345678" in the password
-       field, to set the password used by the WiFi network}
-  wifi.setAccessPoint(network); \textcolor{comment}{// Set the WiFi network parameters we created}
-  \textcolor{keywordflow}{if} (!wifi.connect()) \{ \textcolor{comment}{// Connect to this network}
-    Serial.println(\textcolor{stringliteral}{"Successfully connected to WiFi network"});
-  \} \textcolor{keywordflow}{else} \{
-    Serial.println(\textcolor{stringliteral}{"Connection to WiFi network failed"});
+void my\_function\_connecting\_wifi\_to\_network\_called\_foobar(AWiFiCommunicator
+&wifi) \{ WiFi\_ap network; \textcolor{comment}{// Declare a WiFi\_ap structure}
+  strncpy(network.ssid, \textcolor{stringliteral}{"foobar"}, \textcolor{keyword}{sizeof}(network.ssid)); \textcolor{comment}{// Copy "foobar"}
+in the ssid field of the structure, as the SSID of a WiFi network is the
+name shown to humans strncpy(network.password, \textcolor{stringliteral}{"12345678"},
+\textcolor{keyword}{sizeof}(network.password)); \textcolor{comment}{// Copy "12345678" in the password field, to set}
+the password used by the WiFi network wifi.setAccessPoint(network); \textcolor{comment}{// Set}
+the WiFi network parameters we created \textcolor{keywordflow}{if} (!wifi.connect()) \{ \textcolor{comment}{// Connect to}
+\textcolor{keyword}{this} network Serial.println(\textcolor{stringliteral}{"Successfully connected to WiFi network"}); \}
+\textcolor{keywordflow}{else} \{ Serial.println(\textcolor{stringliteral}{"Connection to WiFi network failed"});
   \}
 \}
 \end{DoxyCode}
  
 
-Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a58cc439be2f368b346bbbe1601a9b675}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_abc07f2d953fa91f86b8919858e10bbd7}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}.
+Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_abc07f2d953fa91f86b8919858e10bbd7}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a58cc439be2f368b346bbbe1601a9b675}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}.
 
 \mbox{\Hypertarget{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a6131240ac0daa0f9fb4d46871feea4c2}\label{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a6131240ac0daa0f9fb4d46871feea4c2}} 
 \index{athome\+::communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator@{athome\+::communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator}!disconnect@{disconnect}}
@@ -160,13 +162,14 @@ Usage is as simple as this\+:
   \textcolor{keywordflow}{if} (!wifi.disconnect()) \{
     Serial.println(\textcolor{stringliteral}{"Successfully disconnected from WiFi network"});
   \} \textcolor{keywordflow}{else} \{
-    Serial.println(\textcolor{stringliteral}{"Failed to disconnect from WiFi network"}); \textcolor{comment}{// Is that really possible? In case we're
-       stuck, it's a problem where the "have you tried turning it off and on again?" rocks ;)}
+    Serial.println(\textcolor{stringliteral}{"Failed to disconnect from WiFi network"}); \textcolor{comment}{// Is that}
+really possible? In \textcolor{keywordflow}{case} we\textcolor{stringliteral}{'re stuck, it'}s a problem where the \textcolor{stringliteral}{"have you}
+\textcolor{stringliteral}{tried turning it off and on again?"} rocks ;)
 \}
 \end{DoxyCode}
  
 
-Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a7e53e10b858aebc5e7c6c0ea6007f84a}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_a3787e850d48d149ee1392ebfb2920bb3}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}.
+Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_a3787e850d48d149ee1392ebfb2920bb3}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_a7e53e10b858aebc5e7c6c0ea6007f84a}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}.
 
 \mbox{\Hypertarget{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_abef86486512e4a39d61df3b27effcc87}\label{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_abef86486512e4a39d61df3b27effcc87}} 
 \index{athome\+::communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator@{athome\+::communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator}!get\+Access\+Point@{get\+Access\+Point}}
@@ -187,8 +190,8 @@ Example\+:
 \textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1wifi_1_1s__wifi__access__point}{athome::communication::wifi::WiFi\_ap}};
 \textcolor{keyword}{using} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{athome::communication::wifi::AWiFiCommunicator}};
 
-\textcolor{keywordtype}{void} my\_function\_printing\_current\_access\_point\_info(\textcolor{keyword}{const} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a0098148fe8d0eeee99b7f8f72a72a900}{AWiFiCommunicator}} &wifi) \{
-  \textcolor{keyword}{const} WiFi\_ap &access\_point = wifi.getAccessPoint;
+\textcolor{keywordtype}{void} my\_function\_printing\_current\_access\_point\_info(\textcolor{keyword}{const} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a0098148fe8d0eeee99b7f8f72a72a900}{AWiFiCommunicator}}
+&wifi) \{ \textcolor{keyword}{const} WiFi\_ap &access\_point = wifi.getAccessPoint;
   Serial.print(\textcolor{stringliteral}{"Network name: "});
   Serial.println(access\_point.ssid);
   Serial.print(\textcolor{stringliteral}{"Password: "});
@@ -215,22 +218,19 @@ Example\+:
 \textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1wifi_1_1s__wifi__client}{athome::communication::wifi::WiFi\_client}};
 \textcolor{keyword}{using} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{athome::communication::wifi::AWiFiCommunicator}};
 
-\textcolor{keywordtype}{void} my\_function\_printing\_current\_ip\_and\_mac\_addresses(\textcolor{keyword}{const} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a0098148fe8d0eeee99b7f8f72a72a900}{AWiFiCommunicator}} &wifi) \{
-  \textcolor{keyword}{const} WiFi\_client &addresses = wifi.getConnectionAddresses();
-  \textcolor{keywordtype}{char} my\_ipv4[16];
-  \textcolor{keywordtype}{char} my\_mac[18];
-  snprintf(my\_ipv4, 16, \textcolor{stringliteral}{"%hhu.%hhu.%hhu.%hhu"}, addresses.ipv4[0], addresses.ipv4[1], addresses.ipv4[2], 
-      addresses.ipv4[3]);
-  \textcolor{comment}{// Note: For MAC address conversion, if you're compiler is broken and doesn't promote char's to int, see
-       this StackOverflow for fix:}
-  \textcolor{comment}{// https://stackoverflow.com/questions/12344814/how-to-print-unsigned-char-as-2-digit-hex-value-in-c}
+\textcolor{keywordtype}{void} my\_function\_printing\_current\_ip\_and\_mac\_addresses(\textcolor{keyword}{const}
+\mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a0098148fe8d0eeee99b7f8f72a72a900}{AWiFiCommunicator}} &wifi) \{ \textcolor{keyword}{const} WiFi\_client &addresses =
+wifi.getConnectionAddresses(); \textcolor{keywordtype}{char} my\_ipv4[16]; \textcolor{keywordtype}{char} my\_mac[18];
+  snprintf(my\_ipv4, 16, \textcolor{stringliteral}{"%hhu.%hhu.%hhu.%hhu"}, addresses.ipv4[0],
+addresses.ipv4[1], addresses.ipv4[2], addresses.ipv4[3]);
+  \textcolor{comment}{// Note: For MAC address conversion, if you're compiler is broken and}
+doesn\textcolor{stringliteral}{'t promote char'}s to int, see \textcolor{keyword}{this} StackOverflow \textcolor{keywordflow}{for} fix:
+  \textcolor{comment}{//}
+https:\textcolor{comment}{//stackoverflow.com/questions/12344814/how-to-print-unsigned-char-as-2-digit-hex-value-in-c}
   snprintf(my\_mac, 18, \textcolor{stringliteral}{"%02x-%02x-%02x-%02x-%02x-%02x"},
-           addresses.mac[0], addresses.mac[1], addresses.mac[2], addresses.mac[3], addresses.mac[4], 
-      addresses.mac[5]);
-  Serial.print(\textcolor{stringliteral}{"IPv4: "});
-  Serial.println(my\_ipv4);
-  Serial.print(\textcolor{stringliteral}{"MAC: "});
-  Serial.println(my\_mac);
+           addresses.mac[0], addresses.mac[1], addresses.mac[2],
+addresses.mac[3], addresses.mac[4], addresses.mac[5]); Serial.print(\textcolor{stringliteral}{"IPv4:}
+\textcolor{stringliteral}{"}); Serial.println(my\_ipv4); Serial.print(\textcolor{stringliteral}{"MAC: "}); Serial.println(my\_mac);
 \}
 \end{DoxyCode}
  \mbox{\Hypertarget{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_adebc335ea6408a90919f396f06260b13}\label{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_adebc335ea6408a90919f396f06260b13}} 
@@ -252,18 +252,13 @@ Example\+:
 \textcolor{keyword}{using} athome::communication::wifi::wifi\_mode;
 \textcolor{keyword}{using} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{athome::communication::wifi::AWiFiCommunicator}};
 
-\textcolor{keywordtype}{void} my\_function\_printing\_current\_wifi\_mode(\textcolor{keyword}{const} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a0098148fe8d0eeee99b7f8f72a72a900}{AWiFiCommunicator}} &wifi) \{
-  wifi\_mode mode = wifi.getWiFiMode();
-  \textcolor{keywordflow}{switch} (mode) \{
-    \textcolor{keywordflow}{case} wifi\_mode::STATION:
-      Serial.println(\textcolor{stringliteral}{"The WiFi adapter connects to a Wireless network"});
-      \textcolor{keywordflow}{break};
-    \textcolor{keywordflow}{case} wifi\_mode::ACCESS\_POINT:
-      Serial.println(\textcolor{stringliteral}{"The WiFi adapter creates a new Access Point (network)"});
-      \textcolor{keywordflow}{break};
-    \textcolor{keywordflow}{default}:
-      Serial.println(\textcolor{stringliteral}{"The WiFi adapter use a less common mode. See athome::communication::ip::wifi\_mode for
-       more information"});
+\textcolor{keywordtype}{void} my\_function\_printing\_current\_wifi\_mode(\textcolor{keyword}{const} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a0098148fe8d0eeee99b7f8f72a72a900}{AWiFiCommunicator}} &wifi)
+\{ wifi\_mode mode = wifi.getWiFiMode(); \textcolor{keywordflow}{switch} (mode) \{ \textcolor{keywordflow}{case}
+wifi\_mode::STATION: Serial.println(\textcolor{stringliteral}{"The WiFi adapter connects to a Wireless}
+\textcolor{stringliteral}{network"}); \textcolor{keywordflow}{break}; \textcolor{keywordflow}{case} wifi\_mode::ACCESS\_POINT: Serial.println(\textcolor{stringliteral}{"The WiFi}
+\textcolor{stringliteral}{adapter creates a new Access Point (network)"}); \textcolor{keywordflow}{break}; \textcolor{keywordflow}{default}:
+      Serial.println(\textcolor{stringliteral}{"The WiFi adapter use a less common mode. See}
+\textcolor{stringliteral}{athome::communication::ip::wifi\_mode for more information"});
       Serial.println(mode);
       \textcolor{keywordflow}{break};
   \}
@@ -287,15 +282,14 @@ Example\+:
 
 \textcolor{keyword}{using} \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator}{athome::communication::wifi::AWiFiCommunicator}};
 
-\textcolor{keywordtype}{void} my\_function\_printing\_if\_adapter\_is\_connected\_to\_network\_or\_not(\textcolor{keyword}{const} 
-      \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a0098148fe8d0eeee99b7f8f72a72a900}{AWiFiCommunicator}} &wifi) \{
-  Serial.println((wifi.isConnected) ? \textcolor{stringliteral}{"Adapter is connected to WiFi network"} : \textcolor{stringliteral}{"Adapter isn't connected to
-       WiFi network"});
+\textcolor{keywordtype}{void} my\_function\_printing\_if\_adapter\_is\_connected\_to\_network\_or\_not(\textcolor{keyword}{const}
+\mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a0098148fe8d0eeee99b7f8f72a72a900}{AWiFiCommunicator}} &wifi) \{ Serial.println((wifi.isConnected) ? \textcolor{stringliteral}{"Adapter is}
+\textcolor{stringliteral}{connected to WiFi network"} : \textcolor{stringliteral}{"Adapter isn't connected to WiFi network"});
 \}
 \end{DoxyCode}
  
 
-Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_aefadac9b1a67d52853495dfabecad5fd}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_a1ad428f03137d93a142ec5ae72f19e14}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}.
+Implemented in \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_native_arduino_e_s_p_wi_fi_communicator_a1ad428f03137d93a142ec5ae72f19e14}{athome\+::communication\+::wifi\+::\+Native\+Arduino\+E\+S\+P\+Wi\+Fi\+Communicator}}, and \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_e_s_p8266_wi_fi_communicator_aefadac9b1a67d52853495dfabecad5fd}{athome\+::communication\+::wifi\+::\+E\+S\+P8266\+Wi\+Fi\+Communicator}}.
 
 \mbox{\Hypertarget{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a2b802d934022436e029fc31b3e84d321}\label{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a2b802d934022436e029fc31b3e84d321}} 
 \index{athome\+::communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator@{athome\+::communication\+::wifi\+::\+A\+Wi\+Fi\+Communicator}!set\+Access\+Point@{set\+Access\+Point}}
@@ -318,25 +312,26 @@ Example\+:
 
 \textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1wifi_1_1s__wifi__access__point}{athome::communication::wifi::WiFi\_ap}};
 
-\textcolor{comment}{// ESP8266WiFiCommunicator is an implementation of AWiFiCommunicator for ESP8266 using default AT firmware}
+\textcolor{comment}{// ESP8266WiFiCommunicator is an implementation of AWiFiCommunicator for}
+ESP8266 \textcolor{keyword}{using} \textcolor{keywordflow}{default} AT firmware
 \textcolor{comment}{// Note: using global variables is normally a dirty way of doing this,}
-\textcolor{comment}{// but on Arduino it will allow you to see at compile time how much RAM is used by this part of your sketch
-       before moving it in a function}
-ESP8266WiFiCommunicator wifi(2, 3); \textcolor{comment}{// ESP8266WiFiCommunicator need to know on which pins of the board are
-       connected the CH\_PD and RST pins of the ESP8266}
-WiFi\_ap my\_network;
+\textcolor{comment}{// but on Arduino it will allow you to see at compile time how much RAM is}
+used by \textcolor{keyword}{this} part of your sketch before moving it in a \textcolor{keyword}{function}
+ESP8266WiFiCommunicator wifi(2, 3); \textcolor{comment}{// ESP8266WiFiCommunicator need to know}
+on which pins of the board are connected the CH\_PD and RST pins of the
+ESP8266 WiFi\_ap my\_network;
 
 \textcolor{keywordtype}{void} setup() \{
   \textcolor{comment}{// We're opening the Stream used to communicate with the adapter}
   Serial.begin(115200);
   \textcolor{comment}{// We set the Stream used to communicate with the adapter}
   wifi.setStreamToChipset(&Serial);
-  \textcolor{comment}{// We're configuring our WiFi adapter to connect to a network called "foobar" with the password
-       "12345678"}
-  strncpy(my\_network.ssid, \textcolor{stringliteral}{"foobar"}, \textcolor{keyword}{sizeof}(my\_network.ssid));
-  strncpy(my\_network.password, \textcolor{stringliteral}{"12345678"}, \textcolor{keyword}{sizeof}(my\_network.password));
-  wifi.setAccessPoint(my\_network);
-  wifi.connect(); \textcolor{comment}{// You need to call this method for the adapter to actually connect to the new network}
+  \textcolor{comment}{// We're configuring our WiFi adapter to connect to a network called}
+\textcolor{stringliteral}{"foobar"} with the password \textcolor{stringliteral}{"12345678"} strncpy(my\_network.ssid, \textcolor{stringliteral}{"foobar"},
+\textcolor{keyword}{sizeof}(my\_network.ssid)); strncpy(my\_network.password, \textcolor{stringliteral}{"12345678"},
+\textcolor{keyword}{sizeof}(my\_network.password)); wifi.setAccessPoint(my\_network);
+  wifi.connect(); \textcolor{comment}{// You need to call this method for the adapter to}
+actually \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a309927109fbc19aa0fb2afb71d50bbf9}{connect}} to the \textcolor{keyword}{new} network
 \}
 
 \textcolor{keywordtype}{void} loop() \{
@@ -364,10 +359,11 @@ Example\+:
 
 \textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1wifi_1_1s__wifi__client}{athome::communication::wifi::WiFi\_client}};
 
-ESP8266WiFiCommunicator wifi(2, 3); \textcolor{comment}{// ESP8266WiFiCommunicator need to know on which pins of the board are
-       connected the CH\_PD and RST pins of the ESP8266}
-WiFi\_client addresses = \{\{0x5C, 0xCF, 0x7F, 0x00, 0x00, 0x00\}, \{127, 0, 0, 1\}\}; \textcolor{comment}{// Users of this method
-       should know why setting this IP address will be pretty useless}
+ESP8266WiFiCommunicator wifi(2, 3); \textcolor{comment}{// ESP8266WiFiCommunicator need to know}
+on which pins of the board are connected the CH\_PD and RST pins of the
+ESP8266 WiFi\_client addresses = \{\{0x5C, 0xCF, 0x7F, 0x00, 0x00, 0x00\},
+\{127, 0, 0, 1\}\}; \textcolor{comment}{// Users of this method should know why setting this IP}
+address will be pretty useless
 
 \textcolor{keywordtype}{void} setup() \{
   \textcolor{comment}{// We're opening the Stream used to communicate with the adapter}
@@ -375,8 +371,9 @@ WiFi\_client addresses = \{\{0x5C, 0xCF, 0x7F, 0x00, 0x00, 0x00\}, \{127, 0, 0, 
   \textcolor{comment}{// We set the Stream used to communicate with the adapter}
   wifi.setStreamToChipset(&Serial);
   ESP8266WiFiCommunicator.setConnectionAddresses();
-  ESP8266WiFiCommunicator.connect(); \textcolor{comment}{// You need to call it, even if you were previously already connected
-       to a WiFi network as calling the setConnectionAddresses method will disconnect you from any current network}
+  ESP8266WiFiCommunicator.connect(); \textcolor{comment}{// You need to call it, even if you}
+were previously already connected to a WiFi network as calling the
+\mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a31fb91672f298718d99bb9776dfe46c9}{setConnectionAddresses}} method will \mbox{\hyperlink{classathome_1_1communication_1_1wifi_1_1_a_wi_fi_communicator_a6131240ac0daa0f9fb4d46871feea4c2}{disconnect}} you from any current network
 \}
 
 \textcolor{keywordtype}{void} loop() \{
@@ -401,9 +398,8 @@ Example for an E\+S\+P8266 connected to the serial port of an Arduino (pins 0 an
 ESP8266WiFiCommunicator wifi(2, 3);
 
 \textcolor{keywordtype}{void} setup() \{
-  \textcolor{comment}{// We initialize the Stream so that the instance is able to use it. Here we start a serial connection at
-       115200 bauds:}
-  Serial.begin(115200);
+  \textcolor{comment}{// We initialize the Stream so that the instance is able to use it. Here}
+we start a serial connection at 115200 bauds: Serial.begin(115200);
   \textcolor{comment}{// We set the stream used to communicate with the ESP8266 adapter:}
   wifi.setStreamToChipset(&Serial);
 \}
@@ -433,9 +429,9 @@ Example to create a new access point named \char`\"{}foobar\char`\"{} protected 
 \textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1wifi_1_1s__wifi__access__point}{athome::communication::wifi::WiFi\_ap}};
 \textcolor{keyword}{using} athome::communication::wifi::wifi\_mode;
 
-ESP8266WiFiCommunicator wifi(2, 3); \textcolor{comment}{// ESP8266WiFiCommunicator need to know on which pins of the board are
-       connected the CH\_PD and RST pins of the ESP8266}
-WiFi\_ap ap;
+ESP8266WiFiCommunicator wifi(2, 3); \textcolor{comment}{// ESP8266WiFiCommunicator need to know}
+on which pins of the board are connected the CH\_PD and RST pins of the
+ESP8266 WiFi\_ap ap;
 
 \textcolor{keywordtype}{void} setup() \{
   \textcolor{comment}{// We're opening the Stream used to communicate with the adapter}
@@ -466,9 +462,9 @@ Example to connect to an existing network called \char`\"{}foobar\char`\"{} prot
 \textcolor{keyword}{using} \mbox{\hyperlink{structathome_1_1communication_1_1wifi_1_1s__wifi__access__point}{athome::communication::wifi::WiFi\_ap}};
 \textcolor{keyword}{using} athome::communication::wifi::wifi\_mode;
 
-ESP8266WiFiCommunicator wifi(2, 3); \textcolor{comment}{// ESP8266WiFiCommunicator need to know on which pins of the board are
-       connected the CH\_PD and RST pins of the ESP8266}
-WiFi\_ap ap;
+ESP8266WiFiCommunicator wifi(2, 3); \textcolor{comment}{// ESP8266WiFiCommunicator need to know}
+on which pins of the board are connected the CH\_PD and RST pins of the
+ESP8266 WiFi\_ap ap;
 
 \textcolor{keywordtype}{void} setup() \{
   \textcolor{comment}{// We're opening the Stream used to communicate with the adapter}

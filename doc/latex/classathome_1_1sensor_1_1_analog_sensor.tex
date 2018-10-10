@@ -21,7 +21,7 @@ Inheritance diagram for athome\+:\+:sensor\+:\+:Analog\+Sensor\+:\begin{figure}[
 \mbox{\Hypertarget{classathome_1_1sensor_1_1_analog_sensor_a3e2cb67bd8eb58798d28eaf152f33b1a}\label{classathome_1_1sensor_1_1_analog_sensor_a3e2cb67bd8eb58798d28eaf152f33b1a}} 
 \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor}{Analog\+Sensor}} \& {\bfseries operator=} (const \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor}{Analog\+Sensor}} \&)=delete
 \item 
-const I\+Sensor\+Value \& \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_a7ad00f985a9d1abeb64f973b5d16558c}{get\+Sample}} ()
+const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+Value}} \& \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_a7ad00f985a9d1abeb64f973b5d16558c}{get\+Sample}} ()
 \item 
 void \mbox{\hyperlink{classathome_1_1sensor_1_1_analog_sensor_addcdb79aa03b7b6e386bc9c59faced10}{set\+Thresholds}} (const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&)
 \item 
@@ -74,22 +74,24 @@ Examples of use\+:
 \textcolor{keywordtype}{void} my\_func\_reading\_my\_sensor(ISensor &my\_sensor) \{
   uint8\_t *pointer = my\_sensor.getSample();
   \textcolor{keywordflow}{if} (pointer == \textcolor{keyword}{nullptr}) \{
-    \textcolor{comment}{// Invalid pointer -> might be caused by a sample error from the sensor.}
-    \textcolor{comment}{// Can't happen with base AnalogSensor class but could happen from other athome::sensor::ISensor
-       derived classes, so it's good practice to always check returned pointer.}
-    \textcolor{keywordflow}{return};
-  \}
-  \textcolor{comment}{// Can access value from casting pointer to its original uint16\_t type:}
-  uint16\_t *full\_pointer = \textcolor{keyword}{reinterpret\_cast<}uint16\_t *\textcolor{keyword}{>}(pointer);
-  \textcolor{comment}{// Or by casting it in C-style:}
-  uint16\_t *c\_pointer = (uint16\_t *)pointer;
-  \textcolor{comment}{// Or by accessing it as an array of 2 bytes:}
-  uint16\_t value = ((pointer[0]) << 8) | pointer[1];
-
-  printf(\textcolor{stringliteral}{"%hu\(\backslash\)n"}, *full\_pointer); \textcolor{comment}{// Or Serial.println(*full\_pointer) for example on Arduino}
-  printf(\textcolor{stringliteral}{"%hu\(\backslash\)n"}, *c\_pointer); \textcolor{comment}{// Or Serial.println(*c\_pointer) for example on Arduino}
-  printf(\textcolor{stringliteral}{"%hu\(\backslash\)n"}, value); \textcolor{comment}{// Or Serial.println(value) for example on Arduino}
-\}
+    \textcolor{comment}{// Invalid pointer -> might be caused by a sample error from the}
+sensor.
+    \textcolor{comment}{// Can't happen with base AnalogSensor class but could happen from}
+other \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor}{athome::sensor::ISensor}} derived classes, so it\textcolor{stringliteral}{'s good practice to}
+\textcolor{stringliteral}{always check returned pointer. return;}
+\textcolor{stringliteral}{  \}}
+\textcolor{stringliteral}{  // Can access value from casting pointer to its original uint16\_t type:}
+\textcolor{stringliteral}{  uint16\_t *full\_pointer = reinterpret\_cast<uint16\_t *>(pointer);}
+\textcolor{stringliteral}{  // Or by casting it in C-style:}
+\textcolor{stringliteral}{  uint16\_t *c\_pointer = (uint16\_t *)pointer;}
+\textcolor{stringliteral}{  // Or by accessing it as an array of 2 bytes:}
+\textcolor{stringliteral}{  uint16\_t value = ((pointer[0]) << 8) | pointer[1];}
+\textcolor{stringliteral}{}
+\textcolor{stringliteral}{  printf("%hu\(\backslash\)n", *full\_pointer); // Or Serial.println(*full\_pointer) for}
+\textcolor{stringliteral}{example on Arduino printf("%hu\(\backslash\)n", *c\_pointer); // Or}
+\textcolor{stringliteral}{Serial.println(*c\_pointer) for example on Arduino printf("%hu\(\backslash\)n", value);}
+\textcolor{stringliteral}{// Or Serial.println(value) for example on Arduino}
+\textcolor{stringliteral}{\}}
 \end{DoxyCode}
  
 
@@ -107,10 +109,10 @@ Example\+:
 
 
 \begin{DoxyCode}
-\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor &my\_sensor) \{
-  \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate();
-  \textcolor{keywordflow}{if} (sensor\_estimate == ISensor::ZERO) \{
-    Serial.println(\textcolor{stringliteral}{"The sensor returned an invalid value"});
+\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor
+&my\_sensor) \{ \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate(); \textcolor{keywordflow}{if}
+(sensor\_estimate == ISensor::ZERO) \{ Serial.println(\textcolor{stringliteral}{"The sensor returned an}
+\textcolor{stringliteral}{invalid value"});
   \}
   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (sensor\_estimate > ISensor::ZERO && sensor\_estimate < 6) \{
     Serial.println(\textcolor{stringliteral}{"Boouh, it's not good :("});

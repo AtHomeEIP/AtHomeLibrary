@@ -101,14 +101,14 @@ class athome::utility::Buffer&lt; T, size &gt;</h3>
 
 <p>Templated buffer, taking as template parameters the type of hold data and their numbers.</p>
 <p>Example of use:</p>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;Buffer.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;String.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1utility_1_1_buffer.html">athome::utility::Buffer</a>;</div><div class="line"></div><div class="line">String my_string1(<span class="stringliteral">&quot;Hello, World!&quot;</span>);</div><div class="line">String my_string2(<span class="stringliteral">&quot;foobar&quot;</span>);</div><div class="line">String my_string3(<span class="stringliteral">&quot;Philipe ! Je sais ou tu te caches !&quot;</span>); <span class="comment">// Sorry for non-french readers :)</span></div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_using_a_buffer() {</div><div class="line">  Buffer&lt;const String &amp;, 2&gt; my_buffer; <span class="comment">// Create a buffer able to store 2 references on constant String objects</span></div><div class="line">  my_buffer.write(my_string1); <span class="comment">// Add a reference on constant my_string1 to the buffer</span></div><div class="line">  my_buffer.write(my_string2); <span class="comment">// Add a reference on constant my_string2 to the buffer</span></div><div class="line">  my_buffer.write(my_string3); <span class="comment">// Won&#39;t work! The buffer is full</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 2</span></div><div class="line">  <span class="keyword">const</span> String &amp;re_string1 = my_buffer.read(); <span class="comment">// Return a reference on constant String my_string1 and free a space in the buffer</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 1</span></div><div class="line">  <span class="keyword">const</span> String &amp;re_string2 = my_buffer.peek(); <span class="comment">// Return a reference on constant String my_string2, don&#39;t modify the buffer</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 1</span></div><div class="line">  my_buffer.write(my_string3); <span class="comment">// Add a reference on constant my_string3 to the buffer, storing now references on my_string2 and my_string3</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 2</span></div><div class="line">  my_buffer.flush(); <span class="comment">// Clear the buffer</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 0</span></div><div class="line">}</div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;Buffer.hpp&gt;</span></div><div class="line"><span class="preprocessor">#include &lt;String.h&gt;</span></div><div class="line"></div><div class="line"><span class="keyword">using</span> <a class="code" href="classathome_1_1utility_1_1_buffer.html">athome::utility::Buffer</a>;</div><div class="line"></div><div class="line">String my_string1(<span class="stringliteral">&quot;Hello, World!&quot;</span>);</div><div class="line">String my_string2(<span class="stringliteral">&quot;foobar&quot;</span>);</div><div class="line">String my_string3(<span class="stringliteral">&quot;Philipe ! Je sais ou tu te caches !&quot;</span>); <span class="comment">// Sorry for</span></div><div class="line">non-french readers :)</div><div class="line"></div><div class="line"><span class="keywordtype">void</span> my_function_using_a_buffer() {</div><div class="line">  Buffer&lt;const String &amp;, 2&gt; my_buffer; <span class="comment">// Create a buffer able to store 2</span></div><div class="line">references on constant String objects my_buffer.write(my_string1); <span class="comment">// Add a</span></div><div class="line">reference on constant my_string1 to the buffer my_buffer.write(my_string2);</div><div class="line"><span class="comment">// Add a reference on constant my_string2 to the buffer</span></div><div class="line">  my_buffer.write(my_string3); <span class="comment">// Won&#39;t work! The buffer is full</span></div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 2</span></div><div class="line">  <span class="keyword">const</span> String &amp;re_string1 = my_buffer.read(); <span class="comment">// Return a reference on</span></div><div class="line">constant String my_string1 and free a space in the buffer</div><div class="line">  Serial.println(my_buffer.available()); <span class="comment">// Will print 1</span></div><div class="line">  <span class="keyword">const</span> String &amp;re_string2 = my_buffer.peek(); <span class="comment">// Return a reference on</span></div><div class="line">constant String my_string2, don<span class="stringliteral">&#39;t modify the buffer</span></div><div class="line"><span class="stringliteral">  Serial.println(my_buffer.available()); // Will print 1</span></div><div class="line"><span class="stringliteral">  my_buffer.write(my_string3); // Add a reference on constant my_string3 to</span></div><div class="line"><span class="stringliteral">the buffer, storing now references on my_string2 and my_string3</span></div><div class="line"><span class="stringliteral">  Serial.println(my_buffer.available()); // Will print 2</span></div><div class="line"><span class="stringliteral">  my_buffer.flush(); // Clear the buffer</span></div><div class="line"><span class="stringliteral">  Serial.println(my_buffer.available()); // Will print 0</span></div><div class="line"><span class="stringliteral">}</span></div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2c441e74e8e325e8eb6cfb7ffb04b157"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2c441e74e8e325e8eb6cfb7ffb04b157">&#9670;&nbsp;</a></span>available()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t size&gt; </div>
+template&lt;typename T , size_t size&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -137,7 +137,7 @@ template&lt;typename T, size_t size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t size&gt; </div>
+template&lt;typename T , size_t size&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -166,7 +166,7 @@ template&lt;typename T, size_t size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t size&gt; </div>
+template&lt;typename T , size_t size&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -195,7 +195,7 @@ template&lt;typename T, size_t size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t size&gt; </div>
+template&lt;typename T , size_t size&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -224,7 +224,7 @@ template&lt;typename T, size_t size&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t size&gt; </div>
+template&lt;typename T , size_t size&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

@@ -37,7 +37,7 @@ int \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_aa6e3ad7d0382f04c
 \item 
 int \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_a36cce0ec962d8b5269e39ee4c368be67}{get\+CO}} () const
 \item 
-const I\+Sensor\+Value \& \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_adbe1195490ce67fbed7c717abe2b5b13}{get\+Sample}} ()
+const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_value}{I\+Sensor\+Value}} \& \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_adbe1195490ce67fbed7c717abe2b5b13}{get\+Sample}} ()
 \item 
 void \mbox{\hyperlink{classathome_1_1sensor_1_1_m_q2_gas_sensor_a69de9f45b9babd2d111b4ce020d7c83e}{set\+Thresholds}} (const \mbox{\hyperlink{structathome_1_1sensor_1_1_i_sensor_1_1_i_sensor_thresholds}{I\+Sensor\+Thresholds}} \&)
 \end{DoxyCompactItemize}
@@ -112,10 +112,10 @@ Example\+:
 
 
 \begin{DoxyCode}
-\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor &my\_sensor) \{
-  \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate();
-  \textcolor{keywordflow}{if} (sensor\_estimate == ISensor::ZERO) \{
-    Serial.println(\textcolor{stringliteral}{"The sensor returned an invalid value"});
+\textcolor{keywordtype}{void} my\_function\_telling\_if\_a\_sensor\_value\_is\_good\_or\_not(ISensor
+&my\_sensor) \{ \mbox{\hyperlink{classathome_1_1sensor_1_1_i_sensor_aa70bc27a4c17c86caf96cca776541ddf}{ISensorScale}} sensor\_estimate = my\_sensor.getEstimate(); \textcolor{keywordflow}{if}
+(sensor\_estimate == ISensor::ZERO) \{ Serial.println(\textcolor{stringliteral}{"The sensor returned an}
+\textcolor{stringliteral}{invalid value"});
   \}
   \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (sensor\_estimate > ISensor::ZERO && sensor\_estimate < 6) \{
     Serial.println(\textcolor{stringliteral}{"Boouh, it's not good :("});

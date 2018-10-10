@@ -44,15 +44,17 @@ Example\+:
 \begin{DoxyCode}
 \textcolor{preprocessor}{#include <AtHome.h>}
 
-AtHomeWiFiModule<uint16\_t, 15> *module = \mbox{\hyperlink{classathome_1_1module_1_1_at_home_module_acc6e7fc0d86f11648fd81729484e546f}{AtHomeModule<uint16\_t, 15>::getInstance}}
-      <AtHomeWiFiModule<uint16\_t, 15> >();
-ESP8266WiFiCommunicator esp8266(2, 3); \textcolor{comment}{// CH\_ED (enable) pin of the ESP8266 is imagined to be connected to
-       pin 2 of the host, and RST (reset) pin is imagined to be connected to pin 3 of the host}
+AtHomeWiFiModule<uint16\_t, 15> *module = \mbox{\hyperlink{classathome_1_1module_1_1_at_home_module_ad78045943a579874ec16e14cf976eada}{AtHomeModule}}<uint16\_t,
+15>::getInstance<AtHomeWiFiModule<uint16\_t, 15> >(); ESP8266WiFiCommunicator
+esp8266(2, 3); \textcolor{comment}{// CH\_ED (enable) pin of the ESP8266 is imagined to be}
+connected to pin 2 of the host, and RST (reset) pin is imagined to be
+connected to pin 3 of the host
 
 \textcolor{keywordtype}{void} \mbox{\hyperlink{classathome_1_1module_1_1_at_home_module_a5354c736954a788c51e7cf25f6ccf89d}{setup}}() \{
   Serial1.begin(115200);
-  esp8266.setStreamToChipset(&Serial1); \textcolor{comment}{// If you're using an Arduino UNO or any other board with only one
-       or no UART, use the SoftwareSerial library to create a new Serial instance to pass to this function}
+  esp8266.setStreamToChipset(&Serial1); \textcolor{comment}{// If you're using an Arduino UNO or}
+any other board with only one or no UART, use the SoftwareSerial library to
+create a \textcolor{keyword}{new} Serial instance to pass to \textcolor{keyword}{this} \textcolor{keyword}{function}
   module->setWiFiCommunicator(esp8266);
 \}
 

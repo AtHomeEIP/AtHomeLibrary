@@ -100,17 +100,14 @@ Classes</h2></td></tr>
 Public Types</h2></td></tr>
 <tr class="memitem:aaa31c8eddb689010ef59deba4e1463c6"><td class="memItemLeft" align="right" valign="top">typedef uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#aaa31c8eddb689010ef59deba4e1463c6">moduleSerial</a></td></tr>
 <tr class="separator:aaa31c8eddb689010ef59deba4e1463c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a077afdad789e433d59c588ec6c0f4594"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structathome_1_1time_1_1_i_time_1_1_i_s_o8601_date_time.html">time::ITime::ISO8601DateTime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a077afdad789e433d59c588ec6c0f4594">t_timestamp</a></td></tr>
-<tr class="separator:a077afdad789e433d59c588ec6c0f4594"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ae49e9e7d0e5f4e9f9148ef76a288dd"><td class="memItemLeft" align="right" valign="top"><a id="a4ae49e9e7d0e5f4e9f9148ef76a288dd"></a>
-typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>customCallback</b>) ()</td></tr>
-<tr class="separator:a4ae49e9e7d0e5f4e9f9148ef76a288dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46fbde0e1376feef862e5cf5ca7b2570"><td class="memItemLeft" align="right" valign="top"><a id="a46fbde0e1376feef862e5cf5ca7b2570"></a>
-typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>AtHomeCommandPlugin</b>) (const String &amp;, Stream &amp;)</td></tr>
-<tr class="separator:a46fbde0e1376feef862e5cf5ca7b2570"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c269b52c37b8ad6cb73f1607aecb0db"><td class="memItemLeft" align="right" valign="top"><a id="a5c269b52c37b8ad6cb73f1607aecb0db"></a>
-typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>AtHomeStoragePlugin</b>) (size_t, <a class="el" href="classathome_1_1storage_1_1_i_storage.html">storage::IStorage</a> &amp;)</td></tr>
-<tr class="separator:a5c269b52c37b8ad6cb73f1607aecb0db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a628bd00cf83073b87c41a3ce2b362a9c"><td class="memItemLeft" align="right" valign="top">typedef char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a628bd00cf83073b87c41a3ce2b362a9c">modulePassword</a>[17]</td></tr>
+<tr class="separator:a628bd00cf83073b87c41a3ce2b362a9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcc0f673f2ccb3e3f3619fda97adadcf"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#adcc0f673f2ccb3e3f3619fda97adadcf">moduleEncryptionKey</a>[32]</td></tr>
+<tr class="separator:adcc0f673f2ccb3e3f3619fda97adadcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75cae8d69276f23834dda9b23da17707"><td class="memItemLeft" align="right" valign="top">typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a75cae8d69276f23834dda9b23da17707">moduleEncryptionIV</a>[12]</td></tr>
+<tr class="separator:a75cae8d69276f23834dda9b23da17707"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74611fcc9d7580bded68899a4fd9c930"><td class="memItemLeft" align="right" valign="top">typedef <a class="el" href="structathome_1_1time_1_1_i_time_1_1_date_time.html">time::ITime::DateTime</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a74611fcc9d7580bded68899a4fd9c930">t_timestamp</a></td></tr>
+<tr class="separator:a74611fcc9d7580bded68899a4fd9c930"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -130,30 +127,48 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9a3b04d8f83ecbe0e8e368b697449326"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0d4458da2bafd104386671d300fb562"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#ae0d4458da2bafd104386671d300fb562">getSensorExecutionInterval</a> () const</td></tr>
 <tr class="separator:ae0d4458da2bafd104386671d300fb562"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1466a92bf4e3d0dc45adff11d8ee5fd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#af1466a92bf4e3d0dc45adff11d8ee5fd">setSensorExecutionCallback</a> (customCallback f=nullptr)</td></tr>
-<tr class="separator:af1466a92bf4e3d0dc45adff11d8ee5fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29464ea78833e571a589c0cf0d17321b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a29464ea78833e571a589c0cf0d17321b">setSensorExecutionCallback</a> (customCallback f=nullptr)</td></tr>
+<tr class="separator:a29464ea78833e571a589c0cf0d17321b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad28a042bd9f793d9dbd944ec4f76156b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#ad28a042bd9f793d9dbd944ec4f76156b">setCommunicationExecutionInterval</a> (unsigned long ms)</td></tr>
 <tr class="separator:ad28a042bd9f793d9dbd944ec4f76156b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa02b94ab5009d59d337144db364053a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#aa02b94ab5009d59d337144db364053a6">setUploadDataExecutionInterval</a> (unsigned long ms)</td></tr>
 <tr class="separator:aa02b94ab5009d59d337144db364053a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6186e04da0e46cf463d24947538380bb"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a6186e04da0e46cf463d24947538380bb">getUploadDataExecutionInterval</a> () const</td></tr>
 <tr class="separator:a6186e04da0e46cf463d24947538380bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae27ce52a7171a2cf3a78c5d8f70c2d1d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#ae27ce52a7171a2cf3a78c5d8f70c2d1d">setUploadDataExecutionCallback</a> (customCallback f=nullptr)</td></tr>
-<tr class="separator:ae27ce52a7171a2cf3a78c5d8f70c2d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24130398678c98c500e211b676fa5079"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a24130398678c98c500e211b676fa5079">setUploadDataExecutionCallback</a> (customCallback f=nullptr)</td></tr>
+<tr class="separator:a24130398678c98c500e211b676fa5079"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a263fe0bea2fa480b3885fee07e2a8221"><td class="memItemLeft" align="right" valign="top">unsigned long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a263fe0bea2fa480b3885fee07e2a8221">getCommunicationExecutionInterval</a> () const</td></tr>
 <tr class="separator:a263fe0bea2fa480b3885fee07e2a8221"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a89b7e4cd63739b2c48ffbe3bbaf9be"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a2a89b7e4cd63739b2c48ffbe3bbaf9be">setCommunicationExecutionCallback</a> (customCallback f=nullptr)</td></tr>
-<tr class="separator:a2a89b7e4cd63739b2c48ffbe3bbaf9be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a137cdd3cfb9bad5e8e65eddac89ddd41"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a137cdd3cfb9bad5e8e65eddac89ddd41">setCommandPlugin</a> (AtHomeCommandPlugin plugin)</td></tr>
-<tr class="separator:a137cdd3cfb9bad5e8e65eddac89ddd41"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeb8a36ce4009ad6a578f41cd654877fa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#aeb8a36ce4009ad6a578f41cd654877fa">setOnBackupPlugin</a> (AtHomeStoragePlugin plugin)</td></tr>
-<tr class="separator:aeb8a36ce4009ad6a578f41cd654877fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ae30173c9c2871cd374d5d6786f43f6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a7ae30173c9c2871cd374d5d6786f43f6">setOnRestorePlugin</a> (AtHomeStoragePlugin plugin)</td></tr>
-<tr class="separator:a7ae30173c9c2871cd374d5d6786f43f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c3585c35b11fe5b70438678b54f3970"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a8c3585c35b11fe5b70438678b54f3970">setCommunicationExecutionCallback</a> (customCallback f=nullptr)</td></tr>
+<tr class="separator:a8c3585c35b11fe5b70438678b54f3970"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1b0c8e38ad6baf46f7d05285c35b255"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#aa1b0c8e38ad6baf46f7d05285c35b255">setCommandPlugin</a> (CommandTable table)</td></tr>
+<tr class="separator:aa1b0c8e38ad6baf46f7d05285c35b255"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7853c8cc0139c956d1d1a941d7145391"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a7853c8cc0139c956d1d1a941d7145391">setPassword</a> (const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a628bd00cf83073b87c41a3ce2b362a9c">modulePassword</a> &amp;password)</td></tr>
+<tr class="separator:a7853c8cc0139c956d1d1a941d7145391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af322578d47001b20d5e5fb8da65dbf93"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a628bd00cf83073b87c41a3ce2b362a9c">modulePassword</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#af322578d47001b20d5e5fb8da65dbf93">getPassword</a> () const</td></tr>
+<tr class="separator:af322578d47001b20d5e5fb8da65dbf93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7e6ed7d4dc72c0cef209704fab0e3af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#af7e6ed7d4dc72c0cef209704fab0e3af">setOnBackupPlugin</a> (AtHomeStoragePlugin plugin)</td></tr>
+<tr class="separator:af7e6ed7d4dc72c0cef209704fab0e3af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae359941a4f2e571a052a30916a306e48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#ae359941a4f2e571a052a30916a306e48">setOnRestorePlugin</a> (AtHomeStoragePlugin plugin)</td></tr>
+<tr class="separator:ae359941a4f2e571a052a30916a306e48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1267bc33e38b25ba52bceddc60ea7df1"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#aaa31c8eddb689010ef59deba4e1463c6">moduleSerial</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a1267bc33e38b25ba52bceddc60ea7df1">getSerial</a> () const</td></tr>
 <tr class="separator:a1267bc33e38b25ba52bceddc60ea7df1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a053f38453530fd881376ed1596a14e09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a053f38453530fd881376ed1596a14e09">setSerial</a> (<a class="el" href="classathome_1_1module_1_1_at_home_module.html#aaa31c8eddb689010ef59deba4e1463c6">moduleSerial</a> serial)</td></tr>
 <tr class="separator:a053f38453530fd881376ed1596a14e09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4423d28b7b05d3164f214e163d59739"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#ae4423d28b7b05d3164f214e163d59739">setEncryptedStreams</a> (<a class="el" href="classathome_1_1arduino_1_1_a_encrypted_stream.html">arduino::AEncryptedStream</a> **streams)</td></tr>
+<tr class="separator:ae4423d28b7b05d3164f214e163d59739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1997a4cc4941fe2d81588785736c1cee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classathome_1_1arduino_1_1_a_encrypted_stream.html">arduino::AEncryptedStream</a> **&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a1997a4cc4941fe2d81588785736c1cee">getEncryptedStreams</a> ()</td></tr>
+<tr class="separator:a1997a4cc4941fe2d81588785736c1cee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace74e744dbca03dcffa2a3d051f8bef6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#ace74e744dbca03dcffa2a3d051f8bef6">setEncryptionKey</a> (const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#adcc0f673f2ccb3e3f3619fda97adadcf">moduleEncryptionKey</a> &amp;key)</td></tr>
+<tr class="separator:ace74e744dbca03dcffa2a3d051f8bef6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a753775fb294d0fb93b3598817b9ae0d6"><td class="memItemLeft" align="right" valign="top"><a id="a753775fb294d0fb93b3598817b9ae0d6"></a>
+const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#adcc0f673f2ccb3e3f3619fda97adadcf">moduleEncryptionKey</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getEncryptionKey</b> () const</td></tr>
+<tr class="separator:a753775fb294d0fb93b3598817b9ae0d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad7b57e1acce915ccaaf243a5c4facf67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#ad7b57e1acce915ccaaf243a5c4facf67">setEncryptionIV</a> (const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a75cae8d69276f23834dda9b23da17707">moduleEncryptionIV</a> &amp;iv)</td></tr>
+<tr class="separator:ad7b57e1acce915ccaaf243a5c4facf67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4009cc5bee15fef841874b962da038b0"><td class="memItemLeft" align="right" valign="top"><a id="a4009cc5bee15fef841874b962da038b0"></a>
+const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a75cae8d69276f23834dda9b23da17707">moduleEncryptionIV</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getEncryptionIV</b> () const</td></tr>
+<tr class="separator:a4009cc5bee15fef841874b962da038b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classathome_1_1module_1_1_a_base_module"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classathome_1_1module_1_1_a_base_module')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classathome_1_1module_1_1_a_base_module.html">athome::module::ABaseModule</a></td></tr>
 <tr class="memitem:ac1444e438bcfcc06f6593e3d4d5fb1fe inherit pub_methods_classathome_1_1module_1_1_a_base_module"><td class="memItemLeft" align="right" valign="top"><a id="ac1444e438bcfcc06f6593e3d4d5fb1fe"></a>
 <a class="el" href="classathome_1_1module_1_1_a_base_module.html">ABaseModule</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classathome_1_1module_1_1_a_base_module.html">ABaseModule</a> &amp;)=delete</td></tr>
@@ -197,8 +212,36 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a863a9efaa6d10169d1888278cbc70175"><td class="memTemplParams" colspan="2">template&lt;typename U &gt; </td></tr>
 <tr class="memitem:a863a9efaa6d10169d1888278cbc70175"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a863a9efaa6d10169d1888278cbc70175">broadcastln</a> (const U &amp;data)</td></tr>
 <tr class="separator:a863a9efaa6d10169d1888278cbc70175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d22f6479f95f5dfa1dcbec9c67e3d10"><td class="memItemLeft" align="right" valign="top"><a id="a7d22f6479f95f5dfa1dcbec9c67e3d10"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>raw_broadcast</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:a7d22f6479f95f5dfa1dcbec9c67e3d10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc09c21d6a82b16e48d5892d7272d890"><td class="memItemLeft" align="right" valign="top"><a id="adc09c21d6a82b16e48d5892d7272d890"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>raw_broadcast_empty</b> ()</td></tr>
+<tr class="separator:adc09c21d6a82b16e48d5892d7272d890"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42a38b4ff497dd6c970b2f3a1e05b705"><td class="memTemplParams" colspan="2"><a id="a42a38b4ff497dd6c970b2f3a1e05b705"></a>
+template&lt;typename U &gt; </td></tr>
+<tr class="memitem:a42a38b4ff497dd6c970b2f3a1e05b705"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><b>broadcast_string</b> (const U &amp;data)</td></tr>
+<tr class="separator:a42a38b4ff497dd6c970b2f3a1e05b705"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa59cdbf90894bdd1328142bb6639b3fd"><td class="memItemLeft" align="right" valign="top"><a id="aa59cdbf90894bdd1328142bb6639b3fd"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_non_zero</b> (const uint8_t *data, size_t len)</td></tr>
+<tr class="separator:aa59cdbf90894bdd1328142bb6639b3fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71ea0b59b8da46ad42409e511435bdcb"><td class="memItemLeft" align="right" valign="top"><a id="a71ea0b59b8da46ad42409e511435bdcb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>broadcast_varuint</b> (uint64_t data)</td></tr>
+<tr class="separator:a71ea0b59b8da46ad42409e511435bdcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07d39ba826e916f33af4b48a2e8514c5"><td class="memItemLeft" align="right" valign="top"><a id="a07d39ba826e916f33af4b48a2e8514c5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>flush_streams</b> ()</td></tr>
+<tr class="separator:a07d39ba826e916f33af4b48a2e8514c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97362ab78d9901dcad0e5cc5f623dc2c"><td class="memItemLeft" align="right" valign="top"><a id="a97362ab78d9901dcad0e5cc5f623dc2c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>flush_encryptedStreams</b> ()</td></tr>
+<tr class="separator:a97362ab78d9901dcad0e5cc5f623dc2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45a45c04235da53317d7bb47b0e989e4"><td class="memItemLeft" align="right" valign="top"><a id="a45a45c04235da53317d7bb47b0e989e4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>broadcast_flush</b> ()</td></tr>
+<tr class="separator:a45a45c04235da53317d7bb47b0e989e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fd5a07603ff4cb512d201352aa2be0a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#a4fd5a07603ff4cb512d201352aa2be0a">uploadData</a> ()</td></tr>
 <tr class="separator:a4fd5a07603ff4cb512d201352aa2be0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acebb5a1f098aa637fd9aaab20190c253"><td class="memItemLeft" align="right" valign="top"><a id="acebb5a1f098aa637fd9aaab20190c253"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>authenticate</b> (Stream &amp;stream)</td></tr>
+<tr class="separator:acebb5a1f098aa637fd9aaab20190c253"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8da3ff2774cee42f1d45cd12912c937"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#ad8da3ff2774cee42f1d45cd12912c937">onCommunicate</a> ()</td></tr>
 <tr class="separator:ad8da3ff2774cee42f1d45cd12912c937"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6e64ed8ff0c2daf0e8bb935b0a8e127"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classathome_1_1module_1_1_at_home_module.html#ad6e64ed8ff0c2daf0e8bb935b0a8e127">flushStreams</a> ()</td></tr>
@@ -247,13 +290,64 @@ class athome::module::AtHomeModule&lt; T, n &gt;</h3>
 
 <p>Template class implementing base AtHome Modules, taking the type representing a reading from the intended sensor to use and the number of readings to save in a buffer. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a75cae8d69276f23834dda9b23da17707"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75cae8d69276f23834dda9b23da17707">&#9670;&nbsp;</a></span>moduleEncryptionIV</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t n&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint8_t <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::moduleEncryptionIV[12]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><code>moduleEncryptionIV</code> type represents an IV used for a cipher protecting an unsecure stream </p>
+
+</div>
+</div>
+<a id="adcc0f673f2ccb3e3f3619fda97adadcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcc0f673f2ccb3e3f3619fda97adadcf">&#9670;&nbsp;</a></span>moduleEncryptionKey</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t n&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef uint8_t <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::moduleEncryptionKey[32]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><code>moduleEncryptionKey</code> type represents a key for a cipher protecting an unsecure stream </p>
+
+</div>
+</div>
+<a id="a628bd00cf83073b87c41a3ce2b362a9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a628bd00cf83073b87c41a3ce2b362a9c">&#9670;&nbsp;</a></span>modulePassword</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t n&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef char <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::modulePassword[17]</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p><code>modulePassword</code> type represents a password value used to protect the configuration of the module </p>
+
+</div>
+</div>
 <a id="aaa31c8eddb689010ef59deba4e1463c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaa31c8eddb689010ef59deba4e1463c6">&#9670;&nbsp;</a></span>moduleSerial</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">typedef uint32_t <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::<a class="el" href="classathome_1_1module_1_1_at_home_module.html#aaa31c8eddb689010ef59deba4e1463c6">moduleSerial</a></td>
@@ -264,16 +358,16 @@ template&lt;typename T, size_t n&gt; </div>
 
 </div>
 </div>
-<a id="a077afdad789e433d59c588ec6c0f4594"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a077afdad789e433d59c588ec6c0f4594">&#9670;&nbsp;</a></span>t_timestamp</h2>
+<a id="a74611fcc9d7580bded68899a4fd9c930"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74611fcc9d7580bded68899a4fd9c930">&#9670;&nbsp;</a></span>t_timestamp</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">typedef <a class="el" href="structathome_1_1time_1_1_i_time_1_1_i_s_o8601_date_time.html">time::ITime::ISO8601DateTime</a> <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::<a class="el" href="classathome_1_1module_1_1_at_home_module.html#a077afdad789e433d59c588ec6c0f4594">t_timestamp</a></td>
+          <td class="memname">typedef <a class="el" href="structathome_1_1time_1_1_i_time_1_1_date_time.html">time::ITime::DateTime</a> <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::<a class="el" href="classathome_1_1module_1_1_at_home_module.html#a74611fcc9d7580bded68899a4fd9c930">t_timestamp</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -288,7 +382,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -318,7 +412,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <div class="memtemplate">
 template&lt;typename U &gt; </div>
 <table class="mlabels">
@@ -349,7 +443,7 @@ template&lt;typename U &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <div class="memtemplate">
 template&lt;typename U &gt; </div>
 <table class="mlabels">
@@ -380,7 +474,7 @@ template&lt;typename U &gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -408,7 +502,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -430,13 +524,41 @@ template&lt;typename T, size_t n&gt; </div>
 
 </div>
 </div>
+<a id="a1997a4cc4941fe2d81588785736c1cee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1997a4cc4941fe2d81588785736c1cee">&#9670;&nbsp;</a></span>getEncryptedStreams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t n&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classathome_1_1arduino_1_1_a_encrypted_stream.html">arduino::AEncryptedStream</a>** <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::getEncryptedStreams </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Return the array of unsecure streams used to communicate, terminated by nullptr </p>
+
+</div>
+</div>
 <a id="acc6e7fc0d86f11648fd81729484e546f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acc6e7fc0d86f11648fd81729484e546f">&#9670;&nbsp;</a></span>getInstance()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <div class="memtemplate">
 template&lt;typename U  = AtHomeModule&gt; </div>
 <table class="mlabels">
@@ -462,13 +584,41 @@ template&lt;typename U  = AtHomeModule&gt; </div>
 
 </div>
 </div>
+<a id="af322578d47001b20d5e5fb8da65dbf93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af322578d47001b20d5e5fb8da65dbf93">&#9670;&nbsp;</a></span>getPassword()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t n&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a628bd00cf83073b87c41a3ce2b362a9c">modulePassword</a>&amp; <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::getPassword </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Return the current password used by the module </p>
+
+</div>
+</div>
 <a id="a954f37f05e5738f270a35fef58782ba6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a954f37f05e5738f270a35fef58782ba6">&#9670;&nbsp;</a></span>getScheduler()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -498,7 +648,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -526,7 +676,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -554,7 +704,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -582,7 +732,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -610,7 +760,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -638,7 +788,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -666,7 +816,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -694,7 +844,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -722,7 +872,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -751,7 +901,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -774,28 +924,28 @@ template&lt;typename T, size_t n&gt; </div>
 
 </div>
 </div>
-<a id="a137cdd3cfb9bad5e8e65eddac89ddd41"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a137cdd3cfb9bad5e8e65eddac89ddd41">&#9670;&nbsp;</a></span>setCommandPlugin()</h2>
+<a id="aa1b0c8e38ad6baf46f7d05285c35b255"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1b0c8e38ad6baf46f7d05285c35b255">&#9670;&nbsp;</a></span>setCommandPlugin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setCommandPlugin </td>
+          <td class="memname">void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setCommandPlugin </td>
           <td>(</td>
-          <td class="paramtype">AtHomeCommandPlugin&#160;</td>
-          <td class="paramname"><em>plugin</em></td><td>)</td>
+          <td class="paramtype">CommandTable&#160;</td>
+          <td class="paramname"><em>table</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -803,19 +953,19 @@ template&lt;typename T, size_t n&gt; </div>
 
 </div>
 </div>
-<a id="a2a89b7e4cd63739b2c48ffbe3bbaf9be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2a89b7e4cd63739b2c48ffbe3bbaf9be">&#9670;&nbsp;</a></span>setCommunicationExecutionCallback()</h2>
+<a id="a8c3585c35b11fe5b70438678b54f3970"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c3585c35b11fe5b70438678b54f3970">&#9670;&nbsp;</a></span>setCommunicationExecutionCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setCommunicationExecutionCallback </td>
+          <td class="memname">void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setCommunicationExecutionCallback </td>
           <td>(</td>
           <td class="paramtype">customCallback&#160;</td>
           <td class="paramname"><em>f</em> = <code>nullptr</code></td><td>)</td>
@@ -824,7 +974,7 @@ template&lt;typename T, size_t n&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -840,7 +990,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -863,19 +1013,106 @@ template&lt;typename T, size_t n&gt; </div>
 
 </div>
 </div>
-<a id="aeb8a36ce4009ad6a578f41cd654877fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aeb8a36ce4009ad6a578f41cd654877fa">&#9670;&nbsp;</a></span>setOnBackupPlugin()</h2>
+<a id="ae4423d28b7b05d3164f214e163d59739"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4423d28b7b05d3164f214e163d59739">&#9670;&nbsp;</a></span>setEncryptedStreams()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setOnBackupPlugin </td>
+          <td class="memname">void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setEncryptedStreams </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classathome_1_1arduino_1_1_a_encrypted_stream.html">arduino::AEncryptedStream</a> **&#160;</td>
+          <td class="paramname"><em>streams</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the array of unsecure streams used to communicate, terminated by nullptr </p>
+
+</div>
+</div>
+<a id="ad7b57e1acce915ccaaf243a5c4facf67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7b57e1acce915ccaaf243a5c4facf67">&#9670;&nbsp;</a></span>setEncryptionIV()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t n&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setEncryptionIV </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a75cae8d69276f23834dda9b23da17707">moduleEncryptionIV</a> &amp;&#160;</td>
+          <td class="paramname"><em>iv</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the initialization vector used by a cipher to protect unsecure streams </p>
+
+</div>
+</div>
+<a id="ace74e744dbca03dcffa2a3d051f8bef6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace74e744dbca03dcffa2a3d051f8bef6">&#9670;&nbsp;</a></span>setEncryptionKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t n&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setEncryptionKey </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#adcc0f673f2ccb3e3f3619fda97adadcf">moduleEncryptionKey</a> &amp;&#160;</td>
+          <td class="paramname"><em>key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the encryption key used to protect unsecure streams </p>
+
+</div>
+</div>
+<a id="af7e6ed7d4dc72c0cef209704fab0e3af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7e6ed7d4dc72c0cef209704fab0e3af">&#9670;&nbsp;</a></span>setOnBackupPlugin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t n&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setOnBackupPlugin </td>
           <td>(</td>
           <td class="paramtype">AtHomeStoragePlugin&#160;</td>
           <td class="paramname"><em>plugin</em></td><td>)</td>
@@ -884,7 +1121,7 @@ template&lt;typename T, size_t n&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -892,19 +1129,19 @@ template&lt;typename T, size_t n&gt; </div>
 
 </div>
 </div>
-<a id="a7ae30173c9c2871cd374d5d6786f43f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ae30173c9c2871cd374d5d6786f43f6">&#9670;&nbsp;</a></span>setOnRestorePlugin()</h2>
+<a id="ae359941a4f2e571a052a30916a306e48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae359941a4f2e571a052a30916a306e48">&#9670;&nbsp;</a></span>setOnRestorePlugin()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setOnRestorePlugin </td>
+          <td class="memname">void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setOnRestorePlugin </td>
           <td>(</td>
           <td class="paramtype">AtHomeStoragePlugin&#160;</td>
           <td class="paramname"><em>plugin</em></td><td>)</td>
@@ -913,7 +1150,7 @@ template&lt;typename T, size_t n&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -921,19 +1158,48 @@ template&lt;typename T, size_t n&gt; </div>
 
 </div>
 </div>
-<a id="af1466a92bf4e3d0dc45adff11d8ee5fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1466a92bf4e3d0dc45adff11d8ee5fd">&#9670;&nbsp;</a></span>setSensorExecutionCallback()</h2>
+<a id="a7853c8cc0139c956d1d1a941d7145391"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7853c8cc0139c956d1d1a941d7145391">&#9670;&nbsp;</a></span>setPassword()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setSensorExecutionCallback </td>
+          <td class="memname">void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setPassword </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classathome_1_1module_1_1_at_home_module.html#a628bd00cf83073b87c41a3ce2b362a9c">modulePassword</a> &amp;&#160;</td>
+          <td class="paramname"><em>password</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Set the password used to protect the module </p>
+
+</div>
+</div>
+<a id="a29464ea78833e571a589c0cf0d17321b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29464ea78833e571a589c0cf0d17321b">&#9670;&nbsp;</a></span>setSensorExecutionCallback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , size_t n&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setSensorExecutionCallback </td>
           <td>(</td>
           <td class="paramtype">customCallback&#160;</td>
           <td class="paramname"><em>f</em> = <code>nullptr</code></td><td>)</td>
@@ -942,7 +1208,7 @@ template&lt;typename T, size_t n&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -958,7 +1224,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -987,7 +1253,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1016,7 +1282,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1038,19 +1304,19 @@ template&lt;typename T, size_t n&gt; </div>
 
 </div>
 </div>
-<a id="ae27ce52a7171a2cf3a78c5d8f70c2d1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae27ce52a7171a2cf3a78c5d8f70c2d1d">&#9670;&nbsp;</a></span>setUploadDataExecutionCallback()</h2>
+<a id="a24130398678c98c500e211b676fa5079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24130398678c98c500e211b676fa5079">&#9670;&nbsp;</a></span>setUploadDataExecutionCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setUploadDataExecutionCallback </td>
+          <td class="memname">void <a class="el" href="classathome_1_1module_1_1_at_home_module.html">athome::module::AtHomeModule</a>&lt; T, n &gt;::setUploadDataExecutionCallback </td>
           <td>(</td>
           <td class="paramtype">customCallback&#160;</td>
           <td class="paramname"><em>f</em> = <code>nullptr</code></td><td>)</td>
@@ -1059,7 +1325,7 @@ template&lt;typename T, size_t n&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1075,7 +1341,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1104,7 +1370,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -1132,7 +1398,7 @@ template&lt;typename T, size_t n&gt; </div>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, size_t n&gt; </div>
+template&lt;typename T , size_t n&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">

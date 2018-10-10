@@ -157,10 +157,11 @@ Example on Arduino to use a common cathode R\+GB L\+ED and the implementation \m
 \begin{DoxyCode}
 \textcolor{preprocessor}{#include <AtHome.h>}
 
-CommonCathodeRGBLed led(2, 3, 4); \textcolor{comment}{// Create a common cathode LED object and defining the pins connected to
-       red, green and blue anodes of the LED}
-AtHomeModule<uint16\_t, 15> *module = \mbox{\hyperlink{classathome_1_1module_1_1_at_home_module_acc6e7fc0d86f11648fd81729484e546f}{AtHomeModule<uint16\_t, 15>::getInstance}}
-      (); \textcolor{comment}{// Create a AtHomeModule instance able to buffer 15 measures from an analog sensor}
+CommonCathodeRGBLed led(2, 3, 4); \textcolor{comment}{// Create a common cathode LED object and}
+defining the pins connected to red, green and blue anodes of the LED
+AtHomeModule<uint16\_t, 15> *module = AtHomeModule<uint16\_t,
+15>::getInstance(); \textcolor{comment}{// Create a AtHomeModule instance able to buffer 15}
+measures from an analog sensor
 
 \textcolor{keywordtype}{void} setup() \{
   module->setDisplay(&led);
@@ -191,9 +192,10 @@ Example on Arduino using the generic Analog\+Sensor class to get measures from a
 \begin{DoxyCode}
 \textcolor{preprocessor}{#include <AtHome.h>}
 
-AtHomeModule<uint16\_t, 15> *module = AtHomeModule::<uint16\_t, 15>::getInstance(); \textcolor{comment}{// Create a AtHomeModule
-       instance able to buffer 15 measures from an analog sensor}
-AnalogSensor sensor(A0); \textcolor{comment}{// Create an object AnalogSensor reading a sensor on pin A0 of an Arduino}
+AtHomeModule<uint16\_t, 15> *module = AtHomeModule::<uint16\_t,
+15>::getInstance(); \textcolor{comment}{// Create a AtHomeModule instance able to buffer 15}
+measures from an analog sensor AnalogSensor sensor(A0); \textcolor{comment}{// Create an object}
+AnalogSensor reading a sensor on pin A0 of an Arduino
 
 \textcolor{keywordtype}{void} setup() \{
   module->setSensor(&sensor);
@@ -216,9 +218,9 @@ Example on an A\+VR Arduino (like Uno, Pro Mini, Nano, Micro, Leonardo, Mega) us
 \begin{DoxyCode}
 \textcolor{preprocessor}{#include <AtHome.h>}
 
-AtHomeModule<uint16\_t, 15> *module = AtHomeModule::<uint16\_t, 15>::getInstance(); \textcolor{comment}{// Create a AtHomeModule
-       instance able to buffer 15 measures from an analog sensor}
-ArduinoEEPROM eeprom;
+AtHomeModule<uint16\_t, 15> *module = AtHomeModule::<uint16\_t,
+15>::getInstance(); \textcolor{comment}{// Create a AtHomeModule instance able to buffer 15}
+measures from an analog sensor ArduinoEEPROM eeprom;
 
 \textcolor{keywordtype}{void} setup() \{
   module->setStorage(&eeprom);
@@ -248,8 +250,9 @@ Example on Arduino with the implementation \mbox{\hyperlink{classathome_1_1modul
 \begin{DoxyCode}
 \textcolor{preprocessor}{#include <AtHome.h>}
 
-AtHomeModule<uint16\_t, 15> *module = AtHomeModule::<uint16\_t, 15>::getInstance(); \textcolor{comment}{// Create a AtHomeModule
-       instance able to buffer 15 measures from an analog sensor}
+AtHomeModule<uint16\_t, 15> *module = AtHomeModule::<uint16\_t,
+15>::getInstance(); \textcolor{comment}{// Create a AtHomeModule instance able to buffer 15}
+measures from an analog sensor
 
 \textcolor{keywordtype}{void} setup() \{
   Stream *streams[] = \{&Serial, \textcolor{keyword}{nullptr}\};
