@@ -19,7 +19,9 @@ CommonCathodeRGBLed::CommonCathodeRGBLed(uint8_t pin_red, uint8_t pin_green,
 
 CommonCathodeRGBLed &CommonCathodeRGBLed::operator=(
     const CommonCathodeRGBLed &other) {
-  setColor(other.getColor());
+  if (&other != this) {
+    setColor(other.getColor());
+  }
   return *this;
 }
 

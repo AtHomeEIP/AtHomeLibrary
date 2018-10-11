@@ -22,12 +22,14 @@ struct ITime {
     DateTime() : second(0), minute(0), hour(0), day(1), month(1), year(0) {}
 
     DateTime &operator=(const DateTime &date) {
-      second = date.second;
-      minute = date.minute;
-      hour = date.hour;
-      day = date.day;
-      month = date.month;
-      year = date.year;
+      if (&date != this) {
+        second = date.second;
+        minute = date.minute;
+        hour = date.hour;
+        day = date.day;
+        month = date.month;
+        year = date.year;
+      }
       return *this;
     }
   };

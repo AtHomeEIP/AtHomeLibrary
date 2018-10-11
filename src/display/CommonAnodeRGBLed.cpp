@@ -19,7 +19,9 @@ CommonAnodeRGBLed::CommonAnodeRGBLed(uint8_t pin_red, uint8_t pin_green,
 
 CommonAnodeRGBLed &CommonAnodeRGBLed::operator=(
     const CommonAnodeRGBLed &other) {
-  setColor(other.getColor());
+  if (&other != this) {
+    setColor(other.getColor());
+  }
   return *this;
 }
 
