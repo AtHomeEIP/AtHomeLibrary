@@ -772,7 +772,6 @@ class AtHomeModule : public ABaseModule {
       const sensor::ISensor::ISensorValue &value = _sensor->getSample();
       _measures[_nbMeasures].unit = value.unit;
       _measures[_nbMeasures].estimate = value.estimate;
-      // TODO: need a time interface
 #ifndef DISABLE_TIME
       if (_clock != nullptr) {
         _measures[_nbMeasures].timestamp = _clock->getDateTime();
