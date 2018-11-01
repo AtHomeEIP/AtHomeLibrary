@@ -56,7 +56,7 @@ buildTests:Arduino:
     - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/test/simple_b/simple_b.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/zero/simple_b/
     - arduino --verify --board arduino:sam:arduino_due_x $PWD/test/simple_b/simple_b.ino --preserve-temp-files --pref build.path=$PWD/test/output/arm/due/simple_b/
     # - arduino --verify --board chipKIT:pic32:fubarino_mini $PWD/test/1/main.ino --preserve-temp-files --pref build.path=$PWD/test/output/pic32/fubarino_mini/
-    - arduino --verify --board arduino:avr:mega $PWD/test/IDisplay_tests/IDisplay_tests.ino --preserve-temp-files --pref build.path=$PWD/test/output/IDisplay_tests
+    - arduino --verify --board arduino:avr:mega:cpu=atmega2560 $PWD/test/IDisplay_tests/IDisplay_tests.ino --preserve-temp-files --pref build.path=$PWD/test/output/IDisplay_tests
   artifacts:
     paths:
       - "test/output"
