@@ -16,9 +16,10 @@ class IPower {
     uint32_t current;
     uint8_t remainingCapacity;
   };
-  // virtual ~IPower() = 0;
   virtual const PowerInfo *getPowerInfo() = 0;
   virtual void sleep(SLEEP_MODE, uint32_t) = 0;
+ protected:
+  ~IPower() {}
 };
 }  // namespace power
 }  // namespace athome

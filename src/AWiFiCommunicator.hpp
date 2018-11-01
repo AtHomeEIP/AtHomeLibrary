@@ -412,6 +412,9 @@ class AWiFiCommunicator : public ANetworkCommunicator {
   void setStreamToChipset(Stream *);
   bool isAccessPointConfigured();
 
+ protected:
+  ~AWiFiCommunicator() {}
+
  private:
   bool _accessPointConfigured;
 

@@ -321,9 +321,7 @@ class AtHomeModule : public ABaseModule {
   /**
    * Return the current password used by the module
    */
-  const modulePassword &getPassword() const {
-    return _password;
-  }
+  const modulePassword &getPassword() const { return _password; }
 #endif /* DISABLE_PASSWORD */
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
@@ -417,9 +415,7 @@ class AtHomeModule : public ABaseModule {
 #endif /* DISABLE_PERSISTENT_STORAGE */
   }
 
-  const moduleEncryptionIV &getEncryptionIV() const {
-    return _encryptionRawIV;
-  }
+  const moduleEncryptionIV &getEncryptionIV() const { return _encryptionRawIV; }
 #endif /* !defined(DISABLE_COMMUNICATION) && \
           !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
 
@@ -587,13 +583,12 @@ class AtHomeModule : public ABaseModule {
     broadcast_varuint(time::absolute_year);
     broadcast_varuint(_nbMeasures);
     for (size_t i = 0; i < _nbMeasures; i++) {
-        broadcast_string(FH(_measures[i].label));
-        raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.unit), 1);
-        raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.prefix),
-                      1);
-        raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].estimate), 1);
-        broadcast_string(_measures[i].sample);
-        raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].timestamp), 1);
+      broadcast_string(FH(_measures[i].label));
+      raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.unit), 1);
+      raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.prefix), 1);
+      raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].estimate), 1);
+      broadcast_string(_measures[i].sample);
+      raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].timestamp), 1);
     }
     broadcast(ATHOME_END_OF_COMMAND);
     _nbMeasures = 0;
@@ -620,10 +615,10 @@ class AtHomeModule : public ABaseModule {
     }
     for (size_t i = 0; _streams[i] != nullptr; i++) {
       if (_streams[i]->available()) {
-        char buffer[18];
+        char buffer[19];
         char buffer2;
         int len = 0;
-        for (len = 0; len < 18; len++) {
+        for (len = 0; len < 19; len++) {
           if (_streams[i]->readBytes(&buffer2, 1) < 0 ||
               buffer2 == ATHOME_NEW_LINE) {
             break;
@@ -868,8 +863,6 @@ class AtHomeModule : public ABaseModule {
     ) {
       return;
     }
-    char buffer[2];
-    stream.readBytesUntil(ATHOME_END_OF_COMMAND, buffer, 1);
   }
 
   static void _setProfileCallback(const char *command, Stream &stream) {

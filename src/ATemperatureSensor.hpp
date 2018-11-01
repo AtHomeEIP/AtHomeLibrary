@@ -12,7 +12,6 @@ class ATemperatureSensor : public ISensor {
   ATemperatureSensor();
   ATemperatureSensor(const ATemperatureSensor &) = delete;
   ATemperatureSensor &operator=(const ATemperatureSensor &) = delete;
-  ~ATemperatureSensor();
   /**
    * Returns a pointer on the sample of the sensor. This pointer needs to point
    * on a float variable.
@@ -24,6 +23,9 @@ class ATemperatureSensor : public ISensor {
    */
   virtual int32_t getSensorSample() = 0;
   virtual void setThresholds(const ISensorThresholds &);
+
+ protected:
+  ~ATemperatureSensor();
 
  private:
   ISensorValue _value;

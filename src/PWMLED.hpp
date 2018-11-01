@@ -12,11 +12,13 @@ class PWMLED : public IDisplay {
   PWMLED(int, bool = false);
   PWMLED(const PWMLED &) = delete;
   PWMLED &operator=(const PWMLED &) = delete;
-  ~PWMLED();
 
   virtual void clear();
   virtual void update();
   virtual void setDisplayedEstimate(sensor::ISensor::ISensorScale);
+
+ protected:
+  ~PWMLED();
 
  private:
   int _pin;

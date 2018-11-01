@@ -55,7 +55,8 @@ class MQ2GasSensor : public ISensor {
     int smoke;
 
     virtual size_t printTo(Print &p) const {
-      // TOOD: To replace with a binary serialization when uploadData will not use json anymore
+      // TOOD: To replace with a binary serialization when uploadData will not
+      // use json anymore
       size_t len = 0;
       len += p.print(FH(MQ2GasSensorStrings::jsonLPG));
       len += p.print(lpg);

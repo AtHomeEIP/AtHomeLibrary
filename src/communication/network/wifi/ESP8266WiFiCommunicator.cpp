@@ -298,26 +298,27 @@ int ESP8266WiFiCommunicator::_connect_ap() {
 int ESP8266WiFiCommunicator::_create_ap() {
   if (!isAccessPointConfigured()) {
     return -4;
-  int check = _command_check();
-  if (check) {
-    return check;
+    int check = _command_check();
+    if (check) {
+      return check;
+    }
+    while (_set_esp_ap_mode())
+      ;
+    char channel[3];
+    SNPRINTF(channel, 2, channel_format, _ap.channel);
+    _stream->print(FH(at_at));
+    _stream->print(FH(symbol_plus));
+    _stream->print(FH(at_cwsap));
+    _stream->print(FH(equal_double_quotes));
+    _stream->print(_ap.ssid);
+    _stream->print(FH(double_quotes_comma_double_quotes));
+    _stream->print(_ap.password);
+    _stream->print(FH(double_quotes_comma));
+    _stream->print(channel);
+    _stream->print(FH(comma_3));
+    _stream->print(FH(at_eol));
+    return _esp_answer_check();
   }
-  while (_set_esp_ap_mode())
-    ;
-  char channel[3];
-  SNPRINTF(channel, 2, channel_format, _ap.channel);
-  _stream->print(FH(at_at));
-  _stream->print(FH(symbol_plus));
-  _stream->print(FH(at_cwsap));
-  _stream->print(FH(equal_double_quotes));
-  _stream->print(_ap.ssid);
-  _stream->print(FH(double_quotes_comma_double_quotes));
-  _stream->print(_ap.password);
-  _stream->print(FH(double_quotes_comma));
-  _stream->print(channel);
-  _stream->print(FH(comma_3));
-  _stream->print(FH(at_eol));
-  return _esp_answer_check();
 }
 
 int ESP8266WiFiCommunicator::_reset_esp() {

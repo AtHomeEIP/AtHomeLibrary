@@ -12,7 +12,6 @@ class AHumiditySensor : public ISensor {
   AHumiditySensor();
   AHumiditySensor(const AHumiditySensor &) = delete;
   AHumiditySensor &operator=(const AHumiditySensor &) = delete;
-  ~AHumiditySensor();
   /**
    * Returns a reference on the sample of the sensor
    */
@@ -22,6 +21,9 @@ class AHumiditySensor : public ISensor {
    */
   virtual int32_t getSensorSample() const = 0;
   void setThresholds(const ISensorThresholds &);
+
+ protected:
+  ~AHumiditySensor();
 
  private:
   ISensorValue _value;

@@ -9,10 +9,9 @@ namespace athome {
 namespace communication {
 class ANetworkCommunicator : public Stream {
  public:
-  ANetworkCommunicator(ip::tcp_host * = nullptr);
+  explicit ANetworkCommunicator(ip::tcp_host * = nullptr);
   ANetworkCommunicator(const ANetworkCommunicator &) = delete;
   ANetworkCommunicator &operator=(const ANetworkCommunicator &) = delete;
-  ~ANetworkCommunicator();
   /**
    * Virtual method inherited from Stream interface. [See documentation on
    * Arduino
@@ -163,6 +162,9 @@ class ANetworkCommunicator : public Stream {
    */
   void setHost(const ip::tcp_host &);
   bool isHostConfigured();
+
+ protected:
+  ~ANetworkCommunicator();
 
  private:
   bool _hostConfigured;

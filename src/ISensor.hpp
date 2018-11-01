@@ -47,7 +47,6 @@ class ISensor {
     uint32_t min;
     uint32_t max;
   };
-  // virtual ~ISensor() = 0;
   /**
    * Returns a pointer on sensor sample raw memory, as an array of bytes
    */
@@ -73,6 +72,8 @@ class ISensor {
    * \endcode
    */
   virtual void setThresholds(const ISensorThresholds &) = 0;
+ protected:
+  ~ISensor() {}
 };
 }  // namespace sensor
 }  // namespace athome

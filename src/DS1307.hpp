@@ -17,15 +17,15 @@ namespace time {
 class DS1307 : public ITime {
  public:
   DS1307();
-  DS1307(TwoWire &);
+  explicit DS1307(TwoWire &);
   DS1307(const DS1307 &) = delete;
   DS1307 &operator=(const DS1307 &) = delete;
-  ~DS1307();
 
   virtual const ITime::DateTime &getDateTime();
   virtual void setCurrentDateTime(const DateTime &);
 
  protected:
+  ~DS1307();
   void setup();
   bool is_running();
   uint8_t bcd2bin(uint8_t);

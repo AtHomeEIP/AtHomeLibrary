@@ -17,13 +17,13 @@ class ChaChaEncryptedStream : public AEncryptedStream {
   explicit ChaChaEncryptedStream(Stream &);
   ChaChaEncryptedStream(const ChaChaEncryptedStream &) = delete;
   ChaChaEncryptedStream &operator=(const ChaChaEncryptedStream &) = delete;
+  virtual ~ChaChaEncryptedStream() {}
 
   const counter &getCounter() const { return _counter; }
   void setCounter(const counter &cnt) {
     memcpy(_counter, cnt, sizeof(_counter));
   }
 
- protected:
   virtual bool initializeCipher(const CipherMaterials &);
   virtual void encrypt(Block &block) {
     _cipher.encrypt(reinterpret_cast<uint8_t *>(&block),

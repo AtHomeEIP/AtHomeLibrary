@@ -30,7 +30,6 @@ class ALuminositySensor : public ISensor {
   ALuminositySensor();
   ALuminositySensor(const ALuminositySensor &) = delete;
   ALuminositySensor &operator=(const ALuminositySensor &) = delete;
-  ~ALuminositySensor();
 
   /**
    * Return a reference on ISensorValue storing the number of lux as an integer.
@@ -45,6 +44,9 @@ class ALuminositySensor : public ISensor {
    * Set thresholds based on the room type
    */
   void setRoom(Room_Type);
+
+ protected:
+  ~ALuminositySensor();
 
  private:
   ISensorValue _value;

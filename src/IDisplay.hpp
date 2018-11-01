@@ -21,7 +21,6 @@ namespace display {
  */
 class IDisplay {
  public:
-  // virtual ~IDisplay() = 0;
   /**
    * Remove display content
    */
@@ -48,6 +47,8 @@ class IDisplay {
    * - ...etc
    */
   virtual void setDisplayedEstimate(sensor::ISensor::ISensorScale) = 0;
+ protected:
+  ~IDisplay() {}
 };
 }  // namespace display
 }  // namespace athome

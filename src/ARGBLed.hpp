@@ -51,7 +51,6 @@ class ARGBLed : public IDisplay {
     uint8_t green;
     uint8_t blue;
   };
-  ~ARGBLed() {}
   ARGBLed()
       : _color({0, 0, 0}),
         _colorsScale({{0, 0, 0},
@@ -133,6 +132,9 @@ class ARGBLed : public IDisplay {
                                sensor::ISensor::ISensorScale value) {
     _colorsScale[value] = color;
   }
+
+ protected:
+  ~ARGBLed() {}
 
  private:
   Color _color;

@@ -19,9 +19,9 @@ namespace module {
 class ABaseModule {
  public:
   ABaseModule &operator=(ABaseModule &) = delete;  // Singleton class
-  ~ABaseModule();
 
  protected:
+  ~ABaseModule();
   ABaseModule(
 #ifndef DISABLE_DISPLAY
 #if !defined(DISABLE_COMMUNICATION) || !defined(DISABLE_POWER_MANAGEMENT) || \

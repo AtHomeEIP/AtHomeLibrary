@@ -4,7 +4,8 @@
 #include "AtHomeConfig.h"
 #if !defined(DISABLE_DISPLAY) && !defined(DISABLE_NEOPIXEL)
 #if (!defined(__MSP430__) && !defined(TARGET_IS_MSP432P4XX) && \
-    !defined(__PIC32MX__)) || defined(DOXYGEN)
+     !defined(__PIC32MX__)) ||                                 \
+    defined(DOXYGEN)
 #include <Adafruit_NeoPixel.h>
 #include "ARGBLed.hpp"
 

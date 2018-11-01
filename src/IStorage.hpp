@@ -13,7 +13,6 @@ namespace storage {
  */
 class IStorage {
  public:
-  // virtual ~IStorage() = 0;
   /**
    * Copy n bytes (3rd parameter) in dest (2nd parameter) from offset x (1st
    * parameter)
@@ -53,6 +52,8 @@ class IStorage {
    * \endcode
    */
   virtual void write(size_t, const void *, size_t) = 0;
+ protected:
+  ~IStorage() {}
 };
 }  // namespace storage
 }  // namespace athome

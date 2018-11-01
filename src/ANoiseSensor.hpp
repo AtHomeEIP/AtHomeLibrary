@@ -12,11 +12,13 @@ class ANoiseSensor : public ISensor {
   ANoiseSensor();
   ANoiseSensor(const ANoiseSensor &) = delete;
   ANoiseSensor &operator=(const ANoiseSensor &) = delete;
-  ~ANoiseSensor();
 
   const ISensorValue &getSample();
   virtual int32_t getSensorSample() const = 0;
   void setThresholds(const ISensorThresholds &);
+
+ protected:
+  ~ANoiseSensor();
 
  private:
   ISensorValue _value;

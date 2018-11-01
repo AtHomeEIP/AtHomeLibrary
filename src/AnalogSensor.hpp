@@ -25,7 +25,7 @@ class AnalogSensor : public ISensor {
    * Create an instance of AnalogSensor, needing the analog pin used to sample
    * the sensor.
    */
-  AnalogSensor(uint8_t pin);
+  explicit AnalogSensor(uint8_t pin);
   AnalogSensor(const AnalogSensor &) = delete;
   AnalogSensor &operator=(const AnalogSensor &) = delete;
   ~AnalogSensor();

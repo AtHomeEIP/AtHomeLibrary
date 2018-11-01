@@ -10,7 +10,7 @@ namespace memory {
 template <typename T>
 class UniquePtr : ASmartPtr<T> {
  public:
-  UniquePtr(T *ptr = nullptr) : ASmartPtr<T>() {
+  UniquePtr(T *ptr = nullptr) : public ASmartPtr<T>() {
     if (ptr != nullptr) {
       set(ptr)
     } else {

@@ -1,12 +1,11 @@
 #include "AtHomeConfig.h"
 #if !defined(DISABLE_DISPLAY) && !defined(DISABLE_COMMON_ANODE_RGB_LED)
+#include "CommonAnodeRGBLed.hpp"
 #ifdef ARDUINO
 #include <Arduino.h>
 #else
 extern void analogWrite(uint8_t, int);
 #endif
-
-#include "CommonAnodeRGBLed.hpp"
 
 namespace athome {
 namespace display {

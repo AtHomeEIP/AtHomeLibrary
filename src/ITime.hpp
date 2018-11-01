@@ -36,6 +36,7 @@ struct ITime {
 
   virtual const DateTime &getDateTime() = 0;
   virtual void setCurrentDateTime(const DateTime &) = 0;
+  virtual ~ITime() {}
 };
 }  // namespace time
 }  // namespace athome

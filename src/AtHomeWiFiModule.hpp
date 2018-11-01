@@ -86,9 +86,9 @@ class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
     char buffer;
     int len = communicator.readBytesUntil('\0', ap.ssid, sizeof(ap.ssid) - 1);
     ap.ssid[len] = '\0';
-    len = communicator.readBytesUntil('\0', ap.password, sizeof(ap.password));
+    len =
+        communicator.readBytesUntil('\0', ap.password, sizeof(ap.password) - 1);
     ap.password[len] = '\0';
-    communicator.readBytesUntil(ATHOME_END_OF_COMMAND, &buffer, 1);
     if (_wifi != nullptr) {
       _wifi->disconnect();
       _wifi->setAccessPoint(ap);
