@@ -66,7 +66,6 @@ class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
       _wifi->connect();
     }
     AtHomeNetworkModule<T, n>::setNetworkCommunicator(wifi);
-    // this->onRestoreFromStorage(); // Restore wifi parameters from storage
   }
 
  protected:
@@ -164,7 +163,7 @@ class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
 
  private:
   static const Command _setWiFiCommand;
-  static CommandTable _wifiCommands;
+  static const CommandTable _wifiCommands;
 };
 
 template <typename T, size_t n>
@@ -172,7 +171,7 @@ const Command AtHomeWiFiModule<T, n>::_setWiFiCommand = {
     communication::commands::setWiFi, AtHomeWiFiModule<T, n>::_setWiFi};
 
 template <typename T, size_t n>
-CommandTable AtHomeWiFiModule<T, n>::_wifiCommands = {
+const CommandTable AtHomeWiFiModule<T, n>::_wifiCommands = {
     &AtHomeWiFiModule::_setWiFiCommand, nullptr};
 }  // namespace module
 }  // namespace athome

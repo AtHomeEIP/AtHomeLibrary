@@ -47,6 +47,7 @@ class IDisplay {
    * - ...etc
    */
   virtual void setDisplayedEstimate(sensor::ISensor::ISensorScale) = 0;
+
  protected:
   ~IDisplay() {}
 };

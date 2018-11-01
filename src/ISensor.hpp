@@ -72,6 +72,7 @@ class ISensor {
    * \endcode
    */
   virtual void setThresholds(const ISensorThresholds &) = 0;
+
  protected:
   ~ISensor() {}
 };

@@ -487,7 +487,7 @@ class AtHomeModule : public ABaseModule {
    * Broadcast the data passed as parameter over all module streams.
    */
   template <typename U>
-  inline void broadcast(const U &data) {
+  void broadcast(const U &data) {
     if (_streams != nullptr) {
       for (size_t i = 0; _streams[i] != nullptr; i++) {
         _streams[i]->print(data);
@@ -507,12 +507,12 @@ class AtHomeModule : public ABaseModule {
    * line return string "\r\n".
    */
   template <typename U>
-  inline void broadcastln(const U &data) {
+  void broadcastln(const U &data) {
     broadcast(data);
     broadcast(FH(ATHOME_NEW_LINE));
   }
 
-  inline void raw_broadcast(const uint8_t *data, size_t len) {
+  void raw_broadcast(const uint8_t *data, size_t len) {
     if (_streams != nullptr) {
       for (size_t i = 0; _streams[i] != nullptr; i++) {
         _streams[i]->write(data, len);
@@ -527,15 +527,15 @@ class AtHomeModule : public ABaseModule {
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   }
 
-  inline void raw_broadcast_empty() { broadcast('\0'); }
+  void raw_broadcast_empty() { broadcast('\0'); }
 
   template <typename U>
-  inline void broadcast_string(const U &data) {
+  void broadcast_string(const U &data) {
     broadcast(data);
     raw_broadcast_empty();
   }
 
-  inline bool is_non_zero(const uint8_t *data, size_t len) {
+  bool is_non_zero(const uint8_t *data, size_t len) {
     for (size_t i = 0; i < len; i++) {
       if (data[i] & 0xFF) {
         return true;
@@ -544,7 +544,7 @@ class AtHomeModule : public ABaseModule {
     return false;
   }
 
-  inline void broadcast_varuint(uint64_t data) {
+  void broadcast_varuint(uint64_t data) {
     if (!is_non_zero(reinterpret_cast<uint8_t *>(&data), sizeof(uint64_t))) {
       broadcast('\0');
       return;
@@ -560,7 +560,7 @@ class AtHomeModule : public ABaseModule {
     }
   }
 
-  inline void flush_encryptedStreams() {
+  void flush_encryptedStreams() {
     if (_encryptedStreams == nullptr) {
       return;
     }
@@ -569,7 +569,7 @@ class AtHomeModule : public ABaseModule {
     }
   }
 
-  inline void broadcast_flush() {
+  void broadcast_flush() {
     flushStreams();
     flush_encryptedStreams();
   }
@@ -614,6 +614,7 @@ class AtHomeModule : public ABaseModule {
       return;
     }
     for (size_t i = 0; _streams[i] != nullptr; i++) {
+      _streams[i]->setTimeout(DEFAULT_STREAM_TIMEOUT);
       if (_streams[i]->available()) {
         char buffer[19];
         char buffer2;
@@ -663,11 +664,9 @@ class AtHomeModule : public ABaseModule {
           }
         }
         if (!found) {
-          //_streams[i]->flush(); // Would also remove output buffers
           while (_streams[i]->read() != -1)
             ;
         }
-        // while (_streams[i]->read() != -1); // Remove the rest of the input
       }
     }
   }

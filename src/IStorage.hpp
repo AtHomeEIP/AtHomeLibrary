@@ -52,6 +52,7 @@ class IStorage {
    * \endcode
    */
   virtual void write(size_t, const void *, size_t) = 0;
+
  protected:
   ~IStorage() {}
 };
