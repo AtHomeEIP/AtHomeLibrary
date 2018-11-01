@@ -12,13 +12,11 @@ class MonochromaticLED : public IDisplay {
   MonochromaticLED(int, bool = false);
   MonochromaticLED(const MonochromaticLED &) = delete;
   MonochromaticLED &operator=(const MonochromaticLED &) = delete;
+  ~MonochromaticLED();
 
   virtual void clear();
   virtual void update();
   virtual void setDisplayedEstimate(sensor::ISensor::ISensorScale);
-
- protected:
-  ~MonochromaticLED();
 
  private:
   int _pin;
