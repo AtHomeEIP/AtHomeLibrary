@@ -94,15 +94,20 @@ class AtHomeNetworkModule : public AtHomeModule<T, n> {
       return;
     }
     if ((version == 4 &&
-        AtHomeModule<T, n>::template securedReadBytes<communication::ip::ipv4_address>(stream, host.ipv4) < 1) ||
+         AtHomeModule<T, n>::template securedReadBytes<
+             communication::ip::ipv4_address>(stream, host.ipv4) < 1) ||
         (version == 6 &&
-        AtHomeModule<T, n>::template securedReadBytes<communication::ip::ipv6_address>(stream, host.ipv6) < 1) ||
-        AtHomeModule<T, n>::template securedReadBytes<communication::ip::port>(stream, host.hport) < 1) {
-      AtHomeModule<T, n>::send_command_error(stream, communication::commands::setEndPoint);
+         AtHomeModule<T, n>::template securedReadBytes<
+             communication::ip::ipv6_address>(stream, host.ipv6) < 1) ||
+        AtHomeModule<T, n>::template securedReadBytes<communication::ip::port>(
+            stream, host.hport) < 1) {
+      AtHomeModule<T, n>::send_command_error(
+          stream, communication::commands::setEndPoint);
       return;
     }
     setHost(host);
-    AtHomeModule<T, n>::acknowledge_command(stream, communication::commands::setEndPoint);
+    AtHomeModule<T, n>::acknowledge_command(
+        stream, communication::commands::setEndPoint);
   }
 
   static void _setEndPoint(const char *command, Stream &stream) {

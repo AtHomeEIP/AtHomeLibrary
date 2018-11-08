@@ -82,9 +82,12 @@ class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
  private:
   void setWiFi(Stream &stream) {
     communication::wifi::WiFi_ap ap;
-    if (AtHomeModule<T, n>::template securedReadBytesUntil<communication::wifi::wifi_ssid>(stream, ap.ssid) < 1 ||
-        AtHomeModule<T, n>::template securedReadBytesUntil<communication::wifi::wifi_password>(stream, ap.password) < 1) {
-      AtHomeModule<T, n>::send_command_error(stream, communication::commands::setWiFi);
+    if (AtHomeModule<T, n>::template securedReadBytesUntil<
+            communication::wifi::wifi_ssid>(stream, ap.ssid) < 1 ||
+        AtHomeModule<T, n>::template securedReadBytesUntil<
+            communication::wifi::wifi_password>(stream, ap.password) < 1) {
+      AtHomeModule<T, n>::send_command_error(stream,
+                                             communication::commands::setWiFi);
       return;
     }
     if (_wifi != nullptr) {
@@ -95,7 +98,8 @@ class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
 #ifndef DISABLE_PERSISTENT_STORAGE
     this->onBackupOnStorage();
 #endif /* DISABLE_PERSISTENT_STORAGE */
-    AtHomeModule<T, n>::acknowledge_command(stream, communication::commands::setWiFi);
+    AtHomeModule<T, n>::acknowledge_command(stream,
+                                            communication::commands::setWiFi);
   }
   static void _setWiFi(const char *command, Stream &stream) {
     (void)command;

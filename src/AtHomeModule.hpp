@@ -15,9 +15,9 @@
 #include "AtHomeCommunicationProtocol.hpp"
 #include "AtHomeConfig.h"
 #include "AtHomeFlashCommon.h"
+#include "CRC.hpp"
 #include "ITime.hpp"
 #include "Queue.hpp"
-#include "CRC.hpp"
 
 namespace athome {
 namespace module {
@@ -612,7 +612,8 @@ class AtHomeModule : public ABaseModule {
   /**
    * Send an error alert to the host when a command fail
    */
-  void send_command_error(Stream &stream, const PROGMEM char *command = nullptr) {
+  void send_command_error(Stream &stream,
+                          const PROGMEM char *command = nullptr) {
     stream.print(communication::commands::koReply);
     stream.write(ATHOME_NEW_LINE);
     if (command != nullptr) {
@@ -624,7 +625,8 @@ class AtHomeModule : public ABaseModule {
   /**
    * Send an acknowledge to the host when a command success
    */
-  void acknowledge_command(Stream &stream, const PROGMEM char *command = nullptr) {
+  void acknowledge_command(Stream &stream,
+                           const PROGMEM char *command = nullptr) {
     stream.print(communication::commands::okReply);
     stream.write(ATHOME_NEW_LINE);
     if (command != nullptr) {
@@ -1033,9 +1035,12 @@ class AtHomeModule : public ABaseModule {
     {
       char buffer[2];
       if (securedReadBytes<char[2]>(stream, buffer) < 1 ||
-          securedReadBytes<sensor::ISensor::SensorThreshold>(stream, thresholds.min) < 1 ||
-          securedReadBytes<sensor::ISensor::SensorThreshold>(stream, thresholds.max) < 1) {
-        send_command_error(stream, communication::commands::setSensorThresholds);
+          securedReadBytes<sensor::ISensor::SensorThreshold>(
+              stream, thresholds.min) < 1 ||
+          securedReadBytes<sensor::ISensor::SensorThreshold>(
+              stream, thresholds.max) < 1) {
+        send_command_error(stream,
+                           communication::commands::setSensorThresholds);
         return;
       }
       thresholds.unit.unit = buffer[0];

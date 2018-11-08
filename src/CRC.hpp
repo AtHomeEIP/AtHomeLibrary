@@ -2,8 +2,8 @@
 #define CRC_HPP
 #ifndef DISABLE_CRC
 #define CRC_ERROR -2
-#include <stdint.h>
 #include <stddef.h>
+#include <stdint.h>
 uint16_t portable_crc16_update(uint16_t, uint8_t);
 namespace athome {
 namespace utility {
@@ -38,7 +38,7 @@ CRC16 crc16_it(const T &data) {
   return crc;
 }
 }  // namespace checksum
-}  // namespace util
+}  // namespace utility
 }  // namespace athome
 #endif  // DISABLE_CRC
 #endif  // CRC_HPP
