@@ -17,6 +17,7 @@
 #include "AtHomeFlashCommon.h"
 #include "ITime.hpp"
 #include "Queue.hpp"
+#include "CRC.hpp"
 
 namespace athome {
 namespace module {
@@ -509,7 +510,7 @@ class AtHomeModule : public ABaseModule {
   template <typename U>
   void broadcastln(const U &data) {
     broadcast(data);
-    broadcast(FH(ATHOME_NEW_LINE));
+    broadcast(ATHOME_NEW_LINE);
   }
 
   void raw_broadcast(const uint8_t *data, size_t len) {
@@ -527,8 +528,14 @@ class AtHomeModule : public ABaseModule {
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   }
 
+  /**
+   * Broadcast empty string
+   */
   void raw_broadcast_empty() { broadcast('\0'); }
 
+  /**
+   * Serialize an object as String and broadcast it
+   */
   template <typename U>
   void broadcast_string(const U &data) {
     broadcast(data);
@@ -544,6 +551,9 @@ class AtHomeModule : public ABaseModule {
     return false;
   }
 
+  /**
+   * Serialize an integer as a variable size integer using Google spec
+   */
   void broadcast_varuint(uint64_t data) {
     if (!is_non_zero(reinterpret_cast<uint8_t *>(&data), sizeof(uint64_t))) {
       broadcast('\0');
@@ -560,6 +570,10 @@ class AtHomeModule : public ABaseModule {
     }
   }
 
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+  /**
+   * Flush encrypted Stream used for broadcast
+   */
   void flush_encryptedStreams() {
     if (_encryptedStreams == nullptr) {
       return;
@@ -568,10 +582,105 @@ class AtHomeModule : public ABaseModule {
       _encryptedStreams[i]->flush();
     }
   }
+#endif  // DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
 
+  /**
+   * Flush all broadcast Stream
+   */
   void broadcast_flush() {
     flushStreams();
     flush_encryptedStreams();
+  }
+
+  /**
+   * Generic function allowing to read from a Stream up until n bytes
+   * into memory
+   */
+  int readBytesN(Stream &stream, char *dest, size_t u) {
+    size_t i = 0;
+    int j = 0;
+    while (i < u) {
+      j = stream.readBytes(dest, u - i);
+      if (j < 0) {
+        return i;
+      }
+      i += j;
+    }
+    return u;
+  }
+
+  /**
+   * Send an error alert to the host when a command fail
+   */
+  void send_command_error(Stream &stream, const PROGMEM char *command = nullptr) {
+    stream.print(communication::commands::koReply);
+    stream.write(ATHOME_NEW_LINE);
+    if (command != nullptr) {
+      stream.print(command);
+    }
+    stream.write(ATHOME_END_OF_COMMAND);
+  }
+
+  /**
+   * Send an acknowledge to the host when a command success
+   */
+  void acknowledge_command(Stream &stream, const PROGMEM char *command = nullptr) {
+    stream.print(communication::commands::okReply);
+    stream.write(ATHOME_NEW_LINE);
+    if (command != nullptr) {
+      stream.print(command);
+    }
+    stream.write(ATHOME_END_OF_COMMAND);
+  }
+
+  /**
+   * Read the content of an object from a Stream
+   */
+  template <typename U>
+  int readBytes(Stream &stream, U &dest) {
+    return readBytesN(stream, reinterpret_cast<char *>(&dest), sizeof(U));
+  }
+
+  /**
+   * Read an object content from a Stream and perform CRC verification
+   * if available
+   */
+  template <typename U>
+  int securedReadBytes(Stream &stream, U &dest) {
+    uint16_t crcRef;
+    if (readBytes<uint16_t>(stream, crcRef) < 0) {
+      return -1;
+    }
+    int size = readBytes<U>(stream, dest);
+#ifndef DISABLE_CRC
+    uint16_t crc = utility::checksum::crc16_it<U>(dest);
+    if (crc != crcRef) {
+      return CRC_ERROR;
+    }
+#endif  // DISABLE_CRC
+    return size;
+  }
+
+  template <typename U, char del = '\0', uint8_t init = 0>
+  int securedReadBytesUntil(Stream &stream, U &dest) {
+    uint16_t crcRef;
+    if (readBytes<uint16_t>(stream, crcRef) < 0) {
+      return -1;
+    }
+    char *ptr = reinterpret_cast<char *>(&dest);
+    memset(ptr, init, sizeof(U));
+    int size = stream.readBytesUntil(del, ptr, sizeof(U) - 1);
+    ptr[size] = del;
+    if (size < 0) {
+      return -1;
+    }
+#ifndef DISABLE_CRC
+    uint16_t crc = utility::checksum::crc16_it<U>(dest);
+    if (crc != crcRef) {
+      return CRC_ERROR;
+    }
+#endif  // DISABLE_CRC
+    return size;
   }
 #ifndef DISABLE_SENSOR
   /**
@@ -592,14 +701,16 @@ class AtHomeModule : public ABaseModule {
     }
     broadcast(ATHOME_END_OF_COMMAND);
     _nbMeasures = 0;
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
     flush_encryptedStreams();
+#endif  // DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
   }
 #endif /* DISABLE_SENSOR */
 #if !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION)
   bool authenticate(Stream &stream) {
     modulePassword password;
     size_t len;
-    if ((len = stream.readBytesUntil('\0', password, sizeof(password))) < 1) {
+    if (securedReadBytesUntil<modulePassword>(stream, password) < 1) {
       return false;
     }
     password[len] = '\0';
@@ -802,8 +913,7 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_COMMUNICATION
   int _setProfileSerial(Stream &stream) {
     moduleSerial serial;
-    if (stream.readBytesUntil('\0', reinterpret_cast<char *>(&serial),
-                              sizeof(serial)) < 1) {
+    if (securedReadBytesUntil<moduleSerial>(stream, serial) < 1) {
       return -1;
     }
     setSerial(serial);
@@ -813,8 +923,7 @@ class AtHomeModule : public ABaseModule {
   int _setProfilePassword(Stream &stream) {
     modulePassword password;
     size_t len;
-    if ((len = stream.readBytesUntil('\0', password, sizeof(password) - 1)) <
-        1) {
+    if (securedReadBytesUntil<modulePassword>(stream, password) < 1) {
       return -1;
     }
     password[len] = '\0';
@@ -825,7 +934,7 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
   int _setProfileEncryptionKey(Stream &stream) {
     moduleEncryptionKey key;
-    if (stream.readBytes(reinterpret_cast<char *>(key), sizeof(key)) < 1) {
+    if (securedReadBytes<moduleEncryptionKey>(stream, key) < 1) {
       return -1;
     }
     setEncryptionKey(key);
@@ -834,7 +943,7 @@ class AtHomeModule : public ABaseModule {
 
   int _setProfileEncryptionIV(Stream &stream) {
     moduleEncryptionIV iv;
-    if (stream.readBytes(reinterpret_cast<char *>(iv), sizeof(iv)) < 1) {
+    if (securedReadBytes<moduleEncryptionIV>(stream, iv) < 1) {
       return -1;
     }
     setEncryptionIV(iv);
@@ -860,8 +969,10 @@ class AtHomeModule : public ABaseModule {
         _setProfileEncryptionKey(stream) || _setProfileEncryptionIV(stream)
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
     ) {
+      send_command_error(stream, communication::commands::setProfile);
       return;
     }
+    acknowledge_command(stream, communication::commands::setProfile);
   }
 
   static void _setProfileCallback(const char *command, Stream &stream) {
@@ -883,8 +994,8 @@ class AtHomeModule : public ABaseModule {
       return;
     }
     char buffer[8];
-    int len = stream.readBytesUntil(ATHOME_END_OF_COMMAND, buffer, 8);
-    if (len < 1) {
+    if (securedReadBytes<char[8]>(stream, buffer) < 1) {
+      send_command_error(stream, communication::commands::setDateTime);
       return;
     }
     time::ITime::DateTime time;
@@ -896,6 +1007,7 @@ class AtHomeModule : public ABaseModule {
     time.year = 0;
     memcpy(&time::absolute_year, buffer + 5, 2);
     _clock->setCurrentDateTime(time);
+    acknowledge_command(stream, communication::commands::setDateTime);
   }
 
   static void _setDateTimeCallback(const char *command, Stream &stream) {
@@ -920,11 +1032,10 @@ class AtHomeModule : public ABaseModule {
     sensor::ISensor::ISensorThresholds thresholds;
     {
       char buffer[2];
-      if (stream.readBytes(buffer, 2) < 1 ||
-          stream.readBytes(reinterpret_cast<char *>(&thresholds.min),
-                           sizeof(thresholds.min)) < 1 ||
-          stream.readBytes(reinterpret_cast<char *>(&thresholds.max),
-                           sizeof(thresholds.max)) < 1) {
+      if (securedReadBytes<char[2]>(stream, buffer) < 1 ||
+          securedReadBytes<sensor::ISensor::SensorThreshold>(stream, thresholds.min) < 1 ||
+          securedReadBytes<sensor::ISensor::SensorThreshold>(stream, thresholds.max) < 1) {
+        send_command_error(stream, communication::commands::setSensorThresholds);
         return;
       }
       thresholds.unit.unit = buffer[0];
@@ -933,6 +1044,7 @@ class AtHomeModule : public ABaseModule {
     _sensor->setThresholds(thresholds);
     uint8_t tmp;
     stream.readBytes(reinterpret_cast<char *>(&tmp), 1);
+    acknowledge_command(stream, communication::commands::setSensorThresholds);
   }
 
   static void _setSensorThresholdsCallback(const char *command,

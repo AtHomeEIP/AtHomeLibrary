@@ -36,6 +36,9 @@ extern const PROGMEM char port_key[];
 #if !defined(DISABLE_TIME)
 extern const PROGMEM char setDateTime[];
 #endif /* !defined(DISABLE_TIME) */
+
+extern const PROGMEM char okReply[];
+extern const PROGMEM char koReply[];
 }  // namespace commands
 }  // namespace communication
 }  // namespace athome

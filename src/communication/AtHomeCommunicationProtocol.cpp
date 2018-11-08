@@ -28,6 +28,8 @@ const PROGMEM char port_key[] = "port";
 #if !defined(DISABLE_TIME)
 const PROGMEM char setDateTime[] = "SET_DATE_TIME";
 #endif /* !defined(DISABLE_TIME) */
+const PROGMEM char okReply[] = "OK";
+const PROGMEM char koReply[] = "KO";
 }  // namespace commands
 }  // namespace communication
 }  // namespace athome

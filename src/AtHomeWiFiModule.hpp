@@ -80,14 +80,13 @@ class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
   }
 
  private:
-  void setWiFi(Stream &communicator) {
+  void setWiFi(Stream &stream) {
     communication::wifi::WiFi_ap ap;
-    char buffer;
-    int len = communicator.readBytesUntil('\0', ap.ssid, sizeof(ap.ssid) - 1);
-    ap.ssid[len] = '\0';
-    len =
-        communicator.readBytesUntil('\0', ap.password, sizeof(ap.password) - 1);
-    ap.password[len] = '\0';
+    if (AtHomeModule<T, n>::template securedReadBytesUntil<communication::wifi::wifi_ssid>(stream, ap.ssid) < 1 ||
+        AtHomeModule<T, n>::template securedReadBytesUntil<communication::wifi::wifi_password>(stream, ap.password) < 1) {
+      AtHomeModule<T, n>::send_command_error(stream, communication::commands::setWiFi);
+      return;
+    }
     if (_wifi != nullptr) {
       _wifi->disconnect();
       _wifi->setAccessPoint(ap);
@@ -96,6 +95,7 @@ class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
 #ifndef DISABLE_PERSISTENT_STORAGE
     this->onBackupOnStorage();
 #endif /* DISABLE_PERSISTENT_STORAGE */
+    AtHomeModule<T, n>::acknowledge_command(stream, communication::commands::setWiFi);
   }
   static void _setWiFi(const char *command, Stream &stream) {
     (void)command;
@@ -163,7 +163,7 @@ class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
 
  private:
   static const Command _setWiFiCommand;
-  static const CommandTable _wifiCommands;
+  static CommandTable _wifiCommands;
 };
 
 template <typename T, size_t n>
@@ -171,7 +171,7 @@ const Command AtHomeWiFiModule<T, n>::_setWiFiCommand = {
     communication::commands::setWiFi, AtHomeWiFiModule<T, n>::_setWiFi};
 
 template <typename T, size_t n>
-const CommandTable AtHomeWiFiModule<T, n>::_wifiCommands = {
+CommandTable AtHomeWiFiModule<T, n>::_wifiCommands = {
     &AtHomeWiFiModule::_setWiFiCommand, nullptr};
 }  // namespace module
 }  // namespace athome

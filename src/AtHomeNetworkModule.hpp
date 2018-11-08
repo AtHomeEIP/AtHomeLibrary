@@ -87,26 +87,22 @@ class AtHomeNetworkModule : public AtHomeModule<T, n> {
 #endif /* DISABLE_PERSISTENT_STORAGE */
 
  private:
-  void setEndPoint(Stream &communicator) {
+  void setEndPoint(Stream &stream) {
     communication::ip::tcp_host host;
     char version;
-    if (communicator.readBytes(&version, 1) < 1) {
+    if (stream.readBytes(&version, 1) < 1) {
       return;
     }
-    if (version == 4) {
-      communicator.readBytes(reinterpret_cast<char *>(host.ipv4),
-                             sizeof(host.ipv4));
-    } else if (version == 6) {
-      communicator.readBytes(reinterpret_cast<char *>(host.ipv6),
-                             sizeof(host.ipv6));
-    } else {
-      return;
-    }
-    if (communicator.readBytes(reinterpret_cast<char *>(&host.hport),
-                               sizeof(host.hport)) < 1) {
+    if ((version == 4 &&
+        AtHomeModule<T, n>::template securedReadBytes<communication::ip::ipv4_address>(stream, host.ipv4) < 1) ||
+        (version == 6 &&
+        AtHomeModule<T, n>::template securedReadBytes<communication::ip::ipv6_address>(stream, host.ipv6) < 1) ||
+        AtHomeModule<T, n>::template securedReadBytes<communication::ip::port>(stream, host.hport) < 1) {
+      AtHomeModule<T, n>::send_command_error(stream, communication::commands::setEndPoint);
       return;
     }
     setHost(host);
+    AtHomeModule<T, n>::acknowledge_command(stream, communication::commands::setEndPoint);
   }
 
   static void _setEndPoint(const char *command, Stream &stream) {

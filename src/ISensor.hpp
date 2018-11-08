@@ -19,6 +19,7 @@ namespace sensor {
  */
 class ISensor {
  public:
+  using SensorThreshold = uint32_t;
   /**
    * Enumeration used to represent the estimation of safety of a sensor value on
    * a scale from 1 to 10. Value 0 means invalid
@@ -44,8 +45,8 @@ class ISensor {
   };
   struct ISensorThresholds {
     utility::units::Unit unit;
-    uint32_t min;
-    uint32_t max;
+    SensorThreshold min;
+    SensorThreshold max;
   };
   /**
    * Returns a pointer on sensor sample raw memory, as an array of bytes
