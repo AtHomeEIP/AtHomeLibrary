@@ -1,6 +1,5 @@
 #ifndef ASMARTPTR_HPP_
 #define ASMARTPTR_HPP_
-#include "RetroSTLCommon.hpp"
 
 namespace athome {
 namespace utility {
