@@ -356,7 +356,9 @@ class AtHomeModule : public ABaseModule {
   /**
    * Return the unique serial of the module, used to identify it.
    */
-  const moduleSerial getSerial() const { return _serial; }
+  moduleSerial getSerial() const {
+    return _serial;
+  }
 
   /**
    * Set the unique serial used to identify the module.
@@ -613,11 +615,11 @@ class AtHomeModule : public ABaseModule {
    * Send an error alert to the host when a command fail
    */
   void send_command_error(Stream &stream,
-                          const PROGMEM char *command = nullptr) {
+                          const char *command = nullptr) {
     stream.print(communication::commands::koReply);
     stream.write(ATHOME_NEW_LINE);
     if (command != nullptr) {
-      stream.print(command);
+      stream.print(FH(command));
     }
     stream.write(ATHOME_END_OF_COMMAND);
   }
@@ -626,11 +628,11 @@ class AtHomeModule : public ABaseModule {
    * Send an acknowledge to the host when a command success
    */
   void acknowledge_command(Stream &stream,
-                           const PROGMEM char *command = nullptr) {
+                           const char *command = nullptr) {
     stream.print(communication::commands::okReply);
     stream.write(ATHOME_NEW_LINE);
     if (command != nullptr) {
-      stream.print(command);
+      stream.print(FH(command));
     }
     stream.write(ATHOME_END_OF_COMMAND);
   }
@@ -711,11 +713,9 @@ class AtHomeModule : public ABaseModule {
 #if !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION)
   bool authenticate(Stream &stream) {
     modulePassword password;
-    size_t len;
     if (securedReadBytesUntil<modulePassword>(stream, password) < 1) {
       return false;
     }
-    password[len] = '\0';
     return !strncmp(_password, password, sizeof(_password));
   }
 #endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
@@ -924,11 +924,9 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_PASSWORD
   int _setProfilePassword(Stream &stream) {
     modulePassword password;
-    size_t len;
     if (securedReadBytesUntil<modulePassword>(stream, password) < 1) {
       return -1;
     }
-    password[len] = '\0';
     setPassword(password);
     return 0;
   }

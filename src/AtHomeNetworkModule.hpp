@@ -111,6 +111,7 @@ class AtHomeNetworkModule : public AtHomeModule<T, n> {
   }
 
   static void _setEndPoint(const char *command, Stream &stream) {
+    (void)command;
     AtHomeNetworkModule *instance = reinterpret_cast<AtHomeNetworkModule *>(
         AtHomeModule<T, n>::getInstance());
     if (instance != nullptr) {
