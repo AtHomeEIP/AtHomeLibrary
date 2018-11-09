@@ -65,7 +65,8 @@ ESP8266WiFiCommunicator::ESP8266WiFiCommunicator(int enable_pin, int reset_pin)
       _connected(false),
       _connected_to_host(false),
       _receiving_data(false),
-      _receiving_len(0) {
+      _receiving_len(0),
+      _max_retry(DEFAULT_WIFI_MAX_RETRY_OPERATION) {
   pinMode(_enable_pin, OUTPUT);
   digitalWrite(
       _enable_pin,
@@ -73,8 +74,6 @@ ESP8266WiFiCommunicator::ESP8266WiFiCommunicator(int enable_pin, int reset_pin)
           ? LOW
           : HIGH);  // esp needs a pull-up on enabled pin, logic is reversed
 }
-
-// ESP8266WiFiCommunicator::~ESP8266WiFiCommunicator() {}
 
 int ESP8266WiFiCommunicator::available() {
   if (_connected_to_host) {
@@ -121,9 +120,11 @@ int ESP8266WiFiCommunicator::connect() {
     return -1;
   }
   if (_mode == ACCESS_POINT) {
-    return _create_ap();
+    TRY_COMMAND({ _create_ap(); })
+    return 0;
   } else if (_mode == STATION) {
-    return _connect_ap();
+    TRY_COMMAND({ _connect_ap(); })
+    return 0;
   }
   return -1;
 }
@@ -133,7 +134,7 @@ int ESP8266WiFiCommunicator::disconnect() {
     return -3;
   }
   if (isConnected()) {
-    return _reset_esp();
+    TRY_COMMAND({ _reset_esp(); })
   }
   return 0;
   // TODO: To complete
@@ -144,12 +145,9 @@ int ESP8266WiFiCommunicator::connectToHost() {
   if (!isHostConfigured()) {
     return -4;
   }
-  while (_connect_to_tcp_socket())
-    ;
-  while (_enable_transparent_mode())
-    ;
-  while (_go_to_send_mode())
-    ;
+  TRY_COMMAND({ _connect_to_tcp_socket(); })
+  TRY_COMMAND({ _enable_transparent_mode(); })
+  TRY_COMMAND({ _go_to_send_mode(); })
   return 0;
 }
 
@@ -249,12 +247,14 @@ int ESP8266WiFiCommunicator::_set_esp_station_mode() {
   if (check) {
     return check;
   }
-  _stream->print(FH(at_at));
-  _stream->print(FH(symbol_plus));
-  _stream->print(FH(at_cwmode));
-  _stream->print(FH(equal_1));
-  _stream->print(FH(at_eol));
-  return _esp_answer_check();
+  TRY_COMMAND({
+    _stream->print(FH(at_at));
+    _stream->print(FH(symbol_plus));
+    _stream->print(FH(at_cwmode));
+    _stream->print(FH(equal_1));
+    _stream->print(FH(at_eol));
+  })
+  return 0;
 }
 
 int ESP8266WiFiCommunicator::_set_esp_ap_mode() {
@@ -262,12 +262,14 @@ int ESP8266WiFiCommunicator::_set_esp_ap_mode() {
   if (check) {
     return check;
   }
-  _stream->print(FH(at_at));
-  _stream->print(FH(symbol_plus));
-  _stream->print(FH(at_cwmode));
-  _stream->print(FH(equal_2));
-  _stream->print(FH(at_eol));
-  return _esp_answer_check();
+  TRY_COMMAND({
+    _stream->print(FH(at_at));
+    _stream->print(FH(symbol_plus));
+    _stream->print(FH(at_cwmode));
+    _stream->print(FH(equal_2));
+    _stream->print(FH(at_eol));
+  })
+  return 0;
 }
 
 int ESP8266WiFiCommunicator::_connect_ap() {
@@ -278,9 +280,8 @@ int ESP8266WiFiCommunicator::_connect_ap() {
   if (check) {
     return check;
   }
-  while (_set_esp_station_mode())
-    ;
-  do {
+  TRY_COMMAND({ _set_esp_station_mode(); })
+  TRY_COMMAND({
     _stream->print(FH(at_at));
     _stream->print(FH(symbol_plus));
     _stream->print(FH(at_cwjap));
@@ -290,35 +291,35 @@ int ESP8266WiFiCommunicator::_connect_ap() {
     _stream->print(_ap.password);
     _stream->print(FH(double_quotes));
     _stream->print(FH(at_eol));
-  } while (_esp_answer_check());
+  })
   _connected = true;
   return 0;
 }
 
 int ESP8266WiFiCommunicator::_create_ap() {
   if (!isAccessPointConfigured()) {
-    return -4;
     int check = _command_check();
     if (check) {
       return check;
     }
-    while (_set_esp_ap_mode())
-      ;
+    TRY_COMMAND({ _set_esp_ap_mode(); })
     char channel[3];
     SNPRINTF(channel, 2, channel_format, _ap.channel);
-    _stream->print(FH(at_at));
-    _stream->print(FH(symbol_plus));
-    _stream->print(FH(at_cwsap));
-    _stream->print(FH(equal_double_quotes));
-    _stream->print(_ap.ssid);
-    _stream->print(FH(double_quotes_comma_double_quotes));
-    _stream->print(_ap.password);
-    _stream->print(FH(double_quotes_comma));
-    _stream->print(channel);
-    _stream->print(FH(comma_3));
-    _stream->print(FH(at_eol));
-    return _esp_answer_check();
+    TRY_COMMAND({
+      _stream->print(FH(at_at));
+      _stream->print(FH(symbol_plus));
+      _stream->print(FH(at_cwsap));
+      _stream->print(FH(equal_double_quotes));
+      _stream->print(_ap.ssid);
+      _stream->print(FH(double_quotes_comma_double_quotes));
+      _stream->print(_ap.password);
+      _stream->print(FH(double_quotes_comma));
+      _stream->print(channel);
+      _stream->print(FH(comma_3));
+      _stream->print(FH(at_eol));
+    })
   }
+  return 0;
 }
 
 int ESP8266WiFiCommunicator::_reset_esp() {
@@ -326,11 +327,6 @@ int ESP8266WiFiCommunicator::_reset_esp() {
   if (check) {
     return check;
   }
-  /*digitalWrite(_reset_pin, HIGH);
-  delay(1);
-  digitalWrite(_reset_pin, LOW);
-  _stream->flush();
-  flush();*/
   _stream->print(FH(at_at));
   _stream->print(FH(symbol_plus));
   _stream->print(FH(at_rst));
@@ -387,23 +383,21 @@ int ESP8266WiFiCommunicator::_connect_to_tcp_socket() {
     return check;
   }
   if (!isConnected()) {
-    while (connect())
-      ;
+    TRY_COMMAND({ connect(); })
   }
   char strIp[16];
   SNPRINTF(strIp, 16, ip::ip_format, _host.ipv4[0], _host.ipv4[1],
            _host.ipv4[2], _host.ipv4[3]);
-  _stream->print(FH(at_at));
-  _stream->print(FH(symbol_plus));
-  _stream->print(FH(at_cipstart));
-  _stream->print(FH(equal_tcp));
-  _stream->print(strIp);
-  _stream->print(FH(double_quotes_comma));
-  _stream->print(_host.hport);
-  _stream->print(FH(at_eol));
-  if (_esp_answer_check()) {
-    return -4;
-  }
+  TRY_COMMAND({
+    _stream->print(FH(at_at));
+    _stream->print(FH(symbol_plus));
+    _stream->print(FH(at_cipstart));
+    _stream->print(FH(equal_tcp));
+    _stream->print(strIp);
+    _stream->print(FH(double_quotes_comma));
+    _stream->print(_host.hport);
+    _stream->print(FH(at_eol));
+  })
   _connected_to_host = true;
   return 0;
 }
@@ -413,12 +407,14 @@ int ESP8266WiFiCommunicator::_enable_transparent_mode() {
   if (check) {
     return check;
   }
-  _stream->print(FH(at_at));
-  _stream->print(FH(symbol_plus));
-  _stream->print(FH(at_cipmode));
-  _stream->print(FH(equal_1));
-  _stream->print(FH(at_eol));
-  return _esp_answer_check();
+  TRY_COMMAND({
+    _stream->print(FH(at_at));
+    _stream->print(FH(symbol_plus));
+    _stream->print(FH(at_cipmode));
+    _stream->print(FH(equal_1));
+    _stream->print(FH(at_eol));
+  })
+  return 0;
 }
 
 int ESP8266WiFiCommunicator::_go_to_send_mode() {
@@ -426,11 +422,13 @@ int ESP8266WiFiCommunicator::_go_to_send_mode() {
   if (check) {
     return check;
   }
-  _stream->print(FH(at_at));
-  _stream->print(FH(symbol_plus));
-  _stream->print(FH(at_cipsend));
-  _stream->print(FH(at_eol));
-  return (_esp_answer_check() == -1) ? -1 : 0;
+  TRY_COMMAND({
+    _stream->print(FH(at_at));
+    _stream->print(FH(symbol_plus));
+    _stream->print(FH(at_cipsend));
+    _stream->print(FH(at_eol));
+  })
+  return 0;
 }
 
 int ESP8266WiFiCommunicator::_command_check_peer() {
@@ -465,10 +463,12 @@ int ESP8266WiFiCommunicator::_set_echo(bool state) {
   if (check) {
     return check;
   }
-  _stream->print(FH(at_ate));
-  _stream->print(state);
-  _stream->print(FH(at_eol));
-  return _esp_answer_check();
+  TRY_COMMAND({
+    _stream->print(FH(at_ate));
+    _stream->print(state);
+    _stream->print(FH(at_eol));
+  })
+  return 0;
 }
 
 void ESP8266WiFiCommunicator::flush() {

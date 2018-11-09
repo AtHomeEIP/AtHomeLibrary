@@ -6,6 +6,7 @@
 #define DEFAULT_UPLOAD_DATA_INTERVAL 1000
 #define DEFAULT_COMMUNICATION_INTERVAL 1
 #define DEFAULT_STREAM_TIMEOUT 5000
+#define DEFAULT_WIFI_MAX_RETRY_OPERATION 10
 
 // Macros to uncomment to disable full part of modules
 //#define DISABLE_SENSOR

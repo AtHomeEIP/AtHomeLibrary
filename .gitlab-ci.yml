@@ -213,6 +213,7 @@ unitTest:
     - mega2560 $PWD/test/output/IDisplay_tests/IDisplay_tests.ino.hex &
     - sleep 3
     - cat /dev/pts/0 > $PWD/test/output/IDisplay_tests/IDisplay_tests.log &
+    - sleep 30
     - killall mega2560
   artifacts:
     paths:

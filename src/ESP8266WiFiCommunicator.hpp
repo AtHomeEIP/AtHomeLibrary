@@ -9,7 +9,21 @@
 
 #ifndef ESP8266_COMMAND_BUFFER_SIZE
 #define ESP8266_COMMAND_BUFFER_SIZE 4
-#endif
+#endif  // ESP8266_COMMAND_BUFFER_SIZE
+
+#ifndef DEFAULT_WIFI_MAX_RETRY_OPERATION
+#define DEFAULT_WIFI_MAX_RETRY_OPERATION 10
+#endif  // WIFI_MAX_RETRY_OPERATION
+
+#define TRY_COMMAND(cmd)                                       \
+  {                                                            \
+    uint8_t retry = 0;                                         \
+    do                                                         \
+      cmd while (_esp_answer_check() && retry++ < _max_retry); \
+    if (retry >= _max_retry) {                                 \
+      return -8;                                               \
+    }                                                          \
+  }
 
 namespace athome {
 namespace communication {
@@ -65,6 +79,7 @@ class ESP8266WiFiCommunicator : public AWiFiCommunicator {
   bool _connected_to_host;
   bool _receiving_data;
   size_t _receiving_len;
+  uint8_t _max_retry;
 };
 }  // namespace wifi
 }  // namespace communication

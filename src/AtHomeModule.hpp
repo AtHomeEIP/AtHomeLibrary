@@ -356,9 +356,7 @@ class AtHomeModule : public ABaseModule {
   /**
    * Return the unique serial of the module, used to identify it.
    */
-  moduleSerial getSerial() const {
-    return _serial;
-  }
+  moduleSerial getSerial() const { return _serial; }
 
   /**
    * Set the unique serial used to identify the module.
@@ -614,8 +612,7 @@ class AtHomeModule : public ABaseModule {
   /**
    * Send an error alert to the host when a command fail
    */
-  void send_command_error(Stream &stream,
-                          const char *command = nullptr) {
+  void send_command_error(Stream &stream, const char *command = nullptr) {
     stream.print(communication::commands::koReply);
     stream.write(ATHOME_NEW_LINE);
     if (command != nullptr) {
@@ -627,8 +624,7 @@ class AtHomeModule : public ABaseModule {
   /**
    * Send an acknowledge to the host when a command success
    */
-  void acknowledge_command(Stream &stream,
-                           const char *command = nullptr) {
+  void acknowledge_command(Stream &stream, const char *command = nullptr) {
     stream.print(communication::commands::okReply);
     stream.write(ATHOME_NEW_LINE);
     if (command != nullptr) {
