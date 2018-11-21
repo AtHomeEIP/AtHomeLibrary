@@ -16,6 +16,9 @@ const PROGMEM char setWiFi[] = "SET_WIFI";
 const PROGMEM char setEndPoint[] = "SET_END_POINT";
 #endif /* !defined(DISABLE_NETWORK) */
 const PROGMEM char setProfile[] = "SET_PROFILE";
+#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
+const PROGMEM char setEncryption[] = "SET_ENCRYPTION";
+#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
 
 #if !defined(DISABLE_NETWORK)
 #if !defined(DISABLE_WIFI)

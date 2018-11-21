@@ -938,7 +938,7 @@ class AtHomeModule : public ABaseModule {
   }
 #endif /* DISABLE_PASSWORD */
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-  int _setProfileEncryptionKey(Stream &stream) {
+  int _setEncryptionKey(Stream &stream) {
     moduleEncryptionKey key;
     if (securedReadBytes<moduleEncryptionKey>(stream, key) < 1) {
       return -1;
@@ -947,7 +947,7 @@ class AtHomeModule : public ABaseModule {
     return 0;
   }
 
-  int _setProfileEncryptionIV(Stream &stream) {
+  int _setEncryptionIV(Stream &stream) {
     moduleEncryptionIV iv;
     if (securedReadBytes<moduleEncryptionIV>(stream, iv) < 1) {
       return -1;
@@ -956,7 +956,21 @@ class AtHomeModule : public ABaseModule {
     return 0;
   }
 
+  int _setEncryption(Stream &stream) {
+    (_setEncryptionKey(stream) || _setEncryptionIV(stream)) ?
+      send_command_error(stream, communication::commands::setEncryption) :
+      acknowledge_command(stream, communication::commands::setEncryption);
+  }
+
+  static void _setEncryptionCallback(const char *command, Stream &stream) {
+    (void)command;
+    AtHomeModule *instance = getInstance();
+    if (instance != nullptr) {
+      instance->_setEncryption(stream);
+    }
+  }
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
+
   void _setProfile(Stream &stream) {
 #if !defined(DISABLE_PASSWORD) || \
     !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
@@ -965,15 +979,9 @@ class AtHomeModule : public ABaseModule {
     if (_setProfileSerial(stream)
 #endif /* !defined(DISABLE_PASSWORD) || \
           !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
-#if !defined(DISABLE_PASSWORD) && \
-    !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
-        _setProfilePassword(stream) ||
-#elif !defined(DISABLE_PASSWORD)
+#if !defined(DISABLE_PASSWORD)
             _setProfilePassword(stream)
 #endif /* DISABLE_PASSWORD */
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-        _setProfileEncryptionKey(stream) || _setProfileEncryptionIV(stream)
-#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
     ) {
       send_command_error(stream, communication::commands::setProfile);
       return;
@@ -1120,6 +1128,9 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_SENSOR
   static const Command _commandSetSensorThresholds;
 #endif /* DISABLE_SENSOR */
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+  static const Command _commandSetEncryption;
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   static CommandTable _commands;
 #endif /* DISABLE_COMMUNICATION */
 };
@@ -1143,6 +1154,13 @@ const Command AtHomeModule<T, n>::_commandSetSensorThresholds = {
     communication::commands::setSensorThresholds,
     AtHomeModule<T, n>::_setSensorThresholdsCallback};
 #endif /* DISABLE_SENSOR */
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+template <typename T, size_t n>
+const Command AtHomeModule<T, n>::_commandSetEncryption = {
+  communication::commands::setEncryption,
+  AtHomeModule<T, n>::_setEncryptionCallback
+};
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
 template <typename T, size_t n>
 CommandTable AtHomeModule<T, n>::_commands = {
     &AtHomeModule<T, n>::_commandSetProfile,
@@ -1152,6 +1170,9 @@ CommandTable AtHomeModule<T, n>::_commands = {
 #ifndef DISABLE_SENSOR
     &AtHomeModule<T, n>::_commandSetSensorThresholds,
 #endif /* DISABLE_SENSOR */
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+    &AtHomeModule<T, n>::_commandSetEncryption,
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
     nullptr};
 #endif /* DISABLE_COMMUNICATION */
 }  // namespace module

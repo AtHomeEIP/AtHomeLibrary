@@ -23,6 +23,9 @@ extern const PROGMEM char setWiFi[];
 extern const PROGMEM char setEndPoint[];
 #endif /* !defined(DISABLE_NETWORK) */
 extern const PROGMEM char setProfile[];
+#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
+extern const PROGMEM char setEncryption[];
+#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
 
 #if !defined(DISABLE_NETWORK)
 #if !defined(DISABLE_WIFI)
