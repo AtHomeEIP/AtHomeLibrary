@@ -513,16 +513,18 @@ class AtHomeModule : public ABaseModule {
     broadcast(ATHOME_NEW_LINE);
   }
 
-  void raw_broadcast(const uint8_t *data, size_t len) {
+  template <typename U>
+  void raw_broadcast(const U &data) {
+    const uint8_t *ptr = reinterpret_cast<const uint8_t *>(&data);
     if (_streams != nullptr) {
       for (size_t i = 0; _streams[i] != nullptr; i++) {
-        _streams[i]->write(data, len);
+        _streams[i]->write(ptr, sizeof(U));
       }
     }
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
     if (_encryptedStreams != nullptr) {
       for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
-        _encryptedStreams[i]->write(data, len);
+        _encryptedStreams[i]->write(ptr, sizeof(U));
       }
     }
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
@@ -542,31 +544,39 @@ class AtHomeModule : public ABaseModule {
     raw_broadcast_empty();
   }
 
-  bool is_non_zero(const uint8_t *data, size_t len) {
-    for (size_t i = 0; i < len; i++) {
-      if (data[i] & 0xFF) {
+  template <typename U>
+  inline bool is_non_zero(const U &data) {
+    const uint8_t *ptr = reinterpret_cast<const uint8_t *>(&data);
+    for (size_t i = 0; i < sizeof(U); i++) {
+      if (*ptr++ & 0xFF) {
         return true;
       }
     }
     return false;
   }
 
+  template <typename U>
+  inline bool is_zero(const U &data) {
+    return !is_non_zero<U>(data);
+  }
+
   /**
    * Serialize an integer as a variable size integer using Google spec
    */
-  void broadcast_varuint(uint64_t data) {
-    if (!is_non_zero(reinterpret_cast<uint8_t *>(&data), sizeof(uint64_t))) {
+  template <typename U>
+  void broadcast_varuint(U data) {
+    if (is_zero<U>(data)) {
       broadcast('\0');
       return;
     }
-    while (is_non_zero(reinterpret_cast<uint8_t *>(&data), sizeof(uint64_t))) {
+    while (is_non_zero<U>(data)) {
       uint8_t buffer = 0;
       buffer |= (data & 0b01111111);
       data >>= 7;
-      if (is_non_zero(reinterpret_cast<uint8_t *>(&data), sizeof(uint64_t))) {
+      if (is_non_zero<U>(data)) {
         buffer |= 0b10000000;
       }
-      raw_broadcast(&buffer, 1);
+      raw_broadcast<uint8_t>(buffer);
     }
   }
 
@@ -688,16 +698,16 @@ class AtHomeModule : public ABaseModule {
    */
   void uploadData() {
     broadcastln(FH(communication::commands::uploadData));
-    broadcast_varuint(_serial);
-    broadcast_varuint(time::absolute_year);
-    broadcast_varuint(_nbMeasures);
+    broadcast_varuint<moduleSerial>(_serial);
+    broadcast_varuint<uint16_t>(time::absolute_year);
+    broadcast_varuint<size_t>(_nbMeasures);
     for (size_t i = 0; i < _nbMeasures; i++) {
       broadcast_string(FH(_measures[i].label));
-      raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.unit), 1);
-      raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].unit.prefix), 1);
-      raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].estimate), 1);
+      raw_broadcast<uint8_t>(_measures[i].unit.unit);
+      raw_broadcast<uint8_t>(_measures[i].unit.prefix);
+      raw_broadcast<uint8_t>(_measures[i].estimate);
       broadcast_string(_measures[i].sample);
-      raw_broadcast(reinterpret_cast<uint8_t *>(&_measures[i].timestamp), 1);
+      raw_broadcast<t_timestamp>(_measures[i].timestamp);
     }
     broadcast(ATHOME_END_OF_COMMAND);
     _nbMeasures = 0;
@@ -911,7 +921,7 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_COMMUNICATION
   int _setProfileSerial(Stream &stream) {
     moduleSerial serial;
-    if (securedReadBytesUntil<moduleSerial>(stream, serial) < 1) {
+    if (securedReadBytes<moduleSerial>(stream, serial) < 1) {
       return -1;
     }
     setSerial(serial);
@@ -989,8 +999,8 @@ class AtHomeModule : public ABaseModule {
         ;
       return;
     }
-    char buffer[8];
-    if (securedReadBytes<char[8]>(stream, buffer) < 1) {
+    char buffer[7];
+    if (securedReadBytes<char[7]>(stream, buffer) < 1) {
       send_command_error(stream, communication::commands::setDateTime);
       return;
     }
@@ -1003,6 +1013,7 @@ class AtHomeModule : public ABaseModule {
     time.year = 0;
     memcpy(&time::absolute_year, buffer + 5, 2);
     _clock->setCurrentDateTime(time);
+    stream.readBytes(buffer, 1);
     acknowledge_command(stream, communication::commands::setDateTime);
   }
 
