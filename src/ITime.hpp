@@ -32,6 +32,21 @@ struct ITime {
       }
       return *this;
     }
+
+    bool operator==(const DateTime &other) {
+      return ((&other == this) || (
+        other.second == second &&
+        other.minute == minute &&
+        other.hour == hour &&
+        other.day == day &&
+        other.month == month &&
+        other.year == year
+      ));
+    }
+
+    bool operator!=(const DateTime &other) {
+      return !(*this == other);
+    }
   };
 
   virtual const DateTime &getDateTime() = 0;

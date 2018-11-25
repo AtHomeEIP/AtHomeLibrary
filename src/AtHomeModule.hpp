@@ -704,12 +704,48 @@ class AtHomeModule : public ABaseModule {
     broadcast_varuint<uint16_t>(time::absolute_year);
     broadcast_varuint<size_t>(_nbMeasures);
     for (size_t i = 0; i < _nbMeasures; i++) {
-      broadcast_string(FH(_measures[i].label));
-      raw_broadcast<uint8_t>(_measures[i].unit.unit);
-      raw_broadcast<uint8_t>(_measures[i].unit.prefix);
-      raw_broadcast<uint8_t>(_measures[i].estimate);
-      broadcast_string(_measures[i].sample);
-      raw_broadcast<t_timestamp>(_measures[i].timestamp);
+      uint8_t fields = 0;
+      if (i) {
+        if (_measures[i].label != _measures[i - 1].label) {
+          fields |= 0x1;
+        }
+        if (_measures[i].unit.unit != _measures[i - 1].unit.unit) {
+          fields |= 0x2;
+        }
+        if (_measures[i].unit.prefix != _measures[i - 1].unit.prefix) {
+          fields |= 0x4;
+        }
+        if (_measures[i].estimate != _measures[i - 1].estimate) {
+          fields |= 0x8;
+        }
+        if (_measures[i].sample != _measures[i - 1].sample) {
+          fields |= 0x10;
+        }
+        if (_measures[i].timestamp != _measures[i - 1].timestamp) {
+          fields |= 0x20;
+        }
+      } else {
+        fields = 0x7F;
+      }
+      broadcast_varuint<uint8_t>(fields);
+      if (fields & 0x1) {
+        broadcast_string(FH(_measures[i].label));
+      }
+      if (fields & 0x2) {
+        raw_broadcast<uint8_t>(_measures[i].unit.unit);
+      }
+      if (fields & 0x4) {
+        raw_broadcast<uint8_t>(_measures[i].unit.prefix);
+      }
+      if (fields & 0x8) {
+        raw_broadcast<uint8_t>(_measures[i].estimate);
+      }
+      if (fields & 0x10) {
+        broadcast_string(_measures[i].sample);
+      }
+      if (fields & 0x20) {
+        raw_broadcast<t_timestamp>(_measures[i].timestamp);
+      }
     }
     broadcast(ATHOME_END_OF_COMMAND);
     _nbMeasures = 0;

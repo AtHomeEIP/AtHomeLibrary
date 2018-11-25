@@ -67,6 +67,19 @@ class MQ2GasSensor : public ISensor {
       len += p.print(FH(MQ2GasSensorStrings::jsonDictEnd));
       return len;
     }
+
+    bool operator==(const Values &other) {
+      return ((&other == this) ||
+      (
+        other.lpg == lpg &&
+        other.co == co &&
+        other.smoke == smoke
+      ));
+    }
+
+    bool operator!=(const Values &other) {
+      return !(*this == other);
+    }
   };
 
   explicit MQ2GasSensor(int pin);
