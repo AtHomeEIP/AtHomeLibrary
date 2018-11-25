@@ -599,7 +599,9 @@ class AtHomeModule : public ABaseModule {
    */
   void broadcast_flush() {
     flushStreams();
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
     flush_encryptedStreams();
+#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   }
 
   /**
