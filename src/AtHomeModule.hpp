@@ -959,7 +959,13 @@ class AtHomeModule : public ABaseModule {
   }
 
   int _setEncryption(Stream &stream) {
-    (_setEncryptionKey(stream) || _setEncryptionIV(stream)) ?
+    (
+#ifndef DISABLE_PASSWORD
+      authenticate(stream) ||
+#endif /* DISABLE_PASSWORD */
+      _setEncryptionKey(stream) ||
+      _setEncryptionIV(stream)
+    ) ?
       send_command_error(stream, communication::commands::setEncryption) :
       acknowledge_command(stream, communication::commands::setEncryption);
   }
