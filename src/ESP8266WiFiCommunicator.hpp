@@ -33,7 +33,6 @@ class ESP8266WiFiCommunicator : public AWiFiCommunicator {
   ESP8266WiFiCommunicator(int, int);
   ESP8266WiFiCommunicator(const ESP8266WiFiCommunicator &) = delete;
   ESP8266WiFiCommunicator &operator=(const ESP8266WiFiCommunicator &) = delete;
-  virtual ~ESP8266WiFiCommunicator() {}
   virtual int available();
   virtual int read();
   virtual int peek();
