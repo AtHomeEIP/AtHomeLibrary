@@ -611,21 +611,22 @@ class AtHomeModule : public ABaseModule {
   int readBytesN(Stream &stream, char *dest, size_t u) {
     size_t i = 0;
     int j = 0;
-    while (i < u) {
+    unsigned long timeout = millis() + DEFAULT_STREAM_TIMEOUT;
+    do {
       j = stream.readBytes(dest, u - i);
       if (j < 0) {
         return i;
       }
       i += j;
-    }
-    return u;
+    } while (i < u && millis() < timeout);
+    return i;
   }
 
   /**
    * Send an error alert to the host when a command fail
    */
   void send_command_error(Stream &stream, const char *command = nullptr) {
-    stream.print(communication::commands::koReply);
+    stream.print(FH(communication::commands::koReply));
     stream.write(ATHOME_NEW_LINE);
     if (command != nullptr) {
       stream.print(FH(command));
@@ -637,7 +638,7 @@ class AtHomeModule : public ABaseModule {
    * Send an acknowledge to the host when a command success
    */
   void acknowledge_command(Stream &stream, const char *command = nullptr) {
-    stream.print(communication::commands::okReply);
+    stream.print(FH(communication::commands::okReply));
     stream.write(ATHOME_NEW_LINE);
     if (command != nullptr) {
       stream.print(FH(command));
@@ -687,12 +688,16 @@ class AtHomeModule : public ABaseModule {
       return -1;
     }
 #ifndef DISABLE_CRC
-    uint16_t crc = utility::checksum::crc16_it<U>(dest);
+    uint16_t crc = utility::checksum::crc16_it<U>(dest, size);
     if (crc != crcRef) {
       return CRC_ERROR;
     }
 #endif  // DISABLE_CRC
     return size;
+  }
+
+  int securedReadString(Stream &stream, const char *dest) {
+
   }
 #ifndef DISABLE_SENSOR
   /**
@@ -1016,8 +1021,7 @@ class AtHomeModule : public ABaseModule {
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
 
   void _setProfile(Stream &stream) {
-#if !defined(DISABLE_PASSWORD) || \
-    !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
+#if !defined(DISABLE_PASSWORD)
     if (_setProfileSerial(stream) ||
 #else
     if (_setProfileSerial(stream)
@@ -1184,7 +1188,7 @@ void *AtHomeModule<T, n>::_instance = nullptr;
 #ifndef DISABLE_COMMUNICATION
 template <typename T, size_t n>
 const Command AtHomeModule<T, n>::_commandSetProfile = {
-    communication::commands::uploadData,
+    communication::commands::setProfile,
     AtHomeModule<T, n>::_setProfileCallback};
 #ifndef DISABLE_TIME
 template <typename T, size_t n>

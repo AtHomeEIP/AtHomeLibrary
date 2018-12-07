@@ -29,13 +29,18 @@ constexpr CRC16 crc16(const T &data) {
 }
 
 template <typename T>
-CRC16 crc16_it(const T &data) {
-  CRC16 crc = 0;
+CRC16 crc16_it(const T &data, size_t len) {
+  CRC16 crc = 0xFF;
   const uint8_t *mem = reinterpret_cast<const uint8_t *>(&data);
-  for (size_t i = 0; i < sizeof(T); i++) {
+  for (size_t i = 0; i < len; i++) {
     crc = portable_crc16_update(crc, mem[i]);
   }
   return crc;
+}
+
+template <typename T>
+CRC16 crc16_it(const T &data) {
+  return crc16_it(data, sizeof(T));
 }
 }  // namespace checksum
 }  // namespace utility
