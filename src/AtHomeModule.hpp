@@ -132,11 +132,10 @@ class AtHomeModule : public ABaseModule {
    */
   template <typename U = AtHomeModule>
   static U *getInstance() {
-    static U instance;
     if (_instance == nullptr) {
-      _instance = reinterpret_cast<void *>(&instance);
+      _instance = reinterpret_cast<void *>(new U());
     }
-    return &instance;
+    return reinterpret_cast<U *>(_instance);
   }
 
   /**
