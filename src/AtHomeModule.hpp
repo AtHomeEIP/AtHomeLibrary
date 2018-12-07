@@ -695,10 +695,6 @@ class AtHomeModule : public ABaseModule {
 #endif  // DISABLE_CRC
     return size;
   }
-
-  int securedReadString(Stream &stream, const char *dest) {
-
-  }
 #ifndef DISABLE_SENSOR
   /**
    * Sends stored sensor readings over module streams.
