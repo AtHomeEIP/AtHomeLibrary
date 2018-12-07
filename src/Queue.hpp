@@ -13,8 +13,8 @@ namespace utility {
 template <typename T>
 class Queue {
  public:
-  Queue() {}
-  Queue(T &data) : _data(data) {}
+  Queue():_next(nullptr) {}
+  Queue(T &data):_next(nullptr), _data(data) {}
   Queue(const Queue &) = delete;
   Queue &operator=(const Queue &) = delete;
   ~Queue() {
@@ -54,8 +54,8 @@ class Queue {
 template <typename T>
 class ConstQueue {
  public:
-  ConstQueue() {}
-  ConstQueue(T const &data) : _data(data) {}
+  ConstQueue():_next(nullptr) {}
+  ConstQueue(T const &data):_next(nullptr), _data(data) {}
   ConstQueue(const ConstQueue &) = delete;
   ConstQueue &operator=(const ConstQueue &) = delete;
   ~ConstQueue() {
