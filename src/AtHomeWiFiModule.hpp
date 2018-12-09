@@ -70,7 +70,7 @@ class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
 
  protected:
   AtHomeWiFiModule() : AtHomeNetworkModule<T, n>(), _wifi(nullptr) {
-    AtHomeModule<T, n>::setCommandPlugin(_wifiCommands);
+    AtHomeModule<T, n>::setCommandPlugin(_setWiFiCommand);
 #ifndef DISABLE_PERSISTENT_STORAGE
     AtHomeModule<T, n>::setOnBackupPlugin(
         AtHomeWiFiModule::_saveWiFiParameters);
@@ -166,17 +166,12 @@ class AtHomeWiFiModule : public AtHomeNetworkModule<T, n> {
   communication::wifi::AWiFiCommunicator *_wifi;
 
  private:
-  static const Command _setWiFiCommand;
-  static CommandTable _wifiCommands;
+  static Command _setWiFiCommand;
 };
 
 template <typename T, size_t n>
-const Command AtHomeWiFiModule<T, n>::_setWiFiCommand = {
+Command AtHomeWiFiModule<T, n>::_setWiFiCommand = {
     communication::commands::setWiFi, AtHomeWiFiModule<T, n>::_setWiFi};
-
-template <typename T, size_t n>
-CommandTable AtHomeWiFiModule<T, n>::_wifiCommands = {
-    &AtHomeWiFiModule::_setWiFiCommand, nullptr};
 }  // namespace module
 }  // namespace athome
 

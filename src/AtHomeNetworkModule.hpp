@@ -47,7 +47,7 @@ class AtHomeNetworkModule : public AtHomeModule<T, n> {
 
  protected:
   AtHomeNetworkModule() : AtHomeModule<T, n>(), _communicator(nullptr) {
-    AtHomeModule<T, n>::setCommandPlugin(_networkCommands);
+    AtHomeModule<T, n>::setCommandPlugin(_setEndPointCommand);
 #ifndef DISABLE_PERSISTENT_STORAGE
     AtHomeModule<T, n>::setOnBackupPlugin(_onNetworkBackup);
     AtHomeModule<T, n>::setOnRestorePlugin(_onNetworkRestore);
@@ -90,10 +90,8 @@ class AtHomeNetworkModule : public AtHomeModule<T, n> {
   void setEndPoint(Stream &stream) {
     communication::ip::tcp_host host;
     char version;
-    if (stream.readBytes(&version, 1) < 1) {
-      return;
-    }
-    if ((version == 4 &&
+    if (stream.readBytes(&version, 1) < 1 ||
+        (version == 4 &&
          AtHomeModule<T, n>::template securedReadBytes<
              communication::ip::ipv4_address>(stream, host.ipv4) < 1) ||
         (version == 6 &&
@@ -161,18 +159,13 @@ class AtHomeNetworkModule : public AtHomeModule<T, n> {
   communication::ANetworkCommunicator *_communicator;
 
  private:
-  static const Command _setEndPointCommand;
-  static CommandTable _networkCommands;
+  static Command _setEndPointCommand;
 };
 
 template <typename T, size_t n>
-const Command AtHomeNetworkModule<T, n>::_setEndPointCommand = {
+Command AtHomeNetworkModule<T, n>::_setEndPointCommand = {
     communication::commands::setEndPoint,
     AtHomeNetworkModule<T, n>::_setEndPoint};
-
-template <typename T, size_t n>
-CommandTable AtHomeNetworkModule<T, n>::_networkCommands = {
-    &AtHomeNetworkModule<T, n>::_setEndPointCommand, nullptr};
 }  // namespace module
 }  // namespace athome
 

@@ -48,9 +48,8 @@ struct Command {
 };
 
 typedef const Command *CommandTable[];
-typedef const Command **C_CommandTable;
 
-using CommandPluginList = utility::ConstQueue<C_CommandTable>;
+using CommandPluginList = utility::Queue<Command>;
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
 /**
@@ -299,11 +298,11 @@ class AtHomeModule : public ABaseModule {
    * able to execute received input, passing the command string and a reference
    * to the stream to the callback.
    */
-  void setCommandPlugin(CommandTable table) {
+  void setCommandPlugin(Command &command) {
     if (_communicationPlugin == nullptr) {
-      _communicationPlugin = new CommandPluginList(table);
+      _communicationPlugin = new CommandPluginList(command);
     } else {
-      _communicationPlugin->push_back(table);
+      _communicationPlugin->push_back(command);
     }
   }
 
@@ -809,13 +808,11 @@ class AtHomeModule : public ABaseModule {
         if (!found && _communicationPlugin != nullptr) {
           CommandPluginList *list = _communicationPlugin;
           while (list != nullptr && !found) {
-            C_CommandTable const &table = list->get();
-            for (size_t j = 0; table[j] != nullptr; j++) {
-              if (!STRCMP(buffer, table[j]->name)) {
-                table[j]->callback(buffer, *_streams[i]);
-                found = true;
-                break;
-              }
+            Command *command = list->get();
+            if (command != nullptr && !STRCMP(buffer, command->name)) {
+              command->callback(buffer, *_streams[i]);
+              found = true;
+              break;
             }
             list = list->next();
           }
@@ -866,7 +863,7 @@ class AtHomeModule : public ABaseModule {
           !defined(DISABLE_COMMUNICATION) */
       StoragePluginList *list = _onBackupPlugin;
       while (list != nullptr) {
-        AtHomeStoragePlugin plugin = list->get();
+        AtHomeStoragePlugin plugin = *(list->get());
         if (plugin != nullptr) {
           offset += plugin(offset, *_storage);
         }
@@ -902,7 +899,7 @@ class AtHomeModule : public ABaseModule {
           !defined(DISABLE_COMMUNICATION) */
       StoragePluginList *list = _onRestorePlugin;
       while (list != nullptr) {
-        AtHomeStoragePlugin plugin = list->get();
+        AtHomeStoragePlugin plugin = *(list->get());
         if (plugin != nullptr) {
           offset += plugin(offset, *_storage);
         }
@@ -1046,12 +1043,11 @@ class AtHomeModule : public ABaseModule {
 #else
     if (_clock == nullptr) {
 #endif /* DISABLE_PASSWORD */
-      while (stream.read() != ATHOME_END_OF_COMMAND)
-        ;
+      send_command_error(stream, communication::commands::setDateTime);
       return;
     }
-    char buffer[7];
-    if (securedReadBytes<char[7]>(stream, buffer) < 1) {
+    uint8_t buffer[7];
+    if (securedReadBytes<uint8_t[7]>(stream, buffer) < 1) {
       send_command_error(stream, communication::commands::setDateTime);
       return;
     }
