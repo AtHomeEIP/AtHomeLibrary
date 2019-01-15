@@ -13,11 +13,11 @@
 //#define DISABLE_DISPLAY
 //#define DISABLE_PERSISTENT_STORAGE
 //#define DISABLE_COMMUNICATION
-//#define DISABLE_POWER_MANAGEMENT
-//#define DISABLE_HEARTBEAT
+#define DISABLE_POWER_MANAGEMENT
+#define DISABLE_HEARTBEAT
 //#define DISABLE_TIME
-//#define DISABLE_PASSWORD
-//#define DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+#define DISABLE_PASSWORD
+#define DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
 //#define DISABLE_CRC
 
 // Macros to uncomment to disable network communications. DISABLE_NETWORK
@@ -41,7 +41,7 @@
 //#define DISABLE_DUMMY_SENSOR
 //#define DISABLE_LDR_LUMINOSITY_SENSOR
 //#define DISABLE_SOUND_SENSOR
-//#define DISABLE_MQ2_SENSOR
+#define DISABLE_MQ2_SENSOR
 #define DISABLE_GROVE_AIR_QUALITY_SENSOR
 //#define DISABLE_GROVE_DIGITAL_LIGHT_SENSOR
 //#define DISABLE_THERMISTOR_SENSOR
@@ -57,7 +57,7 @@
 
 // Macros to uncomment to disable persisent storages
 //#define DISABLE_AVR_EEPROM
-//#define DISABLE_MSP430_FRAM
+#define DISABLE_MSP430_FRAM
 
 // Macros to uncomment to disable power management controllers
 #define DISABLE_AVR_POWER_MANAGEMENT

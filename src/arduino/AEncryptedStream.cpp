@@ -1,3 +1,6 @@
+#include "AtHomeConfig.h"
+#if !defined(DISABLE_COMMUNICATION) && \
+    !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
 #include "AEncryptedStream.hpp"
 #include <string.h>
 
@@ -118,3 +121,5 @@ void AEncryptedStream::reset() {
 }
 }  // namespace arduino
 }  // namespace athome
+#endif /* !defined(DISABLE_COMMUNICATION) && \
+          !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
