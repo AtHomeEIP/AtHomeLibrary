@@ -22,6 +22,12 @@ namespace athome {
                 return _data;
             }
 
+            virtual U getSensorSample() const {
+                U data;
+                memset(&data, rand() % limit, sizeof(U));
+                return data;
+            }
+
         private:
             U   _data;
         };
