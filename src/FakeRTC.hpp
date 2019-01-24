@@ -16,7 +16,7 @@ class FakeRTC : public ITime {
   FakeRTC();
   FakeRTC(const FakeRTC &) = delete;
   FakeRTC &operator=(const FakeRTC &) = delete;
-  virtual ~FakeRTC();
+  //virtual ~FakeRTC();
 
   virtual const DateTime &getDateTime();
   virtual void setCurrentDateTime(const DateTime &);

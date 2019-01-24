@@ -6,7 +6,7 @@ namespace athome {
 namespace time {
 FakeRTC::FakeRTC() : _lastTime(millis()) {}
 
-FakeRTC::~FakeRTC() {}
+//FakeRTC::~FakeRTC() {}
 
 void FakeRTC::setCurrentDateTime(const ITime::DateTime &date) { _date = date; }
 
