@@ -75,7 +75,8 @@ namespace athome {
                 char buffer;
                 int len = communicator.readBytesUntil('\0', ap.ssid, sizeof(ap.ssid) - 1);
                 ap.ssid[len] = '\0';
-                len = communicator.readBytesUntil('\0', ap.password, sizeof(ap.password));
+                delay(100);
+                len = communicator.readBytesUntil('\0', ap.password, sizeof(ap.password) - 1);
                 ap.password[len] = '\0';
                 communicator.readBytesUntil(communication::commands::end_of_command, &buffer, 1);
                 if (_wifi != nullptr) {

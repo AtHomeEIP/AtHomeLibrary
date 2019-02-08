@@ -277,23 +277,20 @@ namespace athome {
                     return check;
                 }
                 while (_set_esp_station_mode());
-                _stream->print(FH(at_at));
-                _stream->print(FH(symbol_plus));
-                _stream->print(FH(at_cwjap));
-                _stream->print(FH(equal_double_quotes));
-                _stream->print(_ap.ssid);
-                _stream->print(FH(double_quotes_comma_double_quotes));
-                _stream->print(_ap.password);
-                _stream->print(FH(double_quotes));
-                _stream->print(FH(at_eol));
-                if (!_esp_answer_check()) {
-                    _connected = true;
-                    return 0;
-                }
-                else {
-                    _connected = false;
-                    return -5;
-                }
+                do {
+                    _stream->print(FH(at_at));
+                    _stream->print(FH(symbol_plus));
+                    _stream->print(FH(at_cwjap));
+                    _stream->print(FH(equal_double_quotes));
+                    _stream->print(_ap.ssid);
+                    _stream->print(FH(double_quotes_comma_double_quotes));
+                    _stream->print(_ap.password);
+                    _stream->print(FH(double_quotes));
+                    _stream->print(FH(at_eol));
+                } while (_esp_answer_check());
+                Serial.println(F("Connected to AP"));
+                _connected = true;
+                return 0;
             }
 
             int ESP8266WiFiCommunicator::_create_ap() {
@@ -391,19 +388,22 @@ namespace athome {
                 if (!isConnected()) {
                     while (connect());
                 }
-                char strIp[16];
-                SNPRINTF(strIp, 16, ip::ip_format, _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
-                _stream->print(FH(at_at));
-                _stream->print(FH(symbol_plus));
-                _stream->print(FH(at_cipstart));
-                _stream->print(FH(equal_tcp));
-                _stream->print(strIp);
-                _stream->print(FH(double_quotes_comma));
-                _stream->print(_host.hport);
-                _stream->print(FH(at_eol));
-                if (_esp_answer_check()) {
+                do {
+                    char strIp[16];
+                    SNPRINTF(strIp, 16, ip::ip_format, _host.ipv4[0], _host.ipv4[1], _host.ipv4[2], _host.ipv4[3]);
+                    _stream->print(FH(at_at));
+                    _stream->print(FH(symbol_plus));
+                    _stream->print(FH(at_cipstart));
+                    _stream->print(FH(equal_tcp));
+                    _stream->print(strIp);
+                    _stream->print(FH(double_quotes_comma));
+                    _stream->print(_host.hport);
+                    _stream->print(FH(at_eol));
+                } while (_esp_answer_check());
+                /* if (_esp_answer_check()) {
                     return -4;
-                }
+                } */
+                Serial.println(F("Connected to host"));
                 _connected_to_host = true;
                 return 0;
             }
