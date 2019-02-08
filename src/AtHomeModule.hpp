@@ -2,7 +2,7 @@
 #define ATHOMEMODULE_HPP
 
 #define _TASK_INLINE  // Macro used by TaskScheduler library
-//# define _TASK_SLEEP_ON_IDLE_RUN
+#define _TASK_SLEEP_ON_IDLE_RUN
 
 #include <TaskScheduler.h>
 #include <alloca.h>
