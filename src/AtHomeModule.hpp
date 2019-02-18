@@ -18,16 +18,18 @@
 #include "CRC.hpp"
 #include "ITime.hpp"
 #include "Queue.hpp"
+#include "MemPrint.hpp"
+#include "base64.h"
 
 namespace athome {
 namespace module {
 /**
- * customCallback type is used to pass a callback to call during various events.
+ * CustomCallback type is used to pass a callback to call during various events.
  *
  * Functions used as callback must have a compatible prototype to this:
  * \fn void name()
  */
-typedef void (*customCallback)();
+using CustomCallback = void (*)();
 
 #ifndef DISABLE_COMMUNICATION
 /**
@@ -40,16 +42,41 @@ typedef void (*customCallback)();
  * These functions must have a prototype compatible to this one:
  * \fn void name(const String &, Stream &)
  */
-typedef void (*AtHomeCommandPlugin)(const char *, Stream &);
+using AtHomeCommandPlugin = void (*)(const char *, Stream &);
 
+/**
+ * Structure representing an AtHome callback, composed of two fields:
+ *
+ * - name: A storage optimized constant string representing the name of
+ *   the command
+ * - callback: The function called when a command is received corresponding
+ *   to the `name` field
+ */
 struct Command {
   PGM_P name;
   AtHomeCommandPlugin callback;
 };
 
-typedef const Command *CommandTable[];
+/**
+ * A table of command is an array of pointers on Command structures
+ */
+using CommandTable = const Command*[];
 
+/**
+ * A plugin list is a queue of Command structures
+ */
 using CommandPluginList = utility::Queue<Command>;
+
+/**
+ * Callback used by stream read helpers
+ */
+using StreamReaderCallback = int (*)(Stream &, char *, size_t);
+
+/**
+ * Callback used by stream write helpers
+ */
+using StreamWriterCallback = int (*)(Stream &, const char *, size_t);
+
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
 /**
@@ -218,7 +245,7 @@ class AtHomeModule : public ABaseModule {
    * Calling this function passing no parameter or nullptr will restore the
    * default callback of this class.
    */
-  void setSensorExecutionCallback(customCallback f = nullptr) {
+  void setSensorExecutionCallback(CustomCallback f = nullptr) {
     _sensorTask.setCallback((f == nullptr) ? &AtHomeModule::_onSampleSensor
                                            : f);
   }
@@ -265,7 +292,7 @@ class AtHomeModule : public ABaseModule {
    * Calling this function passing no parameter or nullptr will restore the
    * default callback of this class.
    */
-  void setUploadDataExecutionCallback(customCallback f = nullptr) {
+  void setUploadDataExecutionCallback(CustomCallback f = nullptr) {
     _uploadDataTask.setCallback((f == nullptr) ? &AtHomeModule::_uploadData
                                                : f);
   }
@@ -288,7 +315,7 @@ class AtHomeModule : public ABaseModule {
    * Calling this function passing no parameter or nullptr will restore the
    * default callback of this class.
    */
-  void setCommunicationExecutionCallback(customCallback f = nullptr) {
+  void setCommunicationExecutionCallback(CustomCallback f = nullptr) {
     _communicationTask.setCallback(
         (f == nullptr) ? &AtHomeModule::_onCommunicate : f);
   }
@@ -482,23 +509,67 @@ class AtHomeModule : public ABaseModule {
         _serial(0) {
   }
 #ifndef DISABLE_COMMUNICATION
+
+  /**
+   * Write bytes into the stream without any modification
+   */
+  static int writeBytes(Stream &stream, const char *src, size_t length) {
+    return stream.write(reinterpret_cast<const uint8_t *>(src), length);
+  }
+
+  /**
+   * Write bytes into the stream without any modification
+   */
+  template <typename U>
+  static int writeBytes(Stream &stream, const U &data) {
+    return writeBytes(stream, reinterpret_cast<const char *>(&data), sizeof(U));
+  }
+
+  /**
+   * Write bytes into the stream enabling to choose an encoder used to write them
+   */
+  static int writeBytesHelper(Stream &stream, const char *src, size_t length, StreamWriterCallback writer = writeBytes) {
+    return writer(stream, src, length);
+  }
+
+  /**
+   * Write bytes into the stream enabling to choose an encoder used to write them
+   */
+  template <typename U>
+  static int writeBytesHelper(Stream &stream, const U &data, StreamWriterCallback writer = writeBytes) {
+    return writer(stream, reinterpret_cast<const char *>(&data), sizeof(U));
+  }
+
+  static int writeBase64EncodedBytes(Stream &stream, const char *src, size_t length) {
+    size_t encoded_length = base64_encoded_length(length);
+    char buffer[encoded_length];
+    if (Base64encode(buffer, src, length) != encoded_length) {
+      return -1;
+    }
+    return stream.write(buffer, encoded_length);
+  }
+
+  template <typename U>
+  static int writeBase64EncodedBytes(Stream &stream, const U &data) {
+    return writeBase64EncodedBytes(stream, reinterpret_cast<const char *>(&data), sizeof(U));
+  }
+
   /**
    * Broadcast the data passed as parameter over all module streams.
    */
-  template <typename U>
-  void broadcast(const U &data) {
+  template <typename U, size_t reserved = 64>
+  void broadcast(const U &data, StreamWriterCallback writer = writeBytes) {
+    char buffer[reserved];
+    arduino::MemPrint memPrinter(buffer);
+    size_t len = memPrinter.print(data);
     if (_streams != nullptr) {
       for (size_t i = 0; _streams[i] != nullptr; i++) {
-        _streams[i]->print(data);
+        writer(*_streams[i], buffer, len);
       }
     }
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-    if (_encryptedStreams != nullptr) {
-      for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
-        _encryptedStreams[i]->print(data);
-      }
-    }
-#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
+  #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
+  #warning "Not implemented"
+  #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   }
 
   /**
@@ -506,40 +577,43 @@ class AtHomeModule : public ABaseModule {
    * line return string "\r\n".
    */
   template <typename U>
-  void broadcastln(const U &data) {
-    broadcast(data);
-    broadcast(ATHOME_NEW_LINE);
+  void broadcastln(const U &data, StreamWriterCallback writer = writeBytes) {
+    broadcast(data, writer);
+    broadcast(ATHOME_NEW_LINE, writer);
   }
 
-  template <typename U>
-  void raw_broadcast(const U &data) {
-    const uint8_t *ptr = reinterpret_cast<const uint8_t *>(&data);
+  void raw_broadcast(const char *src, size_t length, StreamWriterCallback writer = writeBytes) {
     if (_streams != nullptr) {
       for (size_t i = 0; _streams[i] != nullptr; i++) {
-        _streams[i]->write(ptr, sizeof(U));
+        writer(*_streams[i], src, length);
       }
     }
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
     if (_encryptedStreams != nullptr) {
       for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
-        _encryptedStreams[i]->write(ptr, sizeof(U));
+        writer(*_encryptedStreams[i], src, length);
       }
     }
 #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
   }
 
+  template <typename U>
+  void raw_broadcast(const U &data, StreamWriterCallback writer = writeBytes) {
+    raw_broadcast(reinterpret_cast<const char *>(&data), sizeof(U), writer);
+  }
+
   /**
    * Broadcast empty string
    */
-  void raw_broadcast_empty() { broadcast('\0'); }
+  void broadcast_end_of_string(StreamWriterCallback writer = writeBytes) { broadcast('\0', writer); }
 
   /**
    * Serialize an object as String and broadcast it
    */
   template <typename U>
-  void broadcast_string(const U &data) {
-    broadcast(data);
-    raw_broadcast_empty();
+  void broadcast_raw_string(const U &data, StreamWriterCallback writer = writeBytes) {
+    broadcast(data, writer);
+    broadcast_end_of_string(writer);
   }
 
   template <typename U>
@@ -562,9 +636,9 @@ class AtHomeModule : public ABaseModule {
    * Serialize an integer as a variable size integer using Google spec
    */
   template <typename U>
-  void broadcast_varuint(U data) {
+  void broadcast_varuint(U data, StreamWriterCallback writer = writeBytes) {
     if (is_zero<U>(data)) {
-      broadcast('\0');
+      raw_broadcast<uint8_t>(0, writer);
       return;
     }
     while (is_non_zero<U>(data)) {
@@ -574,7 +648,7 @@ class AtHomeModule : public ABaseModule {
       if (is_non_zero<U>(data)) {
         buffer |= 0b10000000;
       }
-      raw_broadcast<uint8_t>(buffer);
+      raw_broadcast<uint8_t>(buffer, writer);
     }
   }
 
@@ -606,8 +680,8 @@ class AtHomeModule : public ABaseModule {
    * Generic function allowing to read from a Stream up until n bytes
    * into memory
    */
-  int readBytesN(Stream &stream, char *dest, size_t u) {
-    size_t i = 0;
+  static int readBytes(Stream &stream, char *dest, size_t u) {
+    int i = 0;
     int j = 0;
     unsigned long timeout = millis() + DEFAULT_STREAM_TIMEOUT;
     do {
@@ -648,8 +722,44 @@ class AtHomeModule : public ABaseModule {
    * Read the content of an object from a Stream
    */
   template <typename U>
-  int readBytes(Stream &stream, U &dest) {
-    return readBytesN(stream, reinterpret_cast<char *>(&dest), sizeof(U));
+  static int readBytes(Stream &stream, U &dest) {
+    return readBytes(stream, reinterpret_cast<char *>(&dest), sizeof(U));
+  }
+
+  template <typename U>
+  static int readBytesHelper(Stream &stream, U &dest, StreamReaderCallback reader = readBytes) {
+    return reader(stream, reinterpret_cast<char *>(&dest), sizeof(U));
+  }
+
+  /**
+   * Compute the encoded length of string encoded in base64
+   */
+  static constexpr size_t base64_encoded_length(size_t plain_length) {
+    return ((plain_length + 2) / 3 * 4) + 1;
+  }
+
+  /**
+   * Read base64 encoded stream input and copy the decoded output
+   * into the destination
+   */
+  static int readBase64EncodedBytes(Stream &stream, char *dest, size_t count) {
+    int encoded_length = base64_encoded_length(count);
+    char buffer[encoded_length];
+    int read_length = readBytes(stream, buffer, encoded_length);
+
+    if (read_length < encoded_length) {
+      return -1;
+    }
+    return Base64decode(reinterpret_cast<char *>(&dest), buffer);
+  }
+
+  /**
+   * Read base64 encoded stream input and copy the decoded output
+   * into the destination
+   */
+  template <typename U>
+  int readBase64EncodedBytes(Stream &stream, U &dest) {
+    return readBase64EncodedBytes(stream, reinterpret_cast<char *>(&dest), sizeof(U));
   }
 
   /**
@@ -657,12 +767,12 @@ class AtHomeModule : public ABaseModule {
    * if available
    */
   template <typename U>
-  int securedReadBytes(Stream &stream, U &dest) {
+  int securedReadBytes(Stream &stream, U &dest, StreamReaderCallback reader = readBytes) {
     uint16_t crcRef;
-    if (readBytes<uint16_t>(stream, crcRef) < 0) {
+    if (reader(stream, reinterpret_cast<char *>(&crcRef), sizeof(crcRef)) < 0) {
       return -1;
     }
-    int size = readBytes<U>(stream, dest);
+    int size = reader(stream, reinterpret_cast<char *>(&dest), sizeof(U));
 #ifndef DISABLE_CRC
     uint16_t crc = utility::checksum::crc16_it<U>(dest);
     if (crc != crcRef) {
@@ -699,9 +809,9 @@ class AtHomeModule : public ABaseModule {
    */
   void uploadData() {
     broadcastln(FH(communication::commands::uploadData));
-    broadcast_varuint<moduleSerial>(_serial);
-    broadcast_varuint<uint16_t>(time::absolute_year);
-    broadcast_varuint<size_t>(_nbMeasures);
+    broadcast_varuint<moduleSerial>(_serial, writeBase64EncodedBytes);
+    broadcast_varuint<uint16_t>(time::absolute_year, writeBase64EncodedBytes);
+    broadcast_varuint<size_t>(_nbMeasures, writeBase64EncodedBytes);
     for (size_t i = 0; i < _nbMeasures; i++) {
       uint8_t fields = 0;
       if (i) {
@@ -726,24 +836,24 @@ class AtHomeModule : public ABaseModule {
       } else {
         fields = 0x7F;
       }
-      broadcast_varuint<uint8_t>(fields);
+      broadcast_varuint<uint8_t>(fields, writeBase64EncodedBytes);
       if (fields & 0x1) {
-        broadcast_string(FH(_measures[i].label));
+        broadcast_raw_string(FH(_measures[i].label), writeBase64EncodedBytes);
       }
       if (fields & 0x2) {
-        raw_broadcast<uint8_t>(_measures[i].unit.unit);
+        raw_broadcast<uint8_t>(_measures[i].unit.unit, writeBase64EncodedBytes);
       }
       if (fields & 0x4) {
-        raw_broadcast<uint8_t>(_measures[i].unit.prefix);
+        raw_broadcast<uint8_t>(_measures[i].unit.prefix, writeBase64EncodedBytes);
       }
       if (fields & 0x8) {
-        raw_broadcast<uint8_t>(_measures[i].estimate);
+        raw_broadcast<uint8_t>(_measures[i].estimate, writeBase64EncodedBytes);
       }
       if (fields & 0x10) {
-        broadcast_string(_measures[i].sample);
+        broadcast_raw_string(_measures[i].sample, writeBase64EncodedBytes);
       }
       if (fields & 0x20) {
-        raw_broadcast<t_timestamp>(_measures[i].timestamp);
+        raw_broadcast<t_timestamp>(_measures[i].timestamp, writeBase64EncodedBytes);
       }
     }
     broadcast(ATHOME_END_OF_COMMAND);
@@ -956,7 +1066,7 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_COMMUNICATION
   int _setProfileSerial(Stream &stream) {
     moduleSerial serial;
-    if (securedReadBytes<moduleSerial>(stream, serial) < 1) {
+    if (securedReadBytes<moduleSerial>(stream, serial, readBase64EncodedBytes) < 1) {
       return -1;
     }
     setSerial(serial);
@@ -975,7 +1085,7 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
   int _setEncryptionKey(Stream &stream) {
     moduleEncryptionKey key;
-    if (securedReadBytes<moduleEncryptionKey>(stream, key) < 1) {
+    if (securedReadBytes<moduleEncryptionKey>(stream, key, readBase64EncodedBytes) < 1) {
       return -1;
     }
     setEncryptionKey(key);
@@ -984,7 +1094,7 @@ class AtHomeModule : public ABaseModule {
 
   int _setEncryptionIV(Stream &stream) {
     moduleEncryptionIV iv;
-    if (securedReadBytes<moduleEncryptionIV>(stream, iv) < 1) {
+    if (securedReadBytes<moduleEncryptionIV>(stream, iv, readBase64EncodedBytes) < 1) {
       return -1;
     }
     setEncryptionIV(iv);
@@ -1047,7 +1157,7 @@ class AtHomeModule : public ABaseModule {
       return;
     }
     uint8_t buffer[7];
-    if (securedReadBytes<uint8_t[7]>(stream, buffer) < 1) {
+    if (securedReadBytes<uint8_t[7]>(stream, buffer, readBase64EncodedBytes) < 1) {
       send_command_error(stream, communication::commands::setDateTime);
       return;
     }
@@ -1086,9 +1196,9 @@ class AtHomeModule : public ABaseModule {
     sensor::ISensor::ISensorThresholds thresholds;
     {
       char buffer[2];
-      if (securedReadBytes<char[2]>(stream, buffer) < 1 ||
+      if (securedReadBytes<char[2]>(stream, buffer, readBase64EncodedBytes) < 1 ||
           securedReadBytes<sensor::ISensor::SensorThreshold>(
-              stream, thresholds.min) < 1 ||
+              stream, thresholds.min, readBase64EncodedBytes) < 1 ||
           securedReadBytes<sensor::ISensor::SensorThreshold>(
               stream, thresholds.max) < 1) {
         send_command_error(stream,
