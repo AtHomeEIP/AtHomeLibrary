@@ -546,7 +546,7 @@ class AtHomeModule : public ABaseModule {
     if (Base64encode(buffer, src, length) != encoded_length) {
       return -1;
     }
-    return stream.write(buffer, encoded_length);
+    return stream.write(reinterpret_cast<const uint8_t *>(buffer), encoded_length);
   }
 
   template <typename U>
