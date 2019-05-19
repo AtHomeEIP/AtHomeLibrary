@@ -15,11 +15,10 @@
 #include "AtHomeCommunicationProtocol.hpp"
 #include "AtHomeConfig.h"
 #include "AtHomeFlashCommon.h"
+#include "AtHomeModuleStreamIO.hpp"
 #include "CRC.hpp"
 #include "ITime.hpp"
 #include "Queue.hpp"
-#include "MemPrint.hpp"
-#include "base64.h"
 
 namespace athome {
 namespace module {
@@ -67,16 +66,6 @@ using CommandTable = const Command*[];
  */
 using CommandPluginList = utility::Queue<Command>;
 
-/**
- * Callback used by stream read helpers
- */
-using StreamReaderCallback = int (*)(Stream &, char *, size_t);
-
-/**
- * Callback used by stream write helpers
- */
-using StreamWriterCallback = int (*)(Stream &, const char *, size_t);
-
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
 /**
@@ -101,7 +90,7 @@ using StoragePluginList = utility::Queue<const AtHomeStoragePlugin>;
  * in a buffer.
  */
 template <typename T, size_t n>
-class AtHomeModule : public ABaseModule {
+class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
  public:
   /**
    * `moduleSerial` type represents a unique value used to identify a module
@@ -115,20 +104,6 @@ class AtHomeModule : public ABaseModule {
    */
   typedef char modulePassword[17];
 #endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
-#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
-    !defined(DISABLE_COMMUNICATION)
-  /**
-   * `moduleEncryptionKey` type represents a key for a cipher protecting an
-   * unsecure stream
-   */
-  typedef uint8_t moduleEncryptionKey[32];
-  /**
-   * `moduleEncryptionIV` type represents an IV used for a cipher protecting an
-   * unsecure stream
-   */
-  typedef uint8_t moduleEncryptionIV[12];
-#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
-          !defined(DISABLE_COMMUNICATION) */
 #ifndef DISABLE_TIME
   /**
    * `timestamp` type is used to represent sensor readings date
@@ -393,57 +368,13 @@ class AtHomeModule : public ABaseModule {
 #endif /* DISABLE_PERSISTENT_STORAGE */
   }
 
-#if !defined(DISABLE_COMMUNICATION) && \
-    !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
-  /**
-   * Set the array of unsecure streams used to communicate, terminated by
-   * nullptr
-   */
-  void setEncryptedStreams(arduino::AEncryptedStream **streams) {
-    _encryptedStreams = streams;
-    if (_encryptedStreams != nullptr) {
-      for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
-        _encryptedStreams[i]->setKey(_encryptionKey);
-        _encryptedStreams[i]->setIV(_encryptionIV);
-      }
-    }
+  void setStreams(Stream **streams) {
+    setClearStreams(streams);
   }
 
-  /**
-   * Return the array of unsecure streams used to communicate, terminated by
-   * nullptr
-   */
-  arduino::AEncryptedStream **getEncryptedStreams() {
-    return _encryptedStreams;
+  Stream** getStreams() {
+    return getClearStreams();
   }
-
-  /**
-   * Set the encryption key used to protect unsecure streams
-   */
-  void setEncryptionKey(const moduleEncryptionKey &key) {
-    memcpy(_encryptionRawKey, key, sizeof(_encryptionRawKey));
-#ifndef DISABLE_PERSISTENT_STORAGE
-    onBackupOnStorage();
-#endif /* DISABLE_PERSISTENT_STORAGE */
-  }
-
-  const moduleEncryptionKey &getEncryptionKey() const {
-    return _encryptionRawKey;
-  }
-
-  /**
-   * Set the initialization vector used by a cipher to protect unsecure streams
-   */
-  void setEncryptionIV(const moduleEncryptionIV &iv) {
-    memcpy(_encryptionRawIV, iv, sizeof(_encryptionRawIV));
-#ifndef DISABLE_PERSISTENT_STORAGE
-    onBackupOnStorage();
-#endif /* DISABLE_PERSISTENT_STORAGE */
-  }
-
-  const moduleEncryptionIV &getEncryptionIV() const { return _encryptionRawIV; }
-#endif /* !defined(DISABLE_COMMUNICATION) && \
-          !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
 
  private:
 #ifndef DISABLE_SENSOR
@@ -485,6 +416,7 @@ class AtHomeModule : public ABaseModule {
 
   AtHomeModule()
       : ABaseModule(),
+        AtHomeModuleStreamIO(),
 #ifndef DISABLE_SENSOR
         _sensorInterval(DEFAULT_SENSOR_INTERVAL * TASK_MILLISECOND),
         _nbMeasures(0),
@@ -494,13 +426,6 @@ class AtHomeModule : public ABaseModule {
                                TASK_MILLISECOND),
         _uploadDataInterval(DEFAULT_UPLOAD_DATA_INTERVAL * TASK_MILLISECOND),
         _communicationPlugin(nullptr),
-#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
-    !defined(DISABLE_COMMUNICATION)
-        _encryptedStreams(nullptr),
-        _encryptionKey{_encryptionRawKey, sizeof(_encryptionRawKey)},
-        _encryptionIV{_encryptionRawIV, sizeof(_encryptionRawIV)},
-#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
-          !defined(DISABLE_COMMUNICATION) */
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
         _onBackupPlugin(nullptr),
@@ -511,307 +436,36 @@ class AtHomeModule : public ABaseModule {
 #ifndef DISABLE_COMMUNICATION
 
   /**
-   * Write bytes into the stream without any modification
-   */
-  static int writeBytes(Stream &stream, const char *src, size_t length) {
-    return stream.write(reinterpret_cast<const uint8_t *>(src), length);
-  }
-
-  /**
-   * Write bytes into the stream without any modification
-   */
-  template <typename U>
-  static int writeBytes(Stream &stream, const U &data) {
-    return writeBytes(stream, reinterpret_cast<const char *>(&data), sizeof(U));
-  }
-
-  /**
-   * Write bytes into the stream enabling to choose an encoder used to write them
-   */
-  static int writeBytesHelper(Stream &stream, const char *src, size_t length, StreamWriterCallback writer = writeBytes) {
-    return writer(stream, src, length);
-  }
-
-  /**
-   * Write bytes into the stream enabling to choose an encoder used to write them
-   */
-  template <typename U>
-  static int writeBytesHelper(Stream &stream, const U &data, StreamWriterCallback writer = writeBytes) {
-    return writer(stream, reinterpret_cast<const char *>(&data), sizeof(U));
-  }
-
-  static int writeBase64EncodedBytes(Stream &stream, const char *src, size_t length) {
-    size_t encoded_length = base64_encoded_length(length);
-    char buffer[encoded_length];
-    if (Base64encode(buffer, src, length) != encoded_length) {
-      return -1;
-    }
-    return stream.write(reinterpret_cast<const uint8_t *>(buffer), encoded_length);
-  }
-
-  template <typename U>
-  static int writeBase64EncodedBytes(Stream &stream, const U &data) {
-    return writeBase64EncodedBytes(stream, reinterpret_cast<const char *>(&data), sizeof(U));
-  }
-
-  /**
-   * Broadcast the data passed as parameter over all module streams.
-   */
-  template <typename U, size_t reserved = 64>
-  void broadcast(const U &data, StreamWriterCallback writer = writeBytes) {
-    char buffer[reserved];
-    arduino::MemPrint memPrinter(buffer);
-    size_t len = memPrinter.print(data);
-    if (_streams != nullptr) {
-      for (size_t i = 0; _streams[i] != nullptr; i++) {
-        writer(*_streams[i], buffer, len);
-      }
-    }
-  #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-  #warning "Not implemented"
-  #endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
-  }
-
-  /**
-   * Broadcast the data passed as parameter over all module streams, followed by
-   * line return string "\r\n".
-   */
-  template <typename U>
-  void broadcastln(const U &data, StreamWriterCallback writer = writeBytes) {
-    broadcast(data, writer);
-    broadcast(ATHOME_NEW_LINE, writer);
-  }
-
-  void raw_broadcast(const char *src, size_t length, StreamWriterCallback writer = writeBytes) {
-    if (_streams != nullptr) {
-      for (size_t i = 0; _streams[i] != nullptr; i++) {
-        writer(*_streams[i], src, length);
-      }
-    }
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-    if (_encryptedStreams != nullptr) {
-      for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
-        writer(*_encryptedStreams[i], src, length);
-      }
-    }
-#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
-  }
-
-  template <typename U>
-  void raw_broadcast(const U &data, StreamWriterCallback writer = writeBytes) {
-    raw_broadcast(reinterpret_cast<const char *>(&data), sizeof(U), writer);
-  }
-
-  /**
-   * Broadcast empty string
-   */
-  void broadcast_end_of_string(StreamWriterCallback writer = writeBytes) { broadcast('\0', writer); }
-
-  /**
-   * Serialize an object as String and broadcast it
-   */
-  template <typename U>
-  void broadcast_raw_string(const U &data, StreamWriterCallback writer = writeBytes) {
-    broadcast(data, writer);
-    broadcast_end_of_string(writer);
-  }
-
-  template <typename U>
-  inline bool is_non_zero(const U &data) {
-    const uint8_t *ptr = reinterpret_cast<const uint8_t *>(&data);
-    for (size_t i = 0; i < sizeof(U); i++) {
-      if (*ptr++ & 0xFF) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  template <typename U>
-  inline bool is_zero(const U &data) {
-    return !is_non_zero<U>(data);
-  }
-
-  /**
-   * Serialize an integer as a variable size integer using Google spec
-   */
-  template <typename U>
-  void broadcast_varuint(U data, StreamWriterCallback writer = writeBytes) {
-    if (is_zero<U>(data)) {
-      raw_broadcast<uint8_t>(0, writer);
-      return;
-    }
-    while (is_non_zero<U>(data)) {
-      uint8_t buffer = 0;
-      buffer |= (data & 0b01111111);
-      data >>= 7;
-      if (is_non_zero<U>(data)) {
-        buffer |= 0b10000000;
-      }
-      raw_broadcast<uint8_t>(buffer, writer);
-    }
-  }
-
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-  /**
-   * Flush encrypted Stream used for broadcast
-   */
-  void flush_encryptedStreams() {
-    if (_encryptedStreams == nullptr) {
-      return;
-    }
-    for (size_t i = 0; _encryptedStreams[i] != nullptr; i++) {
-      _encryptedStreams[i]->flush();
-    }
-  }
-#endif  // DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-
-  /**
-   * Flush all broadcast Stream
-   */
-  void broadcast_flush() {
-    flushStreams();
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-    flush_encryptedStreams();
-#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
-  }
-
-  /**
-   * Generic function allowing to read from a Stream up until n bytes
-   * into memory
-   */
-  static int readBytes(Stream &stream, char *dest, size_t u) {
-    int i = 0;
-    int j = 0;
-    unsigned long timeout = millis() + DEFAULT_STREAM_TIMEOUT;
-    do {
-      j = stream.readBytes(dest, u - i);
-      if (j < 0) {
-        return i;
-      }
-      i += j;
-    } while (i < u && millis() < timeout);
-    return i;
-  }
-
-  /**
    * Send an error alert to the host when a command fail
    */
   void send_command_error(Stream &stream, const char *command = nullptr) {
-    stream.print(FH(communication::commands::koReply));
-    stream.write(ATHOME_NEW_LINE);
+    printHelperLn(stream, FH(communication::commands::koReply));
     if (command != nullptr) {
-      stream.print(FH(command));
+      printHelper(stream, FH(command));
     }
-    stream.write(ATHOME_END_OF_COMMAND);
+    writeBytes<char>(stream, ATHOME_END_OF_COMMAND);
   }
 
   /**
    * Send an acknowledge to the host when a command success
    */
   void acknowledge_command(Stream &stream, const char *command = nullptr) {
-    stream.print(FH(communication::commands::okReply));
-    stream.write(ATHOME_NEW_LINE);
+    printHelperLn(stream, FH(communication::commands::okReply));
     if (command != nullptr) {
-      stream.print(FH(command));
+      printHelper(stream, FH(command));
     }
-    stream.write(ATHOME_END_OF_COMMAND);
+    writeBytes<char>(stream, ATHOME_END_OF_COMMAND);
   }
 
-  /**
-   * Read the content of an object from a Stream
-   */
-  template <typename U>
-  static int readBytes(Stream &stream, U &dest) {
-    return readBytes(stream, reinterpret_cast<char *>(&dest), sizeof(U));
-  }
-
-  template <typename U>
-  static int readBytesHelper(Stream &stream, U &dest, StreamReaderCallback reader = readBytes) {
-    return reader(stream, reinterpret_cast<char *>(&dest), sizeof(U));
-  }
-
-  /**
-   * Compute the encoded length of string encoded in base64
-   */
-  static constexpr size_t base64_encoded_length(size_t plain_length) {
-    return ((plain_length + 2) / 3 * 4) + 1;
-  }
-
-  /**
-   * Read base64 encoded stream input and copy the decoded output
-   * into the destination
-   */
-  static int readBase64EncodedBytes(Stream &stream, char *dest, size_t count) {
-    int encoded_length = base64_encoded_length(count);
-    char buffer[encoded_length];
-    int read_length = readBytes(stream, buffer, encoded_length);
-
-    if (read_length < encoded_length) {
-      return -1;
-    }
-    return Base64decode(reinterpret_cast<char *>(&dest), buffer);
-  }
-
-  /**
-   * Read base64 encoded stream input and copy the decoded output
-   * into the destination
-   */
-  template <typename U>
-  int readBase64EncodedBytes(Stream &stream, U &dest) {
-    return readBase64EncodedBytes(stream, reinterpret_cast<char *>(&dest), sizeof(U));
-  }
-
-  /**
-   * Read an object content from a Stream and perform CRC verification
-   * if available
-   */
-  template <typename U>
-  int securedReadBytes(Stream &stream, U &dest, StreamReaderCallback reader = readBytes) {
-    uint16_t crcRef;
-    if (reader(stream, reinterpret_cast<char *>(&crcRef), sizeof(crcRef)) < 0) {
-      return -1;
-    }
-    int size = reader(stream, reinterpret_cast<char *>(&dest), sizeof(U));
-#ifndef DISABLE_CRC
-    uint16_t crc = utility::checksum::crc16_it<U>(dest);
-    if (crc != crcRef) {
-      return CRC_ERROR;
-    }
-#endif  // DISABLE_CRC
-    return size;
-  }
-
-  template <typename U, char del = '\0', uint8_t init = 0>
-  int securedReadBytesUntil(Stream &stream, U &dest) {
-    uint16_t crcRef;
-    if (readBytes<uint16_t>(stream, crcRef) < 0) {
-      return -1;
-    }
-    char *ptr = reinterpret_cast<char *>(&dest);
-    memset(ptr, init, sizeof(U));
-    int size = stream.readBytesUntil(del, ptr, sizeof(U) - 1);
-    ptr[size] = del;
-    if (size < 0) {
-      return -1;
-    }
-#ifndef DISABLE_CRC
-    uint16_t crc = utility::checksum::crc16_it<U>(dest, size);
-    if (crc != crcRef) {
-      return CRC_ERROR;
-    }
-#endif  // DISABLE_CRC
-    return size;
-  }
 #ifndef DISABLE_SENSOR
   /**
    * Sends stored sensor readings over module streams.
    */
   void uploadData() {
     broadcastln(FH(communication::commands::uploadData));
-    broadcast_varuint<moduleSerial>(_serial, writeBase64EncodedBytes);
-    broadcast_varuint<uint16_t>(time::absolute_year, writeBase64EncodedBytes);
-    broadcast_varuint<size_t>(_nbMeasures, writeBase64EncodedBytes);
+    broadcast_varuint<moduleSerial>(_serial);
+    broadcast_varuint<uint16_t>(time::absolute_year);
+    broadcast_varuint<size_t>(_nbMeasures);
     for (size_t i = 0; i < _nbMeasures; i++) {
       uint8_t fields = 0;
       if (i) {
@@ -836,24 +490,24 @@ class AtHomeModule : public ABaseModule {
       } else {
         fields = 0x7F;
       }
-      broadcast_varuint<uint8_t>(fields, writeBase64EncodedBytes);
+      broadcast_varuint<uint8_t>(fields);
       if (fields & 0x1) {
-        broadcast_raw_string(FH(_measures[i].label), writeBase64EncodedBytes);
+        broadcast_raw_string(FH(_measures[i].label));
       }
       if (fields & 0x2) {
-        raw_broadcast<uint8_t>(_measures[i].unit.unit, writeBase64EncodedBytes);
+        raw_broadcast<uint8_t>(_measures[i].unit.unit);
       }
       if (fields & 0x4) {
-        raw_broadcast<uint8_t>(_measures[i].unit.prefix, writeBase64EncodedBytes);
+        raw_broadcast<uint8_t>(_measures[i].unit.prefix);
       }
       if (fields & 0x8) {
-        raw_broadcast<uint8_t>(_measures[i].estimate, writeBase64EncodedBytes);
+        raw_broadcast<uint8_t>(_measures[i].estimate);
       }
       if (fields & 0x10) {
-        broadcast_raw_string(_measures[i].sample, writeBase64EncodedBytes);
+        broadcast_raw_string(_measures[i].sample);
       }
       if (fields & 0x20) {
-        raw_broadcast<t_timestamp>(_measures[i].timestamp, writeBase64EncodedBytes);
+        raw_broadcast<t_timestamp>(_measures[i].timestamp);
       }
     }
     broadcast(ATHOME_END_OF_COMMAND);
@@ -935,17 +589,6 @@ class AtHomeModule : public ABaseModule {
     }
   }
 
-  /**
-   * Flush all streams used by the module.
-   */
-  void flushStreams() {
-    if (_streams == nullptr) {
-      return;
-    }
-    for (size_t i = 0; _streams[i] != nullptr; i++) {
-      _streams[i]->flush();
-    }
-  }
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
   /**
@@ -1170,7 +813,7 @@ class AtHomeModule : public ABaseModule {
     time.year = 0;
     memcpy(&time::absolute_year, buffer + 5, 2);
     _clock->setCurrentDateTime(time);
-    stream.readBytes(buffer, 1);
+    readBytes(stream, reinterpret_cast<char *>(buffer), 1);
     acknowledge_command(stream, communication::commands::setDateTime);
   }
 
@@ -1233,11 +876,6 @@ class AtHomeModule : public ABaseModule {
   unsigned long _communicationInterval;
   unsigned long _uploadDataInterval;
   CommandPluginList *_communicationPlugin;
-#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
-  arduino::AEncryptedStream **_encryptedStreams;
-  arduino::AEncryptedStream::Key _encryptionKey;
-  arduino::AEncryptedStream::IV _encryptionIV;
-#endif /* DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
   StoragePluginList *_onBackupPlugin;
@@ -1251,12 +889,6 @@ class AtHomeModule : public ABaseModule {
 #if !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION)
   modulePassword _password;
 #endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
-#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
-    !defined(DISABLE_COMMUNICATION)
-  moduleEncryptionKey _encryptionRawKey;
-  moduleEncryptionIV _encryptionRawIV;
-#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) && \
-          !defined(DISABLE_COMMUNICATION) */
 #if !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION)
   Task _uploadDataTask;
 #endif /* !defined(DISABLE_SENSOR) && !defined(DISABLE_COMMUNICATION) */
