@@ -4,6 +4,7 @@
 
 #ifndef DISABLE_COMMUNICATION
 #include <Stream.h>
+#include "CRC.hpp"
 #include "AtHomeModuleUtil.hpp"
 #include "base64.h"
 

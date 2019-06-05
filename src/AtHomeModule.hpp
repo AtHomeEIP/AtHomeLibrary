@@ -16,7 +16,6 @@
 #include "AtHomeConfig.h"
 #include "AtHomeFlashCommon.h"
 #include "AtHomeModuleStreamIO.hpp"
-#include "CRC.hpp"
 #include "ITime.hpp"
 #include "Queue.hpp"
 
