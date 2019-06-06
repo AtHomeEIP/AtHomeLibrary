@@ -506,7 +506,12 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
         broadcast_raw_string(_measures[i].sample);
       }
       if (fields & 0x20) {
-        raw_broadcast<t_timestamp>(_measures[i].timestamp);
+        raw_broadcast<uint8_t>(_measures[i].timestamp.second);
+        raw_broadcast<uint8_t>(_measures[i].timestamp.minute);
+        raw_broadcast<uint8_t>(_measures[i].timestamp.hour);
+        raw_broadcast<uint8_t>(_measures[i].timestamp.day);
+        raw_broadcast<uint8_t>(_measures[i].timestamp.month);
+        raw_broadcast<uint8_t>(_measures[i].timestamp.year);
       }
     }
     broadcast(ATHOME_END_OF_COMMAND);
