@@ -65,6 +65,23 @@ using CommandTable = const Command*[];
  */
 using CommandPluginList = utility::Queue<Command>;
 
+#ifndef DISABLE_COMMUNICATION_CALLBACKS
+/**
+ * A callback type used for calling a function before or after communication step
+ */
+using AtHomeCommunicationPlugin = void (*)();
+
+/**
+ * A plugin list to call before onCommunicate step
+ */
+using AtHomeBeforeCommunicationPluginList = utility::Queue<AtHomeCommunicationPlugin>;
+
+/**
+ * A plugin list to call after onCommunicate step
+ */
+using AtHomeAfterCommunicationPluginList = utility::Queue<AtHomeCommunicationPlugin>;
+#endif /* DISABLE_COMMUNICATION_CALLBACKS */
+
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
 /**
@@ -307,6 +324,30 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
     }
   }
 
+#ifndef DISABLE_COMMUNICATION_CALLBACKS
+  /**
+   * Set a callback to be called just before the beginning of the onCommunicate step
+   */
+  void setBeforeCommunicatePlugin(AtHomeCommunicationPlugin plugin) {
+    if (_beforeCommunicationPluginList == nullptr) {
+      _beforeCommunicationPluginList = new AtHomeBeforeCommunicationPluginList(plugin);
+    } else {
+      _beforeCommunicationPluginList->push_back(plugin);
+    }
+  }
+
+  /**
+   * Set a callback to be called just after the beginning of the onCommunicate step
+   */
+  void setAfterCommunicatePlugin(AtHomeCommunicationPlugin plugin) {
+    if (_afterCommunicationPluginList == nullptr) {
+      _afterCommunicationPluginList = new AtHomeAfterCommunicationPluginList(plugin);
+    } else {
+      _afterCommunicationPluginList->push_back(plugin);
+    }
+  }
+#endif /* DISABLE_COMMUNICATION_CALLBACKS */
+
 #ifndef DISABLE_PASSWORD
   /**
    * Set the password used to protect the module
@@ -425,6 +466,10 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
                                TASK_MILLISECOND),
         _uploadDataInterval(DEFAULT_UPLOAD_DATA_INTERVAL * TASK_MILLISECOND),
         _communicationPlugin(nullptr),
+#ifndef DISABLE_COMMUNICATION_CALLBACKS
+        _beforeCommunicationPluginList(nullptr),
+        _afterCommunicationPluginList(nullptr),
+#endif /* DISABLE_COMMUNICATION_CALLBACKS */
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
         _onBackupPlugin(nullptr),
@@ -530,6 +575,38 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
     return !strncmp(_password, password, sizeof(_password));
   }
 #endif /* !defined(DISABLE_PASSWORD) && !defined(DISABLE_COMMUNICATION) */
+#ifndef DISABLE_COMMUNICATION_CALLBACKS
+  /**
+   * Run logic set to be called before the onCommunicate step
+   */
+  void beforeOnCommunicate() {
+    if (_beforeCommunicationPluginList != nullptr) {
+      AtHomeBeforeCommunicationPluginList *list = _beforeCommunicationPluginList;
+      while (list != nullptr) {
+        AtHomeCommunicationPlugin *plugin = list->get();
+        if (plugin != nullptr && *plugin != nullptr) {
+          (*plugin)();
+        }
+        list = list->next();
+      }
+    }
+  }
+  /**
+   * Run logic set to be called after the onCommunicate step
+   */
+  void afterOnCommunicate() {
+    if (_afterCommunicationPluginList != nullptr) {
+      AtHomeAfterCommunicationPluginList *list = _afterCommunicationPluginList;
+      while (list != nullptr) {
+        AtHomeCommunicationPlugin *plugin = list->get();
+        if (plugin != nullptr && *plugin != nullptr) {
+          (*plugin)();
+        }
+        list = list->next();
+      }
+    }
+  }
+#endif /* DISABLE_COMMUNICATION_CALLBACKS */
   /**
    * Called (or trigger if called) when a module listens for received commands.
    */
@@ -537,6 +614,9 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
     if (_streams == nullptr) {
       return;
     }
+  #ifndef DISABLE_COMMUNICATION_CALLBACKS
+    beforeOnCommunicate();
+  #endif /* DISABLE_COMMUNICATION_CALLBACKS */
     for (size_t i = 0; _streams[i] != nullptr; i++) {
       _streams[i]->setTimeout(DEFAULT_STREAM_TIMEOUT);
       if (_streams[i]->available()) {
@@ -591,6 +671,9 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
         }
       }
     }
+  #ifndef DISABLE_COMMUNICATION_CALLBACKS
+    afterOnCommunicate();
+  #endif /* DISABLE_COMMUNICATION_CALLBACKS */
   }
 
 #endif /* DISABLE_COMMUNICATION */
@@ -880,6 +963,10 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
   unsigned long _communicationInterval;
   unsigned long _uploadDataInterval;
   CommandPluginList *_communicationPlugin;
+#ifndef DISABLE_COMMUNICATION_CALLBACKS
+  AtHomeBeforeCommunicationPluginList *_beforeCommunicationPluginList;
+  AtHomeAfterCommunicationPluginList *_afterCommunicationPluginList;
+#endif /* DISABLE_COMMUNICATION_CALLBACKS */
 #endif /* DISABLE_COMMUNICATION */
 #ifndef DISABLE_PERSISTENT_STORAGE
   StoragePluginList *_onBackupPlugin;
@@ -903,8 +990,6 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
   Task _communicationTask;
 #endif /* DISABLE_COMMUNICATION */
   static void *_instance;
-
- private:
 #ifndef DISABLE_COMMUNICATION
   static const Command _commandSetProfile;
 #ifndef DISABLE_TIME
