@@ -1,8 +1,11 @@
+[![pipeline status](https://gitlab.com/at-home/modules-framework/badges/master/pipeline.svg)](https://gitlab.com/at-home/modules-framework/commits/master)
+[![coverage report](https://gitlab.com/at-home/modules-framework/badges/master/coverage.svg)](https://gitlab.com/at-home/modules-framework/commits/master)
+
 # AtHome Development Kit
 
 This repository holds the source code of the AtHome Development Kit (Framework + examples + PCBs and schematics).
 
-Development documentation is available at https://woodbox.gitlab.io/Framework
+Development documentation is available at https://at-home.gitlab.io/modules-framework/
 
 ## What is AtHome?
 
@@ -36,7 +39,7 @@ Recommended microcontroler platform:
 - Internal persistent storage (FRAM is better, EEPROM other way)
 - Internal RTC
 - At least 32KB of program memory (Warning: not counting bootloader size, some chips such as Microchip PIC32MX or Espressif ESP8265/8266/32 will require much more program memory)
-- At least 2KB of RAM
+- At least 2KB of RAM (4KB of RAM is preferable if possible)
 
 Requirements can be reduced depending on components used and by tweaking the framework configuration. See AtHomeConfig.h to disable unused features.
 
@@ -69,6 +72,7 @@ Here is the status of compatibility of components available in this development 
 | Binary Sound Sensor      | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
 | Dummy Sensor             | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
 | Monochromatic LED        | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
+| Bichromatic LED          | Y              | Y                        | Y                                                                              | Y              |                | ?     | ?       | ?     |
 | PWM LED                  | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
 | Thermistor               | Y              | Y                        | Y                                                                              | Y              | Y              | ?     | ?       | ?     |
 | MSP430FRAM               | N              | N                        | Y                                                                              | N              | N              | N     | N       | N     |
@@ -83,9 +87,11 @@ For battery powered modules, here is the list of low power operation mode on sev
 
 | Environment / Architecture | AVR | ARM | MSP430  | MSP432 | PIC32 | PIC18 | ESP8266 | ESP32 |
 |----------------------------|-----|-----|---------|--------|-------|-------|---------|-------|
-| Arduino (and Energia)      | Y   | N   | Not all | Y      | N     | N     | Y       | N     |
-| Mbed                       | N/A | Y   | N/A     | N/A    | N/A   | N/A   | N/A     | N/A   |
+| Arduino (and Energia)      | Y   | N   | Y\*     | Y\*    | N     | N     | Y       | N     |
+| Mbed                       | N/A | N/A | N/A     | N/A    | N/A   | N/A   | N/A     | N/A   |
 | Bare-Metal                 | N   | N   | N       | N      | N     | N     | N       | N     |
+
+\*MSP43x boards require a forked version of TaskScheduler library with sleep feature implemented for this family of chip but not yet released
 
 ## Secured communication [WIP]
 
