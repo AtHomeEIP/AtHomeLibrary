@@ -10,3 +10,4 @@ CMakeLists.txt
 *.hex
 .scannerwork
 build
+AtHomeConfig.local.h
