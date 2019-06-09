@@ -3,7 +3,7 @@
 #include "ATemperatureSensor.hpp"
 
 #define MIN_EMPTY_ROOM_TEMPERATURE 12000000
-#define MAX_ROOM_TEMPERATURE 28000000
+#define MAX_ROOM_TEMPERATURE 30000000
 
 namespace athome {
 namespace sensor {
@@ -14,8 +14,8 @@ ATemperatureSensor::ATemperatureSensor()
               reinterpret_cast<void *>(&_temp),
               PSTR("Temperature")}),
       _temp(0),
-      _min(16000000),
-      _max(21000000) {}
+      _min(18000000),
+      _max(28000000) {}
 
 ATemperatureSensor::~ATemperatureSensor() {}
 
