@@ -86,6 +86,10 @@ using athome::display::IDisplay;
 #include "MonochromaticLED.hpp"
 using athome::display::MonochromaticLED;
 #endif /* DISABLE_MONOCHROMATIC_LED */
+#ifndef DISABLE_BICHROMATIC_LED
+#include "BichromaticLED.hpp"
+using athome::display::BichromaticLED;
+#endif /* DISABLE_BICHROMATIC_LED */
 #ifndef DISABLE_PWM_LED
 #include "PWMLED.hpp"
 using athome::display::PWMLED;
