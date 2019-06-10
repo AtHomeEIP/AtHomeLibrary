@@ -54,6 +54,7 @@
 //#define DISABLE_COMMON_ANODE_RGB_LED
 //#define DISABLE_NEOPIXEL
 //#define DISABLE_MONOCHROMATIC_LED
+//#define DISABLE_BICHROMATIC_LED
 //#define DISABLE_PWM_LED
 
 // Macros to uncomment to disable persisent storages
