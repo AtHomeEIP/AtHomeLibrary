@@ -142,36 +142,36 @@ buildExamples:Arduino:
     - arduino --install-boards arduino:sam
     - arduino --install-boards arduino:samd
     # - arduino --install-boards chipKIT:pic32
-    - mkdir -p $PWD/examples/output/avr/uno # test the most classical arduino
-    - mkdir -p $PWD/examples/output/avr/leonardo # test avr based arduino with native usb port
-    - mkdir -p $PWD/examples/output/arm/zero # test official arm cortex m0+ board
-    - mkdir -p $PWD/examples/output/arm/due # test official arm cortex m3 board
-    # - mkdir -p $PWD/examples/output/pic32/fubarino_mini # test pic32mx250 based board
+    - mkdir -p $PWD/build/examples/output/avr/uno # test the most classical arduino
+    - mkdir -p $PWD/build/examples/output/avr/leonardo # test avr based arduino with native usb port
+    - mkdir -p $PWD/build/examples/output/arm/zero # test official arm cortex m0+ board
+    - mkdir -p $PWD/build/examples/output/arm/due # test official arm cortex m3 board
+    # - mkdir -p $PWD/build/examples/output/pic32/fubarino_mini # test pic32mx250 based board
   script:
-    - arduino --verify --board arduino:avr:uno $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/HelloWorld/
-    - arduino --verify --board arduino:avr:leonardo $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/HelloWorld/
-    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/HelloWorld/
-    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/HelloWorld/
-    - arduino --verify --board arduino:avr:uno $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/ModuleDemo/
-    - arduino --verify --board arduino:avr:leonardo $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/ModuleDemo/
-    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/ModuleDemo/
-    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/ModuleDemo/
-    - arduino --verify --board arduino:avr:uno $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/LuminosityModule/
-    - arduino --verify --board arduino:avr:leonardo $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/LuminosityModule/
+    - arduino --verify --board arduino:avr:uno $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/avr/uno/HelloWorld/
+    - arduino --verify --board arduino:avr:leonardo $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/avr/leonardo/HelloWorld/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/arm/zero/HelloWorld/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/HelloWorld/HelloWorld.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/arm/due/HelloWorld/
+    - arduino --verify --board arduino:avr:uno $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/avr/uno/ModuleDemo/
+    - arduino --verify --board arduino:avr:leonardo $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/avr/leonardo/ModuleDemo/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/arm/zero/ModuleDemo/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/ModuleDemo/ModuleDemo.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/arm/due/ModuleDemo/
+    - arduino --verify --board arduino:avr:uno $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/avr/uno/LuminosityModule/
+    - arduino --verify --board arduino:avr:leonardo $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/avr/leonardo/LuminosityModule/
     # TODO: Allow compilation again for ARM based boards for Luminosity Modules (currently prevented by header protections)
-    # - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/LuminosityModule/
-    # - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/LuminosityModule/
-    - arduino --verify --board arduino:avr:uno $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/SoundModule/
-    - arduino --verify --board arduino:avr:leonardo $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/SoundModule/
-    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/SoundModule/
-    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/SoundModule/
-    - arduino --verify --board arduino:avr:uno $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/uno/GasModule/
-    - arduino --verify --board arduino:avr:leonardo $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/avr/leonardo/GasModule/
-    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/zero/GasModule/
-    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/examples/output/arm/due/GasModule/
+    # - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/arm/zero/LuminosityModule/
+    # - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/LuminosityModule/LuminosityModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/arm/due/LuminosityModule/
+    - arduino --verify --board arduino:avr:uno $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/avr/uno/SoundModule/
+    - arduino --verify --board arduino:avr:leonardo $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/avr/leonardo/SoundModule/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/arm/zero/SoundModule/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/SoundModule/SoundModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/arm/due/SoundModule/
+    - arduino --verify --board arduino:avr:uno $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/avr/uno/GasModule/
+    - arduino --verify --board arduino:avr:leonardo $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/avr/leonardo/GasModule/
+    - arduino --verify --board arduino:samd:arduino_zero_edbg $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/arm/zero/GasModule/
+    - arduino --verify --board arduino:sam:arduino_due_x $PWD/examples/GasModule/GasModule.ino --preserve-temp-files --pref build.path=$PWD/build/examples/output/arm/due/GasModule/
   artifacts:
     paths:
-      - "examples/output"
+      - "build/examples/output"
 
 buildExamples:Energia:
   stage: build
@@ -180,7 +180,7 @@ buildExamples:Energia:
     - echo "Not yet implemented"
   artifacts:
     paths:
-      - "examples/output"
+      - "build/examples/output"
 
 # run tests using the binary built before
 test:
