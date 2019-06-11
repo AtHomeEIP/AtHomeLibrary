@@ -8,6 +8,8 @@
 #include "base64.h"
 #include "AEncryptedStream.hpp"
 #include "AtHomeModuleUtil.hpp"
+#include "AtHomeCommunicationProtocol.hpp"
+#include "Queue.hpp"
 
 #ifndef DEFAULT_WRITER
 #define DEFAULT_WRITER writeBytes
@@ -20,16 +22,40 @@ namespace module {
  */
 using StreamWriterCallback = int (*)(Stream &, const char *, size_t);
 
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+/**
+ * A callback type used for calling a function modifying a Stream passed as parameter
+ */
+using AtHomeOnWritePlugin = void (*)(Stream &);
+
+/**
+ * A plugin list to call before writing into a Stream
+ */
+using AtHomeBeforeOnWritePluginList = utility::Queue<AtHomeOnWritePlugin>;
+/**
+ * A plugin list to call after writing into a Stream
+ */
+using AtHomeAfterOnWritePluginList = utility::Queue<AtHomeOnWritePlugin>;
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
+
 class AtHomeModuleStreamOutputHelper {
 public:
   AtHomeModuleStreamOutputHelper():
-#if !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION)
+#ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
     _encryptedStreams(nullptr),
     _encryptionKey{_encryptionRawKey, sizeof(_encryptionRawKey)},
     _encryptionIV{_encryptionRawIV, sizeof(_encryptionRawIV)},
-#endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
+#endif /* !DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+    _beforeOnWritePluginList(nullptr),
+    _afterOnWritePluginList(nullptr),
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
     _clearStreams(nullptr)
-  {}
+  {
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+    _streamOutputHelperInstance = this;
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
+  }
 
   void setClearStreams(Stream **streams) {
       _clearStreams = streams;
@@ -51,11 +77,44 @@ public:
    */
   typedef uint8_t moduleEncryptionIV[12];
 #endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
+
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+  /**
+   * Add a callback to be called before writing into a stream
+   */
+  void setBeforeOnWriteCallback(AtHomeOnWritePlugin &plugin) {
+    if (_beforeOnWritePluginList == nullptr) {
+      _beforeOnWritePluginList = new AtHomeBeforeOnWritePluginList(plugin);
+    } else {
+      _beforeOnWritePluginList->push_back(plugin);
+    }
+  }
+
+  /**
+   * Add a callback to be called after writing into a stream
+   */
+  void setAfterOnWriteCallback(AtHomeOnWritePlugin &plugin) {
+    if (_afterOnWritePluginList == nullptr) {
+      _afterOnWritePluginList = new AtHomeAfterOnWritePluginList(plugin);
+    } else {
+      _afterOnWritePluginList->push_back(plugin);
+    }
+  }
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
+
   /**
    * Write bytes into the stream without any modification
    */
   static int writeBytes(Stream &stream, const char *src, size_t length) {
-    return stream.write(reinterpret_cast<const uint8_t *>(src), length);
+    size_t written = 0;
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+    beforeOnWrite(stream);
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
+    written = stream.write(reinterpret_cast<const uint8_t *>(src), length);
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+    afterOnWrite(stream);
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
+    return written;
   }
 
   /**
@@ -87,10 +146,18 @@ public:
   static int writeBase64EncodedBytes(Stream &stream, const char *src, size_t length) {
     size_t encoded_length = base64_encoded_length(length);
     char buffer[encoded_length];
+    size_t written = 0;
     if (Base64encode(buffer, src, length) != encoded_length) {
       return -1;
     }
-    return stream.write(reinterpret_cast<const uint8_t *>(buffer), encoded_length);
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+    beforeOnWrite(stream);
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
+    written = stream.write(reinterpret_cast<const uint8_t *>(buffer), encoded_length);
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+    afterOnWrite(stream);
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
+    return written;
   }
 
   /**
@@ -119,7 +186,7 @@ public:
   static int printHelperLn(Stream &stream, const U &data, StreamWriterCallback writer = DEFAULT_WRITER) {
       printHelper<U, reserved>(stream, data, writer);
       char new_line[2] = { ATHOME_NEW_LINE, '\0' };
-      writer(stream, new_line, 1);
+      return writer(stream, new_line, 1);
   }
 
   /**
@@ -254,7 +321,44 @@ public:
   const moduleEncryptionIV &getEncryptionIV() const { return _encryptionRawIV; }
 #endif /* !defined(DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION) */
 
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+private:
+  void _beforeOnWrite(Stream &stream) {
+    AtHomeBeforeOnWritePluginList *list = _beforeOnWritePluginList;
+    while (list != nullptr) {
+      AtHomeOnWritePlugin *plugin = list->get();
+      if (plugin != nullptr) {
+        (*plugin)(stream);
+      }
+      list = list->next();
+    }
+  }
+
+  void _afterOnWrite(Stream &stream) {
+    AtHomeAfterOnWritePluginList *list = _afterOnWritePluginList;
+    while (list != nullptr) {
+      AtHomeOnWritePlugin *plugin = list->get();
+      if (plugin != nullptr) {
+        (*plugin)(stream);
+      }
+      list = list->next();
+    }
+  }
 protected:
+  static void beforeOnWrite(Stream &stream) {
+    if (_streamOutputHelperInstance != nullptr) {
+      _streamOutputHelperInstance->_beforeOnWrite(stream);
+    }
+  }
+
+  static void afterOnWrite(Stream &stream) {
+    if (_streamOutputHelperInstance != nullptr) {
+      _streamOutputHelperInstance->_afterOnWrite(stream);
+    }
+  }
+#else
+protected:
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
 #ifndef DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION
     arduino::AEncryptedStream **_encryptedStreams;
     arduino::AEncryptedStream::Key _encryptionKey;
@@ -262,7 +366,14 @@ protected:
     moduleEncryptionKey _encryptionRawKey;
     moduleEncryptionIV _encryptionRawIV;
 #endif /* !DISABLE_UNSECURE_COMMUNICATION_ENCRYPTION */
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+    AtHomeBeforeOnWritePluginList *_beforeOnWritePluginList;
+    AtHomeAfterOnWritePluginList *_afterOnWritePluginList;
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
     Stream **_clearStreams;
+#ifndef DISABLE_ON_WRITE_CALLBACKS
+    static AtHomeModuleStreamOutputHelper *_streamOutputHelperInstance;
+#endif /* DISABLE_ON_WRITE_CALLBACKS */
 };
 } // module
 } // athome

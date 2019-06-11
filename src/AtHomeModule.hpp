@@ -80,6 +80,7 @@ using AtHomeBeforeCommunicationPluginList = utility::Queue<AtHomeCommunicationPl
  * A plugin list to call after onCommunicate step
  */
 using AtHomeAfterCommunicationPluginList = utility::Queue<AtHomeCommunicationPlugin>;
+
 #endif /* DISABLE_COMMUNICATION_CALLBACKS */
 
 #endif /* DISABLE_COMMUNICATION */
@@ -328,7 +329,7 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
   /**
    * Set a callback to be called just before the beginning of the onCommunicate step
    */
-  void setBeforeCommunicatePlugin(AtHomeCommunicationPlugin plugin) {
+  void setBeforeCommunicatePlugin(AtHomeCommunicationPlugin &plugin) {
     if (_beforeCommunicationPluginList == nullptr) {
       _beforeCommunicationPluginList = new AtHomeBeforeCommunicationPluginList(plugin);
     } else {
@@ -339,7 +340,7 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
   /**
    * Set a callback to be called just after the beginning of the onCommunicate step
    */
-  void setAfterCommunicatePlugin(AtHomeCommunicationPlugin plugin) {
+  void setAfterCommunicatePlugin(AtHomeCommunicationPlugin &plugin) {
     if (_afterCommunicationPluginList == nullptr) {
       _afterCommunicationPluginList = new AtHomeAfterCommunicationPluginList(plugin);
     } else {
@@ -584,7 +585,7 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
       AtHomeBeforeCommunicationPluginList *list = _beforeCommunicationPluginList;
       while (list != nullptr) {
         AtHomeCommunicationPlugin *plugin = list->get();
-        if (plugin != nullptr && *plugin != nullptr) {
+        if (plugin != nullptr) {
           (*plugin)();
         }
         list = list->next();
@@ -599,7 +600,7 @@ class AtHomeModule : public ABaseModule, public AtHomeModuleStreamIO {
       AtHomeAfterCommunicationPluginList *list = _afterCommunicationPluginList;
       while (list != nullptr) {
         AtHomeCommunicationPlugin *plugin = list->get();
-        if (plugin != nullptr && *plugin != nullptr) {
+        if (plugin != nullptr) {
           (*plugin)();
         }
         list = list->next();
